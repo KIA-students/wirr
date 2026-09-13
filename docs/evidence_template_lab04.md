@@ -8,7 +8,7 @@
 
 ---
 
-## Depth API i Okluzja
+## Depth API i okluzja
 
 - [ ] Depth API aktywna i zwraca dane
 - [ ] Model jest okluzowany za rzeczywistymi przeszkodami
@@ -16,7 +16,7 @@
 
 ---
 
-## Testy Wiarygodności — 5 Warunków
+## Testy wiarygodności — 5 Warunków
 
 | Warunek | Temp. [K] | Pozycja | Okluzja | Oświetlenie | Cień | Kolory | ŚREDNIA |
 |---------|-----------|---------|---------|-------------|------|--------|---------|
@@ -30,7 +30,7 @@
 
 ---
 
-## Błąd Oświetlenia (jeśli dostępny luksomierz)
+## Błąd oświetlenia (jeśli dostępny luksomierz)
 
 | Warunek | Luksomierz [lux] | Light Intensity | Błąd [%] |
 |---------|-----------------|-----------------|----------|

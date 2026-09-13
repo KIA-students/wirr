@@ -1,6 +1,6 @@
-# 📑 Indeks Plików — Mapa Kursu WiRR Lab 1–7
+# Indeks plików WiRR Lab 1–7
 
-## 📂 Struktura Pakietu
+## Struktura Pakietu
 
 ```
 /mnt/user-data/outputs/
@@ -14,7 +14,7 @@
 ├── 📄 Laboratorium_6_XR_Pełna_Instrukcja.docx
 ├── 📄 Laboratorium_7_XR_Pełna_Instrukcja.docx
 │
-└── 📁 starter-files/
+└── starter-files/
     ├── 📄 QUICK_START.md                ← CZYTAJ DRUGIE
     ├── 📄 REPOSITORY_SETUP.md
     ├── 📄 INSTRUCTOR_GUIDE.md
@@ -39,7 +39,7 @@
     ├── 📄 evidence_template_lab06.md
     ├── 📄 evidence_template_lab07.md
     │
-    └── 📁 cs-snippets/
+    └── cs-snippets/
         ├── 📄 Lab01_PerformanceBenchmark.cs
         ├── 📄 Lab02_Trial.cs
         ├── 📄 Lab03_RegistrationError.cs
@@ -52,7 +52,7 @@
 
 ---
 
-## 🎯 Jak Nawigować po Materiałach
+## Jak nawigować po materiałach
 
 ### Jeśli jesteś **STUDENTEM**:
 
@@ -113,7 +113,7 @@
 - Pytanie techniczne? → FAQ.md
 - Nie wiem co to znaczy? → GLOSSARY.md
 - Jak Git? → REPOSITORY_SETUP.md
-- Jak oceniam? → GRADING_MATRIX.md (czytaj dla zmotywowania się 😄)
+- Jak oceniam? → GRADING_MATRIX.md
 
 **Dla prowadzącego:**
 - Jak prowadzić Lab X? → Laboratorium_X..docx
@@ -123,9 +123,9 @@
 
 ---
 
-## 📊 Wersje Plików
+## Wersje plików
 
-Wszystkie pliki: **Wersja 2.0, gotowa do wdrożenia, 1 listopada 2026 r.**
+Wszystkie pliki: **Wersja 2.0, gotowa do wdrożenia, 13 września 2026 r.**
 
 | Plik | Typ | Rozmiar | Przeznaczenie |
 |------|-----|---------|---------------|
@@ -138,7 +138,7 @@ Wszystkie pliki: **Wersja 2.0, gotowa do wdrożenia, 1 listopada 2026 r.**
 
 ---
 
-## 🚀 Ścieżka Uczenia (Zależności Między Lab)
+## Ścieżka uczenia (zależności między labami)
 
 ```
 Lab 1 (Fundament: XR Origin, Profiler)
@@ -155,7 +155,7 @@ Lab 6 (ROS 2: Bliźniak cyfrowy)
     ↓ (integruje wszystkie)
 Lab 7 (Walidacja: Smoke + Functional + Performance)
     ↓
-Zaliczenie Kursu! 🎓
+Zaliczenie kursu
 ```
 
 **Legenda:**
@@ -166,7 +166,7 @@ Zaliczenie Kursu! 🎓
 
 ---
 
-## ✅ Checklist Pobierania
+## Checklist pobierania
 
 ### Dla Studenta
 
@@ -189,7 +189,7 @@ Zaliczenie Kursu! 🎓
 
 ---
 
-## 📞 Wsparcie
+## Wsparcie
 
 - **Błąd w pliku?** → Kontakt z prowadzącym
 - **Nie wiem gdzie znaleźć plik?** → Ten INDEX.md
@@ -198,6 +198,6 @@ Zaliczenie Kursu! 🎓
 
 ---
 
-**Wersja:** 2.0 • 1 listopada 2026 r.  
+**Wersja:** 2.0 • 13 września 2026 r.  
 **Data generacji:** 8 września 2026 r.
 

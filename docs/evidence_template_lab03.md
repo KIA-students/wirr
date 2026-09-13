@@ -1,4 +1,4 @@
-# Laboratorium 3 — Evidence/Raport Końcowy
+# Laboratorium 3 — Evidence/raport
 
 ## Identyfikacja pary
 - Numer indeksu student 1: ___________
@@ -21,7 +21,7 @@
 
 ---
 
-## Pomiar Błędu Rejestracji
+## Pomiar błędu rejestracji
 
 | Pozycja | Dystans od O [m] | Błąd rejestracji [cm] |
 |---------|------------------|----------------------|
@@ -60,6 +60,7 @@
 ## Wnioski
 1. ___
 2. ___
+3. ___
 
 ---
 

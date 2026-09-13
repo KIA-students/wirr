@@ -1,6 +1,6 @@
 # Laboratorium 6 — Bliźniak Cyfrowy ROS 2
 
-## 📦 Co Powinieneś Pobrać
+## Co powinieneś pobrać
 
 - ✓ Projekt z Lab 5
 - ✓ ROS 2 (Humble albo Jazzy) zainstalowany
@@ -23,7 +23,7 @@ Assets/Scenes/Lab06_DigitalTwin.unity
 
 ---
 
-## ✅ Checklist
+## Checklist
 
 - [ ] ROS 2 działający na maszynie
 - [ ] Robot/Gazebo startuje
@@ -34,7 +34,7 @@ Assets/Scenes/Lab06_DigitalTwin.unity
 
 ---
 
-## 🚀 Start Lab 6
+## Start Lab 6
 
 1. Uruchom robota/Gazebo
 2. Terminal: `ros2 topic echo /robot/state` — sprawdź topik
@@ -45,7 +45,7 @@ Assets/Scenes/Lab06_DigitalTwin.unity
 
 ---
 
-## 📋 Kod
+## Kod
 
 ### ROS2Manager.cs
 ```csharp
@@ -82,6 +82,4 @@ public class RobotStateListener : MonoBehaviour {
 }
 ```
 
----
 
-**Razem: ~80 minut**

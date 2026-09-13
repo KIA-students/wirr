@@ -1,6 +1,6 @@
 # Laboratorium 7 — Walidacja i Testy
 
-## 📦 Co Powinieneś Pobrać
+## Co powinieneś pobrać
 
 - ✓ Projekt z Lab 1–6 (wszystkie merged na main)
 - ✓ Profiler Unity, Memory Profiler
@@ -22,7 +22,7 @@ evidence/lab07.md (template)
 
 ---
 
-## ✅ Checklist
+## Checklist
 
 - [ ] Wszystkie Lab 1–6 zaliczone
 - [ ] Wszystkie gałęzie zmergowane na main
@@ -32,7 +32,7 @@ evidence/lab07.md (template)
 
 ---
 
-## 🚀 Start Lab 7
+## Start Lab 7
 
 1. Git: `git switch main && git merge --no-ff team-<nr>/lab06-<...>`
 2. Git: `git switch -c team-<nr>/lab07-<nazwiska>`
@@ -43,7 +43,7 @@ evidence/lab07.md (template)
 
 ---
 
-## 📋 Smoke Tests — Checklist
+## Checklista Smoke Testsów
 
 ```
 [ ] Aplikacja startuje bez crash
@@ -57,7 +57,7 @@ evidence/lab07.md (template)
 
 ---
 
-## 📊 Performance Benchmark (Profiler)
+## Performance Benchmark (profiler)
 
 ```
 Wariant | FPS | CPU [ms] | GPU [ms] | Memory [MB]
@@ -74,7 +74,7 @@ Stress  | ___ | ___     | ___     | ___
 
 ---
 
-## 📋 Evidence/lab07.md
+## Evidence/lab07.md
 
 ```markdown
 # Lab 7 — Raport Finalny
@@ -108,7 +108,3 @@ Stress  | ___ | ___     | ___     | ___
 - [x] Checkpoint 3.0: PASS
 - Ocena finalna: 3.0 / 3.5 / 4.0 / 4.5 / 5.0
 ```
-
----
-
-**Razem: ~120 minut**

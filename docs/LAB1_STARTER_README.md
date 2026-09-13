@@ -1,6 +1,6 @@
 # Laboratorium 1 — XR Origin, Audyt i Wydajność
 
-## 📦 Co Powinieneś Pobrać
+## Co Powinieneś Pobrać
 
 Przed Lab 1 pobierz i skonfiguruj następujące:
 
@@ -33,7 +33,7 @@ XR Hands                       1.4.1+
 Input System                   1.8.3+
 ```
 
-⚠️ **WAŻNE**: Nie aktualizuj pakietów między Lab 1 a Lab 7!
+**WAŻNE**: Nie aktualizuj pakietów między Lab 1 a Lab 7!
 
 ### 4. Konfiguracja XR Origin (pre-configured)
 
@@ -47,7 +47,7 @@ W scenie `Lab01_Baseline.unity` jest już:
 
 ---
 
-## ✅ Checklist — Przed Lab 1
+## Checklist — Przed Lab 1
 
 - [ ] Unity 2022 LTS zainstalowany
 - [ ] Projekt otwarty, brak RED errory w Console
@@ -59,7 +59,7 @@ W scenie `Lab01_Baseline.unity` jest już:
 
 ---
 
-## 🚀 Na Początku Lab 1
+## Na Początku Lab 1
 
 1. **Utwórz gałąź:**
 ```bash
@@ -76,7 +76,7 @@ git switch -c team-<nr>/lab01-<nazwisko1>-<nazwisko2>
 
 ---
 
-## 📋 Skrypty do pobrania
+## Skrypty do pobrania
 
 ### PerformanceBenchmark.cs
 ```csharp
@@ -104,14 +104,14 @@ public class PerformanceBenchmark : MonoBehaviour {
 
 ---
 
-## 🔗 Dokumentacja
+## Dokumentacja
 
 - Unity XR Plugin Management: https://docs.unity3d.com/Manual/xr-plug-in-management.html
 - XR Interaction Toolkit: https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@latest/
 
 ---
 
-## ⏰ Timeline Lab 1
+## Timeline Lab 1
 
 - Smoke check: 5 min
 - Wejściówka: 10 min

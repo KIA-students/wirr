@@ -1,6 +1,6 @@
 # Laboratorium 2 — Interakcja i Lokomocja VR
 
-## 📦 Co Powinieneś Pobrać
+## Co Powinieneś Pobrać
 
 ### Warunki wstępne
 - ✓ Zaliczone Lab 1 albo działająca scena z XR Origin
@@ -26,7 +26,7 @@ Wszystkie pakiety z Lab 1 (XRI 3.1.3+, Input System 1.8.3+, itp.)
 
 ---
 
-## ✅ Checklist — Przed Lab 2
+## Checklist — Przed Lab 2
 
 - [ ] Lab 1 zaliczony
 - [ ] Scene Lab02_Interaction.unity otwarta
@@ -36,7 +36,7 @@ Wszystkie pakiety z Lab 1 (XRI 3.1.3+, Input System 1.8.3+, itp.)
 
 ---
 
-## 🚀 Na Początku Lab 2
+## Na Początku Lab 2
 
 1. **Skopiuj scenę:**
 ```bash
@@ -56,7 +56,7 @@ cp Assets/Scenes/Lab01_Baseline.unity Assets/Scenes/Lab02_Interaction.unity
 
 ---
 
-## 📋 Skrypty do pobrania
+## Skrypty do pobrania
 
 ### Lab02Trial.cs — Rejestrator czasów
 ```csharp
@@ -89,7 +89,7 @@ public class Lab02Trial : MonoBehaviour {
 
 ---
 
-## 🔗 Dokumentacja
+## Dokumentacja
 
 - XR Grab Interactable: https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@latest/
 - XR Socket Interactor: https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@latest/
@@ -97,7 +97,7 @@ public class Lab02Trial : MonoBehaviour {
 
 ---
 
-## ⏰ Timeline Lab 2
+## Timeline Lab 2
 
 - Wejściówka: 10 min
 - Setup repozytorium: 5 min

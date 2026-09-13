@@ -1,6 +1,6 @@
-# 📊 Macierz Oceniania — Dla Prowadzącego
+# Macierz oceniania
 
-## Jak Używać Tego Dokumentu
+## Jak używać
 
 Każde laboratorium ma swoją macierz oceniania. Przejdź przez kryteria w kolejności:
 
@@ -12,7 +12,7 @@ Każde laboratorium ma swoją macierz oceniania. Przejdź przez kryteria w kolej
 
 ---
 
-## Lab 1 — XR Origin, Audyt, Wydajność
+## Lab 1 — XR Origin, audyt, wydajność
 
 | Kryterium | Tak (1 pkt) | Nie (0 pkt) | Uwagi |
 |-----------|------------|-----------|-------|
@@ -31,7 +31,7 @@ Każde laboratorium ma swoją macierz oceniania. Przejdź przez kryteria w kolej
 
 ---
 
-## Lab 2 — Interakcja i Lokomocja
+## Lab 2 — Interakcja i lokomocja
 
 | Kryterium | Tak (1 pkt) | Nie (0 pkt) | Uwagi |
 |-----------|------------|-----------|-------|
@@ -129,7 +129,7 @@ Każde laboratorium ma swoją macierz oceniania. Przejdź przez kryteria w kolej
 
 ---
 
-## Jak Szybko Oceniać
+## Jak szybko oceniać
 
 **Dla każdego Laboratorium (max 90 sekund):**
 
@@ -141,7 +141,7 @@ Każde laboratorium ma swoją macierz oceniania. Przejdź przez kryteria w kolej
 
 ---
 
-## Wkład Pary — Jak Sprawdzić?
+## Jak sprawdzić wkład pary?
 
 ```bash
 # Sprawdź commity dla każdej osoby
@@ -151,12 +151,11 @@ git log --author="Imię" lab0X...lab0X-start --oneline
 - >= 2 merytoryczne commity na osobę → wkład ok (50/50)
 - 1 commit albo mniej → może być problem
 
-# Działanie: Porozmawiaj z parą
 ```
 
 ---
 
-## Oceny Finalne
+## Oceny finalne
 
 | Checkpoint | Wymagania | Ćwiczenia |
 |-----------|-----------|-----------|
@@ -168,5 +167,5 @@ git log --author="Imię" lab0X...lab0X-start --oneline
 
 ---
 
-**Wersja:** 2.0 • 1 listopada 2026 r.
+**Wersja:** 2.0 • 13 września 2026 r.
 

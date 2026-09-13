@@ -1,6 +1,6 @@
 # Laboratorium 4 — Mieszanie Rzeczywistości
 
-## 📦 Co Powinieneś Pobrać
+## Co powinieneś pobrać
 
 - ✓ Projekt z Lab 3 (Android AR)
 - ✓ Telefon Android z Depth API
@@ -20,7 +20,7 @@ Assets/Scripts/LightingController.cs
 
 ---
 
-## ✅ Checklist
+## Checklist
 
 - [ ] Lab 3 zaliczony
 - [ ] Depth API dostępna na telefonie
@@ -29,7 +29,7 @@ Assets/Scripts/LightingController.cs
 
 ---
 
-## 🚀 Start Lab 4
+## Start Lab 4
 
 1. Git: `git switch -c team-<nr>/lab04-<nazwiska>`
 2. Kopiuj scenę: `cp Assets/Scenes/Lab03_AR.unity Assets/Scenes/Lab04_SceneUnderstanding.unity`
@@ -38,7 +38,7 @@ Assets/Scripts/LightingController.cs
 
 ---
 
-## 📋 Kod
+## Kod
 
 ### LightingController.cs
 ```csharp
@@ -72,5 +72,3 @@ public class LightingController : MonoBehaviour {
 ```
 
 ---
-
-**Razem: ~80 minut**

@@ -1,6 +1,6 @@
-# ⚡ Szybki Start — WiRR Lab 1–7
+# Szybki start — WiRR Lab 1–7
 
-## 📥 Co Pobrać Na Początku
+## Co Pobrać na początku
 
 Wszystkie pliki znajdują się w: `/starter-files/`
 
@@ -29,7 +29,7 @@ Wszystkie pliki znajdują się w: `/starter-files/`
 
 ---
 
-## 🚀 Dla Prowadzącego
+## Dla Prowadzącego
 
 1. **Instrukcja** (przygotowanie do zajęć)
    ```
@@ -46,7 +46,7 @@ Wszystkie pliki znajdują się w: `/starter-files/`
 
 ---
 
-## 📋 Kroków na Początku Kursu
+## Kroków na początku kursu
 
 ### Dla Studentów (1. dzień)
 
@@ -102,7 +102,7 @@ Wszystkie pliki znajdują się w: `/starter-files/`
 
 ---
 
-## 🎯 Cel: Co Student Musi Zrobić
+## Cel: Co Student Musi Zrobić
 
 Na koniec kursu (Lab 7):
 
@@ -115,7 +115,7 @@ Na koniec kursu (Lab 7):
 
 ---
 
-## 📖 Dokumentacja
+## Dokumentacja
 
 - **Dla studentów:** Każdy LAB_README.md zawiera linki
 - **Dla prowadzącego:** INSTRUCTOR_GUIDE.md
@@ -123,15 +123,11 @@ Na koniec kursu (Lab 7):
 
 ---
 
-## ❓ Pytania?
+## Pytania?
 
 - **Techniczne:** Przeczytaj REPOSITORY_SETUP.md + LAB_README
 - **Ocenianie:** Przeczytaj INSTRUCTOR_GUIDE.md
 - **Wątpliwości:** Skontaktuj się z prowadzącym
 
 ---
-
-**Powodzenia! 🚀**
-
-Wersja: 2.0 • 1 listopada 2026 r.
 

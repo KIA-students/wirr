@@ -1,6 +1,6 @@
-# ❓ FAQ — Najczęstsze Pytania i Odpowiedzi
+# FAQ — Najczęstsze Pytania i Odpowiedzi
 
-## 🚀 Ogólne
+## Ogólne
 
 ### P1: Czy mogę zaliczyć kurs bez wyższych ocen?
 **Odpowiedź:** Tak. Checkpoint 3.0 na każdym Lab = zaliczenie. Oceny 3.5–5.0 są opcjonalne. Możesz:
@@ -23,7 +23,7 @@
 
 ---
 
-## 💻 Technika & Unity
+## Technika & Unity
 
 ### P5: Jaka wersja Unity?
 **Odpowiedź:** Unity 2022 LTS (6000.0.23+). **Musi być ta sama** dla wszystkich Lab!
@@ -66,7 +66,7 @@ AR Foundation 5.1.0+ (dla Lab 3–4)
 
 ---
 
-## 📦 Git & Repozytorium
+## Git & Repozytorium
 
 ### P11: Jak klonować repo?
 **Odpowiedź:** Przeczytaj `REPOSITORY_SETUP.md` — tam jest krok po kroku.
@@ -110,7 +110,7 @@ git push
 
 ---
 
-## 📊 Ocenianie & Checkpointy
+## Ocenianie i checkpointy
 
 ### P16: Co to jest Checkpoint 3.0?
 **Odpowiedź:** Minimalny poziom kompetencji = zaliczenie. Obejmuje:
@@ -136,7 +136,7 @@ git push
 
 ---
 
-## 🔧 Lab-Specyficzne Problemy
+## Lab-Specyficzne Problemy
 
 ### Lab 1
 
@@ -234,7 +234,7 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 
 ---
 
-## 🎓 Nauka & Wnioski
+## Nauka & wnioski
 
 ### P35: Jak napisać dobrą diagnozę?
 **Odpowiedź:** Schemat 3 kroków:
@@ -260,7 +260,7 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 
 ---
 
-## 📞 Kontakt & Wsparcie
+## Kontakt & Wsparcie
 
 ### P38: Gdzie mogę znaleźć prowadzącego?
 **Odpowiedź:** 
@@ -280,7 +280,7 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 
 ---
 
-## 🎯 Ostatnie Słowo
+## Ostatnie Słowo
 
 **Pamiętaj:**
 - Kurs nie karze Ciebie, ale uczy Cię
@@ -288,5 +288,5 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 - Jeśli utkniesz, pytaj — prowadzący powinien pomagać, nie karać
 - Git i debugging będą Ci potrzebne w pracy — to jest cenne doświadczenie
 
-**Powodzenia! 🚀**
+**Powodzenia!**
 

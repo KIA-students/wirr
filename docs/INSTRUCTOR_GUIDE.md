@@ -1,6 +1,6 @@
 # Instrukcja dla Prowadzącego — WiRR (Lab 1–7)
 
-## 📋 Szybki Przegląd
+## Szybki Przegląd
 
 **Kurs:** Wirtualna i Rozszerzona Rzeczywistość (studia II stopnia)  
 **Czas:** ~15–18 godzin (2–3 tygodnie, ~6h/tydzień)  
@@ -10,7 +10,7 @@
 
 ---
 
-## ⏰ Timeline Kursu
+## Timeline Kursu
 
 ```
 Tydzień 1:
@@ -30,7 +30,7 @@ Razem: ~11 godzin czystego czasu + 4–6h na debug/prace domowe
 
 ---
 
-## 🎯 Checkpoint — Jak Oceniać?
+## Jak oceniać checkpointy
 
 ### Checkpoint 3.0 (Zaliczenie)
 
@@ -63,7 +63,7 @@ Jeśli chce wyższą:
 
 ---
 
-## 🔍 Ocena — Rzeczy Do Sprawdzenia Szybko
+## 🔍 Ocena — rzeczy do sprawdzenia na szybko
 
 ### Lab 1
 ```
@@ -122,7 +122,7 @@ Scenariusz: 3 wykonane, czasy zarejestrowane
 
 ---
 
-## 🐛 Typowe Problemy & Rozwiązania
+## Typowe Problemy & Rozwiązania
 
 ### Lab 1
 ```
@@ -189,7 +189,7 @@ Problem: "FPS pada do 5 FPS w stress teście"
 
 ---
 
-## 📊 Macierz Walidacji
+## Macierz walidacji
 
 Każde laboratorium ma swoją macierz. Przygotuj je przed zajęciami:
 
@@ -206,14 +206,14 @@ Każde laboratorium ma swoją macierz. Przygotuj je przed zajęciami:
 
 ---
 
-## 🚀 Jak Prowadzić Zajęcia
+## Jak prowadzić zajęcia
 
 ### 5 minut przed Lab
 1. Sprawdź, czy kod kompiluje się bez RED errors
 2. Upewnij się, że repozytorium jest dostępne
 3. Przygotuj checklist oceny (print albo na ekranie)
 
-### Na Początku Lab (5 min)
+### Na początku Lab (5 min)
 1. Wyjaśnij problem inżynierski
 2. Pokaż, co będą robić (2–3 min demo)
 3. Odpowiedź na pytania
@@ -224,7 +224,7 @@ Każde laboratorium ma swoją macierz. Przygotuj je przed zajęciami:
 3. Jeśli ktoś utknął: zadaj pytania, nie mów rozwiązania
 4. Zanotuj czasy — kto robi szybko, kto ma problemy
 
-### Na Końcu Lab (15 min)
+### Na końcu Lab (15 min)
 1. Każda para pokazuje ostatni commit
 2. Krótka ocena Checkpoint 3.0 (< 2 min na parę)
 3. Zebranie evidence/lab0X.md
@@ -232,7 +232,7 @@ Każde laboratorium ma swoją macierz. Przygotuj je przed zajęciami:
 
 ---
 
-## 📝 Wkład Pary — Jak Sprawdzić?
+## Jak sprawdzić wkład pary — ?
 
 ```bash
 # Pokaż Stat dla każdej osoby
@@ -247,7 +247,7 @@ git log --author="Imię" lab0X...lab0X-start --oneline
 
 ---
 
-## 🎓 Gotowość do Produkcji (Lab 7)
+## Gotowość do produkcji (Lab 7)
 
 Checkpoint 3.0 na Lab 7 oznacza, że system jest **gotowy do testów** (nie do pełnego wdrożenia).
 
@@ -259,7 +259,7 @@ Oczekuj:
 
 ---
 
-## 📚 Dodatkowe Zasoby
+## Dodatkowe zasoby
 
 - **Dokumentacja:** https://docs.unity3d.com/
 - **GitHub repozytorium:** (link do kursu)
@@ -267,7 +267,7 @@ Oczekuj:
 
 ---
 
-**Wersja:** 2.0 • 1 listopada 2026 r.  
+**Wersja:** 2.0 • 13 września 2026 r.  
 **Autora:** Dr inż. Mateusz Pomianek  
 **Aktualizacja:** Na bieżąco z XR technology
 

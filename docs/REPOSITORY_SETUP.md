@@ -1,6 +1,6 @@
 # Setup Repozytorium — Dla Studentów
 
-## 📦 Klonowanie i Konfiguracja
+## Klonowanie i Konfiguracja
 
 ### 1. Klonuj repozytorium
 ```bash
@@ -64,7 +64,7 @@ git push
 
 ---
 
-## 🚀 Gałąź Main — Nie Rób Tego!
+## Gałąź Main — Nie Rób Tego!
 
 ```bash
 # ❌ NIE RÓB
@@ -78,7 +78,7 @@ Prowadzący będzie merge'ować każdą gałąź ręcznie (Quality Gate).
 
 ---
 
-## 📋 Struktura Repozytorium
+## Struktura Repozytorium
 
 ```
 xr-lab/
@@ -112,7 +112,7 @@ xr-lab/
 
 ---
 
-## ❌ Co NIE Wgrywaj do Git
+## Co NIE Wgrywaj do Git
 
 Plik `.gitignore` powinien zawierać:
 
@@ -140,7 +140,7 @@ git push --force  # Tylko na własnej gałęzi!
 
 ---
 
-## 🔄 Workflow Tygodniowy
+## Workflow tygodniowy
 
 ```
 Przed zajęciami:
@@ -165,7 +165,7 @@ Przejście do Lab X+1:
 
 ---
 
-## 🆘 Jeśli Coś Pójdzie Nie Tak
+## Jeśli Coś Pójdzie Nie Tak
 
 ### Merge Conflict?
 ```bash
@@ -199,7 +199,7 @@ git switch lab01-start       # Cofnij czasowe zmiany
 
 ---
 
-## 📞 Wsparcie
+## Wsparcie
 
 - **Prowadzący:** Czat/Email na zajęciach
 - **Peer review:** Każdy commit przeglądany przez parę
@@ -207,7 +207,4 @@ git switch lab01-start       # Cofnij czasowe zmiany
 
 ---
 
-**Powodzenia!**
-
-Wersja: 2.0 • 1 listopada 2026 r.
 

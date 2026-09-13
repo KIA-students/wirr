@@ -1,4 +1,4 @@
-# 📚 Słownik Terminów — WiRR Lab 1–7
+# Słownik terminów — WiRR Lab 1–7
 
 ## A
 
@@ -318,5 +318,4 @@
 
 ---
 
-**Wersja:** 2.0 • 1 listopada 2026 r.
 

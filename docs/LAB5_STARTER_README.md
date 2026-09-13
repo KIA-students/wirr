@@ -1,6 +1,6 @@
 # Laboratorium 5 — Optymalizacja CAD
 
-## 📦 Co Powinieneś Pobrać
+## Co powinieneś pobrać
 
 - ✓ Projekt z Lab 1 (VR/Desktop)
 - ✓ Model CAD (FBX lub 3DS Max/Blender)
@@ -17,7 +17,7 @@ Assets/Scripts/PerformanceBenchmark.cs (z Lab 1, adapt.)
 
 ---
 
-## ✅ Checklist
+## Checklist
 
 - [ ] Model CAD pobierz od prowadzącego
 - [ ] Blender/3DS Max zainstalowany
@@ -26,7 +26,7 @@ Assets/Scripts/PerformanceBenchmark.cs (z Lab 1, adapt.)
 
 ---
 
-## 🚀 Start Lab 5
+## Start Lab 5
 
 1. Kopiuj model: `Assets/Models/model_original.fbx`
 2. Sprawdź Import Settings: Scale Factor = 0.01 (jeśli cm)
@@ -36,13 +36,9 @@ Assets/Scripts/PerformanceBenchmark.cs (z Lab 1, adapt.)
 
 ---
 
-## 📋 Skrypty do pobrania
+## Skrypty do pobrania
 
 Benchmark z Lab 1 — tylko zmień nazwę:
 ```
 LAB05_BENCHMARK fps=... ms=... seed=...
 ```
-
----
-
-**Razem: ~80 minut**

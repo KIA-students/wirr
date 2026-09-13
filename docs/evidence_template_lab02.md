@@ -1,4 +1,4 @@
-# Laboratorium 2 — Evidence/Raport Końcowy
+# Laboratorium 2 — Evidence/raport 
 
 ## Identyfikacja pary
 - Numer indeksu student 1: ___________
@@ -8,7 +8,7 @@
 
 ---
 
-## Interakcje — Testy Funkcjonalne
+## Interakcje i testy funkcjonalne
 
 | Komponent | Test | Status | Uwagi |
 |-----------|------|--------|-------|
@@ -32,7 +32,7 @@
 
 ---
 
-## Pomiary Wydajności — Scenariusz
+## Pomiary wydajności — scenariusz
 
 ### Próba Treningowa
 - Czas: __ s
@@ -77,7 +77,7 @@
 
 ---
 
-## UI — Sprzężenie Zwrotne
+## UI — Sprzężenie zwrotne
 
 ### Wizualne
 - [ ] Hover zmienia kolor przycisku
@@ -96,6 +96,7 @@
 ## Wnioski
 1. ___
 2. ___
+3. ___
 
 ---
 

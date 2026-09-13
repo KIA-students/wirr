@@ -1,4 +1,4 @@
-# Laboratorium 1 — Evidence/Raport Końcowy
+# Laboratorium 1 — Evidence/raport 
 
 ## Identyfikacja pary
 - Numer indeksu student 1: ___________
@@ -22,7 +22,7 @@
 
 ---
 
-## Audyt Urządzeń (jeśli Lab 1 na sprzęcie)
+## Audyt urządzeń (jeśli Lab 1 na sprzęcie)
 
 ### Quest 3 (jeśli dostępny)
 - CPU: ___

@@ -1,6 +1,6 @@
 # Laboratorium 3 — Rejestracja AR
 
-## 📦 Co Powinieneś Pobrać
+## Co Powinieneś Pobrać
 
 - ✓ Projekt z Lab 1–2
 - ✓ Telefon Android z ARCore (dostępność: https://developers.google.com/ar/devices)
@@ -21,7 +21,7 @@ Assets/Models/ (placeholder)
 
 ---
 
-## ✅ Checklist
+## Checklist
 
 - [ ] Android Build Support zainstalowany
 - [ ] Telefon z ARCore podłączony
@@ -31,7 +31,7 @@ Assets/Models/ (placeholder)
 
 ---
 
-## 🚀 Start Lab 3
+## Start Lab 3
 
 1. Git: `git switch -c team-<nr>/lab03-<nazwiska>`
 2. Konfiguracja Android: Edit → Project Settings → Player → Android
@@ -40,7 +40,7 @@ Assets/Models/ (placeholder)
 
 ---
 
-## 📋 Kod
+## Kod
 
 ### RegistrationError.cs
 ```csharp
@@ -57,4 +57,4 @@ public class RegistrationError : MonoBehaviour {
 
 ---
 
-**Razem: ~100 minut**
+**Razem: ~90 minut**

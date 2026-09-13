@@ -20,7 +20,7 @@
 
 ---
 
-## Matryca Testów Funkcjonalnych (Lab 1–6)
+## Matryca testów funkcjonalnych (Lab 1–6)
 
 | Lab | Status | Uwagi |
 |-----|--------|-------|
@@ -35,7 +35,7 @@
 
 ---
 
-## Wydajność — Performance Benchmark
+## Wydajność i performance Benchmark
 
 | Warunek | FPS | CPU [ms] | GPU [ms] | Memory [MB] |
 |---------|-----|----------|----------|-------------|
@@ -53,7 +53,7 @@
 
 ---
 
-## Testy Użyteczności
+## Testy użyteczności
 
 | Scenariusz | Czas [s] | Błędy | Próby |
 |-----------|----------|-------|-------|
@@ -63,7 +63,7 @@
 
 ---
 
-## Błąd Systemowy (wariant ___)
+## Błąd systemowy (wariant ___)
 
 | Pole | Zawartość |
 |------|-----------|
@@ -76,14 +76,14 @@
 
 ---
 
-## Zaliczenie Kursu
+## Zaliczenie kursu
 
 - Checkpoint 3.0 (Smoke + >= 70% funkcjonalnych): ☐ TAK | ☐ NIE
 - Ocena finalna: ☐ 3.0 | ☐ 3.5 | ☐ 4.0 | ☐ 4.5 | ☐ 5.0
 
 ---
 
-## Wkład Studentów
+## Wkład studentów
 
 **Student 1** — głównie: ___________  
 **Student 2** — głównie: ___________
@@ -92,7 +92,7 @@ Czy wkład jest porównywalny (ok. 50/50)? TAK / NIE
 
 ---
 
-## Wnioski Finalne
+## Wnioski finalne
 
 1. ___
 2. ___
