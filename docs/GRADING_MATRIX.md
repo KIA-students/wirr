@@ -1,0 +1,172 @@
+# 📊 Macierz Oceniania — Dla Prowadzącego
+
+## Jak Używać Tego Dokumentu
+
+Każde laboratorium ma swoją macierz oceniania. Przejdź przez kryteria w kolejności:
+
+1. **Smoke Test** — czy system w ogóle się ładuje?
+2. **Checkpoint 3.0** — czy procedury są zrobione?
+3. **Pomiary** — czy dane są przybliżone?
+4. **Diagnoza** — czy błąd znaleziony + naprawiony?
+5. **Evidence** — czy raport wypełniony?
+
+---
+
+## Lab 1 — XR Origin, Audyt, Wydajność
+
+| Kryterium | Tak (1 pkt) | Nie (0 pkt) | Uwagi |
+|-----------|------------|-----------|-------|
+| **Smoke Test** | Aplikacja startuje bez RED errors | Aplikacja crashuje lub ma RED errors | Obowiązkowe |
+| **XR Origin** | Position (0,0,0), Scale (1,1,1) | Coś innego | Sprawdź Transform |
+| **Benchmark** | FPS zmierzony, co 300 klatek log | Brak logu albo błędy | Powinien być w Console |
+| **Audyt** | Poligony, Draw Calls, shader cost | Brak pomiaru | Min. dwa pomiary |
+| **Diagnoza** | Błąd znaleziony, naprawa wdrożona | Bez diagnozy | Niezbędna dla 3.0 |
+| **Evidence** | Wypeł., wszystkie tabele | Puste lub niekompletne | Markdown format |
+
+**Checkpoint 3.0:** >= 5/6 kryteriów  
+**Checkpoint 3.5:** 6/6 + dodatkowe pomiary (np. memory profiler)  
+**Checkpoint 4.0:** 6/6 + analiza bottleneck (CPU vs GPU)  
+**Checkpoint 4.5:** 6/6 + porównanie z linią bazową  
+**Checkpoint 5.0:** 6/6 + automatyzacja testów + raport produkcyjny
+
+---
+
+## Lab 2 — Interakcja i Lokomocja
+
+| Kryterium | Tak (1 pkt) | Nie (0 pkt) | Uwagi |
+|-----------|------------|-----------|-------|
+| **Chwyt** | Direct Grab + Socket Interactor | Jedno z nich nie działa | Demo: chwycić moduł |
+| **Panel UI** | Ray Interactor + UI kanvas | Panel nie reaguje na ray | Demo: kliknąć przycisk |
+| **Lokomocja** | Teleportacja + Snap Turn | Jedno z nich nie działa | Demo: teleport + obrót |
+| **Pomiary** | 3 próby, czasy zarejestrowane | Brak prób albo czasy != log | Mediana ma sens? |
+| **Błędy** | Liczba błędów zarejestrowana | Brak logu | LAB02_RESULT |
+| **Evidence** | Wypeł., wnioski | Puste | Min. 2 zdania |
+
+**Checkpoint 3.0:** >= 5/6 kryteriów  
+**Checkpoint 4.0:** 6/6 + UI sprzężenie zwrotne (dźwięk/wibracja)
+
+---
+
+## Lab 3 — Rejestracja AR
+
+| Kryterium | Tak (1 pkt) | Nie (0 pkt) | Uwagi |
+|-----------|------------|-----------|-------|
+| **Skanowanie** | ARPlaneManager aktywny | Nie skanuje płaszczyzn | Android + ARCore |
+| **Raycast** | Umieszczanie modelu na płaszczyźnie | Model nie da się umieścić | Demo |
+| **Rejestracja** | 2-punktowa wyrównana | Niezalignowana | Punkt O i X |
+| **Pomiary** | 5 pomiarów błędu | < 5 pomiarów | Różne dystanse |
+| **Trend** | Czy błąd rośnie czy stały? | Nie wiadomo | Wniosek z danych |
+| **Evidence** | Wypeł., tabela pomiarów | Puste | REGISTRATION_ERROR |
+
+**Checkpoint 3.0:** >= 5/6 kryteriów  
+**Checkpoint 4.0:** 6/6 + segmentacja (pessoa vs tło)
+
+---
+
+## Lab 4 — Mieszanie Rzeczywistości
+
+| Kryterium | Tak (1 pkt) | Nie (0 pkt) | Uwagi |
+|-----------|------------|-----------|-------|
+| **Depth API** | Aktywna, zwraca dane | Null albo błąd | ARCore >= 1.40 |
+| **Okluzja** | Model okluzowany rzeczywistością | Zawsze widoczny | Demo: przesłonić ręką |
+| **Light Estimation** | Zmienia się z oświetleniem | Stałe | Demo: zmienić oświetlenie |
+| **Wiarygodność** | 5 testów oświetleniowych | < 5 testów | Średnia ocena |
+| **Pomiary** | Temperatura barwna + błąd | Brak danych | Luksomierz opcjonalnie |
+| **Evidence** | Wypeł., wnioski | Puste | LIGHT logs |
+
+**Checkpoint 3.0:** >= 4/6 kryteriów  
+**Checkpoint 4.0:** >= 5/6 + analiza błędu
+
+---
+
+## Lab 5 — Optymalizacja CAD
+
+| Kryterium | Tak (1 pkt) | Nie (0 pkt) | Uwagi |
+|-----------|------------|-----------|-------|
+| **Import** | Model wczytany, skalowanie OK | Błąd skali | Scale Factor = 0.01 |
+| **Hierarchia** | LOD Group ustawiona | Brak lub źle | Widoczna w Hierarchy |
+| **Benchmark** | Tabela: Baseline, LOD0, LOD1 | Brakuje danych | Min. 3 poziomy |
+| **Poligony** | Zmniejszają się między LOD | Takie same | Redukcja >= 20% |
+| **FPS** | Wzrost >= 20% (LOD vs Baseline) | Mniej niż 20% | Lub uzasadnienie |
+| **Evidence** | Wypeł., analiza | Puste | LAB05_BENCHMARK |
+
+**Checkpoint 3.0:** >= 4/6 kryteriów  
+**Checkpoint 4.0:** >= 5/6 + identyfikacja bottleneck
+
+---
+
+## Lab 6 — Bliźniak Cyfrowy ROS 2
+
+| Kryterium | Tak (1 pkt) | Nie (0 pkt) | Uwagi |
+|-----------|------------|-----------|-------|
+| **ROS 2** | Węzeł pojawia się w `ros2 node list` | Brak węzła | Terminal: `ros2 node list` |
+| **Topiki** | Wszystkie 4 topiki dostępne | < 4 topiki | `ros2 topic list` |
+| **Synchronizacja** | Model śledzi robota w RT | Opóźnienie > 500ms | Demo |
+| **Latency** | < 100ms mediana | >= 100ms | 3 próby pomiarowe |
+| **Buforowanie** | Ring buffer, brak drżeń | Drży albo traci pakiety | Obserwacja |
+| **Evidence** | Wypeł., tabela pozycji | Puste | LAB06_STATE |
+
+**Checkpoint 3.0:** >= 4/6 kryteriów  
+**Checkpoint 4.0:** >= 5/6 + analiza latency
+
+---
+
+## Lab 7 — Walidacja i Testy
+
+| Kryterium | Tak (1 pkt) | Nie (0 pkt) | Uwagi |
+|-----------|------------|-----------|-------|
+| **Smoke Tests** | Brak RED errors | Są RED errors | Console check |
+| **Matryca** | >= 70% Lab 1–6 PASS | < 70% | 18 testów razem |
+| **Wydajność** | FPS >= 60 (VR) / >= 30 (AR) | Mniej | Tabela pomiarów |
+| **Stress Test** | Stabilny przez 60s | Crash lub drastyczny spadek | Memory stable? |
+| **Scenariusze UX** | 3 przeprowadzone, czasy | < 3 albo bez czasów | Błędy zarejestrowane? |
+| **Diagnoza Błędu** | Znaleziony, naprawiony | Brak diagnozy | Niezbędna dla 3.0 |
+| **Evidence** | Wypeł., wnioski, zaliczenie | Puste | Raport finalny |
+
+**Checkpoint 3.0:** >= 5/7 kryteriów  
+**Checkpoint 4.0:** >= 6/7 + przypadki brzegowe  
+**Checkpoint 5.0:** 7/7 + testy automatyczne + raport produkcyjny
+
+---
+
+## Jak Szybko Oceniać
+
+**Dla każdego Laboratorium (max 90 sekund):**
+
+1. **Smoke (10 sekund):** Uruchomić grę — czy startuje?
+2. **Demo (30 sekund):** Student pokazuje główną funkcjonalność
+3. **Evidence (20 sekund):** Przejrzeć tabelę pomiarów
+4. **Diagnoza (20 sekund):** Zrozumieć, co znalezli
+5. **Werdykt (10 sekund):** Wpisać ocenę
+
+---
+
+## Wkład Pary — Jak Sprawdzić?
+
+```bash
+# Sprawdź commity dla każdej osoby
+git log --author="Imię" lab0X...lab0X-start --oneline
+
+# Jeśli:
+- >= 2 merytoryczne commity na osobę → wkład ok (50/50)
+- 1 commit albo mniej → może być problem
+
+# Działanie: Porozmawiaj z parą
+```
+
+---
+
+## Oceny Finalne
+
+| Checkpoint | Wymagania | Ćwiczenia |
+|-----------|-----------|-----------|
+| **3.0** | >= 5/6 (Lab 1–6) lub >= 5/7 (Lab 7) | Smoke + Demo |
+| **3.5** | 6/6 (Lab 1–6) lub >= 6/7 (Lab 7) | + komponenty |
+| **4.0** | 6/6 + analiza | + pomiary + porównania |
+| **4.5** | 6/6 + analiza + eksperymenty | + przypadki brzegowe |
+| **5.0** | 6/6 + wszystko + automatyzacja | + raport produkcyjny |
+
+---
+
+**Wersja:** 2.0 • 1 listopada 2026 r.
+
