@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8243734479035799181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d236b7d11115f2143951f1e14045df39, type: 3}
+  m_Name: WebGL Settings
+  m_EditorClassIdentifier: Unity.XR.Management::UnityEngine.XR.Management.XRGeneralSettings
+  m_Manager: {fileID: -431796932843326211}
+  m_InitManagerOnStart: 1
 --- !u!114 &-7574643464164013171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28,6 +42,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.XR.Management::UnityEngine.XR.Management.XRGeneralSettings
   m_Manager: {fileID: 5185597377529872817}
   m_InitManagerOnStart: 1
+--- !u!114 &-431796932843326211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c3631f5e58749a59194e0cf6baf6d5, type: 3}
+  m_Name: WebGL Providers
+  m_EditorClassIdentifier: Unity.XR.Management::UnityEngine.XR.Management.XRManagerSettings
+  m_RequiresSettingsUpdate: 0
+  m_AutomaticLoading: 0
+  m_AutomaticRunning: 0
+  m_Loaders: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,6 +77,8 @@ MonoBehaviour:
     settings: {fileID: -7574643464164013171}
   - buildTarget: 7
     settings: {fileID: -6001398169239762433}
+  - buildTarget: 13
+    settings: {fileID: -8243734479035799181}
 --- !u!114 &2035549482608929266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +94,8 @@ MonoBehaviour:
   m_RequiresSettingsUpdate: 0
   m_AutomaticLoading: 0
   m_AutomaticRunning: 0
-  m_Loaders: []
+  m_Loaders:
+  - {fileID: 11400000, guid: c99d9dd68439c574681334225bea7203, type: 2}
 --- !u!114 &5185597377529872817
 MonoBehaviour:
   m_ObjectHideFlags: 0
