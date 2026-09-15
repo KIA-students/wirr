@@ -1,4 +1,4 @@
-# WiRR — Wirtualna i Rozszerzona Rzeczywistość
+# WiRR - Wirtualna i Rozszerzona Rzeczywistość
 
 ### Repozytorium laboratoryjne (Lab 1-7)
 
