@@ -1,7 +1,8 @@
-# WiRR — Wirtualna i Rozszerzona Rzeczywistosc
+# WiRR — Wirtualna i Rozszerzona Rzeczywistość
+
 ### Repozytorium laboratoryjne (Lab 1-7)
 
-Katedra Informatyki i Automatyki, Politechnika Rzeszowska.
+Katedra Informatyki i Automatyki, Politechnika Rzeszowska
 
 ## Struktura
 
@@ -19,11 +20,11 @@ evidence/           # raporty studenckie (evidence/lab0X.md)
 docs/               # dokumentacja kursu
 ```
 
-## Galezie
+## Gałęzie
 
-| Galaz | Zawartosc |
+| Gałąź | Zawartość |
 |---|---|
-| `main` | Stan zmergowany, oceniony przez prowadzacego |
+| `main` | Stan zmergowany, oceniony przez prowadzącego |
 | `lab0X-start` | Punkt startowy dla laboratorium X |
 | `team-<NR>/lab0X-<nazwiska>` | Praca konkretnej pary nad laboratorium X |
 
@@ -38,7 +39,7 @@ git switch -c team-<NR>/lab01-<nazwisko1>-<nazwisko2>
 git push -u origin team-<NR>/lab01-<nazwisko1>-<nazwisko2>
 ```
 
-Pelna instrukcja: `docs/REPOSITORY_SETUP.md`
+Pełna instrukcja: `docs/REPOSITORY_SETUP.md`
 
 ## Wymagania
 
