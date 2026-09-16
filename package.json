@@ -1,0 +1,66 @@
+{
+  "name": "pl.prz.kia.wirr",
+  "version": "0.3.0",
+  "displayName": "WiRR Course Toolkit",
+  "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i Rozszerzona Rzeczywistość: instalacja zależności, próbki laboratoriów, sceny, pomiary, walidacja, WebSim ROS 2/Gazebo, cyfrowy cień, strukturalne formularze raportów, telemetryka i wysyłka do GitHub.",
+  "unity": "6000.0",
+  "author": {
+    "name": "Katedra Informatyki i Automatyki, Politechnika Rzeszowska"
+  },
+  "dependencies": {
+    "com.unity.render-pipelines.universal": "17.7.0",
+    "com.unity.inputsystem": "1.20.0"
+  },
+  "samples": [
+    {
+      "displayName": "Lab 01 — Środowisko XR i audyt urządzeń",
+      "description": "Pliki startowe i awaryjny szablon Markdown do Laboratorium 1; podstawowy raport wypełnia się w WiRR Reports.",
+      "path": "Samples~/Lab01"
+    },
+    {
+      "displayName": "Lab 02 — Interakcja i manipulacja XR",
+      "description": "Pliki startowe i awaryjny szablon Markdown do Laboratorium 2; podstawowy raport wypełnia się w WiRR Reports.",
+      "path": "Samples~/Lab02"
+    },
+    {
+      "displayName": "Lab 03 — Rejestracja i kotwice AR",
+      "description": "Pliki startowe i awaryjny szablon Markdown do Laboratorium 3; podstawowy raport wypełnia się w WiRR Reports.",
+      "path": "Samples~/Lab03"
+    },
+    {
+      "displayName": "Lab 04 — Rozumienie sceny i MR",
+      "description": "Pliki startowe, WebSim digital shadow i raport WiRR Reports do Laboratorium 4.",
+      "path": "Samples~/Lab04"
+    },
+    {
+      "displayName": "Lab 05 — Optymalizacja modeli CAD",
+      "description": "Pliki startowe i raport WiRR Reports do Laboratorium 5.",
+      "path": "Samples~/Lab05"
+    },
+    {
+      "displayName": "Lab 06 — Bliźniak cyfrowy ROS 2 + Gazebo",
+      "description": "Pliki startowe, WebSim ROS 2/Gazebo i raport WiRR Reports do Laboratorium 6.",
+      "path": "Samples~/Lab06"
+    },
+    {
+      "displayName": "Lab 07 — Walidacja i testy akceptacyjne",
+      "description": "Pliki startowe i raport WiRR Reports do Laboratorium 7.",
+      "path": "Samples~/Lab07"
+    }
+  ],
+  "keywords": [
+    "XR",
+    "VR",
+    "AR",
+    "ROS2",
+    "Gazebo",
+    "WebSim",
+    "digital twin",
+    "digital shadow",
+    "reports",
+    "telemetry",
+    "education",
+    "PRz",
+    "WiRR"
+  ]
+}
