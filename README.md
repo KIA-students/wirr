@@ -36,7 +36,15 @@ Repozytorium studenckie:
 https://github.com/KIA-students/wirr.git
 ```
 
-Pakiet znajduje się w katalogu głównym repozytorium. Po instalacji w menu Unity pojawi się **WiRR**.
+Pakiet znajduje się w katalogu głównym repozytorium. Po instalacji w menu Unity pojawi się **WiRR**. Wymagana wersja to Unity **6000.6.x** lub nowsza zgodna wersja 6000.6.
+
+## Struktura repozytorium
+
+Katalog główny repozytorium jest czystym pakietem UPM. Kod pakietu znajduje się w `Editor/` i `Runtime/`, a materiały importowane przez Package Manager w `Samples~/`.
+
+Pełny projekt Unity używany do rozwoju i testowania pakietu znajduje się w `Project~/`. Sufiks `~` powoduje, że Unity Package Manager nie importuje tego katalogu do projektu studenta, dzięki czemu `Assets`, `Packages` i `ProjectSettings` projektu deweloperskiego nie powodują konfliktów GUID z projektem użytkownika. Po sklonowaniu `MatPomGit/wirr` do pracy nad pakietem otwórz w Unity katalog `Project~`, nie katalog główny repozytorium.
+
+Dodatkowa dokumentacja techniczna znajduje się w `Documentation~/`, a skrypt walidatora CI w `scripts~/`; katalogi te również są celowo pomijane przez Asset Database.
 
 ## Laboratoria i zależności
 
@@ -107,7 +115,7 @@ Walidator uruchamiany w Pull Request jest pobierany z zaufanej gałęzi bazowej,
 
 ## Zalecany workflow studenta
 
-1. Utwórz projekt **Universal 3D (URP)** w wersji Unity wskazanej przez prowadzącego.
+1. Utwórz projekt **Universal 3D (URP)** w wersji Unity 6000.6.x wskazanej przez prowadzącego.
 2. Zainstaluj WiRR z `KIA-students/wirr`.
 3. Otwórz `WiRR → Course Toolkit` i wybierz laboratorium.
 4. Zainstaluj wymagane zależności i zaimportuj Sample.
@@ -118,7 +126,7 @@ Walidator uruchamiany w Pull Request jest pobierany z zaufanej gałęzi bazowej,
 
 ## Identyfikacja wizualna
 
-`icon.png` jest podstawowym logo pakietu i jest używany w dokumentacji oraz w oknach Unity **WiRR Toolkit** i **WiRR Report**. `icon.ico` pozostaje zasobem ikony aplikacyjnej dla środowisk wymagających formatu ICO. Zestaw faviconów jest przechowywany jako `favicon_io.zip` w repozytorium dystrybucyjnym.
+`icon.png` jest podstawowym logo pakietu i jest używany w dokumentacji oraz w oknach Unity **WiRR Toolkit** i **WiRR Report**. `.icon.png` jest ikoną wyświetlaną przez Unity Package Manager. `icon.ico` pozostaje zasobem ikony aplikacyjnej dla środowisk wymagających formatu ICO. Zestaw faviconów jest przechowywany jako `favicon_io.zip`.
 
 ## Prywatność
 
