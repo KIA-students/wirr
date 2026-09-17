@@ -8,6 +8,7 @@
 - dodano workflow CI budujący kontener i sprawdzający utworzenie sesji ROS 2 oraz publikację `JointState`.
 - poprawiono inicjalizację środowiska ROS 2 w kontenerze dla powłok z włączonym `nounset`.
 - usunięto kolizję nazwy wewnętrznego zegara `rclpy` z publisherem `/clock`.
+- dodano statyczną stronę WebSim i workflow publikacji przez GitHub Pages.
 
 ## 0.4.2 — 2026-09-17
 
