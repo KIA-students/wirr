@@ -64,6 +64,8 @@ Materiały startowe znajdują się w `Samples~/Lab01`–`Samples~/Lab07`.
 
 WebSim jest prostym klientem rosbridge używanym w ćwiczeniach robotycznych. Student podaje adres backendu, identyfikator sesji i model robota, tworzy model w scenie, uruchamia Play Mode i łączy się z backendem. Panel pokazuje jedynie stan potrzebny do wykonania ćwiczenia, m.in. `LIVE` lub `STALE`, oraz podstawowe polecenia ruchu, Home i Reset.
 
+Gotowy backend Docker znajduje się w `WebSim~/`. Uruchamia lokalny generator ROS 2/rosbridge bez instalacji ROS 2 po stronie Unity. Dla tego samego komputera użyj `ws://127.0.0.1:9090`; dla serwera w LAN — `ws://<IP-serwera>:9090`. Szczegółowa instrukcja: [`WebSim~/README.md`](WebSim~/README.md).
+
 Kontrakt komunikacyjny:
 
 ```text
