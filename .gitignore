@@ -6,6 +6,14 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 /[Uu]serSettings/
+/Project~/[Ll]ibrary/
+/Project~/[Tt]emp/
+/Project~/[Oo]bj/
+/Project~/[Bb]uild/
+/Project~/[Bb]uilds/
+/Project~/[Ll]ogs/
+/Project~/[Mm]emoryCaptures/
+/Project~/[Uu]serSettings/
 *.csproj
 *.sln
 *.suo
@@ -27,7 +35,9 @@
 sysinfo.txt
 crashlytics-build.properties
 
-# Samples imported by Unity Package Manager belong to the local project,
+# Samples imported by Unity Package Manager belong to the local development project,
 # not to the WiRR package repository.
 /Assets/Samples/
 /Assets/Samples.meta
+/Project~/Assets/Samples/
+/Project~/Assets/Samples.meta

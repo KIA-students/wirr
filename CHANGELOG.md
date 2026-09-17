@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.2 — 2026-09-17
+
+- rozdzielono instalowalny pakiet UPM od referencyjnego projektu Unity: projekt deweloperski znajduje się teraz w `Project~/` i nie jest importowany do projektu studenta;
+- usunięto źródło konfliktów GUID powodowanych przez duplikowanie `Assets`, `Packages` i `ProjectSettings` wewnątrz `Packages/pl.prz.kia.wirr`;
+- dodano brakujący `Editor/WiRRReportEvaluator.cs.meta`, dzięki czemu evaluator jest poprawnie importowany i dostępny dla `WiRRReportWindow`;
+- dodano pliki `.meta` do zasobów widocznych w głównym katalogu pakietu;
+- dokumentację referencyjną przeniesiono do `Documentation~/`, a walidator CI do `scripts~/`, aby Unity nie importowało plików technicznych jako zasobów pakietu;
+- minimalną wersję pakietu ustawiono na Unity `6000.6`;
+- zaktualizowano workflow walidacji raportów do nowej ścieżki `scripts~/wirr_grade_report.py`.
+
 ## 0.4.1 — 2026-09-17
 
 - dodano dedykowaną ikonę pakietu dla Unity Package Manager na podstawie logo WiRR;
@@ -14,7 +24,7 @@
 - kontrola lokalna wymaga pól oznaczonych jako wymagane oraz obecności danych pomiarowych dla danego checkpointu;
 - uproszczono dokument raportu `wirr-report/1.0` do danych potrzebnych do sprawozdania; usunięto telemetrykę przebiegu pracy z raportu;
 - wysyłka korzysta ze stałego repozytorium kursu `KIA-students/wirr` i ścieżki `students/reports`;
-- repozytoryjny skrypt `scripts/wirr_grade_report.py` wykonuje podstawową kontrolę integralności raportu w CI; ocena merytoryczna pozostaje po stronie prowadzącego;
+- repozytoryjny skrypt walidacyjny wykonuje podstawową kontrolę integralności raportu w CI; ocena merytoryczna pozostaje po stronie prowadzącego;
 - Lab 04 uporządkowano zgodnie z aktualnym przebiegiem ćwiczenia: Depth API → okluzja → depth-raycast → estymacja oświetlenia → kontrolowany błąd i diagnoza;
 - WebSim pozostawiono wyłącznie dla Lab 06 jako opcjonalne źródło stanu bliźniaka cyfrowego;
 - uproszczono dokumentację i interfejs Course Toolkit zgodnie z zasadą KISS;
