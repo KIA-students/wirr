@@ -13,23 +13,9 @@ namespace KIA.WiRR.Editor
         public const string SessionPref = "KIA.WiRR.WebSim.Session";
         public const string RobotPref = "KIA.WiRR.WebSim.Robot";
 
-        public static string Backend
-        {
-            get => EditorPrefs.GetString(BackendPref, string.Empty);
-            set => EditorPrefs.SetString(BackendPref, value ?? string.Empty);
-        }
-
-        public static string Session
-        {
-            get => EditorPrefs.GetString(SessionPref, "TEAM01");
-            set => EditorPrefs.SetString(SessionPref, NormalizeSession(value));
-        }
-
-        public static string Robot
-        {
-            get => EditorPrefs.GetString(RobotPref, "rrbot");
-            set => EditorPrefs.SetString(RobotPref, value == "wirr-arm3" ? "wirr-arm3" : "rrbot");
-        }
+        public static string Backend { get => EditorPrefs.GetString(BackendPref, string.Empty); set => EditorPrefs.SetString(BackendPref, value ?? string.Empty); }
+        public static string Session { get => EditorPrefs.GetString(SessionPref, "TEAM01"); set => EditorPrefs.SetString(SessionPref, NormalizeSession(value)); }
+        public static string Robot { get => EditorPrefs.GetString(RobotPref, "rrbot"); set => EditorPrefs.SetString(RobotPref, value == "wirr-arm3" ? "wirr-arm3" : "rrbot"); }
 
         [MenuItem("WiRR/WebSim/Create or repair digital shadow", priority = 30)]
         public static void CreateFromMenu()
@@ -38,118 +24,98 @@ namespace KIA.WiRR.Editor
             CreateOrRepairRig(lab == 4 ? 4 : 6);
         }
 
+        public static bool ValidateConfiguration(out string message)
+        {
+            if (!Uri.TryCreate(Backend, UriKind.Absolute, out var uri) || (uri.Scheme != "ws" && uri.Scheme != "wss"))
+            {
+                message = "Podaj adres backendu zaczynający się od ws:// lub wss://.";
+                return false;
+            }
+            message = $"Backend: {uri.Host}, sesja: {Session}, robot: {Robot}.";
+            return true;
+        }
+
+        public static WebSimStateSource FindSource() => UnityEngine.Object.FindFirstObjectByType<WebSimStateSource>();
+
+        public static string RuntimeStatus()
+        {
+            if (!Application.isPlaying) return "Uruchom Play Mode.";
+            var source = FindSource();
+            if (source == null) return "Brak WebSim — utwórz model.";
+            if (source.IsConnecting) return "CONNECTING…";
+            if (!source.IsConnected) return "DISCONNECTED";
+            return source.IsStale ? "STALE — brak aktualnych danych" : "LIVE";
+        }
+
         public static void CreateOrRepairRig(int labNumber)
         {
             WiRRSceneTools.PrepareBaseScene(labNumber);
-            var root = GameObject.Find("WiRR_WebSim");
-            if (root == null)
-            {
-                root = new GameObject("WiRR_WebSim");
-                Undo.RegisterCreatedObjectUndo(root, "Create WiRR WebSim root");
-            }
-
-            var source = root.GetComponent<WebSimStateSource>();
-            if (source == null)
-                source = Undo.AddComponent<WebSimStateSource>(root);
+            var root = GameObject.Find("WiRR_WebSim") ?? new GameObject("WiRR_WebSim");
+            var source = root.GetComponent<WebSimStateSource>() ?? Undo.AddComponent<WebSimStateSource>(root);
             source.Configure(Backend, Session, Robot);
-            EditorUtility.SetDirty(source);
 
             var robotRoot = GameObject.Find("WiRR_WebSim_Robot");
-            if (robotRoot != null)
-                Undo.DestroyObjectImmediate(robotRoot);
+            if (robotRoot != null) Undo.DestroyObjectImmediate(robotRoot);
             robotRoot = new GameObject("WiRR_WebSim_Robot");
-            Undo.RegisterCreatedObjectUndo(robotRoot, "Create WiRR robot");
             robotRoot.transform.SetParent(root.transform, false);
 
-            var lengths = Robot == "wirr-arm3" ? new[] { 0.8f, 0.65f, 0.45f } : new[] { 0.9f, 0.75f };
             var names = Robot == "wirr-arm3" ? new[] { "joint1", "joint2", "joint3" } : new[] { "joint1", "joint2" };
+            var lengths = Robot == "wirr-arm3" ? new[] { 0.8f, 0.65f, 0.45f } : new[] { 0.9f, 0.75f };
             var joints = BuildRobot(robotRoot.transform, names, lengths);
-
             var rig = robotRoot.AddComponent<WiRRRobotRig>();
             rig.Configure(source, names, joints, Vector3.forward);
-            EditorUtility.SetDirty(rig);
-
             robotRoot.transform.position = labNumber == 4 ? new Vector3(0f, 0f, 1.5f) : Vector3.zero;
             EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
-            Debug.Log($"[WiRR] WebSim {(labNumber == 4 ? "digital shadow" : "digital twin")} ready: robot={Robot}, session={Session}.");
         }
 
         public static async void ConnectInPlayMode()
         {
             if (!Application.isPlaying)
             {
-                Debug.LogWarning("[WiRR] Połączenie WebSim uruchamiaj w Play Mode.");
+                Debug.LogWarning("[WiRR] Uruchom Play Mode.");
                 return;
             }
-
-            var source = UnityEngine.Object.FindFirstObjectByType<WebSimStateSource>();
-            if (source == null)
+            if (!ValidateConfiguration(out var message))
             {
-                Debug.LogError("[WiRR] Brak WebSimStateSource. Najpierw utwórz cyfrowy cień/bliźniak.");
+                Debug.LogWarning("[WiRR] " + message);
                 return;
             }
-
+            var source = FindSource();
+            if (source == null) { Debug.LogWarning("[WiRR] Najpierw utwórz WebSim."); return; }
             source.Configure(Backend, Session, Robot);
-            try
-            {
-                await source.ConnectAsync();
-            }
-            catch (Exception exception)
-            {
-                Debug.LogError("[WiRR] WebSim connect failed: " + exception.Message);
-            }
+            try { await source.ConnectAsync(); } catch (Exception e) { Debug.LogError("[WiRR] " + e.Message); }
         }
 
-        public static async void SendMotion(string motion)
-        {
-            if (!Application.isPlaying)
-                return;
-            var source = UnityEngine.Object.FindFirstObjectByType<WebSimStateSource>();
-            if (source == null || !source.IsConnected)
-            {
-                Debug.LogWarning("[WiRR] WebSim nie jest połączony.");
-                return;
-            }
-            await source.SendMotionAsync(motion);
-        }
+        public static async void DisconnectInPlayMode() { var source = FindSource(); if (source != null) await source.DisconnectAsync(); }
+        public static async void SendMotion(string motion) { var source = FindSource(); if (source != null && source.IsConnected) await source.SendMotionAsync(motion); }
+        public static async void SendHome() { var source = FindSource(); if (source != null && source.IsConnected) await source.SendHomeAsync(); }
+        public static async void SendReset() { var source = FindSource(); if (source != null && source.IsConnected) await source.SendResetAsync(); }
 
         private static Transform[] BuildRobot(Transform parent, string[] names, float[] lengths)
         {
-            var baseObject = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            baseObject.name = "base_link";
-            baseObject.transform.SetParent(parent, false);
-            baseObject.transform.localScale = new Vector3(0.35f, 0.12f, 0.35f);
-            baseObject.transform.localPosition = new Vector3(0f, 0.12f, 0f);
-
             var result = new Transform[names.Length];
-            var currentParent = parent;
-            var currentHeight = 0.24f;
+            var current = parent;
             for (var i = 0; i < names.Length; i++)
             {
                 var joint = new GameObject(names[i]);
-                joint.transform.SetParent(currentParent, false);
-                joint.transform.localPosition = i == 0 ? new Vector3(0f, currentHeight, 0f) : new Vector3(0f, lengths[i - 1], 0f);
+                joint.transform.SetParent(current, false);
+                joint.transform.localPosition = i == 0 ? Vector3.zero : new Vector3(0f, lengths[i - 1], 0f);
                 result[i] = joint.transform;
-
                 var link = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 link.name = $"link{i + 1}";
                 link.transform.SetParent(joint.transform, false);
-                link.transform.localPosition = new Vector3(0f, lengths[i] * 0.5f, 0f);
+                link.transform.localPosition = new Vector3(0f, lengths[i] / 2f, 0f);
                 link.transform.localScale = new Vector3(0.12f, lengths[i], 0.12f);
-                currentParent = joint.transform;
+                current = joint.transform;
             }
             return result;
         }
 
         private static string NormalizeSession(string value)
         {
-            if (string.IsNullOrWhiteSpace(value))
-                return "TEAM01";
+            if (string.IsNullOrWhiteSpace(value)) return "TEAM01";
             var result = string.Empty;
-            foreach (var character in value.Trim().ToUpperInvariant())
-                if (char.IsLetterOrDigit(character) || character == '_' || character == '-')
-                    result += character;
-            if (result.Length < 3) result += "001";
+            foreach (var c in value.Trim().ToUpperInvariant()) if (char.IsLetterOrDigit(c) || c == '_' || c == '-') result += c;
             return result.Length > 12 ? result.Substring(0, 12) : result;
         }
     }

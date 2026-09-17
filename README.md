@@ -1,91 +1,62 @@
+<p align="center">
+  <img src="icon.png" alt="WiRR" width="128">
+</p>
+
 # WiRR Course Toolkit
 
-Pakiet UPM dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**.
+Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
+
+`MatPomGit/wirr` jest repozytorium roboczym. Po zakończeniu weryfikacji jego zawartość jest kopiowana 1:1 do publicznego `KIA-students/wirr`, z którego korzystają studenci.
+
+## Zasada działania
+
+WiRR automatyzuje infrastrukturę, a nie wykonanie ćwiczenia. Student nadal sam implementuje rozwiązanie, wykonuje pomiary i interpretuje wyniki zgodnie z instrukcją laboratoryjną.
+
+Pakiet zawiera:
+
+- **Course Toolkit** — główny panel laboratorium;
+- **Dependency Installer** — instalację wymaganych pakietów Unity;
+- **Samples Manager** — import materiałów dla wybranego laboratorium;
+- **Scene Tools / Validator** — przygotowanie i kontrolę sceny;
+- **Runtime Utilities** — lekkie komponenty pomiarowe;
+- **WebSim** — połączenie Unity ze środowiskiem ROS 2/Gazebo przez rosbridge;
+- **WiRR Reports** — formularz, autosave, tabele pomiarowe i raport JSON;
+- **Git Submission** — wysłanie raportu do repozytorium;
+- **Report Validation CI** — techniczną kontrolę integralności raportu.
 
 ## Instalacja
 
-W projekcie utworzonym z szablonu **Universal 3D (URP)** wybierz:
+W Unity wybierz:
 
-`Window → Package Manager → + → Add package from git URL...`
+`Window → Package Manager → + → Install package from git URL...`
 
-W repozytorium roboczym `przkia` użyj:
-
-```text
-https://github.com/MatPomGit/przkia.git?path=/courses/wirtualna-i-rozszerzona-rzeczywistosc/unity-package
-```
-
-Po przeniesieniu folderu `unity-package` do repozytorium `KIA-students/wirr` docelowy adres będzie:
+Repozytorium studenckie:
 
 ```text
-https://github.com/KIA-students/wirr.git?path=/unity-package
+https://github.com/KIA-students/wirr.git
 ```
 
-Po instalacji w głównym menu Unity pojawi się **WiRR**.
+Pakiet znajduje się w katalogu głównym repozytorium. Po instalacji w menu Unity pojawi się **WiRR**.
 
-## Zalecany workflow studenta
+## Laboratoria i zależności
 
-1. Utwórz nowy projekt **Universal 3D (URP)** w wersji Unity wskazanej przez prowadzącego.
-2. Zainstaluj `WiRR Course Toolkit` z Git URL.
-3. Otwórz `WiRR → Course Toolkit`.
-4. Wybierz numer laboratorium.
-5. Kliknij **Install / repair lab dependencies**.
-6. Zaimportuj wymagane Samples.
-7. Kliknij **Create / repair base scene**.
-8. Dla Lab 4 lub Lab 6 skonfiguruj **WiRR WebSim**, jeżeli używasz środowiska webowego.
-9. Kliknij **Validate scene** i usuń wszystkie błędy.
-10. Otwórz **Open WiRR Reports form** i wpisuj wyniki bezpośrednio w Unity.
-11. Przed oddaniem użyj **Sprawdź kompletność**, a następnie **Wyślij raport i utwórz PR**.
+| Lab | Dodatkowe pakiety |
+|---|---|
+| 1 | XR Management, OpenXR, XRI, XR Hands |
+| 2 | XR Management, OpenXR, XRI |
+| 3 | XR Management, XRI, AR Foundation, ARCore |
+| 4 | XR Management, XRI, AR Foundation, ARCore |
+| 5 | brak dodatkowych |
+| 6 | ROS-TCP-Connector v0.7.1 z Git |
+| 7 | Unity Test Framework |
 
-## WiRR Reports
+Materiały startowe znajdują się w `Samples~/Lab01`–`Samples~/Lab07`.
 
-Od wersji `0.3.0` podstawowym sposobem przygotowania sprawozdania jest moduł **WiRR Reports**. Dotychczasowy `report-template.md` pozostaje wyłącznie formatem awaryjnym i materiałem referencyjnym.
+## WebSim
 
-Formularz jest inny dla każdego z laboratoriów 1–7. Pola mają stabilne identyfikatory, typy i checkpointy `3.0`, `3.5`, `4.0`, `4.5`, `5.0`, dzięki czemu wynikowy JSON może być bezpiecznie parsowany przez CI. Numery wariantów są wyliczane automatycznie z numerów indeksów 2- lub 3-osobowego zespołu.
+WebSim jest prostym klientem rosbridge używanym w ćwiczeniach robotycznych. Student podaje adres backendu, identyfikator sesji i model robota, tworzy model w scenie, uruchamia Play Mode i łączy się z backendem. Panel pokazuje jedynie stan potrzebny do wykonania ćwiczenia, m.in. `LIVE` lub `STALE`, oraz podstawowe polecenia ruchu, Home i Reset.
 
-Szkic jest zapisywany lokalnie w `Library/WiRRReports`, więc nie zaśmieca katalogu `Assets`. Finalny plik ma schemat `wirr-report/1.0` i zawiera:
-
-- odpowiedzi i wyniki pomiarów;
-- identyfikator zespołu i numery indeksów, bez nazwisk;
-- wersję Unity, system operacyjny, GPU, render pipeline i hash manifestu pakietów;
-- bieżący commit/branch projektu, jeżeli projekt jest repozytorium Git;
-- telemetryczną oś czasu pracy;
-- snapshoty stanu projektu i sceny;
-- zdarzenia tworzenia, modyfikacji, przenoszenia i usuwania plików w `Assets`;
-- aktywny czas Unity, czas Play Mode, kompilacje oraz czas przypisany do checkpointów.
-
-### Prywatność telemetryki
-
-Telemetryka jest jawna i widoczna w formularzu. Nie zapisuje treści plików, nazwy użytkownika systemu, katalogu domowego, zdjęć, danych lokalizacyjnych ani identyfikatorów sprzętowych. Dla plików projektu zapisywane są względna ścieżka, rozmiar, czas zdarzenia i SHA-256. Snapshot całego projektu wykonywany jest domyślnie co 10 minut.
-
-### Przesyłanie raportu
-
-Pakiet nie zawiera tokenu GitHub. Przycisk wysłania korzysta z lokalnej konfiguracji `git` (Git Credential Manager / SSH). Tworzy osobną gałąź w postaci:
-
-```text
-report/<team>/labXX-YYYYMMDD-HHMMSS
-```
-
-i umieszcza raport w:
-
-```text
-students/reports/<team>/lab-XX/<submissionId>.json
-```
-
-Jeżeli dostępny jest zalogowany GitHub CLI (`gh`), pakiet automatycznie tworzy Pull Request. Bez `gh` raport jest nadal wypychany na osobną gałąź i pozostaje gotowy do otwarcia PR.
-
-Repozytorium kursu zawiera workflow `wirr-report-grade.yml` oraz skrypt `scripts/wirr_grade_report.py`. Workflow przygotowuje wyłącznie **propozycję oceny** na podstawie kompletności kolejnych checkpointów i metadanych. Zawsze ustawia `requiresInstructorApproval=true`; prowadzący zatwierdza lub zmienia wynik.
-
-## WiRR WebSim
-
-Pakiet obsługuje trzy źródła środowiska robotycznego dla Lab 6:
-
-- lokalne ROS 2 + Gazebo na tym samym komputerze;
-- ROS 2 + Gazebo na drugim komputerze w LAN;
-- **WiRR WebSim** — Gazebo + ROS 2 po stronie backendu, a Unity łączy się przez `rosbridge` WebSocket/WSS.
-
-W panelu Lab 4 i Lab 6 podaj adres backendu `wss://...`, kod zespołu / sesji oraz model `RRBot 2R` albo `WiRR Arm 3R`. Ten sam `WiRRRobotRig` jest używany w obu laboratoriach: w Lab 4 jako cyfrowy cień, w Lab 6 jako reprezentacja bliźniaka cyfrowego.
-
-Kontrakt WebSim:
+Kontrakt komunikacyjny:
 
 ```text
 /wirr/control
@@ -96,39 +67,63 @@ Kontrakt WebSim:
 /clock
 ```
 
-## Założenia
+W Lab 6 możliwy jest również klasyczny wariant ROS 2/Gazebo z ROS-TCP-Endpoint.
 
-- Pakiet nie ukrywa błędów konfiguracji i nie zastępuje świadomego wykonania ćwiczenia.
-- Zależności laboratoryjne są instalowane sekwencyjnie przez Unity Package Manager.
-- Materiały laboratoriów są rozdzielone jako `Samples~`.
-- Kod Runtime nie zależy od XRI, AR Foundation ani ROS-TCP-Connector.
-- Lab 6 instaluje ROS-TCP-Connector automatycznie dla trybu klasycznego; WebSim nie wymaga lokalnego ROS 2 ani Gazebo na komputerze z Unity.
-- Automatyczna propozycja oceny nie jest oceną końcową i nie zastępuje recenzji prowadzącego.
+## Raportowanie
 
-## Struktura
+Podstawową ścieżką jest `WiRR → Reports → Laboratory report form`. Każde laboratorium ma formularz odpowiadający checkpointom:
+
+`3.0 → 3.5 → 4.0 → 4.5 → 5.0`.
+
+Formularz zawiera pola opisowe oraz tabele wyników wymagane przez dane ćwiczenie. Szkic jest automatycznie zapisywany lokalnie w `Library/WiRRReports`.
+
+Student podaje identyfikator zespołu i 2–3 numery indeksów. Warianty zadania są wyliczane automatycznie. Student może zakończyć raport na dowolnym kompletnym checkpointcie; wyższy checkpoint wymaga ukończenia poprzednich.
+
+Finalny raport ma schemat `wirr-report/1.0`. Zawiera wyłącznie dane raportu: identyfikację zgłoszenia, laboratorium, zespół, numery indeksów, daty oraz odpowiedzi i wyniki. Pakiet nie dołącza telemetryki pracy studenta, danych o systemie, GPU, historii plików ani innych dodatkowych metadanych środowiska.
+
+Markdown `report-template.md` w materiałach laboratoryjnych pozostaje formatem referencyjnym i awaryjnym.
+
+Standardowa ścieżka:
+
+`Raport → Sprawdź → Wyślij → GitHub → walidacja CI → prowadzący`.
+
+## Wysyłanie raportu
+
+Przycisk **Wyślij raport** zapisuje finalny JSON w strukturze:
 
 ```text
-unity-package/
-├── package.json
-├── Runtime/
-│   ├── WiRRReportData.cs
-│   ├── IRobotStateSource.cs
-│   ├── RobotState.cs
-│   ├── WebSimStateSource.cs
-│   └── WiRRRobotRig.cs
-├── Editor/
-│   ├── WiRRReportWindow.cs
-│   ├── WiRRReportSchemaCatalog.cs
-│   ├── WiRRTelemetryRecorder.cs
-│   ├── WiRRGitSubmission.cs
-│   └── WiRRWebSimTools.cs
-├── Samples~/
-│   ├── Lab01/
-│   ├── ...
-│   └── Lab07/
-└── Documentation~/
+students/reports/<team>/lab-XX/<submissionId>.json
 ```
 
-## Wersjonowanie
+i przygotowuje dedykowaną gałąź raportową. Pakiet korzysta z lokalnej konfiguracji `git`; nie przechowuje tokenu GitHub. Jeśli dostępny jest zalogowany GitHub CLI (`gh`), może utworzyć Pull Request automatycznie. W przeciwnym razie student tworzy PR z wypchniętej gałęzi. Wysyłka wymaga konta GitHub z prawem zapisu do repozytorium kursu.
 
-Aktualna wersja pakietu to `0.3.0`. Po przeniesieniu do repozytorium studenckiego zalecane jest tagowanie wydań i instalowanie przez URL przypięty do konkretnego tagu.
+## Walidacja CI
+
+Workflow `.github/workflows/wirr-report-grade.yml` wykonuje wyłącznie kontrolę techniczną raportu. Sprawdza m.in. wersję schematu, numer laboratorium, identyfikator raportu, identyfikator zespołu oraz 2–3 poprawne i unikalne numery indeksów.
+
+CI nie wystawia oceny merytorycznej i nie analizuje sposobu pracy studenta. Ocenę raportu wykonuje prowadzący.
+
+Walidator uruchamiany w Pull Request jest pobierany z zaufanej gałęzi bazowej, natomiast raport pochodzi z gałęzi studenta.
+
+## Zalecany workflow studenta
+
+1. Utwórz projekt **Universal 3D (URP)** w wersji Unity wskazanej przez prowadzącego.
+2. Zainstaluj WiRR z `KIA-students/wirr`.
+3. Otwórz `WiRR → Course Toolkit` i wybierz laboratorium.
+4. Zainstaluj wymagane zależności i zaimportuj Sample.
+5. Utwórz lub napraw scenę bazową i uruchom walidację.
+6. Wykonaj zadania i pomiary zgodnie z instrukcją.
+7. Uzupełnij formularz WiRR Reports do osiągniętego checkpointu.
+8. Wybierz **Sprawdź raport**, popraw wskazane braki i użyj **Wyślij raport**.
+
+## Identyfikacja wizualna
+
+`icon.png` jest podstawowym logo pakietu i jest używany w dokumentacji oraz w oknach Unity **WiRR Toolkit** i **WiRR Report**. `icon.ico` pozostaje zasobem ikony aplikacyjnej dla środowisk wymagających formatu ICO. Zestaw faviconów jest przechowywany jako `favicon_io.zip` w repozytorium dystrybucyjnym.
+
+## Prywatność
+
+WiRR Reports służy do przekazania sprawozdania, a nie do monitorowania aktywności studenta. Do repozytorium trafia raport, nie historia pracy w Unity.
+
+## Licencja
+
+Szczegóły znajdują się w pliku `LICENSE`.

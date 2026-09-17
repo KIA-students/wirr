@@ -1,0 +1,50 @@
+name: WiRR report validation
+
+on:
+  pull_request:
+    paths:
+      - 'students/reports/**/*.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout trusted validator
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          path: trusted
+
+      - name: Checkout submission
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: submission
+          fetch-depth: 0
+
+      - name: Validate reports
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git -C submission diff --name-only --diff-filter=AM \
+              "${{ github.event.pull_request.base.sha }}" \
+              "${{ github.event.pull_request.head.sha }}" -- \
+              'students/reports/**/*.json' > reports.txt
+          else
+            find submission/students/reports -type f -name '*.json' -printf '%P\n' 2>/dev/null \
+              | sed 's#^#students/reports/#' > reports.txt || true
+          fi
+
+          test -s reports.txt || { echo "Brak raportów do sprawdzenia."; exit 1; }
+          failed=0
+          while IFS= read -r report; do
+            [ -n "$report" ] || continue
+            echo "Sprawdzam: $report"
+            python3 trusted/scripts/wirr_grade_report.py "submission/$report" --output /tmp/wirr-result.json || failed=1
+          done < reports.txt
+          exit "$failed"

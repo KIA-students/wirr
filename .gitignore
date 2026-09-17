@@ -26,3 +26,8 @@
 *.aab
 sysinfo.txt
 crashlytics-build.properties
+
+# Samples imported by Unity Package Manager belong to the local project,
+# not to the WiRR package repository.
+/Assets/Samples/
+/Assets/Samples.meta

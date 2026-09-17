@@ -2,21 +2,23 @@
 
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 4.
 
-Po instalacji zależności zaimportuj Starter Assets oraz AR Starter Assets.
+Po instalacji zależności zaimportuj wymagane próbki AR Foundation.
 
 ## Zalecana kolejność
 
 1. Otwórz `WiRR → Course Toolkit`.
 2. Wybierz Lab 04.
-3. Zainstaluj / napraw zależności.
-4. Zaimportuj oficjalne próbki Unity, jeżeli są wymagane.
+3. Zainstaluj lub napraw zależności.
+4. Zaimportuj wymagane próbki Unity.
 5. Użyj `Create / repair base scene`.
-6. Jeżeli ćwiczenie wykorzystuje robota jako cyfrowy cień, w sekcji **WiRR WebSim** wpisz adres WSS i kod sesji, wybierz robota, a następnie kliknij **Create / repair digital shadow**.
-7. W Play Mode połącz WebSim i sprawdź, czy ruchy A/B/C zmieniają geometrię robota na podstawie zewnętrznego `/joint_states`.
-8. Umieść cyfrowy cień na wykrytej płaszczyźnie i oceniaj okluzję, głębię i integrację MR zgodnie z instrukcją laboratorium.
-9. Uruchom `Validate scene`.
-10. Do sprawozdania użyj `Create / open report template`.
+6. Wykonaj diagnostykę Depth API i eksperyment v1.
+7. Zbadaj okluzję środowiskową i eksperyment v2.
+8. Wykonaj pomiary depth-raycast i eksperyment v3.
+9. Zbadaj estymację oświetlenia i eksperyment v4.
+10. Wykonaj kontrolowany błąd, diagnozę H1/H2 i naprawę dla checkpointu 5.0.
+11. Uruchom `Validate scene`.
+12. Uzupełnij `WiRR Reports` do osiągniętego checkpointu.
 
-**Ważne:** ruch robota w wariancie WebSim nie jest animacją Unity. `WiRRRobotRig` odwzorowuje stan przegubów przesyłany z zewnętrznego źródła. Dzięki temu ten sam model jest później używany w Lab 06 jako część bliźniaka cyfrowego.
+Zakres raportu odpowiada aktualnej instrukcji: **Depth API → okluzja → depth-raycast → estymacja oświetlenia → kontrolowany błąd i diagnoza**.
 
-`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+`report-template.md` pozostaje formatem referencyjnym i awaryjnym.

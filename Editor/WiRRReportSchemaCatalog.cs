@@ -85,11 +85,11 @@ namespace KIA.WiRR.Editor
         private static IReadOnlyList<WiRRReportSection> Lab04() => new[]
         {
             CommonEnvironment(),
-            new WiRRReportSection("3.0 — głębia i okluzja", "3.0", C("cp30.depth_available","Depth","dostępna","niedostępna","niezweryfikowano"), T("cp30.occlusion_mode","Tryb okluzji"), B("cp30.occlusion_pass","Okluzja działa"), M("cp30.answer","Obserwacje")),
-            new WiRRReportSection("3.5 — pomiar głębi", "3.5", N("cp35.depth_median_m","Mediana głębi","m"), N("cp35.depth_error_mm","Błąd względem odniesienia","mm",false), I("cp35.samples","Liczba próbek"), M("cp35.answer","Wniosek")),
-            new WiRRReportSection("4.0 — estymacja oświetlenia", "4.0", N("cp40.brightness","Estymowana jasność","",false), N("cp40.color_temperature","Temperatura barwowa","K",false), B("cp40.light_updates","Parametry światła aktualizują się"), M("cp40.answer","Wniosek")),
-            new WiRRReportSection("4.5 — cyfrowy cień WebSim", "4.5", T("cp45.websim_session","Kod sesji WebSim"), N("cp45.joint_error_deg","Maks. błąd odwzorowania przegubu","deg"), B("cp45.shadow_occlusion","Cyfrowy cień podlega okluzji"), M("cp45.answer","Interpretacja cyfrowego cienia")),
-            new WiRRReportSection("5.0 — integracja i diagnostyka", "5.0", M("cp50.fault","Kontrolowany problem"), N("cp50.recovery_s","Czas odzyskania poprawnego stanu","s"), M("cp50.answer","Diagnoza i wniosek"))
+            new WiRRReportSection("3.0 — Depth API i diagnostyka", "3.0", C("cp30.depth_available","Depth","dostępna","niedostępna","niezweryfikowano"), T("cp30.depth_mode","Current depth mode"), T("cp30.depth_resolution","Rozdzielczość ostatniej klatki depth", false), M("cp30.answer","Wniosek i najważniejsze ograniczenie pomiaru")),
+            new WiRRReportSection("3.5 — okluzja środowiskowa", "3.5", T("cp35.occlusion_mode","Dominujący tryb / jakość"), I("cp35.occlusion_errors","Błędy okluzji / 10"), T("cp35.signature","Dominująca sygnatura błędu"), M("cp35.answer","Wniosek o smoothingu / jakości depth")),
+            new WiRRReportSection("4.0 — depth-raycast i błąd odległości", "4.0", N("cp40.depth_error_m","Mediana błędu dla HIT","m"), I("cp40.hits","Liczba HIT / 5"), I("cp40.misses","Liczba MISS / 5"), M("cp40.answer","Wniosek i wyjaśnienie, dlaczego MISS nie jest 0 m")),
+            new WiRRReportSection("4.5 — estymacja oświetlenia", "4.5", N("cp45.brightness","Mediana brightness","",false), N("cp45.color_temperature","Color temperature","K",false), T("cp45.current_mode","Current light estimation mode"), M("cp45.answer","Wniosek i opis niedostępnych pól API")),
+            new WiRRReportSection("5.0 — kontrolowany błąd i diagnoza", "5.0", M("cp50.fault","Kontrolowany błąd"), M("cp50.h1","H1"), M("cp50.h2","H2"), M("cp50.test","Test rozstrzygający i wynik"), M("cp50.fix","Minimalna poprawka"), M("cp50.answer","Diagnoza końcowa"))
         };
 
         private static IReadOnlyList<WiRRReportSection> Lab05() => new[]
