@@ -45,6 +45,6 @@ jobs:
           while IFS= read -r report; do
             [ -n "$report" ] || continue
             echo "Sprawdzam: $report"
-            python3 trusted/scripts/wirr_grade_report.py "submission/$report" --output /tmp/wirr-result.json || failed=1
+            python3 trusted/scripts~/wirr_grade_report.py "submission/$report" --output /tmp/wirr-result.json || failed=1
           done < reports.txt
           exit "$failed"
