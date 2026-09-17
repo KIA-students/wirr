@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.1 — 2026-09-17
+
+- dodano dedykowaną ikonę pakietu dla Unity Package Manager na podstawie logo WiRR;
+- rozbudowano główny opis pakietu o zakres funkcjonalny i workflow `Raport → Sprawdź → Wyślij`;
+- rozbudowano opisy próbek Lab 01–07 o cele oraz kluczowe etapy odpowiadające checkpointom `3.0 → 3.5 → 4.0 → 4.5 → 5.0`;
+- doprecyzowano pełne nazwy laboratoriów w widoku Samples.
+
 ## 0.4.0 — 2026-09-17
 
 - uproszczono raportowanie do jednego formularza: `wypełnij → sprawdź → wyślij`;
