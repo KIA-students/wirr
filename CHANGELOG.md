@@ -9,6 +9,7 @@
 - poprawiono inicjalizację środowiska ROS 2 w kontenerze dla powłok z włączonym `nounset`.
 - usunięto kolizję nazwy wewnętrznego zegara `rclpy` z publisherem `/clock`.
 - dodano statyczną stronę WebSim i workflow publikacji przez GitHub Pages.
+- rozbudowano stronę WebSim o instrukcję krok po kroku: przygotowanie Dockera, weryfikację topików, konfigurację Unity, diagnostykę i zakończenie pracy.
 
 ## 0.4.2 — 2026-09-17
 

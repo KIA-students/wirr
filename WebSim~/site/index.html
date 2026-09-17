@@ -38,37 +38,77 @@
     </div>
 
     <section>
-      <h2>Szybki start</h2>
+      <h2>Przygotowanie</h2>
+      <p>Potrzebujesz dostępu do repozytorium, terminala oraz Docker Desktop (Windows/macOS) albo Docker Engine z wtyczką Compose (Linux). Na komputerze z Unity nie trzeba instalować ROS 2 ani Gazebo.</p>
+      <pre><code>docker --version
+docker compose version</code></pre>
+      <p>Oba polecenia powinny zwrócić wersję narzędzia. Jeśli nie zwracają, dokończ instalację Dockera i uruchom ponownie terminal.</p>
+    </section>
+
+    <section>
+      <h2>Uruchomienie krok po kroku</h2>
       <ol class="steps">
-        <li>Zainstaluj Docker Desktop albo Docker Engine z Compose.</li>
-        <li>Sklonuj repozytorium i przejdź do katalogu <code>WebSim~</code>.</li>
-        <li>Uruchom kontener, pozostawiając terminal otwarty.</li>
+        <li><strong>Pobierz kod.</strong> Sklonuj repozytorium albo przejdź do już pobranej kopii projektu.</li>
+        <li><strong>Wejdź do katalogu backendu.</strong> W tym katalogu znajduje się plik <code>compose.yaml</code>.</li>
+        <li><strong>Zbuduj i uruchom WebSim.</strong> Pierwsze uruchomienie może chwilę potrwać, ponieważ Docker pobiera obraz ROS 2.</li>
+        <li><strong>Poczekaj na gotowość.</strong> W logu musi pojawić się komunikat <code>READY: WiRR WebSim ROS 2 signal generator</code>. Pozostaw ten terminal otwarty przez całe ćwiczenie.</li>
+        <li><strong>Sprawdź topiki.</strong> W drugim terminalu wykonaj polecenie kontrolne. Na liście powinien być co najmniej <code>/wirr/status</code>.</li>
       </ol>
       <pre><code>git clone https://github.com/MatPomGit/wirr.git
 cd wirr/WebSim~
-docker compose up --build</code></pre>
+docker compose up --build
+
+# drugi terminal, ten sam katalog
+docker compose exec websim bash -lc 'source /opt/ros/jazzy/setup.bash &amp;&amp; ros2 topic list'</code></pre>
     </section>
 
     <div class="grid">
       <section>
         <h2>Unity na tym samym komputerze</h2>
-        <p>W <code>WiRR → Course Toolkit → Lab 06</code> ustaw:</p>
+        <p>W <code>WiRR → Course Toolkit → Lab 06</code> wybierz WebSim i wpisz adres:</p>
         <pre><code>ws://127.0.0.1:9090</code></pre>
       </section>
       <section>
         <h2>Unity na innym komputerze</h2>
-        <p>Ustal adres IPv4 serwera i otwórz port TCP 9090 w jego zaporze:</p>
+        <p>Ustal adres IPv4 komputera z Dockerem, otwórz na nim port TCP 9090 w zaporze i użyj:</p>
         <pre><code>ws://ADRES_IP_SERWERA:9090</code></pre>
       </section>
     </div>
 
     <section>
-      <h2>Kontrola ćwiczenia</h2>
-      <p>W Unity wpisz kod zespołu (3–12 znaków: A–Z, cyfry, <code>_</code>, <code>-</code>), wybierz model, użyj <strong>Create / repair WebSim digital twin</strong>, uruchom Play Mode i kliknij <strong>Connect</strong>. Ruch w Unity musi wynikać z topiku <code>/wirr/&lt;SESSION&gt;/joint_states</code>.</p>
+      <h2>Konfiguracja i wykonanie w Unity</h2>
+      <ol class="steps">
+        <li>Otwórz <code>WiRR → Course Toolkit</code>, wybierz <strong>Lab 06</strong>, zainstaluj lub napraw zależności i użyj <strong>Create / repair base scene</strong>.</li>
+        <li>Wybierz topologię <strong>WebSim</strong>. Wklej właściwy adres WebSocket: lokalny albo adres komputera-serwera z LAN.</li>
+        <li>Wpisz kod zespołu: 3–12 znaków <code>A–Z</code>, cyfr, <code>_</code> lub <code>-</code>. Wybierz <strong>RRBot 2R</strong> albo <strong>WiRR Arm 3R</strong>.</li>
+        <li>Kliknij <strong>Create / repair WebSim digital twin</strong>, aby utworzyć albo naprawić obiekt robota w scenie.</li>
+        <li>Uruchom <strong>Play Mode</strong>, a następnie kliknij <strong>Connect WebSim</strong>. Stan powinien przejść do <code>LIVE</code>.</li>
+        <li>Wykonaj <strong>Motion A</strong>, <strong>Motion B</strong>, <strong>Motion C</strong>, <strong>Home</strong> i <strong>Reset</strong>. Obserwuj zmianę przegubów i zapisz wyniki do sprawozdania.</li>
+      </ol>
+      <p>Ruch w Unity musi wynikać z topiku <code>/wirr/&lt;SESSION&gt;/joint_states</code>, a nie z lokalnej animacji klienta.</p>
       <pre><code>/wirr/&lt;SESSION&gt;/joint_states   sensor_msgs/msg/JointState, 30 Hz
 /wirr/&lt;SESSION&gt;/command        std_msgs/msg/String
 /wirr/&lt;SESSION&gt;/status         std_msgs/msg/String
 /clock                         rosgraph_msgs/msg/Clock</code></pre>
+    </section>
+
+    <section>
+      <h2>Gdy coś nie działa</h2>
+      <ol class="steps">
+        <li><strong>Brak połączenia / <code>ERROR</code>.</strong> Sprawdź, czy <code>docker compose ps</code> pokazuje działający kontener, czy adres w Unity zaczyna się od <code>ws://</code> oraz czy port 9090 nie jest blokowany przez zaporę.</li>
+        <li><strong>Połączenie przez LAN nie działa.</strong> Użyj adresu IPv4 komputera z Dockerem, nie <code>127.0.0.1</code>; oba komputery muszą być w tej samej sieci.</li>
+        <li><strong>Stan <code>STALE</code>.</strong> Podejrzyj logi. Jeśli nie ma komunikatu <code>READY</code>, zatrzymaj i uruchom backend ponownie.</li>
+        <li><strong>Brak modelu lub przycisków.</strong> W Course Toolkit wykonaj ponownie instalację zależności oraz <strong>Create / repair base scene</strong>, potem utwórz cyfrowego bliźniaka.</li>
+      </ol>
+      <pre><code>docker compose logs -f
+docker compose down
+docker compose up --build</code></pre>
+    </section>
+
+    <section>
+      <h2>Zakończenie pracy</h2>
+      <p>Po zapisaniu wyników zatrzymaj backend. Przy kolejnym ćwiczeniu uruchom go ponownie z tego samego katalogu.</p>
+      <pre><code>docker compose down</code></pre>
     </section>
 
     <p class="notice">Bezpieczeństwo: nie wystawiaj portu 9090 do Internetu. Jeśli potrzebujesz połączenia spoza LAN, użyj odrębnego reverse proxy z TLS/WSS i kontrolą dostępu.</p>

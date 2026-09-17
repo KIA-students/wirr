@@ -2,7 +2,7 @@
 
 Ten katalog uruchamia przez Docker pojedynczy, izolowany backend ROS 2 dla Lab 06. Zawiera `rosbridge` (WebSocket) i deterministyczny generator `sensor_msgs/msg/JointState`; nie wymaga instalacji ROS 2 ani Gazebo na komputerach studentów. Stan jest generowany przez prawdziwy węzeł ROS 2, dzięki czemu Unity obserwuje topiki identycznie jak przy zewnętrznym symulatorze.
 
-Skrócona, publiczna instrukcja jest publikowana przez GitHub Pages z katalogu `site/`. Strona nie uruchamia backendu ani nie przechowuje danych — służy wyłącznie jako punkt startowy dla studentów.
+Publiczna instrukcja krok po kroku jest publikowana przez GitHub Pages z katalogu `site/`. Strona nie uruchamia backendu ani nie przechowuje danych — służy wyłącznie jako punkt startowy dla studentów.
 
 ## Uruchomienie
 
