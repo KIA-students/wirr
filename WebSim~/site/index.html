@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07121f">
+  <meta name="description" content="WiRR WebSim — lokalny generator sygnału ROS 2 dla Laboratorium 6.">
+  <title>WiRR WebSim · Lab 06</title>
+  <style>
+    :root { color-scheme: dark; --bg:#07121f; --card:#10243a; --ink:#eef6ff; --muted:#b6c9dc; --accent:#5eead4; --line:#29445f; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:radial-gradient(circle at 85% 0,#164e63 0,transparent 34%),var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif; }
+    main { width:min(960px,calc(100% - 2rem)); margin:auto; padding:4.5rem 0; }
+    .eyebrow { color:var(--accent); font-weight:700; letter-spacing:.09em; text-transform:uppercase; font-size:.8rem; }
+    h1 { font-size:clamp(2.3rem,7vw,4.8rem); max-width:14ch; line-height:1.04; margin:.4rem 0 1rem; }
+    h2 { font-size:1.35rem; margin:0 0 .75rem; } p { color:var(--muted); max-width:68ch; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; margin:2rem 0; }
+    section { border:1px solid var(--line); border-radius:16px; background:color-mix(in srgb,var(--card) 88%,transparent); padding:1.35rem; }
+    code { color:#d7fff8; background:#06111d; padding:.13rem .35rem; border-radius:.3rem; overflow-wrap:anywhere; }
+    pre { margin:1rem 0 0; padding:1rem; overflow:auto; border-radius:10px; background:#030a12; border:1px solid #1b344c; }
+    pre code { padding:0; background:transparent; }
+    .steps { counter-reset:step; list-style:none; margin:0; padding:0; display:grid; gap:.75rem; }
+    .steps li { counter-increment:step; padding-left:2.3rem; position:relative; color:var(--muted); }
+    .steps li::before { content:counter(step); position:absolute; left:0; top:0; width:1.55rem; height:1.55rem; border-radius:50%; color:#04201d; background:var(--accent); text-align:center; font-weight:800; }
+    .notice { border-left:4px solid var(--accent); padding:.75rem 1rem; background:#0a2f35; color:#d8fdf8; }
+    a { color:var(--accent); } footer { color:var(--muted); font-size:.9rem; margin-top:3rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Wirtualna i Rozszerzona Rzeczywistość · Lab 06</div>
+    <h1>WiRR WebSim</h1>
+    <p>Lokalny backend ROS 2 dla cyfrowego bliźniaka robota. Kontener generuje rzeczywiste komunikaty <code>JointState</code>, a Unity odbiera je przez rosbridge WebSocket.</p>
+
+    <div class="grid">
+      <section><h2>Co działa</h2><p>Oddzielne sesje zespołów, RRBot 2R i WiRR Arm 3R, stan <code>LIVE</code>/<code>STALE</code>, ruchy A–C, Home i Reset.</p></section>
+      <section><h2>Gdzie działa</h2><p>Na komputerze studenta lub serwerze w tej samej sieci. Nie jest to serwer chmurowy — GitHub Pages publikuje wyłącznie tę instrukcję.</p></section>
+    </div>
+
+    <section>
+      <h2>Przygotowanie</h2>
+      <p>Potrzebujesz dostępu do repozytorium, terminala oraz Docker Desktop (Windows/macOS) albo Docker Engine z wtyczką Compose (Linux). Na komputerze z Unity nie trzeba instalować ROS 2 ani Gazebo.</p>
+      <pre><code>docker --version
+docker compose version</code></pre>
+      <p>Oba polecenia powinny zwrócić wersję narzędzia. Jeśli nie zwracają, dokończ instalację Dockera i uruchom ponownie terminal.</p>
+    </section>
+
+    <section>
+      <h2>Uruchomienie krok po kroku</h2>
+      <ol class="steps">
+        <li><strong>Pobierz kod.</strong> Sklonuj repozytorium albo przejdź do już pobranej kopii projektu.</li>
+        <li><strong>Wejdź do katalogu backendu.</strong> W tym katalogu znajduje się plik <code>compose.yaml</code>.</li>
+        <li><strong>Zbuduj i uruchom WebSim.</strong> Pierwsze uruchomienie może chwilę potrwać, ponieważ Docker pobiera obraz ROS 2.</li>
+        <li><strong>Poczekaj na gotowość.</strong> W logu musi pojawić się komunikat <code>READY: WiRR WebSim ROS 2 signal generator</code>. Pozostaw ten terminal otwarty przez całe ćwiczenie.</li>
+        <li><strong>Sprawdź topiki.</strong> W drugim terminalu wykonaj polecenie kontrolne. Na liście powinien być co najmniej <code>/wirr/status</code>.</li>
+      </ol>
+      <pre><code>git clone https://github.com/MatPomGit/wirr.git
+cd wirr/WebSim~
+docker compose up --build
+
+# drugi terminal, ten sam katalog
+docker compose exec websim bash -lc 'source /opt/ros/jazzy/setup.bash &amp;&amp; ros2 topic list'</code></pre>
+    </section>
+
+    <div class="grid">
+      <section>
+        <h2>Unity na tym samym komputerze</h2>
+        <p>W <code>WiRR → Course Toolkit → Lab 06</code> wybierz WebSim i wpisz adres:</p>
+        <pre><code>ws://127.0.0.1:9090</code></pre>
+      </section>
+      <section>
+        <h2>Unity na innym komputerze</h2>
+        <p>Ustal adres IPv4 komputera z Dockerem, otwórz na nim port TCP 9090 w zaporze i użyj:</p>
+        <pre><code>ws://ADRES_IP_SERWERA:9090</code></pre>
+      </section>
+    </div>
+
+    <section>
+      <h2>Konfiguracja i wykonanie w Unity</h2>
+      <ol class="steps">
+        <li>Otwórz <code>WiRR → Course Toolkit</code>, wybierz <strong>Lab 06</strong>, zainstaluj lub napraw zależności i użyj <strong>Create / repair base scene</strong>.</li>
+        <li>Wybierz topologię <strong>WebSim</strong>. Wklej właściwy adres WebSocket: lokalny albo adres komputera-serwera z LAN.</li>
+        <li>Wpisz kod zespołu: 3–12 znaków <code>A–Z</code>, cyfr, <code>_</code> lub <code>-</code>. Wybierz <strong>RRBot 2R</strong> albo <strong>WiRR Arm 3R</strong>.</li>
+        <li>Kliknij <strong>Create / repair WebSim digital twin</strong>, aby utworzyć albo naprawić obiekt robota w scenie.</li>
+        <li>Uruchom <strong>Play Mode</strong>, a następnie kliknij <strong>Connect WebSim</strong>. Stan powinien przejść do <code>LIVE</code>.</li>
+        <li>Wykonaj <strong>Motion A</strong>, <strong>Motion B</strong>, <strong>Motion C</strong>, <strong>Home</strong> i <strong>Reset</strong>. Obserwuj zmianę przegubów i zapisz wyniki do sprawozdania.</li>
+      </ol>
+      <p>Ruch w Unity musi wynikać z topiku <code>/wirr/&lt;SESSION&gt;/joint_states</code>, a nie z lokalnej animacji klienta.</p>
+      <pre><code>/wirr/&lt;SESSION&gt;/joint_states   sensor_msgs/msg/JointState, 30 Hz
+/wirr/&lt;SESSION&gt;/command        std_msgs/msg/String
+/wirr/&lt;SESSION&gt;/status         std_msgs/msg/String
+/clock                         rosgraph_msgs/msg/Clock</code></pre>
+    </section>
+
+    <section>
+      <h2>Gdy coś nie działa</h2>
+      <ol class="steps">
+        <li><strong>Brak połączenia / <code>ERROR</code>.</strong> Sprawdź, czy <code>docker compose ps</code> pokazuje działający kontener, czy adres w Unity zaczyna się od <code>ws://</code> oraz czy port 9090 nie jest blokowany przez zaporę.</li>
+        <li><strong>Połączenie przez LAN nie działa.</strong> Użyj adresu IPv4 komputera z Dockerem, nie <code>127.0.0.1</code>; oba komputery muszą być w tej samej sieci.</li>
+        <li><strong>Stan <code>STALE</code>.</strong> Podejrzyj logi. Jeśli nie ma komunikatu <code>READY</code>, zatrzymaj i uruchom backend ponownie.</li>
+        <li><strong>Brak modelu lub przycisków.</strong> W Course Toolkit wykonaj ponownie instalację zależności oraz <strong>Create / repair base scene</strong>, potem utwórz cyfrowego bliźniaka.</li>
+      </ol>
+      <pre><code>docker compose logs -f
+docker compose down
+docker compose up --build</code></pre>
+    </section>
+
+    <section>
+      <h2>Zakończenie pracy</h2>
+      <p>Po zapisaniu wyników zatrzymaj backend. Przy kolejnym ćwiczeniu uruchom go ponownie z tego samego katalogu.</p>
+      <pre><code>docker compose down</code></pre>
+    </section>
+
+    <p class="notice">Bezpieczeństwo: nie wystawiaj portu 9090 do Internetu. Jeśli potrzebujesz połączenia spoza LAN, użyj odrębnego reverse proxy z TLS/WSS i kontrolą dostępu.</p>
+    <footer>Pełna dokumentacja i kod: <a href="https://github.com/MatPomGit/wirr/tree/main/WebSim~">MatPomGit/wirr · WebSim~</a>.</footer>
+  </main>
+</body>
+</html>

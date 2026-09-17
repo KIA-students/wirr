@@ -1,0 +1,47 @@
+name: WebSim smoke test
+
+on:
+  pull_request:
+    paths:
+      - 'WebSim~/**'
+      - '.github/workflows/websim-smoke.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'WebSim~/**'
+      - '.github/workflows/websim-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ros2-websim:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and start WebSim
+        run: docker compose -f WebSim~/compose.yaml up --build -d
+
+      - name: Verify ROS 2 session and JointState publication
+        run: |
+          set -euo pipefail
+          docker compose -f WebSim~/compose.yaml exec -T websim bash -lc '
+            source /opt/ros/jazzy/setup.bash
+            for attempt in {1..20}; do
+              ros2 topic list | grep -qx /wirr/status && break
+              sleep 1
+            done
+            ros2 topic list | grep -qx /wirr/status
+            ros2 topic pub --once /wirr/control std_msgs/msg/String "{data: \"{\\\"session\\\":\\\"TEAMCI\\\",\\\"robot\\\":\\\"rrbot\\\",\\\"action\\\":\\\"create\\\"}\"}"
+            timeout 10 ros2 topic echo --once /wirr/TEAMCI/joint_states sensor_msgs/msg/JointState | grep -q "joint1"
+          '
+
+      - name: Show logs on failure
+        if: failure()
+        run: docker compose -f WebSim~/compose.yaml logs --no-color
+
+      - name: Stop WebSim
+        if: always()
+        run: docker compose -f WebSim~/compose.yaml down --volumes

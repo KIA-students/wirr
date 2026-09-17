@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- dodano `WebSim~/`: gotowy backend Docker Compose dla Lab 06 z ROS 2 Jazzy, rosbridge i deterministycznym generatorem `JointState` per sesja;
+- backend obsługuje `RRBot 2R`, `WiRR Arm 3R`, komendy `Motion A/B/C`, `Home`, `Reset`, status i `/clock` zgodnie z klientem Unity;
+- dodano instrukcję uruchomienia na tym samym komputerze oraz przez LAN.
+- dodano workflow CI budujący kontener i sprawdzający utworzenie sesji ROS 2 oraz publikację `JointState`.
+- poprawiono inicjalizację środowiska ROS 2 w kontenerze dla powłok z włączonym `nounset`.
+- usunięto kolizję nazwy wewnętrznego zegara `rclpy` z publisherem `/clock`.
+- dodano statyczną stronę WebSim i workflow publikacji przez GitHub Pages.
+- rozbudowano stronę WebSim o instrukcję krok po kroku: przygotowanie Dockera, weryfikację topików, konfigurację Unity, diagnostykę i zakończenie pracy.
+
 ## 0.4.2 — 2026-09-17
 
 - rozdzielono instalowalny pakiet UPM od referencyjnego projektu Unity: projekt deweloperski znajduje się teraz w `Project~/` i nie jest importowany do projektu studenta;
