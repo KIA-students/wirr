@@ -17,11 +17,10 @@ namespace KIA.WiRR.Editor
         public static string Session { get => EditorPrefs.GetString(SessionPref, "TEAM01"); set => EditorPrefs.SetString(SessionPref, NormalizeSession(value)); }
         public static string Robot { get => EditorPrefs.GetString(RobotPref, "rrbot"); set => EditorPrefs.SetString(RobotPref, value == "wirr-arm3" ? "wirr-arm3" : "rrbot"); }
 
-        [MenuItem("WiRR/WebSim/Create or repair digital shadow", priority = 30)]
+        [MenuItem("WiRR/WebSim/Create or repair digital twin", priority = 30)]
         public static void CreateFromMenu()
         {
-            var lab = EditorPrefs.GetInt("KIA.WiRR.SelectedLab", 6);
-            CreateOrRepairRig(lab == 4 ? 4 : 6);
+            CreateOrRepairRig(6);
         }
 
         public static bool ValidateConfiguration(out string message)
@@ -64,7 +63,7 @@ namespace KIA.WiRR.Editor
             var joints = BuildRobot(robotRoot.transform, names, lengths);
             var rig = robotRoot.AddComponent<WiRRRobotRig>();
             rig.Configure(source, names, joints, Vector3.forward);
-            robotRoot.transform.position = labNumber == 4 ? new Vector3(0f, 0f, 1.5f) : Vector3.zero;
+            robotRoot.transform.position = Vector3.zero;
             EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         }
 
