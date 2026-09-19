@@ -1,38 +1,16 @@
-<!doctype html>
-<html lang="pl">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07121f">
-  <meta name="description" content="WiRR WebSim — lokalny generator sygnału ROS 2 dla Laboratorium 6.">
-  <title>WiRR WebSim · Lab 06</title>
-  <style>
-    :root { color-scheme: dark; --bg:#07121f; --card:#10243a; --ink:#eef6ff; --muted:#b6c9dc; --accent:#5eead4; --line:#29445f; }
-    * { box-sizing:border-box; }
-    body { margin:0; background:radial-gradient(circle at 85% 0,#164e63 0,transparent 34%),var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif; }
-    main { width:min(960px,calc(100% - 2rem)); margin:auto; padding:4.5rem 0; }
-    .eyebrow { color:var(--accent); font-weight:700; letter-spacing:.09em; text-transform:uppercase; font-size:.8rem; }
-    h1 { font-size:clamp(2.3rem,7vw,4.8rem); max-width:14ch; line-height:1.04; margin:.4rem 0 1rem; }
-    h2 { font-size:1.35rem; margin:0 0 .75rem; } p { color:var(--muted); max-width:68ch; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; margin:2rem 0; }
-    section { border:1px solid var(--line); border-radius:16px; background:color-mix(in srgb,var(--card) 88%,transparent); padding:1.35rem; }
-    code { color:#d7fff8; background:#06111d; padding:.13rem .35rem; border-radius:.3rem; overflow-wrap:anywhere; }
-    pre { margin:1rem 0 0; padding:1rem; overflow:auto; border-radius:10px; background:#030a12; border:1px solid #1b344c; }
-    pre code { padding:0; background:transparent; }
-    .steps { counter-reset:step; list-style:none; margin:0; padding:0; display:grid; gap:.75rem; }
-    .steps li { counter-increment:step; padding-left:2.3rem; position:relative; color:var(--muted); }
-    .steps li::before { content:counter(step); position:absolute; left:0; top:0; width:1.55rem; height:1.55rem; border-radius:50%; color:#04201d; background:var(--accent); text-align:center; font-weight:800; }
-    .notice { border-left:4px solid var(--accent); padding:.75rem 1rem; background:#0a2f35; color:#d8fdf8; }
-    a { color:var(--accent); } footer { color:var(--muted); font-size:.9rem; margin-top:3rem; }
-  </style>
-</head>
-<body>
-  <main>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07121f"><meta name="description" content="WiRR: import pakietu Unity, uruchomienie WebSim dla Lab 06 i interaktywny kwestionariusz SSQ."><title>WiRR · Laboratorium XR</title><link rel="stylesheet" href="styles.css"><script type="module" src="app.mjs"></script></head><body><a class="skip" href="#content">Przejdź do treści</a><main><header><div class="eyebrow">Katedra Informatyki i Automatyki · PRz</div><h1>Laboratorium XR</h1><p>WiRR Course Toolkit · środowisko, symulacja i komfort</p></header><nav aria-label="Zakładki WiRR"><a href="#unity" aria-current="page">01 · Import do Unity</a><a href="#websim">02 · WebSim / Gazebo</a><a href="#ssq">03 · Kwestionariusz SSQ</a></nav><div id="content"><article id="unity"><div class="eyebrow">Zacznij tutaj · Unity Package Manager</div>
+<h2 class="page-title">Import pakietu do Unity</h2>
+<p>Utwórz własny projekt, dodaj WiRR i przygotuj wybrane laboratorium z panelu Course Toolkit.</p>
+<section><h3>1. Przygotuj projekt</h3><ol class="steps"><li>Zainstaluj Git i sprawdź w terminalu <code>git --version</code>. Po instalacji uruchom ponownie Unity Hub.</li><li>W Unity Hub utwórz projekt <strong>Universal 3D (URP)</strong> w wersji <strong>6000.6.x</strong> wskazanej przez prowadzącego. Pakiet deklaruje Unity 6000.6.</li><li>Otwórz projekt i zaczekaj na zakończenie kompilacji.</li></ol></section>
+<section><h3>2. Dodaj WiRR przez Package Manager</h3><ol class="steps"><li>W Unity otwórz <strong>Window → Package Manager</strong> (w niektórych układach: Window → Package Management → Package Manager).</li><li>Kliknij <strong>+</strong>, następnie <strong>Install package from git URL…</strong> / <strong>Add package from git URL…</strong>.</li><li>Wklej poniższy adres repozytorium studenckiego i wybierz <strong>Install</strong> / <strong>Add</strong>.</li></ol><pre><code>https://github.com/KIA-students/wirr.git</code></pre><p>Pakiet UPM znajduje się w katalogu głównym — nie dodawaj <code>?path=Project~</code>. Repozytorium robocze prowadzącego: <code>https://github.com/MatPomGit/wirr.git</code>. Korzystaj z wersji wskazanej na zajęciach; jeśli podano tag lub SHA, dodaj go po znaku <code>#</code>.</p><p>Po instalacji powinny być widoczne <strong>WiRR Course Toolkit</strong> w Package Manager oraz menu <strong>WiRR</strong> w edytorze.</p></section>
+<section><h3>3. Przygotuj laboratorium</h3><ol class="steps"><li>Otwórz <strong>WiRR → Course Toolkit</strong> i wybierz numer laboratorium.</li><li>Kliknij <strong>Install / repair lab dependencies</strong>. Poczekaj na instalację i kompilację; jeśli Unity poprosi o restart, wykonaj go.</li><li>Użyj <strong>Import official Unity samples</strong> i <strong>Import WiRR lab sample</strong>. Alternatywnie próbkę WiRR zaimportujesz w sekcji Samples pakietu w Package Manager.</li><li>Kliknij <strong>Create / repair base scene</strong>, a następnie <strong>Validate scene</strong>. Usuń błędy wskazane przez walidator.</li><li>Zapisz scenę. W Lab 01 sprawdź XR Origin, jeden aktywny symulator XR oraz <strong>Active Input Handling = Input System Package (New)</strong>. Uruchom Play Mode i sprawdź ruch głowy oraz kontrolera.</li></ol><p>Pracuj na zaimportowanych materiałach w <code>Assets</code>. Nie edytuj cache pakietów w <code>Library/PackageCache</code>. Instalacja pakietu i import próbki to dwa osobne kroki.</p></section>
+<section><h3>Gdy import się nie udaje</h3><ul><li><strong>Git nie został znaleziony:</strong> sprawdź <code>git --version</code>, dostępność Git w PATH i zrestartuj Hub.</li><li><strong>Nie znaleziono package.json:</strong> użyj dokładnego URL powyżej, bez ścieżki do projektu lub strony GitHub.</li><li><strong>Brak menu WiRR:</strong> poczekaj na kompilację, otwórz Console i usuń pierwszy czerwony błąd. Sprawdź wersję Unity.</li><li><strong>Brak sceny:</strong> zaimportuj Sample wybranego laboratorium i użyj Create / repair base scene.</li><li><strong>Aktualizacja:</strong> zapisz pracę w Git, zaktualizuj pakiet do wersji wskazanej przez prowadzącego i ponów walidację. Ponowny import próbek może nadpisać ich zawartość — wcześniej zachowaj własne zmiany.</li></ul></section>
+<p><a href="https://github.com/MatPomGit/wirr#readme">Dokumentacja pakietu</a> · <a href="https://docs.unity3d.com/6000.0/Documentation/Manual/upm-ui-giturl.html">Dokumentacja Unity: instalacja z Git</a></p></article><article id="websim">
     <div class="eyebrow">Wirtualna i Rozszerzona Rzeczywistość · Lab 06</div>
-    <h1>WiRR WebSim</h1>
+    <h2 class="page-title">WiRR WebSim</h2>
     <p>Lokalny backend ROS 2 dla cyfrowego bliźniaka robota. Kontener generuje rzeczywiste komunikaty <code>JointState</code>, a Unity odbiera je przez rosbridge WebSocket.</p>
 
-    <div class="grid">
+    <p class="notice">W Lab 06 WebSim jest alternatywą dla Gazebo: ten backend generuje sygnał ROS 2, ale nie oblicza dynamiki ani kolizji w Gazebo. Klasyczny wariant Gazebo + ROS 2 jest odrębną ścieżką ćwiczenia.</p><div class="grid">
       <section><h2>Co działa</h2><p>Oddzielne sesje zespołów, RRBot 2R i WiRR Arm 3R, stan <code>LIVE</code>/<code>STALE</code>, ruchy A–C, Home i Reset.</p></section>
       <section><h2>Gdzie działa</h2><p>Na komputerze studenta lub serwerze w tej samej sieci. Nie jest to serwer chmurowy — GitHub Pages publikuje wyłącznie tę instrukcję.</p></section>
     </div>
@@ -82,7 +60,7 @@ docker compose exec websim bash -lc 'source /opt/ros/jazzy/setup.bash &amp;&amp;
         <li>Wybierz topologię <strong>WebSim</strong>. Wklej właściwy adres WebSocket: lokalny albo adres komputera-serwera z LAN.</li>
         <li>Wpisz kod zespołu: 3–12 znaków <code>A–Z</code>, cyfr, <code>_</code> lub <code>-</code>. Wybierz <strong>RRBot 2R</strong> albo <strong>WiRR Arm 3R</strong>.</li>
         <li>Kliknij <strong>Create / repair WebSim digital twin</strong>, aby utworzyć albo naprawić obiekt robota w scenie.</li>
-        <li>Uruchom <strong>Play Mode</strong>, a następnie kliknij <strong>Connect WebSim</strong>. Stan powinien przejść do <code>LIVE</code>.</li>
+        <li>Uruchom <strong>Play Mode</strong>, a następnie kliknij <strong>Connect</strong>. Stan powinien przejść do <code>LIVE</code>.</li>
         <li>Wykonaj <strong>Motion A</strong>, <strong>Motion B</strong>, <strong>Motion C</strong>, <strong>Home</strong> i <strong>Reset</strong>. Obserwuj zmianę przegubów i zapisz wyniki do sprawozdania.</li>
       </ol>
       <p>Ruch w Unity musi wynikać z topiku <code>/wirr/&lt;SESSION&gt;/joint_states</code>, a nie z lokalnej animacji klienta.</p>
@@ -113,6 +91,16 @@ docker compose up --build</code></pre>
 
     <p class="notice">Bezpieczeństwo: nie wystawiaj portu 9090 do Internetu. Jeśli potrzebujesz połączenia spoza LAN, użyj odrębnego reverse proxy z TLS/WSS i kontrolą dostępu.</p>
     <footer>Pełna dokumentacja i kod: <a href="https://github.com/MatPomGit/wirr/tree/main/WebSim~">MatPomGit/wirr · WebSim~</a>.</footer>
-  </main>
-</body>
-</html>
+  </article><article id="ssq"><div class="eyebrow">Komfort w XR · Pomiar przed i po ekspozycji</div><h2 class="page-title">Kwestionariusz SSQ</h2>
+<p>Oceń aktualne nasilenie każdego z 16 objawów: <strong>0 — brak, 1 — niewielkie, 2 — umiarkowane, 3 — silne</strong>. Najpierw wykonaj pomiar przed ekspozycją, następnie po jej zakończeniu. Nie zakładaj, że wynik początkowy wynosi zero.</p>
+<p class="notice">W razie dyskomfortu przerwij ekspozycję i poinformuj prowadzącego. SSQ opisuje nasilenie objawów; nie jest diagnozą ani zgodą na kontynuowanie ćwiczenia.</p>
+<p>Polskie opisy są tłumaczeniem roboczym do dydaktyki, nie zwalidowaną polską adaptacją. Odpowiedzi pozostają tylko w pamięci tej karty przeglądarki; odświeżenie je usuwa. Pobierz wyniki przed zamknięciem strony. Nie podawaj danych osobowych.</p>
+<noscript>Włącz JavaScript, aby wypełnić kwestionariusz i obliczyć wyniki.</noscript>
+<form id="ssq-form"><label for="phase">Pomiar</label> <select id="phase"><option value="pre">Przed ekspozycją</option><option value="post">Po ekspozycji</option></select>
+<p id="progress" role="status" aria-live="polite"></p><div id="questions"></div>
+<div class="actions"><button type="submit">Oblicz wynik</button><button type="button" id="export" disabled>Pobierz JSON</button><button type="button" id="reset">Wyczyść oba pomiary</button></div></form>
+<div id="results" aria-live="polite"></div>
+<section><h3>Jak liczymy wynik?</h3><p>Każda podskala jest sumą wskazanych odpowiedzi pomnożoną przez wagę. Numeracja odpowiada kolejności pytań powyżej.</p>
+<ul><li><strong>N — nudności:</strong> (1 + 6 + 7 + 8 + 9 + 15 + 16) × 9,54.</li><li><strong>O — objawy okulomotoryczne:</strong> (1 + 2 + 3 + 4 + 5 + 9 + 11) × 7,58.</li><li><strong>D — dezorientacja:</strong> (5 + 8 + 10 + 11 + 12 + 13 + 14) × 13,92.</li><li><strong>TS — wynik całkowity:</strong> suma wszystkich 16 odpowiedzi, każdej liczonej raz, × 3,74.</li></ul>
+<p>TS nie jest sumą ważonych podskal. Wyniki nie są procentami; większa wartość oznacza większe zgłoszone nasilenie. Nie stosujemy uniwersalnych progów diagnostycznych ani automatycznej klasyfikacji „bezpiecznie/niebezpiecznie”. Różnica Δ = po − przed może być ujemna; interpretuj ją razem z oboma pomiarami i warunkami ekspozycji.</p>
+<p>Źródło: Kennedy, Lane, Berbaum i Lilienthal (1993), <a href="https://doi.org/10.1207/s15327108ijap0303_3">Simulator Sickness Questionnaire: An Enhanced Method for Quantifying Simulator Sickness</a>, 3(3), 203–220.</p></section></article></div><footer>WiRR · Wirtualna i Rozszerzona Rzeczywistość · <a href="https://github.com/MatPomGit/wirr">Kod i dokumentacja</a></footer></main></body></html>

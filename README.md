@@ -60,6 +60,19 @@ Dodatkowa dokumentacja techniczna znajduje się w `Documentation~/`, a skrypt wa
 
 Materiały startowe znajdują się w `Samples~/Lab01`–`Samples~/Lab07`.
 
+## Strona kursu (GitHub Pages)
+
+[Strona WiRR](https://matpomgit.github.io/wirr/) zawiera trzy zakładki:
+
+- [Import do Unity](https://matpomgit.github.io/wirr/#unity) — instalacja UPM, zależności, próbki i walidacja sceny.
+- [WebSim / Gazebo](https://matpomgit.github.io/wirr/#websim) — istniejąca instrukcja backendu ROS 2, lokalnie lub w LAN; WebSim jest alternatywą dla symulacji dynamiki w Gazebo.
+- [SSQ](https://matpomgit.github.io/wirr/#ssq) — 16 objawów, pomiar przed/po, N/O/D/TS, różnica i eksport JSON. Braki odpowiedzi nie są zerami. Polskie tłumaczenie robocze nie jest zwalidowaną adaptacją. Dane nie opuszczają przeglądarki i nie są utrwalane po odświeżeniu.
+
+Źródła strony: `WebSim~/site/`. Testy punktacji: `node --test WebSim~/tests/*.test.mjs`.
+Workflow Pages uruchamia testy przed publikacją. Bieżący zakres strony jest kompletny;
+pozostało 0 dodatkowych PR dla trzech zakładek. Walidacja polskiej adaptacji SSQ
+pozostaje osobnym zadaniem badawczym, poza zakresem wersji dydaktycznej.
+
 ## WebSim
 
 WebSim jest prostym klientem rosbridge używanym w ćwiczeniach robotycznych. Student podaje adres backendu, identyfikator sesji i model robota, tworzy model w scenie, uruchamia Play Mode i łączy się z backendem. Panel pokazuje jedynie stan potrzebny do wykonania ćwiczenia, m.in. `LIVE` lub `STALE`, oraz podstawowe polecenia ruchu, Home i Reset.
@@ -137,3 +150,4 @@ WiRR Reports służy do przekazania sprawozdania, a nie do monitorowania aktywno
 ## Licencja
 
 Szczegóły znajdują się w pliku `LICENSE`.
+
