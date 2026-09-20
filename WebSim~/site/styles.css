@@ -1,0 +1,20 @@
+
+    :root { color-scheme: dark; --bg:#07121f; --card:#10243a; --ink:#eef6ff; --muted:#b6c9dc; --accent:#5eead4; --line:#29445f; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:radial-gradient(circle at 85% 0,#164e63 0,transparent 34%),var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif; }
+    main { width:min(960px,calc(100% - 2rem)); margin:auto; padding:4.5rem 0; }
+    .eyebrow { color:var(--accent); font-weight:700; letter-spacing:.09em; text-transform:uppercase; font-size:.8rem; }
+    h1 { font-size:clamp(2.3rem,7vw,4.8rem); max-width:14ch; line-height:1.04; margin:.4rem 0 1rem; }
+    h2 { font-size:1.35rem; margin:0 0 .75rem; } p { color:var(--muted); max-width:68ch; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; margin:2rem 0; }
+    section { border:1px solid var(--line); border-radius:16px; background:color-mix(in srgb,var(--card) 88%,transparent); padding:1.35rem; }
+    code { color:#d7fff8; background:#06111d; padding:.13rem .35rem; border-radius:.3rem; overflow-wrap:anywhere; }
+    pre { margin:1rem 0 0; padding:1rem; overflow:auto; border-radius:10px; background:#030a12; border:1px solid #1b344c; }
+    pre code { padding:0; background:transparent; }
+    .steps { counter-reset:step; list-style:none; margin:0; padding:0; display:grid; gap:.75rem; }
+    .steps li { counter-increment:step; padding-left:2.3rem; position:relative; color:var(--muted); }
+    .steps li::before { content:counter(step); position:absolute; left:0; top:0; width:1.55rem; height:1.55rem; border-radius:50%; color:#04201d; background:var(--accent); text-align:center; font-weight:800; }
+    .notice { border-left:4px solid var(--accent); padding:.75rem 1rem; background:#0a2f35; color:#d8fdf8; }
+    a { color:var(--accent); } footer { color:var(--muted); font-size:.9rem; margin-top:3rem; }
+  
+[hidden]{display:none!important} h1{max-width:none;font-size:clamp(2.2rem,6vw,3.8rem)} .page-title{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.15;margin:.6rem 0 1rem} h3{margin-top:0} section{margin:1rem 0} .grid section{margin:0;min-width:0} nav{display:flex;flex-wrap:wrap;gap:.6rem;margin:2rem 0} nav a,button,select{font:inherit;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);padding:.7rem 1rem} nav a{text-decoration:none} nav a[aria-current="page"],button[type="submit"]{background:var(--accent);color:#04201d;font-weight:700} button{cursor:pointer} button:disabled{opacity:.45;cursor:not-allowed} :focus-visible{outline:3px solid #facc15;outline-offset:3px} fieldset{border:1px solid var(--line);border-radius:12px;margin:1rem 0;padding:1rem} legend{font-weight:650;padding:0 .4rem} legend small{display:block;color:var(--muted);font-weight:400} .choices{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem} .choices label{padding:.7rem;background:var(--card);border-radius:8px;cursor:pointer} input{accent-color:var(--accent)} .actions{display:flex;flex-wrap:wrap;gap:.7rem;margin:1.4rem 0} .table-wrap{overflow-x:auto} table{width:100%;border-collapse:collapse} th,td{text-align:left;padding:.7rem;border-bottom:1px solid var(--line)} .skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem} @media(max-width:540px){main{padding:2rem 0}.choices{grid-template-columns:repeat(2,1fr)}nav a{width:100%}section{padding:1rem}}

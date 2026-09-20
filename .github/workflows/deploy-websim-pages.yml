@@ -4,11 +4,13 @@ on:
   pull_request:
     paths:
       - 'WebSim~/site/**'
+      - 'WebSim~/tests/**'
       - '.github/workflows/deploy-websim-pages.yml'
   push:
     branches: [main]
     paths:
       - 'WebSim~/site/**'
+      - 'WebSim~/tests/**'
       - '.github/workflows/deploy-websim-pages.yml'
   workflow_dispatch:
 
@@ -26,10 +28,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test SSQ scoring
+        run: node --test WebSim~/tests/*.test.mjs
       - name: Validate static site
         run: |
           test -s WebSim~/site/index.html
           grep -q 'WiRR WebSim' WebSim~/site/index.html
+          node --check WebSim~/site/app.mjs
+          test -s WebSim~/site/styles.css
       - uses: actions/upload-pages-artifact@v3
         with:
           path: WebSim~/site
@@ -44,3 +53,4 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
