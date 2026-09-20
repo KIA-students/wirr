@@ -155,7 +155,7 @@ namespace KIA.WiRR.Editor
         private static bool IsAlreadyInstalled(string identifier)
         {
             if (identifier.Contains("ROS-TCP-Connector", StringComparison.OrdinalIgnoreCase))
-                return PackageInfo.IsPackageRegistered("com.unity.robotics.ros-tcp-connector");
+                return UnityEditor.PackageManager.PackageInfo.IsPackageRegistered("com.unity.robotics.ros-tcp-connector");
 
             var manifestPath = Path.GetFullPath(Path.Combine(Application.dataPath, "../Packages/manifest.json"));
             if (!File.Exists(manifestPath))
@@ -164,7 +164,7 @@ namespace KIA.WiRR.Editor
             var manifest = File.ReadAllText(manifestPath);
             var at = identifier.IndexOf('@');
             if (at <= 0)
-                return PackageInfo.IsPackageRegistered(identifier);
+                return UnityEditor.PackageManager.PackageInfo.IsPackageRegistered(identifier);
 
             var packageName = identifier.Substring(0, at);
             var version = identifier.Substring(at + 1);
