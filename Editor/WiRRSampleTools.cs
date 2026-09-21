@@ -29,7 +29,7 @@ namespace KIA.WiRR.Editor
             if (result)
             {
                 WiRRSceneTools.PrepareLabWorkspace(labNumber);
-                Debug.Log($"[WiRR] Zaimportowano próbkę i przygotowano workspace Lab {labNumber:00}: {WiRRSceneTools.GetLabRootPath(labNumber)}");
+                Debug.Log($"[WiRR] Zaimportowano próbkę i przygotowano folder roboczy laboratorium {labNumber:00}: {WiRRSceneTools.GetLabRootPath(labNumber)}");
             }
             else
             {
@@ -43,7 +43,7 @@ namespace KIA.WiRR.Editor
             var definition = WiRRLabCatalog.Get(labNumber);
             if (definition.ExternalSamples.Count == 0)
             {
-                Debug.Log($"[WiRR] Lab {labNumber:00} nie wymaga dodatkowych oficjalnych próbek Unity.");
+                Debug.Log($"[WiRR] Laboratorium {labNumber:00} nie wymaga dodatkowych oficjalnych próbek Unity.");
                 return;
             }
 
