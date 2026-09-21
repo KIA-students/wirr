@@ -65,18 +65,25 @@ namespace KIA.WiRR.Editor
             return errors;
         }
 
-        public static IReadOnlyList<string> Validate(WiRRReportDocument document)
+        public static IReadOnlyList<string> Validate(WiRRReportDocument document, string throughCheckpoint = null)
         {
             var errors = new List<string>(ValidateIdentity(document));
             if (document == null || document.labNumber < 1 || document.labNumber > 7) return errors;
+
             foreach (var section in WiRRReportSchemaCatalog.Get(document.labNumber))
-            foreach (var field in section.Fields)
             {
-                var value = GetValue(document, field.Id);
-                if (string.IsNullOrWhiteSpace(value)) continue;
-                if (field.Kind == WiRRReportFieldKind.Number && !double.TryParse(value.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out _)) errors.Add($"Pole {field.Label} wymaga liczby.");
-                if (field.Kind == WiRRReportFieldKind.Integer && !long.TryParse(value, out _)) errors.Add($"Pole {field.Label} wymaga liczby całkowitej.");
+                foreach (var field in section.Fields)
+                {
+                    var value = GetValue(document, field.Id);
+                    if (string.IsNullOrWhiteSpace(value)) continue;
+                    if (field.Kind == WiRRReportFieldKind.Number && !double.TryParse(value.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out _)) errors.Add($"Pole {field.Label} wymaga liczby.");
+                    if (field.Kind == WiRRReportFieldKind.Integer && !long.TryParse(value, out _)) errors.Add($"Pole {field.Label} wymaga liczby całkowitej.");
+                }
+
+                if (!string.IsNullOrWhiteSpace(throughCheckpoint) && section.Checkpoint == throughCheckpoint)
+                    break;
             }
+
             return errors;
         }
 
