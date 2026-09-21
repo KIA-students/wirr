@@ -44,6 +44,9 @@ namespace KIA.WiRR.Editor
                    fieldId == "cp45.recovery_ms" ||
                    fieldId == "cp30.smoke_pass" ||
                    fieldId == "cp30.nv" ||
+                   fieldId == "cp40.success_rate" ||
+                   fieldId == "cp40.false_activations" ||
+                   fieldId == "cp40.assistance" ||
                    fieldId == "cp50.max_risk";
         }
 
@@ -67,6 +70,9 @@ namespace KIA.WiRR.Editor
                 "cp45.recovery_ms" => "Wartość pobierana z pola „Powrót LIVE [ms]” w tabeli LIVE/STALE.",
                 "cp30.smoke_pass" => "Liczba pozycji ze statusem PASS w tabeli testu podstawowego.",
                 "cp30.nv" => "Liczba pozycji ze statusem NV w tabeli testu podstawowego.",
+                "cp40.success_rate" => "Odsetek zadań U1–U3 oznaczonych jako wykonane poprawnie.",
+                "cp40.false_activations" => "Suma błędnych aktywacji dla zadań U1–U3.",
+                "cp40.assistance" => "Suma podpowiedzi lub przypadków pomocy dla zadań U1–U3.",
                 "cp50.max_risk" => "Największa wartość R = P × S w macierzy ryzyka.",
                 _ => "Wartość obliczana automatycznie na podstawie danych w tabelach."
             };
@@ -253,6 +259,9 @@ namespace KIA.WiRR.Editor
                 case 7:
                     SetFieldFromStatusCount(document, "cp30.smoke_pass", "3.0", "lab07_smoke", "status_pass_fail_nv", "PASS");
                     SetFieldFromStatusCount(document, "cp30.nv", "3.0", "lab07_smoke", "status_pass_fail_nv", "NV");
+                    SetFieldFromBooleanRate(document, "cp40.success_rate", "4.0", "lab07_usability", "sukces");
+                    SetFieldFromColumnSum(document, "cp40.false_activations", "4.0", "lab07_usability", "błędne_aktywacje");
+                    SetFieldFromColumnSum(document, "cp40.assistance", "4.0", "lab07_usability", "pomoc");
                     SetFieldFromColumnMax(document, "cp50.max_risk", "5.0", "lab07_risk", "r");
                     break;
             }
@@ -382,6 +391,40 @@ namespace KIA.WiRR.Editor
 
             var count = values.Count(value => value.StartsWith(expectedStatus, StringComparison.OrdinalIgnoreCase));
             WiRRReportStore.SetValue(document, fieldId, count.ToString(Invariant));
+        }
+
+        private static void SetFieldFromBooleanRate(
+            WiRRReportDocument document,
+            string fieldId,
+            string checkpoint,
+            string tableId,
+            string columnId)
+        {
+            var table = WiRRReportTableCatalog.Get(document.labNumber, checkpoint).FirstOrDefault(t => t.Id == tableId);
+            var column = table == null ? null : FindColumn(table, columnId);
+            if (table == null || !column.HasValue)
+            {
+                WiRRReportStore.SetValue(document, fieldId, string.Empty);
+                return;
+            }
+
+            var successCount = 0;
+            foreach (var row in table.Rows)
+            {
+                var raw = WiRRReportStore.GetValue(document, WiRRReportTableCatalog.CellKey(table, row, column.Value));
+                if (string.IsNullOrWhiteSpace(raw))
+                {
+                    WiRRReportStore.SetValue(document, fieldId, string.Empty);
+                    return;
+                }
+
+                if (raw.Equals("tak", StringComparison.OrdinalIgnoreCase) ||
+                    raw.Equals("true", StringComparison.OrdinalIgnoreCase) ||
+                    raw.Equals("PASS", StringComparison.OrdinalIgnoreCase))
+                    successCount++;
+            }
+
+            WiRRReportStore.SetValue(document, fieldId, Format(100.0 * successCount / table.Rows.Count));
         }
 
         private static List<double> ReadCompleteColumn(
