@@ -194,19 +194,24 @@ namespace KIA.WiRR.Editor
             if (tables.Count == 0)
                 return;
 
-            var tablesWithData = 0;
+            var totalRows = 0;
+            var rowsWithData = 0;
             foreach (var table in tables)
             {
-                var hasData = table.Rows.Any(row => table.Columns.Any(column =>
-                    !string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(
-                        document,
-                        WiRRReportTableCatalog.CellKey(table, row, column)))));
-                if (hasData)
-                    tablesWithData++;
+                foreach (var row in table.Rows)
+                {
+                    totalRows++;
+                    var hasData = table.Columns.Any(column =>
+                        !string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(
+                            document,
+                            WiRRReportTableCatalog.CellKey(table, row, column))));
+                    if (hasData)
+                        rowsWithData++;
+                }
             }
 
             EditorGUILayout.LabelField(
-                $"Tabele pomiarowe z danymi: {tablesWithData}/{tables.Count}{suffix}",
+                $"Wiersze pomiarowe z danymi: {rowsWithData}/{totalRows}{suffix}",
                 EditorStyles.miniLabel);
         }
 
