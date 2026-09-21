@@ -67,7 +67,7 @@ namespace KIA.WiRR.Editor
                 try
                 {
                     WiRRSceneTools.PrepareLabWorkspace(labNumber);
-                    Debug.Log($"[WiRR] Wykryto import próbki Lab {labNumber:00}; przygotowano workspace {WiRRSceneTools.GetLabRootPath(labNumber)}.");
+                    Debug.Log($"[WiRR] Wykryto import próbki laboratorium {labNumber:00}; przygotowano folder roboczy {WiRRSceneTools.GetLabRootPath(labNumber)}.");
                 }
                 catch (Exception exception)
                 {
