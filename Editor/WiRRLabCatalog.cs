@@ -82,7 +82,7 @@ namespace KIA.WiRR.Editor
         {
             var labels = new string[Labs.Length];
             for (var i = 0; i < Labs.Length; i++)
-                labels[i] = $"Lab {Labs[i].Number:00} — {Labs[i].Title}";
+                labels[i] = $"Laboratorium {Labs[i].Number:00} — {Labs[i].Title}";
             return labels;
         }
     }
