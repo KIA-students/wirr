@@ -173,12 +173,31 @@ namespace KIA.WiRR.Editor
         {
             var requiredFields = section.Fields.Where(f => f.Required).ToArray();
             var filled = requiredFields.Count(f => !string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(document, f.Id)));
-            if (requiredFields.Length == 0)
+            var suffix = requiredForSubmission ? " · wymagane do wysłania" : string.Empty;
+            if (requiredFields.Length > 0)
+            {
+                EditorGUILayout.LabelField(
+                    $"Pola wymagane: {filled}/{requiredFields.Length}{suffix}",
+                    EditorStyles.miniLabel);
+            }
+
+            var tables = WiRRReportTableCatalog.Get(labNumber, section.Checkpoint);
+            if (tables.Count == 0)
                 return;
 
-            var suffix = requiredForSubmission ? " · wymagane do wysłania" : string.Empty;
+            var tablesWithData = 0;
+            foreach (var table in tables)
+            {
+                var hasData = table.Rows.Any(row => table.Columns.Any(column =>
+                    !string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(
+                        document,
+                        WiRRReportTableCatalog.CellKey(table, row, column)))));
+                if (hasData)
+                    tablesWithData++;
+            }
+
             EditorGUILayout.LabelField(
-                $"Pola wymagane: {filled}/{requiredFields.Length}{suffix}",
+                $"Tabele pomiarowe z danymi: {tablesWithData}/{tables.Count}{suffix}",
                 EditorStyles.miniLabel);
         }
 
