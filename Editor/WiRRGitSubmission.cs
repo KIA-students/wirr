@@ -72,7 +72,7 @@ namespace KIA.WiRR.Editor
                 var prCreated = false;
                 if (Run(cacheRoot, "gh", "--version", 5000, false).code == 0 && !string.IsNullOrWhiteSpace(repositorySlug))
                 {
-                    var title = $"WiRR report: {team} — Lab {document.labNumber:00}";
+                    var title = $"Raport WiRR: {team} — laboratorium {document.labNumber:00}";
                     var body = "Raport laboratoryjny WiRR. Ocena merytoryczna należy do prowadzącego.";
                     prCreated = Run(cacheRoot, "gh", $"pr create --repo {Q(repositorySlug)} --base {Q(baseBranch)} --head {Q(branch)} --title {Q(title)} --body {Q(body)}", 60000, false).code == 0;
                 }
@@ -83,7 +83,7 @@ namespace KIA.WiRR.Editor
                     PullRequestCreated = prCreated,
                     Branch = branch,
                     RepositoryPath = relative,
-                    Message = prCreated ? "Raport został wysłany i utworzono Pull Request." : "Raport został wysłany na nową gałąź. Utwórz Pull Request z tej gałęzi do gałęzi głównej."
+                    Message = prCreated ? "Raport został wysłany i utworzono zgłoszenie Pull Request (PR)." : "Raport został wysłany na nową gałąź. Utwórz zgłoszenie Pull Request (PR) z tej gałęzi do gałęzi głównej."
                 };
             }
             catch (Exception exception)
