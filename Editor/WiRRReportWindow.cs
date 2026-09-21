@@ -283,6 +283,15 @@ namespace KIA.WiRR.Editor
             if (!string.IsNullOrWhiteSpace(field.Help))
                 EditorGUILayout.LabelField(field.Help, EditorStyles.wordWrappedMiniLabel);
 
+            if (!string.IsNullOrWhiteSpace(newValue))
+            {
+                if (field.Kind == WiRRReportFieldKind.Number &&
+                    !double.TryParse(newValue.Replace(',', '.'), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out _))
+                    EditorGUILayout.HelpBox("W tym polu wpisz liczbę. Możesz użyć przecinka albo kropki jako separatora dziesiętnego.", MessageType.Warning);
+                else if (field.Kind == WiRRReportFieldKind.Integer && !long.TryParse(newValue, out _))
+                    EditorGUILayout.HelpBox("W tym polu wpisz liczbę całkowitą bez jednostki ani dodatkowego tekstu.", MessageType.Warning);
+            }
+
             if (oldValue == newValue)
                 return;
 
@@ -327,7 +336,9 @@ namespace KIA.WiRR.Editor
                         var displayLabel = automatic ? column.Label + " — automatycznie" : column.Label;
                         var content = new GUIContent(
                             displayLabel,
-                            automatic ? WiRRReportCalculator.DerivedDescription(table, column) : string.Empty);
+                            automatic
+                                ? WiRRReportCalculator.DerivedDescription(table, column)
+                                : TableColumnHelp(column));
 
                         string newValue;
                         using (new EditorGUI.DisabledScope(automatic))
@@ -344,6 +355,48 @@ namespace KIA.WiRR.Editor
                     }
                 }
             }
+        }
+
+        private static string TableColumnHelp(WiRRTableAxis column)
+        {
+            var id = column.Id;
+
+            if (id.StartsWith("fps", StringComparison.OrdinalIgnoreCase) || id.Contains("fps", StringComparison.OrdinalIgnoreCase))
+                return "Liczba klatek renderowanych w ciągu sekundy. Wpisz wartość pomiarową bez jednostki.";
+            if (id.Contains("ms", StringComparison.OrdinalIgnoreCase))
+                return "Wartość czasu w milisekundach. Wpisz samą liczbę.";
+            if (id.Contains("błę", StringComparison.OrdinalIgnoreCase) || id.Contains("error", StringComparison.OrdinalIgnoreCase))
+                return "Wpisz liczbę zaobserwowanych błędów albo wartość błędu zgodnie z jednostką podaną w etykiecie.";
+            if (id == "batches")
+                return "Liczba partii renderowania odczytana z narzędzi profilujących Unity.";
+            if (id == "setpass")
+                return "Liczba zmian stanu renderowania SetPass odczytana z narzędzi profilujących Unity.";
+            if (id == "triangles")
+                return "Liczba renderowanych trójkątów dla badanego wariantu.";
+            if (id.Contains("pamięć", StringComparison.OrdinalIgnoreCase))
+                return "Zużycie pamięci dla badanego wariantu, zgodnie z jednostką podaną w etykiecie.";
+            if (id == "q05")
+                return "5. percentyl wybranej miary jakości siatki; niższe wartości wskazują najgorszą część rozkładu.";
+            if (id == "qmedian")
+                return "Mediana wybranej miary jakości siatki.";
+            if (id == "dowód")
+                return "Podaj nazwę artefaktu, zrzutu, logu lub innego dowodu pozwalającego zweryfikować wynik.";
+            if (id == "uwagi")
+                return "Dopisz tylko obserwacje potrzebne do interpretacji pomiaru.";
+            if (id == "p")
+                return "Oceń prawdopodobieństwo w skali 1–5 zgodnie z instrukcją.";
+            if (id == "s")
+                return "Oceń skutek w skali 1–5 zgodnie z instrukcją.";
+            if (id == "warunek")
+                return "Opisz warunek, który jest sprawdzany w tym teście.";
+            if (id == "oczekiwany")
+                return "Wpisz oczekiwany rezultat przed wykonaniem testu.";
+            if (id == "rzeczywisty")
+                return "Wpisz rzeczywiście zaobserwowany rezultat testu.";
+            if (id.Contains("status", StringComparison.OrdinalIgnoreCase))
+                return "Wybierz lub wpisz status zgodny z wynikiem wykonanego testu.";
+
+            return "Wpisz wartość uzyskaną dla tego warunku lub próby. Jeżeli etykieta zawiera jednostkę, nie dopisuj jej do wartości.";
         }
 
         private static string ChoiceDisplayName(string value)
