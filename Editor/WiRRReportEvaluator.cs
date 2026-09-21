@@ -39,7 +39,7 @@ namespace KIA.WiRR.Editor
                 var section = WiRRReportSchemaCatalog.Get(document.labNumber).FirstOrDefault(s => s.Checkpoint == grade);
                 if (section == null)
                 {
-                    cp.Reasons.Add("Brak definicji checkpointu.");
+                    cp.Reasons.Add("Brak definicji etapu.");
                     chainOpen = false;
                     result.Checkpoints.Add(cp);
                     continue;
@@ -56,7 +56,7 @@ namespace KIA.WiRR.Editor
                     if (!hasData) cp.Reasons.Add("Brak danych pomiarowych: " + table.Label + ".");
                 }
 
-                if (!chainOpen && cp.Reasons.Count == 0) cp.Reasons.Add("Najpierw uzupełnij wcześniejszy checkpoint.");
+                if (!chainOpen && cp.Reasons.Count == 0) cp.Reasons.Add("Najpierw uzupełnij wcześniejszy etap.");
                 cp.Complete = chainOpen && cp.Reasons.Count == 0;
                 if (cp.Complete) result.SuggestedGrade = grade;
                 else chainOpen = false;
