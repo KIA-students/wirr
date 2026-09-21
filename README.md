@@ -2,7 +2,7 @@
   <img src="icon.png" alt="WiRR" width="128">
 </p>
 
-# WiRR Course Toolkit
+# WiRR — narzędzia kursu
 
 Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
 
@@ -20,9 +20,9 @@ Pakiet zawiera:
 - **Scene Tools / Validator** — przygotowanie i kontrolę sceny;
 - **Runtime Utilities** — lekkie komponenty pomiarowe;
 - **WebSim** — połączenie Unity ze środowiskiem ROS 2/Gazebo przez rosbridge;
-- **WiRR Reports** — formularz, autosave, tabele pomiarowe i raport JSON;
-- **Git Submission** — wysłanie raportu do repozytorium;
-- **Report Validation CI** — techniczną kontrolę integralności raportu.
+- **Raporty WiRR** — formularz, automatyczny zapis, tabele pomiarowe i raport JSON;
+- **Wysyłanie przez Git** — wysłanie raportu do repozytorium;
+- **Walidacja raportu w CI** — techniczną kontrolę integralności raportu.
 
 ## Instalacja
 
@@ -58,7 +58,7 @@ Dodatkowa dokumentacja techniczna znajduje się w `Documentation~/`, a skrypt wa
 | 6 | ROS-TCP-Connector v0.7.1 z Git |
 | 7 | Unity Test Framework |
 
-Materiały startowe znajdują się w `Samples~/Lab01`–`Samples~/Lab07`. Po imporcie próbki WiRR — z Course Toolkit albo bezpośrednio z Unity Package Manager — pakiet automatycznie przygotowuje workspace `Assets/WiRR/LabXX` z folderami `Scenes`, `Scripts`, `Materials`, `Models`, `Prefabs`, `Textures`, `Data`, `Evidence` i `Documentation`. Przy pierwszym imporcie tworzona jest również scena `Scenes/LabXX.unity`.
+Materiały startowe znajdują się w `Samples~/Lab01`–`Samples~/Lab07`. Po imporcie próbki WiRR — z panelu WiRR albo bezpośrednio z Unity Package Manager — pakiet automatycznie przygotowuje folder roboczy `Assets/WiRR/LabXX` z folderami `Scenes`, `Scripts`, `Materials`, `Models`, `Prefabs`, `Textures`, `Data`, `Evidence` i `Documentation`. Przy pierwszym imporcie tworzona jest również scena `Scenes/LabXX.unity`.
 
 ## Strona kursu (GitHub Pages)
 
@@ -94,7 +94,7 @@ W Lab 6 możliwy jest również klasyczny wariant ROS 2/Gazebo z ROS-TCP-Endpoin
 
 ## Raportowanie
 
-Podstawową ścieżką jest `WiRR → Raporty → Formularz raportu laboratoryjnego`. Każde laboratorium ma formularz odpowiadający checkpointom:
+Podstawową ścieżką jest `WiRR → Raporty → Formularz raportu laboratoryjnego`. Każde laboratorium ma formularz odpowiadający etapom:
 
 `3.0 → 3.5 → 4.0 → 4.5 → 5.0`.
 
@@ -128,7 +128,7 @@ CI nie wystawia oceny merytorycznej i nie analizuje sposobu pracy studenta. Ocen
 
 Walidator uruchamiany w Pull Request jest pobierany z zaufanej gałęzi bazowej, natomiast raport pochodzi z gałęzi studenta.
 
-## Zalecany workflow studenta
+## Zalecany przebieg pracy studenta
 
 1. Utwórz projekt **Universal 3D (URP)** w wersji Unity 6000.6.x wskazanej przez prowadzącego.
 2. Zainstaluj WiRR z `KIA-students/wirr`.
