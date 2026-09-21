@@ -29,7 +29,7 @@ namespace KIA.WiRR.Editor
             if (errors.Count > 0) return Fail("Raport zawiera błąd: " + errors[0]);
             var evaluation = WiRRReportEvaluator.Evaluate(document);
             if (evaluation.BlockingIssues.Count > 0) return Fail(evaluation.BlockingIssues[0]);
-            if (string.IsNullOrWhiteSpace(evaluation.SuggestedGrade)) return Fail("Uzupełnij co najmniej checkpoint 3.0 wraz z danymi pomiarowymi.");
+            if (!evaluation.CanSubmit) return Fail("Uzupełnij checkpoint 3.0 wraz z wymaganymi danymi pomiarowymi. Etapy 3.5–5.0 nie są wymagane do wysłania.");
 
             var exported = WiRRReportStore.ExportFinal(document, true);
             var projectRoot = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
