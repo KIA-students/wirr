@@ -1,13 +1,15 @@
 {
   "name": "pl.prz.kia.wirr",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "displayName": "WiRR — narzędzia kursu",
   "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i Rozszerzona Rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera narzędzia prowadzące przez pracę laboratoryjną, materiały startowe, walidację scen oraz prosty przebieg raportowania: Raport → Sprawdź → Wyślij. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
   "unity": "6000.6",
-  "documentationUrl": "https://github.com/MatPomGit/wirr#readme",
-  "changelogUrl": "https://github.com/MatPomGit/wirr/blob/main/CHANGELOG.md",
-  "licensesUrl": "https://github.com/MatPomGit/wirr/blob/main/LICENSE",
-  "author": { "name": "Katedra Informatyki i Automatyki, Politechnika Rzeszowska" },
+  "documentationUrl": "https://kia-students.github.io/wirr/",
+  "changelogUrl": "https://github.com/KIA-students/wirr/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/KIA-students/wirr/blob/main/LICENSE",
+  "author": {
+    "name": "Katedra Informatyki i Automatyki, Politechnika Rzeszowska"
+  },
   "dependencies": {
     "com.unity.render-pipelines.universal": "17.7.0",
     "com.unity.inputsystem": "1.20.0"
@@ -49,5 +51,17 @@
       "path": "Samples~/Lab07"
     }
   ],
-  "keywords": ["XR", "VR", "AR", "ROS2", "Gazebo", "WebSim", "digital twin", "reports", "education", "PRz", "WiRR"]
+  "keywords": [
+    "XR",
+    "VR",
+    "AR",
+    "ROS2",
+    "Gazebo",
+    "WebSim",
+    "digital twin",
+    "reports",
+    "education",
+    "PRz",
+    "WiRR"
+  ]
 }
