@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 0.4.4 — 2026-09-21
+
+- ujednolicono polski język interfejsu w oknach WiRR, menu Unity, komunikatach walidatora, WebSim, nakładce metryk i inspektorach komponentów;
+- przebudowano formularz raportu pod kątem studentów: etapy są zwijane, etap 3.0 jest jednoznacznie oznaczony jako wymagany do wysłania, pokazano postęp pól oraz objaśnienia celu każdego pola;
+- dodano automatyczne obliczenia wartości pochodnych z danych surowych, m.in. median, czasu klatki z FPS, zmiany FPS, liczby kroków fizyki na sekundę, e_med/e_max, sum błędów, RTT, zmienności odstępów między wiadomościami i ryzyka R=P×S;
+- pola i komórki obliczane automatycznie są tylko do odczytu i zawierają opis zastosowanego wzoru lub źródła danych;
+- dla pól o zamkniętym zbiorze odpowiedzi dodano kontrolowane wybory zamiast swobodnego tekstu, m.in. PASS/FAIL/NV, HIT/MISS, tak/nie, skale 1–5 i 0–10;
+- zachowano dotychczasowe stabilne klucze JSON tabel mimo polonizacji etykiet wyświetlanych użytkownikowi.
+
+
 ## 0.4.3 — 2026-09-21
 
 - import próbki WiRR — zarówno z Course Toolkit, jak i bezpośrednio z Unity Package Manager — automatycznie tworzy kompletny workspace `Assets/WiRR/LabXX` z folderami `Scenes`, `Scripts`, `Materials`, `Models`, `Prefabs`, `Textures`, `Data`, `Evidence` i `Documentation`;
