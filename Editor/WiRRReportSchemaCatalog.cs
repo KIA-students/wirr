@@ -115,7 +115,7 @@ namespace KIA.WiRR.Editor
         private static IReadOnlyList<WiRRReportSection> Lab07() => new[]
         {
             CommonEnvironment(),
-            new WiRRReportSection("3.0 — smoke i kryteria akceptacji", "3.0", I("cp30.smoke_pass","Liczba PASS"), I("cp30.blocking_fail","Blokujące FAIL"), I("cp30.nv","NV",false), M("cp30.answer","Ocena kryteriów")),
+            new WiRRReportSection("3.0 — smoke i kryteria akceptacji", "3.0", I("cp30.smoke_pass","Liczba PASS"), I("cp30.blocking_fail","Blokujące FAIL"), I("cp30.nv","NV","",false), M("cp30.answer","Ocena kryteriów")),
             new WiRRReportSection("3.5 — wydajność", "3.5", N("cp35.frame_ms","Mediana czasu klatki","ms"), N("cp35.fps","Mediana FPS","FPS"), N("cp35.memory_mb","Pamięć","MB"), M("cp35.answer","Wniosek CPU/GPU/memory/transport")),
             new WiRRReportSection("4.0 — użyteczność", "4.0", N("cp40.success_rate","Skuteczność","%"), I("cp40.false_activations","Błędne aktywacje"), I("cp40.assistance","Liczba podpowiedzi"), M("cp40.answer","Wniosek użyteczność / dostępność")),
             new WiRRReportSection("4.5 — fault injection i regresja", "4.5", T("cp45.fault","Kontrolowany fault"), N("cp45.recovery_s","Czas recovery","s"), B("cp45.regression_pass","Test regresyjny PASS"), M("cp45.diagnosis","H1/H2, test rozstrzygający i poprawka")),
