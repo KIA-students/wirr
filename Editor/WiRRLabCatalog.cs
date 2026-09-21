@@ -60,7 +60,7 @@ namespace KIA.WiRR.Editor
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "Starter Assets"),
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "AR Starter Assets")
                 }),
-            new WiRRLabDefinition(4, "Rozumienie sceny i mieszanie rzeczywistości", "Lab 04 — Rozumienie sceny i MR",
+            new WiRRLabDefinition(4, "Rozumienie sceny i mieszanie rzeczywistości", "Lab 04 — Rozumienie sceny i mieszanie rzeczywistości",
                 new[] { "com.unity.xr.management@4.7.0", "com.unity.xr.interaction.toolkit@3.6.0", "com.unity.xr.arfoundation@6.4.1", "com.unity.xr.arcore@6.4.1" },
                 new[] {
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "Starter Assets"),
@@ -68,7 +68,7 @@ namespace KIA.WiRR.Editor
                 }),
             new WiRRLabDefinition(5, "Optymalizacja modeli CAD", "Lab 05 — Optymalizacja modeli CAD", Array.Empty<string>(), Array.Empty<WiRRExternalSample>()),
             new WiRRLabDefinition(6, "Bliźniak cyfrowy ROS 2 + Gazebo", "Lab 06 — Bliźniak cyfrowy ROS 2 + Gazebo", new[] { RosTcpConnectorUrl }, Array.Empty<WiRRExternalSample>()),
-            new WiRRLabDefinition(7, "Walidacja i testy akceptacyjne", "Lab 07 — Walidacja i testy akceptacyjne", new[] { "com.unity.test-framework@1.8.0" }, Array.Empty<WiRRExternalSample>())
+            new WiRRLabDefinition(7, "Walidacja i testy akceptacyjne", "Lab 07 — Walidacja i testy akceptacyjne XR", new[] { "com.unity.test-framework@1.8.0" }, Array.Empty<WiRRExternalSample>())
         };
 
         public static WiRRLabDefinition Get(int labNumber)
