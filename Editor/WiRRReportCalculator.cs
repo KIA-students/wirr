@@ -30,12 +30,20 @@ namespace KIA.WiRR.Editor
         {
             return fieldId == "cp30.baseline_fps" ||
                    fieldId == "cp30.baseline_frame_ms" ||
+                   fieldId == "cp30.errors" ||
+                   fieldId == "cp35.false_activations" ||
+                   fieldId == "cp40.corrections" ||
                    fieldId == "cp45.scenario_median_s" ||
                    fieldId == "cp40.drift_median_mm" ||
                    fieldId == "cp45.e_median_mm" ||
                    fieldId == "cp45.e_max_mm" ||
+                   fieldId == "cp50.error_after_fix_mm" ||
                    fieldId == "cp40.latency_ms" ||
                    fieldId == "cp40.jitter_ms" ||
+                   fieldId == "cp45.stale_ms" ||
+                   fieldId == "cp45.recovery_ms" ||
+                   fieldId == "cp30.smoke_pass" ||
+                   fieldId == "cp30.nv" ||
                    fieldId == "cp50.max_risk";
         }
 
@@ -197,6 +205,9 @@ namespace KIA.WiRR.Editor
                     break;
 
                 case 2:
+                    SetFieldFromColumnSum(document, "cp30.errors", "3.0", "lab02_cp30_conditions", "błędy");
+                    SetFieldFromColumnSum(document, "cp35.false_activations", "3.5", "lab02_cp35_conditions", "błędne_aktywacje");
+                    SetFieldFromColumnSum(document, "cp40.corrections", "4.0", "lab02_cp40_conditions", "błędy_korekty");
                     SetFieldFromColumnMedian(document, "cp45.scenario_median_s", "4.5", "lab02_scenario", "czas_s");
                     break;
 
@@ -204,14 +215,19 @@ namespace KIA.WiRR.Editor
                     SetFieldFromColumnMedian(document, "cp40.drift_median_mm", "4.0", "lab03_drift", "błąd_końcowy_mm");
                     SetFieldFromColumnMedian(document, "cp45.e_median_mm", "4.5", "lab03_registration", "e_med_mm");
                     SetFieldFromColumnMax(document, "cp45.e_max_mm", "4.5", "lab03_registration", "e_max_mm");
+                    SetFieldFromRowGroupMedian(document, "cp50.error_after_fix_mm", "5.0", "lab03_fault", "e_med_mm", "naprawa");
                     break;
 
                 case 6:
                     SetFieldFromColumnMedian(document, "cp40.latency_ms", "4.0", "lab06_rtt", "rtt_ms");
                     SetFieldFromColumnStdDev(document, "cp40.jitter_ms", "4.0", "lab06_interarrival", "inter_arrival_ms");
+                    SetFieldFromSingleCell(document, "cp45.stale_ms", "4.5", "lab06_stale", "pomiar", "detekcja_stale_ms");
+                    SetFieldFromSingleCell(document, "cp45.recovery_ms", "4.5", "lab06_stale", "pomiar", "odzyskanie_live_ms");
                     break;
 
                 case 7:
+                    SetFieldFromStatusCount(document, "cp30.smoke_pass", "3.0", "lab07_smoke", "status_pass_fail_nv", "PASS");
+                    SetFieldFromStatusCount(document, "cp30.nv", "3.0", "lab07_smoke", "status_pass_fail_nv", "NV");
                     SetFieldFromColumnMax(document, "cp50.max_risk", "5.0", "lab07_risk", "r");
                     break;
             }
@@ -220,22 +236,29 @@ namespace KIA.WiRR.Editor
         private static void SetFieldFromColumnMedian(
             WiRRReportDocument document, string fieldId, string checkpoint, string tableId, string columnId)
         {
-            var values = ReadColumn(document, checkpoint, tableId, columnId);
-            WiRRReportStore.SetValue(document, fieldId, values.Count == 0 ? string.Empty : Format(Median(values)));
+            var values = ReadCompleteColumn(document, checkpoint, tableId, columnId);
+            WiRRReportStore.SetValue(document, fieldId, values == null ? string.Empty : Format(Median(values)));
         }
 
         private static void SetFieldFromColumnMax(
             WiRRReportDocument document, string fieldId, string checkpoint, string tableId, string columnId)
         {
-            var values = ReadColumn(document, checkpoint, tableId, columnId);
-            WiRRReportStore.SetValue(document, fieldId, values.Count == 0 ? string.Empty : Format(values.Max()));
+            var values = ReadCompleteColumn(document, checkpoint, tableId, columnId);
+            WiRRReportStore.SetValue(document, fieldId, values == null ? string.Empty : Format(values.Max()));
+        }
+
+        private static void SetFieldFromColumnSum(
+            WiRRReportDocument document, string fieldId, string checkpoint, string tableId, string columnId)
+        {
+            var values = ReadCompleteColumn(document, checkpoint, tableId, columnId);
+            WiRRReportStore.SetValue(document, fieldId, values == null ? string.Empty : Format(values.Sum()));
         }
 
         private static void SetFieldFromColumnStdDev(
             WiRRReportDocument document, string fieldId, string checkpoint, string tableId, string columnId)
         {
-            var values = ReadColumn(document, checkpoint, tableId, columnId);
-            if (values.Count < 2)
+            var values = ReadCompleteColumn(document, checkpoint, tableId, columnId);
+            if (values == null || values.Count < 2)
             {
                 WiRRReportStore.SetValue(document, fieldId, string.Empty);
                 return;
@@ -246,23 +269,114 @@ namespace KIA.WiRR.Editor
             WiRRReportStore.SetValue(document, fieldId, Format(Math.Sqrt(variance)));
         }
 
-        private static List<double> ReadColumn(
+        private static void SetFieldFromSingleCell(
+            WiRRReportDocument document,
+            string fieldId,
+            string checkpoint,
+            string tableId,
+            string rowId,
+            string columnId)
+        {
+            var table = WiRRReportTableCatalog.Get(document.labNumber, checkpoint).FirstOrDefault(t => t.Id == tableId);
+            if (table == null)
+            {
+                WiRRReportStore.SetValue(document, fieldId, string.Empty);
+                return;
+            }
+
+            var row = table.Rows.FirstOrDefault(r => r.Id == rowId);
+            var column = FindColumn(table, columnId);
+            if (!column.HasValue || string.IsNullOrEmpty(row.Id))
+            {
+                WiRRReportStore.SetValue(document, fieldId, string.Empty);
+                return;
+            }
+
+            var raw = WiRRReportStore.GetValue(document, WiRRReportTableCatalog.CellKey(table, row, column.Value));
+            WiRRReportStore.SetValue(document, fieldId, raw);
+        }
+
+        private static void SetFieldFromRowGroupMedian(
+            WiRRReportDocument document,
+            string fieldId,
+            string checkpoint,
+            string tableId,
+            string columnId,
+            string rowPrefix)
+        {
+            var table = WiRRReportTableCatalog.Get(document.labNumber, checkpoint).FirstOrDefault(t => t.Id == tableId);
+            var column = table == null ? null : FindColumn(table, columnId);
+            if (table == null || !column.HasValue)
+            {
+                WiRRReportStore.SetValue(document, fieldId, string.Empty);
+                return;
+            }
+
+            var rows = table.Rows.Where(r => r.Id.StartsWith(rowPrefix, StringComparison.OrdinalIgnoreCase)).ToArray();
+            var values = new List<double>();
+            foreach (var row in rows)
+            {
+                var value = ReadCellNumber(document, table, row, column.Value);
+                if (value.HasValue)
+                    values.Add(value.Value);
+            }
+
+            WiRRReportStore.SetValue(
+                document,
+                fieldId,
+                rows.Length > 0 && values.Count == rows.Length ? Format(Median(values)) : string.Empty);
+        }
+
+        private static void SetFieldFromStatusCount(
+            WiRRReportDocument document,
+            string fieldId,
+            string checkpoint,
+            string tableId,
+            string columnId,
+            string expectedStatus)
+        {
+            var table = WiRRReportTableCatalog.Get(document.labNumber, checkpoint).FirstOrDefault(t => t.Id == tableId);
+            var column = table == null ? null : FindColumn(table, columnId);
+            if (table == null || !column.HasValue)
+            {
+                WiRRReportStore.SetValue(document, fieldId, string.Empty);
+                return;
+            }
+
+            var values = new List<string>();
+            foreach (var row in table.Rows)
+            {
+                var raw = WiRRReportStore.GetValue(document, WiRRReportTableCatalog.CellKey(table, row, column.Value));
+                if (string.IsNullOrWhiteSpace(raw))
+                {
+                    WiRRReportStore.SetValue(document, fieldId, string.Empty);
+                    return;
+                }
+                values.Add(raw.Trim());
+            }
+
+            var count = values.Count(value => value.StartsWith(expectedStatus, StringComparison.OrdinalIgnoreCase));
+            WiRRReportStore.SetValue(document, fieldId, count.ToString(Invariant));
+        }
+
+        private static List<double> ReadCompleteColumn(
             WiRRReportDocument document, string checkpoint, string tableId, string columnId)
         {
             var table = WiRRReportTableCatalog.Get(document.labNumber, checkpoint).FirstOrDefault(t => t.Id == tableId);
             if (table == null)
-                return new List<double>();
+                return null;
 
             var column = FindColumn(table, columnId);
             if (!column.HasValue)
-                return new List<double>();
+                return null;
 
             var values = new List<double>();
             foreach (var row in table.Rows)
             {
                 var value = ReadCellNumber(document, table, row, column.Value);
-                if (value.HasValue)
-                    values.Add(value.Value);
+                if (!value.HasValue)
+                    return null;
+                values.Add(value.Value);
             }
             return values;
         }
