@@ -164,7 +164,7 @@ namespace KIA.WiRR.Editor
             {
                 if (!TryParse(row.Label, out var timestep) || timestep <= 0)
                     return string.Empty;
-                return Format(1.0 / timestep);
+                return Math.Round(1.0 / timestep).ToString(Invariant);
             }
 
             if (column.Id == "e_med_mm" || column.Id == "e_max_mm")
