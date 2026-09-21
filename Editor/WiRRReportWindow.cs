@@ -298,7 +298,9 @@ namespace KIA.WiRR.Editor
 
                         string newValue;
                         using (new EditorGUI.DisabledScope(automatic))
-                            newValue = EditorGUILayout.TextField(content, oldValue);
+                            newValue = automatic
+                                ? EditorGUILayout.TextField(content, oldValue)
+                                : DrawEditableTableCell(content, column, oldValue);
 
                         if (automatic || oldValue == newValue)
                             continue;
@@ -309,6 +311,54 @@ namespace KIA.WiRR.Editor
                     }
                 }
             }
+        }
+
+        private static string DrawEditableTableCell(GUIContent label, WiRRTableAxis column, string oldValue)
+        {
+            if (column.Id == "status_pass_fail_nv")
+            {
+                var values = new[] { "— wybierz —", "PASS — zaliczony", "FAIL — niezaliczony", "NV — niezweryfikowany" };
+                var index = oldValue.StartsWith("PASS", StringComparison.OrdinalIgnoreCase) ? 1
+                    : oldValue.StartsWith("FAIL", StringComparison.OrdinalIgnoreCase) ? 2
+                    : oldValue.StartsWith("NV", StringComparison.OrdinalIgnoreCase) ? 3
+                    : 0;
+                var selected = EditorGUILayout.Popup(label, index, values);
+                return selected == 1 ? "PASS" : selected == 2 ? "FAIL" : selected == 3 ? "NV" : string.Empty;
+            }
+
+            if (column.Id == "hit_miss")
+            {
+                var values = new[] { "— wybierz —", "HIT — trafienie", "MISS — brak trafienia" };
+                var index = oldValue.Equals("HIT", StringComparison.OrdinalIgnoreCase) ? 1
+                    : oldValue.Equals("MISS", StringComparison.OrdinalIgnoreCase) ? 2
+                    : 0;
+                var selected = EditorGUILayout.Popup(label, index, values);
+                return selected == 1 ? "HIT" : selected == 2 ? "MISS" : string.Empty;
+            }
+
+            if (IsBooleanLikeColumn(column.Id))
+            {
+                var values = new[] { "— wybierz —", "tak", "nie" };
+                var index = oldValue.Equals("tak", StringComparison.OrdinalIgnoreCase) || oldValue.Equals("true", StringComparison.OrdinalIgnoreCase) ? 1
+                    : oldValue.Equals("nie", StringComparison.OrdinalIgnoreCase) || oldValue.Equals("false", StringComparison.OrdinalIgnoreCase) ? 2
+                    : 0;
+                var selected = EditorGUILayout.Popup(label, index, values);
+                return selected == 1 ? "tak" : selected == 2 ? "nie" : string.Empty;
+            }
+
+            return EditorGUILayout.TextField(label, oldValue);
+        }
+
+        private static bool IsBooleanLikeColumn(string columnId)
+        {
+            return columnId == "blokujące" ||
+                   columnId == "sukces" ||
+                   columnId == "gazebo_unity_zgodne" ||
+                   columnId == "model_zasłaniany" ||
+                   columnId == "wymiary_ok" ||
+                   columnId == "cechy_zachowane" ||
+                   columnId == "hierarchia_ok" ||
+                   columnId == "gc_zaobserwowane";
         }
 
         private void DrawActions()
