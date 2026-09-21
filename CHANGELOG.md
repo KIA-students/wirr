@@ -1,6 +1,13 @@
 # Changelog
 
-## Unreleased
+## 0.4.3 — 2026-09-21
+
+- import próbki WiRR automatycznie tworzy kompletny workspace `Assets/WiRR/LabXX` z folderami `Scenes`, `Scripts`, `Materials`, `Models`, `Prefabs`, `Textures`, `Data`, `Evidence` i `Documentation`;
+- przy pierwszym przygotowaniu workspace automatycznie powstaje scena `Scenes/LabXX.unity` z pojedynczym `WiRRSceneMarker`, kamerą, światłem i gruntem;
+- przebudowano okno `WiRR Course Toolkit`: dodano status laboratorium, przewijany układ kroków, akcje otwierania folderu/sceny i naprawy workspace oraz czytelniejszy workflow;
+- raport można wysłać po ukończeniu checkpointu `3.0`; checkpointy `3.5–5.0` są opcjonalne i ich puste lub nieukończone pola nie blokują wysyłki;
+- walidacja typów pól przy wysyłce obejmuje tylko najwyższy kompletny, sekwencyjny checkpoint raportu.
+
 
 - uporządkowano menu Unity: narzędzia sceny przeniesiono do `WiRR → Lab scene`, a awaryjny szablon Markdown do `WiRR → Reports`; usunięto duplikat otwierania formularza raportu;
 - `Create / repair base scene` wymusza teraz dokładnie jeden `WiRRSceneMarker` w aktywnej scenie, a walidator zgłasza duplikaty lub marker przypisany do innego laboratorium;
