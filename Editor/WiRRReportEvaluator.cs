@@ -16,6 +16,10 @@ namespace KIA.WiRR.Editor
         public string SuggestedGrade;
         public readonly List<string> BlockingIssues = new List<string>();
         public readonly List<WiRRCheckpointEvaluation> Checkpoints = new List<WiRRCheckpointEvaluation>();
+
+        public bool CanSubmit =>
+            BlockingIssues.Count == 0 &&
+            Checkpoints.Any(cp => cp.Checkpoint == "3.0" && cp.Complete);
     }
 
     internal static class WiRRReportEvaluator
