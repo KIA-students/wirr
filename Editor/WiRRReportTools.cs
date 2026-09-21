@@ -11,7 +11,7 @@ namespace KIA.WiRR.Editor
             var sampleNullable = WiRRSampleTools.FindCourseSample(labNumber);
             if (!sampleNullable.HasValue)
             {
-                Debug.LogError($"[WiRR] Nie znaleziono próbki Lab {labNumber:00} w pakiecie.");
+                Debug.LogError($"[WiRR] Nie znaleziono próbki laboratorium {labNumber:00} w pakiecie.");
                 return;
             }
 
@@ -31,7 +31,7 @@ namespace KIA.WiRR.Editor
             {
                 File.Copy(source, fullPath);
                 AssetDatabase.Refresh();
-                Debug.Log($"[WiRR] Utworzono szablon raportu: {assetPath}");
+                Debug.Log($"[WiRR] Utworzono awaryjny szablon raportu: {assetPath}");
             }
 
             var textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(assetPath);
