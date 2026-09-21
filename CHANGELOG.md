@@ -13,6 +13,7 @@
 - walidacja raportu wskazuje teraz konkretne nieuzupełnione wiersze tabel oraz wyjaśnia, jakich danych brakuje do obliczenia pól automatycznych;
 - rozszerzono obliczenia automatyczne m.in. o błąd odległości w raycaście głębi i przeliczenie FPS ↔ czas klatki tam, gdzie zależność jest jednoznaczna;
 - ujednolicono polskie nazwy próbek w Unity Package Manager oraz naprawiono niespójne nazwy próbek laboratoriów 04 i 07, które mogły uniemożliwiać ich automatyczne odnalezienie.
+- dodano automatyczny proces wydania: walidację pakietu, testy WebSim i walidatora raportów, archiwa ZIP/TGZ, sumy SHA-256 oraz publikację oznaczonego wydania GitHub.
 
 
 ## 0.4.3 — 2026-09-21
