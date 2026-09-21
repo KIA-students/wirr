@@ -42,33 +42,33 @@ namespace KIA.WiRR.Editor
 
         private static readonly WiRRLabDefinition[] Labs =
         {
-            new WiRRLabDefinition(1, "Środowisko XR i audyt urządzeń", "Lab 01 — Środowisko XR i audyt urządzeń",
+            new WiRRLabDefinition(1, "Środowisko XR i audyt urządzeń", "Laboratorium 01 — Środowisko XR i audyt urządzeń",
                 new[] { "com.unity.xr.management@4.7.0", "com.unity.xr.openxr@1.18.0", "com.unity.xr.interaction.toolkit@3.6.0", "com.unity.xr.hands@1.9.0" },
                 new[] {
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "Starter Assets"),
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "XR Interaction Simulator", "XR Device Simulator")
                 }),
-            new WiRRLabDefinition(2, "Interakcja i manipulacja XR", "Lab 02 — Interakcja i manipulacja XR",
+            new WiRRLabDefinition(2, "Interakcja i manipulacja XR", "Laboratorium 02 — Interakcja i manipulacja XR",
                 new[] { "com.unity.xr.management@4.7.0", "com.unity.xr.openxr@1.18.0", "com.unity.xr.interaction.toolkit@3.6.0" },
                 new[] {
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "Starter Assets"),
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "XR Interaction Simulator", "XR Device Simulator")
                 }),
-            new WiRRLabDefinition(3, "Rejestracja i kotwice AR", "Lab 03 — Rejestracja i kotwice AR",
+            new WiRRLabDefinition(3, "Rejestracja i kotwice AR", "Laboratorium 03 — Rejestracja i kotwice AR",
                 new[] { "com.unity.xr.management@4.7.0", "com.unity.xr.interaction.toolkit@3.6.0", "com.unity.xr.arfoundation@6.4.1", "com.unity.xr.arcore@6.4.1" },
                 new[] {
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "Starter Assets"),
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "AR Starter Assets")
                 }),
-            new WiRRLabDefinition(4, "Rozumienie sceny i mieszanie rzeczywistości", "Lab 04 — Rozumienie sceny i mieszanie rzeczywistości",
+            new WiRRLabDefinition(4, "Rozumienie sceny i mieszanie rzeczywistości", "Laboratorium 04 — Rozumienie sceny i mieszanie rzeczywistości",
                 new[] { "com.unity.xr.management@4.7.0", "com.unity.xr.interaction.toolkit@3.6.0", "com.unity.xr.arfoundation@6.4.1", "com.unity.xr.arcore@6.4.1" },
                 new[] {
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "Starter Assets"),
                     new WiRRExternalSample("com.unity.xr.interaction.toolkit", "AR Starter Assets")
                 }),
-            new WiRRLabDefinition(5, "Optymalizacja modeli CAD", "Lab 05 — Optymalizacja modeli CAD", Array.Empty<string>(), Array.Empty<WiRRExternalSample>()),
-            new WiRRLabDefinition(6, "Bliźniak cyfrowy ROS 2 + Gazebo", "Lab 06 — Bliźniak cyfrowy ROS 2 + Gazebo", new[] { RosTcpConnectorUrl }, Array.Empty<WiRRExternalSample>()),
-            new WiRRLabDefinition(7, "Walidacja i testy akceptacyjne", "Lab 07 — Walidacja i testy akceptacyjne XR", new[] { "com.unity.test-framework@1.8.0" }, Array.Empty<WiRRExternalSample>())
+            new WiRRLabDefinition(5, "Optymalizacja modeli CAD", "Laboratorium 05 — Optymalizacja modeli CAD", Array.Empty<string>(), Array.Empty<WiRRExternalSample>()),
+            new WiRRLabDefinition(6, "Bliźniak cyfrowy ROS 2 + Gazebo", "Laboratorium 06 — Bliźniak cyfrowy ROS 2 + Gazebo", new[] { RosTcpConnectorUrl }, Array.Empty<WiRRExternalSample>()),
+            new WiRRLabDefinition(7, "Walidacja i testy akceptacyjne", "Laboratorium 07 — Walidacja i testy akceptacyjne XR", new[] { "com.unity.test-framework@1.8.0" }, Array.Empty<WiRRExternalSample>())
         };
 
         public static WiRRLabDefinition Get(int labNumber)
