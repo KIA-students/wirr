@@ -77,6 +77,12 @@ namespace KIA.WiRR.Editor
                 "RTT — wariant v4" => "Czas RTT — wariant v4",
                 "LIVE / STALE" => "Stan danych LIVE / STALE",
                 "Test dymny" => "Test podstawowy (smoke test)",
+                "Depth API — eksperyment v1" => "API głębi (Depth API) — eksperyment v1",
+                "Depth-raycast — seria bazowa" => "Raycast z użyciem głębi — seria bazowa",
+                "Depth-raycast — eksperyment v3" => "Raycast z użyciem głębi — eksperyment v3",
+                "Finalne geometrie LOD" => "Geometrie końcowe LOD",
+                "Materiały, draw calls i kolizje" => "Materiały, wywołania rysowania i kolizje",
+                "Macierz funkcjonalna Lab 1–6" => "Macierz funkcjonalna laboratoriów 1–6",
                 _ => label
             };
         }
@@ -169,6 +175,28 @@ namespace KIA.WiRR.Editor
                 .Replace("odzyskanie LIVE ms", "Powrót LIVE [ms]")
                 .Replace("Błędne aktywacje", "Błędne aktywacje")
                 .Replace("Problem dostępności", "Zaobserwowany problem dostępności");
+
+            if (localized.StartsWith("Lab ", StringComparison.Ordinal))
+                localized = "Laboratorium " + localized.Substring(4);
+            if (localized.StartsWith("baseline ", StringComparison.OrdinalIgnoreCase))
+                localized = "pomiar bazowy " + localized.Substring("baseline ".Length);
+            if (localized.Equals("Off", StringComparison.OrdinalIgnoreCase))
+                localized = "Wyłączone (Off)";
+            else if (localized.Equals("Raw", StringComparison.OrdinalIgnoreCase))
+                localized = "Surowe (Raw)";
+            else if (localized.Equals("Smoothed", StringComparison.OrdinalIgnoreCase))
+                localized = "Wygładzone (Smoothed)";
+            else if (localized.Equals("Final XR", StringComparison.OrdinalIgnoreCase))
+                localized = "Końcowy wariant XR";
+
+            localized = localized
+                .Replace("successRate", "Skuteczność")
+                .Replace("Color temp", "Temperatura barwowa")
+                .Replace("Main direction", "Główny kierunek")
+                .Replace("Current mode", "Bieżący tryb")
+                .Replace("mean ", "Średnia ")
+                .Replace("median ", "Mediana ")
+                .Replace("p95 ", "95. percentyl ");
 
             return localized;
         }
