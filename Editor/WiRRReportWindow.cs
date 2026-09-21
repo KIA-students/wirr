@@ -161,11 +161,20 @@ namespace KIA.WiRR.Editor
 
                 EditorGUILayout.HelpBox(SectionGuidance(section), required ? MessageType.Info : MessageType.None);
 
+                var tables = WiRRReportTableCatalog.Get(labNumber, section.Checkpoint);
+                foreach (var table in tables)
+                    DrawTable(section.Checkpoint, table);
+
+                if (section.Fields.Count > 0)
+                {
+                    EditorGUILayout.Space(8);
+                    EditorGUILayout.LabelField(
+                        section.Checkpoint == "COMMON" ? "Informacje dodatkowe" : "Podsumowanie etapu i wnioski",
+                        EditorStyles.miniBoldLabel);
+                }
+
                 foreach (var field in section.Fields)
                     DrawField(field);
-
-                foreach (var table in WiRRReportTableCatalog.Get(labNumber, section.Checkpoint))
-                    DrawTable(section.Checkpoint, table);
             }
         }
 
