@@ -83,6 +83,11 @@ namespace KIA.WiRR.Editor
                 "Finalne geometrie LOD" => "Geometrie końcowe LOD",
                 "Materiały, draw calls i kolizje" => "Materiały, wywołania rysowania i kolizje",
                 "Macierz funkcjonalna Lab 1–6" => "Macierz funkcjonalna laboratoriów 1–6",
+                "CPU-A — iterationsPerFrame" => "CPU-A — iteracje na klatkę (iterationsPerFrame)",
+                "CPU-B — blocksPerFrame" => "CPU-B — bloki na klatkę (blocksPerFrame)",
+                "CPU-C — allocationBytesPerFrame" => "CPU-C — alokacja pamięci na klatkę (allocationBytesPerFrame)",
+                "GPU-D — Render Scale" => "GPU-D — skala renderowania (Render Scale)",
+                "PHY-C — Fixed Timestep" => "PHY-C — stały krok symulacji (Fixed Timestep)",
                 _ => label
             };
         }
@@ -132,6 +137,8 @@ namespace KIA.WiRR.Editor
                 "inter-arrival ms" => "Odstęp między wiadomościami [ms]",
                 "Delay ms" => "Opóźnienie [ms]",
                 "Buffer" => "Bufor",
+                "Endpoint" => "Punkt końcowy (Endpoint)",
+                "Transport" => "Sposób transmisji",
                 "T średnie ms" => "Średni odstęp T [ms]",
                 "sT ms" => "Odchylenie standardowe sT [ms]",
                 "min ms" => "Minimum [ms]",
@@ -169,6 +176,19 @@ namespace KIA.WiRR.Editor
                 .Replace("CPU ms", "CPU [ms]")
                 .Replace("GPU ms", "GPU [ms]")
                 .Replace("RTT ms", "RTT [ms]")
+                .Replace("Wymiar m", "Wymiar [m]")
+                .Replace("Czas s", "Czas [s]")
+                .Replace("Próba 1 s", "Próba 1 [s]")
+                .Replace("Próba 2 s", "Próba 2 [s]")
+                .Replace("Próba 3 s", "Próba 3 [s]")
+                .Replace("Próba 4 s", "Próba 4 [s]")
+                .Replace("Próba 5 s", "Próba 5 [s]")
+                .Replace("Powt. 1 s", "Powtórzenie 1 [s]")
+                .Replace("Powt. 2 s", "Powtórzenie 2 [s]")
+                .Replace("Powt. 3 s", "Powtórzenie 3 [s]")
+                .Replace("Powt. 1 mm", "Powtórzenie 1 [mm]")
+                .Replace("Powt. 2 mm", "Powtórzenie 2 [mm]")
+                .Replace("Powt. 3 mm", "Powtórzenie 3 [mm]")
                 .Replace("joint_states Hz", "/joint_states [Hz]")
                 .Replace("pauza Gazebo s", "Pauza Gazebo [s]")
                 .Replace("detekcja STALE ms", "Wykrycie STALE [ms]")
