@@ -96,12 +96,17 @@ namespace KIA.WiRR.Editor
             else
                 Error(results, $"Wymagana jest dokładnie jedna aktywna MainCamera; wykryto: {mainCameras}.");
 
-            var markers = UnityEngine.Object.FindObjectsByType<WiRRSceneMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            var matchingMarker = markers.FirstOrDefault(m => m.LabNumber == labNumber);
-            if (matchingMarker != null)
-                Pass(results, $"Scena zawiera WiRRSceneMarker dla Lab {labNumber:00}.");
-            else
+            var markers = UnityEngine.Object.FindObjectsByType<WiRRSceneMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                .Where(m => m.gameObject.scene == scene)
+                .ToArray();
+            if (markers.Length == 1 && markers[0].LabNumber == labNumber)
+                Pass(results, $"Scena zawiera dokładnie jeden WiRRSceneMarker dla Lab {labNumber:00}.");
+            else if (markers.Length == 0)
                 Error(results, $"Brak WiRRSceneMarker dla Lab {labNumber:00}. Użyj Create / repair base scene.");
+            else if (markers.Length == 1)
+                Error(results, $"WiRRSceneMarker wskazuje Lab {markers[0].LabNumber:00}, a wybrano Lab {labNumber:00}. Użyj Create / repair base scene.");
+            else
+                Error(results, $"Wymagany jest dokładnie jeden WiRRSceneMarker w aktywnej scenie; wykryto: {markers.Length}. Użyj Create / repair base scene.");
 
             var missingScripts = 0;
             foreach (var root in scene.GetRootGameObjects())
