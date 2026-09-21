@@ -155,7 +155,7 @@ namespace KIA.WiRR.Editor
             new WiRRReportSection("3.5 — wydajność", "3.5", N("cp35.frame_ms","Mediana czasu klatki","ms"), N("cp35.fps","Mediana liczby klatek na sekundę","FPS"), N("cp35.memory_mb","Pamięć","MB"), M("cp35.answer","Wniosek dotyczący CPU, GPU, pamięci i transmisji")),
             new WiRRReportSection("4.0 — użyteczność", "4.0", N("cp40.success_rate","Skuteczność","%"), I("cp40.false_activations","Błędne aktywacje"), I("cp40.assistance","Liczba podpowiedzi"), M("cp40.answer","Wniosek dotyczący użyteczności i dostępności")),
             new WiRRReportSection("4.5 — kontrolowany błąd i test regresyjny", "4.5", T("cp45.fault","Kontrolowany błąd"), N("cp45.recovery_s","Czas przywracania poprawnego działania","s"), B("cp45.regression_pass","Test regresyjny zaliczony"), M("cp45.diagnosis","Hipotezy H1/H2, test rozstrzygający i poprawka")),
-            new WiRRReportSection("5.0 — automatyzacja, ryzyko i decyzja", "5.0", B("cp50.automated_pass","Automatyczny test zaliczony"), B("cp50.controlled_fail","Wykazano kontrolowany wynik FAIL"), I("cp50.max_risk","Maksymalny priorytet ryzyka R = P × S"), C("cp50.acceptance","Decyzja","AKCEPTUJ","AKCEPTUJ WARUNKOWO","ODRZUĆ"), M("cp50.answer","Uzasadnienie decyzji"))
+            new WiRRReportSection("5.0 — automatyzacja, ryzyko i decyzja", "5.0", B("cp50.automated_pass","Automatyczny test zaliczony"), B("cp50.controlled_fail","Wykazano kontrolowany wynik FAIL"), I("cp50.max_risk","Maksymalny priorytet ryzyka R = P × S"), C("cp50.acceptance","Decyzja","ACCEPT","ACCEPT WITH CONDITIONS","REJECT"), M("cp50.answer","Uzasadnienie decyzji"))
         };
     }
 }
