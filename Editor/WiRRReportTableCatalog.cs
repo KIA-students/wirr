@@ -128,7 +128,6 @@ namespace KIA.WiRR.Editor
                 "Buffer" => "Bufor",
                 "T średnie ms" => "Średni odstęp T [ms]",
                 "sT ms" => "Odchylenie standardowe sT [ms]",
-                "mean ms" => "Średnia [ms]",
                 "min ms" => "Minimum [ms]",
                 "max ms" => "Maksimum [ms]",
                 "Status PASS/FAIL/NV" => "Status: PASS / FAIL / NV",
