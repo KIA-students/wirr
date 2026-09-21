@@ -27,11 +27,7 @@ namespace KIA.WiRR.Editor
                 Undo.RegisterCreatedObjectUndo(root, "Create WiRR lab root");
             }
 
-            var marker = root.GetComponent<WiRRSceneMarker>();
-            if (marker == null)
-                marker = Undo.AddComponent<WiRRSceneMarker>(root);
-            marker.LabNumber = labNumber;
-            EditorUtility.SetDirty(marker);
+            EnsureSingleSceneMarker(scene, root, labNumber);
 
             EnsureMainCamera();
             EnsureDirectionalLight();
@@ -126,13 +122,47 @@ namespace KIA.WiRR.Editor
 
         private static void EnsureGround()
         {
-            if (GameObject.Find("WiRR_Ground") != null)
-                return;
+            var ground = GameObject.Find("WiRR_Ground");
+            if (ground == null)
+            {
+                ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                Undo.RegisterCreatedObjectUndo(ground, "Create WiRR Ground");
+                ground.name = "WiRR_Ground";
+                ground.transform.localScale = new Vector3(2f, 1f, 2f);
+            }
 
-            var ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            Undo.RegisterCreatedObjectUndo(ground, "Create WiRR Ground");
-            ground.name = "WiRR_Ground";
-            ground.transform.localScale = new Vector3(2f, 1f, 2f);
+            // A primitive Plane comes with a MeshCollider. In Unity 6000.6 this can
+            // produce a warning about missing pre-baked triangle collision data.
+            // The course ground is flat, so a BoxCollider is simpler and deterministic.
+            foreach (var meshCollider in ground.GetComponents<MeshCollider>())
+                Undo.DestroyObjectImmediate(meshCollider);
+
+            var boxCollider = ground.GetComponent<BoxCollider>();
+            if (boxCollider == null)
+                boxCollider = Undo.AddComponent<BoxCollider>(ground);
+            boxCollider.center = new Vector3(0f, -0.01f, 0f);
+            boxCollider.size = new Vector3(10f, 0.02f, 10f);
+            boxCollider.isTrigger = false;
+            EditorUtility.SetDirty(boxCollider);
+        }
+
+        private static void EnsureSingleSceneMarker(Scene scene, GameObject root, int labNumber)
+        {
+            var rootMarker = root.GetComponent<WiRRSceneMarker>();
+            if (rootMarker == null)
+                rootMarker = Undo.AddComponent<WiRRSceneMarker>(root);
+
+            rootMarker.LabNumber = labNumber;
+            EditorUtility.SetDirty(rootMarker);
+
+            var markers = Object.FindObjectsByType<WiRRSceneMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var marker in markers)
+            {
+                if (marker == null || marker == rootMarker || marker.gameObject.scene != scene)
+                    continue;
+
+                Undo.DestroyObjectImmediate(marker);
+            }
         }
 
         private static void EnsureFolder(string assetPath)
