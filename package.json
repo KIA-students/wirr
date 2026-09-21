@@ -1,6 +1,6 @@
 {
   "name": "pl.prz.kia.wirr",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "displayName": "WiRR Course Toolkit",
   "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i Rozszerzona Rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera narzędzia prowadzące przez pracę laboratoryjną, materiały startowe, walidację scen oraz prosty workflow raportowania: Raport → Sprawdź → Wyślij. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
   "unity": "6000.6",
