@@ -109,10 +109,16 @@ namespace KIA.WiRR.Editor
             if (!string.IsNullOrEmpty(exact.displayName))
                 return exact;
 
-            var prefix = $"Lab {definition.Number:00} —";
+            var prefixes = new[]
+            {
+                $"Laboratorium {definition.Number:00} —",
+                $"Lab {definition.Number:00} —"
+            };
+
             return samples.FirstOrDefault(sample =>
                 !string.IsNullOrEmpty(sample.displayName) &&
-                sample.displayName.StartsWith(prefix, System.StringComparison.OrdinalIgnoreCase));
+                prefixes.Any(prefix =>
+                    sample.displayName.StartsWith(prefix, System.StringComparison.OrdinalIgnoreCase)));
         }
     }
 }
