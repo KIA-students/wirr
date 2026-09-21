@@ -37,10 +37,10 @@ namespace KIA.WiRR.Editor
                     return "Zapisz hipotezę w sposób możliwy do sprawdzenia: wskaż przewidywany skutek i zmienną, na której go ocenisz." + requirement;
                 if (label.Contains("błąd", StringComparison.OrdinalIgnoreCase) && label.Contains("kontrol", StringComparison.OrdinalIgnoreCase))
                     return "Opisz celowo wprowadzony błąd lub zakłócenie oraz element systemu, którego dotyczy." + requirement;
-                if (label.Contains("poprawk", StringComparison.OrdinalIgnoreCase) || label.Contains("napraw", StringComparison.OrdinalIgnoreCase))
-                    return "Opisz możliwie małą zmianę zastosowaną w celu usunięcia zidentyfikowanej przyczyny problemu." + requirement;
                 if (label.Contains("wynik", StringComparison.OrdinalIgnoreCase) && label.Contains("popraw", StringComparison.OrdinalIgnoreCase))
                     return "Podaj wynik ponownego testu po zastosowaniu poprawki i porównaj go z pomiarem wcześniejszym." + requirement;
+                if (label.Contains("poprawk", StringComparison.OrdinalIgnoreCase) || label.Contains("napraw", StringComparison.OrdinalIgnoreCase))
+                    return "Opisz możliwie małą zmianę zastosowaną w celu usunięcia zidentyfikowanej przyczyny problemu." + requirement;
                 return "Sformułuj krótki wniosek na podstawie wykonanych pomiarów. Odwołaj się do obserwowanych danych, a nie do przypuszczeń." + requirement;
             }
 
