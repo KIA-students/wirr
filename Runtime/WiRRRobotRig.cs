@@ -6,9 +6,17 @@ namespace KIA.WiRR
 {
     public sealed class WiRRRobotRig : MonoBehaviour
     {
+        [InspectorName("Źródło stanu")]
+        [Tooltip("Komponent dostarczający bieżący stan przegubów robota.")]
         [SerializeField] private MonoBehaviour stateSourceBehaviour;
+        [InspectorName("Nazwy przegubów")]
+        [Tooltip("Nazwy przegubów zgodne z wiadomością JointState.")]
         [SerializeField] private string[] jointNames = { "joint1", "joint2" };
+        [InspectorName("Transformacje przegubów")]
+        [Tooltip("Obiekty Transform odpowiadające kolejnym przegubom robota.")]
         [SerializeField] private Transform[] jointTransforms = Array.Empty<Transform>();
+        [InspectorName("Lokalna oś obrotu")]
+        [Tooltip("Oś, wokół której obracany jest dany przegub w Unity.")]
         [SerializeField] private Vector3 localRotationAxis = Vector3.up;
 
         private IRobotStateSource stateSource;

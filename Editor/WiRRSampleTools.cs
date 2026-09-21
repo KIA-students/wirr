@@ -18,7 +18,7 @@ namespace KIA.WiRR.Editor
             }
 
             var samples = Sample.FindByPackage(packageInfo.name, packageInfo.version);
-            var sample = samples.FirstOrDefault(s => s.displayName == definition.SampleName);
+            var sample = FindLabSample(samples, definition);
             if (string.IsNullOrEmpty(sample.displayName))
             {
                 Debug.LogError($"[WiRR] Brak próbki: {definition.SampleName}");
@@ -26,9 +26,15 @@ namespace KIA.WiRR.Editor
             }
 
             var result = sample.Import(Sample.ImportOptions.OverridePreviousImports);
-            Debug.Log(result
-                ? $"[WiRR] Zaimportowano próbkę: {sample.displayName}"
-                : $"[WiRR] Import próbki nie został wykonany: {sample.displayName}");
+            if (result)
+            {
+                WiRRSceneTools.PrepareLabWorkspace(labNumber);
+                Debug.Log($"[WiRR] Zaimportowano próbkę i przygotowano folder roboczy laboratorium {labNumber:00}: {WiRRSceneTools.GetLabRootPath(labNumber)}");
+            }
+            else
+            {
+                Debug.Log($"[WiRR] Import próbki nie został wykonany: {sample.displayName}");
+            }
             return result;
         }
 
@@ -37,10 +43,11 @@ namespace KIA.WiRR.Editor
             var definition = WiRRLabCatalog.Get(labNumber);
             if (definition.ExternalSamples.Count == 0)
             {
-                Debug.Log($"[WiRR] Lab {labNumber:00} nie wymaga dodatkowych oficjalnych próbek Unity.");
+                Debug.Log($"[WiRR] Laboratorium {labNumber:00} nie wymaga dodatkowych oficjalnych próbek Unity.");
                 return;
             }
 
+            var importedAny = false;
             foreach (var requested in definition.ExternalSamples)
             {
                 var packageInfo = PackageInfo.FindForPackageName(requested.PackageName);
@@ -68,10 +75,20 @@ namespace KIA.WiRR.Editor
                 }
 
                 var imported = sample.Import(Sample.ImportOptions.None);
+                importedAny |= imported;
                 Debug.Log(imported
                     ? $"[WiRR] Zaimportowano oficjalną próbkę: {sample.displayName}"
                     : $"[WiRR] Nie udało się zaimportować próbki: {sample.displayName}");
             }
+
+            if (importedAny)
+                WiRRSceneTools.PrepareLabWorkspace(labNumber);
+        }
+
+        public static bool IsCourseSampleImported(int labNumber)
+        {
+            var sampleNullable = FindCourseSample(labNumber);
+            return sampleNullable.HasValue && sampleNullable.Value.isImported;
         }
 
         public static Sample? FindCourseSample(int labNumber)
@@ -81,9 +98,27 @@ namespace KIA.WiRR.Editor
             if (packageInfo == null)
                 return null;
 
-            var sample = Sample.FindByPackage(packageInfo.name, packageInfo.version)
-                .FirstOrDefault(s => s.displayName == definition.SampleName);
+            var samples = Sample.FindByPackage(packageInfo.name, packageInfo.version);
+            var sample = FindLabSample(samples, definition);
             return string.IsNullOrEmpty(sample.displayName) ? null : sample;
+        }
+
+        private static Sample FindLabSample(System.Collections.Generic.IEnumerable<Sample> samples, WiRRLabDefinition definition)
+        {
+            var exact = samples.FirstOrDefault(sample => sample.displayName == definition.SampleName);
+            if (!string.IsNullOrEmpty(exact.displayName))
+                return exact;
+
+            var prefixes = new[]
+            {
+                $"Laboratorium {definition.Number:00} —",
+                $"Lab {definition.Number:00} —"
+            };
+
+            return samples.FirstOrDefault(sample =>
+                !string.IsNullOrEmpty(sample.displayName) &&
+                prefixes.Any(prefix =>
+                    sample.displayName.StartsWith(prefix, System.StringComparison.OrdinalIgnoreCase)));
         }
     }
 }

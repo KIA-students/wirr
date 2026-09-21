@@ -2,6 +2,32 @@
 
 ## Unreleased
 
+## 0.4.4 — 2026-09-21
+
+- ujednolicono polski język interfejsu w oknach WiRR, menu Unity, komunikatach walidatora, WebSim, nakładce metryk i inspektorach komponentów;
+- przebudowano formularz raportu pod kątem studentów: etapy są zwijane, etap 3.0 jest jednoznacznie oznaczony jako wymagany do wysłania, pokazano postęp pól oraz objaśnienia celu każdego pola;
+- dodano automatyczne obliczenia wartości pochodnych z danych surowych, m.in. median, czasu klatki z FPS, zmiany FPS, liczby kroków fizyki na sekundę, e_med/e_max, sum błędów, RTT, zmienności odstępów między wiadomościami i ryzyka R=P×S;
+- pola i komórki obliczane automatycznie są tylko do odczytu i zawierają opis zastosowanego wzoru lub źródła danych;
+- dla pól o zamkniętym zbiorze odpowiedzi dodano kontrolowane wybory zamiast swobodnego tekstu, m.in. PASS/FAIL/NV, HIT/MISS, tak/nie, skale 1–5 i 0–10;
+- zachowano dotychczasowe stabilne klucze JSON tabel mimo polonizacji etykiet wyświetlanych użytkownikowi;
+- walidacja raportu wskazuje teraz konkretne nieuzupełnione wiersze tabel oraz wyjaśnia, jakich danych brakuje do obliczenia pól automatycznych;
+- rozszerzono obliczenia automatyczne m.in. o błąd odległości w raycaście głębi i przeliczenie FPS ↔ czas klatki tam, gdzie zależność jest jednoznaczna;
+- ujednolicono polskie nazwy próbek w Unity Package Manager oraz naprawiono niespójne nazwy próbek laboratoriów 04 i 07, które mogły uniemożliwiać ich automatyczne odnalezienie.
+
+
+## 0.4.3 — 2026-09-21
+
+- import próbki WiRR — zarówno z Course Toolkit, jak i bezpośrednio z Unity Package Manager — automatycznie tworzy kompletny workspace `Assets/WiRR/LabXX` z folderami `Scenes`, `Scripts`, `Materials`, `Models`, `Prefabs`, `Textures`, `Data`, `Evidence` i `Documentation`;
+- przy pierwszym przygotowaniu workspace automatycznie powstaje scena `Scenes/LabXX.unity` z pojedynczym `WiRRSceneMarker`, kamerą, światłem i gruntem;
+- przebudowano okno `WiRR Course Toolkit`: dodano status laboratorium, przewijany układ kroków, akcje otwierania folderu/sceny i naprawy workspace oraz czytelniejszy workflow;
+- raport można wysłać po ukończeniu checkpointu `3.0`; checkpointy `3.5–5.0` są opcjonalne i ich puste lub nieukończone pola nie blokują wysyłki;
+- walidacja typów pól przy wysyłce obejmuje tylko najwyższy kompletny, sekwencyjny checkpoint raportu.
+
+
+- uporządkowano menu Unity: narzędzia sceny przeniesiono do `WiRR → Lab scene`, a awaryjny szablon Markdown do `WiRR → Reports`; usunięto duplikat otwierania formularza raportu;
+- `Create / repair base scene` wymusza teraz dokładnie jeden `WiRRSceneMarker` w aktywnej scenie, a walidator zgłasza duplikaty lub marker przypisany do innego laboratorium;
+- grunt `WiRR_Ground` używa prostego `BoxCollider` zamiast `MeshCollider`, eliminując ostrzeżenie Unity 6000.6 o brakujących pre-baked triangle collision data.
+
 - dodano `WebSim~/`: gotowy backend Docker Compose dla Lab 06 z ROS 2 Jazzy, rosbridge i deterministycznym generatorem `JointState` per sesja;
 - backend obsługuje `RRBot 2R`, `WiRR Arm 3R`, komendy `Motion A/B/C`, `Home`, `Reset`, status i `/clock` zgodnie z klientem Unity;
 - dodano instrukcję uruchomienia na tym samym komputerze oraz przez LAN.

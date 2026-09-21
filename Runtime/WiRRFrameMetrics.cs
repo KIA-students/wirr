@@ -12,11 +12,17 @@ namespace KIA.WiRR
     public sealed class WiRRFrameMetrics : MonoBehaviour
     {
         [Min(30)]
+        [InspectorName("Liczba klatek w próbce")]
+        [Tooltip("Liczba ostatnich klatek używanych do obliczenia mediany czasu klatki i FPS.")]
         [SerializeField] private int sampleFrames = 180;
 
+        [InspectorName("Pokaż nakładkę z wynikami")]
+        [Tooltip("Wyświetla w widoku Game bieżącą medianę czasu klatki, FPS i wykorzystanie pamięci.")]
         [SerializeField] private bool showOverlay = true;
 
         [Min(0.1f)]
+        [InspectorName("Okres odświeżania [s]")]
+        [Tooltip("Co ile sekund odświeżać wyświetlane wartości.")]
         [SerializeField] private float refreshSeconds = 0.5f;
 
         private readonly Queue<float> frameTimesMs = new Queue<float>();
@@ -69,7 +75,7 @@ namespace KIA.WiRR
 
             GUI.Box(
                 new Rect(12, 12, 300, 78),
-                $"WiRR metrics\nMedian: {medianFrameMs:F2} ms  ({medianFps:F1} FPS)\nAllocated: {allocatedMemoryMb:F1} MB");
+                $"Metryki WiRR\nMediana czasu klatki: {medianFrameMs:F2} ms  ({medianFps:F1} FPS)\nPrzydzielona pamięć: {allocatedMemoryMb:F1} MB");
         }
     }
 }

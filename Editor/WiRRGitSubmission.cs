@@ -25,11 +25,12 @@ namespace KIA.WiRR.Editor
 
         public static WiRRGitSubmissionResult Submit(WiRRReportDocument document, string repositoryUrl, string repositorySlug, string baseBranch, string reportsPath)
         {
-            var errors = WiRRReportStore.Validate(document);
-            if (errors.Count > 0) return Fail("Raport zawiera błąd: " + errors[0]);
             var evaluation = WiRRReportEvaluator.Evaluate(document);
             if (evaluation.BlockingIssues.Count > 0) return Fail(evaluation.BlockingIssues[0]);
-            if (string.IsNullOrWhiteSpace(evaluation.SuggestedGrade)) return Fail("Uzupełnij co najmniej checkpoint 3.0 wraz z danymi pomiarowymi.");
+            if (!evaluation.CanSubmit) return Fail("Uzupełnij etap 3.0 wraz z wymaganymi danymi pomiarowymi. Etapy 3.5–5.0 nie są wymagane do wysłania.");
+
+            var errors = WiRRReportStore.Validate(document, evaluation.SuggestedGrade);
+            if (errors.Count > 0) return Fail("Raport zawiera błąd: " + errors[0]);
 
             var exported = WiRRReportStore.ExportFinal(document, true);
             var projectRoot = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
@@ -71,7 +72,7 @@ namespace KIA.WiRR.Editor
                 var prCreated = false;
                 if (Run(cacheRoot, "gh", "--version", 5000, false).code == 0 && !string.IsNullOrWhiteSpace(repositorySlug))
                 {
-                    var title = $"WiRR report: {team} — Lab {document.labNumber:00}";
+                    var title = $"Raport WiRR: {team} — laboratorium {document.labNumber:00}";
                     var body = "Raport laboratoryjny WiRR. Ocena merytoryczna należy do prowadzącego.";
                     prCreated = Run(cacheRoot, "gh", $"pr create --repo {Q(repositorySlug)} --base {Q(baseBranch)} --head {Q(branch)} --title {Q(title)} --body {Q(body)}", 60000, false).code == 0;
                 }
@@ -82,7 +83,7 @@ namespace KIA.WiRR.Editor
                     PullRequestCreated = prCreated,
                     Branch = branch,
                     RepositoryPath = relative,
-                    Message = prCreated ? "Raport wysłany." : "Raport wysłany. Otwórz Pull Request z utworzonej gałęzi."
+                    Message = prCreated ? "Raport został wysłany i utworzono zgłoszenie Pull Request (PR)." : "Raport został wysłany na nową gałąź. Utwórz zgłoszenie Pull Request (PR) z tej gałęzi do gałęzi głównej."
                 };
             }
             catch (Exception exception)

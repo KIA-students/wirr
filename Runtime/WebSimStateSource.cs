@@ -10,14 +10,32 @@ namespace KIA.WiRR
 {
     public sealed class WebSimStateSource : MonoBehaviour, IRobotStateSource
     {
+        [InspectorName("Adres serwera WebSocket")]
+        [Tooltip("Adres backendu WebSim, np. ws://127.0.0.1:9090 lub adres WSS.")]
         [SerializeField] private string backendWebSocketUrl = "";
+        [InspectorName("Kod sesji")]
+        [Tooltip("Kod identyfikujący sesję lub zespół w WebSim.")]
         [SerializeField] private string sessionCode = "TEAM01";
+        [InspectorName("Identyfikator robota")]
+        [Tooltip("Identyfikator modelu robota używany przez backend WebSim.")]
         [SerializeField] private string robotId = "rrbot";
+        [InspectorName("Połącz przy uruchomieniu")]
+        [Tooltip("Automatycznie nawiąż połączenie po uruchomieniu sceny.")]
         [SerializeField] private bool connectOnStart;
+        [InspectorName("Automatycznie ponawiaj połączenie")]
+        [Tooltip("Po utracie połączenia podejmuj automatyczne próby ponownego połączenia.")]
         [SerializeField] private bool autoReconnect = true;
+        [InspectorName("Czas do stanu STALE [s]")]
+        [Tooltip("Po jakim czasie bez nowego stanu dane mają zostać uznane za nieaktualne.")]
         [SerializeField, Min(0.25f)] private float staleAfterSeconds = 1.5f;
+        [InspectorName("Okres sygnału podtrzymania [s]")]
+        [Tooltip("Odstęp między komunikatami podtrzymującymi połączenie.")]
         [SerializeField, Min(5f)] private float heartbeatSeconds = 15f;
+        [InspectorName("Opóźnienie ponownego połączenia [s]")]
+        [Tooltip("Czas oczekiwania przed kolejną próbą połączenia.")]
         [SerializeField, Min(1f)] private float reconnectDelaySeconds = 3f;
+        [InspectorName("Limit czasu połączenia [s]")]
+        [Tooltip("Maksymalny czas oczekiwania na nawiązanie połączenia.")]
         [SerializeField, Min(1f)] private float connectTimeoutSeconds = 10f;
 
         private ClientWebSocket socket;

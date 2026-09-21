@@ -56,9 +56,9 @@ namespace KIA.WiRR.Editor
                 Warn(results, $"Unity {Application.unityVersion}; kurs referencyjnie używa 6000.6.x.");
 
             if (GraphicsSettings.defaultRenderPipeline != null)
-                Pass(results, "Aktywny Scriptable Render Pipeline — projekt nie jest Built-in.");
+                Pass(results, "Aktywny potok renderowania SRP — projekt nie korzysta z trybu Built-in.");
             else
-                Error(results, "Brak aktywnego Render Pipeline Asset. Utwórz projekt Universal 3D (URP).");
+                Error(results, "Brak aktywnego zasobu Render Pipeline. Utwórz projekt Universal 3D (URP) lub przypisz właściwy zasób URP.");
         }
 
         private static void ValidatePackages(List<WiRRValidationResult> results, WiRRLabDefinition definition)
@@ -92,16 +92,21 @@ namespace KIA.WiRR.Editor
             var mainCameras = UnityEngine.Object.FindObjectsByType<Camera>(FindObjectsInactive.Include, FindObjectsSortMode.None)
                 .Count(c => c.CompareTag("MainCamera") && c.gameObject.activeInHierarchy);
             if (mainCameras == 1)
-                Pass(results, "Dokładnie jedna aktywna kamera z tagiem MainCamera.");
+                Pass(results, "W scenie znajduje się dokładnie jedna aktywna kamera oznaczona tagiem MainCamera.");
             else
-                Error(results, $"Wymagana jest dokładnie jedna aktywna MainCamera; wykryto: {mainCameras}.");
+                Error(results, $"Wymagana jest dokładnie jedna aktywna kamera z tagiem MainCamera; wykryto: {mainCameras}.");
 
-            var markers = UnityEngine.Object.FindObjectsByType<WiRRSceneMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            var matchingMarker = markers.FirstOrDefault(m => m.LabNumber == labNumber);
-            if (matchingMarker != null)
-                Pass(results, $"Scena zawiera WiRRSceneMarker dla Lab {labNumber:00}.");
+            var markers = UnityEngine.Object.FindObjectsByType<WiRRSceneMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                .Where(m => m.gameObject.scene == scene)
+                .ToArray();
+            if (markers.Length == 1 && markers[0].LabNumber == labNumber)
+                Pass(results, $"Scena zawiera dokładnie jeden WiRRSceneMarker dla Lab {labNumber:00}.");
+            else if (markers.Length == 0)
+                Error(results, $"Brak znacznika WiRRSceneMarker dla laboratorium {labNumber:00}. Użyj polecenia „Utwórz / napraw aktywną scenę”.");
+            else if (markers.Length == 1)
+                Error(results, $"Znacznik WiRRSceneMarker wskazuje laboratorium {markers[0].LabNumber:00}, a wybrano laboratorium {labNumber:00}. Użyj polecenia „Utwórz / napraw aktywną scenę”.");
             else
-                Error(results, $"Brak WiRRSceneMarker dla Lab {labNumber:00}. Użyj Create / repair base scene.");
+                Error(results, $"W aktywnej scenie powinien znajdować się dokładnie jeden WiRRSceneMarker; wykryto: {markers.Length}. Użyj polecenia „Utwórz / napraw aktywną scenę”.");
 
             var missingScripts = 0;
             foreach (var root in scene.GetRootGameObjects())
@@ -109,9 +114,9 @@ namespace KIA.WiRR.Editor
                 missingScripts += GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(transform.gameObject);
 
             if (missingScripts == 0)
-                Pass(results, "Brak Missing Script w aktywnej scenie.");
+                Pass(results, "Nie wykryto komponentów z brakującym skryptem (Missing Script).");
             else
-                Error(results, $"Wykryto brakujące skrypty: {missingScripts}.");
+                Error(results, $"Wykryto komponenty z brakującym skryptem (Missing Script): {missingScripts}.");
         }
 
         private static void ValidateLabSpecific(List<WiRRValidationResult> results, int labNumber)
@@ -119,7 +124,7 @@ namespace KIA.WiRR.Editor
             if (labNumber == 1 || labNumber == 2)
             {
                 ValidateComponentCount(results, "Unity.XR.CoreUtils.XROrigin, Unity.XR.CoreUtils", "XR Origin", exactlyOne: true);
-                Info(results, "Sprawdź również aktywny runtime OpenXR i XR Interaction Simulator zgodnie z instrukcją.");
+                Info(results, "Sprawdź również, czy aktywne jest środowisko OpenXR oraz XR Interaction Simulator zgodnie z instrukcją.");
             }
             else if (labNumber == 3 || labNumber == 4)
             {
@@ -134,11 +139,11 @@ namespace KIA.WiRR.Editor
             else if (labNumber == 6)
             {
                 ValidateWebSim(results, required: false, role: "bliźniaka cyfrowego");
-                Info(results, "Dozwolone są trzy źródła stanu: lokalny ROS 2/Gazebo, ROS 2/Gazebo na drugim komputerze lub WiRR WebSim przez WSS.");
+                Info(results, "Dozwolone są trzy źródła stanu: lokalny ROS 2/Gazebo, ROS 2/Gazebo na drugim komputerze albo WiRR WebSim przez WSS.");
             }
             else if (labNumber == 7)
             {
-                Info(results, "Uruchom także testy EditMode/PlayMode wymagane w Lab 07; validator WiRR nie zastępuje Unity Test Runner.");
+                Info(results, "Uruchom także testy EditMode i PlayMode wymagane w laboratorium 07. Walidator WiRR nie zastępuje narzędzia Unity Test Runner.");
             }
         }
 
@@ -150,12 +155,12 @@ namespace KIA.WiRR.Editor
                 if (required)
                     Error(results, $"Brak WebSimStateSource dla {role}.");
                 else
-                    Info(results, $"WebSim nie jest skonfigurowany. Jest opcjonalnym źródłem stanu dla {role}.");
+                    Info(results, $"WebSim nie jest skonfigurowany. Dla {role} jest to opcjonalne źródło stanu.");
                 return;
             }
 
             if (sources.Length > 1)
-                Warn(results, $"Wykryto {sources.Length} komponenty WebSimStateSource; zwykle powinien być jeden.");
+                Warn(results, $"Wykryto {sources.Length} komponentów WebSimStateSource; zwykle powinien być dokładnie jeden.");
             else
                 Pass(results, "Wykryto WebSimStateSource.");
 
@@ -165,7 +170,7 @@ namespace KIA.WiRR.Editor
             else if (source.BackendWebSocketUrl.StartsWith("wss://", StringComparison.OrdinalIgnoreCase))
                 Pass(results, $"Backend WebSim używa WSS: {source.BackendWebSocketUrl}");
             else
-                Warn(results, "Backend WebSim nie używa wss://. ws:// jest przeznaczone głównie do testów lokalnych/LAN.");
+                Warn(results, "Serwer WebSim nie używa wss://. Adres ws:// jest przeznaczony głównie do testów lokalnych lub w sieci LAN.");
 
             if (!string.IsNullOrWhiteSpace(source.SessionCode))
                 Pass(results, $"Kod sesji WebSim: {source.SessionCode}.");
@@ -174,11 +179,11 @@ namespace KIA.WiRR.Editor
 
             var rigs = UnityEngine.Object.FindObjectsByType<WiRRRobotRig>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             if (rigs.Length == 1)
-                Pass(results, "Dokładnie jeden WiRRRobotRig odwzorowuje /joint_states.");
+                Pass(results, "Dokładnie jeden komponent WiRRRobotRig odwzorowuje dane z /joint_states.");
             else if (rigs.Length == 0)
-                Error(results, "Brak WiRRRobotRig. Użyj przycisku Create / repair digital shadow/twin.");
+                Error(results, "Brak komponentu WiRRRobotRig. Użyj przycisku „Utwórz / napraw model WebSim”.");
             else
-                Warn(results, $"Wykryto wiele WiRRRobotRig: {rigs.Length}.");
+                Warn(results, $"Wykryto więcej niż jeden komponent WiRRRobotRig: {rigs.Length}.");
         }
 
         private static void ValidateComponentCount(List<WiRRValidationResult> results, string qualifiedTypeName, string label, bool exactlyOne)
@@ -221,7 +226,7 @@ namespace KIA.WiRR.Editor
             return at > 0 ? identifier.Substring(0, at) : identifier;
         }
 
-        private static void Pass(List<WiRRValidationResult> results, string message) => results.Add(new WiRRValidationResult(WiRRValidationSeverity.Info, "PASS — " + message));
+        private static void Pass(List<WiRRValidationResult> results, string message) => results.Add(new WiRRValidationResult(WiRRValidationSeverity.Info, "OK — " + message));
         private static void Info(List<WiRRValidationResult> results, string message) => results.Add(new WiRRValidationResult(WiRRValidationSeverity.Info, message));
         private static void Warn(List<WiRRValidationResult> results, string message) => results.Add(new WiRRValidationResult(WiRRValidationSeverity.Warning, message));
         private static void Error(List<WiRRValidationResult> results, string message) => results.Add(new WiRRValidationResult(WiRRValidationSeverity.Error, message));

@@ -21,9 +21,15 @@ namespace KIA.WiRR.Editor
                 try
                 {
                     var loaded = JsonUtility.FromJson<WiRRReportDocument>(File.ReadAllText(path));
-                    if (loaded != null && loaded.labNumber == lab) return EnsureCollections(loaded);
+                    if (loaded != null && loaded.labNumber == lab)
+                    {
+                        loaded = EnsureCollections(loaded);
+                        UpdateVariants(loaded);
+                        WiRRReportCalculator.Recalculate(loaded);
+                        return loaded;
+                    }
                 }
-                catch (Exception exception) { Debug.LogWarning("[WiRR Reports] Draft load failed: " + exception.Message); }
+                catch (Exception exception) { Debug.LogWarning("[WiRR Raporty] Nie udało się wczytać szkicu raportu: " + exception.Message); }
             }
             var now = DateTime.UtcNow.ToString("O");
             var document = new WiRRReportDocument { submissionId = Guid.NewGuid().ToString("N"), labNumber = lab, createdAtUtc = now, updatedAtUtc = now };
@@ -37,6 +43,7 @@ namespace KIA.WiRR.Editor
             EnsureCollections(document);
             document.updatedAtUtc = DateTime.UtcNow.ToString("O");
             UpdateVariants(document);
+            WiRRReportCalculator.Recalculate(document);
             Directory.CreateDirectory(Root);
             File.WriteAllText(DraftPath(document.labNumber), JsonUtility.ToJson(document, true));
         }
@@ -65,18 +72,25 @@ namespace KIA.WiRR.Editor
             return errors;
         }
 
-        public static IReadOnlyList<string> Validate(WiRRReportDocument document)
+        public static IReadOnlyList<string> Validate(WiRRReportDocument document, string throughCheckpoint = null)
         {
             var errors = new List<string>(ValidateIdentity(document));
             if (document == null || document.labNumber < 1 || document.labNumber > 7) return errors;
+
             foreach (var section in WiRRReportSchemaCatalog.Get(document.labNumber))
-            foreach (var field in section.Fields)
             {
-                var value = GetValue(document, field.Id);
-                if (string.IsNullOrWhiteSpace(value)) continue;
-                if (field.Kind == WiRRReportFieldKind.Number && !double.TryParse(value.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out _)) errors.Add($"Pole {field.Label} wymaga liczby.");
-                if (field.Kind == WiRRReportFieldKind.Integer && !long.TryParse(value, out _)) errors.Add($"Pole {field.Label} wymaga liczby całkowitej.");
+                foreach (var field in section.Fields)
+                {
+                    var value = GetValue(document, field.Id);
+                    if (string.IsNullOrWhiteSpace(value)) continue;
+                    if (field.Kind == WiRRReportFieldKind.Number && !double.TryParse(value.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture, out _)) errors.Add($"Pole {field.Label} wymaga liczby.");
+                    if (field.Kind == WiRRReportFieldKind.Integer && !long.TryParse(value, out _)) errors.Add($"Pole {field.Label} wymaga liczby całkowitej.");
+                }
+
+                if (!string.IsNullOrWhiteSpace(throughCheckpoint) && section.Checkpoint == throughCheckpoint)
+                    break;
             }
+
             return errors;
         }
 
