@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 0.4.5 — 2026-09-21
+
+- przebudowano okno `WiRR → Narzędzia kursu` pod kątem ergonomii poznawczej: kolorowe nagłówki etapów, pasek postępu, czytelne stany GOTOWE/BRAK, komunikat „następny krok” oraz kolorystyczne rozróżnienie walidacji;
+- zachowano redundancję informacji: kolor zawsze występuje razem z tekstem, dzięki czemu stan interfejsu nie zależy wyłącznie od rozpoznawania barw;
+- ustawiono publiczną stronę kursu `https://kia-students.github.io/wirr/` jako kanoniczny adres dokumentacji WiRR;
+- wszystkie odwołania do poprzedniego adresu strony zastąpiono adresem `https://kia-students.github.io/wirr/`;
+- instalacja pakietu, klonowanie kodu i odwołania do źródeł wskazują publiczne repozytorium `KIA-students/wirr`;
+- zaktualizowano stronę GitHub Pages do polskich nazw poleceń aktualnego interfejsu Unity;
+- workflow wydania generuje notatki i instrukcję instalacji z docelowego repozytorium `KIA-students/wirr`.
+
+
 ## 0.4.4 — 2026-09-21
 
 - ujednolicono polski język interfejsu w oknach WiRR, menu Unity, komunikatach walidatora, WebSim, nakładce metryk i inspektorach komponentów;

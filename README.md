@@ -6,7 +6,7 @@
 
 Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
 
-`MatPomGit/wirr` jest repozytorium roboczym. Po zakończeniu weryfikacji jego zawartość jest kopiowana 1:1 do publicznego `KIA-students/wirr`, z którego korzystają studenci.
+`KIA-students/wirr` jest docelowym, publicznym repozytorium kursu używanym przez studentów. Strona kursu jest publikowana pod adresem https://kia-students.github.io/wirr/.
 
 ## Zasada działania
 
@@ -42,7 +42,7 @@ Pakiet znajduje się w katalogu głównym repozytorium. Po instalacji w menu Uni
 
 Katalog główny repozytorium jest czystym pakietem UPM. Kod pakietu znajduje się w `Editor/` i `Runtime/`, a materiały importowane przez Package Manager w `Samples~/`.
 
-Pełny projekt Unity używany do rozwoju i testowania pakietu znajduje się w `Project~/`. Sufiks `~` powoduje, że Unity Package Manager nie importuje tego katalogu do projektu studenta, dzięki czemu `Assets`, `Packages` i `ProjectSettings` projektu deweloperskiego nie powodują konfliktów GUID z projektem użytkownika. Po sklonowaniu `MatPomGit/wirr` do pracy nad pakietem otwórz w Unity katalog `Project~`, nie katalog główny repozytorium.
+Pełny projekt Unity używany do rozwoju i testowania pakietu znajduje się w `Project~/`. Sufiks `~` powoduje, że Unity Package Manager nie importuje tego katalogu do projektu studenta, dzięki czemu `Assets`, `Packages` i `ProjectSettings` projektu deweloperskiego nie powodują konfliktów GUID z projektem użytkownika. Po sklonowaniu `KIA-students/wirr` do pracy nad pakietem otwórz w Unity katalog `Project~`, nie katalog główny repozytorium.
 
 Dodatkowa dokumentacja techniczna znajduje się w `Documentation~/`, a skrypt walidatora CI w `scripts~/`; katalogi te również są celowo pomijane przez Asset Database.
 
@@ -62,11 +62,11 @@ Materiały startowe znajdują się w `Samples~/Lab01`–`Samples~/Lab07`. Po imp
 
 ## Strona kursu (GitHub Pages)
 
-[Strona WiRR](https://matpomgit.github.io/wirr/) zawiera trzy zakładki:
+[Strona WiRR](https://kia-students.github.io/wirr/) zawiera trzy zakładki:
 
-- [Import do Unity](https://matpomgit.github.io/wirr/#unity) — instalacja UPM, zależności, próbki i walidacja sceny.
-- [WebSim / Gazebo](https://matpomgit.github.io/wirr/#websim) — istniejąca instrukcja backendu ROS 2, lokalnie lub w LAN; WebSim jest alternatywą dla symulacji dynamiki w Gazebo.
-- [SSQ](https://matpomgit.github.io/wirr/#ssq) — 16 objawów, pomiar przed/po, N/O/D/TS, różnica i eksport JSON. Braki odpowiedzi nie są zerami. Polskie tłumaczenie robocze nie jest zwalidowaną adaptacją. Dane nie opuszczają przeglądarki i nie są utrwalane po odświeżeniu.
+- [Import do Unity](https://kia-students.github.io/wirr/#unity) — instalacja UPM, zależności, próbki i walidacja sceny.
+- [WebSim / Gazebo](https://kia-students.github.io/wirr/#websim) — istniejąca instrukcja backendu ROS 2, lokalnie lub w LAN; WebSim jest alternatywą dla symulacji dynamiki w Gazebo.
+- [SSQ](https://kia-students.github.io/wirr/#ssq) — 16 objawów, pomiar przed/po, N/O/D/TS, różnica i eksport JSON. Braki odpowiedzi nie są zerami. Polskie tłumaczenie robocze nie jest zwalidowaną adaptacją. Dane nie opuszczają przeglądarki i nie są utrwalane po odświeżeniu.
 
 Źródła strony: `WebSim~/site/`. Testy punktacji: `node --test WebSim~/tests/*.test.mjs`.
 Workflow Pages uruchamia testy przed publikacją. Bieżący zakres strony jest kompletny;
