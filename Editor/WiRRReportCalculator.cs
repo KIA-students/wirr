@@ -47,6 +47,31 @@ namespace KIA.WiRR.Editor
                    fieldId == "cp50.max_risk";
         }
 
+        public static string DerivedFieldDescription(string fieldId)
+        {
+            return fieldId switch
+            {
+                "cp30.baseline_fps" => "Mediana z trzech wartości FPS w tabeli pomiaru bazowego.",
+                "cp30.baseline_frame_ms" => "Mediana z trzech czasów klatki w tabeli pomiaru bazowego.",
+                "cp30.errors" => "Suma błędów ze wszystkich warunków A–C w etapie 3.0.",
+                "cp35.false_activations" => "Suma błędnych i powtórzonych aktywacji ze wszystkich warunków A–C.",
+                "cp40.corrections" => "Suma błędów i dodatkowych korekt ze wszystkich warunków A–C.",
+                "cp45.scenario_median_s" => "Mediana czasu z pięciu prób scenariusza bazowego.",
+                "cp40.drift_median_mm" => "Mediana błędu końcowego z trzech pomiarów po powrocie.",
+                "cp45.e_median_mm" => "Mediana wartości e_med z trzech rejestracji dwupunktowych.",
+                "cp45.e_max_mm" => "Największa wartość e_max z trzech rejestracji dwupunktowych.",
+                "cp50.error_after_fix_mm" => "Mediana e_med z trzech powtórzeń wykonanych po naprawie.",
+                "cp40.latency_ms" => "Mediana z dziesięciu próbek RTT.",
+                "cp40.jitter_ms" => "Odchylenie standardowe z 30 odstępów między kolejnymi wiadomościami.",
+                "cp45.stale_ms" => "Wartość pobierana z pola „Wykrycie STALE [ms]” w tabeli LIVE/STALE.",
+                "cp45.recovery_ms" => "Wartość pobierana z pola „Powrót LIVE [ms]” w tabeli LIVE/STALE.",
+                "cp30.smoke_pass" => "Liczba pozycji ze statusem PASS w tabeli testu podstawowego.",
+                "cp30.nv" => "Liczba pozycji ze statusem NV w tabeli testu podstawowego.",
+                "cp50.max_risk" => "Największa wartość R = P × S w macierzy ryzyka.",
+                _ => "Wartość obliczana automatycznie na podstawie danych w tabelach."
+            };
+        }
+
         public static bool IsDerivedCell(WiRRReportTable table, WiRRTableAxis column)
         {
             if (table == null)
