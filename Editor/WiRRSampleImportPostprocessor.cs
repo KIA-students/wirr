@@ -40,7 +40,10 @@ namespace KIA.WiRR.Editor
                 !assetPath.StartsWith("Assets/Samples/", StringComparison.OrdinalIgnoreCase))
                 return 0;
 
-            if (assetPath.IndexOf("WiRR Course Toolkit", StringComparison.OrdinalIgnoreCase) < 0)
+            var belongsToWiRR =
+                assetPath.IndexOf("WiRR — narzędzia kursu", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                assetPath.IndexOf("WiRR Course Toolkit", StringComparison.OrdinalIgnoreCase) >= 0;
+            if (!belongsToWiRR)
                 return 0;
 
             for (var labNumber = 1; labNumber <= 7; labNumber++)
