@@ -13,10 +13,9 @@ namespace KIA.WiRR.Editor
         private List<WiRRValidationResult> validationResults;
 
         [MenuItem("WiRR/Course Toolkit", priority = 1)] public static void Open() { var window = GetWindow<WiRRCourseWindow>(); window.titleContent = WiRRBranding.Title("WiRR Toolkit"); window.minSize = new Vector2(500, 650); window.Show(); }
-        [MenuItem("WiRR/Validate selected lab", priority = 20)] private static void ValidateFromMenu() => WiRRSceneValidator.Validate(EditorPrefs.GetInt(LabPrefKey, 1));
-        [MenuItem("WiRR/Create or repair base scene", priority = 21)] private static void PrepareFromMenu() => WiRRSceneTools.PrepareBaseScene(EditorPrefs.GetInt(LabPrefKey, 1));
-        [MenuItem("WiRR/Open structured report form", priority = 22)] private static void ReportFromMenu() => WiRRReportWindow.Open();
-        [MenuItem("WiRR/Open legacy Markdown report template", priority = 23)] private static void LegacyReportFromMenu() => WiRRReportTools.CreateOrOpen(EditorPrefs.GetInt(LabPrefKey, 1));
+        [MenuItem("WiRR/Lab scene/Create or repair base scene", priority = 10)] private static void PrepareFromMenu() => WiRRSceneTools.PrepareBaseScene(EditorPrefs.GetInt(LabPrefKey, 1));
+        [MenuItem("WiRR/Lab scene/Validate selected lab", priority = 20)] private static void ValidateFromMenu() => WiRRSceneValidator.Validate(EditorPrefs.GetInt(LabPrefKey, 1));
+        [MenuItem("WiRR/Reports/Open legacy Markdown report template", priority = 20)] private static void LegacyReportFromMenu() => WiRRReportTools.CreateOrOpen(EditorPrefs.GetInt(LabPrefKey, 1));
         internal static void RepaintOpenWindow() => openWindow?.Repaint();
         private void OnEnable() { openWindow = this; selectedLab = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 7); titleContent = WiRRBranding.Title("WiRR Toolkit"); }
         private void OnDisable() { if (openWindow == this) openWindow = null; }
