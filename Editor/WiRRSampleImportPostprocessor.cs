@@ -48,7 +48,10 @@ namespace KIA.WiRR.Editor
 
             for (var labNumber = 1; labNumber <= 7; labNumber++)
             {
-                if (assetPath.IndexOf($"Lab {labNumber:00}", StringComparison.OrdinalIgnoreCase) >= 0)
+                var polishName = $"Laboratorium {labNumber:00}";
+                var legacyName = $"Lab {labNumber:00}";
+                if (assetPath.IndexOf(polishName, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    assetPath.IndexOf(legacyName, StringComparison.OrdinalIgnoreCase) >= 0)
                     return labNumber;
             }
 
