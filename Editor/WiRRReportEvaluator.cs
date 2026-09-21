@@ -28,6 +28,7 @@ namespace KIA.WiRR.Editor
 
         public static WiRRReportEvaluation Evaluate(WiRRReportDocument document)
         {
+            WiRRReportCalculator.Recalculate(document);
             var result = new WiRRReportEvaluation();
             result.BlockingIssues.AddRange(WiRRReportStore.ValidateIdentity(document));
             if (document == null || document.labNumber < 1 || document.labNumber > 7) return result;
