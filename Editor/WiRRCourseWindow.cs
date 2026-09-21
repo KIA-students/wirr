@@ -179,7 +179,7 @@ namespace KIA.WiRR.Editor
 
                 if (lab.Number == 6)
                     EditorGUILayout.HelpBox(
-                        "Lab 06 obsługuje lokalny ROS 2/Gazebo, ROS 2/Gazebo na drugim komputerze oraz WiRR WebSim przez WSS.",
+                        "Laboratorium 06 obsługuje lokalny ROS 2/Gazebo, ROS 2/Gazebo na drugim komputerze oraz WiRR WebSim przez WSS.",
                         MessageType.Info);
             }
         }
