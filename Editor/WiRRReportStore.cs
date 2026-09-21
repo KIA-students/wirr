@@ -37,6 +37,7 @@ namespace KIA.WiRR.Editor
             EnsureCollections(document);
             document.updatedAtUtc = DateTime.UtcNow.ToString("O");
             UpdateVariants(document);
+            WiRRReportCalculator.Recalculate(document);
             Directory.CreateDirectory(Root);
             File.WriteAllText(DraftPath(document.labNumber), JsonUtility.ToJson(document, true));
         }
