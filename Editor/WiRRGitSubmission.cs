@@ -27,7 +27,7 @@ namespace KIA.WiRR.Editor
         {
             var evaluation = WiRRReportEvaluator.Evaluate(document);
             if (evaluation.BlockingIssues.Count > 0) return Fail(evaluation.BlockingIssues[0]);
-            if (!evaluation.CanSubmit) return Fail("Uzupełnij checkpoint 3.0 wraz z wymaganymi danymi pomiarowymi. Etapy 3.5–5.0 nie są wymagane do wysłania.");
+            if (!evaluation.CanSubmit) return Fail("Uzupełnij etap 3.0 wraz z wymaganymi danymi pomiarowymi. Etapy 3.5–5.0 nie są wymagane do wysłania.");
 
             var errors = WiRRReportStore.Validate(document, evaluation.SuggestedGrade);
             if (errors.Count > 0) return Fail("Raport zawiera błąd: " + errors[0]);
@@ -83,7 +83,7 @@ namespace KIA.WiRR.Editor
                     PullRequestCreated = prCreated,
                     Branch = branch,
                     RepositoryPath = relative,
-                    Message = prCreated ? "Raport wysłany." : "Raport wysłany. Otwórz Pull Request z utworzonej gałęzi."
+                    Message = prCreated ? "Raport został wysłany i utworzono Pull Request." : "Raport został wysłany na nową gałąź. Utwórz Pull Request z tej gałęzi do gałęzi głównej."
                 };
             }
             catch (Exception exception)
