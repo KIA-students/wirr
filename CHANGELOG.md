@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- uporządkowano menu Unity: narzędzia sceny przeniesiono do `WiRR → Lab scene`, a awaryjny szablon Markdown do `WiRR → Reports`; usunięto duplikat otwierania formularza raportu;
+- `Create / repair base scene` wymusza teraz dokładnie jeden `WiRRSceneMarker` w aktywnej scenie, a walidator zgłasza duplikaty lub marker przypisany do innego laboratorium;
+- grunt `WiRR_Ground` używa prostego `BoxCollider` zamiast `MeshCollider`, eliminując ostrzeżenie Unity 6000.6 o brakujących pre-baked triangle collision data.
+
 - dodano `WebSim~/`: gotowy backend Docker Compose dla Lab 06 z ROS 2 Jazzy, rosbridge i deterministycznym generatorem `JointState` per sesja;
 - backend obsługuje `RRBot 2R`, `WiRR Arm 3R`, komendy `Motion A/B/C`, `Home`, `Reset`, status i `/clock` zgodnie z klientem Unity;
 - dodano instrukcję uruchomienia na tym samym komputerze oraz przez LAN.
