@@ -24,7 +24,20 @@ namespace KIA.WiRR.Editor
 
         public static string GetLabRootPath(int labNumber) => $"Assets/WiRR/Lab{labNumber:00}";
         public static string GetScenePath(int labNumber) => $"{GetLabRootPath(labNumber)}/Scenes/Lab{labNumber:00}.unity";
-        public static bool WorkspaceExists(int labNumber) => AssetDatabase.IsValidFolder(GetLabRootPath(labNumber));
+
+        public static bool WorkspaceExists(int labNumber)
+        {
+            var root = GetLabRootPath(labNumber);
+            if (!AssetDatabase.IsValidFolder(root))
+                return false;
+
+            foreach (var folder in WorkspaceFolders)
+                if (!AssetDatabase.IsValidFolder($"{root}/{folder}"))
+                    return false;
+
+            return true;
+        }
+
         public static bool SceneExists(int labNumber) => AssetDatabase.LoadAssetAtPath<SceneAsset>(GetScenePath(labNumber)) != null;
 
         public static void PrepareLabWorkspace(int labNumber)
