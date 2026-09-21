@@ -18,7 +18,7 @@ namespace KIA.WiRR.Editor
             }
 
             var samples = Sample.FindByPackage(packageInfo.name, packageInfo.version);
-            var sample = samples.FirstOrDefault(s => s.displayName == definition.SampleName);
+            var sample = FindLabSample(samples, definition);
             if (string.IsNullOrEmpty(sample.displayName))
             {
                 Debug.LogError($"[WiRR] Brak próbki: {definition.SampleName}");
@@ -98,9 +98,21 @@ namespace KIA.WiRR.Editor
             if (packageInfo == null)
                 return null;
 
-            var sample = Sample.FindByPackage(packageInfo.name, packageInfo.version)
-                .FirstOrDefault(s => s.displayName == definition.SampleName);
+            var samples = Sample.FindByPackage(packageInfo.name, packageInfo.version);
+            var sample = FindLabSample(samples, definition);
             return string.IsNullOrEmpty(sample.displayName) ? null : sample;
+        }
+
+        private static Sample FindLabSample(System.Collections.Generic.IEnumerable<Sample> samples, WiRRLabDefinition definition)
+        {
+            var exact = samples.FirstOrDefault(sample => sample.displayName == definition.SampleName);
+            if (!string.IsNullOrEmpty(exact.displayName))
+                return exact;
+
+            var prefix = $"Lab {definition.Number:00} —";
+            return samples.FirstOrDefault(sample =>
+                !string.IsNullOrEmpty(sample.displayName) &&
+                sample.displayName.StartsWith(prefix, System.StringComparison.OrdinalIgnoreCase));
         }
     }
 }
