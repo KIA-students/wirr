@@ -25,11 +25,12 @@ namespace KIA.WiRR.Editor
 
         public static WiRRGitSubmissionResult Submit(WiRRReportDocument document, string repositoryUrl, string repositorySlug, string baseBranch, string reportsPath)
         {
-            var errors = WiRRReportStore.Validate(document);
-            if (errors.Count > 0) return Fail("Raport zawiera błąd: " + errors[0]);
             var evaluation = WiRRReportEvaluator.Evaluate(document);
             if (evaluation.BlockingIssues.Count > 0) return Fail(evaluation.BlockingIssues[0]);
             if (!evaluation.CanSubmit) return Fail("Uzupełnij checkpoint 3.0 wraz z wymaganymi danymi pomiarowymi. Etapy 3.5–5.0 nie są wymagane do wysłania.");
+
+            var errors = WiRRReportStore.Validate(document, evaluation.SuggestedGrade);
+            if (errors.Count > 0) return Fail("Raport zawiera błąd: " + errors[0]);
 
             var exported = WiRRReportStore.ExportFinal(document, true);
             var projectRoot = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
