@@ -9,7 +9,10 @@
 - dodano automatyczne obliczenia wartości pochodnych z danych surowych, m.in. median, czasu klatki z FPS, zmiany FPS, liczby kroków fizyki na sekundę, e_med/e_max, sum błędów, RTT, zmienności odstępów między wiadomościami i ryzyka R=P×S;
 - pola i komórki obliczane automatycznie są tylko do odczytu i zawierają opis zastosowanego wzoru lub źródła danych;
 - dla pól o zamkniętym zbiorze odpowiedzi dodano kontrolowane wybory zamiast swobodnego tekstu, m.in. PASS/FAIL/NV, HIT/MISS, tak/nie, skale 1–5 i 0–10;
-- zachowano dotychczasowe stabilne klucze JSON tabel mimo polonizacji etykiet wyświetlanych użytkownikowi.
+- zachowano dotychczasowe stabilne klucze JSON tabel mimo polonizacji etykiet wyświetlanych użytkownikowi;
+- walidacja raportu wskazuje teraz konkretne nieuzupełnione wiersze tabel oraz wyjaśnia, jakich danych brakuje do obliczenia pól automatycznych;
+- rozszerzono obliczenia automatyczne m.in. o błąd odległości w raycaście głębi i przeliczenie FPS ↔ czas klatki tam, gdzie zależność jest jednoznaczna;
+- ujednolicono polskie nazwy próbek w Unity Package Manager oraz naprawiono niespójne nazwy próbek laboratoriów 04 i 07, które mogły uniemożliwiać ich automatyczne odnalezienie.
 
 
 ## 0.4.3 — 2026-09-21
