@@ -21,7 +21,13 @@ namespace KIA.WiRR.Editor
                 try
                 {
                     var loaded = JsonUtility.FromJson<WiRRReportDocument>(File.ReadAllText(path));
-                    if (loaded != null && loaded.labNumber == lab) return EnsureCollections(loaded);
+                    if (loaded != null && loaded.labNumber == lab)
+                    {
+                        loaded = EnsureCollections(loaded);
+                        UpdateVariants(loaded);
+                        WiRRReportCalculator.Recalculate(loaded);
+                        return loaded;
+                    }
                 }
                 catch (Exception exception) { Debug.LogWarning("[WiRR Raporty] Nie udało się wczytać szkicu raportu: " + exception.Message); }
             }
