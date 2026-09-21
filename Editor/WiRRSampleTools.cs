@@ -26,9 +26,15 @@ namespace KIA.WiRR.Editor
             }
 
             var result = sample.Import(Sample.ImportOptions.OverridePreviousImports);
-            Debug.Log(result
-                ? $"[WiRR] Zaimportowano próbkę: {sample.displayName}"
-                : $"[WiRR] Import próbki nie został wykonany: {sample.displayName}");
+            if (result)
+            {
+                WiRRSceneTools.PrepareLabWorkspace(labNumber);
+                Debug.Log($"[WiRR] Zaimportowano próbkę i przygotowano workspace Lab {labNumber:00}: {WiRRSceneTools.GetLabRootPath(labNumber)}");
+            }
+            else
+            {
+                Debug.Log($"[WiRR] Import próbki nie został wykonany: {sample.displayName}");
+            }
             return result;
         }
 
@@ -41,6 +47,7 @@ namespace KIA.WiRR.Editor
                 return;
             }
 
+            var importedAny = false;
             foreach (var requested in definition.ExternalSamples)
             {
                 var packageInfo = PackageInfo.FindForPackageName(requested.PackageName);
@@ -68,10 +75,20 @@ namespace KIA.WiRR.Editor
                 }
 
                 var imported = sample.Import(Sample.ImportOptions.None);
+                importedAny |= imported;
                 Debug.Log(imported
                     ? $"[WiRR] Zaimportowano oficjalną próbkę: {sample.displayName}"
                     : $"[WiRR] Nie udało się zaimportować próbki: {sample.displayName}");
             }
+
+            if (importedAny)
+                WiRRSceneTools.PrepareLabWorkspace(labNumber);
+        }
+
+        public static bool IsCourseSampleImported(int labNumber)
+        {
+            var sampleNullable = FindCourseSample(labNumber);
+            return sampleNullable.HasValue && sampleNullable.Value.isImported;
         }
 
         public static Sample? FindCourseSample(int labNumber)
