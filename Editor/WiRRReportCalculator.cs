@@ -95,7 +95,13 @@ namespace KIA.WiRR.Editor
                 HasColumns(table, "e1_mm", "e2_mm", "e3_mm"))
                 return true;
 
+            if (table.Id == "lab04_depth_raycast" && id == "e_d_m" && HasColumn(table, "d_ar_m"))
+                return true;
+
             if (table.Id == "lab05_benchmark" && id == "fps" && HasColumn(table, "median_ms"))
+                return true;
+
+            if (table.Id == "lab07_performance" && id == "ms_kl_mediana" && HasColumn(table, "fps_mediana"))
                 return true;
 
             if (table.Id == "lab07_risk" && id == "r" && HasColumns(table, "p", "s"))
@@ -118,8 +124,12 @@ namespace KIA.WiRR.Editor
                 return "Mediana wartości e1, e2 i e3 — obliczana automatycznie.";
             if (column.Id == "e_max_mm")
                 return "Największa z wartości e1, e2 i e3 — obliczana automatycznie.";
+            if (table.Id == "lab04_depth_raycast" && column.Id == "e_d_m")
+                return "Bezwzględny błąd odległości |d_AR − d_ref|, gdzie d_ref wynika z nazwy wiersza.";
             if (table.Id == "lab05_benchmark" && column.Id == "fps")
                 return "Obliczane automatycznie jako 1000 / mediana czasu klatki [ms].";
+            if (table.Id == "lab07_performance" && column.Id == "ms_kl_mediana")
+                return "Obliczane automatycznie jako 1000 / mediana liczby klatek na sekundę.";
             if (table.Id == "lab07_risk" && column.Id == "r")
                 return "Priorytet ryzyka R = P × S — obliczany automatycznie.";
             if (column.Id == "mediana_ms" && HasColumn(table, "mediana_fps") &&
@@ -181,12 +191,33 @@ namespace KIA.WiRR.Editor
                 return column.Id == "e_med_mm" ? Format(Median(values)) : Format(values.Max());
             }
 
+            if (table.Id == "lab04_depth_raycast" && column.Id == "e_d_m")
+            {
+                var measured = ReadCellNumber(document, table, row, FindColumn(table, "d_ar_m"));
+                if (!measured.HasValue)
+                    return string.Empty;
+
+                var referenceText = row.Label.Split(' ')[0].Replace(',', '.');
+                if (!TryParse(referenceText, out var reference))
+                    return string.Empty;
+
+                return Format(Math.Abs(measured.Value - reference));
+            }
+
             if (table.Id == "lab05_benchmark" && column.Id == "fps")
             {
                 var medianMs = ReadCellNumber(document, table, row, FindColumn(table, "median_ms"));
                 if (!medianMs.HasValue || medianMs.Value <= 0)
                     return string.Empty;
                 return Format(1000.0 / medianMs.Value);
+            }
+
+            if (table.Id == "lab07_performance" && column.Id == "ms_kl_mediana")
+            {
+                var fps = ReadCellNumber(document, table, row, FindColumn(table, "fps_mediana"));
+                if (!fps.HasValue || fps.Value <= 0)
+                    return string.Empty;
+                return Format(1000.0 / fps.Value);
             }
 
             if (table.Id == "lab07_risk" && column.Id == "r")
