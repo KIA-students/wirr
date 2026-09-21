@@ -14,24 +14,24 @@ namespace KIA.WiRR.Editor
         private Vector2 validationScroll;
         private List<WiRRValidationResult> validationResults;
 
-        [MenuItem("WiRR/Course Toolkit", priority = 1)]
+        [MenuItem("WiRR/Narzędzia kursu", priority = 1)]
         public static void Open()
         {
             var window = GetWindow<WiRRCourseWindow>();
-            window.titleContent = WiRRBranding.Title("WiRR Toolkit");
+            window.titleContent = WiRRBranding.Title("WiRR — narzędzia kursu");
             window.minSize = new Vector2(520, 650);
             window.Show();
         }
 
-        [MenuItem("WiRR/Lab scene/Create or repair base scene", priority = 10)]
+        [MenuItem("WiRR/Scena laboratorium/Utwórz lub napraw scenę", priority = 10)]
         private static void PrepareFromMenu() =>
             WiRRSceneTools.PrepareBaseScene(EditorPrefs.GetInt(LabPrefKey, 1));
 
-        [MenuItem("WiRR/Lab scene/Validate selected lab", priority = 20)]
+        [MenuItem("WiRR/Scena laboratorium/Sprawdź wybrane laboratorium", priority = 20)]
         private static void ValidateFromMenu() =>
             WiRRSceneValidator.Validate(EditorPrefs.GetInt(LabPrefKey, 1));
 
-        [MenuItem("WiRR/Reports/Open legacy Markdown report template", priority = 20)]
+        [MenuItem("WiRR/Raporty/Awaryjny szablon Markdown", priority = 20)]
         private static void LegacyReportFromMenu() =>
             WiRRReportTools.CreateOrOpen(EditorPrefs.GetInt(LabPrefKey, 1));
 
@@ -41,7 +41,7 @@ namespace KIA.WiRR.Editor
         {
             openWindow = this;
             selectedLab = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 7);
-            titleContent = WiRRBranding.Title("WiRR Toolkit");
+            titleContent = WiRRBranding.Title("WiRR — narzędzia kursu");
         }
 
         private void OnDisable()
@@ -53,9 +53,9 @@ namespace KIA.WiRR.Editor
         private void OnGUI()
         {
             EditorGUILayout.Space(8);
-            EditorGUILayout.LabelField("WiRR Course Toolkit", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("WiRR — narzędzia kursu", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox(
-                "Wybierz laboratorium i wykonuj kolejne kroki od góry. Import próbki WiRR automatycznie tworzy uporządkowany workspace Assets/WiRR/LabXX wraz ze sceną bazową.",
+                "Wybierz laboratorium i wykonuj kolejne kroki od góry. Import próbki WiRR automatycznie tworzy uporządkowany folder roboczy Assets/WiRR/LabXX wraz ze sceną bazową.",
                 MessageType.Info);
 
             var labels = WiRRLabCatalog.GetPopupLabels();
@@ -99,7 +99,7 @@ namespace KIA.WiRR.Editor
 
                 EditorGUILayout.LabelField(
                     $"Próbka WiRR: {(sampleReady ? "OK" : "brak")}    " +
-                    $"Workspace: {(workspaceReady ? "OK" : "brak")}    " +
+                    $"Folder roboczy: {(workspaceReady ? "OK" : "brak")}    " +
                     $"Scena: {(sceneReady ? "OK" : "brak")}",
                     EditorStyles.wordWrappedLabel);
                 EditorGUILayout.LabelField(WiRRSceneTools.GetLabRootPath(lab.Number), EditorStyles.miniLabel);
@@ -130,19 +130,19 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField("2. Próbki i workspace", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("2. Próbki i folder roboczy", EditorStyles.boldLabel);
                 EditorGUILayout.HelpBox(
-                    "Po imporcie próbki tworzony jest Assets/WiRR/LabXX z folderami Scenes, Scripts, Materials, Models, Prefabs, Textures, Data, Evidence i Documentation oraz sceną LabXX.unity.",
+                    "Po imporcie próbki tworzony jest folder Assets/WiRR/LabXX. Wewnątrz znajdują się uporządkowane katalogi na sceny, skrypty, materiały, modele, prefaby, tekstury, dane, dowody pomiarowe i dokumentację oraz scena LabXX.unity.",
                     MessageType.None);
 
-                if (GUILayout.Button("Importuj próbkę WiRR + przygotuj workspace", GUILayout.Height(32)))
+                if (GUILayout.Button("Importuj próbkę WiRR i przygotuj folder roboczy", GUILayout.Height(32)))
                     WiRRSampleTools.ImportCourseSample(lab.Number);
 
                 using (new EditorGUILayout.HorizontalScope())
                 {
-                    if (GUILayout.Button("Importuj oficjalne Samples Unity"))
+                    if (GUILayout.Button("Importuj oficjalne próbki Unity"))
                         WiRRSampleTools.ImportOfficialSamples(lab.Number);
-                    if (GUILayout.Button("Napraw strukturę workspace"))
+                    if (GUILayout.Button("Napraw strukturę folderu roboczego"))
                         WiRRSceneTools.PrepareLabWorkspace(lab.Number);
                 }
 
@@ -163,7 +163,7 @@ namespace KIA.WiRR.Editor
             {
                 EditorGUILayout.LabelField("3. Scena i pomiary", EditorStyles.boldLabel);
                 EditorGUILayout.HelpBox(
-                    "Naprawa sceny zapewnia pojedynczy WiRRSceneMarker, Main Camera, Directional Light i WiRR_Ground z BoxCollider.",
+                    "Ta operacja przygotowuje minimalną scenę laboratoryjną: jeden znacznik WiRRSceneMarker, kamerę główną (Main Camera), światło kierunkowe (Directional Light) oraz podłoże WiRR_Ground z BoxCollider.",
                     MessageType.None);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -188,10 +188,10 @@ namespace KIA.WiRR.Editor
             {
                 EditorGUILayout.LabelField("4. WiRR WebSim", EditorStyles.boldLabel);
                 EditorGUILayout.HelpBox(
-                    "Podaj backend, kod sesji i model. Następnie utwórz rig, uruchom Play Mode i sprawdź status LIVE.",
+                    "Podaj adres serwera WebSocket, kod sesji i model robota. Następnie utwórz model robota, uruchom tryb Play i sprawdź, czy stan połączenia ma wartość LIVE.",
                     MessageType.Info);
 
-                var backend = EditorGUILayout.TextField("Backend WebSocket", WiRRWebSimTools.Backend);
+                var backend = EditorGUILayout.TextField("Adres serwera WebSocket", WiRRWebSimTools.Backend);
                 if (backend != WiRRWebSimTools.Backend)
                     WiRRWebSimTools.Backend = backend.Trim();
 
@@ -209,7 +209,7 @@ namespace KIA.WiRR.Editor
 
                 using (new EditorGUI.DisabledScope(!valid || Application.isPlaying))
                 {
-                    if (GUILayout.Button("Utwórz / napraw bliźniaka WebSim", GUILayout.Height(30)))
+                    if (GUILayout.Button("Utwórz / napraw model WebSim", GUILayout.Height(30)))
                         WiRRWebSimTools.CreateOrRepairRig(lab.Number);
                 }
 
@@ -221,19 +221,19 @@ namespace KIA.WiRR.Editor
                 {
                     using (new EditorGUILayout.HorizontalScope())
                     {
-                        if (GUILayout.Button("Connect")) WiRRWebSimTools.ConnectInPlayMode();
-                        if (GUILayout.Button("Disconnect")) WiRRWebSimTools.DisconnectInPlayMode();
+                        if (GUILayout.Button("Połącz")) WiRRWebSimTools.ConnectInPlayMode();
+                        if (GUILayout.Button("Rozłącz")) WiRRWebSimTools.DisconnectInPlayMode();
                     }
                     using (new EditorGUILayout.HorizontalScope())
                     {
-                        if (GUILayout.Button("Home")) WiRRWebSimTools.SendHome();
-                        if (GUILayout.Button("Reset")) WiRRWebSimTools.SendReset();
+                        if (GUILayout.Button("Pozycja początkowa")) WiRRWebSimTools.SendHome();
+                        if (GUILayout.Button("Resetuj")) WiRRWebSimTools.SendReset();
                     }
                     using (new EditorGUILayout.HorizontalScope())
                     {
-                        if (GUILayout.Button("Motion A")) WiRRWebSimTools.SendMotion("A");
-                        if (GUILayout.Button("Motion B")) WiRRWebSimTools.SendMotion("B");
-                        if (GUILayout.Button("Motion C")) WiRRWebSimTools.SendMotion("C");
+                        if (GUILayout.Button("Ruch A")) WiRRWebSimTools.SendMotion("A");
+                        if (GUILayout.Button("Ruch B")) WiRRWebSimTools.SendMotion("B");
+                        if (GUILayout.Button("Ruch C")) WiRRWebSimTools.SendMotion("C");
                     }
                 }
             }
@@ -246,7 +246,7 @@ namespace KIA.WiRR.Editor
             {
                 EditorGUILayout.LabelField(lab.Number == 6 ? "5. Raport" : "4. Raport", EditorStyles.boldLabel);
                 EditorGUILayout.HelpBox(
-                    "Do wysłania raportu wystarczy kompletny checkpoint 3.0. Etapy 3.5–5.0 są opcjonalne i mogą pozostać puste.",
+                    "Do wysłania raportu wystarczy kompletny etap 3.0. Etapy 3.5–5.0 są opcjonalne i mogą pozostać puste.",
                     MessageType.Info);
 
                 if (GUILayout.Button("Otwórz formularz raportu WiRR", GUILayout.Height(32)))
@@ -285,16 +285,16 @@ namespace KIA.WiRR.Editor
                         : MessageType.Info;
 
                 EditorGUILayout.HelpBox(
-                    $"Wynik: {errors} błędów, {warnings} ostrzeżeń, {validationResults.Count - errors - warnings} informacji/PASS.",
+                    $"Wynik: {errors} błędów, {warnings} ostrzeżeń, {validationResults.Count - errors - warnings} komunikatów OK/informacyjnych.",
                     type);
 
                 validationScroll = EditorGUILayout.BeginScrollView(validationScroll, GUILayout.MinHeight(120), GUILayout.MaxHeight(260));
                 foreach (var result in validationResults)
                 {
                     var prefix = result.Severity == WiRRValidationSeverity.Error
-                        ? "ERROR"
+                        ? "BŁĄD"
                         : result.Severity == WiRRValidationSeverity.Warning
-                            ? "WARN"
+                            ? "OSTRZEŻENIE"
                             : "INFO";
                     EditorGUILayout.LabelField($"[{prefix}] {result.Message}", EditorStyles.wordWrappedLabel);
                     EditorGUILayout.Space(2);
