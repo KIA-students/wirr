@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## 0.4.5 — 2026-09-21
+
+- ustawiono publiczną stronę kursu `https://kia-students.github.io/wirr/` jako kanoniczny adres dokumentacji WiRR;
+- wszystkie odwołania do dawnej strony `matpomgit.github.io/wirr` zastąpiono adresem `kia-students.github.io/wirr`;
+- instalacja pakietu, klonowanie kodu i odwołania do źródeł wskazują publiczne repozytorium `KIA-students/wirr`;
+- zaktualizowano stronę GitHub Pages do polskich nazw poleceń aktualnego interfejsu Unity;
+- workflow wydania generuje notatki i instrukcję instalacji z docelowego repozytorium `KIA-students/wirr`.
+
+
 ## 0.4.4 — 2026-09-21
 
 - ujednolicono polski język interfejsu w oknach WiRR, menu Unity, komunikatach walidatora, WebSim, nakładce metryk i inspektorach komponentów;
