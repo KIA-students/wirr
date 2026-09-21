@@ -202,9 +202,8 @@ namespace KIA.WiRR.Editor
             var unit = string.IsNullOrEmpty(field.Unit) ? string.Empty : $" [{field.Unit}]";
             var automatic = WiRRReportCalculator.IsDerivedField(field.Id);
             var labelText = field.Label + unit + requiredMark + (automatic ? " — automatycznie" : string.Empty);
-            var label = new GUIContent(labelText, automatic
-                ? "Wartość jest obliczana automatycznie na podstawie danych z tabeli."
-                : field.Help);
+            var automaticDescription = automatic ? WiRRReportCalculator.DerivedFieldDescription(field.Id) : string.Empty;
+            var label = new GUIContent(labelText, automatic ? automaticDescription : field.Help);
 
             string newValue;
 
@@ -242,7 +241,7 @@ namespace KIA.WiRR.Editor
             if (automatic)
             {
                 EditorGUILayout.LabelField(
-                    "Ta wartość zostanie uzupełniona po wpisaniu wymaganych danych pomiarowych.",
+                    automaticDescription + " Pole zostanie uzupełnione po wpisaniu kompletu wymaganych danych źródłowych.",
                     EditorStyles.wordWrappedMiniLabel);
                 return;
             }
