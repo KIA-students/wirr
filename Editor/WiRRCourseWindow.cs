@@ -262,9 +262,9 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField(lab.Number == 6 ? "6. Walidacja" : "5. Walidacja", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField(lab.Number == 6 ? "6. Sprawdzenie konfiguracji" : "5. Sprawdzenie konfiguracji", EditorStyles.boldLabel);
 
-                if (GUILayout.Button("Waliduj wybrane laboratorium", GUILayout.Height(32)))
+                if (GUILayout.Button("Sprawdź konfigurację laboratorium", GUILayout.Height(32)))
                     validationResults = WiRRSceneValidator.Validate(lab.Number);
 
                 if (validationResults == null)
