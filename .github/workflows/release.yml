@@ -1,0 +1,229 @@
+name: Wydanie WiRR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'package.json'
+      - 'CHANGELOG.md'
+      - '.github/workflows/release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Walidacja i publikacja wydania
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Przygotuj Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Sprawdź metadane pakietu
+        id: metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          root = Path(".")
+          package = json.loads((root / "package.json").read_text(encoding="utf-8"))
+          version = package["version"].strip()
+
+          if not re.fullmatch(r"\d+\.\d+\.\d+", version):
+              raise SystemExit(f"Nieprawidłowa stabilna wersja SemVer: {version}")
+
+          changelog = (root / "CHANGELOG.md").read_text(encoding="utf-8")
+          if f"## {version} —" not in changelog:
+              raise SystemExit(f"Brak sekcji {version} w CHANGELOG.md")
+
+          required = [
+              "Editor",
+              "Runtime",
+              "Samples~",
+              "package.json",
+              "README.md",
+              "CHANGELOG.md",
+              "LICENSE",
+          ]
+          missing = [path for path in required if not (root / path).exists()]
+          if missing:
+              raise SystemExit("Brak wymaganych elementów pakietu: " + ", ".join(missing))
+
+          samples = package.get("samples", [])
+          if len(samples) != 7:
+              raise SystemExit(f"Oczekiwano 7 próbek laboratoriów, znaleziono: {len(samples)}")
+
+          for number, sample in enumerate(samples, 1):
+              expected_prefix = f"Laboratorium {number:02d} —"
+              name = sample.get("displayName", "")
+              path = sample.get("path", "")
+              if not name.startswith(expected_prefix):
+                  raise SystemExit(f"Niespójna nazwa próbki {number}: {name}")
+              if not (root / path).exists():
+                  raise SystemExit(f"Brak katalogu próbki: {path}")
+
+          Path("release-version.txt").write_text(version, encoding="utf-8")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"version={version}\n")
+              output.write(f"tag=v{version}\n")
+          print(f"Pakiet WiRR {version}: metadane poprawne.")
+          PY
+
+      - name: Sprawdź skrypt walidatora raportów
+        run: python3 -m py_compile scripts~/wirr_grade_report.py
+
+      - name: Przetestuj punktację SSQ
+        run: node --test WebSim~/tests/*.test.mjs
+
+      - name: Sprawdź kod strony WebSim
+        run: |
+          set -euo pipefail
+          test -s WebSim~/site/index.html
+          test -s WebSim~/site/styles.css
+          node --check WebSim~/site/app.mjs
+
+      - name: Przygotuj informacje o wydaniu
+        shell: bash
+        env:
+          VERSION: ${{ steps.metadata.outputs.version }}
+          TAG: ${{ steps.metadata.outputs.tag }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          version = os.environ["VERSION"]
+          tag = os.environ["TAG"]
+          changelog = Path("CHANGELOG.md").read_text(encoding="utf-8")
+
+          match = re.search(
+              rf"^## {re.escape(version)} — .*?\n(?P<body>.*?)(?=^## |\Z)",
+              changelog,
+              flags=re.MULTILINE | re.DOTALL,
+          )
+          if not match:
+              raise SystemExit(f"Nie można wyodrębnić informacji o wydaniu {version}.")
+
+          body = match.group("body").strip()
+          notes = f"""# WiRR {version}
+
+          Stabilne wydanie pakietu dydaktycznego WiRR dla Unity 6000.6.x.
+
+          ## Instalacja z tego wydania
+
+          W Unity Package Manager wybierz **Install package from git URL...** i użyj:
+
+          `https://github.com/MatPomGit/wirr.git#{tag}`
+
+          ## Najważniejsze zmiany
+
+          {body}
+
+          ## Weryfikacja wydania
+
+          Przed publikacją automatycznie sprawdzono:
+          - spójność `package.json` i `CHANGELOG.md`;
+          - obecność wszystkich siedmiu próbek laboratoriów;
+          - składnię walidatora raportów;
+          - testy punktacji SSQ;
+          - składnię aplikacji WebSim.
+
+          Archiwa dołączone do wydania zawierają pakiet UPM oraz sumy kontrolne SHA-256.
+          """
+          Path("release-notes.md").write_text(
+              "\n".join(line.strip() for line in notes.strip().splitlines()) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Zbuduj archiwa wydania
+        shell: bash
+        env:
+          VERSION: ${{ steps.metadata.outputs.version }}
+        run: |
+          set -euo pipefail
+          DIST="dist"
+          STAGE="$DIST/wirr-$VERSION"
+          mkdir -p "$STAGE"
+
+          items=(
+            Editor
+            Runtime
+            Samples~
+            Documentation~
+            WebSim~
+            scripts~
+            package.json
+            package.json.meta
+            README.md
+            README.md.meta
+            CHANGELOG.md
+            CHANGELOG.md.meta
+            LICENSE
+            LICENSE.meta
+            .icon.png
+            .icon.png.meta
+            icon.png
+            icon.png.meta
+            icon.ico
+            icon.ico.meta
+            RoboAnimation.unitypackage
+            RoboAnimation.unitypackage.meta
+          )
+
+          for item in "${items[@]}"; do
+            if [ -e "$item" ]; then
+              cp -a "$item" "$STAGE/"
+            fi
+          done
+
+          tar -C "$DIST" -czf "$DIST/wirr-$VERSION.tgz" "wirr-$VERSION"
+          (
+            cd "$DIST"
+            zip -qr "wirr-$VERSION.zip" "wirr-$VERSION"
+          )
+          sha256sum "$DIST/wirr-$VERSION.tgz" "$DIST/wirr-$VERSION.zip" > "$DIST/SHA256SUMS.txt"
+
+      - name: Zachowaj artefakty CI
+        uses: actions/upload-artifact@v4
+        with:
+          name: wirr-${{ steps.metadata.outputs.version }}
+          path: |
+            dist/wirr-${{ steps.metadata.outputs.version }}.tgz
+            dist/wirr-${{ steps.metadata.outputs.version }}.zip
+            dist/SHA256SUMS.txt
+            release-notes.md
+          if-no-files-found: error
+
+      - name: Opublikuj GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.metadata.outputs.version }}
+          TAG: ${{ steps.metadata.outputs.tag }}
+        run: |
+          set -euo pipefail
+
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Wydanie $TAG już istnieje — pomijam ponowną publikację."
+            exit 0
+          fi
+
+          gh release create "$TAG"             --repo "$GITHUB_REPOSITORY"             --target "$GITHUB_SHA"             --title "WiRR $TAG"             --notes-file release-notes.md             "dist/wirr-$VERSION.tgz"             "dist/wirr-$VERSION.zip"             "dist/SHA256SUMS.txt"
