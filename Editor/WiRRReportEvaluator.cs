@@ -47,14 +47,38 @@ namespace KIA.WiRR.Editor
                 }
 
                 foreach (var field in section.Fields.Where(f => f.Required))
-                    if (string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(document, field.Id)))
-                        cp.Reasons.Add("Brak: " + field.Label + ".");
+                {
+                    if (!string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(document, field.Id)))
+                        continue;
+
+                    if (WiRRReportCalculator.IsDerivedField(field.Id))
+                        cp.Reasons.Add("Brak danych źródłowych do obliczenia pola „" + field.Label + "”. " +
+                                       WiRRReportCalculator.DerivedFieldDescription(field.Id));
+                    else
+                        cp.Reasons.Add("Uzupełnij pole „" + field.Label + "”.");
+                }
 
                 foreach (var table in WiRRReportTableCatalog.Get(document.labNumber, grade))
                 {
-                    var hasData = table.Rows.Any(row => table.Columns.Any(column =>
-                        !string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(document, WiRRReportTableCatalog.CellKey(table, row, column)))));
-                    if (!hasData) cp.Reasons.Add("Brak danych pomiarowych: " + table.Label + ".");
+                    var emptyRows = table.Rows
+                        .Where(row => !table.Columns.Any(column =>
+                            !string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(
+                                document,
+                                WiRRReportTableCatalog.CellKey(table, row, column)))))
+                        .Select(row => row.Label)
+                        .ToArray();
+
+                    if (emptyRows.Length == table.Rows.Count)
+                    {
+                        cp.Reasons.Add("Brak danych pomiarowych w tabeli „" + table.Label + "”.");
+                    }
+                    else if (emptyRows.Length > 0)
+                    {
+                        var preview = string.Join(", ", emptyRows.Take(4));
+                        if (emptyRows.Length > 4)
+                            preview += $" i {emptyRows.Length - 4} kolejnych";
+                        cp.Reasons.Add("Uzupełnij brakujące wiersze tabeli „" + table.Label + "”: " + preview + ".");
+                    }
                 }
 
                 if (!chainOpen && cp.Reasons.Count == 0) cp.Reasons.Add("Najpierw uzupełnij wcześniejszy etap.");
