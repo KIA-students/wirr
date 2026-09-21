@@ -69,7 +69,7 @@ namespace KIA.WiRR
 
             GUI.Box(
                 new Rect(12, 12, 300, 78),
-                $"WiRR metrics\nMedian: {medianFrameMs:F2} ms  ({medianFps:F1} FPS)\nAllocated: {allocatedMemoryMb:F1} MB");
+                $"Metryki WiRR\nMediana czasu klatki: {medianFrameMs:F2} ms  ({medianFps:F1} FPS)\nPrzydzielona pamięć: {allocatedMemoryMb:F1} MB");
         }
     }
 }
