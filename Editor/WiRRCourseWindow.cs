@@ -7,19 +7,39 @@ namespace KIA.WiRR.Editor
     public sealed class WiRRCourseWindow : EditorWindow
     {
         private const string LabPrefKey = "KIA.WiRR.SelectedLab";
+        private const string CourseUrl = "https://kia-students.github.io/wirr/";
         private static WiRRCourseWindow openWindow;
+
+        private static readonly Color HeaderAccent = new Color(0.12f, 0.63f, 0.86f);
+        private static readonly Color DependencyAccent = new Color(0.25f, 0.52f, 0.94f);
+        private static readonly Color WorkspaceAccent = new Color(0.10f, 0.70f, 0.72f);
+        private static readonly Color SceneAccent = new Color(0.56f, 0.42f, 0.92f);
+        private static readonly Color WebSimAccent = new Color(0.95f, 0.56f, 0.18f);
+        private static readonly Color ReportAccent = new Color(0.77f, 0.35f, 0.72f);
+        private static readonly Color ValidationAccent = new Color(0.24f, 0.68f, 0.42f);
+        private static readonly Color SuccessAccent = new Color(0.24f, 0.68f, 0.42f);
+        private static readonly Color WarningAccent = new Color(0.95f, 0.62f, 0.18f);
+        private static readonly Color ErrorAccent = new Color(0.90f, 0.30f, 0.28f);
 
         private int selectedLab;
         private Vector2 windowScroll;
         private Vector2 validationScroll;
         private List<WiRRValidationResult> validationResults;
 
+        private GUIStyle heroTitleStyle;
+        private GUIStyle heroSubtitleStyle;
+        private GUIStyle sectionTitleStyle;
+        private GUIStyle sectionSubtitleStyle;
+        private GUIStyle stepBadgeStyle;
+        private GUIStyle statusBadgeStyle;
+        private GUIStyle nextStepStyle;
+
         [MenuItem("WiRR/Narzędzia kursu", priority = 1)]
         public static void Open()
         {
             var window = GetWindow<WiRRCourseWindow>();
             window.titleContent = WiRRBranding.Title("WiRR — narzędzia kursu");
-            window.minSize = new Vector2(520, 650);
+            window.minSize = new Vector2(560, 680);
             window.Show();
         }
 
@@ -52,25 +72,14 @@ namespace KIA.WiRR.Editor
 
         private void OnGUI()
         {
-            EditorGUILayout.Space(8);
-            EditorGUILayout.LabelField("WiRR — narzędzia kursu", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox(
-                "Wybierz laboratorium i wykonuj kolejne kroki od góry. Import próbki WiRR automatycznie tworzy uporządkowany folder roboczy Assets/WiRR/LabXX wraz ze sceną bazową.",
-                MessageType.Info);
-
-            var labels = WiRRLabCatalog.GetPopupLabels();
-            var newIndex = EditorGUILayout.Popup("Laboratorium", selectedLab - 1, labels);
-            if (newIndex != selectedLab - 1)
-            {
-                selectedLab = newIndex + 1;
-                EditorPrefs.SetInt(LabPrefKey, selectedLab);
-                validationResults = null;
-            }
+            EnsureStyles();
+            DrawHero();
+            DrawLabSelector();
 
             var lab = WiRRLabCatalog.Get(selectedLab);
             windowScroll = EditorGUILayout.BeginScrollView(windowScroll);
 
-            DrawLabStatus(lab);
+            DrawPreparationOverview(lab);
             DrawDependencySection(lab);
             DrawWorkspaceSection(lab);
             DrawSceneSection(lab);
@@ -79,31 +88,182 @@ namespace KIA.WiRR.Editor
             DrawReportSection(lab);
             DrawValidationSection(lab);
 
-            EditorGUILayout.Space(10);
+            EditorGUILayout.Space(12);
             EditorGUILayout.EndScrollView();
 
             if (Application.isPlaying && lab.Number == 6)
                 Repaint();
         }
 
-        private void DrawLabStatus(WiRRLabDefinition lab)
+        private void EnsureStyles()
+        {
+            if (heroTitleStyle != null)
+                return;
+
+            heroTitleStyle = new GUIStyle(EditorStyles.boldLabel)
+            {
+                fontSize = 19,
+                alignment = TextAnchor.MiddleLeft,
+                normal = { textColor = ForegroundColor() }
+            };
+
+            heroSubtitleStyle = new GUIStyle(EditorStyles.wordWrappedMiniLabel)
+            {
+                fontSize = 11,
+                alignment = TextAnchor.UpperLeft,
+                normal = { textColor = MutedForegroundColor() }
+            };
+
+            sectionTitleStyle = new GUIStyle(EditorStyles.boldLabel)
+            {
+                fontSize = 13,
+                alignment = TextAnchor.MiddleLeft,
+                normal = { textColor = ForegroundColor() }
+            };
+
+            sectionSubtitleStyle = new GUIStyle(EditorStyles.wordWrappedMiniLabel)
+            {
+                alignment = TextAnchor.UpperLeft,
+                normal = { textColor = MutedForegroundColor() }
+            };
+
+            stepBadgeStyle = new GUIStyle(EditorStyles.boldLabel)
+            {
+                fontSize = 15,
+                alignment = TextAnchor.MiddleCenter,
+                normal = { textColor = Color.white }
+            };
+
+            statusBadgeStyle = new GUIStyle(EditorStyles.miniBoldLabel)
+            {
+                alignment = TextAnchor.MiddleCenter,
+                normal = { textColor = ForegroundColor() }
+            };
+
+            nextStepStyle = new GUIStyle(EditorStyles.wordWrappedLabel)
+            {
+                fontStyle = FontStyle.Bold,
+                padding = new RectOffset(8, 8, 5, 5),
+                normal = { textColor = ForegroundColor() }
+            };
+        }
+
+        private void DrawHero()
+        {
+            EditorGUILayout.Space(8);
+            var rect = GUILayoutUtility.GetRect(0f, 78f, GUILayout.ExpandWidth(true));
+            EditorGUI.DrawRect(rect, PanelColor(HeaderAccent, 0.34f));
+            EditorGUI.DrawRect(new Rect(rect.x, rect.y, 6f, rect.height), HeaderAccent);
+
+            var iconRect = new Rect(rect.x + 16f, rect.y + 13f, 52f, 52f);
+            if (WiRRBranding.Icon != null)
+                GUI.DrawTexture(iconRect, WiRRBranding.Icon, ScaleMode.ScaleToFit, true);
+
+            var textLeft = WiRRBranding.Icon != null ? rect.x + 80f : rect.x + 18f;
+            var buttonWidth = 112f;
+            var titleRect = new Rect(textLeft, rect.y + 12f, Mathf.Max(120f, rect.width - (textLeft - rect.x) - buttonWidth - 22f), 26f);
+            var subtitleRect = new Rect(textLeft, rect.y + 40f, Mathf.Max(120f, rect.width - (textLeft - rect.x) - buttonWidth - 22f), 30f);
+            GUI.Label(titleRect, "WiRR — narzędzia kursu", heroTitleStyle);
+            GUI.Label(subtitleRect, "Przygotuj środowisko, scenę i raport krok po kroku.", heroSubtitleStyle);
+
+            var buttonRect = new Rect(rect.xMax - buttonWidth - 12f, rect.y + 23f, buttonWidth, 30f);
+            var oldBackground = GUI.backgroundColor;
+            GUI.backgroundColor = HeaderAccent;
+            if (GUI.Button(buttonRect, "Strona kursu"))
+                Application.OpenURL(CourseUrl);
+            GUI.backgroundColor = oldBackground;
+        }
+
+        private void DrawLabSelector()
         {
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField($"Laboratorium {lab.Number:00}: {lab.Title}", EditorStyles.boldLabel);
-
-                var sampleReady = WiRRSampleTools.IsCourseSampleImported(lab.Number);
-                var workspaceReady = WiRRSceneTools.WorkspaceExists(lab.Number);
-                var sceneReady = WiRRSceneTools.SceneExists(lab.Number);
-
+                EditorGUILayout.LabelField("Wybierz laboratorium", EditorStyles.boldLabel);
                 EditorGUILayout.LabelField(
-                    $"Próbka WiRR: {(sampleReady ? "gotowa" : "brak")}    " +
-                    $"Folder roboczy: {(workspaceReady ? "gotowy" : "brak")}    " +
-                    $"Scena: {(sceneReady ? "gotowa" : "brak")}",
-                    EditorStyles.wordWrappedLabel);
+                    "Panel poniżej dopasuje kolejne kroki do wybranego laboratorium.",
+                    EditorStyles.wordWrappedMiniLabel);
+
+                var labels = WiRRLabCatalog.GetPopupLabels();
+                var newIndex = EditorGUILayout.Popup("Laboratorium", selectedLab - 1, labels);
+                if (newIndex == selectedLab - 1)
+                    return;
+
+                selectedLab = newIndex + 1;
+                EditorPrefs.SetInt(LabPrefKey, selectedLab);
+                validationResults = null;
+                GUI.FocusControl(null);
+            }
+        }
+
+        private void DrawPreparationOverview(WiRRLabDefinition lab)
+        {
+            var sampleReady = WiRRSampleTools.IsCourseSampleImported(lab.Number);
+            var workspaceReady = WiRRSceneTools.WorkspaceExists(lab.Number);
+            var sceneReady = WiRRSceneTools.SceneExists(lab.Number);
+            var preparedCount = (sampleReady ? 1 : 0) + (workspaceReady ? 1 : 0) + (sceneReady ? 1 : 0);
+
+            EditorGUILayout.Space(8);
+            using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                EditorGUILayout.LabelField($"Laboratorium {lab.Number:00}: {lab.Title}", sectionTitleStyle);
+                EditorGUILayout.Space(3);
+
+                var progressRect = GUILayoutUtility.GetRect(0f, 20f, GUILayout.ExpandWidth(true));
+                EditorGUI.ProgressBar(progressRect, preparedCount / 3f, $"Przygotowanie środowiska: {preparedCount}/3");
+                EditorGUILayout.Space(5);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    DrawStatusBadge("Próbka", sampleReady);
+                    DrawStatusBadge("Folder roboczy", workspaceReady);
+                    DrawStatusBadge("Scena", sceneReady);
+                }
+
+                EditorGUILayout.Space(5);
+                DrawNextStep(sampleReady, workspaceReady, sceneReady);
                 EditorGUILayout.LabelField(WiRRSceneTools.GetLabRootPath(lab.Number), EditorStyles.miniLabel);
             }
+        }
+
+        private void DrawNextStep(bool sampleReady, bool workspaceReady, bool sceneReady)
+        {
+            string message;
+            Color accent;
+
+            if (!sampleReady)
+            {
+                message = "NASTĘPNY KROK · Zainstaluj zależności, a następnie zaimportuj próbkę WiRR.";
+                accent = DependencyAccent;
+            }
+            else if (!workspaceReady)
+            {
+                message = "NASTĘPNY KROK · Napraw strukturę folderu roboczego laboratorium.";
+                accent = WorkspaceAccent;
+            }
+            else if (!sceneReady)
+            {
+                message = "NASTĘPNY KROK · Utwórz lub napraw scenę bazową laboratorium.";
+                accent = SceneAccent;
+            }
+            else if (validationResults == null)
+            {
+                message = "NASTĘPNY KROK · Sprawdź konfigurację laboratorium przed rozpoczęciem pomiarów.";
+                accent = ValidationAccent;
+            }
+            else
+            {
+                var errors = CountValidation(WiRRValidationSeverity.Error);
+                message = errors > 0
+                    ? $"DO POPRAWY · Walidator wykrył {errors} błędów. Usuń je przed wykonaniem pomiarów."
+                    : "GOTOWE · Konfiguracja nie zawiera błędów blokujących. Możesz wykonywać ćwiczenie i pomiary.";
+                accent = errors > 0 ? ErrorAccent : SuccessAccent;
+            }
+
+            var rect = GUILayoutUtility.GetRect(0f, 34f, GUILayout.ExpandWidth(true));
+            EditorGUI.DrawRect(rect, PanelColor(accent, 0.27f));
+            EditorGUI.DrawRect(new Rect(rect.x, rect.y, 4f, rect.height), accent);
+            GUI.Label(new Rect(rect.x + 8f, rect.y + 2f, rect.width - 12f, rect.height - 4f), message, nextStepStyle);
         }
 
         private void DrawDependencySection(WiRRLabDefinition lab)
@@ -111,17 +271,23 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField("1. Zależności", EditorStyles.boldLabel);
+                DrawSectionHeader(
+                    1,
+                    "Zależności",
+                    "Najpierw przygotuj pakiety Unity wymagane przez ćwiczenie.",
+                    DependencyAccent);
+
                 EditorGUILayout.HelpBox(
-                    "Zainstaluj pakiety wymagane przez wybrane laboratorium. Narzędzie pomija zależności, które są już obecne w projekcie.",
+                    "Narzędzie instaluje brakujące zależności i pomija pakiety już obecne w projekcie. Po instalacji poczekaj na zakończenie kompilacji Unity.",
                     MessageType.None);
+
                 using (new EditorGUI.DisabledScope(WiRRPackageInstaller.IsBusy))
                 {
-                    if (GUILayout.Button("Zainstaluj / napraw zależności laboratorium", GUILayout.Height(30)))
+                    if (PrimaryButton("Zainstaluj / napraw zależności", DependencyAccent, 34f))
                         WiRRPackageInstaller.InstallForLab(lab.Number);
                 }
 
-                if (WiRRPackageInstaller.IsBusy && GUILayout.Button("Anuluj kolejkę instalacji"))
+                if (WiRRPackageInstaller.IsBusy && SecondaryColoredButton("Anuluj kolejkę instalacji", WarningAccent))
                     WiRRPackageInstaller.Cancel();
 
                 EditorGUILayout.HelpBox(WiRRPackageInstaller.Status, MessageType.None);
@@ -133,27 +299,32 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField("2. Próbki i folder roboczy", EditorStyles.boldLabel);
+                DrawSectionHeader(
+                    2,
+                    "Próbki i folder roboczy",
+                    "Zaimportuj materiały startowe. WiRR uporządkuje pliki laboratorium automatycznie.",
+                    WorkspaceAccent);
+
                 EditorGUILayout.HelpBox(
-                    "Po imporcie próbki tworzony jest folder Assets/WiRR/LabXX. Wewnątrz znajdują się uporządkowane katalogi na sceny, skrypty, materiały, modele, prefaby, tekstury, dane, dowody pomiarowe i dokumentację oraz scena LabXX.unity.",
+                    "Po imporcie powstaje Assets/WiRR/LabXX z katalogami Scenes, Scripts, Materials, Models, Prefabs, Textures, Data, Evidence i Documentation oraz sceną LabXX.unity.",
                     MessageType.None);
 
-                if (GUILayout.Button("Importuj próbkę WiRR i przygotuj folder roboczy", GUILayout.Height(32)))
+                if (PrimaryButton("Importuj próbkę WiRR i przygotuj folder", WorkspaceAccent, 34f))
                     WiRRSampleTools.ImportCourseSample(lab.Number);
 
                 using (new EditorGUILayout.HorizontalScope())
                 {
-                    if (GUILayout.Button("Importuj oficjalne próbki Unity"))
+                    if (GUILayout.Button("Importuj oficjalne próbki Unity", GUILayout.Height(27)))
                         WiRRSampleTools.ImportOfficialSamples(lab.Number);
-                    if (GUILayout.Button("Napraw strukturę folderu roboczego"))
+                    if (GUILayout.Button("Napraw strukturę folderu", GUILayout.Height(27)))
                         WiRRSceneTools.PrepareLabWorkspace(lab.Number);
                 }
 
                 using (new EditorGUILayout.HorizontalScope())
                 {
-                    if (GUILayout.Button($"Otwórz folder roboczy Lab{lab.Number:00}"))
+                    if (GUILayout.Button($"Otwórz folder Lab{lab.Number:00}", GUILayout.Height(25)))
                         WiRRSceneTools.OpenLabFolder(lab.Number);
-                    if (GUILayout.Button($"Otwórz scenę laboratorium {lab.Number:00}"))
+                    if (GUILayout.Button($"Otwórz scenę Lab{lab.Number:00}", GUILayout.Height(25)))
                         WiRRSceneTools.OpenLabScene(lab.Number);
                 }
             }
@@ -164,22 +335,25 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField("3. Scena i pomiary", EditorStyles.boldLabel);
+                DrawSectionHeader(
+                    3,
+                    "Scena i pomiary",
+                    "Przygotuj minimalną scenę, a następnie włącz narzędzia pomiarowe, gdy są potrzebne.",
+                    SceneAccent);
+
                 EditorGUILayout.HelpBox(
-                    "Ta operacja przygotowuje minimalną scenę laboratoryjną: jeden znacznik WiRRSceneMarker, kamerę główną (Main Camera), światło kierunkowe (Directional Light) oraz podłoże WiRR_Ground z BoxCollider.",
+                    "Naprawa sceny zapewnia jeden WiRRSceneMarker, kamerę główną, światło kierunkowe oraz WiRR_Ground z BoxCollider. Nie usuwa Twoich obiektów laboratoryjnych.",
                     MessageType.None);
 
-                using (new EditorGUILayout.HorizontalScope())
-                {
-                    if (GUILayout.Button("Utwórz / napraw aktywną scenę", GUILayout.Height(28)))
-                        WiRRSceneTools.PrepareBaseScene(lab.Number);
-                    if (GUILayout.Button("Dodaj / usuń sondę metryk", GUILayout.Height(28)))
-                        WiRRSceneTools.ToggleMetrics(lab.Number);
-                }
+                if (PrimaryButton("Utwórz / napraw aktywną scenę", SceneAccent, 32f))
+                    WiRRSceneTools.PrepareBaseScene(lab.Number);
+
+                if (GUILayout.Button("Dodaj / usuń sondę metryk", GUILayout.Height(27)))
+                    WiRRSceneTools.ToggleMetrics(lab.Number);
 
                 if (lab.Number == 6)
                     EditorGUILayout.HelpBox(
-                        "Laboratorium 06 obsługuje lokalny ROS 2/Gazebo, ROS 2/Gazebo na drugim komputerze oraz WiRR WebSim przez WSS.",
+                        "Laboratorium 06 może korzystać z lokalnego ROS 2/Gazebo, ROS 2/Gazebo na drugim komputerze albo z WiRR WebSim.",
                         MessageType.Info);
             }
         }
@@ -189,16 +363,25 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField("4. WiRR WebSim", EditorStyles.boldLabel);
+                DrawSectionHeader(
+                    4,
+                    "WiRR WebSim",
+                    "Opcjonalne źródło stanu robota w Laboratorium 06.",
+                    WebSimAccent);
+
                 EditorGUILayout.HelpBox(
-                    "Podaj adres serwera WebSocket (np. ws://127.0.0.1:9090), kod sesji i model robota. Następnie utwórz model robota, uruchom tryb Play i sprawdź, czy stan połączenia ma wartość LIVE.",
+                    "Podaj adres serwera WebSocket (np. ws://127.0.0.1:9090), kod sesji i model robota. Utwórz model, uruchom tryb Play i sprawdź, czy stan połączenia zmieni się na LIVE.",
                     MessageType.Info);
 
-                var backend = EditorGUILayout.TextField("Adres serwera WebSocket", WiRRWebSimTools.Backend);
+                var backend = EditorGUILayout.TextField(
+                    new GUIContent("Adres serwera WebSocket", "Adres backendu WebSim, np. ws://127.0.0.1:9090."),
+                    WiRRWebSimTools.Backend);
                 if (backend != WiRRWebSimTools.Backend)
                     WiRRWebSimTools.Backend = backend.Trim();
 
-                var session = EditorGUILayout.TextField("Kod sesji / zespołu", WiRRWebSimTools.Session);
+                var session = EditorGUILayout.TextField(
+                    new GUIContent("Kod sesji / zespołu", "Krótki kod rozdzielający sesje różnych zespołów."),
+                    WiRRWebSimTools.Session);
                 if (session != WiRRWebSimTools.Session)
                     WiRRWebSimTools.Session = session;
 
@@ -208,17 +391,19 @@ namespace KIA.WiRR.Editor
                 WiRRWebSimTools.Robot = next == 1 ? "wirr-arm3" : "rrbot";
 
                 var valid = WiRRWebSimTools.ValidateConfiguration(out var configurationMessage);
-                EditorGUILayout.HelpBox(configurationMessage, valid ? MessageType.None : MessageType.Warning);
+                DrawInlineStatus(configurationMessage, valid ? SuccessAccent : WarningAccent);
 
                 using (new EditorGUI.DisabledScope(!valid || Application.isPlaying))
                 {
-                    if (GUILayout.Button("Utwórz / napraw model WebSim", GUILayout.Height(30)))
+                    if (PrimaryButton("Utwórz / napraw model WebSim", WebSimAccent, 32f))
                         WiRRWebSimTools.CreateOrRepairRig(lab.Number);
                 }
 
                 EditorGUILayout.Space(4);
-                EditorGUILayout.LabelField("Połączenie", EditorStyles.miniBoldLabel);
-                EditorGUILayout.HelpBox(WiRRWebSimTools.RuntimeStatus(), MessageType.None);
+                EditorGUILayout.LabelField("Sterowanie połączeniem", EditorStyles.miniBoldLabel);
+                DrawInlineStatus(
+                    WiRRWebSimTools.RuntimeStatus(),
+                    WiRRWebSimTools.RuntimeStatus().StartsWith("LIVE") ? SuccessAccent : WarningAccent);
 
                 using (new EditorGUI.DisabledScope(!Application.isPlaying || !valid))
                 {
@@ -227,11 +412,13 @@ namespace KIA.WiRR.Editor
                         if (GUILayout.Button("Połącz")) WiRRWebSimTools.ConnectInPlayMode();
                         if (GUILayout.Button("Rozłącz")) WiRRWebSimTools.DisconnectInPlayMode();
                     }
+
                     using (new EditorGUILayout.HorizontalScope())
                     {
                         if (GUILayout.Button("Pozycja początkowa")) WiRRWebSimTools.SendHome();
                         if (GUILayout.Button("Resetuj")) WiRRWebSimTools.SendReset();
                     }
+
                     using (new EditorGUILayout.HorizontalScope())
                     {
                         if (GUILayout.Button("Ruch A")) WiRRWebSimTools.SendMotion("A");
@@ -244,69 +431,208 @@ namespace KIA.WiRR.Editor
 
         private void DrawReportSection(WiRRLabDefinition lab)
         {
+            var step = lab.Number == 6 ? 5 : 4;
+
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField(lab.Number == 6 ? "5. Raport" : "4. Raport", EditorStyles.boldLabel);
+                DrawSectionHeader(
+                    step,
+                    "Raport",
+                    "Zapisz wyniki i wnioski. Do wysłania wystarczy kompletny etap 3.0.",
+                    ReportAccent);
+
                 EditorGUILayout.HelpBox(
-                    "Do wysłania raportu wystarczy kompletny etap 3.0. Etapy 3.5–5.0 są opcjonalne i mogą pozostać puste.",
+                    "Etapy 3.5–5.0 są opcjonalne. Formularz automatycznie oblicza wartości pochodne, jeśli wynikają jednoznacznie z danych pomiarowych.",
                     MessageType.Info);
 
-                if (GUILayout.Button("Otwórz formularz raportu WiRR", GUILayout.Height(32)))
+                if (PrimaryButton("Otwórz formularz raportu WiRR", ReportAccent, 34f))
                     WiRRReportWindow.Open();
 
-                if (GUILayout.Button("Otwórz awaryjny szablon Markdown", GUILayout.Height(22)))
+                if (GUILayout.Button("Otwórz awaryjny szablon Markdown", GUILayout.Height(24)))
                     WiRRReportTools.CreateOrOpen(lab.Number);
             }
         }
 
         private void DrawValidationSection(WiRRLabDefinition lab)
         {
+            var step = lab.Number == 6 ? 6 : 5;
+
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField(lab.Number == 6 ? "6. Sprawdzenie konfiguracji" : "5. Sprawdzenie konfiguracji", EditorStyles.boldLabel);
+                DrawSectionHeader(
+                    step,
+                    "Sprawdzenie konfiguracji",
+                    "Na końcu sprawdź, czy środowisko jest gotowe do wykonania ćwiczenia.",
+                    ValidationAccent);
+
                 EditorGUILayout.HelpBox(
-                    "Sprawdzenie obejmuje wersję Unity, wymagane pakiety, aktywną scenę, kamerę główną, znacznik WiRRSceneMarker oraz typowe błędy konfiguracji danego laboratorium.",
+                    "Walidator sprawdza wersję Unity, wymagane pakiety, aktywną scenę, kamerę główną, WiRRSceneMarker i typowe błędy konfiguracji.",
                     MessageType.None);
 
-                if (GUILayout.Button("Sprawdź konfigurację laboratorium", GUILayout.Height(32)))
+                if (PrimaryButton("Sprawdź konfigurację laboratorium", ValidationAccent, 34f))
                     validationResults = WiRRSceneValidator.Validate(lab.Number);
 
                 if (validationResults == null)
+                {
+                    DrawInlineStatus("Walidacja nie została jeszcze uruchomiona.", WarningAccent);
                     return;
-
-                var errors = 0;
-                var warnings = 0;
-                foreach (var result in validationResults)
-                {
-                    if (result.Severity == WiRRValidationSeverity.Error) errors++;
-                    else if (result.Severity == WiRRValidationSeverity.Warning) warnings++;
                 }
 
-                var type = errors > 0
-                    ? MessageType.Error
+                var errors = CountValidation(WiRRValidationSeverity.Error);
+                var warnings = CountValidation(WiRRValidationSeverity.Warning);
+                var information = validationResults.Count - errors - warnings;
+
+                var summaryAccent = errors > 0 ? ErrorAccent : warnings > 0 ? WarningAccent : SuccessAccent;
+                var summary = errors > 0
+                    ? $"Wymaga poprawy · błędy: {errors}, ostrzeżenia: {warnings}, OK/info: {information}"
                     : warnings > 0
-                        ? MessageType.Warning
-                        : MessageType.Info;
+                        ? $"Można kontynuować po sprawdzeniu ostrzeżeń · ostrzeżenia: {warnings}, OK/info: {information}"
+                        : $"Konfiguracja gotowa · OK/info: {information}";
 
-                EditorGUILayout.HelpBox(
-                    $"Wynik: {errors} błędów, {warnings} ostrzeżeń, {validationResults.Count - errors - warnings} komunikatów OK/informacyjnych.",
-                    type);
+                DrawInlineStatus(summary, summaryAccent);
 
-                validationScroll = EditorGUILayout.BeginScrollView(validationScroll, GUILayout.MinHeight(120), GUILayout.MaxHeight(260));
+                validationScroll = EditorGUILayout.BeginScrollView(
+                    validationScroll,
+                    GUILayout.MinHeight(120),
+                    GUILayout.MaxHeight(280));
+
                 foreach (var result in validationResults)
-                {
-                    var prefix = result.Severity == WiRRValidationSeverity.Error
-                        ? "BŁĄD"
-                        : result.Severity == WiRRValidationSeverity.Warning
-                            ? "OSTRZEŻENIE"
-                            : "INFO";
-                    EditorGUILayout.LabelField($"[{prefix}] {result.Message}", EditorStyles.wordWrappedLabel);
-                    EditorGUILayout.Space(2);
-                }
+                    DrawValidationResult(result);
+
                 EditorGUILayout.EndScrollView();
             }
+        }
+
+        private void DrawSectionHeader(int step, string title, string subtitle, Color accent)
+        {
+            var rect = GUILayoutUtility.GetRect(0f, 58f, GUILayout.ExpandWidth(true));
+            EditorGUI.DrawRect(rect, PanelColor(accent, 0.24f));
+            EditorGUI.DrawRect(new Rect(rect.x, rect.y, 5f, rect.height), accent);
+
+            var badgeRect = new Rect(rect.x + 13f, rect.y + 12f, 34f, 34f);
+            EditorGUI.DrawRect(badgeRect, accent);
+            GUI.Label(badgeRect, step.ToString(), stepBadgeStyle);
+
+            GUI.Label(
+                new Rect(rect.x + 58f, rect.y + 8f, rect.width - 68f, 22f),
+                title,
+                sectionTitleStyle);
+
+            GUI.Label(
+                new Rect(rect.x + 58f, rect.y + 30f, rect.width - 68f, 23f),
+                subtitle,
+                sectionSubtitleStyle);
+        }
+
+        private void DrawStatusBadge(string label, bool ready)
+        {
+            var accent = ready ? SuccessAccent : WarningAccent;
+            var text = ready ? $"GOTOWE · {label}" : $"BRAK · {label}";
+            var rect = GUILayoutUtility.GetRect(0f, 24f, GUILayout.ExpandWidth(true));
+            EditorGUI.DrawRect(rect, PanelColor(accent, 0.32f));
+            GUI.Label(rect, text, statusBadgeStyle);
+        }
+
+        private void DrawInlineStatus(string text, Color accent)
+        {
+            var height = Mathf.Max(28f, EditorStyles.wordWrappedLabel.CalcHeight(new GUIContent(text), position.width - 42f) + 10f);
+            var rect = GUILayoutUtility.GetRect(0f, height, GUILayout.ExpandWidth(true));
+            EditorGUI.DrawRect(rect, PanelColor(accent, 0.25f));
+            EditorGUI.DrawRect(new Rect(rect.x, rect.y, 4f, rect.height), accent);
+            GUI.Label(
+                new Rect(rect.x + 9f, rect.y + 4f, rect.width - 14f, rect.height - 8f),
+                text,
+                EditorStyles.wordWrappedLabel);
+        }
+
+        private void DrawValidationResult(WiRRValidationResult result)
+        {
+            Color accent;
+            string prefix;
+
+            if (result.Severity == WiRRValidationSeverity.Error)
+            {
+                accent = ErrorAccent;
+                prefix = "BŁĄD";
+            }
+            else if (result.Severity == WiRRValidationSeverity.Warning)
+            {
+                accent = WarningAccent;
+                prefix = "OSTRZEŻENIE";
+            }
+            else
+            {
+                accent = SuccessAccent;
+                prefix = "OK";
+            }
+
+            var text = $"{prefix} · {result.Message}";
+            var height = Mathf.Max(31f, EditorStyles.wordWrappedLabel.CalcHeight(new GUIContent(text), position.width - 70f) + 10f);
+            var rect = GUILayoutUtility.GetRect(0f, height, GUILayout.ExpandWidth(true));
+            EditorGUI.DrawRect(rect, PanelColor(accent, 0.18f));
+            EditorGUI.DrawRect(new Rect(rect.x, rect.y, 4f, rect.height), accent);
+            GUI.Label(
+                new Rect(rect.x + 10f, rect.y + 4f, rect.width - 14f, rect.height - 8f),
+                text,
+                EditorStyles.wordWrappedLabel);
+            EditorGUILayout.Space(3);
+        }
+
+        private bool PrimaryButton(string label, Color accent, float height)
+        {
+            var oldBackground = GUI.backgroundColor;
+            var oldContent = GUI.contentColor;
+            GUI.backgroundColor = accent;
+            GUI.contentColor = Color.white;
+            var pressed = GUILayout.Button(label, GUILayout.Height(height));
+            GUI.backgroundColor = oldBackground;
+            GUI.contentColor = oldContent;
+            return pressed;
+        }
+
+        private bool SecondaryColoredButton(string label, Color accent)
+        {
+            var oldBackground = GUI.backgroundColor;
+            GUI.backgroundColor = Color.Lerp(Color.white, accent, 0.65f);
+            var pressed = GUILayout.Button(label, GUILayout.Height(25f));
+            GUI.backgroundColor = oldBackground;
+            return pressed;
+        }
+
+        private int CountValidation(WiRRValidationSeverity severity)
+        {
+            if (validationResults == null)
+                return 0;
+
+            var count = 0;
+            foreach (var result in validationResults)
+                if (result.Severity == severity)
+                    count++;
+            return count;
+        }
+
+        private static Color PanelColor(Color accent, float strength)
+        {
+            var baseColor = EditorGUIUtility.isProSkin
+                ? new Color(0.16f, 0.16f, 0.18f)
+                : new Color(0.94f, 0.94f, 0.95f);
+            return Color.Lerp(baseColor, accent, strength);
+        }
+
+        private static Color ForegroundColor()
+        {
+            return EditorGUIUtility.isProSkin
+                ? new Color(0.94f, 0.94f, 0.96f)
+                : new Color(0.12f, 0.12f, 0.14f);
+        }
+
+        private static Color MutedForegroundColor()
+        {
+            return EditorGUIUtility.isProSkin
+                ? new Color(0.76f, 0.78f, 0.82f)
+                : new Color(0.30f, 0.31f, 0.34f);
         }
     }
 }

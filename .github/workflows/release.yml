@@ -130,7 +130,11 @@ jobs:
 
           W Unity Package Manager wybierz **Install package from git URL...** i użyj:
 
-          `https://github.com/MatPomGit/wirr.git#{tag}`
+          `https://github.com/KIA-students/wirr.git#{tag}`
+
+          ## Strona kursu
+
+          https://kia-students.github.io/wirr/
 
           ## Najważniejsze zmiany
 
