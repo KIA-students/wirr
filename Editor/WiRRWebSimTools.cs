@@ -17,7 +17,7 @@ namespace KIA.WiRR.Editor
         public static string Session { get => EditorPrefs.GetString(SessionPref, "TEAM01"); set => EditorPrefs.SetString(SessionPref, NormalizeSession(value)); }
         public static string Robot { get => EditorPrefs.GetString(RobotPref, "rrbot"); set => EditorPrefs.SetString(RobotPref, value == "wirr-arm3" ? "wirr-arm3" : "rrbot"); }
 
-        [MenuItem("WiRR/WebSim/Create or repair digital twin", priority = 30)]
+        [MenuItem("WiRR/WebSim/Utwórz lub napraw model robota", priority = 30)]
         public static void CreateFromMenu()
         {
             CreateOrRepairRig(6);
@@ -38,12 +38,12 @@ namespace KIA.WiRR.Editor
 
         public static string RuntimeStatus()
         {
-            if (!Application.isPlaying) return "Uruchom Play Mode.";
+            if (!Application.isPlaying) return "Uruchom tryb Play.";
             var source = FindSource();
-            if (source == null) return "Brak WebSim — utwórz model.";
-            if (source.IsConnecting) return "CONNECTING…";
-            if (!source.IsConnected) return "DISCONNECTED";
-            return source.IsStale ? "STALE — brak aktualnych danych" : "LIVE";
+            if (source == null) return "Brak modelu WebSim — najpierw go utwórz.";
+            if (source.IsConnecting) return "ŁĄCZENIE…";
+            if (!source.IsConnected) return "ROZŁĄCZONO";
+            return source.IsStale ? "STALE — dane nie są aktualizowane" : "LIVE — dane są aktualne";
         }
 
         public static void CreateOrRepairRig(int labNumber)
@@ -71,7 +71,7 @@ namespace KIA.WiRR.Editor
         {
             if (!Application.isPlaying)
             {
-                Debug.LogWarning("[WiRR] Uruchom Play Mode.");
+                Debug.LogWarning("[WiRR] Uruchom tryb Play.");
                 return;
             }
             if (!ValidateConfiguration(out var message))
@@ -80,7 +80,7 @@ namespace KIA.WiRR.Editor
                 return;
             }
             var source = FindSource();
-            if (source == null) { Debug.LogWarning("[WiRR] Najpierw utwórz WebSim."); return; }
+            if (source == null) { Debug.LogWarning("[WiRR] Najpierw utwórz model WebSim."); return; }
             source.Configure(Backend, Session, Robot);
             try { await source.ConnectAsync(); } catch (Exception e) { Debug.LogError("[WiRR] " + e.Message); }
         }
