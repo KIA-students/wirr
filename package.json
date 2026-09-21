@@ -15,7 +15,7 @@
   "samples": [
     {
       "displayName": "Lab 01 — Środowisko XR i audyt urządzeń",
-      "description": "Przygotowanie środowiska XR, sceny bazowej i pomiarów wydajności. Etapy kluczowe: 3.0 — pomiar bazowy i eksperyment kontrolny; 3.5 — obciążenie CPU i GC; 4.0 — renderowanie, liczba obiektów, materiały, trójkąty i skalowanie renderowania (Render Scale); 4.5 — fizyka, Rigidbody i stały krok symulacji (Fixed Timestep); 5.0 — uruchomienie autonomiczne na Meta Quest 3 i weryfikacja tracking 6DoF.",
+      "description": "Przygotowanie środowiska XR, sceny bazowej i pomiarów wydajności. Etapy kluczowe: 3.0 — pomiar bazowy i eksperyment kontrolny; 3.5 — obciążenie CPU i GC; 4.0 — renderowanie, liczba obiektów, materiały, trójkąty i skalowanie renderowania (Render Scale); 4.5 — fizyka, Rigidbody i stały krok symulacji (Fixed Timestep); 5.0 — uruchomienie autonomiczne na Meta Quest 3 i weryfikacja śledzenia 6DoF.",
       "path": "Samples~/Lab01"
     },
     {
@@ -30,12 +30,12 @@
     },
     {
       "displayName": "Lab 04 — Rozumienie sceny i mieszanie rzeczywistości",
-      "description": "Praca z informacją o głębi i łączeniem obiektów rzeczywistych z wirtualnymi. Etapy kluczowe: 3.0 — Depth API i diagnostyka; 3.5 — okluzja środowiskowa; 4.0 — raycast z użyciem danych głębi i błąd odległości; 4.5 — estymacja oświetlenia; 5.0 — kontrolowany błąd, test rozstrzygający, minimalna poprawka i diagnoza.",
+      "description": "Praca z informacją o głębi i łączeniem obiektów rzeczywistych z wirtualnymi. Etapy kluczowe: 3.0 — API głębi (Depth API) i diagnostyka; 3.5 — okluzja środowiskowa; 4.0 — raycast z użyciem danych głębi i błąd odległości; 4.5 — estymacja oświetlenia; 5.0 — kontrolowany błąd, test rozstrzygający, minimalna poprawka i diagnoza.",
       "path": "Samples~/Lab04"
     },
     {
       "displayName": "Lab 05 — Optymalizacja modeli CAD",
-      "description": "Przygotowanie modeli inżynierskich do wydajnego użycia w XR. Etapy kluczowe: 3.0 — audyt modelu CAD i topologii; 3.5 — poziomy LOD; 4.0 — czas importu, pamięć i koszt klatki; 4.5 — diagnostyka oraz naprawa geometrii; 5.0 — wybór pipeline'u STEP→DCC→FBX/glTF, USD lub bezpośredniej siatki i ocena ryzyka.",
+      "description": "Przygotowanie modeli inżynierskich do wydajnego użycia w XR. Etapy kluczowe: 3.0 — audyt modelu CAD i topologii; 3.5 — poziomy LOD; 4.0 — czas importu, pamięć i koszt klatki; 4.5 — diagnostyka oraz naprawa geometrii; 5.0 — wybór potoku przetwarzania STEP→DCC→FBX/glTF, USD lub bezpośredniej siatki i ocena ryzyka.",
       "path": "Samples~/Lab05"
     },
     {
