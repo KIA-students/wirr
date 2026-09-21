@@ -254,7 +254,8 @@ namespace KIA.WiRR.Editor
                     case WiRRReportFieldKind.Choice:
                         var choices = new string[field.Choices.Length + 1];
                         choices[0] = "— wybierz —";
-                        Array.Copy(field.Choices, 0, choices, 1, field.Choices.Length);
+                        for (var i = 0; i < field.Choices.Length; i++)
+                            choices[i + 1] = ChoiceDisplayName(field.Choices[i]);
                         var oldChoice = Array.IndexOf(field.Choices, oldValue);
                         var selected = EditorGUILayout.Popup(label, oldChoice >= 0 ? oldChoice + 1 : 0, choices);
                         newValue = selected > 0 ? field.Choices[selected - 1] : string.Empty;
@@ -338,6 +339,23 @@ namespace KIA.WiRR.Editor
                     }
                 }
             }
+        }
+
+        private static string ChoiceDisplayName(string value)
+        {
+            return value switch
+            {
+                "ACCEPT" => "AKCEPTUJ",
+                "ACCEPT WITH CONDITIONS" => "AKCEPTUJ WARUNKOWO",
+                "REJECT" => "ODRZUĆ",
+                "LOCAL" => "Lokalnie (LOCAL)",
+                "LAN" => "Sieć lokalna (LAN)",
+                "WEBSIM" => "WebSim",
+                "STEP→DCC→FBX/glTF" => "STEP → DCC → FBX/glTF",
+                "bezpośrednia siatka" => "Bezpośrednia siatka",
+                "inna" => "Inna",
+                _ => value
+            };
         }
 
         private static string DrawEditableTableCell(GUIContent label, WiRRTableAxis column, string oldValue)
