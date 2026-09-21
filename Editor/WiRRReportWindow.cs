@@ -49,7 +49,7 @@ namespace KIA.WiRR.Editor
         {
             EditorGUILayout.Space(8);
             EditorGUILayout.LabelField("Raport laboratoryjny WiRR", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Wypełnij raport od checkpointu 3.0 w górę. Pola oznaczone * są wymagane. Raport zapisuje się automatycznie. Nie wpisuj imion ani nazwisk.", MessageType.Info);
+            EditorGUILayout.HelpBox("Do wysłania wymagany jest wyłącznie kompletny checkpoint 3.0. Etapy 3.5–5.0 są opcjonalne i mogą pozostać puste. Pola oznaczone * są wymagane w obrębie realizowanego checkpointu. Raport zapisuje się automatycznie. Nie wpisuj imion ani nazwisk.", MessageType.Info);
             var labels = WiRRLabCatalog.GetPopupLabels();
             var newLab = EditorGUILayout.Popup("Laboratorium", labNumber - 1, labels) + 1;
             if (newLab == labNumber) return;
@@ -155,8 +155,8 @@ namespace KIA.WiRR.Editor
             if (GUILayout.Button("Wyślij raport", GUILayout.Height(36)))
             {
                 evaluation = WiRRReportEvaluator.Evaluate(document);
-                if (evaluation.BlockingIssues.Count > 0 || string.IsNullOrWhiteSpace(evaluation.SuggestedGrade))
-                    submissionStatus = "Raport nie jest jeszcze gotowy do wysłania. Popraw wskazane braki.";
+                if (!evaluation.CanSubmit)
+                    submissionStatus = "Raport nie jest jeszcze gotowy do wysłania. Uzupełnij dane zespołu oraz checkpoint 3.0; etapy 3.5–5.0 mogą pozostać puste.";
                 else
                 {
                     var result = WiRRGitSubmission.Submit(document, WiRRGitSubmission.DefaultRepositoryUrl, WiRRGitSubmission.DefaultRepositorySlug, WiRRGitSubmission.DefaultBaseBranch, WiRRGitSubmission.DefaultReportsPath);
@@ -172,12 +172,30 @@ namespace KIA.WiRR.Editor
             foreach (var issue in evaluation.BlockingIssues) EditorGUILayout.HelpBox(issue, MessageType.Error);
             foreach (var cp in evaluation.Checkpoints)
             {
-                var text = $"{cp.Checkpoint}: {(cp.Complete ? "OK" : "braki")}";
+                var requiredForSubmission = cp.Checkpoint == "3.0";
+                var status = cp.Complete
+                    ? "OK"
+                    : requiredForSubmission
+                        ? "braki — wymagane do wysłania"
+                        : "opcjonalny — nieukończony";
+                var text = $"{cp.Checkpoint}: {status}";
                 if (cp.Reasons.Count > 0) text += " — " + string.Join("; ", cp.Reasons);
-                EditorGUILayout.HelpBox(text, cp.Complete ? MessageType.Info : MessageType.Warning);
+                var type = cp.Complete
+                    ? MessageType.Info
+                    : requiredForSubmission
+                        ? MessageType.Error
+                        : MessageType.None;
+                EditorGUILayout.HelpBox(text, type);
             }
-            var grade = string.IsNullOrWhiteSpace(evaluation.SuggestedGrade) ? "brak kompletnego checkpointu" : $"kompletny zakres do {evaluation.SuggestedGrade}";
+            var grade = string.IsNullOrWhiteSpace(evaluation.SuggestedGrade)
+                ? "checkpoint 3.0 nie jest jeszcze kompletny"
+                : $"kompletny zakres do {evaluation.SuggestedGrade}";
             EditorGUILayout.LabelField("Wynik kontroli: " + grade, EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox(
+                evaluation.CanSubmit
+                    ? "Raport może zostać wysłany. Nie trzeba uzupełniać checkpointów powyżej 3.0."
+                    : "Do wysłania wymagane są poprawne dane zespołu oraz kompletny checkpoint 3.0.",
+                evaluation.CanSubmit ? MessageType.Info : MessageType.Warning);
         }
     }
 }
