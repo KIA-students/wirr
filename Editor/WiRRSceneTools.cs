@@ -68,7 +68,7 @@ namespace KIA.WiRR.Editor
             }
             else
             {
-                Debug.Log($"[WiRR] Naprawiono scenę bazową dla Lab {labNumber:00}.");
+                Debug.Log($"[WiRR] Naprawiono scenę bazową dla laboratorium {labNumber:00}.");
             }
         }
 
@@ -140,7 +140,7 @@ namespace KIA.WiRR.Editor
             if (previousActive.IsValid() && previousActive.isLoaded)
                 SceneManager.SetActiveScene(previousActive);
 
-            Debug.Log($"[WiRR] Utworzono workspace Lab {labNumber:00}: {GetLabRootPath(labNumber)}");
+            Debug.Log($"[WiRR] Utworzono folder roboczy laboratorium {labNumber:00}: {GetLabRootPath(labNumber)}");
         }
 
         private static void ConfigureBaseScene(Scene scene, int labNumber)
