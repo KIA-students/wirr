@@ -23,7 +23,7 @@ namespace KIA.WiRR.Editor
                     var loaded = JsonUtility.FromJson<WiRRReportDocument>(File.ReadAllText(path));
                     if (loaded != null && loaded.labNumber == lab) return EnsureCollections(loaded);
                 }
-                catch (Exception exception) { Debug.LogWarning("[WiRR Reports] Draft load failed: " + exception.Message); }
+                catch (Exception exception) { Debug.LogWarning("[WiRR Raporty] Nie udało się wczytać szkicu raportu: " + exception.Message); }
             }
             var now = DateTime.UtcNow.ToString("O");
             var document = new WiRRReportDocument { submissionId = Guid.NewGuid().ToString("N"), labNumber = lab, createdAtUtc = now, updatedAtUtc = now };
