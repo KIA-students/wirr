@@ -91,7 +91,7 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField($"Lab {lab.Number:00}: {lab.Title}", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField($"Laboratorium {lab.Number:00}: {lab.Title}", EditorStyles.boldLabel);
 
                 var sampleReady = WiRRSampleTools.IsCourseSampleImported(lab.Number);
                 var workspaceReady = WiRRSceneTools.WorkspaceExists(lab.Number);
@@ -148,9 +148,9 @@ namespace KIA.WiRR.Editor
 
                 using (new EditorGUILayout.HorizontalScope())
                 {
-                    if (GUILayout.Button($"Otwórz folder Lab{lab.Number:00}"))
+                    if (GUILayout.Button($"Otwórz folder roboczy Lab{lab.Number:00}"))
                         WiRRSceneTools.OpenLabFolder(lab.Number);
-                    if (GUILayout.Button($"Otwórz scenę Lab{lab.Number:00}"))
+                    if (GUILayout.Button($"Otwórz scenę laboratorium {lab.Number:00}"))
                         WiRRSceneTools.OpenLabScene(lab.Number);
                 }
             }
