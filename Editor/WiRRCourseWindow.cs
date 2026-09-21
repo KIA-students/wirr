@@ -98,9 +98,9 @@ namespace KIA.WiRR.Editor
                 var sceneReady = WiRRSceneTools.SceneExists(lab.Number);
 
                 EditorGUILayout.LabelField(
-                    $"Próbka WiRR: {(sampleReady ? "OK" : "brak")}    " +
-                    $"Folder roboczy: {(workspaceReady ? "OK" : "brak")}    " +
-                    $"Scena: {(sceneReady ? "OK" : "brak")}",
+                    $"Próbka WiRR: {(sampleReady ? "gotowa" : "brak")}    " +
+                    $"Folder roboczy: {(workspaceReady ? "gotowy" : "brak")}    " +
+                    $"Scena: {(sceneReady ? "gotowa" : "brak")}",
                     EditorStyles.wordWrappedLabel);
                 EditorGUILayout.LabelField(WiRRSceneTools.GetLabRootPath(lab.Number), EditorStyles.miniLabel);
             }
@@ -112,6 +112,9 @@ namespace KIA.WiRR.Editor
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 EditorGUILayout.LabelField("1. Zależności", EditorStyles.boldLabel);
+                EditorGUILayout.HelpBox(
+                    "Zainstaluj pakiety wymagane przez wybrane laboratorium. Narzędzie pomija zależności, które są już obecne w projekcie.",
+                    MessageType.None);
                 using (new EditorGUI.DisabledScope(WiRRPackageInstaller.IsBusy))
                 {
                     if (GUILayout.Button("Zainstaluj / napraw zależności laboratorium", GUILayout.Height(30)))
@@ -188,7 +191,7 @@ namespace KIA.WiRR.Editor
             {
                 EditorGUILayout.LabelField("4. WiRR WebSim", EditorStyles.boldLabel);
                 EditorGUILayout.HelpBox(
-                    "Podaj adres serwera WebSocket, kod sesji i model robota. Następnie utwórz model robota, uruchom tryb Play i sprawdź, czy stan połączenia ma wartość LIVE.",
+                    "Podaj adres serwera WebSocket (np. ws://127.0.0.1:9090), kod sesji i model robota. Następnie utwórz model robota, uruchom tryb Play i sprawdź, czy stan połączenia ma wartość LIVE.",
                     MessageType.Info);
 
                 var backend = EditorGUILayout.TextField("Adres serwera WebSocket", WiRRWebSimTools.Backend);
@@ -263,6 +266,9 @@ namespace KIA.WiRR.Editor
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 EditorGUILayout.LabelField(lab.Number == 6 ? "6. Sprawdzenie konfiguracji" : "5. Sprawdzenie konfiguracji", EditorStyles.boldLabel);
+                EditorGUILayout.HelpBox(
+                    "Sprawdzenie obejmuje wersję Unity, wymagane pakiety, aktywną scenę, kamerę główną, znacznik WiRRSceneMarker oraz typowe błędy konfiguracji danego laboratorium.",
+                    MessageType.None);
 
                 if (GUILayout.Button("Sprawdź konfigurację laboratorium", GUILayout.Height(32)))
                     validationResults = WiRRSceneValidator.Validate(lab.Number);
