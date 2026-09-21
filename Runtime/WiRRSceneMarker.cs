@@ -9,9 +9,12 @@ namespace KIA.WiRR
     public sealed class WiRRSceneMarker : MonoBehaviour
     {
         [Range(1, 7)]
+        [InspectorName("Numer laboratorium")]
+        [Tooltip("Numer laboratorium, do którego należy ta scena.")]
         [SerializeField] private int labNumber = 1;
 
         [Tooltip("Opcjonalny identyfikator zespołu, np. numery indeksów.")]
+        [InspectorName("Identyfikator zespołu")]
         [SerializeField] private string teamId = string.Empty;
 
         public int LabNumber
