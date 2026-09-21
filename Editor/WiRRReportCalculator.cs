@@ -30,6 +30,7 @@ namespace KIA.WiRR.Editor
         {
             return fieldId == "cp30.baseline_fps" ||
                    fieldId == "cp30.baseline_frame_ms" ||
+                   fieldId == "cp45.scenario_median_s" ||
                    fieldId == "cp40.drift_median_mm" ||
                    fieldId == "cp45.e_median_mm" ||
                    fieldId == "cp45.e_max_mm" ||
