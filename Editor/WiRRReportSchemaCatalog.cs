@@ -47,7 +47,6 @@ namespace KIA.WiRR.Editor
 
             return $"Wpisz informację odpowiadającą polu „{label}” na podstawie wykonanego ćwiczenia." + requirement;
         }
-        }
     }
 
     internal sealed class WiRRReportSection
@@ -126,7 +125,7 @@ namespace KIA.WiRR.Editor
             new WiRRReportSection("3.5 — LOD", "3.5", I("cp35.lod0_triangles","LOD0 — liczba trójkątów"), I("cp35.lod1_triangles","LOD1 — liczba trójkątów"), I("cp35.lod2_triangles","LOD2 — liczba trójkątów"), M("cp35.answer","Kompromis między jakością a kosztem obliczeniowym")),
             new WiRRReportSection("4.0 — wydajność zasobu", "4.0", N("cp40.import_s","Czas importu","s"), N("cp40.memory_mb","Pamięć zasobu","MB"), N("cp40.frame_ms","Mediana czasu klatki","ms"), M("cp40.answer","Wniosek")),
             new WiRRReportSection("4.5 — diagnostyka geometrii", "4.5", M("cp45.issue","Wykryty problem geometrii"), M("cp45.fix","Zastosowana naprawa"), N("cp45.error_before","Miara błędu przed", "", false), N("cp45.error_after","Miara błędu po", "", false), M("cp45.answer","Weryfikacja naprawy")),
-            new WiRRReportSection("5.0 — potok przetwarzania", "5.0", C("cp50.potok przetwarzania","Wybrana ścieżka","STEP→DCC→FBX/glTF","USD","bezpośrednia siatka","inna"), M("cp50.risk","Najważniejsze ryzyko potoku przetwarzania"), M("cp50.answer","Uzasadnienie końcowe"))
+            new WiRRReportSection("5.0 — potok przetwarzania", "5.0", C("cp50.pipeline","Wybrany potok przetwarzania","STEP→DCC→FBX/glTF","USD","bezpośrednia siatka","inna"), M("cp50.risk","Najważniejsze ryzyko potoku przetwarzania"), M("cp50.answer","Uzasadnienie końcowe"))
         };
 
         private static IReadOnlyList<WiRRReportSection> Lab06() => new[]
