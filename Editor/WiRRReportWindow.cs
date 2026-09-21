@@ -325,6 +325,12 @@ namespace KIA.WiRR.Editor
                 return selected == 1 ? "PASS" : selected == 2 ? "FAIL" : selected == 3 ? "NV" : string.Empty;
             }
 
+            if (column.Id == "p" || column.Id == "s" || column.Id == "ocena_1_5" || column.Id == "jakość_1_5")
+                return DrawNumericChoice(label, oldValue, 1, 5);
+
+            if (column.Id == "komfort_0_10")
+                return DrawNumericChoice(label, oldValue, 0, 10);
+
             if (column.Id == "hit_miss")
             {
                 var values = new[] { "— wybierz —", "HIT — trafienie", "MISS — brak trafienia" };
@@ -346,6 +352,21 @@ namespace KIA.WiRR.Editor
             }
 
             return EditorGUILayout.TextField(label, oldValue);
+        }
+
+        private static string DrawNumericChoice(GUIContent label, string oldValue, int minimum, int maximum)
+        {
+            var values = new string[maximum - minimum + 2];
+            values[0] = "— wybierz —";
+            for (var value = minimum; value <= maximum; value++)
+                values[value - minimum + 1] = value.ToString();
+
+            var selected = 0;
+            if (int.TryParse(oldValue, out var current) && current >= minimum && current <= maximum)
+                selected = current - minimum + 1;
+
+            var next = EditorGUILayout.Popup(label, selected, values);
+            return next == 0 ? string.Empty : (minimum + next - 1).ToString();
         }
 
         private static bool IsBooleanLikeColumn(string columnId)
