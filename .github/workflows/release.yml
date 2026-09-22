@@ -48,7 +48,7 @@ jobs:
               raise SystemExit(f"Nieprawidłowa stabilna wersja SemVer: {version}")
 
           changelog = (root / "CHANGELOG.md").read_text(encoding="utf-8")
-          if f"## {version} —" not in changelog:
+          if f"## {version} (" not in changelog:
               raise SystemExit(f"Brak sekcji {version} w CHANGELOG.md")
 
           required = [
@@ -114,7 +114,7 @@ jobs:
           changelog = Path("CHANGELOG.md").read_text(encoding="utf-8")
 
           match = re.search(
-              rf"^## {re.escape(version)} — .*?\n(?P<body>.*?)(?=^## |\Z)",
+              rf"^## {re.escape(version)} \\(.*?\\)\n(?P<body>.*?)(?=^## |\\Z)",
               changelog,
               flags=re.MULTILINE | re.DOTALL,
           )
