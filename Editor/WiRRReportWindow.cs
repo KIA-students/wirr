@@ -234,7 +234,7 @@ namespace KIA.WiRR.Editor
             var requiredMark = field.Required ? " *" : string.Empty;
             var unit = string.IsNullOrEmpty(field.Unit) ? string.Empty : $" [{field.Unit}]";
             var automatic = WiRRReportCalculator.IsDerivedField(field.Id);
-            var labelText = field.Label + unit + requiredMark + (automatic ? " — automatycznie" : string.Empty);
+            var labelText = field.Label + unit + requiredMark + (automatic ? ": automatycznie" : string.Empty);
             var automaticDescription = automatic ? WiRRReportCalculator.DerivedFieldDescription(field.Id) : string.Empty;
             var label = new GUIContent(labelText, automatic ? automaticDescription : field.Help);
 
