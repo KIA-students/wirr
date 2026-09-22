@@ -22,6 +22,7 @@ env:
 
 jobs:
   sync:
+    if: github.repository == 'MatPomGit/wirr'
     name: Scal nowe zmiany z repozytorium nadrzędnego
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -69,10 +70,8 @@ jobs:
           {
             echo "## Synchronizacja z KIA-students/wirr"
             echo
-            echo "- fork: `${local_sha:0:12}`"
-            echo "- upstream: `${upstream_sha:0:12}`"
-            echo "- nowych commitów w upstream: **${upstream_only}**"
-            echo "- commitów lokalnych niewystępujących w upstream: **${local_only}**"
+            echo "- nowych commitów w repozytorium kursu: ${upstream_only}"
+            echo "- lokalnych commitów niewystępujących upstream: ${local_only}"
           } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Brak zmian do pobrania
@@ -80,31 +79,78 @@ jobs:
         shell: bash
         run: |
           echo "KIA-students/wirr nie zawiera nowych commitów względem forka."
-          echo >> "${GITHUB_STEP_SUMMARY}"
           echo "Fork jest aktualny względem repozytorium nadrzędnego." >> "${GITHUB_STEP_SUMMARY}"
 
-      - name: Scal upstream z zachowaniem lokalnej historii
+      - name: Scal upstream i zachowaj prywatną automatyzację
         if: steps.compare.outputs.needs_sync == 'true'
         id: merge
         shell: bash
         run: |
           set -euo pipefail
 
-          # Zwykły merge zachowuje zarówno commity z forka, jak i z upstream.
-          # Nie używamy reset --hard, force-push ani strategii nadpisującej historię.
+          local_before="$(git rev-parse HEAD)"
+          private_paths=(
+            ".github/workflows/sync-kia-students-pr.yml"
+            ".github/workflows/sync-from-kia-students.yml"
+            ".github/workflows/branch-hygiene.yml"
+          )
+
           set +e
-          git merge --no-edit "upstream/${UPSTREAM_BRANCH}"
+          git merge --no-ff --no-edit "upstream/${UPSTREAM_BRANCH}"
           merge_status=$?
           set -e
 
-          if [ "${merge_status}" -eq 0 ]; then
-            echo "clean=true" >> "${GITHUB_OUTPUT}"
-            echo "Scalanie zakończone bez konfliktów."
-          else
+          if [ "${merge_status}" -ne 0 ]; then
+            mapfile -t conflicts < <(git diff --name-only --diff-filter=U)
+            unhandled=0
+
+            for path in "${conflicts[@]}"; do
+              protected=false
+              for private_path in "${private_paths[@]}"; do
+                if [ "${path}" = "${private_path}" ]; then
+                  protected=true
+                  break
+                fi
+              done
+
+              if [ "${protected}" = true ]; then
+                echo "Rozwiązuję konflikt prywatnego workflow na korzyść forka: ${path}"
+                git checkout "${local_before}" -- "${path}"
+                git add "${path}"
+              else
+                echo "Konflikt wymagający ręcznej decyzji: ${path}"
+                unhandled=1
+              fi
+            done
+
+            if [ "${unhandled}" -eq 0 ]; then
+              git commit --no-edit
+              echo "clean=true" >> "${GITHUB_OUTPUT}"
+              echo "Konflikty dotyczyły wyłącznie chronionych workflow i zostały rozwiązane lokalnie."
+              exit 0
+            fi
+
             git merge --abort || true
             echo "clean=false" >> "${GITHUB_OUTPUT}"
-            echo "::warning::Automatyczne scalanie wykryło konflikt. Główna gałąź forka nie została zmieniona."
+            echo "::warning::Automatyczne scalanie wykryło konflikt poza prywatną automatyzacją."
+            exit 0
           fi
+
+          # Nawet przy czystym merge publiczne repozytorium nie może usunąć ani
+          # zastąpić workflow używanych wyłącznie w forku.
+          for path in "${private_paths[@]}"; do
+            if git cat-file -e "${local_before}:${path}" 2>/dev/null; then
+              git checkout "${local_before}" -- "${path}"
+              git add "${path}"
+            fi
+          done
+
+          if ! git diff --cached --quiet; then
+            git commit --amend --no-edit
+          fi
+
+          echo "clean=true" >> "${GITHUB_OUTPUT}"
+          echo "Scalanie zakończone, a prywatna automatyzacja została zachowana."
 
       - name: Zaktualizuj main forka
         if: steps.compare.outputs.needs_sync == 'true' && steps.merge.outputs.clean == 'true'
@@ -112,15 +158,35 @@ jobs:
         run: |
           set -euo pipefail
           git push origin HEAD:main
-          echo >> "${GITHUB_STEP_SUMMARY}"
-          echo "✅ `MatPomGit/wirr:main` został zaktualizowany przez bezpieczne scalenie z `KIA-students/wirr:main`." >> "${GITHUB_STEP_SUMMARY}"
+          echo "Main forka został zaktualizowany bez publikowania prywatnych workflow." >> "${GITHUB_STEP_SUMMARY}"
 
-      - name: Przygotuj gałąź do ręcznego rozwiązania konfliktu
+      - name: Przygotuj bezpieczną gałąź do ręcznego rozwiązania konfliktu
         if: steps.compare.outputs.needs_sync == 'true' && steps.merge.outputs.clean == 'false'
         shell: bash
         run: |
           set -euo pipefail
-          git push --force-with-lease origin "upstream/${UPSTREAM_BRANCH}:refs/heads/${FALLBACK_BRANCH}"
+
+          local_before="${{ steps.compare.outputs.local_sha }}"
+          private_paths=(
+            ".github/workflows/sync-kia-students-pr.yml"
+            ".github/workflows/sync-from-kia-students.yml"
+            ".github/workflows/branch-hygiene.yml"
+          )
+
+          git checkout -B "${FALLBACK_BRANCH}" "upstream/${UPSTREAM_BRANCH}"
+
+          for path in "${private_paths[@]}"; do
+            if git cat-file -e "${local_before}:${path}" 2>/dev/null; then
+              git checkout "${local_before}" -- "${path}"
+              git add "${path}"
+            fi
+          done
+
+          if ! git diff --cached --quiet; then
+            git commit -m "sync: zachowaj prywatną automatyzację forka"
+          fi
+
+          git push --force origin "HEAD:refs/heads/${FALLBACK_BRANCH}"
 
       - name: Utwórz lub pokaż PR przy konflikcie
         if: steps.compare.outputs.needs_sync == 'true' && steps.merge.outputs.clean == 'false'
@@ -138,9 +204,8 @@ jobs:
             pr_url="${existing}"
           else
             pr_url="$(
-              gh pr create                 --repo "${GITHUB_REPOSITORY}"                 --base main                 --head "${FALLBACK_BRANCH}"                 --title "sync: KIA-students/wirr → MatPomGit/wirr"                 --body "Automatyczna synchronizacja wykryła nowe commity w `KIA-students/wirr`, ale zwykły merge z `MatPomGit/wirr:main` zakończył się konfliktem. Ten PR udostępnia aktualny stan upstream do ręcznego scalenia. Nie wykonano resetu ani force-push na `main`, więc lokalne zmiany w forku pozostają nienaruszone."
+              gh pr create                 --repo "${GITHUB_REPOSITORY}"                 --base main                 --head "${FALLBACK_BRANCH}"                 --title "sync: aktualizacja z KIA-students/wirr"                 --body "Automatyczna synchronizacja wykryła konflikt wymagający ręcznej decyzji. Gałąź zachowuje workflow przeznaczone wyłącznie dla forka."
             )"
           fi
 
-          echo >> "${GITHUB_STEP_SUMMARY}"
-          echo "⚠️ Wymagane ręczne rozwiązanie konfliktu: ${pr_url}" >> "${GITHUB_STEP_SUMMARY}"
+          echo "Wymagane ręczne rozwiązanie konfliktu: ${pr_url}" >> "${GITHUB_STEP_SUMMARY}"
