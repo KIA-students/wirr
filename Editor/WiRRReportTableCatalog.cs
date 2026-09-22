@@ -63,31 +63,31 @@ namespace KIA.WiRR.Editor
         {
             return label switch
             {
-                "Baseline PC — trzy próby" => "Pomiar bazowy na PC — trzy próby",
-                "Chwyt / socket / ray — pomiary" => "Chwyt / gniazdo (socket) / promień (ray) — pomiary",
-                "UI i feedback — pomiary" => "Interfejs i informacja zwrotna — pomiary",
-                "Tracking — warunki eksperymentalne" => "Śledzenie — warunki eksperymentalne",
+                "Baseline PC: trzy próby" => "Pomiar bazowy na PC: trzy próby",
+                "Chwyt / socket / ray: pomiary" => "Chwyt / gniazdo (socket) / promień (ray): pomiary",
+                "UI i feedback: pomiary" => "Interfejs i informacja zwrotna: pomiary",
+                "Tracking: warunki eksperymentalne" => "Śledzenie: warunki eksperymentalne",
                 "Raycast i placement" => "Raycast i pozycjonowanie",
                 "Baseline → błąd → naprawa" => "Pomiar bazowy → błąd → naprawa",
-                "Baseline topology audit" => "Audyt topologii — pomiar bazowy",
-                "Benchmark LOD — trzy próby" => "Pomiar wydajności LOD — trzy próby",
+                "Baseline topology audit" => "Audyt topologii: pomiar bazowy",
+                "Benchmark LOD: trzy próby" => "Pomiar wydajności LOD: trzy próby",
                 "Baseline → fault → repaired" => "Pomiar bazowy → błąd → po naprawie",
-                "Inter-arrival — pierwsze 30 próbek" => "Odstępy między wiadomościami — pierwsze 30 próbek",
-                "RTT — próbki" => "Czas RTT — próbki",
-                "RTT — wariant v4" => "Czas RTT — wariant v4",
+                "Inter-arrival: pierwsze 30 próbek" => "Odstępy między wiadomościami: pierwsze 30 próbek",
+                "RTT: próbki" => "Czas RTT: próbki",
+                "RTT: wariant v4" => "Czas RTT: wariant v4",
                 "LIVE / STALE" => "Stan danych LIVE / STALE",
                 "Test dymny" => "Test podstawowy (smoke test)",
-                "Depth API — eksperyment v1" => "API głębi (Depth API) — eksperyment v1",
-                "Depth-raycast — seria bazowa" => "Raycast z użyciem głębi — seria bazowa",
-                "Depth-raycast — eksperyment v3" => "Raycast z użyciem głębi — eksperyment v3",
+                "Depth API: eksperyment v1" => "API głębi (Depth API): eksperyment v1",
+                "Depth-raycast: seria bazowa" => "Raycast z użyciem głębi: seria bazowa",
+                "Depth-raycast: eksperyment v3" => "Raycast z użyciem głębi: eksperyment v3",
                 "Finalne geometrie LOD" => "Geometrie końcowe LOD",
                 "Materiały, draw calls i kolizje" => "Materiały, wywołania rysowania i kolizje",
                 "Macierz funkcjonalna Lab 1–6" => "Macierz funkcjonalna laboratoriów 1–6",
-                "CPU-A — iterationsPerFrame" => "CPU-A — iteracje na klatkę (iterationsPerFrame)",
-                "CPU-B — blocksPerFrame" => "CPU-B — bloki na klatkę (blocksPerFrame)",
-                "CPU-C — allocationBytesPerFrame" => "CPU-C — alokacja pamięci na klatkę (allocationBytesPerFrame)",
-                "GPU-D — Render Scale" => "GPU-D — skala renderowania (Render Scale)",
-                "PHY-C — Fixed Timestep" => "PHY-C — stały krok symulacji (Fixed Timestep)",
+                "CPU-A: iterationsPerFrame" => "CPU-A: iteracje na klatkę (iterationsPerFrame)",
+                "CPU-B: blocksPerFrame" => "CPU-B: bloki na klatkę (blocksPerFrame)",
+                "CPU-C: allocationBytesPerFrame" => "CPU-C: alokacja pamięci na klatkę (allocationBytesPerFrame)",
+                "GPU-D: Render Scale" => "GPU-D: skala renderowania (Render Scale)",
+                "PHY-C: Fixed Timestep" => "PHY-C: stały krok symulacji (Fixed Timestep)",
                 _ => label
             };
         }
@@ -147,8 +147,8 @@ namespace KIA.WiRR.Editor
                 "Sukces?" => "Czy zadanie wykonano?",
                 "Czas/próby" => "Czas / liczba prób",
                 "Pomoc" => "Liczba podpowiedzi / pomoc",
-                "P" => "P — prawdopodobieństwo",
-                "S" => "S — skutek",
+                "P" => "P: prawdopodobieństwo",
+                "S" => "S: skutek",
                 "R" => "R = P × S",
                 _ => label
             };
@@ -224,41 +224,41 @@ namespace KIA.WiRR.Editor
         private static IReadOnlyList<WiRRReportTable> Lab01(string cp) => cp switch
         {
             "3.0" => new[] {
-                T("lab01_cp30_baseline", "Baseline PC — trzy próby", new[]{"Próba 1","Próba 2","Próba 3"}, new[]{"FPS","ms/klatka"}),
+                T("lab01_cp30_baseline", "Baseline PC: trzy próby", new[]{"Próba 1","Próba 2","Próba 3"}, new[]{"FPS","ms/klatka"}),
                 T("lab01_cp30_ab", "Eksperyment kontrolny 3.0", new[]{"A","B"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","ms 1","ms 2","ms 3","Mediana ms"}) },
             "3.5" => new[] {
-                T("lab01_cpu_a", "CPU-A — iterationsPerFrame", new[]{"0","10000","25000","50000","100000","200000","400000"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Main Thread ms","Delta FPS %"}),
-                T("lab01_cpu_b", "CPU-B — blocksPerFrame", new[]{"1","2","4","8","16","32"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Delta FPS %"}),
-                T("lab01_cpu_c", "CPU-C — allocationBytesPerFrame", new[]{"0","1024","4096","16384","65536","262144"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","GC Alloc","GC zaobserwowane"}) },
+                T("lab01_cpu_a", "CPU-A: iterationsPerFrame", new[]{"0","10000","25000","50000","100000","200000","400000"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Main Thread ms","Delta FPS %"}),
+                T("lab01_cpu_b", "CPU-B: blocksPerFrame", new[]{"1","2","4","8","16","32"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Delta FPS %"}),
+                T("lab01_cpu_c", "CPU-C: allocationBytesPerFrame", new[]{"0","1024","4096","16384","65536","262144"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","GC Alloc","GC zaobserwowane"}) },
             "4.0" => new[] {
-                T("lab01_gpu_a", "GPU-A — liczba widocznych obiektów", new[]{"0","100","250","500","1000","2000","4000"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Batches","SetPass","Triangles","Delta FPS %"}),
-                T("lab01_gpu_b", "GPU-B — liczba materiałów", new[]{"1","2","4","8","16","32"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Batches","SetPass"}),
-                T("lab01_gpu_d", "GPU-D — Render Scale", new[]{"0.60","0.70","0.80","0.90","1.00","1.20"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Delta FPS %"}) },
+                T("lab01_gpu_a", "GPU-A: liczba widocznych obiektów", new[]{"0","100","250","500","1000","2000","4000"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Batches","SetPass","Triangles","Delta FPS %"}),
+                T("lab01_gpu_b", "GPU-B: liczba materiałów", new[]{"1","2","4","8","16","32"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Batches","SetPass"}),
+                T("lab01_gpu_d", "GPU-D: Render Scale", new[]{"0.60","0.70","0.80","0.90","1.00","1.20"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Delta FPS %"}) },
             "4.5" => new[] {
-                T("lab01_phy_a", "PHY-A — dynamiczne Rigidbody", new[]{"0","25","50","100","200","400","800"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Physics ms","Delta FPS %"}),
-                T("lab01_phy_c", "PHY-C — Fixed Timestep", new[]{"0.0333","0.0250","0.0200","0.0167","0.0133","0.0111"}, new[]{"kroki/s","FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Physics ms"}) },
-            "5.0" => new[] { T("lab01_quest_tests", "Quest 3 — testy funkcjonalne", new[]{"obrót głowy","translacja głowy","lewy kontroler","prawy kontroler","Select","standalone bez Link"}, new[]{"Wynik","Uwagi"}) },
+                T("lab01_phy_a", "PHY-A: dynamiczne Rigidbody", new[]{"0","25","50","100","200","400","800"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Physics ms","Delta FPS %"}),
+                T("lab01_phy_c", "PHY-C: Fixed Timestep", new[]{"0.0333","0.0250","0.0200","0.0167","0.0133","0.0111"}, new[]{"kroki/s","FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Physics ms"}) },
+            "5.0" => new[] { T("lab01_quest_tests", "Quest 3: testy funkcjonalne", new[]{"obrót głowy","translacja głowy","lewy kontroler","prawy kontroler","Select","standalone bez Link"}, new[]{"Wynik","Uwagi"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
 
         private static IReadOnlyList<WiRRReportTable> Lab02(string cp) => cp switch
         {
-            "3.0" => new[] { T("lab02_cp30_conditions", "Chwyt / socket / ray — pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy"}) },
-            "3.5" => new[] { T("lab02_cp35_conditions", "UI i feedback — pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędne aktywacje"}) },
-            "4.0" => new[] { T("lab02_cp40_conditions", "Lokomocja — pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy/korekty"}) },
+            "3.0" => new[] { T("lab02_cp30_conditions", "Chwyt / socket / ray: pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy"}) },
+            "3.5" => new[] { T("lab02_cp35_conditions", "UI i feedback: pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędne aktywacje"}) },
+            "4.0" => new[] { T("lab02_cp40_conditions", "Lokomocja: pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy/korekty"}) },
             "4.5" => new[] { T("lab02_scenario", "Scenariusz bazowy", new[]{"1","2","3","4","5"}, new[]{"Czas s","Upuszczenia","Błędne aktywacje","Nieudane teleportacje","Błędy osadzenia/reset","Uwagi"}) },
             "5.0" => new[] {
-                T("lab02_ssq", "SSQ — wyniki liczbowe", new[]{"Osoba A PRE","Osoba A POST","Osoba B PRE","Osoba B POST"}, new[]{"N","O","D","TS"}),
+                T("lab02_ssq", "SSQ: wyniki liczbowe", new[]{"Osoba A PRE","Osoba A POST","Osoba B PRE","Osoba B POST"}, new[]{"N","O","D","TS"}),
                 T("lab02_quest_experiment", "Eksperyment Quest 3", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Mediana s","Błędy/korekty","Komfort 0–10"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
 
         private static IReadOnlyList<WiRRReportTable> Lab03(string cp) => cp switch
         {
-            "3.0" => new[] { T("lab03_tracking_conditions", "Tracking — warunki eksperymentalne", new[]{"A","B","C"}, new[]{"Powt. 1 s","Powt. 2 s","Powt. 3 s","Mediana s","notTrackingReason/uwagi"}) },
+            "3.0" => new[] { T("lab03_tracking_conditions", "Tracking: warunki eksperymentalne", new[]{"A","B","C"}, new[]{"Powt. 1 s","Powt. 2 s","Powt. 3 s","Mediana s","notTrackingReason/uwagi"}) },
             "3.5" => new[] { T("lab03_placement", "Raycast i placement", new[]{"A","B","C"}, new[]{"Poprawne trafienia /10","Mediana błędu mm","Uwagi"}) },
             "4.0" => new[] {
-                T("lab03_drift", "Kotwica — pomiar po powrocie", new[]{"1","2","3"}, new[]{"Błąd końcowy mm","Tracking","notTrackingReason","Uwagi"}),
+                T("lab03_drift", "Kotwica: pomiar po powrocie", new[]{"1","2","3"}, new[]{"Błąd końcowy mm","Tracking","notTrackingReason","Uwagi"}),
                 T("lab03_drift_conditions", "Eksperyment dryfu", new[]{"A","B","C"}, new[]{"Powt. 1 mm","Powt. 2 mm","Powt. 3 mm","Mediana mm","Uwagi"}) },
             "4.5" => new[] { T("lab03_registration", "Bazowe rejestracje dwupunktowe", new[]{"1","2","3"}, new[]{"Zmierzony OX m","e1 mm","e2 mm","e3 mm","e_med mm","e_max mm"}) },
             "5.0" => new[] { T("lab03_fault", "Baseline → błąd → naprawa", new[]{"baseline 1","baseline 2","baseline 3","błąd 1","błąd 2","błąd 3","naprawa 1","naprawa 2","naprawa 3"}, new[]{"e1 mm","e2 mm","e3 mm","e_med mm","e_max mm"}) },
@@ -267,14 +267,14 @@ namespace KIA.WiRR.Editor
 
         private static IReadOnlyList<WiRRReportTable> Lab04(string cp) => cp switch
         {
-            "3.0" => new[] { T("lab04_depth_v1", "Depth API — eksperyment v1", new[]{"A","B","C"}, new[]{"successRate 1 %","successRate 2 %","successRate 3 %","Mediana %","Rozdzielczość","Uwagi"}) },
+            "3.0" => new[] { T("lab04_depth_v1", "Depth API: eksperyment v1", new[]{"A","B","C"}, new[]{"successRate 1 %","successRate 2 %","successRate 3 %","Mediana %","Rozdzielczość","Uwagi"}) },
             "3.5" => new[] {
-                T("lab04_occlusion_base", "Okluzja — test bazowy", new[]{"Off","Raw","Smoothed"}, new[]{"Model zasłaniany?","Błędy /10","Dominujący błąd"}),
-                T("lab04_occlusion_v2", "Okluzja — eksperyment v2", new[]{"A","B","C"}, new[]{"Tryb/jakość","Błędy /10","Requested depth","Current depth","Uwagi"}) },
+                T("lab04_occlusion_base", "Okluzja: test bazowy", new[]{"Off","Raw","Smoothed"}, new[]{"Model zasłaniany?","Błędy /10","Dominujący błąd"}),
+                T("lab04_occlusion_v2", "Okluzja: eksperyment v2", new[]{"A","B","C"}, new[]{"Tryb/jakość","Błędy /10","Requested depth","Current depth","Uwagi"}) },
             "4.0" => new[] {
-                T("lab04_depth_raycast", "Depth-raycast — seria bazowa", new[]{"0.50 m / 1","0.50 m / 2","0.50 m / 3","0.50 m / 4","0.50 m / 5","1.00 m / 1","1.00 m / 2","1.00 m / 3","1.00 m / 4","1.00 m / 5","1.50 m / 1","1.50 m / 2","1.50 m / 3","1.50 m / 4","1.50 m / 5"}, new[]{"HIT/MISS","d_AR m","e_d m"}),
-                T("lab04_depth_v3", "Depth-raycast — eksperyment v3", new[]{"A","B","C"}, new[]{"HIT /5","MISS /5","Mediana błędu HIT m","Uwagi"}) },
-            "4.5" => new[] { T("lab04_lighting", "Estymacja oświetlenia — pięć warunków", new[]{"Jasne rozproszone","Słabsze rozproszone","Źródło boczne","Światło od przodu","Oświetlenie mieszane"}, new[]{"Mediana brightness","Color temp K/NA","Main direction/NA","Current mode","Ocena 1–5","Uwagi"}) },
+                T("lab04_depth_raycast", "Depth-raycast: seria bazowa", new[]{"0.50 m / 1","0.50 m / 2","0.50 m / 3","0.50 m / 4","0.50 m / 5","1.00 m / 1","1.00 m / 2","1.00 m / 3","1.00 m / 4","1.00 m / 5","1.50 m / 1","1.50 m / 2","1.50 m / 3","1.50 m / 4","1.50 m / 5"}, new[]{"HIT/MISS","d_AR m","e_d m"}),
+                T("lab04_depth_v3", "Depth-raycast: eksperyment v3", new[]{"A","B","C"}, new[]{"HIT /5","MISS /5","Mediana błędu HIT m","Uwagi"}) },
+            "4.5" => new[] { T("lab04_lighting", "Estymacja oświetlenia: pięć warunków", new[]{"Jasne rozproszone","Słabsze rozproszone","Źródło boczne","Światło od przodu","Oświetlenie mieszane"}, new[]{"Mediana brightness","Color temp K/NA","Main direction/NA","Current mode","Ocena 1–5","Uwagi"}) },
             "5.0" => new[] { T("lab04_fault", "Baseline → błąd → naprawa", new[]{"baseline","kontrolowany błąd","po naprawie"}, new[]{"Powt. 1","Powt. 2","Powt. 3","Mediana/wynik","Uwagi"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
@@ -287,7 +287,7 @@ namespace KIA.WiRR.Editor
             "3.5" => new[] { T("lab05_triangulation", "Triangulacja i jakość siatki", new[]{"A","B","C"}, new[]{"Metoda/parametr","Vertices","Triangles","Boundary","Non-manifold","Degenerate","q05","qMedian","Cechy zachowane"}) },
             "4.0" => new[] {
                 T("lab05_lods", "Finalne geometrie LOD", new[]{"Baseline","LOD0","LOD1","LOD2"}, new[]{"Rozmiar pliku","Vertices","Triangles","Submesh","Materiały","q05","qMedian","Uwagi"}),
-                T("lab05_benchmark", "Benchmark LOD — trzy próby", new[]{"A1","A2","A3","B1","B2","B3","C1","C2","C3"}, new[]{"mean ms","median ms","p95 ms","FPS","Triangles","Renderers","Material slots","CPU ms","GPU ms","Batches","Pamięć"}) },
+                T("lab05_benchmark", "Benchmark LOD: trzy próby", new[]{"A1","A2","A3","B1","B2","B3","C1","C2","C3"}, new[]{"mean ms","median ms","p95 ms","FPS","Triangles","Renderers","Material slots","CPU ms","GPU ms","Batches","Pamięć"}) },
             "4.5" => new[] { T("lab05_materials", "Materiały, draw calls i kolizje", new[]{"A","B","C"}, new[]{"Triangles","Materiały","Draw calls/batches","CPU ms","GPU ms","Pamięć","Błędy /20","Jakość 1–5"}) },
             "5.0" => new[] {
                 T("lab05_fault", "Baseline → fault → repaired", new[]{"baseline","fault","repaired"}, new[]{"Wymiar m","Vertices","Triangles","Boundary","q05","Materiały","Hierarchia OK","median ms","p95 ms","Błąd funkcjonalny","Uwagi"}),
@@ -302,11 +302,11 @@ namespace KIA.WiRR.Editor
                 T("lab06_robot_motion", "Test ruchu robota", new[]{"Próba 1","Próba 2","Próba 3"}, new[]{"Komenda joint1","Komenda joint2","JointState joint1","JointState joint2","Gazebo/Unity zgodne?"}) },
             "3.5" => new[] { T("lab06_mapping", "Mapowanie JointState → Unity", new[]{"joint1","joint2","joint3"}, new[]{"Obiekt Unity","Typ","Oś lokalna","sign","offset","Jednostka"}) },
             "4.0" => new[] {
-                T("lab06_interarrival", "Inter-arrival — pierwsze 30 próbek", new[]{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"}, new[]{"inter-arrival ms"}),
-                T("lab06_buffer", "Buforowanie i interpolacja — wariant v3", new[]{"A","B","C"}, new[]{"Źródło","Hz","Delay ms","Buffer","T średnie ms","sT ms","Płynność"}),
-                T("lab06_rtt", "RTT — próbki", new[]{"1","2","3","4","5","6","7","8","9","10"}, new[]{"RTT ms"}) },
+                T("lab06_interarrival", "Inter-arrival: pierwsze 30 próbek", new[]{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"}, new[]{"inter-arrival ms"}),
+                T("lab06_buffer", "Buforowanie i interpolacja: wariant v3", new[]{"A","B","C"}, new[]{"Źródło","Hz","Delay ms","Buffer","T średnie ms","sT ms","Płynność"}),
+                T("lab06_rtt", "RTT: próbki", new[]{"1","2","3","4","5","6","7","8","9","10"}, new[]{"RTT ms"}) },
             "4.5" => new[] {
-                T("lab06_rtt_compare", "RTT — wariant v4", new[]{"A","B"}, new[]{"N","mean ms","min ms","max ms","Warunki"}),
+                T("lab06_rtt_compare", "RTT: wariant v4", new[]{"A","B"}, new[]{"N","mean ms","min ms","max ms","Warunki"}),
                 T("lab06_stale", "LIVE / STALE", new[]{"Pomiar"}, new[]{"próg STALE ms","joint_states Hz","pauza Gazebo s","detekcja STALE ms","odzyskanie LIVE ms"}) },
             "5.0" => new[] { T("lab06_fault", "Eksperyment diagnostyczny", new[]{"baseline","kontrolowany błąd","po naprawie"}, new[]{"Stan / wynik","joint1","joint2","Hz","RTT ms","Uwagi"}) },
             _ => Array.Empty<WiRRReportTable>()
