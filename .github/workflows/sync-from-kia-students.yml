@@ -1,10 +1,8 @@
 name: Aktualizacja forka z KIA-students
 
 on:
-  push:
-    branches: [main]
   schedule:
-    - cron: '23 * * * *'
+    - cron: '23 */6 * * *'
   workflow_dispatch:
 
 permissions:
