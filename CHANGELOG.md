@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 0.4.6 (2026-09-22)
+
+- przywrócono nazwę produktu `WiRR Course Toolkit` w Unity, Package Manager, README i stronie kursu;
+- usunięto pauzy typu em dash z aktywnych etykiet interfejsu oraz zastąpiono je dwukropkami, nawiasami lub prostszymi sformułowaniami;
+- zachowano kolorowy, etapowy układ Course Toolkit wprowadzony wcześniej;
+- zaktualizowano nazwy próbek laboratoriów i walidację wydania tak, aby używały separatora dwukropka.
+
+
 ## 0.5.0 — 2026-09-22
 
 - dodano generator lekkich prefabów dydaktycznych dla Lab 01–07 bez dodatkowych zależności od XRI/AR/ROS;
