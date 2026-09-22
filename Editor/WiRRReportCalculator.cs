@@ -121,9 +121,9 @@ namespace KIA.WiRR.Editor
             if (table.Id == "lab01_phy_c" && column.Id == "kroki_s")
                 return "Obliczane automatycznie jako 1 / Fixed Timestep.";
             if (column.Id == "e_med_mm")
-                return "Mediana wartości e1, e2 i e3 — obliczana automatycznie.";
+                return "Mediana wartości e1, e2 i e3: obliczana automatycznie.";
             if (column.Id == "e_max_mm")
-                return "Największa z wartości e1, e2 i e3 — obliczana automatycznie.";
+                return "Największa z wartości e1, e2 i e3: obliczana automatycznie.";
             if (table.Id == "lab04_depth_raycast" && column.Id == "e_d_m")
                 return "Bezwzględny błąd odległości |d_AR − d_ref|, gdzie d_ref wynika z nazwy wiersza.";
             if (table.Id == "lab05_benchmark" && column.Id == "fps")
@@ -131,12 +131,12 @@ namespace KIA.WiRR.Editor
             if (table.Id == "lab07_performance" && column.Id == "ms_kl_mediana")
                 return "Obliczane automatycznie jako 1000 / mediana liczby klatek na sekundę.";
             if (table.Id == "lab07_risk" && column.Id == "r")
-                return "Priorytet ryzyka R = P × S — obliczany automatycznie.";
+                return "Priorytet ryzyka R = P × S: obliczany automatycznie.";
             if (column.Id == "mediana_ms" && HasColumn(table, "mediana_fps") &&
                 GetMedianSources(table, column).Count < 2)
                 return "Obliczane automatycznie jako 1000 / mediana FPS.";
             if (GetMedianSources(table, column).Count >= 2)
-                return "Mediana z wartości pomiarowych w tym wierszu — obliczana automatycznie.";
+                return "Mediana z wartości pomiarowych w tym wierszu: obliczana automatycznie.";
 
             return "Obliczane automatycznie.";
         }
