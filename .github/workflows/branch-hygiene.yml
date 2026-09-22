@@ -19,6 +19,7 @@ concurrency:
 
 jobs:
   cleanup:
+    if: github.repository == 'MatPomGit/wirr'
     name: Usuń zakończone gałęzie robocze
     runs-on: ubuntu-latest
     timeout-minutes: 8
