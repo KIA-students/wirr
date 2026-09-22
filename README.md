@@ -106,6 +106,29 @@ Dostępne demonstratory:
 
 Do standardowych materiałów używany jest `NormalGL`, ponieważ Unity oczekuje map normalnych w konwencji Y+ (OpenGL). Materiały źródłowe pochodzą z biblioteki ambientCG i są udostępniane przez ambientCG na licencji CC0.
 
+## Ruch, fizyka i dźwięk
+
+WiRR 0.8.0 dodaje opcjonalne demonstratory działające w **Play Mode**. Są dostępne z sekcji **Scena i pomiary → Ruch, fizyka i dźwięk**.
+
+Komponenty runtime:
+
+- `WiRRLoopMotion` — ruch PingPong, Bob, Orbit i Rotate; może używać zwykłego Transform albo `Rigidbody.MovePosition/MoveRotation` dla obiektu kinematycznego;
+- `WiRRPhysicsImpulsePad` — trigger nadający dynamicznym Rigidbody impuls i opcjonalny moment obrotowy;
+- `WiRRProceduralAudio` — generuje profile Hum, Beacon, Engine i Wind bez plików WAV/OGG;
+- `WiRRVehicleController` — pojazd Rigidbody z przyspieszaniem, jazdą wstecz, skrętem, przyczepnością boczną, hamowaniem i limitem prędkości.
+
+Gotowe prefaby:
+
+- **DYN_FloatingTeleportPlatform** — platforma okresowo unosząca się w pionie, z przestrzennym niskim humem i `TeleportAreaPlaceholder`;
+- **DYN_ShuttlePlatform** — platforma odjeżdżająca między dwoma położeniami, z dźwiękiem ruchu i miejscem na XRI Teleportation Area;
+- **DYN_DriveableCart** — fizyczny wózek sterowany klawiaturą lub gamepadem; `WASD`/strzałki sterują, spacja hamuje;
+- **DYN_PhysicsImpulseLauncher** — pole triggera wyrzucające kule i kostki o różnych masach;
+- **DYN_KineticAudioBeacon** — obracająca się konstrukcja z orbitującą sondą i proceduralnym beaconem audio.
+
+Pojazd udostępnia metodę `SetExternalInput(Vector2 steeringAndThrottle, float brake)`, dlatego student może zastąpić wejście z klawiatury własnym panelem UI, kontrolerem XR albo innym źródłem sygnału bez modyfikacji fizyki pojazdu.
+
+Ruchome platformy **nie mają automatycznie skonfigurowanego XRI Teleportation Area**. W prefabie znajduje się jedynie `TeleportAreaPlaceholder`, aby student sam wykonał część ćwiczenia dotyczącą teleportacji i warstw interakcji.
+
 ## Strona kursu (GitHub Pages)
 
 [Strona WiRR](https://kia-students.github.io/wirr/) zawiera trzy zakładki:

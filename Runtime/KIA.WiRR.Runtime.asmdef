@@ -1,7 +1,9 @@
 {
   "name": "KIA.WiRR.Runtime",
   "rootNamespace": "KIA.WiRR",
-  "references": [],
+  "references": [
+    "Unity.InputSystem"
+  ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

@@ -435,6 +435,42 @@ namespace KIA.WiRR.Editor
                 if (WiRROptionalPrefabTools.OptionalDemosExist(lab.Number))
                     DrawInlineStatus("Opcjonalne demonstratory materiałów są aktywne w tej scenie.", SuccessAccent);
 
+                EditorGUILayout.Space(7);
+                EditorGUILayout.LabelField("Ruch, fizyka i dźwięk", EditorStyles.miniBoldLabel);
+                EditorGUILayout.HelpBox(
+                    "Opcjonalne prefaby działające w Play Mode. Pokazują ruch zapętlony, kinematyczne Rigidbody, triggery i impulsy, dźwięk proceduralny oraz sterowanie pojazdem. Platformy zawierają tylko TeleportAreaPlaceholder: komponent XRI student dodaje samodzielnie.",
+                    MessageType.Info);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Unosząca platforma", GUILayout.Height(27)))
+                        WiRRDynamicPrefabTools.CreateFloatingTeleportPlatform(lab.Number);
+                    if (GUILayout.Button("Platforma wahadłowa", GUILayout.Height(27)))
+                        WiRRDynamicPrefabTools.CreateShuttlePlatform(lab.Number);
+                }
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Sterowalny pojazd", GUILayout.Height(27)))
+                        WiRRDynamicPrefabTools.CreateDriveableCart(lab.Number);
+                    if (GUILayout.Button("Wyrzutnia fizyczna", GUILayout.Height(27)))
+                        WiRRDynamicPrefabTools.CreatePhysicsLauncher(lab.Number);
+                }
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Kinetyczny beacon audio", GUILayout.Height(27)))
+                        WiRRDynamicPrefabTools.CreateKineticAudioBeacon(lab.Number);
+                    if (GUILayout.Button("Dodaj wszystkie dynamiczne", GUILayout.Height(27)))
+                        WiRRDynamicPrefabTools.CreateAll(lab.Number);
+                }
+
+                if (GUILayout.Button("Usuń dynamiczne demonstratory ze sceny", GUILayout.Height(24)))
+                    WiRRDynamicPrefabTools.RemoveDynamicDemos(lab.Number);
+
+                if (WiRRDynamicPrefabTools.DynamicDemosExist(lab.Number))
+                    DrawInlineStatus("Dynamiczne demonstratory są aktywne. Uruchom Play Mode, aby obserwować ruch, fizykę i dźwięk.", SuccessAccent);
+
                 if (lab.Number == 6)
                     EditorGUILayout.HelpBox(
                         "Laboratorium 06 może korzystać z lokalnego ROS 2/Gazebo, ROS 2/Gazebo na drugim komputerze albo z WiRR WebSim.",

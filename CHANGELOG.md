@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+## 0.8.0 (2026-09-22)
+
+- dodano `WiRRLoopMotion` z trybami PingPong, Bob, Orbit i Rotate; komponent może sterować bezpośrednio Transform albo kinematycznym Rigidbody;
+- dodano `WiRRPhysicsImpulsePad` do demonstracji triggerów, ForceMode, impulsu liniowego i momentu obrotowego;
+- dodano `WiRRProceduralAudio`, który generuje bez zewnętrznych plików profile Hum, Beacon, Engine i Wind oraz może modulować pitch/głośność stanem obiektu;
+- dodano `WiRRVehicleController`: prosty pojazd Rigidbody sterowany WASD/strzałkami lub gamepadem; API `SetExternalInput()` umożliwia późniejsze podłączenie sterowania XR;
+- Runtime assembly jawnie odwołuje się do `Unity.InputSystem`, który jest już zależnością pakietu;
+- dodano pięć opcjonalnych prefabów dynamicznych: unoszącą platformę teleportacyjną, platformę wahadłową, sterowalny wózek, wyrzutnię fizyczną i kinetyczny beacon audio;
+- ruchome platformy zawierają wyłącznie obiekt `TeleportAreaPlaceholder`; student sam konfiguruje XRI Teleportation Area;
+- rozbudowano Course Toolkit o sekcję „Ruch, fizyka i dźwięk” z generowaniem pojedynczych demonstratorów albo całego zestawu;
+- prefab pojazdu korzysta z materiałów PBR, procedurally generated engine audio i fizyki Rigidbody, ale nie wymaga gotowych Input Actions ani XRI;
+- demonstratory są opcjonalne i nie zmieniają kryteriów zaliczenia laboratoriów.
+
+
 ## 0.7.0 (2026-09-22)
 
 - rozszerzono bibliotekę tekstur pakietu o 12 rodzin materiałów PBR 1K: AcousticFoam003, Concrete032, DiamondPlate005D, Fabric023, Fabric066, Metal004, Metal044A, PaintedWood007A, Sign002, Grass001, WoodFloor034 i WoodFloor040;
