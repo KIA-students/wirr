@@ -80,6 +80,7 @@ jobs:
               "WiRRPrefabTools.cs",
               "WiRRSurfaceTextureLibrary.cs",
               "WiRROptionalPrefabTools.cs",
+              "WiRRDynamicPrefabTools.cs",
           ):
               source = root / "Editor" / editor_file
               meta = root / "Editor" / f"{editor_file}.meta"
@@ -115,6 +116,27 @@ jobs:
 
           if not (root / "THIRD_PARTY_TEXTURES.md").is_file():
               raise SystemExit("Brak THIRD_PARTY_TEXTURES.md")
+
+          runtime_dynamic_files = (
+              "WiRRLoopMotion.cs",
+              "WiRRPhysicsImpulsePad.cs",
+              "WiRRProceduralAudio.cs",
+              "WiRRVehicleController.cs",
+          )
+          for runtime_file in runtime_dynamic_files:
+              source = root / "Runtime" / runtime_file
+              meta = root / "Runtime" / f"{runtime_file}.meta"
+              if not source.is_file() or not meta.is_file():
+                  raise SystemExit(f"Brak dynamicznego komponentu Runtime lub pliku meta: {source}")
+
+          runtime_asmdef = json.loads(
+              (root / "Runtime" / "KIA.WiRR.Runtime.asmdef").read_text(encoding="utf-8")
+          )
+          if "Unity.InputSystem" not in runtime_asmdef.get("references", []):
+              raise SystemExit("Runtime asmdef nie odwołuje się do Unity.InputSystem")
+
+          if package.get("dependencies", {}).get("com.unity.inputsystem") is None:
+              raise SystemExit("package.json nie deklaruje zależności com.unity.inputsystem")
 
           samples = package.get("samples", [])
           if len(samples) != 7:
