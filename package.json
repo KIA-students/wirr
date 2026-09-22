@@ -1,7 +1,7 @@
 {
   "name": "pl.prz.kia.wirr",
   "version": "0.5.0",
-  "displayName": "WiRR — narzędzia kursu",
+  "displayName": "WiRR Course Toolkit",
   "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i Rozszerzona Rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera narzędzia prowadzące przez pracę laboratoryjną, generowane prefaby dydaktyczne, materiały startowe, walidację scen oraz prosty przebieg raportowania: Raport → Sprawdź → Wyślij. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
   "unity": "6000.6",
   "documentationUrl": "https://kia-students.github.io/wirr/",
@@ -16,38 +16,38 @@
   },
   "samples": [
     {
-      "displayName": "Laboratorium 01 — Środowisko XR i audyt urządzeń",
-      "description": "Przygotowanie środowiska XR, sceny bazowej i pomiarów wydajności. Etapy kluczowe: 3.0 — pomiar bazowy i eksperyment kontrolny; 3.5 — obciążenie CPU i GC; 4.0 — renderowanie, liczba obiektów, materiały, trójkąty i skalowanie renderowania (Render Scale); 4.5 — fizyka, Rigidbody i stały krok symulacji (Fixed Timestep); 5.0 — uruchomienie autonomiczne na Meta Quest 3 i weryfikacja śledzenia 6DoF.",
+      "displayName": "Laboratorium 01: Środowisko XR i audyt urządzeń",
+      "description": "Przygotowanie środowiska XR, sceny bazowej i pomiarów wydajności. Etapy kluczowe: 3.0: pomiar bazowy i eksperyment kontrolny; 3.5: obciążenie CPU i GC; 4.0: renderowanie, liczba obiektów, materiały, trójkąty i skalowanie renderowania (Render Scale); 4.5: fizyka, Rigidbody i stały krok symulacji (Fixed Timestep); 5.0: uruchomienie autonomiczne na Meta Quest 3 i weryfikacja śledzenia 6DoF.",
       "path": "Samples~/Lab01"
     },
     {
-      "displayName": "Laboratorium 02 — Interakcja i manipulacja XR",
-      "description": "Projektowanie i pomiar interakcji użytkownika w XR. Etapy kluczowe: 3.0 — chwyt, gniazdo (socket) i interakcja promieniem (ray); 3.5 — interfejs, informacja zwrotna i haptyka; 4.0 — lokomocja i teleportacja; 4.5 — diagnostyka scenariusza z hipotezami H1/H2 i minimalną poprawką; 5.0 — test na Quest 3, SSQ i ocena komfortu.",
+      "displayName": "Laboratorium 02: Interakcja i manipulacja XR",
+      "description": "Projektowanie i pomiar interakcji użytkownika w XR. Etapy kluczowe: 3.0: chwyt, gniazdo (socket) i interakcja promieniem (ray); 3.5: interfejs, informacja zwrotna i haptyka; 4.0: lokomocja i teleportacja; 4.5: diagnostyka scenariusza z hipotezami H1/H2 i minimalną poprawką; 5.0: test na Quest 3, SSQ i ocena komfortu.",
       "path": "Samples~/Lab02"
     },
     {
-      "displayName": "Laboratorium 03 — Rejestracja i kotwice AR",
-      "description": "Rejestracja obiektów w przestrzeni i ocena stabilności AR. Etapy kluczowe: 3.0 — śledzenie i detekcja płaszczyzn; 3.5 — raycast i skala 1:1; 4.0 — kotwica i pomiar dryfu; 4.5 — rejestracja dwupunktowa i analiza błędu; 5.0 — kontrolowany błąd, test hipotez H1/H2 i diagnoza końcowa.",
+      "displayName": "Laboratorium 03: Rejestracja i kotwice AR",
+      "description": "Rejestracja obiektów w przestrzeni i ocena stabilności AR. Etapy kluczowe: 3.0: śledzenie i detekcja płaszczyzn; 3.5: raycast i skala 1:1; 4.0: kotwica i pomiar dryfu; 4.5: rejestracja dwupunktowa i analiza błędu; 5.0: kontrolowany błąd, test hipotez H1/H2 i diagnoza końcowa.",
       "path": "Samples~/Lab03"
     },
     {
-      "displayName": "Laboratorium 04 — Rozumienie sceny i mieszanie rzeczywistości",
-      "description": "Praca z informacją o głębi i łączeniem obiektów rzeczywistych z wirtualnymi. Etapy kluczowe: 3.0 — API głębi (Depth API) i diagnostyka; 3.5 — okluzja środowiskowa; 4.0 — raycast z użyciem danych głębi i błąd odległości; 4.5 — estymacja oświetlenia; 5.0 — kontrolowany błąd, test rozstrzygający, minimalna poprawka i diagnoza.",
+      "displayName": "Laboratorium 04: Rozumienie sceny i mieszanie rzeczywistości",
+      "description": "Praca z informacją o głębi i łączeniem obiektów rzeczywistych z wirtualnymi. Etapy kluczowe: 3.0: API głębi (Depth API) i diagnostyka; 3.5: okluzja środowiskowa; 4.0: raycast z użyciem danych głębi i błąd odległości; 4.5: estymacja oświetlenia; 5.0: kontrolowany błąd, test rozstrzygający, minimalna poprawka i diagnoza.",
       "path": "Samples~/Lab04"
     },
     {
-      "displayName": "Laboratorium 05 — Optymalizacja modeli CAD",
-      "description": "Przygotowanie modeli inżynierskich do wydajnego użycia w XR. Etapy kluczowe: 3.0 — audyt modelu CAD i topologii; 3.5 — poziomy LOD; 4.0 — czas importu, pamięć i koszt klatki; 4.5 — diagnostyka oraz naprawa geometrii; 5.0 — wybór potoku przetwarzania STEP→DCC→FBX/glTF, USD lub bezpośredniej siatki i ocena ryzyka.",
+      "displayName": "Laboratorium 05: Optymalizacja modeli CAD",
+      "description": "Przygotowanie modeli inżynierskich do wydajnego użycia w XR. Etapy kluczowe: 3.0: audyt modelu CAD i topologii; 3.5: poziomy LOD; 4.0: czas importu, pamięć i koszt klatki; 4.5: diagnostyka oraz naprawa geometrii; 5.0: wybór potoku przetwarzania STEP→DCC→FBX/glTF, USD lub bezpośredniej siatki i ocena ryzyka.",
       "path": "Samples~/Lab05"
     },
     {
-      "displayName": "Laboratorium 06 — Bliźniak cyfrowy ROS 2 + Gazebo",
-      "description": "Budowa i walidacja prostego bliźniaka cyfrowego robota. Etapy kluczowe: 3.0 — źródło symulacji LOCAL/LAN/WEBSIM i przepływ Gazebo→ROS 2→Unity; 3.5 — zgodność stanu przegubów; 4.0 — opóźnienie, zmienność transmisji (jitter) i bufor interpolacji; 4.5 — utrata danych, stan STALE i przywracanie połączenia; 5.0 — błąd synchronizacji oraz poprawny powrót STALE→LIVE.",
+      "displayName": "Laboratorium 06: Bliźniak cyfrowy ROS 2 + Gazebo",
+      "description": "Budowa i walidacja prostego bliźniaka cyfrowego robota. Etapy kluczowe: 3.0: źródło symulacji LOCAL/LAN/WEBSIM i przepływ Gazebo→ROS 2→Unity; 3.5: zgodność stanu przegubów; 4.0: opóźnienie, zmienność transmisji (jitter) i bufor interpolacji; 4.5: utrata danych, stan STALE i przywracanie połączenia; 5.0: błąd synchronizacji oraz poprawny powrót STALE→LIVE.",
       "path": "Samples~/Lab06"
     },
     {
-      "displayName": "Laboratorium 07 — Walidacja i testy akceptacyjne XR",
-      "description": "Końcowa walidacja jakości rozwiązania XR. Etapy kluczowe: 3.0 — test podstawowy (smoke test) i kryteria akceptacji; 3.5 — wydajność CPU/GPU, pamięć i transport; 4.0 — użyteczność, skuteczność i błędne aktywacje; 4.5 — kontrolowany błąd, przywracanie działania i test regresyjny; 5.0 — automatyzacja testów, analiza ryzyka R=P×S i decyzja AKCEPTUJ / AKCEPTUJ WARUNKOWO / ODRZUĆ.",
+      "displayName": "Laboratorium 07: Walidacja i testy akceptacyjne XR",
+      "description": "Końcowa walidacja jakości rozwiązania XR. Etapy kluczowe: 3.0: test podstawowy (smoke test) i kryteria akceptacji; 3.5: wydajność CPU/GPU, pamięć i transport; 4.0: użyteczność, skuteczność i błędne aktywacje; 4.5: kontrolowany błąd, przywracanie działania i test regresyjny; 5.0: automatyzacja testów, analiza ryzyka R=P×S i decyzja AKCEPTUJ / AKCEPTUJ WARUNKOWO / ODRZUĆ.",
       "path": "Samples~/Lab07"
     }
   ],
