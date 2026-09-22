@@ -58,13 +58,8 @@ jobs:
           )
 
           git checkout -B "${EXPORT_BRANCH}" "upstream/${UPSTREAM_BRANCH}"
-
-          # Ustaw zawartość gałęzi eksportowej na snapshot źródłowego main.
-          # HEAD nadal wskazuje publiczny upstream, więc różnica jest gotowa do PR.
           git read-tree --reset -u "${source_sha}"
 
-          # Prywatna automatyzacja repozytoriów nie może trafić do repozytorium kursu.
-          # Usuwamy ją także wtedy, gdy znalazła się tam we wcześniejszej synchronizacji.
           for path in "${private_paths[@]}"; do
             git rm -f --ignore-unmatch -- "${path}"
           done
@@ -76,7 +71,6 @@ jobs:
             fi
           done
 
-          # Blokuj publikację, jeśli publiczny snapshot zawiera nazwy repozytoriów roboczych.
           forbidden_matches="$(
             grep -RInE               --exclude-dir=.git               --binary-files=without-match               'MatPomGit/(wirr|prz)|github\.com/MatPomGit/(wirr|prz)'               . || true
           )"
@@ -101,7 +95,6 @@ jobs:
 
           git commit -m "sync: aktualizacja publicznego pakietu WiRR"
           export_sha="$(git rev-parse HEAD)"
-
           git push --force origin "HEAD:refs/heads/${EXPORT_BRANCH}"
 
           {
@@ -142,7 +135,7 @@ jobs:
             echo "available=true" >> "${GITHUB_OUTPUT}"
           fi
 
-      - name: Zamknij wcześniejsze niesanitizowane Pull Requesty
+      - name: Oczyść metadane starszych Pull Requestów
         if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
         shell: bash
         env:
@@ -150,27 +143,22 @@ jobs:
         run: |
           set -euo pipefail
 
-          mapfile -t legacy_prs < <(
-            gh pr list \
-              --repo "${UPSTREAM_REPOSITORY}" \
-              --state open \
-              --base "${UPSTREAM_BRANCH}" \
-              --head "MatPomGit:main" \
-              --json number \
-              --jq '.[].number'
+          mapfile -t public_metadata_prs < <(
+            gh pr list               --repo "${UPSTREAM_REPOSITORY}"               --state all               --limit 100               --json number,title               --jq '.[] | select(.title | contains("MatPomGit/wirr")) | .number'
           )
 
-          for pr_number in "${legacy_prs[@]}"; do
+          for pr_number in "${public_metadata_prs[@]}"; do
             [ -n "${pr_number}" ] || continue
+            gh pr edit "${pr_number}"               --repo "${UPSTREAM_REPOSITORY}"               --title "archiwalna synchronizacja WiRR"               --body "Archiwalny Pull Request mechanizmu synchronizacji. Zastąpiony przez sanitizowany eksport publicznej zawartości WiRR Course Toolkit."
+          done
 
-            gh pr edit "${pr_number}" \
-              --repo "${UPSTREAM_REPOSITORY}" \
-              --title "archiwalna synchronizacja WiRR" \
-              --body "Ten Pull Request został zastąpiony przez sanitizowany eksport publicznej zawartości WiRR Course Toolkit."
+          mapfile -t legacy_open_prs < <(
+            gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls"               -f state=open               -f base="${UPSTREAM_BRANCH}"               -f head="MatPomGit:main"               --jq '.[].number'
+          )
 
-            gh pr close "${pr_number}" \
-              --repo "${UPSTREAM_REPOSITORY}" \
-              --comment "Zastąpiono bezpiecznym mechanizmem eksportu publicznej zawartości."
+          for pr_number in "${legacy_open_prs[@]}"; do
+            [ -n "${pr_number}" ] || continue
+            gh pr close "${pr_number}"               --repo "${UPSTREAM_REPOSITORY}"               --comment "Zastąpiono bezpiecznym mechanizmem eksportu publicznej zawartości."
           done
 
       - name: Sprawdź istniejący Pull Request
@@ -183,10 +171,15 @@ jobs:
           set -euo pipefail
 
           existing_url="$(
-            gh pr list               --repo "${UPSTREAM_REPOSITORY}"               --state open               --base "${UPSTREAM_BRANCH}"               --head "MatPomGit:${EXPORT_BRANCH}"               --json url               --jq '.[0].url // ""'
+            gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls"               -f state=open               -f base="${UPSTREAM_BRANCH}"               -f head="MatPomGit:${EXPORT_BRANCH}"               --jq '.[0].html_url // ""'
+          )"
+
+          existing_number="$(
+            gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls"               -f state=open               -f base="${UPSTREAM_BRANCH}"               -f head="MatPomGit:${EXPORT_BRANCH}"               --jq '.[0].number // ""'
           )"
 
           echo "url=${existing_url}" >> "${GITHUB_OUTPUT}"
+          echo "number=${existing_number}" >> "${GITHUB_OUTPUT}"
 
       - name: Utwórz Pull Request do repozytorium kursu
         if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true' && steps.existing.outputs.url == ''
@@ -219,3 +212,28 @@ jobs:
         shell: bash
         run: |
           echo "Zmiany są objęte istniejącym Pull Requestem: ${{ steps.existing.outputs.url }}" >> "${GITHUB_STEP_SUMMARY}"
+
+      - name: Usuń odziedziczoną automatyzację z repozytorium kursu
+        if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true' && steps.existing.outputs.number != ''
+        continue-on-error: true
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          inherited=false
+          for path in             ".github/workflows/sync-kia-students-pr.yml"             ".github/workflows/sync-from-kia-students.yml"             ".github/workflows/branch-hygiene.yml"; do
+            if gh api "repos/${UPSTREAM_REPOSITORY}/contents/${path}" >/dev/null 2>&1; then
+              inherited=true
+              break
+            fi
+          done
+
+          if [ "${inherited}" != true ]; then
+            echo "Repozytorium kursu nie zawiera prywatnej automatyzacji."
+            exit 0
+          fi
+
+          echo "W repozytorium kursu wykryto odziedziczone workflow. Próbuję scalić sanitizowany Pull Request."
+          gh pr merge "${{ steps.existing.outputs.number }}"             --repo "${UPSTREAM_REPOSITORY}"             --squash
