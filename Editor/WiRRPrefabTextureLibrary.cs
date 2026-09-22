@@ -105,7 +105,7 @@ namespace KIA.WiRR.Editor
 
         private static string ResolveSourcePath(WiRRGridTextureSet set, string suffix)
         {
-            // Development project: MatPomGit/wirr/Project~/Assets/Textures becomes Assets/Textures.
+            // In the development project, Project~/Assets/Textures is exposed as Assets/Textures.
             foreach (var prefix in SourcePrefixes(set))
             {
                 var fileName = $"{prefix}_{suffix}.png";
