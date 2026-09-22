@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 0.7.0 (2026-09-22)
+
+- rozszerzono bibliotekę tekstur pakietu o 12 rodzin materiałów PBR 1K: AcousticFoam003, Concrete032, DiamondPlate005D, Fabric023, Fabric066, Metal004, Metal044A, PaintedWood007A, Sign002, Grass001, WoodFloor034 i WoodFloor040;
+- dodano `WiRRSurfaceTextureLibrary`, która tworzy robocze kopie map Color, NormalGL, Roughness, Ambient Occlusion, Metalness, Displacement i Opacity oraz generuje edytowalne materiały URP;
+- dla pełnego materiału PBR generator automatycznie pakuje metalness do kanału R i smoothness wyliczone z roughness do kanału A mapy Metallic/Smoothness;
+- dodano pięć opcjonalnych prefabów dydaktycznych: galerię 12 materiałów, ścianę rozdzielczości 128/256/512/1024 px, porównanie albedo → albedo+normal → pełny PBR, galerię kanałów PBR oraz stanowisko tilingu i mipmap;
+- rozszerzono WiRR Course Toolkit o osobną sekcję „Opcjonalne laboratorium materiałów” z możliwością dodawania pojedynczych demonstratorów lub całego zestawu;
+- demonstratory są niezależne od obowiązkowych ćwiczeń i mogą być wykorzystane szczególnie w Laboratorium 01 oraz Laboratorium 05;
+- do map normalnych używany jest wariant Y+ / OpenGL (`NormalGL`) zgodny z konwencją oczekiwaną przez Unity; `DiamondPlate` zachowuje również `NormalDX` do przyszłych ćwiczeń porównawczych.
+
+
 ## 0.6.0 (2026-09-22)
 
 - dodano `WiRRPrefabTextureLibrary`, która korzysta z zestawów tekstur `grid-1_*`, `grid_2_*` oraz `grid-4_*`; trzeci zestaw jest w kodzie logicznie oznaczany jako `Grid3`, ponieważ w repozytorium nie ma obecnie plików `grid_3_*`;

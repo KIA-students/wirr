@@ -88,6 +88,24 @@ Przy instalacji UPM te same mapy są dostępne w `Textures/Grid`. Narzędzie kop
 
 Dla każdego laboratorium generowane są dwa dodatkowe stanowiska kontekstowe. Są one przeznaczone do obserwacji, pomiarów i własnej rozbudowy, a nie jako gotowe rozwiązania zadań.
 
+## Opcjonalne laboratorium materiałów
+
+WiRR 0.7.0 zawiera dodatkową bibliotekę powierzchni PBR i zestaw demonstratorów przeznaczonych przede wszystkim do Laboratorium 01 oraz Laboratorium 05. Są dostępne w każdej scenie z sekcji **Scena i pomiary → Opcjonalne laboratorium materiałów**.
+
+Biblioteka obejmuje 12 rodzin: piankę akustyczną, beton, blachę ryflowaną, dwie tkaniny, dwa metale, malowane drewno, materiał znaku, trawę i dwie odmiany drewnianej podłogi. Generator korzysta z wielu map: Color, NormalGL, Roughness, Ambient Occlusion, Metalness, Displacement oraz Opacity, jeśli są dostępne.
+
+Dostępne demonstratory:
+
+- **Galeria materiałów** — dwanaście powierzchni na identycznych próbkach geometrycznych;
+- **Rozdzielczość 128–1024** — cztery wersje tej samej tekstury przy tej samej geometrii i UV;
+- **Normal map: porównanie** — albedo bez normal mapy, albedo z normal mapą oraz pełny PBR; lokalne źródło światła można przesuwać;
+- **Kanały PBR** — osobne panele Color, Normal, Roughness, AO, Metalness i Displacement tego samego materiału;
+- **Tiling i mipmapy** — ta sama drewniana powierzchnia z różną gęstością UV, przeznaczona do obserwacji powtarzalności wzoru i zachowania mipmap pod małym kątem.
+
+Źródłowe mapy są kopiowane do `Assets/WiRR/Common/Textures/Generated/Surfaces`. Materiały powstają w `Assets/WiRR/Common/Materials/Generated/Surfaces`, natomiast robocze warianty porównawcze w katalogach `Generated/Quality`. Pełny materiał PBR generuje mapę Metallic/Smoothness: metalness trafia do kanału R, a smoothness jest wyznaczane jako `1 - roughness` i trafia do kanału A.
+
+Do standardowych materiałów używany jest `NormalGL`, ponieważ Unity oczekuje map normalnych w konwencji Y+ (OpenGL). Materiały źródłowe pochodzą z biblioteki ambientCG i są udostępniane przez ambientCG na licencji CC0.
+
 ## Strona kursu (GitHub Pages)
 
 [Strona WiRR](https://kia-students.github.io/wirr/) zawiera trzy zakładki:

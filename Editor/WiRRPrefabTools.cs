@@ -147,7 +147,8 @@ namespace KIA.WiRR.Editor
         private static GameObject BuildMetricArena()
         {
             var root = NewRoot("L01_MetricArena_Grid");
-            Box(root.transform, "Floor_2m", new Vector3(0f, 0.02f, 0f), new Vector3(2f, 0.04f, 2f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Floor, true);
+            var floor = Box(root.transform, "Floor_2m", new Vector3(0f, 0.02f, 0f), new Vector3(2f, 0.04f, 2f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Floor, true);
+            ApplySurface(floor, WiRRSurfaceFamily.Concrete);
             Box(root.transform, "Wall_X", new Vector3(0f, 0.5f, 1f), new Vector3(2f, 1f, 0.05f), WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Wall, true);
             Box(root.transform, "Wall_Z", new Vector3(-1f, 0.5f, 0f), new Vector3(0.05f, 1f, 2f), WiRRGridTextureSet.Grid3, WiRRGridMaterialRole.Wall, true);
 
@@ -172,33 +173,45 @@ namespace KIA.WiRR.Editor
         private static GameObject BuildRenderGallery()
         {
             var root = NewRoot("L01_RenderGallery_Grid");
-            Box(root.transform, "Backplate", new Vector3(0f, 0.75f, 0f), new Vector3(1.8f, 1.5f, 0.08f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Wall, true);
+            var backplate = Box(root.transform, "Backplate", new Vector3(0f, 0.75f, 0f), new Vector3(1.8f, 1.5f, 0.08f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Wall, true);
+            ApplySurface(backplate, WiRRSurfaceFamily.Concrete);
 
-            var sets = new[] { WiRRGridTextureSet.Grid1, WiRRGridTextureSet.Grid2, WiRRGridTextureSet.Grid3 };
-            for (var row = 0; row < 2; row++)
-            for (var col = 0; col < 3; col++)
+            var families = new[]
             {
-                var set = sets[col];
+                WiRRSurfaceFamily.DiamondPlate,
+                WiRRSurfaceFamily.Fabric023,
+                WiRRSurfaceFamily.Metal004,
+                WiRRSurfaceFamily.PaintedWood,
+                WiRRSurfaceFamily.Fabric066,
+                WiRRSurfaceFamily.WoodFloor034
+            };
+
+            for (var i = 0; i < families.Length; i++)
+            {
+                var row = i / 3;
+                var col = i % 3;
                 var type = row == 0 ? PrimitiveType.Sphere : PrimitiveType.Cube;
-                Primitive(
+                var sample = Primitive(
                     root.transform,
-                    $"Sample_{set}_{type}",
+                    $"Sample_{families[i]}",
                     type,
                     new Vector3(-0.55f + col * 0.55f, 0.45f + row * 0.62f, -0.14f),
                     Vector3.one * 0.34f,
-                    set,
+                    (WiRRGridTextureSet)((col % 3) + 1),
                     WiRRGridMaterialRole.Panel,
                     false);
+                ApplySurface(sample, families[i]);
             }
 
-            Note(root.transform, "Compare_material_count_batches_and_visual_quality");
+            Note(root.transform, "Compare_material_count_batches_texture_channels_and_visual_quality");
             return root;
         }
 
         private static GameObject BuildAssemblyWorkbench()
         {
             var root = NewRoot("L02_AssemblyWorkbench_Grid");
-            Box(root.transform, "Workbench", new Vector3(0f, 0.72f, 0f), new Vector3(1.6f, 0.08f, 0.72f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Panel, true);
+            var workbench = Box(root.transform, "Workbench", new Vector3(0f, 0.72f, 0f), new Vector3(1.6f, 0.08f, 0.72f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Panel, true);
+            ApplySurface(workbench, WiRRSurfaceFamily.WoodFloor040);
             foreach (var x in new[] { -0.68f, 0.68f })
             foreach (var z in new[] { -0.25f, 0.25f })
                 Box(root.transform, "Leg", new Vector3(x, 0.35f, z), new Vector3(0.06f, 0.70f, 0.06f), WiRRGridTextureSet.Grid3, WiRRGridMaterialRole.Wall, true);
@@ -210,6 +223,8 @@ namespace KIA.WiRR.Editor
                 Box(root.transform, $"Socket_{i + 1}", new Vector3(x, 0.79f, 0.12f), new Vector3(0.28f, 0.035f, 0.24f), set, WiRRGridMaterialRole.Accent, true);
 
                 var module = Box(root.transform, $"Module_{i + 1}", new Vector3(x, 0.90f, -0.18f), new Vector3(0.16f, 0.20f, 0.12f), set, WiRRGridMaterialRole.Panel, true);
+                var moduleFamilies = new[] { WiRRSurfaceFamily.Metal004, WiRRSurfaceFamily.PaintedWood, WiRRSurfaceFamily.Fabric066 };
+                ApplySurface(module, moduleFamilies[i]);
                 var rb = module.AddComponent<Rigidbody>();
                 rb.mass = 0.25f;
                 rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -223,7 +238,8 @@ namespace KIA.WiRR.Editor
         private static GameObject BuildControlPanel()
         {
             var root = NewRoot("L02_ControlPanel_Grid");
-            Box(root.transform, "Panel", Vector3.zero, new Vector3(1.1f, 0.65f, 0.08f), WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Panel, true);
+            var panel = Box(root.transform, "Panel", Vector3.zero, new Vector3(1.1f, 0.65f, 0.08f), WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Panel, true);
+            ApplySurface(panel, WiRRSurfaceFamily.DiamondPlate);
 
             for (var i = 0; i < 3; i++)
             {
@@ -257,7 +273,8 @@ namespace KIA.WiRR.Editor
         private static GameObject BuildRegistrationBoard()
         {
             var root = NewRoot("L03_RegistrationBoard_Grid");
-            Box(root.transform, "Board_0_8x0_5m", new Vector3(0f, 0.015f, 0f), new Vector3(0.8f, 0.03f, 0.5f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Panel, false);
+            var board = Box(root.transform, "Board_0_8x0_5m", new Vector3(0f, 0.015f, 0f), new Vector3(0.8f, 0.03f, 0.5f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Panel, false);
+            ApplySurface(board, WiRRSurfaceFamily.Sign);
             Fiducial(root.transform, "Point_A", new Vector3(-0.30f, 0.045f, 0f), WiRRGridTextureSet.Grid1, PrimitiveType.Sphere);
             Fiducial(root.transform, "Point_B", new Vector3(0.30f, 0.045f, 0f), WiRRGridTextureSet.Grid2, PrimitiveType.Cube);
             Fiducial(root.transform, "Point_C", new Vector3(0f, 0.045f, 0.18f), WiRRGridTextureSet.Grid3, PrimitiveType.Cylinder);
@@ -279,10 +296,18 @@ namespace KIA.WiRR.Editor
         private static GameObject BuildOcclusionCorridor()
         {
             var root = NewRoot("L04_OcclusionCorridor_Grid");
-            Box(root.transform, "ReferenceFloor", new Vector3(0f, 0.015f, 0.35f), new Vector3(1.4f, 0.03f, 1.8f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Floor, false);
+            var referenceFloor = Box(root.transform, "ReferenceFloor", new Vector3(0f, 0.015f, 0.35f), new Vector3(1.4f, 0.03f, 1.8f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Floor, false);
+            ApplySurface(referenceFloor, WiRRSurfaceFamily.Concrete);
 
+            var occluderFamilies = new[]
+            {
+                WiRRSurfaceFamily.AcousticFoam,
+                WiRRSurfaceFamily.Fabric023,
+                WiRRSurfaceFamily.PaintedWood
+            };
             for (var i = 0; i < 3; i++)
-                Box(
+            {
+                var occluder = Box(
                     root.transform,
                     $"Occluder_{i + 1}",
                     new Vector3(-0.45f + i * 0.45f, 0.45f, 0.15f + i * 0.32f),
@@ -290,6 +315,8 @@ namespace KIA.WiRR.Editor
                     (WiRRGridTextureSet)(i + 1),
                     WiRRGridMaterialRole.Wall,
                     false);
+                ApplySurface(occluder, occluderFamilies[i]);
+            }
 
             Primitive(root.transform, "VirtualTarget", PrimitiveType.Sphere, new Vector3(0f, 0.30f, 1.05f), Vector3.one * 0.26f, WiRRGridTextureSet.Grid3, WiRRGridMaterialRole.Accent, false);
             Note(root.transform, "Use_real_geometry_or_depth_occlusion_to_hide_VirtualTarget");
@@ -299,7 +326,8 @@ namespace KIA.WiRR.Editor
         private static GameObject BuildLightingBay()
         {
             var root = NewRoot("L04_LightingBay_Grid");
-            Box(root.transform, "Bay", new Vector3(0f, 0.02f, 0f), new Vector3(1.1f, 0.04f, 0.72f), WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Floor, false);
+            var bay = Box(root.transform, "Bay", new Vector3(0f, 0.02f, 0f), new Vector3(1.1f, 0.04f, 0.72f), WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Floor, false);
+            ApplySurface(bay, WiRRSurfaceFamily.Concrete);
             Primitive(root.transform, "Grid1_Sphere", PrimitiveType.Sphere, new Vector3(-0.32f, 0.18f, 0f), Vector3.one * 0.28f, WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Panel, false);
             Primitive(root.transform, "Grid2_Cube", PrimitiveType.Cube, new Vector3(0f, 0.16f, 0f), Vector3.one * 0.26f, WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Panel, false);
             Primitive(root.transform, "Grid3_Cylinder", PrimitiveType.Cylinder, new Vector3(0.34f, 0.16f, 0f), new Vector3(0.14f, 0.16f, 0.14f), WiRRGridTextureSet.Grid3, WiRRGridMaterialRole.Panel, false);
@@ -321,12 +349,14 @@ namespace KIA.WiRR.Editor
         {
             var root = NewRoot("L05_ColliderLab_Grid");
             var box = Primitive(root.transform, "BoxColliderCandidate", PrimitiveType.Cube, new Vector3(-0.45f, 0.22f, 0f), new Vector3(0.32f, 0.44f, 0.32f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Panel, true);
+            ApplySurface(box, WiRRSurfaceFamily.Concrete);
             var compound = NewRoot("CompoundColliderCandidate");
             compound.transform.SetParent(root.transform, false);
             compound.transform.localPosition = Vector3.zero;
             Box(compound.transform, "PartA", new Vector3(0f, 0.16f, 0f), new Vector3(0.34f, 0.22f, 0.30f), WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Panel, true);
             Box(compound.transform, "PartB", new Vector3(0f, 0.42f, 0f), new Vector3(0.16f, 0.30f, 0.16f), WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Accent, true);
             var mesh = Primitive(root.transform, "MeshColliderCandidate", PrimitiveType.Sphere, new Vector3(0.45f, 0.24f, 0f), Vector3.one * 0.42f, WiRRGridTextureSet.Grid3, WiRRGridMaterialRole.Panel, false);
+            ApplySurface(mesh, WiRRSurfaceFamily.DiamondPlate);
             mesh.AddComponent<MeshCollider>().sharedMesh = mesh.GetComponent<MeshFilter>().sharedMesh;
             Note(root.transform, "Compare_collider_cost_and_accuracy");
             _ = box;
@@ -336,9 +366,12 @@ namespace KIA.WiRR.Editor
         private static GameObject BuildDigitalTwinCell()
         {
             var root = NewRoot("L06_DigitalTwinCell_Grid");
-            Box(root.transform, "CellFloor", new Vector3(0f, 0.02f, 0f), new Vector3(1.8f, 0.04f, 1.2f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Floor, true);
-            Box(root.transform, "RobotPad", new Vector3(-0.42f, 0.06f, 0f), new Vector3(0.52f, 0.08f, 0.52f), WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Panel, true);
-            Box(root.transform, "Conveyor", new Vector3(0.40f, 0.18f, 0f), new Vector3(0.82f, 0.18f, 0.40f), WiRRGridTextureSet.Grid3, WiRRGridMaterialRole.Panel, true);
+            var cellFloor = Box(root.transform, "CellFloor", new Vector3(0f, 0.02f, 0f), new Vector3(1.8f, 0.04f, 1.2f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Floor, true);
+            ApplySurface(cellFloor, WiRRSurfaceFamily.Concrete);
+            var robotPad = Box(root.transform, "RobotPad", new Vector3(-0.42f, 0.06f, 0f), new Vector3(0.52f, 0.08f, 0.52f), WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Panel, true);
+            ApplySurface(robotPad, WiRRSurfaceFamily.DiamondPlate);
+            var conveyor = Box(root.transform, "Conveyor", new Vector3(0.40f, 0.18f, 0f), new Vector3(0.82f, 0.18f, 0.40f), WiRRGridTextureSet.Grid3, WiRRGridMaterialRole.Panel, true);
+            ApplySurface(conveyor, WiRRSurfaceFamily.Metal004);
 
             for (var i = 0; i < 3; i++)
                 Primitive(
@@ -360,7 +393,8 @@ namespace KIA.WiRR.Editor
         private static GameObject BuildNetworkConsole()
         {
             var root = NewRoot("L06_NetworkConsole_Grid");
-            Box(root.transform, "Console", Vector3.zero, new Vector3(1.0f, 0.62f, 0.08f), WiRRGridTextureSet.Grid3, WiRRGridMaterialRole.Panel, true);
+            var console = Box(root.transform, "Console", Vector3.zero, new Vector3(1.0f, 0.62f, 0.08f), WiRRGridTextureSet.Grid3, WiRRGridMaterialRole.Panel, true);
+            ApplySurface(console, WiRRSurfaceFamily.Metal044A);
             Primitive(root.transform, "LIVE", PrimitiveType.Sphere, new Vector3(-0.30f, 0.12f, -0.10f), Vector3.one * 0.16f, WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Accent, false);
             Primitive(root.transform, "STALE", PrimitiveType.Cylinder, new Vector3(0f, 0.12f, -0.10f), new Vector3(0.09f, 0.08f, 0.09f), WiRRGridTextureSet.Grid2, WiRRGridMaterialRole.Accent, false);
             Primitive(root.transform, "DISCONNECTED", PrimitiveType.Cube, new Vector3(0.30f, 0.12f, -0.10f), Vector3.one * 0.15f, WiRRGridTextureSet.Grid3, WiRRGridMaterialRole.Accent, false);
@@ -382,7 +416,8 @@ namespace KIA.WiRR.Editor
         private static GameObject BuildQaArena()
         {
             var root = NewRoot("L07_QAArena_Grid");
-            Box(root.transform, "Floor", new Vector3(0f, 0.02f, 0f), new Vector3(1.8f, 0.04f, 1.6f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Floor, true);
+            var qaFloor = Box(root.transform, "Floor", new Vector3(0f, 0.02f, 0f), new Vector3(1.8f, 0.04f, 1.6f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Floor, true);
+            ApplySurface(qaFloor, WiRRSurfaceFamily.Concrete);
 
             for (var i = 0; i < 4; i++)
             {
@@ -407,7 +442,8 @@ namespace KIA.WiRR.Editor
         private static GameObject BuildRiskMatrix()
         {
             var root = NewRoot("L07_RiskMatrix_Grid");
-            Box(root.transform, "Board", Vector3.zero, new Vector3(0.95f, 0.95f, 0.06f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Panel, true);
+            var riskBoard = Box(root.transform, "Board", Vector3.zero, new Vector3(0.95f, 0.95f, 0.06f), WiRRGridTextureSet.Grid1, WiRRGridMaterialRole.Panel, true);
+            ApplySurface(riskBoard, WiRRSurfaceFamily.Sign);
 
             for (var y = 0; y < 5; y++)
             for (var x = 0; x < 5; x++)
@@ -536,6 +572,16 @@ namespace KIA.WiRR.Editor
             }
 
             return go;
+        }
+
+        private static void ApplySurface(
+            GameObject target,
+            WiRRSurfaceFamily family,
+            WiRRSurfaceMaterialVariant variant = WiRRSurfaceMaterialVariant.FullPbr)
+        {
+            var renderer = target.GetComponent<Renderer>();
+            if (renderer != null)
+                renderer.sharedMaterial = WiRRSurfaceTextureLibrary.GetMaterial(family, variant);
         }
 
         private static void Note(Transform parent, string name)
