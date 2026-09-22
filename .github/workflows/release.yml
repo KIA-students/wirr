@@ -48,7 +48,7 @@ jobs:
               raise SystemExit(f"Nieprawidłowa stabilna wersja SemVer: {version}")
 
           changelog = (root / "CHANGELOG.md").read_text(encoding="utf-8")
-          if f"## {version} —" not in changelog:
+          if f"## {version} (" not in changelog:
               raise SystemExit(f"Brak sekcji {version} w CHANGELOG.md")
 
           required = [
@@ -69,7 +69,7 @@ jobs:
               raise SystemExit(f"Oczekiwano 7 próbek laboratoriów, znaleziono: {len(samples)}")
 
           for number, sample in enumerate(samples, 1):
-              expected_prefix = f"Laboratorium {number:02d} —"
+              expected_prefix = f"Laboratorium {number:02d}:"
               name = sample.get("displayName", "")
               path = sample.get("path", "")
               if not name.startswith(expected_prefix):
@@ -114,7 +114,7 @@ jobs:
           changelog = Path("CHANGELOG.md").read_text(encoding="utf-8")
 
           match = re.search(
-              rf"^## {re.escape(version)} — .*?\n(?P<body>.*?)(?=^## |\Z)",
+              rf"^## {re.escape(version)} \(.*?\)\n(?P<body>.*?)(?=^## |\Z)",
               changelog,
               flags=re.MULTILINE | re.DOTALL,
           )

@@ -72,7 +72,7 @@ namespace KIA.WiRR.Editor
                 var prCreated = false;
                 if (Run(cacheRoot, "gh", "--version", 5000, false).code == 0 && !string.IsNullOrWhiteSpace(repositorySlug))
                 {
-                    var title = $"Raport WiRR: {team} — laboratorium {document.labNumber:00}";
+                    var title = $"Raport WiRR: {team}: laboratorium {document.labNumber:00}";
                     var body = "Raport laboratoryjny WiRR. Ocena merytoryczna należy do prowadzącego.";
                     prCreated = Run(cacheRoot, "gh", $"pr create --repo {Q(repositorySlug)} --base {Q(baseBranch)} --head {Q(branch)} --title {Q(title)} --body {Q(body)}", 60000, false).code == 0;
                 }

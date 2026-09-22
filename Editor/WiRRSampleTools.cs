@@ -111,8 +111,8 @@ namespace KIA.WiRR.Editor
 
             var prefixes = new[]
             {
-                $"Laboratorium {definition.Number:00} —",
-                $"Lab {definition.Number:00} —"
+                $"Laboratorium {definition.Number:00}:",
+                $"Lab {definition.Number:00}:"
             };
 
             return samples.FirstOrDefault(sample =>

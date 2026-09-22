@@ -51,12 +51,12 @@ namespace KIA.WiRR.Editor
         private static void ValidateUnity(List<WiRRValidationResult> results)
         {
             if (Application.unityVersion.StartsWith("6000.6.", StringComparison.Ordinal))
-                Pass(results, $"Unity {Application.unityVersion} — wersja referencyjna 6000.6.x.");
+                Pass(results, $"Unity {Application.unityVersion}: wersja referencyjna 6000.6.x.");
             else
                 Warn(results, $"Unity {Application.unityVersion}; kurs referencyjnie używa 6000.6.x.");
 
             if (GraphicsSettings.defaultRenderPipeline != null)
-                Pass(results, "Aktywny potok renderowania SRP — projekt nie korzysta z trybu Built-in.");
+                Pass(results, "Aktywny potok renderowania SRP: projekt nie korzysta z trybu Built-in.");
             else
                 Error(results, "Brak aktywnego zasobu Render Pipeline. Utwórz projekt Universal 3D (URP) lub przypisz właściwy zasób URP.");
         }
@@ -226,7 +226,7 @@ namespace KIA.WiRR.Editor
             return at > 0 ? identifier.Substring(0, at) : identifier;
         }
 
-        private static void Pass(List<WiRRValidationResult> results, string message) => results.Add(new WiRRValidationResult(WiRRValidationSeverity.Info, "OK — " + message));
+        private static void Pass(List<WiRRValidationResult> results, string message) => results.Add(new WiRRValidationResult(WiRRValidationSeverity.Info, "OK: " + message));
         private static void Info(List<WiRRValidationResult> results, string message) => results.Add(new WiRRValidationResult(WiRRValidationSeverity.Info, message));
         private static void Warn(List<WiRRValidationResult> results, string message) => results.Add(new WiRRValidationResult(WiRRValidationSeverity.Warning, message));
         private static void Error(List<WiRRValidationResult> results, string message) => results.Add(new WiRRValidationResult(WiRRValidationSeverity.Error, message));

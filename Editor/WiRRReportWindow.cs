@@ -23,14 +23,14 @@ namespace KIA.WiRR.Editor
         public static void Open()
         {
             var window = GetWindow<WiRRReportWindow>();
-            window.titleContent = WiRRBranding.Title("WiRR — raport");
+            window.titleContent = WiRRBranding.Title("WiRR Raport");
             window.minSize = new Vector2(680, 720);
             window.Show();
         }
 
         private void OnEnable()
         {
-            titleContent = WiRRBranding.Title("WiRR — raport");
+            titleContent = WiRRBranding.Title("WiRR Raport");
             labNumber = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 7);
             document = WiRRReportStore.LoadOrCreate(labNumber);
             InitializeSectionFoldouts();
@@ -99,9 +99,9 @@ namespace KIA.WiRR.Editor
                 while (document.studentIndices.Count < 3)
                     document.studentIndices.Add(string.Empty);
 
-                document.studentIndices[0] = EditorGUILayout.TextField("Numer indeksu — osoba 1", document.studentIndices[0]);
-                document.studentIndices[1] = EditorGUILayout.TextField("Numer indeksu — osoba 2", document.studentIndices[1]);
-                document.studentIndices[2] = EditorGUILayout.TextField("Numer indeksu — osoba 3 (opcjonalnie)", document.studentIndices[2]);
+                document.studentIndices[0] = EditorGUILayout.TextField("Numer indeksu: osoba 1", document.studentIndices[0]);
+                document.studentIndices[1] = EditorGUILayout.TextField("Numer indeksu: osoba 2", document.studentIndices[1]);
+                document.studentIndices[2] = EditorGUILayout.TextField("Numer indeksu: osoba 3 (opcjonalnie)", document.studentIndices[2]);
 
                 if (EditorGUI.EndChangeCheck())
                 {
@@ -112,7 +112,7 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.Space(4);
                 var sum = WiRRReportStore.GetValue(document, "variant.sum");
                 EditorGUILayout.LabelField(
-                    string.IsNullOrWhiteSpace(sum) ? "Suma indeksów S: —" : $"Suma indeksów S: {sum}",
+                    string.IsNullOrWhiteSpace(sum) ? "Suma indeksów S: brak" : $"Suma indeksów S: {sum}",
                     EditorStyles.miniBoldLabel);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -121,7 +121,7 @@ namespace KIA.WiRR.Editor
                     for (var k = 1; k <= 5; k++)
                     {
                         var value = WiRRReportStore.GetValue(document, $"variant.v{k}");
-                        EditorGUILayout.LabelField($"v{k} = {(string.IsNullOrWhiteSpace(value) ? "—" : value)}", GUILayout.Width(72));
+                        EditorGUILayout.LabelField($"v{k} = {(string.IsNullOrWhiteSpace(value) ? "brak" : value)}", GUILayout.Width(72));
                     }
                 }
                 EditorGUILayout.LabelField(
@@ -147,7 +147,7 @@ namespace KIA.WiRR.Editor
             {
                 var required = section.Checkpoint == "3.0";
                 var optional = section.Checkpoint != "3.0" && section.Checkpoint != "COMMON";
-                var status = required ? " — wymagany do wysłania" : optional ? " — opcjonalny" : " — opcjonalne informacje";
+                var status = required ? ": wymagany do wysłania" : optional ? ": opcjonalny" : ": opcjonalne informacje";
                 var title = section.Checkpoint == "COMMON"
                     ? section.Title + status
                     : $"Etap {section.Title}" + status;
@@ -234,7 +234,7 @@ namespace KIA.WiRR.Editor
             var requiredMark = field.Required ? " *" : string.Empty;
             var unit = string.IsNullOrEmpty(field.Unit) ? string.Empty : $" [{field.Unit}]";
             var automatic = WiRRReportCalculator.IsDerivedField(field.Id);
-            var labelText = field.Label + unit + requiredMark + (automatic ? " — automatycznie" : string.Empty);
+            var labelText = field.Label + unit + requiredMark + (automatic ? ": automatycznie" : string.Empty);
             var automaticDescription = automatic ? WiRRReportCalculator.DerivedFieldDescription(field.Id) : string.Empty;
             var label = new GUIContent(labelText, automatic ? automaticDescription : field.Help);
 
@@ -250,7 +250,7 @@ namespace KIA.WiRR.Editor
                         break;
 
                     case WiRRReportFieldKind.Boolean:
-                        var booleanOptions = new[] { "— wybierz —", "tak", "nie" };
+                        var booleanOptions = new[] { "Wybierz...", "tak", "nie" };
                         var booleanIndex = oldValue == "true" ? 1 : oldValue == "false" ? 2 : 0;
                         var selectedBoolean = EditorGUILayout.Popup(label, booleanIndex, booleanOptions);
                         newValue = selectedBoolean == 1 ? "true" : selectedBoolean == 2 ? "false" : string.Empty;
@@ -258,7 +258,7 @@ namespace KIA.WiRR.Editor
 
                     case WiRRReportFieldKind.Choice:
                         var choices = new string[field.Choices.Length + 1];
-                        choices[0] = "— wybierz —";
+                        choices[0] = "Wybierz...";
                         for (var i = 0; i < field.Choices.Length; i++)
                             choices[i + 1] = ChoiceDisplayName(field.Choices[i]);
                         var oldChoice = Array.IndexOf(field.Choices, oldValue);
@@ -309,7 +309,7 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(8);
             tableFoldouts[key] = EditorGUILayout.Foldout(
                 tableFoldouts[key],
-                "Dane pomiarowe — " + table.Label,
+                "Dane pomiarowe: " + table.Label,
                 true);
 
             if (!tableFoldouts[key])
@@ -333,7 +333,7 @@ namespace KIA.WiRR.Editor
                         var cell = WiRRReportTableCatalog.CellKey(table, row, column);
                         var oldValue = WiRRReportStore.GetValue(document, cell);
                         var automatic = WiRRReportCalculator.IsDerivedCell(table, column);
-                        var displayLabel = automatic ? column.Label + " — automatycznie" : column.Label;
+                        var displayLabel = automatic ? column.Label + " (automatycznie)" : column.Label;
                         var content = new GUIContent(
                             displayLabel,
                             automatic
@@ -420,7 +420,7 @@ namespace KIA.WiRR.Editor
         {
             if (column.Id == "status_pass_fail_nv")
             {
-                var values = new[] { "— wybierz —", "PASS — zaliczony", "FAIL — niezaliczony", "NV — niezweryfikowany" };
+                var values = new[] { "Wybierz...", "PASS: zaliczony", "FAIL: niezaliczony", "NV: niezweryfikowany" };
                 var index = oldValue.StartsWith("PASS", StringComparison.OrdinalIgnoreCase) ? 1
                     : oldValue.StartsWith("FAIL", StringComparison.OrdinalIgnoreCase) ? 2
                     : oldValue.StartsWith("NV", StringComparison.OrdinalIgnoreCase) ? 3
@@ -437,7 +437,7 @@ namespace KIA.WiRR.Editor
 
             if (column.Id == "hit_miss")
             {
-                var values = new[] { "— wybierz —", "HIT — trafienie", "MISS — brak trafienia" };
+                var values = new[] { "Wybierz...", "HIT: trafienie", "MISS: brak trafienia" };
                 var index = oldValue.Equals("HIT", StringComparison.OrdinalIgnoreCase) ? 1
                     : oldValue.Equals("MISS", StringComparison.OrdinalIgnoreCase) ? 2
                     : 0;
@@ -447,7 +447,7 @@ namespace KIA.WiRR.Editor
 
             if (IsBooleanLikeColumn(column.Id))
             {
-                var values = new[] { "— wybierz —", "tak", "nie" };
+                var values = new[] { "Wybierz...", "tak", "nie" };
                 var index = oldValue.Equals("tak", StringComparison.OrdinalIgnoreCase) || oldValue.Equals("true", StringComparison.OrdinalIgnoreCase) ? 1
                     : oldValue.Equals("nie", StringComparison.OrdinalIgnoreCase) || oldValue.Equals("false", StringComparison.OrdinalIgnoreCase) ? 2
                     : 0;
@@ -461,7 +461,7 @@ namespace KIA.WiRR.Editor
         private static string DrawNumericChoice(GUIContent label, string oldValue, int minimum, int maximum)
         {
             var values = new string[maximum - minimum + 2];
-            values[0] = "— wybierz —";
+            values[0] = "Wybierz...";
             for (var value = minimum; value <= maximum; value++)
                 values[value - minimum + 1] = value.ToString();
 
@@ -548,12 +548,12 @@ namespace KIA.WiRR.Editor
                 var status = cp.Complete
                     ? "kompletny"
                     : requiredForSubmission
-                        ? "niekompletny — wymagany do wysłania"
-                        : "niekompletny — etap opcjonalny";
+                        ? "niekompletny: wymagany do wysłania"
+                        : "niekompletny: etap opcjonalny";
 
                 var text = $"Etap {cp.Checkpoint}: {status}";
                 if (cp.Reasons.Count > 0)
-                    text += " — " + string.Join("; ", cp.Reasons);
+                    text += ": " + string.Join("; ", cp.Reasons);
 
                 var type = cp.Complete
                     ? MessageType.Info
