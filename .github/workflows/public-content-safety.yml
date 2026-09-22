@@ -2,8 +2,6 @@ name: Kontrola publicznej zawartości
 
 on:
   pull_request:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
