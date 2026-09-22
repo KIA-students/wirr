@@ -155,8 +155,27 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git push origin HEAD:main
-          echo "Main forka został zaktualizowany bez publikowania prywatnych workflow." >> "${GITHUB_STEP_SUMMARY}"
+
+          checked_sha="${{ steps.compare.outputs.local_sha }}"
+          git fetch --no-tags origin main
+          current_sha="$(git rev-parse origin/main)"
+
+          if [ "${current_sha}" != "${checked_sha}" ]; then
+            echo "::notice::Main zmienił się podczas synchronizacji. Pomijam push; kolejny zaplanowany przebieg sprawdzi nowszy stan."
+            {
+              echo
+              echo "Synchronizacja nie wykonała push, ponieważ main otrzymał nowsze commity w trakcie tego przebiegu."
+              echo "Nie jest to błąd. Kolejny przebieg wykona ponowną ocenę."
+            } >> "${GITHUB_STEP_SUMMARY}"
+            exit 0
+          fi
+
+          if git push origin HEAD:main; then
+            echo "Main forka został zaktualizowany bez publikowania prywatnych workflow." >> "${GITHUB_STEP_SUMMARY}"
+          else
+            echo "::notice::Push został pominięty z powodu równoległej zmiany main. Kolejny przebieg ponowi synchronizację."
+            echo "Równoległa zmiana main przerwała push bez oznaczania przebiegu jako błąd." >> "${GITHUB_STEP_SUMMARY}"
+          fi
 
       - name: Przygotuj bezpieczną gałąź do ręcznego rozwiązania konfliktu
         if: steps.compare.outputs.needs_sync == 'true' && steps.merge.outputs.clean == 'false'
