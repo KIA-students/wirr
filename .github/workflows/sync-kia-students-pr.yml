@@ -72,7 +72,7 @@ jobs:
           done
 
           forbidden_matches="$(
-            grep -RInE               --exclude-dir=.git               --binary-files=without-match               'MatPomGit/(wirr|prz)|github\.com/MatPomGit/(wirr|prz)'               . || true
+            grep -RInE               --exclude-dir=.git               --binary-files=without-match               'MatPomGit'               . || true
           )"
 
           if [ -n "${forbidden_matches}" ]; then
