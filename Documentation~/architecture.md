@@ -82,6 +82,34 @@ Assets/WiRR/Common/
 
 Stanowiska jakości tekstur powstają z kopii źródeł. Warianty 128, 256, 512 i 1024 px różnią się tylko `maxTextureSize`, dzięki czemu porównanie nie miesza rozdzielczości z inną geometrią lub UV.
 
+## Dynamiczne komponenty dydaktyczne
+
+Warstwa Runtime zawiera cztery niezależne komponenty demonstracyjne:
+
+```text
+Runtime/
+  WiRRLoopMotion.cs
+  WiRRPhysicsImpulsePad.cs
+  WiRRProceduralAudio.cs
+  WiRRVehicleController.cs
+```
+
+`WiRRLoopMotion` może pracować na Transform lub na kinematycznym Rigidbody. Dzięki temu ten sam komponent nadaje się zarówno do prostych obiektów dekoracyjnych, jak i ruchomych platform mających kolizję.
+
+`WiRRVehicleController` korzysta z `Unity.InputSystem`. Domyślnie czyta klawiaturę i gamepad bez wymagania gotowego assetu Input Actions. Publiczne `SetExternalInput()` / `ClearExternalInput()` tworzą punkt integracji dla XRI, UI, ROS lub własnego kontrolera.
+
+`WiRRProceduralAudio` generuje AudioClip w pamięci przy uruchomieniu. Nie zwiększa paczki o pliki audio i pozwala omawiać częstotliwość, harmoniczne, modulację, spatial blend, pitch oraz zależność dźwięku od prędkości pojazdu.
+
+Dynamiczne prefaby są generowane do:
+
+```text
+Assets/WiRR/Common/Prefabs/Dynamic/
+```
+
+Ich instancje są umieszczane pod `WiRR_TeachingAssets/DynamicDemos`. Usunięcie dynamicznych demonstratorów nie ingeruje w pozostałe obiekty dydaktyczne ani pracę studenta.
+
+Platformy zawierają obiekt `TeleportAreaPlaceholder`, lecz nie zależą od XRI. Konfiguracja Teleportation Area i warstw interakcji pozostaje zadaniem studenta.
+
 ## Zależności
 
 Pakiet bazowy wymusza tylko URP i Input System. Pozostałe pakiety są instalowane dla konkretnego laboratorium:
