@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-## 0.4.6 (2026-09-22)
+## 0.5.1 (2026-09-22)
 
 - przywrócono nazwę produktu `WiRR Course Toolkit` w Unity, Package Manager, README i stronie kursu;
 - usunięto pauzy typu em dash z aktywnych etykiet interfejsu oraz zastąpiono je dwukropkami, nawiasami lub prostszymi sformułowaniami;
