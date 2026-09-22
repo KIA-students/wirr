@@ -114,7 +114,7 @@ jobs:
           changelog = Path("CHANGELOG.md").read_text(encoding="utf-8")
 
           match = re.search(
-              rf"^## {re.escape(version)} \\(.*?\\)\n(?P<body>.*?)(?=^## |\\Z)",
+              rf"^## {re.escape(version)} \(.*?\)\n(?P<body>.*?)(?=^## |\Z)",
               changelog,
               flags=re.MULTILINE | re.DOTALL,
           )
