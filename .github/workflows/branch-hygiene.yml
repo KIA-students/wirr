@@ -1,0 +1,71 @@
+name: Porządkowanie gałęzi
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [closed]
+  schedule:
+    - cron: '41 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: wirr-branch-hygiene
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    name: Usuń zakończone gałęzie robocze
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Usuń gałęzie zakończonych PR
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          mapfile -t merged_branches < <(
+            gh pr list               --repo "${GITHUB_REPOSITORY}"               --state merged               --limit 200               --json headRefName,headRepositoryOwner               --jq '.[] | select(.headRepositoryOwner.login == "MatPomGit") | .headRefName'               | sort -u
+          )
+
+          deleted=0
+          skipped=0
+
+          for branch in "${merged_branches[@]}"; do
+            [ -n "${branch}" ] || continue
+
+            case "${branch}" in
+              main|lab??-start|sync/*)
+                echo "Zachowuję gałąź chronioną regułą: ${branch}"
+                skipped=$((skipped + 1))
+                continue
+                ;;
+            esac
+
+            if git ls-remote --exit-code --heads origin "${branch}" >/dev/null 2>&1; then
+              echo "Usuwam zakończoną gałąź: ${branch}"
+              git push origin --delete "${branch}"
+              deleted=$((deleted + 1))
+            fi
+          done
+
+          {
+            echo "## Porządkowanie gałęzi"
+            echo
+            echo "- usunięte zakończone gałęzie PR: **${deleted}**"
+            echo "- zachowane gałęzie chronione: **${skipped}**"
+            echo
+            echo "Gałęzie `main`, `lab??-start` i `sync/*` nie są usuwane automatycznie."
+          } >> "${GITHUB_STEP_SUMMARY}"
