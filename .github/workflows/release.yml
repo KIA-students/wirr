@@ -69,7 +69,7 @@ jobs:
               raise SystemExit(f"Oczekiwano 7 próbek laboratoriów, znaleziono: {len(samples)}")
 
           for number, sample in enumerate(samples, 1):
-              expected_prefix = f"Laboratorium {number:02d} —"
+              expected_prefix = f"Laboratorium {number:02d}:"
               name = sample.get("displayName", "")
               path = sample.get("path", "")
               if not name.startswith(expected_prefix):
