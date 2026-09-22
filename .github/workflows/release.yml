@@ -55,6 +55,7 @@ jobs:
               "Editor",
               "Runtime",
               "Samples~",
+              "Textures",
               "package.json",
               "README.md",
               "CHANGELOG.md",
@@ -63,6 +64,22 @@ jobs:
           missing = [path for path in required if not (root / path).exists()]
           if missing:
               raise SystemExit("Brak wymaganych elementów pakietu: " + ", ".join(missing))
+
+          texture_root = root / "Textures" / "Grid"
+          texture_prefixes = ("grid-1", "grid_2", "grid-4")
+          texture_suffixes = ("albedo", "ambient", "displacement", "normal", "specular")
+          for prefix in texture_prefixes:
+              for suffix in texture_suffixes:
+                  texture = texture_root / f"{prefix}_{suffix}.png"
+                  meta = texture_root / f"{prefix}_{suffix}.png.meta"
+                  if not texture.is_file() or not meta.is_file():
+                      raise SystemExit(f"Brak tekstury Grid lub pliku meta: {texture}")
+
+          for editor_file in ("WiRRPrefabTextureLibrary.cs", "WiRRPrefabTools.cs"):
+              source = root / "Editor" / editor_file
+              meta = root / "Editor" / f"{editor_file}.meta"
+              if not source.is_file() or not meta.is_file():
+                  raise SystemExit(f"Brak narzędzia prefabów lub pliku meta: {source}")
 
           samples = package.get("samples", [])
           if len(samples) != 7:
@@ -171,6 +188,7 @@ jobs:
             Editor
             Runtime
             Samples~
+            Textures
             Documentation~
             WebSim~
             scripts~

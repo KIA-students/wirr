@@ -1,8 +1,8 @@
 {
   "name": "pl.prz.kia.wirr",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "displayName": "WiRR Course Toolkit",
-  "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i Rozszerzona Rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera narzędzia prowadzące przez pracę laboratoryjną, generowane prefaby dydaktyczne, materiały startowe, walidację scen oraz prosty przebieg raportowania: Raport → Sprawdź → Wyślij. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
+  "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i Rozszerzona Rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera narzędzia prowadzące przez pracę laboratoryjną, generowane prefaby dydaktyczne, teksturowane zestawy Grid, materiały startowe, walidację scen oraz prosty przebieg raportowania: Raport → Sprawdź → Wyślij. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
   "unity": "6000.6",
   "documentationUrl": "https://kia-students.github.io/wirr/",
   "changelogUrl": "https://github.com/KIA-students/wirr/blob/main/CHANGELOG.md",
