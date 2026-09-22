@@ -18,7 +18,7 @@
 - wygenerowane prefaby trafiają do `Assets/WiRR/LabXX/Prefabs/Generated`, a własna praca studenta pozostaje poza folderem odtwarzalnym;
 - rozbudowano `WiRR → Narzędzia kursu` o tworzenie środowiska, zestawu eksperymentalnego i bezpieczne usuwanie obiektów dydaktycznych wyłącznie z aktywnej sceny;
 - utrzymano zasadę, że materiały startowe nie konfigurują za studenta komponentów XRI, AR ani mapowania ROS stanowiących cel ćwiczenia;
-- wyraźnie zdefiniowano `MatPomGit/wirr` jako repozytorium deweloperskie, `KIA-students/wirr` jako repozytorium produkcyjne dla studentów oraz `MatPomGit/prz` jako repo materiałów dydaktycznych bez kopii pakietu.
+- uporządkowano strukturę publikacji tak, aby publiczne repozytorium kursu zawierało wyłącznie materiały potrzebne studentom i użytkownikom pakietu.
 
 
 ## 0.4.5 — 2026-09-21
