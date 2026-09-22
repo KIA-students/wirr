@@ -41,7 +41,6 @@ namespace KIA.WiRR.Editor
                 return 0;
 
             var belongsToWiRR =
-                assetPath.IndexOf("WiRR — narzędzia kursu", StringComparison.OrdinalIgnoreCase) >= 0 ||
                 assetPath.IndexOf("WiRR Course Toolkit", StringComparison.OrdinalIgnoreCase) >= 0;
             if (!belongsToWiRR)
                 return 0;
