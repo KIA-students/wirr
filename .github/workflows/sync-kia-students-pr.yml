@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: wirr-sync-to-kia-students
@@ -17,98 +17,118 @@ concurrency:
 env:
   UPSTREAM_REPOSITORY: KIA-students/wirr
   UPSTREAM_BRANCH: main
-  SOURCE_REPOSITORY: MatPomGit/wirr
-  SOURCE_BRANCH: main
+  EXPORT_BRANCH: sync/public-main
 
 jobs:
   sync-pr:
-    name: Sprawdź różnice i utwórz Pull Request
+    if: github.repository == 'MatPomGit/wirr'
+    name: Przygotuj bezpieczny eksport i Pull Request
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
 
     steps:
-      - name: Pobierz repozytorium deweloperskie
+      - name: Pobierz repozytorium źródłowe
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
-      - name: Pobierz stan repozytorium studenckiego
+      - name: Skonfiguruj Git i pobierz repozytorium publiczne
         shell: bash
         run: |
           set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote add upstream "https://github.com/${UPSTREAM_REPOSITORY}.git"
           git fetch --no-tags upstream "${UPSTREAM_BRANCH}"
 
-      - name: Wykryj nowe zmiany z MatPomGit/wirr
-        id: diff
+      - name: Zbuduj publiczny snapshot
+        id: export
         shell: bash
         run: |
           set -euo pipefail
 
           source_sha="$(git rev-parse HEAD)"
           upstream_sha="$(git rev-parse "upstream/${UPSTREAM_BRANCH}")"
-          ahead_count="$(git rev-list --count "upstream/${UPSTREAM_BRANCH}..HEAD")"
-          behind_count="$(git rev-list --count "HEAD..upstream/${UPSTREAM_BRANCH}")"
 
-          # git cherry porównuje patch-id, więc nie zgłasza ponownie commitów,
-          # które trafiły już do repozytorium docelowego np. przez squash/cherry-pick.
-          cherry_output="$(git cherry "upstream/${UPSTREAM_BRANCH}" HEAD || true)"
-          unique_count="$(printf '%s\n' "${cherry_output}" | awk '$1 == "+" {count++} END {print count+0}')"
-          equivalent_count="$(printf '%s\n' "${cherry_output}" | awk '$1 == "-" {count++} END {print count+0}')"
+          private_paths=(
+            ".github/workflows/sync-kia-students-pr.yml"
+            ".github/workflows/sync-from-kia-students.yml"
+            ".github/workflows/branch-hygiene.yml"
+          )
 
-          {
-            echo "source_sha=${source_sha}"
-            echo "upstream_sha=${upstream_sha}"
-            echo "ahead_count=${ahead_count}"
-            echo "behind_count=${behind_count}"
-            echo "unique_count=${unique_count}"
-            echo "equivalent_count=${equivalent_count}"
-          } >> "${GITHUB_OUTPUT}"
+          git checkout -B "${EXPORT_BRANCH}" "upstream/${UPSTREAM_BRANCH}"
 
-          if [ "${unique_count}" -gt 0 ]; then
-            echo "needs_pr=true" >> "${GITHUB_OUTPUT}"
-          else
-            echo "needs_pr=false" >> "${GITHUB_OUTPUT}"
+          # Ustaw zawartość gałęzi eksportowej na snapshot źródłowego main.
+          # HEAD nadal wskazuje publiczny upstream, więc różnica jest gotowa do PR.
+          git read-tree --reset -u "${source_sha}"
+
+          # Prywatna automatyzacja repozytoriów nie może trafić do repozytorium kursu.
+          # Usuwamy ją także wtedy, gdy znalazła się tam we wcześniejszej synchronizacji.
+          for path in "${private_paths[@]}"; do
+            git rm -f --ignore-unmatch -- "${path}"
+          done
+
+          for path in "${private_paths[@]}"; do
+            if [ -e "${path}" ]; then
+              echo "::error::Prywatny workflow pozostał w eksporcie: ${path}"
+              exit 1
+            fi
+          done
+
+          # Blokuj publikację, jeśli publiczny snapshot zawiera nazwy repozytoriów roboczych.
+          forbidden_matches="$(
+            grep -RInE               --exclude-dir=.git               --binary-files=without-match               'MatPomGit/(wirr|prz)|github\.com/MatPomGit/(wirr|prz)'               . || true
+          )"
+
+          if [ -n "${forbidden_matches}" ]; then
+            echo "::error::Eksport zawiera niedozwolone odwołania do repozytoriów roboczych."
+            printf '%s\n' "${forbidden_matches}"
+            {
+              echo "## Eksport wstrzymany"
+              echo
+              echo "W publicznym snapshotcie wykryto odwołania, które nie powinny być publikowane."
+              printf '%s\n' "${forbidden_matches}"
+            } >> "${GITHUB_STEP_SUMMARY}"
+            exit 1
           fi
 
-          echo "MatPomGit/wirr @ ${source_sha}"
-          echo "KIA-students/wirr @ ${upstream_sha}"
-          echo "Commity tylko w źródle: ${ahead_count}"
-          echo "Commity tylko w repozytorium studenckim: ${behind_count}"
-          echo "Unikalne zmiany (patch-id): ${unique_count}"
-          echo "Zmiany już równoważnie obecne upstream: ${equivalent_count}"
+          if git diff --cached --quiet HEAD --; then
+            echo "needs_pr=false" >> "${GITHUB_OUTPUT}"
+            echo "Brak różnic w publicznej zawartości."
+            exit 0
+          fi
+
+          git commit -m "sync: aktualizacja publicznego pakietu WiRR"
+          export_sha="$(git rev-parse HEAD)"
+
+          git push --force origin "HEAD:refs/heads/${EXPORT_BRANCH}"
 
           {
-            echo "## Automatyczna synchronizacja WiRR"
-            echo
-            echo "Ten Pull Request został przygotowany automatycznie, ponieważ `MatPomGit/wirr:main` zawiera zmiany, których nie ma jeszcze w `KIA-students/wirr:main`."
-            echo
-            echo "- źródło: `MatPomGit/wirr:main` (`${source_sha:0:12}`)"
-            echo "- cel: `KIA-students/wirr:main` (`${upstream_sha:0:12}`)"
-            echo "- unikalne zmiany: **${unique_count}**"
-            echo "- źródło jest za celem o: **${behind_count}** commit(ów)"
-            echo
-            echo "### Commity z unikalnymi zmianami"
-            echo
-            if [ "${unique_count}" -gt 0 ]; then
-              printf '%s\n' "${cherry_output}" | awk '$1 == "+" {print $2}' | while read -r sha; do
-                git show -s --format='- `%h` %s' "${sha}"
-              done
-            else
-              echo "- brak"
-            fi
-            echo
-            echo "_PR aktualizuje się automatycznie przy kolejnych zmianach w gałęzi `MatPomGit/wirr:main`._"
-          } > sync-pr-body.md
+            echo "needs_pr=true"
+            echo "source_sha=${source_sha}"
+            echo "upstream_sha=${upstream_sha}"
+            echo "export_sha=${export_sha}"
+          } >> "${GITHUB_OUTPUT}"
 
-      - name: Brak nowych zmian
-        if: steps.diff.outputs.needs_pr != 'true'
+          {
+            echo "## Publiczny eksport WiRR"
+            echo
+            echo "Przygotowano sanitizowany snapshot przeznaczony do repozytorium kursu."
+            echo
+            echo "- pliki prywatnej automatyzacji: wykluczone"
+            echo "- odwołania do repozytoriów roboczych: brak"
+            echo "- commit eksportowy: ${export_sha:0:12}"
+          } >> "${GITHUB_STEP_SUMMARY}"
+
+      - name: Brak zmian do publikacji
+        if: steps.export.outputs.needs_pr != 'true'
         shell: bash
         run: |
-          echo "Repozytorium deweloperskie nie zawiera nowych zmian wymagających PR do KIA-students/wirr."
+          echo "Publiczna zawartość jest już zgodna z KIA-students/wirr."
 
       - name: Sprawdź gotowość uwierzytelnienia
-        if: steps.diff.outputs.needs_pr == 'true'
+        if: steps.export.outputs.needs_pr == 'true'
         id: auth
         shell: bash
         env:
@@ -117,54 +137,54 @@ jobs:
           set -euo pipefail
           if [ -z "${SYNC_TOKEN}" ]; then
             echo "available=false" >> "${GITHUB_OUTPUT}"
-            echo "::warning::Wykryto nowe zmiany, ale brak sekretu KIA_STUDENTS_SYNC_TOKEN. Dodaj fine-grained PAT z dostępem do KIA-students/wirr i uprawnieniem Pull requests: Read and write."
-            {
-              echo "### Synchronizacja WiRR"
-              echo "Wykryto nowe zmiany, ale nie można utworzyć Pull Requestu bez sekretu `KIA_STUDENTS_SYNC_TOKEN`."
-            } >> "${GITHUB_STEP_SUMMARY}"
+            echo "::warning::Brak sekretu KIA_STUDENTS_SYNC_TOKEN. Wymagany jest dostęp do tworzenia Pull Requestów w KIA-students/wirr."
           else
             echo "available=true" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Sprawdź istniejący Pull Request
-        if: steps.diff.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
+        if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
         id: existing
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
         run: |
           set -euo pipefail
+
           existing_url="$(
-            gh pr list               --repo "${UPSTREAM_REPOSITORY}"               --state open               --base "${UPSTREAM_BRANCH}"               --head "MatPomGit:${SOURCE_BRANCH}"               --json url               --jq '.[0].url // ""'
+            gh pr list               --repo "${UPSTREAM_REPOSITORY}"               --state open               --base "${UPSTREAM_BRANCH}"               --head "MatPomGit:${EXPORT_BRANCH}"               --json url               --jq '.[0].url // ""'
           )"
 
           echo "url=${existing_url}" >> "${GITHUB_OUTPUT}"
 
-          if [ -n "${existing_url}" ]; then
-            echo "Istniejący PR: ${existing_url}"
-          else
-            echo "Brak otwartego PR synchronizacyjnego."
-          fi
-
-      - name: Utwórz Pull Request do repozytorium studenckiego
-        if: steps.diff.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true' && steps.existing.outputs.url == ''
+      - name: Utwórz Pull Request do repozytorium kursu
+        if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true' && steps.existing.outputs.url == ''
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
         run: |
           set -euo pipefail
 
+          cat > sync-pr-body.md <<'EOF'
+          Automatycznie przygotowana aktualizacja publicznego pakietu WiRR Course Toolkit.
+
+          Snapshot został sprawdzony przed utworzeniem Pull Requestu:
+          - nie zawiera workflow używanych wyłącznie do synchronizacji repozytoriów;
+          - nie zawiera odwołań do repozytoriów roboczych;
+          - zawiera wyłącznie publiczną postać pakietu kursu.
+
+          Po scaleniu repozytorium KIA-students/wirr nie otrzymuje mechanizmów odpowiedzialnych za synchronizację.
+          EOF
+
           pr_url="$(
-            gh pr create               --repo "${UPSTREAM_REPOSITORY}"               --base "${UPSTREAM_BRANCH}"               --head "MatPomGit:${SOURCE_BRANCH}"               --title "sync: MatPomGit/wirr → KIA-students/wirr"               --body-file sync-pr-body.md
+            gh pr create               --repo "${UPSTREAM_REPOSITORY}"               --base "${UPSTREAM_BRANCH}"               --head "MatPomGit:${EXPORT_BRANCH}"               --title "sync: aktualizacja WiRR Course Toolkit"               --body-file sync-pr-body.md
           )"
 
           echo "Utworzono PR: ${pr_url}"
-          echo "### Synchronizacja WiRR" >> "${GITHUB_STEP_SUMMARY}"
-          echo "Utworzono Pull Request: ${pr_url}" >> "${GITHUB_STEP_SUMMARY}"
+          echo "Pull Request: ${pr_url}" >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Podsumuj istniejący Pull Request
-        if: steps.diff.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true' && steps.existing.outputs.url != ''
+        if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true' && steps.existing.outputs.url != ''
         shell: bash
         run: |
-          echo "### Synchronizacja WiRR" >> "${GITHUB_STEP_SUMMARY}"
-          echo "Zmiany są już objęte otwartym Pull Requestem: ${{ steps.existing.outputs.url }}" >> "${GITHUB_STEP_SUMMARY}"
+          echo "Zmiany są objęte istniejącym Pull Requestem: ${{ steps.existing.outputs.url }}" >> "${GITHUB_STEP_SUMMARY}"
