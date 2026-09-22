@@ -75,11 +75,46 @@ jobs:
                   if not texture.is_file() or not meta.is_file():
                       raise SystemExit(f"Brak tekstury Grid lub pliku meta: {texture}")
 
-          for editor_file in ("WiRRPrefabTextureLibrary.cs", "WiRRPrefabTools.cs"):
+          for editor_file in (
+              "WiRRPrefabTextureLibrary.cs",
+              "WiRRPrefabTools.cs",
+              "WiRRSurfaceTextureLibrary.cs",
+              "WiRROptionalPrefabTools.cs",
+          ):
               source = root / "Editor" / editor_file
               meta = root / "Editor" / f"{editor_file}.meta"
               if not source.is_file() or not meta.is_file():
                   raise SystemExit(f"Brak narzędzia prefabów lub pliku meta: {source}")
+
+          surface_root = root / "Textures" / "Surfaces"
+          required_surface_families = (
+              "AcousticFoam",
+              "Concrete",
+              "DiamondPlate",
+              "Fabric023",
+              "Fabric066",
+              "Metal004",
+              "Metal044A",
+              "PaintedWood",
+              "Sign",
+              "Grass001",
+              "WoodFloor034",
+              "WoodFloor040",
+          )
+          for family in required_surface_families:
+              folder = surface_root / family
+              if not folder.is_dir():
+                  raise SystemExit(f"Brak rodziny materiałów PBR: {family}")
+              files = [path.name for path in folder.iterdir() if path.is_file()]
+              if not any("_Color." in name for name in files):
+                  raise SystemExit(f"Brak mapy Color dla {family}")
+              if not any("_NormalGL." in name for name in files):
+                  raise SystemExit(f"Brak mapy NormalGL dla {family}")
+              if not any("_Roughness." in name for name in files):
+                  raise SystemExit(f"Brak mapy Roughness dla {family}")
+
+          if not (root / "THIRD_PARTY_TEXTURES.md").is_file():
+              raise SystemExit("Brak THIRD_PARTY_TEXTURES.md")
 
           samples = package.get("samples", [])
           if len(samples) != 7:
@@ -200,6 +235,7 @@ jobs:
             CHANGELOG.md.meta
             LICENSE
             LICENSE.meta
+            THIRD_PARTY_TEXTURES.md
             .icon.png
             .icon.png.meta
             icon.png

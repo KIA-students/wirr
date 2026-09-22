@@ -399,6 +399,42 @@ namespace KIA.WiRR.Editor
                 if (WiRRPrefabTools.GridPrefabsExist(lab.Number))
                     DrawInlineStatus("Teksturowane prefaby Grid są wygenerowane w Prefabs/GridGenerated.", SuccessAccent);
 
+                EditorGUILayout.Space(7);
+                EditorGUILayout.LabelField("Opcjonalne laboratorium materiałów", EditorStyles.miniBoldLabel);
+                EditorGUILayout.HelpBox(
+                    "Dodatkowe demonstratory do Lab 01 i Lab 05, ale dostępne w każdej scenie. Pokazują wpływ rozdzielczości tekstury, normal mapy, kanałów PBR, tilingu i mipmap oraz różnice między wieloma materiałami z biblioteki WiRR.",
+                    MessageType.Info);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Galeria materiałów", GUILayout.Height(27)))
+                        WiRROptionalPrefabTools.CreateMaterialGallery(lab.Number);
+                    if (GUILayout.Button("Rozdzielczość 128–1024", GUILayout.Height(27)))
+                        WiRROptionalPrefabTools.CreateResolutionWall(lab.Number);
+                }
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Normal map: porównanie", GUILayout.Height(27)))
+                        WiRROptionalPrefabTools.CreateNormalMapLab(lab.Number);
+                    if (GUILayout.Button("Kanały PBR", GUILayout.Height(27)))
+                        WiRROptionalPrefabTools.CreatePbrChannelGallery(lab.Number);
+                }
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Tiling i mipmapy", GUILayout.Height(27)))
+                        WiRROptionalPrefabTools.CreateTilingLab(lab.Number);
+                    if (GUILayout.Button("Dodaj wszystkie demonstratory", GUILayout.Height(27)))
+                        WiRROptionalPrefabTools.CreateAll(lab.Number);
+                }
+
+                if (GUILayout.Button("Usuń opcjonalne demonstratory ze sceny", GUILayout.Height(24)))
+                    WiRROptionalPrefabTools.RemoveOptionalDemos(lab.Number);
+
+                if (WiRROptionalPrefabTools.OptionalDemosExist(lab.Number))
+                    DrawInlineStatus("Opcjonalne demonstratory materiałów są aktywne w tej scenie.", SuccessAccent);
+
                 if (lab.Number == 6)
                     EditorGUILayout.HelpBox(
                         "Laboratorium 06 może korzystać z lokalnego ROS 2/Gazebo, ROS 2/Gazebo na drugim komputerze albo z WiRR WebSim.",
