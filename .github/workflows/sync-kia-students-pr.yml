@@ -3,8 +3,10 @@ name: Synchronizacja do KIA-students
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: '17 */6 * * *'
+    paths-ignore:
+      - '.github/workflows/sync-kia-students-pr.yml'
+      - '.github/workflows/sync-from-kia-students.yml'
+      - '.github/workflows/branch-hygiene.yml'
   workflow_dispatch:
 
 permissions:
