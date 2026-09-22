@@ -38,7 +38,7 @@ namespace KIA.WiRR.Editor
         public static void Open()
         {
             var window = GetWindow<WiRRCourseWindow>();
-            window.titleContent = WiRRBranding.Title("WiRR — narzędzia kursu");
+            window.titleContent = WiRRBranding.Title("WiRR Course Toolkit");
             window.minSize = new Vector2(560, 680);
             window.Show();
         }
@@ -69,7 +69,7 @@ namespace KIA.WiRR.Editor
         {
             openWindow = this;
             selectedLab = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 7);
-            titleContent = WiRRBranding.Title("WiRR — narzędzia kursu");
+            titleContent = WiRRBranding.Title("WiRR Course Toolkit");
         }
 
         private void OnDisable()
@@ -171,7 +171,7 @@ namespace KIA.WiRR.Editor
             var buttonWidth = 112f;
             var titleRect = new Rect(textLeft, rect.y + 12f, Mathf.Max(120f, rect.width - (textLeft - rect.x) - buttonWidth - 22f), 26f);
             var subtitleRect = new Rect(textLeft, rect.y + 40f, Mathf.Max(120f, rect.width - (textLeft - rect.x) - buttonWidth - 22f), 30f);
-            GUI.Label(titleRect, "WiRR — narzędzia kursu", heroTitleStyle);
+            GUI.Label(titleRect, "WiRR Course Toolkit", heroTitleStyle);
             GUI.Label(subtitleRect, "Przygotuj środowisko, scenę i raport krok po kroku.", heroSubtitleStyle);
 
             var buttonRect = new Rect(rect.xMax - buttonWidth - 12f, rect.y + 23f, buttonWidth, 30f);
@@ -471,7 +471,7 @@ namespace KIA.WiRR.Editor
                     ReportAccent);
 
                 EditorGUILayout.HelpBox(
-                    "Etapy 3.5–5.0 są opcjonalne. Formularz automatycznie oblicza wartości pochodne, jeśli wynikają jednoznacznie z danych pomiarowych.",
+                    "Etapy od 3.5 do 5.0 są opcjonalne. Formularz automatycznie oblicza wartości pochodne, jeśli wynikają jednoznacznie z danych pomiarowych.",
                     MessageType.Info);
 
                 if (PrimaryButton("Otwórz formularz raportu WiRR", ReportAccent, 34f))
