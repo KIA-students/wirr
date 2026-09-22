@@ -107,20 +107,27 @@ jobs:
         run: |
           echo "Repozytorium deweloperskie nie zawiera nowych zmian wymagających PR do KIA-students/wirr."
 
-      - name: Sprawdź token synchronizacji
+      - name: Sprawdź gotowość uwierzytelnienia
         if: steps.diff.outputs.needs_pr == 'true'
+        id: auth
         shell: bash
         env:
           SYNC_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
         run: |
           set -euo pipefail
           if [ -z "${SYNC_TOKEN}" ]; then
-            echo "::error::Brak sekretu KIA_STUDENTS_SYNC_TOKEN. Dodaj fine-grained PAT z dostępem do KIA-students/wirr i uprawnieniem Pull requests: Read and write."
-            exit 1
+            echo "available=false" >> "${GITHUB_OUTPUT}"
+            echo "::warning::Wykryto nowe zmiany, ale brak sekretu KIA_STUDENTS_SYNC_TOKEN. Dodaj fine-grained PAT z dostępem do KIA-students/wirr i uprawnieniem Pull requests: Read and write."
+            {
+              echo "### Synchronizacja WiRR"
+              echo "Wykryto nowe zmiany, ale nie można utworzyć Pull Requestu bez sekretu `KIA_STUDENTS_SYNC_TOKEN`."
+            } >> "${GITHUB_STEP_SUMMARY}"
+          else
+            echo "available=true" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Sprawdź istniejący Pull Request
-        if: steps.diff.outputs.needs_pr == 'true'
+        if: steps.diff.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
         id: existing
         shell: bash
         env:
@@ -140,7 +147,7 @@ jobs:
           fi
 
       - name: Utwórz Pull Request do repozytorium studenckiego
-        if: steps.diff.outputs.needs_pr == 'true' && steps.existing.outputs.url == ''
+        if: steps.diff.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true' && steps.existing.outputs.url == ''
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
@@ -156,7 +163,7 @@ jobs:
           echo "Utworzono Pull Request: ${pr_url}" >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Podsumuj istniejący Pull Request
-        if: steps.diff.outputs.needs_pr == 'true' && steps.existing.outputs.url != ''
+        if: steps.diff.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true' && steps.existing.outputs.url != ''
         shell: bash
         run: |
           echo "### Synchronizacja WiRR" >> "${GITHUB_STEP_SUMMARY}"
