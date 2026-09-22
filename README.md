@@ -18,6 +18,10 @@ Synchronizację automatyzuje workflow `.github/workflows/sync-kia-students-pr.ym
 
 Do tworzenia PR wymagany jest sekret Actions `KIA_STUDENTS_SYNC_TOKEN` w repozytorium `MatPomGit/wirr`. Zalecany jest fine-grained PAT ograniczony do `KIA-students/wirr` z uprawnieniami **Contents: Read-only** oraz **Pull requests: Read and write**. Bez sekretu workflow nadal wykonuje porównanie i zgłasza ostrzeżenie, ale nie próbuje zapisywać do repozytorium studenckiego.
 
+Synchronizacja działa także w drugą stronę. Workflow `.github/workflows/sync-from-kia-students.yml` sprawdza, czy `KIA-students/wirr:main` zawiera commity, których nie ma jeszcze w forku. Jeśli tak, wykonuje zwykły merge do `MatPomGit/wirr:main`, dzięki czemu zachowywana jest zarówno historia zmian upstream, jak i wszystkie lokalne commity forka. Workflow celowo nie używa `reset --hard`, force-push ani nadpisywania historii. Jeżeli pojawi się konflikt, `main` pozostaje bez zmian, a tworzony jest PR z gałęzi `sync/upstream-main` do ręcznego rozwiązania konfliktu.
+
+Porządek gałęzi utrzymuje `.github/workflows/branch-hygiene.yml`: usuwa gałęzie robocze zakończonych i scalonych PR, ale nigdy nie usuwa `main`, gałęzi `lab??-start` ani gałęzi `sync/*`.
+
 Strona kursu jest publikowana pod adresem https://kia-students.github.io/wirr/.
 
 ## Zasada działania
