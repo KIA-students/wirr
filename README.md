@@ -76,6 +76,18 @@ Generator tworzy stylizowane, lekkie obiekty low-poly: stanowisko pomiarowe, mod
 
 Materiały **nie rozwiązują ćwiczenia za studenta**. Nie konfigurują automatycznie komponentów XRI, kotwic AR, raycastów, mapowania ROS ani procedury testowej, jeżeli właśnie te elementy są celem laboratorium. Folder `Prefabs/Generated` jest odtwarzalny; własne rozwiązania studenta powinny znajdować się poza nim.
 
+### Teksturowane prefaby Grid
+
+Drugi generator, `WiRRPrefabTools`, tworzy dodatkowe obiekty o bardziej charakterystycznej warstwie wizualnej. Korzysta z map PBR dostarczonych w projekcie deweloperskim w `Assets/Textures`:
+
+- `grid_1_*` → `Grid1`; bieżące pliki `grid-1_*` są obsługiwane jako fallback;
+- `grid_2_*` → `Grid2`;
+- `grid_3_*` → `Grid3`; bieżące pliki `grid-4_*` są obsługiwane jako fallback.
+
+Przy instalacji UPM te same mapy są dostępne w `Textures/Grid`. Narzędzie kopiuje je do `Assets/WiRR/Common/Textures/Generated`, ustawia właściwości importera oraz buduje materiały URP w `Assets/WiRR/Common/Materials/Generated/Grid`. Prefaby trafiają do `Assets/WiRR/LabXX/Prefabs/GridGenerated`.
+
+Dla każdego laboratorium generowane są dwa dodatkowe stanowiska kontekstowe. Są one przeznaczone do obserwacji, pomiarów i własnej rozbudowy, a nie jako gotowe rozwiązania zadań.
+
 ## Strona kursu (GitHub Pages)
 
 [Strona WiRR](https://kia-students.github.io/wirr/) zawiera trzy zakładki:

@@ -379,6 +379,26 @@ namespace KIA.WiRR.Editor
                 if (WiRRTeachingAssetTools.GeneratedPrefabsExist(lab.Number))
                     DrawInlineStatus("Prefaby dydaktyczne są wygenerowane. Modyfikuj własne rozwiązania poza folderem Prefabs/Generated.", SuccessAccent);
 
+                EditorGUILayout.Space(5);
+                EditorGUILayout.LabelField("Prefaby teksturowane Grid", EditorStyles.miniBoldLabel);
+                EditorGUILayout.HelpBox(
+                    "Drugi zestaw pomocy scenicznych korzysta z rodzin grid-1, grid_2 i grid-4 (w narzędziu: Grid1, Grid2 i Grid3). Tekstury są kopiowane do Assets/WiRR/Common/Textures/Generated i używane do generowania edytowalnych materiałów URP.",
+                    MessageType.None);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Dodaj prefaby Grid", GUILayout.Height(28)))
+                        WiRRPrefabTools.CreateOrRepairGridSet(lab.Number);
+                    if (GUILayout.Button("Odśwież materiały Grid", GUILayout.Height(28)))
+                        WiRRPrefabTools.RefreshGridMaterials();
+                }
+
+                if (GUILayout.Button("Usuń prefaby Grid ze sceny", GUILayout.Height(24)))
+                    WiRRPrefabTools.RemoveGridObjectsFromScene(lab.Number);
+
+                if (WiRRPrefabTools.GridPrefabsExist(lab.Number))
+                    DrawInlineStatus("Teksturowane prefaby Grid są wygenerowane w Prefabs/GridGenerated.", SuccessAccent);
+
                 if (lab.Number == 6)
                     EditorGUILayout.HelpBox(
                         "Laboratorium 06 może korzystać z lokalnego ROS 2/Gazebo, ROS 2/Gazebo na drugim komputerze albo z WiRR WebSim.",
