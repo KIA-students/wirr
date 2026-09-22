@@ -14,6 +14,10 @@ Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzec
 
 Przepływ zmian jest jednokierunkowy: **rozwój i testy w `MatPomGit/wirr` → wydanie → synchronizacja do `KIA-students/wirr`**. Repozytorium `prz` odsyła do repozytorium deweloperskiego zamiast duplikować jego pliki.
 
+Synchronizację automatyzuje workflow `.github/workflows/sync-kia-students-pr.yml`. Po każdym pushu do `main`, ręcznym uruchomieniu oraz cyklicznie porównuje on `MatPomGit/wirr:main` z `KIA-students/wirr:main`. Jeśli wykryje unikalne zmiany, tworzy jeden Pull Request `MatPomGit:main → KIA-students:main`; kolejne commity aktualizują ten sam PR. Porównanie wykorzystuje `git cherry`, dzięki czemu nie zgłasza ponownie zmian, które są już obecne w repozytorium docelowym po squashu lub cherry-picku.
+
+Do tworzenia PR wymagany jest sekret Actions `KIA_STUDENTS_SYNC_TOKEN` w repozytorium `MatPomGit/wirr`. Zalecany jest fine-grained PAT ograniczony do `KIA-students/wirr` z uprawnieniami **Contents: Read-only** oraz **Pull requests: Read and write**. Bez sekretu workflow nadal wykonuje porównanie i zgłasza ostrzeżenie, ale nie próbuje zapisywać do repozytorium studenckiego.
+
 Strona kursu jest publikowana pod adresem https://kia-students.github.io/wirr/.
 
 ## Zasada działania
