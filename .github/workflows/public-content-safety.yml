@@ -1,0 +1,55 @@
+name: Kontrola publicznej zawartości
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-safety:
+    if: github.repository == 'KIA-students/wirr'
+    name: Sprawdź zawartość repozytorium kursu
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v4
+
+      - name: Sprawdź brak prywatnych workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          forbidden_paths=(
+            ".github/workflows/sync-kia-students-pr.yml"
+            ".github/workflows/sync-from-kia-students.yml"
+            ".github/workflows/branch-hygiene.yml"
+          )
+
+          found=0
+          for path in "${forbidden_paths[@]}"; do
+            if [ -e "${path}" ]; then
+              echo "::error::Repozytorium kursu zawiera niedozwolony workflow: ${path}"
+              found=1
+            fi
+          done
+
+          if [ "${found}" -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Sprawdź publiczne adresy pakietu
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          grep -q '"documentationUrl": "https://kia-students.github.io/wirr/"' package.json
+          grep -q 'https://github.com/KIA-students/wirr.git' README.md
+          grep -q 'https://kia-students.github.io/wirr/' README.md
+
+          echo "Publiczna konfiguracja WiRR jest poprawna."
