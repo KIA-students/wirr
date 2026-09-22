@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 0.6.0 (2026-09-22)
+
+- dodano `WiRRPrefabTextureLibrary`, która korzysta z zestawów tekstur `grid-1_*`, `grid_2_*` oraz `grid-4_*`; trzeci zestaw jest w kodzie logicznie oznaczany jako `Grid3`, ponieważ w repozytorium nie ma obecnie plików `grid_3_*`;
+- dodano package-visible katalog `Textures/Grid`; generator kopiuje mapy do `Assets/WiRR/Common/Textures/Generated`, ustawia import normal map/AO/specular i tworzy edytowalne materiały URP;
+- dodano `WiRRPrefabTools` z czternastoma dodatkowymi, teksturowanymi prefabami dla laboratoriów 01–07;
+- dodano m.in. arenę metryczną, galerię materiałów, stanowisko montażowe, planszę rejestracji AR, korytarz okluzji, stanowisko LOD/collider, celę bliźniaka cyfrowego, konsolę sieciową, arenę QA i macierz ryzyka;
+- rozbudowano WiRR Course Toolkit o generowanie, odświeżanie materiałów i usuwanie wyłącznie instancji prefabów Grid;
+- zachowano zasadę dydaktyczną: prefaby dostarczają kontekst wizualny i stanowisko pomiarowe, ale nie konfigurują za studenta XRI, AR Foundation ani mapowania ROS.
+
+
 ## 0.5.1 (2026-09-22)
 
 - przywrócono nazwę produktu `WiRR Course Toolkit` w Unity, Package Manager, README i stronie kursu;
