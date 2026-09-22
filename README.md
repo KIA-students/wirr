@@ -6,7 +6,15 @@
 
 Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
 
-`KIA-students/wirr` jest docelowym, publicznym repozytorium kursu używanym przez studentów. Strona kursu jest publikowana pod adresem https://kia-students.github.io/wirr/.
+## Repozytoria i przepływ wydania
+
+- **[MatPomGit/wirr](https://github.com/MatPomGit/wirr)** — repozytorium deweloperskie i źródło prawdy dla kodu pakietu, generatorów scen, WebSim i dokumentacji technicznej.
+- **[KIA-students/wirr](https://github.com/KIA-students/wirr)** — repozytorium produkcyjne publikowane studentom i instalowane przez Unity Package Manager.
+- **[MatPomGit/prz](https://github.com/MatPomGit/prz)** — materiały dydaktyczne: wykłady, instrukcje laboratoryjne i pliki potrzebne do ich budowania. Nie należy utrzymywać tam kopii kodu pakietu WiRR.
+
+Przepływ zmian jest jednokierunkowy: **rozwój i testy w `MatPomGit/wirr` → wydanie → synchronizacja do `KIA-students/wirr`**. Repozytorium `prz` odsyła do repozytorium deweloperskiego zamiast duplikować jego pliki.
+
+Strona kursu jest publikowana pod adresem https://kia-students.github.io/wirr/.
 
 ## Zasada działania
 
@@ -42,7 +50,7 @@ Pakiet znajduje się w katalogu głównym repozytorium. Po instalacji w menu Uni
 
 Katalog główny repozytorium jest czystym pakietem UPM. Kod pakietu znajduje się w `Editor/` i `Runtime/`, a materiały importowane przez Package Manager w `Samples~/`.
 
-Pełny projekt Unity używany do rozwoju i testowania pakietu znajduje się w `Project~/`. Sufiks `~` powoduje, że Unity Package Manager nie importuje tego katalogu do projektu studenta, dzięki czemu `Assets`, `Packages` i `ProjectSettings` projektu deweloperskiego nie powodują konfliktów GUID z projektem użytkownika. Po sklonowaniu `KIA-students/wirr` do pracy nad pakietem otwórz w Unity katalog `Project~`, nie katalog główny repozytorium.
+Pełny projekt Unity używany do rozwoju i testowania pakietu znajduje się w `Project~/`. Sufiks `~` powoduje, że Unity Package Manager nie importuje tego katalogu do projektu studenta, dzięki czemu `Assets`, `Packages` i `ProjectSettings` projektu deweloperskiego nie powodują konfliktów GUID z projektem użytkownika. Do rozwoju pakietu klonuj `MatPomGit/wirr` i otwieraj w Unity katalog `Project~`, nie katalog główny repozytorium. `KIA-students/wirr` jest kopią wydaniową dla studentów.
 
 Dodatkowa dokumentacja techniczna znajduje się w `Documentation~/`, a skrypt walidatora CI w `scripts~/`; katalogi te również są celowo pomijane przez Asset Database.
 
@@ -59,6 +67,18 @@ Dodatkowa dokumentacja techniczna znajduje się w `Documentation~/`, a skrypt wa
 | 7 | Unity Test Framework |
 
 Materiały startowe znajdują się w `Samples~/Lab01`–`Samples~/Lab07`. Po imporcie próbki WiRR — z panelu WiRR albo bezpośrednio z Unity Package Manager — pakiet automatycznie przygotowuje folder roboczy `Assets/WiRR/LabXX` z folderami `Scenes`, `Scripts`, `Materials`, `Models`, `Prefabs`, `Textures`, `Data`, `Evidence` i `Documentation`. Przy pierwszym imporcie tworzona jest również scena `Scenes/LabXX.unity`.
+
+## Prefaby dydaktyczne
+
+W sekcji **Scena i pomiary → Materiały dydaktyczne** można opcjonalnie wygenerować:
+
+- wspólne środowisko laboratorium albo lekki zestaw odniesienia AR;
+- zestaw rozpoznawalnych obiektów eksperymentalnych właściwy dla Lab 01–07;
+- zwykłe prefaby Unity zapisane w `Assets/WiRR/LabXX/Prefabs/Generated`.
+
+Generator tworzy stylizowane, lekkie obiekty low-poly: stanowisko pomiarowe, moduł zasilania i gniazdo, artefakt AR i ramę kalibracyjną, robota do okluzji, warianty chwytaka do LOD, ramię robota z osiami przegubów oraz stanowisko QA z panelem usterek.
+
+Materiały **nie rozwiązują ćwiczenia za studenta**. Nie konfigurują automatycznie komponentów XRI, kotwic AR, raycastów, mapowania ROS ani procedury testowej, jeżeli właśnie te elementy są celem laboratorium. Folder `Prefabs/Generated` jest odtwarzalny; własne rozwiązania studenta powinny znajdować się poza nim.
 
 ## Strona kursu (GitHub Pages)
 

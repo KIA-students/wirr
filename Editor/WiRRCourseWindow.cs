@@ -47,6 +47,14 @@ namespace KIA.WiRR.Editor
         private static void PrepareFromMenu() =>
             WiRRSceneTools.PrepareBaseScene(EditorPrefs.GetInt(LabPrefKey, 1));
 
+        [MenuItem("WiRR/Scena laboratorium/Wygeneruj środowisko dydaktyczne", priority = 11)]
+        private static void TeachingEnvironmentFromMenu() =>
+            WiRRTeachingAssetTools.CreateOrRepairEnvironment(EditorPrefs.GetInt(LabPrefKey, 1));
+
+        [MenuItem("WiRR/Scena laboratorium/Wygeneruj zestaw eksperymentalny", priority = 12)]
+        private static void TeachingExperimentFromMenu() =>
+            WiRRTeachingAssetTools.CreateOrRepairExperimentSet(EditorPrefs.GetInt(LabPrefKey, 1));
+
         [MenuItem("WiRR/Scena laboratorium/Sprawdź wybrane laboratorium", priority = 20)]
         private static void ValidateFromMenu() =>
             WiRRSceneValidator.Validate(EditorPrefs.GetInt(LabPrefKey, 1));
@@ -350,6 +358,26 @@ namespace KIA.WiRR.Editor
 
                 if (GUILayout.Button("Dodaj / usuń sondę metryk", GUILayout.Height(27)))
                     WiRRSceneTools.ToggleMetrics(lab.Number);
+
+                EditorGUILayout.Space(7);
+                EditorGUILayout.LabelField("Materiały dydaktyczne", EditorStyles.miniBoldLabel);
+                EditorGUILayout.HelpBox(
+                    "Opcjonalny zestaw rozpoznawalnych obiektów zastępuje pustą scenę i ręczne modelowanie prymitywów. Prefaby są generowane w Assets/WiRR/LabXX/Prefabs/Generated. Nie dodają za studenta komponentów XRI, AR ani mapowania ROS stanowiących cel ćwiczenia.",
+                    MessageType.Info);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Dodaj środowisko", GUILayout.Height(28)))
+                        WiRRTeachingAssetTools.CreateOrRepairEnvironment(lab.Number);
+                    if (GUILayout.Button("Dodaj zestaw eksperymentalny", GUILayout.Height(28)))
+                        WiRRTeachingAssetTools.CreateOrRepairExperimentSet(lab.Number);
+                }
+
+                if (GUILayout.Button("Usuń obiekty dydaktyczne ze sceny", GUILayout.Height(24)))
+                    WiRRTeachingAssetTools.RemoveTeachingObjectsFromScene(lab.Number);
+
+                if (WiRRTeachingAssetTools.GeneratedPrefabsExist(lab.Number))
+                    DrawInlineStatus("Prefaby dydaktyczne są wygenerowane. Modyfikuj własne rozwiązania poza folderem Prefabs/Generated.", SuccessAccent);
 
                 if (lab.Number == 6)
                     EditorGUILayout.HelpBox(
