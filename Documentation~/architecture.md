@@ -57,6 +57,31 @@ Przy pierwszym użyciu generator:
 API używa kanonicznych rodzin `grid_1`, `grid_2` i `grid_3`. Dla zgodności z bieżącą zawartością repozytorium resolver akceptuje również `grid-1_*` jako źródło `Grid1` oraz `grid-4_*` jako źródło `Grid3`.
 
 
+## Biblioteka powierzchni PBR i demonstratory opcjonalne
+
+`Textures/Surfaces` jest kuratorowanym zestawem materiałów 1K dostępnym z pakietu UPM. `WiRRSurfaceTextureLibrary` nigdy nie modyfikuje plików pakietu. Kopiuje potrzebne mapy do projektu studenta i dopiero tam ustawia importer oraz tworzy materiały.
+
+Dla standardowych materiałów używane są:
+- Color jako sRGB;
+- NormalGL jako `TextureImporterType.NormalMap`;
+- AO, Roughness, Metalness i Displacement jako dane liniowe;
+- automatycznie pakowana mapa Metallic/Smoothness dla URP/Lit.
+
+Struktura zasobów roboczych:
+
+```text
+Assets/WiRR/Common/
+  Textures/Generated/Surfaces/
+  Textures/Generated/Quality/
+  Materials/Generated/Surfaces/
+  Materials/Generated/Quality/
+  Prefabs/Optional/
+```
+
+`WiRROptionalPrefabTools` generuje pięć niezależnych stanowisk. Są umieszczane pod `WiRR_TeachingAssets/OptionalMaterialDemos`, dlatego ich usunięcie nie narusza podstawowych prefabów laboratorium ani pracy studenta.
+
+Stanowiska jakości tekstur powstają z kopii źródeł. Warianty 128, 256, 512 i 1024 px różnią się tylko `maxTextureSize`, dzięki czemu porównanie nie miesza rozdzielczości z inną geometrią lub UV.
+
 ## Zależności
 
 Pakiet bazowy wymusza tylko URP i Input System. Pozostałe pakiety są instalowane dla konkretnego laboratorium:
