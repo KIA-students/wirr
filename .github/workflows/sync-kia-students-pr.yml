@@ -142,6 +142,37 @@ jobs:
             echo "available=true" >> "${GITHUB_OUTPUT}"
           fi
 
+      - name: Zamknij wcześniejsze niesanitizowane Pull Requesty
+        if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          mapfile -t legacy_prs < <(
+            gh pr list \
+              --repo "${UPSTREAM_REPOSITORY}" \
+              --state open \
+              --base "${UPSTREAM_BRANCH}" \
+              --head "MatPomGit:main" \
+              --json number \
+              --jq '.[].number'
+          )
+
+          for pr_number in "${legacy_prs[@]}"; do
+            [ -n "${pr_number}" ] || continue
+
+            gh pr edit "${pr_number}" \
+              --repo "${UPSTREAM_REPOSITORY}" \
+              --title "archiwalna synchronizacja WiRR" \
+              --body "Ten Pull Request został zastąpiony przez sanitizowany eksport publicznej zawartości WiRR Course Toolkit."
+
+            gh pr close "${pr_number}" \
+              --repo "${UPSTREAM_REPOSITORY}" \
+              --comment "Zastąpiono bezpiecznym mechanizmem eksportu publicznej zawartości."
+          done
+
       - name: Sprawdź istniejący Pull Request
         if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
         id: existing
