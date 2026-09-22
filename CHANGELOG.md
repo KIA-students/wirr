@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 0.5.0 — 2026-09-22
+
+- dodano generator lekkich prefabów dydaktycznych dla Lab 01–07 bez dodatkowych zależności od XRI/AR/ROS;
+- dodano wspólne środowisko `WiRR_LabRoom` oraz lekki `WiRR_ARReferenceKit` dla laboratoriów AR;
+- dodano zestawy eksperymentalne: ścianę obciążenia geometrii i Physics Dropper, moduł zasilania i gniazdo, artefakt AR i Ghost Reference, Occlusion Bot i Depth Probe, warianty chwytaka do LOD, wizualne ramię robota z osiami oraz stanowisko QA z panelem kontrolowanych usterek;
+- wygenerowane prefaby trafiają do `Assets/WiRR/LabXX/Prefabs/Generated`, a własna praca studenta pozostaje poza folderem odtwarzalnym;
+- rozbudowano `WiRR → Narzędzia kursu` o tworzenie środowiska, zestawu eksperymentalnego i bezpieczne usuwanie obiektów dydaktycznych wyłącznie z aktywnej sceny;
+- utrzymano zasadę, że materiały startowe nie konfigurują za studenta komponentów XRI, AR ani mapowania ROS stanowiących cel ćwiczenia;
+- wyraźnie zdefiniowano `MatPomGit/wirr` jako repozytorium deweloperskie, `KIA-students/wirr` jako repozytorium produkcyjne dla studentów oraz `MatPomGit/prz` jako repo materiałów dydaktycznych bez kopii pakietu.
+
+
 ## 0.4.5 — 2026-09-21
 
 - przebudowano okno `WiRR → Narzędzia kursu` pod kątem ergonomii poznawczej: kolorowe nagłówki etapów, pasek postępu, czytelne stany GOTOWE/BRAK, komunikat „następny krok” oraz kolorystyczne rozróżnienie walidacji;
