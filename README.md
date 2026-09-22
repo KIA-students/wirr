@@ -6,23 +6,11 @@
 
 Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
 
-## Repozytoria i przepływ wydania
+## Repozytorium kursu
 
-- **[MatPomGit/wirr](https://github.com/MatPomGit/wirr)**: repozytorium deweloperskie i źródło prawdy dla kodu pakietu, generatorów scen, WebSim i dokumentacji technicznej.
-- **[KIA-students/wirr](https://github.com/KIA-students/wirr)**: repozytorium produkcyjne publikowane studentom i instalowane przez Unity Package Manager.
-- **[MatPomGit/prz](https://github.com/MatPomGit/prz)**: materiały dydaktyczne: wykłady, instrukcje laboratoryjne i pliki potrzebne do ich budowania. Nie należy utrzymywać tam kopii kodu pakietu WiRR.
+Publiczne repozytorium kursu znajduje się pod adresem [KIA-students/wirr](https://github.com/KIA-students/wirr). To z niego studenci instalują pakiet przez Unity Package Manager i do niego odnoszą się materiały kursowe.
 
-Przepływ zmian jest jednokierunkowy: **rozwój i testy w `MatPomGit/wirr` → wydanie → synchronizacja do `KIA-students/wirr`**. Repozytorium `prz` odsyła do repozytorium deweloperskiego zamiast duplikować jego pliki.
-
-Synchronizację automatyzuje workflow `.github/workflows/sync-kia-students-pr.yml`. Po każdym pushu do `main`, ręcznym uruchomieniu oraz cyklicznie porównuje on `MatPomGit/wirr:main` z `KIA-students/wirr:main`. Jeśli wykryje unikalne zmiany, tworzy jeden Pull Request `MatPomGit:main → KIA-students:main`; kolejne commity aktualizują ten sam PR. Porównanie wykorzystuje `git cherry`, dzięki czemu nie zgłasza ponownie zmian, które są już obecne w repozytorium docelowym po squashu lub cherry-picku.
-
-Do tworzenia PR wymagany jest sekret Actions `KIA_STUDENTS_SYNC_TOKEN` w repozytorium `MatPomGit/wirr`. Zalecany jest fine-grained PAT ograniczony do `KIA-students/wirr` z uprawnieniami **Contents: Read-only** oraz **Pull requests: Read and write**. Bez sekretu workflow nadal wykonuje porównanie i zgłasza ostrzeżenie, ale nie próbuje zapisywać do repozytorium studenckiego.
-
-Synchronizacja działa także w drugą stronę. Workflow `.github/workflows/sync-from-kia-students.yml` sprawdza, czy `KIA-students/wirr:main` zawiera commity, których nie ma jeszcze w forku. Jeśli tak, wykonuje zwykły merge do `MatPomGit/wirr:main`, dzięki czemu zachowywana jest zarówno historia zmian upstream, jak i wszystkie lokalne commity forka. Workflow celowo nie używa `reset --hard`, force-push ani nadpisywania historii. Jeżeli pojawi się konflikt, `main` pozostaje bez zmian, a tworzony jest PR z gałęzi `sync/upstream-main` do ręcznego rozwiązania konfliktu.
-
-Porządek gałęzi utrzymuje `.github/workflows/branch-hygiene.yml`: usuwa gałęzie robocze zakończonych i scalonych PR, ale nigdy nie usuwa `main`, gałęzi `lab??-start` ani gałęzi `sync/*`.
-
-Strona kursu jest publikowana pod adresem https://kia-students.github.io/wirr/.
+Strona kursu jest dostępna pod adresem [kia-students.github.io/wirr](https://kia-students.github.io/wirr/). Zawiera instrukcję instalacji pakietu, opis WebSim oraz interaktywny kwestionariusz SSQ.
 
 ## Zasada działania
 
@@ -58,7 +46,7 @@ Pakiet znajduje się w katalogu głównym repozytorium. Po instalacji w menu Uni
 
 Katalog główny repozytorium jest czystym pakietem UPM. Kod pakietu znajduje się w `Editor/` i `Runtime/`, a materiały importowane przez Package Manager w `Samples~/`.
 
-Pełny projekt Unity używany do rozwoju i testowania pakietu znajduje się w `Project~/`. Sufiks `~` powoduje, że Unity Package Manager nie importuje tego katalogu do projektu studenta, dzięki czemu `Assets`, `Packages` i `ProjectSettings` projektu deweloperskiego nie powodują konfliktów GUID z projektem użytkownika. Do rozwoju pakietu klonuj `MatPomGit/wirr` i otwieraj w Unity katalog `Project~`, nie katalog główny repozytorium. `KIA-students/wirr` jest kopią wydaniową dla studentów.
+Pełny projekt Unity używany do rozwoju i testowania pakietu znajduje się w `Project~/`. Sufiks `~` powoduje, że Unity Package Manager nie importuje tego katalogu do projektu studenta, dzięki czemu `Assets`, `Packages` i `ProjectSettings` projektu testowego nie powodują konfliktów GUID z projektem użytkownika. Osoby rozwijające pakiet powinny otwierać w Unity katalog `Project~`, a nie katalog główny repozytorium.
 
 Dodatkowa dokumentacja techniczna znajduje się w `Documentation~/`, a skrypt walidatora CI w `scripts~/`; katalogi te również są celowo pomijane przez Asset Database.
 
@@ -169,7 +157,7 @@ Walidator uruchamiany w Pull Request jest pobierany z zaufanej gałęzi bazowej,
 
 ## Identyfikacja wizualna
 
-`icon.png` jest podstawowym logo pakietu i jest używany w dokumentacji oraz w oknach Unity **WiRR Toolkit** i **WiRR Report**. `.icon.png` jest ikoną wyświetlaną przez Unity Package Manager. `icon.ico` pozostaje zasobem ikony aplikacyjnej dla środowisk wymagających formatu ICO. Zestaw faviconów jest przechowywany jako `favicon_io.zip`.
+`icon.png` jest podstawowym logo pakietu i jest używany w dokumentacji oraz w oknach Unity **WiRR Course Toolkit** i **WiRR Raport**. `.icon.png` jest ikoną wyświetlaną przez Unity Package Manager. `icon.ico` pozostaje zasobem ikony aplikacyjnej dla środowisk wymagających formatu ICO. Zestaw faviconów jest przechowywany jako `favicon_io.zip`.
 
 ## Prywatność
 
