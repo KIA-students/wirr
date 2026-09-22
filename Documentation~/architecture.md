@@ -1,41 +1,29 @@
-# Architektura WiRR — narzędzia kursu
-
-## Repozytoria
-
-Źródłem prawdy dla rozwoju pakietu jest **MatPomGit/wirr**. Po przetestowaniu i wydaniu ta sama wersja jest synchronizowana do **KIA-students/wirr**, które jest repozytorium produkcyjnym instalowanym przez studentów.
-
-Repozytorium **MatPomGit/prz** przechowuje wykłady, instrukcje laboratoryjne i zasoby potrzebne do ich budowania. Nie powinno zawierać kopii kodu pakietu, WebSim ani jego workflowów CI.
-
-Przepływ:
-
-```text
-MatPomGit/wirr
-  development + tests
-        |
-        v
-KIA-students/wirr
-  production / students
-
-MatPomGit/prz
-  lectures + laboratory instructions
-  -> link to MatPomGit/wirr
-```
+# Architektura WiRR Course Toolkit
 
 ## Cel
 
-Pakiet redukuje czas tracony na ręczne pobieranie zależności, powtarzalną konfigurację projektu i modelowanie pomocniczych elementów sceny, ale nie ukrywa przed studentami architektury systemu ani nie wykonuje za nich zadań będących celem ćwiczenia.
+WiRR Course Toolkit jest publicznym pakietem dydaktycznym dla przedmiotu Wirtualna i Rozszerzona Rzeczywistość. Repozytorium kursu zawiera kod pakietu, materiały startowe, narzędzia pomocnicze i dokumentację potrzebną studentom oraz osobom korzystającym z pakietu.
+
+Pakiet ogranicza czas poświęcany na ręczne pobieranie zależności, powtarzalną konfigurację projektu i tworzenie pomocniczych elementów sceny. Nie ukrywa jednak architektury systemu i nie wykonuje za studenta zadań będących celem ćwiczenia.
+
+Publiczne repozytorium kursu:
+https://github.com/KIA-students/wirr
+
+Strona kursu:
+https://kia-students.github.io/wirr/
 
 ## Warstwy
 
-- **Runtime** — niezależne od XRI/AR/ROS komponenty wspólne dla laboratoriów.
-- **Editor** — panel kursu, instalator UPM, import próbek, przygotowanie sceny, generator prefabów dydaktycznych, walidator i obsługa raportu.
-- **Samples~** — siedem niezależnych zestawów laboratoryjnych importowanych do projektu studenta.
-- **Project~** — projekt deweloperski używany do testów pakietu; nie jest importowany przez UPM.
-- **WebSim~** — backend i strona pomocnicza dla Lab 06.
+- **Runtime**: niezależne od XRI, AR i ROS komponenty wspólne dla laboratoriów.
+- **Editor**: WiRR Course Toolkit, instalator UPM, import próbek, przygotowanie sceny, generator prefabów dydaktycznych, walidator i obsługa raportu.
+- **Samples~**: siedem niezależnych zestawów laboratoryjnych importowanych do projektu studenta.
+- **Project~**: projekt testowy używany do rozwoju i weryfikacji pakietu; nie jest importowany przez UPM.
+- **WebSim~**: backend i strona pomocnicza dla Laboratorium 06.
+- **Documentation~**: dokumentacja techniczna pakietu.
 
 ## Prefaby dydaktyczne
 
-`WiRRTeachingAssetTools` generuje zwykłe prefaby Unity już w projekcie studenta. Dzięki temu repozytorium pakietu pozostaje tekstowe i stabilne, a wygenerowane obiekty można normalnie oglądać i modyfikować w Inspectorze.
+`WiRRTeachingAssetTools` generuje zwykłe prefaby Unity bezpośrednio w projekcie studenta. Dzięki temu repozytorium pakietu pozostaje lekkie, a wygenerowane obiekty można oglądać i modyfikować w Inspectorze.
 
 Ścieżki:
 
@@ -48,27 +36,27 @@ Assets/WiRR/LabXX/
   Prefabs/Generated/
 ```
 
-Dla Lab 01, 02, 05, 06 i 07 środowiskiem odniesienia jest `WiRR_LabRoom`. Dla Lab 03 i 04 używany jest lekki `WiRR_ARReferenceKit`, aby wirtualne wnętrze nie zakłócało ćwiczeń opartych na rzeczywistym otoczeniu.
+Dla laboratoriów 01, 02, 05, 06 i 07 środowiskiem odniesienia jest `WiRR_LabRoom`. Dla laboratoriów 03 i 04 używany jest lekki `WiRR_ARReferenceKit`, aby wirtualne wnętrze nie zakłócało ćwiczeń opartych na rzeczywistym otoczeniu.
 
-Generator może zostać uruchomiony ponownie. Nadpisuje wyłącznie zasoby w folderach `Generated` i obiekty pod `WiRR_TeachingAssets`; nie usuwa obiektów studenta z pozostałej części sceny.
+Generator może zostać uruchomiony ponownie. Nadpisuje wyłącznie zasoby w folderach `Generated` i obiekty pod `WiRR_TeachingAssets`. Nie usuwa obiektów studenta z pozostałej części sceny.
 
-Prefaby są pomocami dydaktycznymi, nie kompletnymi rozwiązaniami. Przykładowo moduł Lab 02 ma Rigidbody, Collider i punkt mocowania, ale student sam konfiguruje XRI; artefakt Lab 03 nie otrzymuje automatycznie kotwicy AR; wizualne ramię Lab 06 zachowuje nazwy `joint1`–`joint3`, lecz student nadal wykonuje mapowanie stanu.
+Prefaby są pomocami dydaktycznymi, a nie kompletnymi rozwiązaniami. Przykładowo moduł Laboratorium 02 ma Rigidbody, Collider i punkt mocowania, ale student sam konfiguruje XRI. Artefakt Laboratorium 03 nie otrzymuje automatycznie kotwicy AR. Wizualne ramię Laboratorium 06 zachowuje nazwy `joint1`, `joint2` i `joint3`, lecz student nadal wykonuje mapowanie stanu.
 
 ## Zależności
 
 Pakiet bazowy wymusza tylko URP i Input System. Pozostałe pakiety są instalowane dla konkretnego laboratorium:
 
-| Lab | Dodatkowe pakiety |
+| Laboratorium | Dodatkowe pakiety |
 |---|---|
-| 1 | XR Management, OpenXR, XRI, XR Hands |
-| 2 | XR Management, OpenXR, XRI |
-| 3 | XR Management, XRI, AR Foundation, ARCore |
-| 4 | XR Management, XRI, AR Foundation, ARCore |
-| 5 | brak dodatkowych |
-| 6 | ROS-TCP-Connector v0.7.1 z Git |
-| 7 | Unity Test Framework |
+| 01 | XR Management, OpenXR, XRI, XR Hands |
+| 02 | XR Management, OpenXR, XRI |
+| 03 | XR Management, XRI, AR Foundation, ARCore |
+| 04 | XR Management, XRI, AR Foundation, ARCore |
+| 05 | brak dodatkowych |
+| 06 | ROS-TCP-Connector v0.7.1 z Git |
+| 07 | Unity Test Framework |
 
-## Lab 6
+## Laboratorium 06
 
 ROS 2 i Gazebo nie są zależnościami Unity. Mogą działać lokalnie lub na osobnym komputerze zgodnie z instrukcją laboratorium. WebSim pozostaje alternatywnym źródłem `JointState` przez rosbridge.
 
