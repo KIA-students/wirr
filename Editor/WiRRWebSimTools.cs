@@ -40,10 +40,10 @@ namespace KIA.WiRR.Editor
         {
             if (!Application.isPlaying) return "Uruchom tryb Play.";
             var source = FindSource();
-            if (source == null) return "Brak modelu WebSim — najpierw go utwórz.";
+            if (source == null) return "Brak modelu WebSim: najpierw go utwórz.";
             if (source.IsConnecting) return "ŁĄCZENIE…";
             if (!source.IsConnected) return "ROZŁĄCZONO";
-            return source.IsStale ? "STALE — dane nie są aktualizowane" : "LIVE — dane są aktualne";
+            return source.IsStale ? "STALE: dane nie są aktualizowane" : "LIVE: dane są aktualne";
         }
 
         public static void CreateOrRepairRig(int labNumber)
