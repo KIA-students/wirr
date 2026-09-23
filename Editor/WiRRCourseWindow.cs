@@ -8,12 +8,14 @@ namespace KIA.WiRR.Editor
     {
         private const string LabPrefKey = "KIA.WiRR.SelectedLab";
         private const string CourseUrl = "https://kia-students.github.io/wirr/";
+        private const string TaskPrefPrefix = "KIA.WiRR.Task";
         private static WiRRCourseWindow openWindow;
 
         private static readonly Color HeaderAccent = new Color(0.12f, 0.63f, 0.86f);
         private static readonly Color DependencyAccent = new Color(0.25f, 0.52f, 0.94f);
         private static readonly Color WorkspaceAccent = new Color(0.10f, 0.70f, 0.72f);
         private static readonly Color SceneAccent = new Color(0.56f, 0.42f, 0.92f);
+        private static readonly Color ExerciseAccent = new Color(0.91f, 0.45f, 0.18f);
         private static readonly Color WebSimAccent = new Color(0.95f, 0.56f, 0.18f);
         private static readonly Color ReportAccent = new Color(0.77f, 0.35f, 0.72f);
         private static readonly Color ValidationAccent = new Color(0.24f, 0.68f, 0.42f);
@@ -33,6 +35,8 @@ namespace KIA.WiRR.Editor
         private GUIStyle stepBadgeStyle;
         private GUIStyle statusBadgeStyle;
         private GUIStyle nextStepStyle;
+        private GUIStyle taskTitleStyle;
+        private GUIStyle taskStepStyle;
 
         [MenuItem("WiRR/Narzędzia kursu", priority = 1)]
         public static void Open()
@@ -93,8 +97,9 @@ namespace KIA.WiRR.Editor
             DrawSceneSection(lab);
             if (lab.Number == 6)
                 DrawWebSimSection(lab);
-            DrawReportSection(lab);
             DrawValidationSection(lab);
+            DrawExerciseSection(lab);
+            DrawReportSection(lab);
 
             EditorGUILayout.Space(12);
             EditorGUILayout.EndScrollView();
@@ -154,6 +159,20 @@ namespace KIA.WiRR.Editor
                 padding = new RectOffset(8, 8, 5, 5),
                 normal = { textColor = ForegroundColor() }
             };
+
+            taskTitleStyle = new GUIStyle(EditorStyles.boldLabel)
+            {
+                fontSize = 12,
+                wordWrap = true,
+                normal = { textColor = ForegroundColor() }
+            };
+
+            taskStepStyle = new GUIStyle(EditorStyles.wordWrappedLabel)
+            {
+                wordWrap = true,
+                padding = new RectOffset(4, 4, 2, 2),
+                normal = { textColor = ForegroundColor() }
+            };
         }
 
         private void DrawHero()
@@ -172,7 +191,7 @@ namespace KIA.WiRR.Editor
             var titleRect = new Rect(textLeft, rect.y + 12f, Mathf.Max(120f, rect.width - (textLeft - rect.x) - buttonWidth - 22f), 26f);
             var subtitleRect = new Rect(textLeft, rect.y + 40f, Mathf.Max(120f, rect.width - (textLeft - rect.x) - buttonWidth - 22f), 30f);
             GUI.Label(titleRect, "WiRR Course Toolkit", heroTitleStyle);
-            GUI.Label(subtitleRect, "Przygotuj środowisko, scenę i raport krok po kroku.", heroSubtitleStyle);
+            GUI.Label(subtitleRect, "Przygotuj środowisko, wykonaj zadania, pomiary i raport krok po kroku.", heroSubtitleStyle);
 
             var buttonRect = new Rect(rect.xMax - buttonWidth - 12f, rect.y + 23f, buttonWidth, 30f);
             var oldBackground = GUI.backgroundColor;
@@ -549,9 +568,96 @@ namespace KIA.WiRR.Editor
             }
         }
 
+        private void DrawExerciseSection(WiRRLabDefinition lab)
+        {
+            var step = lab.Number == 6 ? 6 : 5;
+            var tasks = WiRRLabTaskCatalog.Get(lab.Number);
+            var total = 0;
+            var completed = 0;
+
+            for (var taskIndex = 0; taskIndex < tasks.Count; taskIndex++)
+            {
+                var task = tasks[taskIndex];
+                for (var stepIndex = 0; stepIndex < task.Steps.Count; stepIndex++)
+                {
+                    total++;
+                    if (EditorPrefs.GetBool(TaskKey(lab.Number, taskIndex, stepIndex), false))
+                        completed++;
+                }
+            }
+
+            EditorGUILayout.Space(8);
+            using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                DrawSectionHeader(
+                    step,
+                    "Zadania laboratoryjne",
+                    "Wykonuj kolejne punkty kontrolne od 3.0 do 5.0. Każdy krok kończy się mierzalnym dowodem do raportu.",
+                    ExerciseAccent);
+
+                var progress = total == 0 ? 0f : completed / (float)total;
+                var progressRect = GUILayoutUtility.GetRect(0f, 20f, GUILayout.ExpandWidth(true));
+                EditorGUI.ProgressBar(progressRect, progress, $"Postęp checklisty: {completed}/{total}");
+                EditorGUILayout.Space(4);
+
+                EditorGUILayout.HelpBox(
+                    "Checkboxy są lokalną pomocą organizacyjną. Nie stanowią automatycznego zaliczenia ani nie są wysyłane w raporcie.",
+                    MessageType.None);
+
+                for (var taskIndex = 0; taskIndex < tasks.Count; taskIndex++)
+                    DrawLabTask(lab.Number, taskIndex, tasks[taskIndex]);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Wyczyść oznaczenia checklisty", GUILayout.Height(24)))
+                        ClearTaskProgress(lab.Number, tasks);
+
+                    if (GUILayout.Button("Otwórz formularz raportu", GUILayout.Height(24)))
+                        WiRRReportWindow.Open();
+                }
+            }
+        }
+
+        private void DrawLabTask(int labNumber, int taskIndex, WiRRLabTask task)
+        {
+            EditorGUILayout.Space(6);
+            using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                EditorGUILayout.LabelField($"{task.Checkpoint}: {task.Title}", taskTitleStyle);
+                EditorGUILayout.LabelField(task.Goal, EditorStyles.wordWrappedMiniLabel);
+                EditorGUILayout.Space(3);
+
+                for (var stepIndex = 0; stepIndex < task.Steps.Count; stepIndex++)
+                {
+                    var key = TaskKey(labNumber, taskIndex, stepIndex);
+                    var current = EditorPrefs.GetBool(key, false);
+                    var next = EditorGUILayout.ToggleLeft(
+                        $"{stepIndex + 1}. {task.Steps[stepIndex]}",
+                        current,
+                        taskStepStyle);
+
+                    if (next != current)
+                        EditorPrefs.SetBool(key, next);
+                }
+
+                EditorGUILayout.Space(3);
+                EditorGUILayout.HelpBox(task.Evidence, MessageType.Info);
+            }
+        }
+
+        private static string TaskKey(int labNumber, int taskIndex, int stepIndex) =>
+            $"{TaskPrefPrefix}.{labNumber:00}.{taskIndex}.{stepIndex}";
+
+        private static void ClearTaskProgress(int labNumber, IReadOnlyList<WiRRLabTask> tasks)
+        {
+            for (var taskIndex = 0; taskIndex < tasks.Count; taskIndex++)
+                for (var stepIndex = 0; stepIndex < tasks[taskIndex].Steps.Count; stepIndex++)
+                    EditorPrefs.DeleteKey(TaskKey(labNumber, taskIndex, stepIndex));
+        }
+
         private void DrawReportSection(WiRRLabDefinition lab)
         {
-            var step = lab.Number == 6 ? 5 : 4;
+            var step = lab.Number == 6 ? 7 : 6;
 
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
@@ -576,7 +682,7 @@ namespace KIA.WiRR.Editor
 
         private void DrawValidationSection(WiRRLabDefinition lab)
         {
-            var step = lab.Number == 6 ? 6 : 5;
+            var step = lab.Number == 6 ? 5 : 4;
 
             EditorGUILayout.Space(8);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
@@ -584,7 +690,7 @@ namespace KIA.WiRR.Editor
                 DrawSectionHeader(
                     step,
                     "Sprawdzenie konfiguracji",
-                    "Na końcu sprawdź, czy środowisko jest gotowe do wykonania ćwiczenia.",
+                    "Przed pomiarami sprawdź, czy środowisko jest gotowe do wykonania ćwiczenia.",
                     ValidationAccent);
 
                 EditorGUILayout.HelpBox(

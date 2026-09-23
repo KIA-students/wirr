@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 0.8.1 (2026-09-23)
+
+- dodano katalog zadań `WiRRLabTaskCatalog` dla laboratoriów 01–07, zgodny z punktami kontrolnymi 3.0–5.0 i polami raportu;
+- główny panel `WiRR Course Toolkit` zawiera nową sekcję „Zadania laboratoryjne” z instrukcjami krok po kroku, paskiem postępu i lokalnymi checkboxami;
+- każdy punkt kontrolny kończy się opisem dowodu, który student powinien zapisać w raporcie;
+- uporządkowano przebieg panelu: walidacja konfiguracji jest wykonywana przed listą eksperymentów, a raport po wykonaniu zadań;
+- rozbudowano `Samples~/Lab01`–`Lab07/README.md` o samodzielne instrukcje wykonania ćwiczeń bez konieczności odgadywania kolejności z samego szablonu raportu;
+- checkboxy pozostają wyłącznie lokalną pomocą organizacyjną w `EditorPrefs` i nie są dołączane do raportu ani wysyłane do repozytorium.
+
+
 ## 0.8.0 (2026-09-22)
 
 - dodano `WiRRLoopMotion` z trybami PingPong, Bob, Orbit i Rotate; komponent może sterować bezpośrednio Transform albo kinematycznym Rigidbody;
