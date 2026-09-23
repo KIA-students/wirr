@@ -23,6 +23,7 @@ Pakiet zawiera:
 - **Samples Manager**: import materiałów dla wybranego laboratorium;
 - **Scene Tools / Validator**: przygotowanie i kontrolę sceny;
 - **Runtime Utilities**: lekkie komponenty pomiarowe;
+- **Checklisty zadań Lab 01–07**: krok po kroku prowadzą przez punkty kontrolne 3.0–5.0 i wskazują wymagany dowód pomiarowy;
 - **WebSim**: połączenie Unity ze środowiskiem ROS 2/Gazebo przez rosbridge;
 - **Raporty WiRR**: formularz, automatyczny zapis, tabele pomiarowe i raport JSON;
 - **Wysyłanie przez Git**: wysłanie raportu do repozytorium;
@@ -204,7 +205,7 @@ Walidator uruchamiany w Pull Request jest pobierany z zaufanej gałęzi bazowej,
 3. Otwórz `WiRR → Narzędzia kursu` i wybierz laboratorium.
 4. Zainstaluj wymagane zależności i zaimportuj próbkę. WiRR automatycznie utworzy folder roboczy `Assets/WiRR/LabXX` i scenę bazową.
 5. Otwórz przygotowaną scenę, w razie potrzeby użyj funkcji naprawy sceny i uruchom walidację.
-6. Wykonaj zadania i pomiary zgodnie z instrukcją.
+6. W sekcji **Zadania laboratoryjne** wykonuj checklistę punkt po punkcie; po każdym punkcie kontrolnym zapisz wymagany dowód w formularzu raportu.
 7. Uzupełnij formularz raportu do osiągniętego etapu; pola pochodne zostaną obliczone automatycznie.
 8. Wybierz **Sprawdź raport**, popraw wskazane braki i użyj **Wyślij raport**.
 
