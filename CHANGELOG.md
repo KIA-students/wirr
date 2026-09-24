@@ -9,6 +9,11 @@
 - `WiRRSpatialSurfaceScanner` przyjmuje próbki depth/spatial mesh wraz z normalnymi i ma raycastowy fallback do testów w Editorze;
 - `WiRRWallAnchor` kotwi wirtualną zawartość do płaszczyzny ściany i skaluje ją do rozmiaru powierzchni; fallback `TryAnchorFromViewerRay()` działa na colliderach sceny;
 - dodano `MIXED_REALITY_SHOWCASE.md` z opisem adapterów dla kamery, hand trackingu, detekcji ludzi, depth/spatial mesh i Scene Understanding oraz zasadami minimalizacji danych;
+- dodano okno `WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa` z osobnymi zakładkami Camera/Hand/People/Spatial/Wall i dokładnym przebiegiem implementacji;
+- dodano generator pięciu starterów adapterów do `Assets/WiRR/LabXX/Scripts/MixedRealityAdapters`; pliki należą do projektu studenta, kompilują się bez vendor SDK i nie są automatycznie nadpisywane;
+- dodano `MIXED_REALITY_IMPLEMENTATION.md` opisujący provider → adapter → Runtime WiRR, konwersję układów współrzędnych, lifecycle trackingu, walidację i procedury A/B;
+- każdy demonstrator MR otrzymał listę dalszych modyfikacji w trzech poziomach trudności oraz przykładowe metryki do obiektywnej oceny własnej rozbudowy;
+- Course Toolkit bezpośrednio zachęca do zastąpienia fallbacku rzeczywistym providerem i wykonania jednej mierzalnej modyfikacji zamiast traktowania prefabu jako rozwiązania końcowego;
 
 - dodano zestaw `XR Showcase` z pięcioma gotowymi demonstratorami przestrzennymi: `XR_ParallaxPortal`, `XR_GazeBloom`, `XR_TelekinesisOrb`, `XR_DiegeticHUD` i `XR_WorldScaleTotem`;
 - każdy demonstrator ma przypisany własny komponent Runtime i działa w Play Mode bez zależności od XRI;

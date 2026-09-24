@@ -571,6 +571,19 @@ namespace KIA.WiRR.Editor
                 if (WiRRMixedRealityShowcaseTools.ShowcaseExists(lab.Number))
                     DrawInlineStatus("Demonstratory MR są aktywne. Fallbacki działają bez zewnętrznego SDK; prawdziwe sensory podłącz przez publiczne API komponentów Runtime.", SuccessAccent);
 
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Jak to zaimplementować i rozbudować?", GUILayout.Height(30)))
+                        WiRRMixedRealityGuideWindow.Open(lab.Number);
+
+                    if (GUILayout.Button("Utwórz startery adapterów MR", GUILayout.Height(30)))
+                        WiRRMixedRealityAdapterTemplateTools.CreateAll(lab.Number);
+                }
+
+                EditorGUILayout.HelpBox(
+                    "Nie traktuj gotowych prefabów jako produktu końcowego. Otwórz instrukcję implementacji, wybierz provider dla swojego urządzenia, wygeneruj adapter w folderze Scripts i rozbuduj demonstrator o jedną mierzalną funkcję: np. confidence, predykcję, pełny hand skeleton, okluzję, persistent anchor albo dynamiczną strefę człowieka.",
+                    MessageType.None);
+
                 EditorGUILayout.HelpBox(
                     "Prywatność: demonstrator People Awareness wymaga jedynie pozycji osób i nie potrzebuje twarzy, nazw ani identyfikacji biometrycznej. Camera Window uruchamia WebCamTexture dopiero po zgodzie systemowej. Na Quest passthrough jest zwykle warstwą platformową — nie należy zakładać, że jest dostępny jako zwykły WebCamTexture.",
                     MessageType.Warning);

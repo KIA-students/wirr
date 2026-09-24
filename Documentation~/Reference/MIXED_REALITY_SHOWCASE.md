@@ -4,6 +4,8 @@ Zestaw **Mixed Reality Showcase** zawiera pięć prefabów przeznaczonych do ćw
 
 Prefaby są generowane do `Assets/WiRR/Common/Prefabs/MixedReality` i umieszczane w scenie pod `WiRR_TeachingAssets/MixedRealityShowcase`.
 
+> **Chcesz zbudować własną wersję?** Otwórz `WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa` albo dokument `MIXED_REALITY_IMPLEMENTATION.md`. Znajdziesz tam procedurę provider → adapter → WiRR, generator starterów kodu, walidację i propozycje dalszych modyfikacji.
+
 ## 1. MR_CameraWindow
 
 **Cel:** wprowadzić obraz z rzeczywistej kamery do obiektu wirtualnego i nałożyć na niego wirtualne elementy, np. celownik lub informacje.
@@ -107,3 +109,8 @@ Takie rozdzielenie pozwala studentowi porównać np. AR Foundation i Meta SDK be
 3. Spatial Surface Scanner — przejście z obrazu do geometrii środowiska.
 4. Wall Portal — semantyczne wykorzystanie konkretnej powierzchni.
 5. People Awareness — dynamiczne elementy realnego otoczenia i interakcja społeczna.
+
+
+## Następny krok studenta
+
+Nie kończ pracy na uruchomieniu fallbacku. Wybierz co najmniej jeden demonstrator, podłącz rzeczywisty provider i wprowadź jedną własną modyfikację, której efekt można zmierzyć. Gotowy prefab jest kontrolowanym baseline'em; wartość dydaktyczna zaczyna się przy porównaniu baseline → własna wersja.
