@@ -3,10 +3,8 @@ name: Synchronizacja do KIA-students
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - '.github/workflows/sync-kia-students-pr.yml'
-      - '.github/workflows/sync-from-kia-students.yml'
-      - '.github/workflows/branch-hygiene.yml'
+  schedule:
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -43,6 +41,43 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote add upstream "https://github.com/${UPSTREAM_REPOSITORY}.git"
           git fetch --no-tags upstream "${UPSTREAM_BRANCH}"
+
+      - name: Sprawdź gotowość uwierzytelnienia
+        id: auth
+        shell: bash
+        env:
+          SYNC_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SYNC_TOKEN}" ]; then
+            echo "available=false" >> "${GITHUB_OUTPUT}"
+            echo "::warning::Brak sekretu KIA_STUDENTS_SYNC_TOKEN. Automatyczne porządkowanie PR-ów i publikacja zmian są wyłączone."
+          else
+            echo "available=true" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Zamknij bezpośrednie PR-y z gałęzi main
+        if: steps.auth.outputs.available == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          mapfile -t legacy_open_prs < <(
+            gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls" \
+              -f state=open \
+              -f base="${UPSTREAM_BRANCH}" \
+              -f head="MatPomGit:main" \
+              --jq '.[].number'
+          )
+
+          for pr_number in "${legacy_open_prs[@]}"; do
+            [ -n "${pr_number}" ] || continue
+            gh pr close "${pr_number}" \
+              --repo "${UPSTREAM_REPOSITORY}" \
+              --comment "Ten PR omija sanitizowany eksport. Publiczne zmiany są publikowane wyłącznie z gałęzi sync/public-main."
+          done
 
       - name: Zbuduj publiczny snapshot
         id: export
@@ -129,21 +164,6 @@ jobs:
         run: |
           echo "Publiczna zawartość jest już zgodna z KIA-students/wirr."
 
-      - name: Sprawdź gotowość uwierzytelnienia
-        if: steps.export.outputs.needs_pr == 'true'
-        id: auth
-        shell: bash
-        env:
-          SYNC_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
-        run: |
-          set -euo pipefail
-          if [ -z "${SYNC_TOKEN}" ]; then
-            echo "available=false" >> "${GITHUB_OUTPUT}"
-            echo "::warning::Brak sekretu KIA_STUDENTS_SYNC_TOKEN. Wymagany jest dostęp do tworzenia Pull Requestów w KIA-students/wirr."
-          else
-            echo "available=true" >> "${GITHUB_OUTPUT}"
-          fi
-
       - name: Oczyść metadane starszych Pull Requestów
         if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
         shell: bash
@@ -159,15 +179,6 @@ jobs:
           for pr_number in "${public_metadata_prs[@]}"; do
             [ -n "${pr_number}" ] || continue
             gh pr edit "${pr_number}"               --repo "${UPSTREAM_REPOSITORY}"               --title "archiwalna synchronizacja WiRR"               --body "Archiwalny Pull Request mechanizmu synchronizacji. Zastąpiony przez sanitizowany eksport publicznej zawartości WiRR Course Toolkit."
-          done
-
-          mapfile -t legacy_open_prs < <(
-            gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls"               -f state=open               -f base="${UPSTREAM_BRANCH}"               -f head="MatPomGit:main"               --jq '.[].number'
-          )
-
-          for pr_number in "${legacy_open_prs[@]}"; do
-            [ -n "${pr_number}" ] || continue
-            gh pr close "${pr_number}"               --repo "${UPSTREAM_REPOSITORY}"               --comment "Zastąpiono bezpiecznym mechanizmem eksportu publicznej zawartości."
           done
 
       - name: Sprawdź istniejący Pull Request
