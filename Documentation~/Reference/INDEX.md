@@ -18,6 +18,7 @@
     ├── 📄 QUICK_START.md                ← CZYTAJ DRUGIE
     ├── 📄 REPOSITORY_SETUP.md
     ├── 📄 BUILD_AND_DEPLOY.md
+    ├── 📄 XR_SHOWCASE.md
     ├── 📄 EXTRA_ASSETS.md
     ├── 📄 INSTRUCTOR_GUIDE.md
     ├── 📄 FAQ.md
@@ -116,6 +117,7 @@
 - Nie wiem co to znaczy? → GLOSSARY.md
 - Jak Git? → REPOSITORY_SETUP.md
 - Jak zbudować aplikację PC/Android/Quest? → BUILD_AND_DEPLOY.md
+- Jak działają demonstratory XR? → XR_SHOWCASE.md
 - Do czego służą dodatkowe prefaby, materiały i HDRI? → EXTRA_ASSETS.md
 - Jak oceniam? → GRADING_MATRIX.md
 
