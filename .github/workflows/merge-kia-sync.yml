@@ -71,5 +71,5 @@ jobs:
             exit 1
           fi
 
-          gh pr merge "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --merge
+          gh pr merge "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --merge --auto
           echo "Scalono PR #${pr_number} do ${UPSTREAM_REPOSITORY}."
