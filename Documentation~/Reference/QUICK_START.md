@@ -26,6 +26,7 @@ Wszystkie pliki znajdują się w: `/starter-files/`
    ```
    REPOSITORY_SETUP.md        (git workflow, struktura)
    BUILD_AND_DEPLOY.md         (PC, Android, Quest 3)
+   XR_SHOWCASE.md              (gotowe efekty 6DoF, gaze, distant interaction i skala)
    EXTRA_ASSETS.md             (dodatkowe modele, prefaby, HDRI)
    ```
 

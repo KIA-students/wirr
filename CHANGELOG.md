@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- dodano zestaw `XR Showcase` z pięcioma gotowymi demonstratorami przestrzennymi: `XR_ParallaxPortal`, `XR_GazeBloom`, `XR_TelekinesisOrb`, `XR_DiegeticHUD` i `XR_WorldScaleTotem`;
+- każdy demonstrator ma przypisany własny komponent Runtime i działa w Play Mode bez zależności od XRI;
+- `WiRRHeadParallax` implementuje kalibrowaną względem początkowej pozycji głowy paralaksę 6DoF i udostępnia `Recenter()`;
+- `WiRRGazeBloom` realizuje reakcję na head-gaze oraz wejście `SetExternalActivation()` dla eye trackingu, XRI hover lub hand trackingu;
+- `WiRRTelekinesisOrb` implementuje gaze dwell, distant interaction, płynne przyciąganie, wiązkę i powrót obiektu; udostępnia `BeginHold()`, `Release()` i `ToggleHold()`;
+- `WiRRHeadFollower` demonstruje wygładzone body/head-referenced UI oraz przełączanie `Pin()` / `Unpin()` do trybu world-locked;
+- `WiRRProximityScale` demonstruje embodied scale przez zmianę miniatura → room-scale i może być sterowany zewnętrznie przez `SetExternalFactor()`;
+- Course Toolkit pozwala dodać każdy efekt osobno, cały zestaw albo usunąć demonstratory XR z aktywnej sceny;
+- dodano dokument `XR_SHOWCASE.md` z opisem logiki, API integracyjnego i propozycjami eksperymentów.
+
 ## 0.9.0 (2026-09-24)
 
 - dodano opisy proponowanych zastosowań przy dodatkowych materiałach dydaktycznych, prefabach Grid, demonstratorach materiałów, ruchu, fizyki i dźwięku oraz modelu Unitree G1 EDU;

@@ -86,6 +86,7 @@ jobs:
               "WiRRAdditionalModelTools.cs",
               "WiRRHdriTools.cs",
               "WiRRBuildGuideWindow.cs",
+              "WiRRXrShowcaseTools.cs",
               "WiRROnboarding.cs",
           ):
               source = root / "Editor" / editor_file
@@ -126,6 +127,7 @@ jobs:
           required_docs = (
               root / "Documentation~" / "Reference" / "EXTRA_ASSETS.md",
               root / "Documentation~" / "Reference" / "BUILD_AND_DEPLOY.md",
+              root / "Documentation~" / "Reference" / "XR_SHOWCASE.md",
               root / "Textures" / "HDRI" / "README.md",
           )
           for document in required_docs:
@@ -157,12 +159,34 @@ jobs:
               "WiRRPhysicsImpulsePad.cs",
               "WiRRProceduralAudio.cs",
               "WiRRVehicleController.cs",
+              "WiRRHeadParallax.cs",
+              "WiRRGazeBloom.cs",
+              "WiRRTelekinesisOrb.cs",
+              "WiRRHeadFollower.cs",
+              "WiRRProximityScale.cs",
           )
           for runtime_file in runtime_dynamic_files:
               source = root / "Runtime" / runtime_file
               meta = root / "Runtime" / f"{runtime_file}.meta"
               if not source.is_file() or not meta.is_file():
                   raise SystemExit(f"Brak dynamicznego komponentu Runtime lub pliku meta: {source}")
+
+          showcase_source = (root / "Editor" / "WiRRXrShowcaseTools.cs").read_text(encoding="utf-8")
+          if showcase_source.count("new Definition(") != 5:
+              raise SystemExit("XR Showcase nie zawiera dokładnie pięciu demonstratorów.")
+
+          xr_runtime_expectations = {
+              "WiRRHeadParallax.cs": ("Recenter()",),
+              "WiRRGazeBloom.cs": ("SetExternalActivation(float value)", "ClearExternalActivation()"),
+              "WiRRTelekinesisOrb.cs": ("BeginHold()", "Release()", "ToggleHold()"),
+              "WiRRHeadFollower.cs": ("Pin()", "Unpin()", "TogglePin()"),
+              "WiRRProximityScale.cs": ("SetExternalFactor(float value)", "UseProximity()"),
+          }
+          for filename, signatures in xr_runtime_expectations.items():
+              source_text = (root / "Runtime" / filename).read_text(encoding="utf-8")
+              for signature in signatures:
+                  if signature not in source_text:
+                      raise SystemExit(f"Brak API XR w {filename}: {signature}")
 
           runtime_asmdef = json.loads(
               (root / "Runtime" / "KIA.WiRR.Runtime.asmdef").read_text(encoding="utf-8")
@@ -279,7 +303,8 @@ jobs:
           - testy punktacji SSQ;
           - składnię aplikacji WebSim;
           - obecność dziewięciu panoram HDRI oraz instrukcji skybox;
-          - obecność wbudowanej instrukcji budowania PC / Android / Quest 3.
+          - obecność wbudowanej instrukcji budowania PC / Android / Quest 3;
+          - komplet pięciu demonstratorów XR oraz ich skryptów Runtime i publicznego API integracyjnego.
 
           Archiwa dołączone do wydania zawierają pakiet UPM oraz sumy kontrolne SHA-256.
           """

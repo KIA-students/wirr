@@ -76,6 +76,20 @@ Do eksperymentów z triggerami, impulsami, kolizjami i powtarzalnością symulac
 ### Kinetyczny beacon audio
 Do testów audio przestrzennego, sygnałów ostrzegawczych, multimodalnej informacji zwrotnej i powiązania dźwięku z ruchem.
 
+## Efekty charakterystyczne dla XR
+
+Pakiet zawiera także pięć gotowych demonstratorów XR, które mają przypisaną własną logikę Runtime i działają od razu w Play Mode:
+
+- **XR_ParallaxPortal** — wielowarstwowy portal sterowany translacją głowy; skrypt `WiRRHeadParallax` pokazuje head-coupled parallax i znaczenie 6DoF;
+- **XR_GazeBloom** — holograficzny obiekt reagujący na kierunek patrzenia; `WiRRGazeBloom` pokazuje implicit interaction i może przyjąć zewnętrzny sygnał z eye trackingu/XRI;
+- **XR_TelekinesisOrb** — demonstracja distant interaction/force grab; `WiRRTelekinesisOrb` ma gaze dwell, płynne przyciąganie do użytkownika, wiązkę i powrót do pozycji bazowej;
+- **XR_DiegeticHUD** — panel przestrzenny z miękkim podążaniem za głową; `WiRRHeadFollower` pozwala porównać UI podążające i world-locked;
+- **XR_WorldScaleTotem** — obiekt przechodzący od miniatury do room-scale w funkcji odległości; `WiRRProximityScale` pokazuje embodied scale i wpływ skali 1 unit = 1 m.
+
+Każdy komponent ma publiczne metody przeznaczone do późniejszego podłączenia XRI, kontrolera lub hand trackingu. Oznacza to, że demonstracja działa bez dodatkowego SDK, ale student może wykorzystać ją jako gotowy obiekt wykonawczy dla własnej interakcji.
+
+Szczegółowy opis działania, API oraz propozycje eksperymentów znajdują się w `Documentation~/Reference/XR_SHOWCASE.md`.
+
 ## Unitree G1 EDU
 
 `RoboAnimation.unitypackage` zawiera model 3D humanoidalnego robota Unitree G1 EDU oraz przykładowe animacje.

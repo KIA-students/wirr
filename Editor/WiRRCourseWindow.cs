@@ -492,6 +492,46 @@ namespace KIA.WiRR.Editor
                     DrawInlineStatus("Dynamiczne demonstratory są aktywne. Uruchom Play Mode, aby obserwować ruch, fizykę i dźwięk.", SuccessAccent);
 
                 EditorGUILayout.Space(7);
+                EditorGUILayout.LabelField("Efekty charakterystyczne dla XR", EditorStyles.miniBoldLabel);
+                EditorGUILayout.HelpBox(
+                    "Pięć gotowych demonstratorów projektowanych specjalnie pod doświadczenie przestrzenne i 6DoF. Każdy ma już przypisany komponent Runtime i działa od razu w Play Mode bez XRI. Skrypty udostępniają też publiczne metody, które można później podłączyć do XRI Select/Hover, kontrolerów lub hand trackingu.",
+                    MessageType.Info);
+
+                EditorGUILayout.HelpBox(
+                    "Portal paralaksy: przesuń głowę na boki i w pionie — warstwy zmieniają położenie względem siebie, tworząc head-coupled depth. Gaze Bloom: obiekt rozkwita pod spojrzeniem. Telekinesis Orb: utrzymaj spojrzenie, aby przyciągnąć kulę. Diegetic HUD: panel miękko podąża za użytkownikiem i może zostać przypięty do świata. World Scale Totem: podejdź, aby przejść od miniatury do skali pomieszczenia.",
+                    MessageType.None);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Portal paralaksy 6DoF", GUILayout.Height(28)))
+                        WiRRXrShowcaseTools.CreateParallaxPortal(lab.Number);
+                    if (GUILayout.Button("Gaze Bloom", GUILayout.Height(28)))
+                        WiRRXrShowcaseTools.CreateGazeBloom(lab.Number);
+                }
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Telekinesis Orb", GUILayout.Height(28)))
+                        WiRRXrShowcaseTools.CreateTelekinesisOrb(lab.Number);
+                    if (GUILayout.Button("Diegetic HUD", GUILayout.Height(28)))
+                        WiRRXrShowcaseTools.CreateDiegeticHud(lab.Number);
+                }
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("World Scale Totem", GUILayout.Height(28)))
+                        WiRRXrShowcaseTools.CreateWorldScaleTotem(lab.Number);
+                    if (GUILayout.Button("Dodaj cały zestaw XR", GUILayout.Height(28)))
+                        WiRRXrShowcaseTools.CreateAll(lab.Number);
+                }
+
+                if (GUILayout.Button("Usuń demonstratory XR ze sceny", GUILayout.Height(24)))
+                    WiRRXrShowcaseTools.RemoveShowcase(lab.Number);
+
+                if (WiRRXrShowcaseTools.ShowcaseExists(lab.Number))
+                    DrawInlineStatus("Demonstratory XR są aktywne. Najlepiej oceniaj je w headsetcie z 6DoF, a nie wyłącznie w Game View.", SuccessAccent);
+
+                EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("Dodatkowe modele 3D", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
                     "Pakiet zawiera dodatkowy model humanoidalnego robota Unitree G1 EDU z przykładowymi animacjami (RoboAnimation.unitypackage). Jest szczególnie przydatny w Lab 05 jako złożony zasób 3D, w Lab 06 jako dodatkowa reprezentacja wizualna robota oraz w Lab 07 jako realistyczny obiekt do testów wydajności i walidacji. Przykładowe animacje nie są pomiarem JointState ani źródłem prawdy dla bliźniaka cyfrowego.",
