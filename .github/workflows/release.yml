@@ -244,7 +244,7 @@ jobs:
 
           implementation_guide = (root / "Documentation~" / "Reference" / "MIXED_REALITY_IMPLEMENTATION.md").read_text(encoding="utf-8")
           for required_text in (
-              "provider → adapter → komponent WiRR",
+              "sensor / SDK / model CV → adapter",
               "MR_CameraWindow",
               "MR_HandAura",
               "MR_PeopleAwareness",
