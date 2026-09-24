@@ -140,7 +140,7 @@ Model jest opcjonalnym zasobem uzupełniającym:
 - w **Lab 06** może służyć jako dodatkowa reprezentacja wizualna robota podczas pracy z architekturą bliźniaka cyfrowego;
 - w **Lab 07** może być użyty jako realistyczne obciążenie sceny w testach wydajności, stabilności i regresji.
 
-Przykładowe animacje z pakietu służą do demonstracji ruchu. Nie są źródłem `JointState`, nie zastępują pomiarów ROS 2/WebSim i nie stanowią referencji poprawności mapowania przegubów.
+Przykładowe animacje z pakietu służą do demonstracji ruchu. Nie są źródłem `JointState`, nie zastępują pomiarów ROS 2/WebSim i nie stanowią referencji poprawności mapowania przegubów. Import modelu jest opcjonalny i nie zmienia kryteriów zaliczenia żadnego laboratorium.
 
 ## Strona kursu (GitHub Pages)
 
