@@ -182,6 +182,16 @@ W RRBot oba przeguby w opisie ROS obracają się wokół osi `(0, 1, 0)`. Opisz,
 
 ................................................................................
 
+### Trzy pozycje kontrolne
+
+Dla każdej pozycji zapisz wartość w źródle, wartość odczytaną/zaobserwowaną w Unity oraz błąd w stopniach. Jeżeli model ma tylko dwa przeguby, pola joint3 oznacz jako N/A.
+
+| Pozycja | joint1 źródło [deg] | joint1 Unity [deg] | błąd joint1 [deg] | joint2 źródło [deg] | joint2 Unity [deg] | błąd joint2 [deg] | joint3 źródło [deg] | joint3 Unity [deg] | błąd joint3 [deg] |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | | | | | | | | | |
+| 2 | | | | | | | | | |
+| 3 | | | | | | | | | |
+
 ## 6. Eksperyment 2 — wariant `v2 = ...`
 
 **Konfiguracja błędna:**

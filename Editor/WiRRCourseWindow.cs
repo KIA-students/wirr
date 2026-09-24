@@ -490,6 +490,27 @@ namespace KIA.WiRR.Editor
                 if (WiRRDynamicPrefabTools.DynamicDemosExist(lab.Number))
                     DrawInlineStatus("Dynamiczne demonstratory są aktywne. Uruchom Play Mode, aby obserwować ruch, fizykę i dźwięk.", SuccessAccent);
 
+                EditorGUILayout.Space(7);
+                EditorGUILayout.LabelField("Dodatkowe modele 3D", EditorStyles.miniBoldLabel);
+                EditorGUILayout.HelpBox(
+                    "Pakiet zawiera dodatkowy model humanoidalnego robota Unitree G1 EDU z przykładowymi animacjami (RoboAnimation.unitypackage). Jest szczególnie przydatny w Lab 05 jako złożony zasób 3D, w Lab 06 jako dodatkowa reprezentacja wizualna robota oraz w Lab 07 jako realistyczny obiekt do testów wydajności i walidacji. Przykładowe animacje nie są pomiarem JointState ani źródłem prawdy dla bliźniaka cyfrowego.",
+                    MessageType.Info);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    using (new EditorGUI.DisabledScope(!WiRRAdditionalModelTools.UnitreePackageAvailable))
+                    {
+                        if (GUILayout.Button("Importuj Unitree G1 EDU + animacje", GUILayout.Height(28)))
+                            WiRRAdditionalModelTools.ImportUnitreeG1();
+                    }
+
+                    if (GUILayout.Button("Pokaż plik RoboAnimation", GUILayout.Height(28)))
+                        WiRRAdditionalModelTools.RevealUnitreePackage();
+                }
+
+                if (!WiRRAdditionalModelTools.UnitreePackageAvailable)
+                    DrawInlineStatus("Brak RoboAnimation.unitypackage w zainstalowanym pakiecie WiRR.", WarningAccent);
+
                 if (lab.Number == 6)
                     EditorGUILayout.HelpBox(
                         "Laboratorium 06 może korzystać z lokalnego ROS 2/Gazebo, ROS 2/Gazebo na drugim komputerze albo z WiRR WebSim.",
@@ -626,6 +647,8 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.LabelField($"{task.Checkpoint}: {task.Title}", taskTitleStyle);
                 EditorGUILayout.LabelField(task.Goal, EditorStyles.wordWrappedMiniLabel);
                 EditorGUILayout.Space(3);
+                DrawMeasurementRequirements(labNumber, task.Checkpoint);
+                EditorGUILayout.Space(3);
 
                 for (var stepIndex = 0; stepIndex < task.Steps.Count; stepIndex++)
                 {
@@ -642,6 +665,70 @@ namespace KIA.WiRR.Editor
 
                 EditorGUILayout.Space(3);
                 EditorGUILayout.HelpBox(task.Evidence, MessageType.Info);
+            }
+        }
+
+        private static void DrawMeasurementRequirements(int labNumber, string checkpoint)
+        {
+            WiRRReportSection reportSection = null;
+            var sections = WiRRReportSchemaCatalog.Get(labNumber);
+            for (var i = 0; i < sections.Count; i++)
+            {
+                if (sections[i].Checkpoint == checkpoint)
+                {
+                    reportSection = sections[i];
+                    break;
+                }
+            }
+
+            var requiredFields = new List<string>();
+            if (reportSection != null)
+            {
+                for (var i = 0; i < reportSection.Fields.Count; i++)
+                {
+                    var field = reportSection.Fields[i];
+                    if (!field.Required || field.Kind == WiRRReportFieldKind.Multiline)
+                        continue;
+
+                    requiredFields.Add(string.IsNullOrWhiteSpace(field.Unit)
+                        ? field.Label
+                        : $"{field.Label} [{field.Unit}]");
+                }
+            }
+
+            EditorGUILayout.LabelField("Co dokładnie zapisać w pomiarach", EditorStyles.miniBoldLabel);
+
+            if (requiredFields.Count > 0)
+            {
+                EditorGUILayout.HelpBox(
+                    "Obowiązkowe pola wyniku: " + string.Join("; ", requiredFields),
+                    MessageType.None);
+            }
+
+            var tables = WiRRReportTableCatalog.Get(labNumber, checkpoint);
+            for (var tableIndex = 0; tableIndex < tables.Count; tableIndex++)
+            {
+                var table = tables[tableIndex];
+                var columns = new List<string>();
+                for (var columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++)
+                    columns.Add(table.Columns[columnIndex].Label);
+
+                string rows;
+                if (table.Rows.Count <= 6)
+                {
+                    var rowLabels = new List<string>();
+                    for (var rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++)
+                        rowLabels.Add(table.Rows[rowIndex].Label);
+                    rows = string.Join(", ", rowLabels);
+                }
+                else
+                {
+                    rows = $"{table.Rows.Count} wierszy/powtórzeń zgodnie z formularzem";
+                }
+
+                EditorGUILayout.HelpBox(
+                    $"Tabela: {table.Label}\nWarunki/powtórzenia: {rows}\nZapisuj: {string.Join(", ", columns)}",
+                    MessageType.None);
             }
         }
 
