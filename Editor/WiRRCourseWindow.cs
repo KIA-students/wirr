@@ -532,6 +532,50 @@ namespace KIA.WiRR.Editor
                     DrawInlineStatus("Demonstratory XR są aktywne. Najlepiej oceniaj je w headsetcie z 6DoF, a nie wyłącznie w Game View.", SuccessAccent);
 
                 EditorGUILayout.Space(7);
+                EditorGUILayout.LabelField("Mixed Reality: świat rzeczywisty + wirtualny", EditorStyles.miniBoldLabel);
+                EditorGUILayout.HelpBox(
+                    "Pięć demonstratorów łączy dane z otoczenia z obiektami wirtualnymi. Każdy ma działający fallback do testów w Editorze oraz publiczne API do podłączenia prawdziwego źródła: kamery/passthrough, hand trackingu, detekcji ludzi, depth/spatial mesh albo Scene Understanding ścian.",
+                    MessageType.Info);
+
+                EditorGUILayout.HelpBox(
+                    "Camera Window: obraz kamery z wirtualnym reticle. Hand Aura: holograficzna warstwa na realnej dłoni i detekcja pinch. People Awareness: anonimowe strefy wokół wykrytych osób. Spatial Scanner: punkty z depth/spatial mesh nanoszone na otoczenie. Wall Portal: wirtualna zawartość przyklejana do wykrytej ściany.",
+                    MessageType.None);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Camera Window", GUILayout.Height(28)))
+                        WiRRMixedRealityShowcaseTools.CreateCameraWindow(lab.Number);
+                    if (GUILayout.Button("Hand Aura", GUILayout.Height(28)))
+                        WiRRMixedRealityShowcaseTools.CreateHandAura(lab.Number);
+                }
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("People Awareness", GUILayout.Height(28)))
+                        WiRRMixedRealityShowcaseTools.CreatePeopleAwareness(lab.Number);
+                    if (GUILayout.Button("Spatial Surface Scanner", GUILayout.Height(28)))
+                        WiRRMixedRealityShowcaseTools.CreateSpatialScanner(lab.Number);
+                }
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Wall Portal / Anchor", GUILayout.Height(28)))
+                        WiRRMixedRealityShowcaseTools.CreateWallPortal(lab.Number);
+                    if (GUILayout.Button("Dodaj cały zestaw MR", GUILayout.Height(28)))
+                        WiRRMixedRealityShowcaseTools.CreateAll(lab.Number);
+                }
+
+                if (GUILayout.Button("Usuń demonstratory MR ze sceny", GUILayout.Height(24)))
+                    WiRRMixedRealityShowcaseTools.RemoveShowcase(lab.Number);
+
+                if (WiRRMixedRealityShowcaseTools.ShowcaseExists(lab.Number))
+                    DrawInlineStatus("Demonstratory MR są aktywne. Fallbacki działają bez zewnętrznego SDK; prawdziwe sensory podłącz przez publiczne API komponentów Runtime.", SuccessAccent);
+
+                EditorGUILayout.HelpBox(
+                    "Prywatność: demonstrator People Awareness wymaga jedynie pozycji osób i nie potrzebuje twarzy, nazw ani identyfikacji biometrycznej. Camera Window uruchamia WebCamTexture dopiero po zgodzie systemowej. Na Quest passthrough jest zwykle warstwą platformową — nie należy zakładać, że jest dostępny jako zwykły WebCamTexture.",
+                    MessageType.Warning);
+
+                EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("Dodatkowe modele 3D", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
                     "Pakiet zawiera dodatkowy model humanoidalnego robota Unitree G1 EDU z przykładowymi animacjami (RoboAnimation.unitypackage). Jest szczególnie przydatny w Lab 05 jako złożony zasób 3D, w Lab 06 jako dodatkowa reprezentacja wizualna robota oraz w Lab 07 jako realistyczny obiekt do testów wydajności i walidacji. Przykładowe animacje nie są pomiarem JointState ani źródłem prawdy dla bliźniaka cyfrowego.",
