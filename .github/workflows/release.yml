@@ -90,6 +90,9 @@ jobs:
               "WiRRMixedRealityShowcaseTools.cs",
               "WiRRMixedRealityGuideWindow.cs",
               "WiRRMixedRealityAdapterTemplateTools.cs",
+              "WiRRMobileARShowcaseTools.cs",
+              "WiRRMobileARGuideWindow.cs",
+              "WiRRMobileARAdapterTemplateTools.cs",
               "WiRROnboarding.cs",
           ):
               source = root / "Editor" / editor_file
@@ -133,6 +136,7 @@ jobs:
               root / "Documentation~" / "Reference" / "XR_SHOWCASE.md",
               root / "Documentation~" / "Reference" / "MIXED_REALITY_SHOWCASE.md",
               root / "Documentation~" / "Reference" / "MIXED_REALITY_IMPLEMENTATION.md",
+              root / "Documentation~" / "Reference" / "MOBILE_AR_SHOWCASE.md",
               root / "Textures" / "HDRI" / "README.md",
           )
           for document in required_docs:
@@ -174,6 +178,11 @@ jobs:
               "WiRRPeopleAwareness.cs",
               "WiRRSpatialSurfaceScanner.cs",
               "WiRRWallAnchor.cs",
+              "WiRRMobileARTapPlacement.cs",
+              "WiRRMobileARImageAnchor.cs",
+              "WiRRMobileARRuler.cs",
+              "WiRRMobileARLightMatch.cs",
+              "WiRRMobileARSurfacePainter.cs",
           )
           for runtime_file in runtime_dynamic_files:
               source = root / "Runtime" / runtime_file
@@ -254,6 +263,72 @@ jobs:
           ):
               if required_text not in implementation_guide:
                   raise SystemExit(f"Instrukcja implementacji MR jest niekompletna: {required_text}")
+
+          mobile_ar_source = (root / "Editor" / "WiRRMobileARShowcaseTools.cs").read_text(encoding="utf-8")
+          if mobile_ar_source.count("new Definition(") != 5:
+              raise SystemExit("Mobile AR Showcase nie zawiera dokładnie pięciu demonstratorów.")
+
+          mobile_ar_runtime_expectations = {
+              "WiRRMobileARTapPlacement.cs": (
+                  "SetSurfaceHit(Vector3 worldPoint",
+                  "ConfirmPlacement()",
+                  "ClearPlacement()",
+              ),
+              "WiRRMobileARImageAnchor.cs": (
+                  "SetTrackedImagePose(",
+                  "LostTracking()",
+                  "TrackedImageName",
+              ),
+              "WiRRMobileARRuler.cs": (
+                  "SetCandidatePoint(Vector3 worldPoint",
+                  "ConfirmCandidate()",
+                  "DistanceMeters",
+              ),
+              "WiRRMobileARLightMatch.cs": (
+                  "SetLightEstimate(",
+                  "Intensity01",
+                  "Confidence",
+              ),
+              "WiRRMobileARSurfacePainter.cs": (
+                  "SetSurfaceHit(Vector3 worldPoint",
+                  "PaintAtCurrentHit()",
+                  "ClearPaint()",
+              ),
+          }
+          for filename, signatures in mobile_ar_runtime_expectations.items():
+              source_text = (root / "Runtime" / filename).read_text(encoding="utf-8")
+              for signature in signatures:
+                  if signature not in source_text:
+                      raise SystemExit(f"Brak API Mobile AR w {filename}: {signature}")
+
+          mobile_ar_guide = (root / "Editor" / "WiRRMobileARGuideWindow.cs").read_text(encoding="utf-8")
+          for section in ("Start", "Placement", "Image", "Ruler", "Light", "Painter", "Rozbudowa"):
+              if section not in mobile_ar_guide:
+                  raise SystemExit(f"Brak sekcji instrukcji Mobile AR: {section}")
+
+          mobile_ar_adapters = (root / "Editor" / "WiRRMobileARAdapterTemplateTools.cs").read_text(encoding="utf-8")
+          mobile_ar_starters = (
+              "TapPlacementARFoundationAdapterStarter.cs",
+              "ImageTrackingARFoundationAdapterStarter.cs",
+              "RulerARFoundationAdapterStarter.cs",
+              "LightEstimationARFoundationAdapterStarter.cs",
+              "SurfacePainterARFoundationAdapterStarter.cs",
+          )
+          for starter in mobile_ar_starters:
+              if starter not in mobile_ar_adapters:
+                  raise SystemExit(f"Brak startera Mobile AR: {starter}")
+
+          mobile_ar_doc = (root / "Documentation~" / "Reference" / "MOBILE_AR_SHOWCASE.md").read_text(encoding="utf-8")
+          for required_text in (
+              "AR_TapPlacement",
+              "AR_ImageMarkerPortal",
+              "AR_WorldRuler",
+              "AR_LightMatchObject",
+              "AR_SurfacePainter",
+              "Startery AR Foundation",
+          ):
+              if required_text not in mobile_ar_doc:
+                  raise SystemExit(f"Dokumentacja Mobile AR jest niekompletna: {required_text}")
 
           runtime_asmdef = json.loads(
               (root / "Runtime" / "KIA.WiRR.Runtime.asmdef").read_text(encoding="utf-8")
@@ -373,7 +448,8 @@ jobs:
           - obecność wbudowanej instrukcji budowania PC / Android / Quest 3;
           - komplet pięciu demonstratorów XR oraz ich skryptów Runtime i publicznego API integracyjnego;
           - komplet pięciu demonstratorów Mixed Reality dla kamery, dłoni, ludzi, spatial/depth i ścian wraz z neutralnym API providerów;
-          - instrukcję implementacji MR, generator pięciu starterów adapterów i sekcje zachęcające do mierzalnej dalszej rozbudowy.
+          - instrukcję implementacji MR, generator pięciu starterów adapterów i sekcje zachęcające do mierzalnej dalszej rozbudowy;
+          - komplet pięciu demonstratorów Mobile AR na smartfon wraz z API Runtime, instrukcją i pięcioma starterami AR Foundation.
 
           Archiwa dołączone do wydania zawierają pakiet UPM oraz sumy kontrolne SHA-256.
           """
