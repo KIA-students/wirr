@@ -88,6 +88,8 @@ jobs:
               "WiRRBuildGuideWindow.cs",
               "WiRRXrShowcaseTools.cs",
               "WiRRMixedRealityShowcaseTools.cs",
+              "WiRRMixedRealityGuideWindow.cs",
+              "WiRRMixedRealityAdapterTemplateTools.cs",
               "WiRROnboarding.cs",
           ):
               source = root / "Editor" / editor_file
@@ -130,6 +132,7 @@ jobs:
               root / "Documentation~" / "Reference" / "BUILD_AND_DEPLOY.md",
               root / "Documentation~" / "Reference" / "XR_SHOWCASE.md",
               root / "Documentation~" / "Reference" / "MIXED_REALITY_SHOWCASE.md",
+              root / "Documentation~" / "Reference" / "MIXED_REALITY_IMPLEMENTATION.md",
               root / "Textures" / "HDRI" / "README.md",
           )
           for document in required_docs:
@@ -221,6 +224,36 @@ jobs:
               for signature in signatures:
                   if signature not in source_text:
                       raise SystemExit(f"Brak API Mixed Reality w {filename}: {signature}")
+
+          mr_guide_source = (root / "Editor" / "WiRRMixedRealityGuideWindow.cs").read_text(encoding="utf-8")
+          for section in ("Architektura", "Camera", "Hand", "People", "Spatial", "Wall", "Rozbudowa"):
+              if section not in mr_guide_source:
+                  raise SystemExit(f"Brak sekcji instrukcji MR: {section}")
+
+          adapter_generator = (root / "Editor" / "WiRRMixedRealityAdapterTemplateTools.cs").read_text(encoding="utf-8")
+          adapter_starters = (
+              "CameraFeedAdapterStarter.cs",
+              "HandTrackingAdapterStarter.cs",
+              "PeopleDetectorAdapterStarter.cs",
+              "SpatialDepthAdapterStarter.cs",
+              "WallPlaneAdapterStarter.cs",
+          )
+          for starter in adapter_starters:
+              if starter not in adapter_generator:
+                  raise SystemExit(f"Brak startera adaptera MR: {starter}")
+
+          implementation_guide = (root / "Documentation~" / "Reference" / "MIXED_REALITY_IMPLEMENTATION.md").read_text(encoding="utf-8")
+          for required_text in (
+              "provider → adapter → komponent WiRR",
+              "MR_CameraWindow",
+              "MR_HandAura",
+              "MR_PeopleAwareness",
+              "MR_SpatialSurfaceScanner",
+              "MR_WallPortal",
+              "Jak zaprojektować własną rozbudowę",
+          ):
+              if required_text not in implementation_guide:
+                  raise SystemExit(f"Instrukcja implementacji MR jest niekompletna: {required_text}")
 
           runtime_asmdef = json.loads(
               (root / "Runtime" / "KIA.WiRR.Runtime.asmdef").read_text(encoding="utf-8")
@@ -339,7 +372,8 @@ jobs:
           - obecność dziewięciu panoram HDRI oraz instrukcji skybox;
           - obecność wbudowanej instrukcji budowania PC / Android / Quest 3;
           - komplet pięciu demonstratorów XR oraz ich skryptów Runtime i publicznego API integracyjnego;
-          - komplet pięciu demonstratorów Mixed Reality dla kamery, dłoni, ludzi, spatial/depth i ścian wraz z neutralnym API providerów.
+          - komplet pięciu demonstratorów Mixed Reality dla kamery, dłoni, ludzi, spatial/depth i ścian wraz z neutralnym API providerów;
+          - instrukcję implementacji MR, generator pięciu starterów adapterów i sekcje zachęcające do mierzalnej dalszej rozbudowy.
 
           Archiwa dołączone do wydania zawierają pakiet UPM oraz sumy kontrolne SHA-256.
           """
