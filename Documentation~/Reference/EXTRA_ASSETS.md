@@ -81,12 +81,12 @@ Do testów audio przestrzennego, sygnałów ostrzegawczych, multimodalnej inform
 Pakiet zawiera także pięć gotowych demonstratorów XR, które mają przypisaną własną logikę Runtime i działają od razu w Play Mode:
 
 - **XR_ParallaxPortal** — wielowarstwowy portal sterowany translacją głowy; skrypt `WiRRHeadParallax` pokazuje head-coupled parallax i znaczenie 6DoF;
-- **XR_GazeBloom** — holograficzny obiekt reagujący na kierunek patrzenia; `WiRRGazeBloom` pokazuje implicit interaction i może przyjąć zewnętrzny sygnał z eye trackingu/XRI;
-- **XR_TelekinesisOrb** — demonstracja distant interaction/force grab; `WiRRTelekinesisOrb` ma gaze dwell, płynne przyciąganie do użytkownika, wiązkę i powrót do pozycji bazowej;
-- **XR_DiegeticHUD** — panel przestrzenny z miękkim podążaniem za głową; `WiRRHeadFollower` pozwala porównać UI podążające i world-locked;
-- **XR_WorldScaleTotem** — obiekt przechodzący od miniatury do room-scale w funkcji odległości; `WiRRProximityScale` pokazuje embodied scale i wpływ skali 1 unit = 1 m.
+- **XR_GazeBloom** — holograficzny obiekt reagujący na kierunek patrzenia; `WiRRGazeBloom` pokazuje interakcję niejawną (implicit interaction) i może przyjąć zewnętrzny sygnał ze śledzenia wzroku lub XRI;
+- **XR_TelekinesisOrb** — demonstracja interakcji na odległość (distant interaction) i zdalnego przyciągania (force grab); `WiRRTelekinesisOrb` ma utrzymanie spojrzenia przez określony czas (gaze dwell), płynne przyciąganie do użytkownika, wiązkę i powrót do pozycji bazowej;
+- **XR_DiegeticHUD** — panel przestrzenny z miękkim podążaniem za głową; `WiRRHeadFollower` pozwala porównać UI podążające i zakotwiczone w świecie;
+- **XR_WorldScaleTotem** — obiekt przechodzący od miniatury do skali pomieszczenia (room-scale) w funkcji odległości; `WiRRProximityScale` pokazuje embodied scale i wpływ skali 1 unit = 1 m.
 
-Każdy komponent ma publiczne metody przeznaczone do późniejszego podłączenia XRI, kontrolera lub hand trackingu. Oznacza to, że demonstracja działa bez dodatkowego SDK, ale student może wykorzystać ją jako gotowy obiekt wykonawczy dla własnej interakcji.
+Każdy komponent ma publiczne metody przeznaczone do późniejszego podłączenia XRI, kontrolera lub śledzenia dłoni. Oznacza to, że demonstracja działa bez dodatkowego SDK, ale student może wykorzystać ją jako gotowy obiekt wykonawczy dla własnej interakcji.
 
 Szczegółowy opis działania, API oraz propozycje eksperymentów znajdują się w `Documentation~/Reference/XR_SHOWCASE.md`.
 
@@ -97,22 +97,22 @@ Drugi zestaw pięciu demonstratorów pokazuje nie tylko wirtualne efekty XR, ale
 - **MR_CameraWindow** — obraz z kamery lub zewnętrznej tekstury z wirtualnym reticle; `WiRRCameraFeedMixer` może korzystać z `WebCamTexture` albo `SetExternalTexture(Texture)`;
 - **MR_HandAura** — wirtualne markery nadgarstka i opuszków nakładane na śledzoną dłoń; `WiRRHandAura` wylicza również `Pinch01`;
 - **MR_PeopleAwareness** — anonimowe markery i strefy wokół wykrytych osób; `WiRRPeopleAwareness` przyjmuje wyłącznie pozycje w świecie;
-- **MR_SpatialSurfaceScanner** — wizualizacja punktów z depth/spatial mesh, z raycastowym fallbackiem do testów w Editorze;
+- **MR_SpatialSurfaceScanner** — wizualizacja punktów z danych głębi / siatki przestrzennej, z trybem zastępczym opartym na rzutowaniu promieni do testów w Editorze;
 - **MR_WallPortal** — portal i wirtualna głębia kotwione do wykrytej ściany przez `WiRRWallAnchor` i `WiRRHeadParallax`.
 
-Każdy prefab ma gotową logikę Runtime i jednocześnie jawny punkt integracji z konkretnym providerem. Szczegółowy opis znajduje się w `Documentation~/Reference/MIXED_REALITY_SHOWCASE.md`. Jeżeli chcesz podłączyć realny sensor lub SDK i rozbudować prefab, użyj `MIXED_REALITY_IMPLEMENTATION.md` albo okna `WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa`; można tam również wygenerować pięć starterów adapterów do własnego folderu `Scripts`.
+Każdy prefab ma gotową logikę Runtime i jednocześnie jawny punkt integracji z konkretnym dostawcą danych. Szczegółowy opis znajduje się w `Documentation~/Reference/MIXED_REALITY_SHOWCASE.md`. Jeżeli chcesz podłączyć realny sensor lub SDK i rozbudować prefab, użyj `MIXED_REALITY_IMPLEMENTATION.md` albo okna `WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa`; można tam również wygenerować pięć starterów adapterów do własnego folderu `Scripts`.
 
 ## Mobile AR: rozszerzona rzeczywistość na telefonie
 
 Pakiet zawiera również pięć demonstratorów przeznaczonych specjalnie do AR na smartfonie:
 
-- **AR_TapPlacement** — reticle i umieszczanie obiektu przez tap na powierzchni plane/depth;
+- **AR_TapPlacement** — wskaźnik położenia i umieszczanie obiektu przez dotknięcie ekranu na wykrytej płaszczyźnie lub z wykorzystaniem danych głębi;
 - **AR_ImageMarkerPortal** — zawartość zakotwiona do rozpoznanego obrazu z Reference Image Library;
 - **AR_WorldRuler** — pomiar odległości w świecie przez dwa tapy;
 - **AR_LightMatchObject** — dopasowanie wirtualnego światła i materiału do estymacji oświetlenia kamery;
-- **AR_SurfacePainter** — rysowanie palcem po realnych powierzchniach z użyciem raycastu.
+- **AR_SurfacePainter** — rysowanie palcem po realnych powierzchniach z użyciem rzutu promienia.
 
-Każdy element ma fallback do testów w Editorze i publiczne API dla AR Foundation. Przycisk `Utwórz startery AR Foundation` generuje kod studenta w `Assets/WiRR/LabXX/Scripts/MobileARAdapters` bez modyfikowania provider-neutralnego Runtime WiRR.
+Każdy element ma tryb zastępczy do testów w Editorze i publiczne API dla AR Foundation. Przycisk `Utwórz startery AR Foundation` generuje kod studenta w `Assets/WiRR/LabXX/Scripts/MobileARAdapters` bez modyfikowania warstwy Runtime WiRR niezależnej od dostawcy danych.
 
 Szczegóły znajdują się w `Documentation~/Reference/MOBILE_AR_SHOWCASE.md` oraz w `WiRR → Pomoc → Mobile AR: telefon`.
 

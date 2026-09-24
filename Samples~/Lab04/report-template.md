@@ -32,7 +32,7 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - Graphics API: __________
 - Minimum API Level: __________
 - ARCore: Required / Optional: __________
-- Depth: Required / Optional: __________
+- dane głębi: wymagane / opcjonalne (`Required` / `Optional`): __________
 - Scena: `Assets/Scenes/Lab04_SceneUnderstanding.unity`
 - Gałąź: `lab04-work`
 
@@ -56,7 +56,7 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 3.0 — Depth API i diagnostyka
+# Punkt kontrolny 3.0 — API głębi (Depth API) i diagnostyka
 
 ## Stan subsystemu
 
@@ -65,7 +65,7 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - `requestedEnvironmentDepthMode`: __________
 - `currentEnvironmentDepthMode`: __________
 - `environmentDepthTemporalSmoothingEnabled`: __________
-- rozdzielczość ostatniej klatki depth: __________
+- rozdzielczość ostatniej klatki danych głębi: __________
 
 ## Eksperyment v1
 
@@ -102,7 +102,7 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - Zmienna: __________
 - Hipoteza: __________
 
-| Warunek | Tryb / jakość | Błędy okluzji / 10 | Requested depth | Current depth | Uwagi |
+| Warunek | Tryb / jakość | Błędy okluzji / 10 | Żądana głębia (`Requested depth`) | Bieżąca głębia (`Current depth`) | Uwagi |
 |---|---|---:|---|---|---|
 | A | | | | | |
 | B | | | | | |
@@ -115,11 +115,11 @@ Dominująca sygnatura:
 - [ ] opóźnienie po ruchu
 - [ ] inna: __________
 
-**Wniosek o smoothingu / jakości depth:** __________
+**Wniosek o wygładzaniu i jakości danych głębi:** __________
 
 ---
 
-# Punkt kontrolny 4.0 — depth-raycast i błąd odległości
+# Punkt kontrolny 4.0 — rzutowanie promienia z użyciem danych głębi i błąd odległości
 
 ## Konfiguracja
 
@@ -238,15 +238,15 @@ Dominująca sygnatura:
 - Wynik testu: __________
 - Najbardziej prawdopodobna przyczyna: __________
 
-## Baseline → błąd → naprawa
+## Wariant bazowy → błąd → naprawa
 
 | Stan | Powt. 1 | Powt. 2 | Powt. 3 | Mediana / wynik zbiorczy | Uwagi |
 |---|---:|---:|---:|---:|---|
-| baseline | | | | | |
+| wariant bazowy | | | | | |
 | kontrolowany błąd | | | | | |
 | po naprawie | | | | | |
 
-- Czy wynik po naprawie wrócił w pobliże baseline? __________
+- Czy wynik po naprawie wrócił w pobliże wariantu bazowego? __________
 - Czy sygnatura błędu była zgodna z przewidywaniem? __________
 - Minimalna poprawka: __________
 
@@ -254,10 +254,10 @@ Dominująca sygnatura:
 
 # Wnioski
 
-1. **Depth API:** __________
+1. **API głębi (Depth API):** __________
 2. **Okluzja:** __________
-3. **Depth-raycast:** __________
-4. **Light estimation:** __________
+3. **Rzutowanie promienia z użyciem danych głębi:** __________
+4. **Estymacja oświetlenia:** __________
 5. **Najbardziej wrażliwy warunek środowiskowy:** __________
 6. **Najważniejsze ograniczenie metody:** __________
 

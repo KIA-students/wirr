@@ -1,4 +1,4 @@
-# Laboratorium 5 — Evidence/Raport Końcowy
+# Laboratorium 5 — raport końcowy
 
 ## Identyfikacja pary
 - Numer indeksu student 1: ___________
@@ -17,16 +17,16 @@
 
 ---
 
-## Benchmark — Porównanie
+## Pomiar wydajności — porównanie
 
 | Level | Poligony | % oryginału | FPS | ms | Draw Calls |
 |-------|----------|------------|-----|----|----|
-| Baseline | __ | 100% | __ | __ | __ |
+| Wariant bazowy | __ | 100% | __ | __ | __ |
 | LOD0 | __ | __% | __ | __ | __ |
 | LOD1 | __ | __% | __ | __ | __ |
 | LOD2 | __ | __% | __ | __ | __ |
 
-**Przyrost wydajności (LOD vs Baseline):** ___ %
+**Przyrost wydajności (LOD względem wariantu bazowego):** ___ %
 
 ---
 

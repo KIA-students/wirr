@@ -1,4 +1,4 @@
-# Laboratorium 1 — Evidence/raport 
+# Laboratorium 1 — raport wykonania 
 
 ## Identyfikacja pary
 - Numer indeksu student 1: ___________
@@ -8,7 +8,7 @@
 
 ---
 
-## Benchmark — Baseline (oryginalny CAD)
+## Pomiar wydajności — wariant bazowy (oryginalny CAD)
 
 | Próba | FPS | ms/klatka | Draw Calls |
 |-------|-----|----------|-----------|

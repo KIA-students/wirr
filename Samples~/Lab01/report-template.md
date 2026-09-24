@@ -58,9 +58,9 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 # Punkt kontrolny 3.0
 
-## Baseline PC
+## Wariant bazowy PC
 
-- tryb: Editor / standalone PC
+- tryb: Edytor / samodzielna aplikacja PC (`standalone`)
 - Game View / rozdzielczość: __________
 - VSync: __________
 - `sampleFrames`: 180
@@ -355,21 +355,21 @@ Stała liczba obiektów: 400.
 | prawy kontroler | działa / nie działa |
 | Select | działa / nie działa |
 
-**Uwaga:** Link nie jest pomiarem wydajności standalone Quest 3.
+**Uwaga:** Meta Horizon Link nie jest pomiarem wydajności samodzielnej aplikacji na Quest 3.
 
-## Quest 3 — standalone
+## Quest 3 — aplikacja samodzielna
 
 - Profil: Android / Meta Quest
 - Architektura: ARM64
 - API graficzne: __________
 - OpenXR: aktywny / nieaktywny
 - `Mobile_RPAsset`: aktywny / nieaktywny
-- Render Scale baseline: __________
-- Build And Run: sukces / błąd
+- `Render Scale` wariantu bazowego: __________
+- wynik polecenia `Build And Run`: sukces / błąd
 - Aplikacja działa bez aktywnego Meta Horizon Link: tak / nie
 - Uwagi / błąd buildu: __________
 
-## Quest 3 — kontrola funkcjonalna standalone
+## Quest 3 — kontrola funkcjonalna aplikacji samodzielnej
 
 | Test | działa | nie działa | niezweryfikowano |
 |---|:---:|:---:|:---:|
@@ -381,9 +381,9 @@ Stała liczba obiektów: 400.
 | Select | ☐ | ☐ | ☐ |
 | stabilność przez 60 s | ☐ | ☐ | ☐ |
 
-## Quest 3 — baseline standalone
+## Quest 3 — wariant bazowy aplikacji samodzielnej
 
-- tryb: `standalone`
+- tryb: samodzielna aplikacja (`standalone`)
 - Render Scale: __________
 - częstotliwość odświeżania: __________ Hz
 
@@ -394,7 +394,7 @@ Stała liczba obiektów: 400.
 | 3 | | |
 | **Mediana** | | |
 
-## Eksperyment kontrolny 5.0 — transfer PC ↔ Quest standalone
+## Eksperyment kontrolny 5.0 — przeniesienie PC ↔ samodzielna aplikacja Quest
 
 - Wariant `v5`: ___
 - Parametr: __________
@@ -408,7 +408,7 @@ Stała liczba obiektów: 400.
 | A | | | | | |
 | B | | | | | |
 
-### Quest 3 standalone
+### Samodzielna aplikacja na Quest 3
 
 | Warunek | FPS 1 | FPS 2 | FPS 3 | Mediana FPS | Mediana ms |
 |---|---:|---:|---:|---:|---:|

@@ -1,4 +1,4 @@
-# Laboratorium 6 — Evidence/Raport Końcowy
+# Laboratorium 6 — raport końcowy
 
 ## Identyfikacja pary
 - Numer indeksu student 1: ___________
@@ -19,7 +19,7 @@
 
 ---
 
-## Pomiar Latency
+## Pomiar opóźnienia
 
 | Próba | Mediana [ms] | Min [ms] | Max [ms] |
 |-------|--------------|---------|----------|

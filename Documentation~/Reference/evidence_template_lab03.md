@@ -1,4 +1,4 @@
-# Laboratorium 3 — Evidence/raport
+# Laboratorium 3 — raport wykonania
 
 ## Identyfikacja pary
 - Numer indeksu student 1: ___________
@@ -25,7 +25,7 @@
 
 | Pozycja | Dystans od O [m] | Błąd rejestracji [cm] |
 |---------|------------------|----------------------|
-| 1 (baseline) | 0 | __ |
+| 1 (wariant bazowy) | 0 | __ |
 | 2 | 1 | __ |
 | 3 | 2 | __ |
 | 4 | 3 | __ |
@@ -36,7 +36,7 @@
 
 ---
 
-## Segmentacja (Checkpoint 3.5+)
+## Segmentacja (punkt kontrolny 3.5+)
 
 - [ ] Model okluzowany wyłącznie przez osoby
 - [ ] Tło i obiekty nie okluzują modelu

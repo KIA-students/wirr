@@ -54,9 +54,9 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 3.0 — ARCore, tracking i płaszczyzny
+# Punkt kontrolny 3.0 — ARCore, śledzenie i płaszczyzny
 
-## Tracking
+## Śledzenie
 
 - czas do `SessionTracking` [s]: __________
 - pierwszy `notTrackingReason`: __________
@@ -71,7 +71,7 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - Moderator: __________
 - Warunki: __________
 
-| Warunek | Tracking 1 [s] | Tracking 2 [s] | Tracking 3 [s] | Mediana tracking [s] | Płaszczyzna 1 [s] | Płaszczyzna 2 [s] | Płaszczyzna 3 [s] | Mediana płaszczyzny [s] | notTrackingReason / uwagi |
+| Warunek | Śledzenie 1 [s] | Śledzenie 2 [s] | Śledzenie 3 [s] | Mediana czasu śledzenia [s] | Płaszczyzna 1 [s] | Płaszczyzna 2 [s] | Płaszczyzna 3 [s] | Mediana płaszczyzny [s] | notTrackingReason / uwagi |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | A | | | | | | | | | |
 | B | | | | | | | | | |
@@ -83,7 +83,7 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 3.5 — raycast i placement 1:1
+# Punkt kontrolny 3.5 — rzutowanie promienia i umieszczanie 1:1
 
 ## Model
 
@@ -131,7 +131,7 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ## Pomiar po powrocie
 
-| Powtórzenie | Błąd końcowy [mm] | Tracking podczas ruchu | `notTrackingReason` | Uwagi |
+| Powtórzenie | Błąd końcowy [mm] | Śledzenie podczas ruchu | `notTrackingReason` | Uwagi |
 |---:|---:|---|---|---|
 | 1 | | | | |
 | 2 | | | | |
@@ -222,13 +222,13 @@ Wynik obejmuje łącznie błąd rejestracji, raycastu, wskazania dotykowego i ś
 - Przewidywanie rozróżniające H1 i H2: __________
 - Test rozstrzygający: __________
 
-## Baseline → błąd → naprawa
+## Wariant bazowy → błąd → naprawa
 
 | Stan | Powtórzenie | e1 [mm] | e2 [mm] | e3 [mm] | e_med [mm] | e_max [mm] |
 |---|---:|---:|---:|---:|---:|---:|
-| baseline | 1 | | | | | |
-| baseline | 2 | | | | | |
-| baseline | 3 | | | | | |
+| wariant bazowy | 1 | | | | | |
+| wariant bazowy | 2 | | | | | |
+| wariant bazowy | 3 | | | | | |
 | kontrolowany błąd | 1 | | | | | |
 | kontrolowany błąd | 2 | | | | | |
 | kontrolowany błąd | 3 | | | | | |
@@ -239,14 +239,14 @@ Wynik obejmuje łącznie błąd rejestracji, raycastu, wskazania dotykowego i ś
 - Czy sygnatura była zgodna z przewidywaniem? __________
 - Przyczyna uznana za najbardziej prawdopodobną: __________
 - Minimalna poprawka: __________
-- Czy wynik po naprawie wrócił w pobliże baseline? __________
+- Czy wynik po naprawie wrócił w pobliże wariantu bazowego? __________
 
 ---
 
 # Wnioski
 
-1. **Tracking i środowisko:** __________
-2. **Raycast i placement:** __________
+1. **Śledzenie i środowisko:** __________
+2. **Rzutowanie promienia i umieszczanie:** __________
 3. **Kotwica / dryf:** __________
 4. **Rejestracja O–X:** __________
 5. **Najważniejsza sygnatura błędu:** __________

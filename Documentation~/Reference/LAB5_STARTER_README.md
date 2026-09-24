@@ -38,7 +38,7 @@ Assets/Scripts/PerformanceBenchmark.cs (z Lab 1, adapt.)
 
 ## Skrypty do pobrania
 
-Benchmark z Lab 1 — tylko zmień nazwę:
+Pomiar porównawczy z Laboratorium 1 — zmień jedynie nazwę:
 ```
 LAB05_BENCHMARK fps=... ms=... seed=...
 ```

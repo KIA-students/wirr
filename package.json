@@ -1,8 +1,8 @@
 {
   "name": "pl.prz.kia.wirr",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "displayName": "WiRR Course Toolkit",
-  "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i Rozszerzona Rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera interaktywne checklisty zadań dla punktów kontrolnych 3.0–5.0, generowane prefaby dydaktyczne, teksturowane zestawy Grid, bibliotekę materiałów PBR, dziewięć środowisk HDRI z narzędziem skybox, pięć gotowych demonstratorów XR z logiką head-parallax, gaze, distant interaction, diegetic UI i world-scale, zestaw Mixed Reality z provider-neutralnymi prefabami dla kamery, dłoni, ludzi, depth/spatial mesh i ścian oraz wbudowaną instrukcją implementacji z generatorami adapterów, zestaw Mobile AR na smartfon z tap placement, image tracking, ruler, light estimation i surface painting, dodatkowy model Unitree G1 EDU z animacjami, demonstratory ruchu/fizyki/dźwięku oraz wbudowaną instrukcję budowania i instalowania aplikacji na PC, smartfonie z Androidem i Meta Quest 3. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
+  "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i rozszerzona rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera interaktywne listy zadań dla punktów kontrolnych 3.0–5.0, generowane prefaby dydaktyczne, teksturowane zestawy Grid, bibliotekę materiałów PBR, dziewięć środowisk HDRI z narzędziem skybox, pięć demonstratorów XR, pięć demonstratorów Mixed Reality z adapterami niezależnymi od dostawcy danych oraz pięć demonstratorów Mobile AR na smartfon z integracją AR Foundation. Pakiet zawiera także model Unitree G1 EDU z animacjami, demonstratory ruchu, fizyki i dźwięku oraz wbudowane instrukcje budowania i instalowania aplikacji na PC, smartfonie z Androidem i Meta Quest 3. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
   "unity": "6000.6",
   "documentationUrl": "https://kia-students.github.io/wirr/",
   "changelogUrl": "https://github.com/KIA-students/wirr/blob/main/CHANGELOG.md",
@@ -27,12 +27,12 @@
     },
     {
       "displayName": "Laboratorium 03: Rejestracja i kotwice AR",
-      "description": "Rejestracja obiektów w przestrzeni i ocena stabilności AR. Etapy kluczowe: 3.0: śledzenie i detekcja płaszczyzn; 3.5: raycast i skala 1:1; 4.0: kotwica i pomiar dryfu; 4.5: rejestracja dwupunktowa i analiza błędu; 5.0: kontrolowany błąd, test hipotez H1/H2 i diagnoza końcowa.",
+      "description": "Rejestracja obiektów w przestrzeni i ocena stabilności AR. Etapy kluczowe: 3.0: śledzenie i detekcja płaszczyzn; 3.5: rzutowanie promienia i skala 1:1; 4.0: kotwica i pomiar dryfu; 4.5: rejestracja dwupunktowa i analiza błędu; 5.0: kontrolowany błąd, test hipotez H1/H2 i diagnoza końcowa.",
       "path": "Samples~/Lab03"
     },
     {
       "displayName": "Laboratorium 04: Rozumienie sceny i mieszanie rzeczywistości",
-      "description": "Praca z informacją o głębi i łączeniem obiektów rzeczywistych z wirtualnymi. Etapy kluczowe: 3.0: API głębi (Depth API) i diagnostyka; 3.5: okluzja środowiskowa; 4.0: raycast z użyciem danych głębi i błąd odległości; 4.5: estymacja oświetlenia; 5.0: kontrolowany błąd, test rozstrzygający, minimalna poprawka i diagnoza.",
+      "description": "Praca z informacją o głębi i łączeniem obiektów rzeczywistych z wirtualnymi. Etapy kluczowe: 3.0: API głębi (Depth API) i diagnostyka; 3.5: okluzja środowiskowa; 4.0: rzutowanie promienia z użyciem danych głębi i błąd odległości; 4.5: estymacja oświetlenia; 5.0: kontrolowany błąd, test rozstrzygający, minimalna poprawka i diagnoza.",
       "path": "Samples~/Lab04"
     },
     {
@@ -42,7 +42,7 @@
     },
     {
       "displayName": "Laboratorium 06: Bliźniak cyfrowy ROS 2 + Gazebo",
-      "description": "Budowa i walidacja prostego bliźniaka cyfrowego robota. Etapy kluczowe: 3.0: źródło symulacji LOCAL/LAN/WEBSIM i przepływ Gazebo→ROS 2→Unity; 3.5: zgodność stanu przegubów; 4.0: opóźnienie, zmienność transmisji (jitter) i bufor interpolacji; 4.5: utrata danych, stan STALE i przywracanie połączenia; 5.0: błąd synchronizacji oraz poprawny powrót STALE→LIVE.",
+      "description": "Budowa i walidacja prostego bliźniaka cyfrowego robota. Etapy kluczowe: 3.0: źródło symulacji LOCAL/LAN/WEBSIM i przepływ Gazebo→ROS 2→Unity; 3.5: zgodność stanu przegubów; 4.0: opóźnienie, zmienność opóźnienia transmisji (jitter) i bufor interpolacji; 4.5: utrata danych, stan STALE i przywracanie połączenia; 5.0: błąd synchronizacji oraz poprawny powrót STALE→LIVE.",
       "path": "Samples~/Lab06"
     },
     {

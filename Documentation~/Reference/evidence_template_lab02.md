@@ -1,4 +1,4 @@
-# Laboratorium 2 — Evidence/raport 
+# Laboratorium 2 — raport wykonania 
 
 ## Identyfikacja pary
 - Numer indeksu student 1: ___________
@@ -28,7 +28,7 @@
 | Teleportation Area | Promień wskazuje dozwoloną powierzchnię | PASS/FAIL |
 | Teleportation Anchor | Kotwica ustawiona przed stanowiskiem | PASS/FAIL |
 | Snap Turn | Obrót skokowy = 30° | PASS/FAIL |
-| No Continuous Turn | Brak płynnego obrotu (w Checkpoint 3.0) | PASS/FAIL |
+| Bez płynnego obrotu (`Continuous Turn`) | Brak płynnego obrotu (w punkcie kontrolnym 3.0) | PASS/FAIL |
 
 ---
 
@@ -80,7 +80,7 @@
 ## UI — Sprzężenie zwrotne
 
 ### Wizualne
-- [ ] Hover zmienia kolor przycisku
+- [ ] Stan wskazania (`Hover`) zmienia kolor przycisku
 - [ ] Select zmienia kolor modułu
 - [ ] Status panel zmienia się: gotowy → montaż → alarm → ukończono
 
