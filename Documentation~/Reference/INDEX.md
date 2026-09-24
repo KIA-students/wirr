@@ -17,6 +17,8 @@
 └── starter-files/
     ├── 📄 QUICK_START.md                ← CZYTAJ DRUGIE
     ├── 📄 REPOSITORY_SETUP.md
+    ├── 📄 BUILD_AND_DEPLOY.md
+    ├── 📄 EXTRA_ASSETS.md
     ├── 📄 INSTRUCTOR_GUIDE.md
     ├── 📄 FAQ.md
     ├── 📄 GRADING_MATRIX.md
@@ -113,6 +115,8 @@
 - Pytanie techniczne? → FAQ.md
 - Nie wiem co to znaczy? → GLOSSARY.md
 - Jak Git? → REPOSITORY_SETUP.md
+- Jak zbudować aplikację PC/Android/Quest? → BUILD_AND_DEPLOY.md
+- Do czego służą dodatkowe prefaby, materiały i HDRI? → EXTRA_ASSETS.md
 - Jak oceniam? → GRADING_MATRIX.md
 
 **Dla prowadzącego:**
