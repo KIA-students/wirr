@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- dodano zestaw `Mixed Reality Showcase` z pięcioma prefabami: `MR_CameraWindow`, `MR_HandAura`, `MR_PeopleAwareness`, `MR_SpatialSurfaceScanner` i `MR_WallPortal`;
+- `WiRRCameraFeedMixer` obsługuje `WebCamTexture`, zewnętrzną `Texture`, mirrorowanie obrazu i kontrolowane uruchamianie/zatrzymywanie kamery;
+- `WiRRHandAura` przyjmuje pozycję nadgarstka oraz pięciu opuszków, wizualizuje śledzoną dłoń i wyznacza `Pinch01` z odległości kciuk–wskazujący;
+- `WiRRPeopleAwareness` wizualizuje anonimowe pozycje osób i strefę bliskości bez danych identyfikacyjnych lub biometrycznych;
+- `WiRRSpatialSurfaceScanner` przyjmuje próbki depth/spatial mesh wraz z normalnymi i ma raycastowy fallback do testów w Editorze;
+- `WiRRWallAnchor` kotwi wirtualną zawartość do płaszczyzny ściany i skaluje ją do rozmiaru powierzchni; fallback `TryAnchorFromViewerRay()` działa na colliderach sceny;
+- dodano `MIXED_REALITY_SHOWCASE.md` z opisem adapterów dla kamery, hand trackingu, detekcji ludzi, depth/spatial mesh i Scene Understanding oraz zasadami minimalizacji danych;
+
 - dodano zestaw `XR Showcase` z pięcioma gotowymi demonstratorami przestrzennymi: `XR_ParallaxPortal`, `XR_GazeBloom`, `XR_TelekinesisOrb`, `XR_DiegeticHUD` i `XR_WorldScaleTotem`;
 - każdy demonstrator ma przypisany własny komponent Runtime i działa w Play Mode bez zależności od XRI;
 - `WiRRHeadParallax` implementuje kalibrowaną względem początkowej pozycji głowy paralaksę 6DoF i udostępnia `Recenter()`;

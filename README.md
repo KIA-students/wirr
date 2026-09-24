@@ -31,6 +31,7 @@ Pakiet zawiera:
 - **Unitree G1 EDU**: dodatkowy model humanoidalnego robota z przykładowymi animacjami, importowany z `RoboAnimation.unitypackage`;
 - **HDRI i skybox**: dziewięć środowisk HDR dostępnych po instalacji UPM, z automatycznym tworzeniem materiału `Skybox/Panoramic`;
 - **XR Showcase**: pięć gotowych efektów przestrzennych z własną logiką Runtime: portal paralaksy 6DoF, Gaze Bloom, Telekinesis Orb, Diegetic HUD i World Scale Totem;
+- **Mixed Reality Showcase**: pięć prefabów łączących warstwę wirtualną z kamerą, dłońmi, ludźmi, depth/spatial mesh i wykrytymi ścianami;
 - **Build & Deploy**: instrukcja wewnątrz Unity dla Windows PC, smartfona z Androidem i Meta Quest 3, razem z ADB i Build Profiles.
 
 ## Instalacja
@@ -145,6 +146,18 @@ W sekcji **Scena i pomiary → Efekty charakterystyczne dla XR** dostępnych jes
 - **XR_WorldScaleTotem** + `WiRRProximityScale` — przejście miniatura → room-scale w funkcji odległości; `SetExternalFactor()` umożliwia sterowanie gestem, suwakiem lub kontrolerem.
 
 Zestaw jest przeznaczony do obserwacji zjawisk typowych dla XR, eksperymentów HCI i rozbudowy przez studentów. Nie zastępuje ocenianych zadań XRI. Szczegóły: `Documentation~/Reference/XR_SHOWCASE.md`.
+
+## Mixed Reality Showcase — rzeczywistość jako część sceny
+
+W sekcji **Scena i pomiary → Mixed Reality: świat rzeczywisty + wirtualny** znajduje się pięć kolejnych prefabów. Ich logika jest provider-neutral: mogą działać z fallbackiem w Editorze, ale mają jawne API wejściowe dla realnych sensorów i SDK.
+
+- **MR_CameraWindow** + `WiRRCameraFeedMixer` — obraz z `WebCamTexture` albo zewnętrznej `Texture` z wirtualnym reticle; użyteczne do nakładania grafiki na obraz rzeczywisty;
+- **MR_HandAura** + `WiRRHandAura` — holograficzne markery nadgarstka i pięciu opuszków, linie palców oraz `Pinch01`; prawdziwy hand tracker przekazuje dane przez `SetHandPose(...)`;
+- **MR_PeopleAwareness** + `WiRRPeopleAwareness` — anonimowe markery i strefy wokół wykrytych osób; komponent potrzebuje tylko pozycji w świecie, bez identyfikacji twarzy;
+- **MR_SpatialSurfaceScanner** + `WiRRSpatialSurfaceScanner` — dynamiczna wizualizacja próbek depth/spatial mesh; bez zewnętrznego depth API skanuje collidery raycastami;
+- **MR_WallPortal** + `WiRRWallAnchor` — wirtualny portal dopasowywany do wykrytej ściany przez `SetWallPlane(center, normal, size)`; zawartość za ścianą ma dodatkowo head-coupled parallax.
+
+Pełny opis API, fallbacków, prywatności i scenariuszy integracji znajduje się w `Documentation~/Reference/MIXED_REALITY_SHOWCASE.md`.
 
 ## Dodatkowy model Unitree G1 EDU
 

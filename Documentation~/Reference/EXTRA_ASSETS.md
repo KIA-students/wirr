@@ -90,6 +90,18 @@ Każdy komponent ma publiczne metody przeznaczone do późniejszego podłączeni
 
 Szczegółowy opis działania, API oraz propozycje eksperymentów znajdują się w `Documentation~/Reference/XR_SHOWCASE.md`.
 
+## Mixed Reality: realne otoczenie jako część sceny
+
+Drugi zestaw pięciu demonstratorów pokazuje nie tylko wirtualne efekty XR, ale bezpośrednie łączenie danych z rzeczywistego świata z grafiką Unity:
+
+- **MR_CameraWindow** — obraz z kamery lub zewnętrznej tekstury z wirtualnym reticle; `WiRRCameraFeedMixer` może korzystać z `WebCamTexture` albo `SetExternalTexture(Texture)`;
+- **MR_HandAura** — wirtualne markery nadgarstka i opuszków nakładane na śledzoną dłoń; `WiRRHandAura` wylicza również `Pinch01`;
+- **MR_PeopleAwareness** — anonimowe markery i strefy wokół wykrytych osób; `WiRRPeopleAwareness` przyjmuje wyłącznie pozycje w świecie;
+- **MR_SpatialSurfaceScanner** — wizualizacja punktów z depth/spatial mesh, z raycastowym fallbackiem do testów w Editorze;
+- **MR_WallPortal** — portal i wirtualna głębia kotwione do wykrytej ściany przez `WiRRWallAnchor` i `WiRRHeadParallax`.
+
+Każdy prefab ma gotową logikę Runtime i jednocześnie jawny punkt integracji z konkretnym providerem. Szczegółowy opis znajduje się w `Documentation~/Reference/MIXED_REALITY_SHOWCASE.md`.
+
 ## Unitree G1 EDU
 
 `RoboAnimation.unitypackage` zawiera model 3D humanoidalnego robota Unitree G1 EDU oraz przykładowe animacje.
