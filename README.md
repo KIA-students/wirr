@@ -27,7 +27,8 @@ Pakiet zawiera:
 - **WebSim**: połączenie Unity ze środowiskiem ROS 2/Gazebo przez rosbridge;
 - **Raporty WiRR**: formularz, automatyczny zapis, tabele pomiarowe i raport JSON;
 - **Wysyłanie przez Git**: wysłanie raportu do repozytorium;
-- **Walidacja raportu w CI**: techniczną kontrolę integralności raportu.
+- **Walidacja raportu w CI**: techniczną kontrolę integralności raportu;
+- **Unitree G1 EDU**: dodatkowy model humanoidalnego robota z przykładowymi animacjami, importowany z `RoboAnimation.unitypackage`.
 
 ## Instalacja
 
@@ -41,7 +42,7 @@ Repozytorium studenckie:
 https://github.com/KIA-students/wirr.git
 ```
 
-Pakiet znajduje się w katalogu głównym repozytorium. Po instalacji w menu Unity pojawi się **WiRR**. Wymagana wersja to Unity **6000.6.x** lub nowsza zgodna wersja 6000.6.
+Pakiet znajduje się w katalogu głównym repozytorium. Po pierwszej instalacji danej wersji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wymagana wersja to Unity **6000.6.x** lub nowsza zgodna wersja 6000.6.
 
 ## Struktura repozytorium
 
@@ -129,6 +130,17 @@ Gotowe prefaby:
 Pojazd udostępnia metodę `SetExternalInput(Vector2 steeringAndThrottle, float brake)`, dlatego student może zastąpić wejście z klawiatury własnym panelem UI, kontrolerem XR albo innym źródłem sygnału bez modyfikacji fizyki pojazdu.
 
 Ruchome platformy **nie mają automatycznie skonfigurowanego XRI Teleportation Area**. W prefabie znajduje się jedynie `TeleportAreaPlaceholder`, aby student sam wykonał część ćwiczenia dotyczącą teleportacji i warstw interakcji.
+
+## Dodatkowy model Unitree G1 EDU
+
+W katalogu głównym pakietu znajduje się `RoboAnimation.unitypackage`. Zawiera model 3D humanoidalnego robota **Unitree G1 EDU** oraz przykładowe klipy animacji. W panelu **Scena i pomiary → Dodatkowe modele 3D** można otworzyć standardowy import Unity przyciskiem **Importuj Unitree G1 EDU + animacje**.
+
+Model jest opcjonalnym zasobem uzupełniającym:
+- w **Lab 05** może służyć jako złożony, wieloczęściowy model porównawczy do audytu kosztu renderowania, pamięci, materiałów i LOD;
+- w **Lab 06** może służyć jako dodatkowa reprezentacja wizualna robota podczas pracy z architekturą bliźniaka cyfrowego;
+- w **Lab 07** może być użyty jako realistyczne obciążenie sceny w testach wydajności, stabilności i regresji.
+
+Przykładowe animacje z pakietu służą do demonstracji ruchu. Nie są źródłem `JointState`, nie zastępują pomiarów ROS 2/WebSim i nie stanowią referencji poprawności mapowania przegubów.
 
 ## Strona kursu (GitHub Pages)
 

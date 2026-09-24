@@ -191,6 +191,7 @@ SOURCE -> __________ -> __________ -> __________ -> Unity
 - zmienna: __________
 - warunki stałe: __________
 - miejsce pomiaru: Editor / Build: __________
+- czas importu wybranego wariantu zasobu [s]: __________
 
 | Warunek | Próba | mean ms | median ms | p95 ms | FPS z mediany | Triangles | Renderers | Material slots | CPU [ms] | GPU [ms] | Draw calls / batches | Pamięć |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|

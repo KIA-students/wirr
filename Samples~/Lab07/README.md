@@ -12,6 +12,7 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 6. Przygotuj wersję systemu przeznaczoną do testów i nie zmieniaj kryteriów po zobaczeniu wyniku.
 7. Otwórz Unity Test Framework i formularz raportu Lab07.
 8. Ustal sposób przechowywania dowodów: zrzuty, logi, wyniki pomiarów i identyfikatory testów.
+9. Opcjonalnie zaimportuj **Unitree G1 EDU + animacje** jako realistyczny dodatkowy obiekt obciążający scenę; jeśli go używasz, zachowaj identyczny stan modelu i animacji we wszystkich porównywanych warunkach.
 
 ## Zadania krok po kroku
 
@@ -73,6 +74,7 @@ Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dy
 1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
 2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab07/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
 3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
+4. **Importuj Unitree G1 EDU + animacje** — pozwala użyć humanoidalnego modelu jako stałego obciążenia sceny w testach wydajności, stabilności i regresji.
 
 Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
 
