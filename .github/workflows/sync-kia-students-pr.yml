@@ -236,8 +236,52 @@ jobs:
             exit 1
           fi
 
-          echo "Czekam na kontrole PR #${pr_number}."
-          gh pr checks "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --watch --interval 5
+          pr_head_sha="$(gh api "repos/${UPSTREAM_REPOSITORY}/pulls/${pr_number}" --jq '.head.sha')"
+          verified=false
+
+          for attempt in $(seq 1 60); do
+            run_json="$(
+              gh api --method GET "repos/${UPSTREAM_REPOSITORY}/actions/runs" \
+                -f event=pull_request \
+                -f head_sha="${pr_head_sha}" \
+                -f per_page=20
+            )"
+
+            run_id="$(printf '%s' "${run_json}" | jq -r '.workflow_runs[] | select(.name == "Kontrola publicznej zawartości") | .id' | head -n1)"
+            status="$(printf '%s' "${run_json}" | jq -r '.workflow_runs[] | select(.name == "Kontrola publicznej zawartości") | .status' | head -n1)"
+            conclusion="$(printf '%s' "${run_json}" | jq -r '.workflow_runs[] | select(.name == "Kontrola publicznej zawartości") | (.conclusion // "")' | head -n1)"
+
+            if [ -z "${run_id}" ]; then
+              echo "Kontrola publiczna jeszcze się nie pojawiła (${attempt}/60)."
+              sleep 5
+              continue
+            fi
+
+            if [ "${conclusion}" = "action_required" ]; then
+              echo "Kontrola #${run_id} wymaga zatwierdzenia; zatwierdzam i czekam na wykonanie."
+              gh api --method POST "repos/${UPSTREAM_REPOSITORY}/actions/runs/${run_id}/approve"
+              sleep 5
+              continue
+            fi
+
+            if [ "${status}" = "completed" ]; then
+              if [ "${conclusion}" = "success" ]; then
+                verified=true
+                break
+              fi
+              echo "::error::Kontrola publiczna zakończyła się wynikiem: ${conclusion}"
+              exit 1
+            fi
+
+            echo "Kontrola #${run_id}: ${status} (${attempt}/60)."
+            sleep 5
+          done
+
+          if [ "${verified}" != "true" ]; then
+            echo "::error::Nie uzyskano zielonej kontroli publicznej w wyznaczonym czasie."
+            exit 1
+          fi
+
           gh pr merge "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --merge
 
           {
