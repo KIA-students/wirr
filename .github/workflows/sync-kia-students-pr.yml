@@ -254,7 +254,7 @@ jobs:
           # Forkowe runy GitHub Actions mogą mieć action_required, gdy gałąź
           # synchronizacji aktualizuje github-actions[bot]; nie są wymaganym
           # statusem ochrony main.
-          gh pr merge "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --merge
+          gh pr merge "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --merge --admin
 
           {
             echo
