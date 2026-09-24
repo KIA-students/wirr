@@ -1,38 +1,21 @@
 # Changelog
 
-## Unreleased
+## 1.0.0 (2026-09-24)
 
-- dodano zestaw `Mobile AR Showcase` z pięcioma prefabami przeznaczonymi na smartfon: `AR_TapPlacement`, `AR_ImageMarkerPortal`, `AR_WorldRuler`, `AR_LightMatchObject` i `AR_SurfacePainter`;
-- `WiRRMobileARTapPlacement` obsługuje reticle, tap-to-place, zewnętrzny hit plane/depth oraz fallback `Physics.Raycast` do testów w Editorze;
-- `WiRRMobileARImageAnchor` przyjmuje pose i fizyczny rozmiar obrazu referencyjnego oraz płynnie skaluje/zakotwicza zawartość;
-- `WiRRMobileARRuler` implementuje dwupunktowy pomiar w metrach, linię, podziałkę oraz `DistanceMeters` dostępne dla własnego UI;
-- `WiRRMobileARLightMatch` przyjmuje znormalizowaną jasność, kolor i kierunek głównego światła i dopasowuje wirtualne oświetlenie;
-- `WiRRMobileARSurfacePainter` umożliwia rysowanie po realnych powierzchniach przez drag i używa puli 120 markerów bez runtime instantiate;
-- dodano pięć starterów integracji AR Foundation dla raycastu, image tracking, ruler, light estimation i surface painter; startery trafiają do projektu studenta i nie są automatycznie nadpisywane;
-- dodano okno `WiRR → Pomoc → Mobile AR: telefon` oraz dokument `MOBILE_AR_SHOWCASE.md` z procedurą uruchomienia, walidacji i propozycjami dalszej rozbudowy;
-
-- dodano zestaw `Mixed Reality Showcase` z pięcioma prefabami: `MR_CameraWindow`, `MR_HandAura`, `MR_PeopleAwareness`, `MR_SpatialSurfaceScanner` i `MR_WallPortal`;
-- `WiRRCameraFeedMixer` obsługuje `WebCamTexture`, zewnętrzną `Texture`, mirrorowanie obrazu i kontrolowane uruchamianie/zatrzymywanie kamery;
-- `WiRRHandAura` przyjmuje pozycję nadgarstka oraz pięciu opuszków, wizualizuje śledzoną dłoń i wyznacza `Pinch01` z odległości kciuk–wskazujący;
-- `WiRRPeopleAwareness` wizualizuje anonimowe pozycje osób i strefę bliskości bez danych identyfikacyjnych lub biometrycznych;
-- `WiRRSpatialSurfaceScanner` przyjmuje próbki depth/spatial mesh wraz z normalnymi i ma raycastowy fallback do testów w Editorze;
-- `WiRRWallAnchor` kotwi wirtualną zawartość do płaszczyzny ściany i skaluje ją do rozmiaru powierzchni; fallback `TryAnchorFromViewerRay()` działa na colliderach sceny;
-- dodano `MIXED_REALITY_SHOWCASE.md` z opisem adapterów dla kamery, hand trackingu, detekcji ludzi, depth/spatial mesh i Scene Understanding oraz zasadami minimalizacji danych;
-- dodano okno `WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa` z osobnymi zakładkami Camera/Hand/People/Spatial/Wall i dokładnym przebiegiem implementacji;
-- dodano generator pięciu starterów adapterów do `Assets/WiRR/LabXX/Scripts/MixedRealityAdapters`; pliki należą do projektu studenta, kompilują się bez vendor SDK i nie są automatycznie nadpisywane;
-- dodano `MIXED_REALITY_IMPLEMENTATION.md` opisujący provider → adapter → Runtime WiRR, konwersję układów współrzędnych, lifecycle trackingu, walidację i procedury A/B;
-- każdy demonstrator MR otrzymał listę dalszych modyfikacji w trzech poziomach trudności oraz przykładowe metryki do obiektywnej oceny własnej rozbudowy;
-- Course Toolkit bezpośrednio zachęca do zastąpienia fallbacku rzeczywistym providerem i wykonania jednej mierzalnej modyfikacji zamiast traktowania prefabu jako rozwiązania końcowego;
-
-- dodano zestaw `XR Showcase` z pięcioma gotowymi demonstratorami przestrzennymi: `XR_ParallaxPortal`, `XR_GazeBloom`, `XR_TelekinesisOrb`, `XR_DiegeticHUD` i `XR_WorldScaleTotem`;
-- każdy demonstrator ma przypisany własny komponent Runtime i działa w Play Mode bez zależności od XRI;
-- `WiRRHeadParallax` implementuje kalibrowaną względem początkowej pozycji głowy paralaksę 6DoF i udostępnia `Recenter()`;
-- `WiRRGazeBloom` realizuje reakcję na head-gaze oraz wejście `SetExternalActivation()` dla eye trackingu, XRI hover lub hand trackingu;
-- `WiRRTelekinesisOrb` implementuje gaze dwell, distant interaction, płynne przyciąganie, wiązkę i powrót obiektu; udostępnia `BeginHold()`, `Release()` i `ToggleHold()`;
-- `WiRRHeadFollower` demonstruje wygładzone body/head-referenced UI oraz przełączanie `Pin()` / `Unpin()` do trybu world-locked;
-- `WiRRProximityScale` demonstruje embodied scale przez zmianę miniatura → room-scale i może być sterowany zewnętrznie przez `SetExternalFactor()`;
-- Course Toolkit pozwala dodać każdy efekt osobno, cały zestaw albo usunąć demonstratory XR z aktywnej sceny;
-- dodano dokument `XR_SHOWCASE.md` z opisem logiki, API integracyjnego i propozycjami eksperymentów.
+- dodano pięć demonstratorów XR: `XR_ParallaxPortal`, `XR_GazeBloom`, `XR_TelekinesisOrb`, `XR_DiegeticHUD` i `XR_WorldScaleTotem`, każdy z własnym komponentem warstwy Runtime i publicznym API integracyjnym;
+- demonstratory XR obejmują paralaksę zależną od ruchu głowy, reakcję na uwagę użytkownika, interakcję na odległość, przestrzenny interfejs użytkownika i zmianę postrzeganej skali;
+- dodano pięć demonstratorów Mixed Reality: `MR_CameraWindow`, `MR_HandAura`, `MR_PeopleAwareness`, `MR_SpatialSurfaceScanner` i `MR_WallPortal`;
+- warstwa Mixed Reality pozostaje niezależna od konkretnego SDK; rzeczywiste dane z kamery, śledzenia dłoni, detekcji ludzi, mapy głębi, siatki przestrzennej lub Scene Understanding są przekazywane przez małe adaptery;
+- dodano okno `WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa`, generator pięciu starterów adapterów oraz dokument `MIXED_REALITY_IMPLEMENTATION.md` z procedurami walidacji i propozycjami mierzalnych eksperymentów A/B;
+- dodano pięć demonstratorów Mobile AR na smartfon: `AR_TapPlacement`, `AR_ImageMarkerPortal`, `AR_WorldRuler`, `AR_LightMatchObject` i `AR_SurfacePainter`;
+- komponenty Mobile AR obsługują odpowiednio umieszczanie obiektów przez dotknięcie ekranu, śledzenie obrazów, pomiar odległości, estymację oświetlenia i rysowanie po rzeczywistych powierzchniach;
+- dodano generator pięciu starterów integracji AR Foundation dla `ARRaycastManager`, `ARTrackedImageManager` i `ARCameraManager`; pliki są tworzone w projekcie studenta i nie są automatycznie nadpisywane;
+- tryby zastępcze Mobile AR działają wyłącznie w Edytorze Unity, dzięki czemu build Android nie może pomylić danych symulowanych z rzeczywistym śledzeniem;
+- rozbudowano `WiRR Course Toolkit` o bezpośredni dostęp do wszystkich zestawów XR, MR i Mobile AR oraz powiązanych instrukcji i starterów kodu;
+- przeprowadzono pełny audyt treści studenckich: README, dokumentacji referencyjnej, instrukcji laboratoriów, szablonów raportów i komunikatów Unity; opisy ujednolicono do poprawnej polszczyzny, pozostawiając angielskie nazwy tylko jako identyfikatory API, klas, komponentów lub poleceń interfejsu;
+- ujednolicono terminologię dydaktyczną: „punkt kontrolny”, „wariant bazowy”, „raport wykonania”, „pomiar porównawczy”, „wąskie gardło”, „rzutowanie promienia”, „śledzenie” i „dane głębi”;
+- rozszerzono walidację wydania o kontrolę kompletności pięciu demonstratorów XR, pięciu demonstratorów Mixed Reality, pięciu demonstratorów Mobile AR, ich publicznego API, dokumentacji oraz generatorów adapterów;
+- wydanie `1.0.0` jest pierwszym stabilnym wydaniem obejmującym cały aktualny zakres kursu: siedem laboratoriów, XR, Mixed Reality, Mobile AR, HDRI, dodatkowe zasoby 3D, WebSim, raportowanie i procedury budowania aplikacji.
 
 ## 0.9.0 (2026-09-24)
 

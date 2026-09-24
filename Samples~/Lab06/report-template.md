@@ -294,7 +294,7 @@ Opisz, co działo się równocześnie z `/clock`, `/joint_states` i modelem Unit
 
 ## 12. Eksperyment 5 — wariant `v5 = ...`
 
-### Baseline
+### Wariant bazowy
 
 ................................................................................
 

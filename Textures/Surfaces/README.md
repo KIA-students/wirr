@@ -6,8 +6,8 @@ Families: AcousticFoam003, Concrete032, DiamondPlate005D, Fabric023, Fabric066, 
 
 ## Proponowane zastosowania
 
-- AcousticFoam / Fabric — materiały niemetaliczne, roughness i normal mapy; dobre do porównania subtelnego reliefu.
-- Concrete / PaintedWood / WoodFloor — tiling, skala UV, mipmapy i obserwacja powierzchni pod małym kątem.
+- AcousticFoam / Fabric — materiały niemetaliczne, mapa chropowatości (`roughness`) i mapa normalnych; dobre do porównania subtelnego reliefu.
+- Concrete / PaintedWood / WoodFloor — kafelkowanie tekstury (`tiling`), skala UV, mipmapy i obserwacja powierzchni pod małym kątem.
 - DiamondPlate / Metal004 / Metal044A — metalness, odbicia środowiskowe i wpływ HDRI.
 - Sign — opacity i czytelność powierzchni oznaczeniowych.
 - Grass — materiał organiczny i ocena powtarzalności tekstury.

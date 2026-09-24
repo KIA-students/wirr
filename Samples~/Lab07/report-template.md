@@ -46,7 +46,7 @@ Wpisz kryteria **przed** wykonaniem pomiarów.
 
 | Lab | Funkcja / kontrakt | Procedura | Oczekiwany wynik | Wynik rzeczywisty | Status | Dowód |
 |---:|---|---|---|---|---|---|
-| 1 | XR Origin, skala, osie, baseline |  |  |  |  |  |
+| 1 | XR Origin, skala, osie, wariant bazowy |  |  |  |  |  |
 | 2 | chwyt, promień, UI, lokomocja |  |  |  |  |  |
 | 3 | rejestracja AR i błąd rejestracji |  |  |  |  |  |
 | 4 | mieszanie rzeczywistości / okluzja |  |  |  |  |  |

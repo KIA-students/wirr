@@ -1,4 +1,4 @@
-# Laboratorium 4 — Evidence/Raport Końcowy
+# Laboratorium 4 — raport końcowy
 
 ## Identyfikacja pary
 - Numer indeksu student 1: ___________
@@ -8,9 +8,9 @@
 
 ---
 
-## Depth API i okluzja
+## API głębi (Depth API) i okluzja
 
-- [ ] Depth API aktywna i zwraca dane
+- [ ] API głębi (Depth API) jest aktywne i zwraca dane
 - [ ] Model jest okluzowany za rzeczywistymi przeszkodami
 - [ ] Przesłonięcie dłonią powoduje zniknięcie modelu
 

@@ -15,7 +15,7 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 
 ## Zadania krok po kroku
 
-### 3.0: Tracking i płaszczyzny
+### 3.0: Śledzenie i płaszczyzny
 
 1. Uruchom aplikację na urządzeniu i zmierz czas do SessionTracking.
 2. Zmierz osobno czas do pierwszej użytecznej płaszczyzny.
@@ -24,10 +24,10 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
-### 3.5: Raycast i skala 1:1
+### 3.5: Rzutowanie promienia i skala 1:1
 
 1. Ustaw model w jednostkach metrycznych i zachowaj skalę 1:1.
-2. Umieszczaj model wyłącznie po poprawnym raycast do płaszczyzny.
+2. Umieszczaj model wyłącznie po poprawnym rzucie promienia do płaszczyzny.
 3. Dla A/B/C wykonaj po 10 prób i policz poprawne trafienia.
 4. Zmierz medianę błędu pozycjonowania bez korygowania go skalą modelu.
 
@@ -37,7 +37,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Utwórz kotwicę przy fizycznym punkcie referencyjnym.
 2. Przejdź zadaną ścieżkę, wróć i zmierz odchylenie od znacznika.
-3. Wykonaj trzy powtórzenia baseline oraz serię A/B/C, zapisując tracking.
+3. Wykonaj trzy powtórzenia wariantu bazowego oraz serię A/B/C, zapisując stan śledzenia.
 4. Policz medianę dryfu i określ charakter błędu.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
@@ -53,10 +53,10 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 ### 5.0: Kontrolowany błąd
 
-1. Wykonaj trzy pomiary baseline.
+1. Wykonaj trzy pomiary wariantu bazowego.
 2. Wprowadź błąd v5 i zapisz H1/H2.
 3. Wykonaj test rozstrzygający i trzy pomiary ze stanem błędnym.
-4. Napraw minimalnie, wykonaj trzy pomiary i sprawdź powrót e_med do baseline.
+4. Napraw minimalnie, wykonaj trzy pomiary i sprawdź powrót e_med do poziomu wariantu bazowego.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 

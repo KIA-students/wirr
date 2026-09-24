@@ -90,7 +90,7 @@ SOURCE -> __________ -> __________ -> __________ -> Unity
 
 # Punkt kontrolny 3.0 — format, import i audyt topologii
 
-## Baseline topology audit
+## Audyt topologii — wariant bazowy
 
 | Pole | Wynik |
 |---|---:|
@@ -165,13 +165,13 @@ SOURCE -> __________ -> __________ -> __________ -> Unity
 
 ---
 
-# Punkt kontrolny 4.0 — LOD i benchmark
+# Punkt kontrolny 4.0 — LOD i pomiar wydajności
 
 ## Finalne geometrie LOD
 
 | Model | Rozmiar pliku | Vertices | Triangles | Submesh | Materiały | q05 | qMedian | Uwagi |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| Baseline | | | | | | | | |
+| Wariant bazowy | | | | | | | | |
 | LOD0 | | | | | | | | |
 | LOD1 | | | | | | | | |
 | LOD2 | | | | | | | | |
@@ -190,7 +190,7 @@ SOURCE -> __________ -> __________ -> __________ -> Unity
 - `v3`: ___
 - zmienna: __________
 - warunki stałe: __________
-- miejsce pomiaru: Editor / Build: __________
+- miejsce pomiaru: Edytor / kompilacja: __________
 - czas importu wybranego wariantu zasobu [s]: __________
 
 | Warunek | Próba | mean ms | median ms | p95 ms | FPS z mediany | Triangles | Renderers | Material slots | CPU [ms] | GPU [ms] | Draw calls / batches | Pamięć |
@@ -213,7 +213,7 @@ SOURCE -> __________ -> __________ -> __________ -> Unity
 
 # Punkt kontrolny 4.5 — materiały, draw calls, tekstury i kolizje
 
-## Baseline render / physics
+## Wariant bazowy renderowania i fizyki
 
 - renderers: __________
 - submeshes: __________
@@ -257,18 +257,18 @@ SOURCE -> __________ -> __________ -> __________ -> Unity
 - przewidywanie H2: __________
 - test rozstrzygający: __________
 
-## Baseline → fault → repaired
+## `baseline` (wariant bazowy) → `fault` (usterka) → `repaired` (po naprawie)
 
 | Stan | Wymiar [m] | Vertices | Triangles | Boundary | q05 | Materiały | Hierarchia OK? | median ms | p95 ms | Błąd funkcjonalny | Uwagi |
 |---|---:|---:|---:|---:|---:|---:|---|---:|---:|---|---|
-| baseline | | | | | | | | | | | |
-| fault | | | | | | | | | | | |
-| repaired | | | | | | | | | | | |
+| wariant bazowy | | | | | | | | | | | |
+| usterka | | | | | | | | | | | |
+| po naprawie | | | | | | | | | | | |
 
 - obserwacja rozstrzygająca H1/H2: __________
 - przyczyna: __________
 - minimalna poprawka: __________
-- czy stan repaired wrócił do baseline: tak / częściowo / nie
+- czy stan po naprawie wrócił do poziomu wariantu bazowego: tak / częściowo / nie
 - dlaczego: __________
 
 ---
@@ -277,7 +277,7 @@ SOURCE -> __________ -> __________ -> __________ -> Unity
 
 | Wariant | Vertices | Triangles | Submesh | Materiały | median ms | p95 ms | Draw calls / batches | Pamięć | Najważniejszy kompromis |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Baseline | | | | | | | | | |
+| Wariant bazowy | | | | | | | | | |
 | LOD0 | | | | | | | | | |
 | LOD1 | | | | | | | | | |
 | LOD2 | | | | | | | | | |
@@ -303,7 +303,7 @@ SOURCE -> __________ -> __________ -> __________ -> Unity
 
 # Git
 
-- commit z baseline: __________
+- commit wariantu bazowego: __________
 - commit z LOD: __________
 - commit finalny: __________
 - najwyższy osiągnięty punkt kontrolny: 3.0 / 3.5 / 4.0 / 4.5 / 5.0

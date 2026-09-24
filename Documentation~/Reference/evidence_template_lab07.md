@@ -35,7 +35,7 @@
 
 ---
 
-## Wydajność i performance Benchmark
+## Wydajność i pomiar porównawczy
 
 | Warunek | FPS | CPU [ms] | GPU [ms] | Memory [MB] |
 |---------|-----|----------|----------|-------------|
@@ -78,7 +78,7 @@
 
 ## Zaliczenie kursu
 
-- Checkpoint 3.0 (Smoke + >= 70% funkcjonalnych): ☐ TAK | ☐ NIE
+- Punkt kontrolny 3.0 (test dymny + co najmniej 70% testów funkcjonalnych): ☐ TAK | ☐ NIE
 - Ocena finalna: ☐ 3.0 | ☐ 3.5 | ☐ 4.0 | ☐ 4.5 | ☐ 5.0
 
 ---

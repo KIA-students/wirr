@@ -39,7 +39,7 @@ evidence/lab07.md (template)
 3. Uruchom Play Mode: Smoke Test
 4. Profiler: pomiar wydajności
 5. Przeprowadź scenariusze użytkownika
-6. Wpisz wyniki do evidence/lab07.md
+6. Wpisz wyniki do raportu `evidence/lab07.md`
 
 ---
 
@@ -57,7 +57,7 @@ evidence/lab07.md (template)
 
 ---
 
-## Performance Benchmark (profiler)
+## Pomiar wydajności (Profiler)
 
 ```
 Wariant | FPS | CPU [ms] | GPU [ms] | Memory [MB]
@@ -74,7 +74,7 @@ Stress  | ___ | ___     | ___     | ___
 
 ---
 
-## Evidence/lab07.md
+## Raport `evidence/lab07.md`
 
 ```markdown
 # Lab 7 — Raport Finalny

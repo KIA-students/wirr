@@ -12,7 +12,7 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 6. Przygotuj model CAD i co najmniej dwa alternatywne formaty/ustawienia eksportu.
 7. Opcjonalnie w sekcji **Scena i pomiary → Dodatkowe modele 3D** zaimportuj model **Unitree G1 EDU + animacje** jako dodatkowy, bardziej złożony zasób porównawczy. Nie zastępuje on obowiązkowego modelu CAD.
 8. Utwórz scenę Lab05 i geometrię referencyjną do kontroli skali.
-9. Wszystkie benchmarki wykonuj w tych samych warunkach Editor/Build i na tej samej kamerze.
+9. Wszystkie pomiary porównawcze wykonuj w tych samych warunkach Edytor/kompilacja i na tej samej kamerze.
 
 ## Zadania krok po kroku
 
@@ -34,7 +34,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
-### 4.0: LOD i benchmark
+### 4.0: LOD i pomiar wydajności
 
 1. Skonfiguruj LOD Group i sprawdź przejścia między poziomami.
 2. Zmierz czas importu wybranego wariantu zasobu.
@@ -55,7 +55,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 ### 5.0: Pipeline finalny
 
-1. Wykonaj baseline/fault/repaired dla błędu v5.
+1. Wykonaj stany `baseline` (wariant bazowy), `fault` (usterka) i `repaired` (po naprawie) dla błędu v5.
 2. Porównaj STEP→DCC→FBX/glTF, USD, bezpośrednią siatkę lub inny uzasadniony pipeline.
 3. Wskaż najważniejsze ryzyko wybranego pipeline.
 4. Wybierz finalny model XR i podsumuj kompromis jakość–wydajność–pamięć.

@@ -3,7 +3,7 @@
 ## Co powinieneś pobrać
 
 - ✓ Projekt z Lab 3 (Android AR)
-- ✓ Telefon Android z Depth API
+- ✓ Telefon z Androidem obsługujący API głębi (Depth API)
 
 ### Nowe komponenty
 ```
@@ -23,7 +23,7 @@ Assets/Scripts/LightingController.cs
 ## Checklist
 
 - [ ] Lab 3 zaliczony
-- [ ] Depth API dostępna na telefonie
+- [ ] API głębi (Depth API) dostępne na telefonie
 - [ ] Shader zaimportowany
 - [ ] LightingController.cs przygotowany
 

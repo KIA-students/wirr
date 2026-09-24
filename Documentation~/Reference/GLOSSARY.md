@@ -16,7 +16,7 @@
 
 ## B
 
-**Benchmark** — Pomiar wydajności systemu (FPS, CPU, GPU, Memory).
+**Pomiar porównawczy (benchmark)** — pomiar wydajności systemu (FPS, CPU, GPU, Memory).
 
 **Binary Search** — Metoda debugowania: wyłączaj komponenty jednocześnie (50% w każdej iteracji).
 
@@ -32,7 +32,7 @@
 
 ## C
 
-**Checkpoint** — Punkt kontrolny w ocenianiu (3.0, 3.5, 4.0, 4.5, 5.0).
+**Punkt kontrolny (checkpoint)** — etap kontrolny w ocenianiu (3.0, 3.5, 4.0, 4.5, 5.0).
 
 **Collider** — Komponent fizyki w Unity (Box Collider, Sphere Collider, itp.).
 
@@ -48,9 +48,9 @@
 
 **Debug** — Proces szukania i naprawiania błędów.
 
-**Depth API** — Funkcja AR, która zwraca głębokość (odległość) każdego piksela.
+**API głębi (Depth API)** — funkcja AR, która zwraca głębokość (odległość) każdego piksela.
 
-**Depth Map** — Tekstura pokazująca głębię sceny (Lab 4).
+**Mapa głębi (Depth Map)** — tekstura pokazująca głębię sceny (Lab 4).
 
 **Direct Grab** — Metoda interakcji, gdzie chwytasz obiekt bezpośrednio (Lab 2).
 
@@ -60,11 +60,11 @@
 
 ## E
 
-**Evidence** — Raport ucznia (evidence/lab0X.md).
+**Raport wykonania (evidence)** — raport studenta (evidence/lab0X.md).
 
 **Exit Ticket** — Pytanie na koniec Lab (odpowiedź indywidualna).
 
-**Eye Tracking** — Śledzenie spojrzenia użytkownika (nie ma w tym kursie).
+**Śledzenie wzroku (Eye Tracking)** — śledzenie spojrzenia użytkownika (nie ma w tym kursie).
 
 ---
 
@@ -124,7 +124,7 @@
 
 **Latency** — Opóźnienie między akcją a odpowiedzią (Lab 6, powinno być < 100ms).
 
-**Layer (Unity)** — Warstwa w Unity do organizacji obiektów i filtrowania raycast'ów.
+**Warstwa (`Layer`, Unity)** — warstwa służąca do organizacji obiektów i filtrowania rzutowania promieni.
 
 **Level of Detail (LOD)** — Różne wersje modelu o różnej złożoności (Lab 5).
 
@@ -196,7 +196,7 @@
 
 ## R
 
-**Raycast** — Rzut promienia (do detekcji kolizji i selekcji).
+**Rzutowanie promienia (raycast)** — technika wykrywania kolizji i wskazywania obiektów.
 
 **Ray Interactor** — Komponent XRI do interakcji poprzez promień (Lab 2).
 
@@ -309,7 +309,7 @@
 | LOD | Level of Detail | Lab 5 |
 | MR | Mixed Reality | Lab 4+ |
 | NUI | Natural User Interface | Wszędzie |
-| PR | Pull Request | Git workflow |
+| PR | Żądanie scalenia (Pull Request) | przepływ pracy Git |
 | ROS 2 | Robot Operating System 2 | Lab 6 |
 | UI | User Interface | Lab 2, 7 |
 | UX | User Experience | Lab 7 |

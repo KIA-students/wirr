@@ -3,12 +3,12 @@
 ## Ogólne
 
 ### P1: Czy mogę zaliczyć kurs bez wyższych ocen?
-**Odpowiedź:** Tak. Checkpoint 3.0 na każdym Lab = zaliczenie. Oceny 3.5–5.0 są opcjonalne. Możesz:
+**Odpowiedź:** Tak. punkt kontrolny 3.0 na każdym Lab = zaliczenie. Oceny 3.5–5.0 są opcjonalne. Możesz:
 - Wziąć ocenę 3.0 i przejść do Lab X+1
 - Wrócić na Lab X po zajęciach i spróbować 3.5+
 
 ### P2: Ile czasu zajmie cały kurs?
-**Odpowiedź:** ~12–15 godzin (dla Checkpoint 3.0 na każdym Lab). Jeśli chcesz wyższe oceny, +30–60 min na każdy Lab.
+**Odpowiedź:** Zakres podstawowy odpowiada punktowi kontrolnemu 3.0 na każdym laboratorium; wyższe oceny wymagają wykonania dodatkowych zadań i pomiarów.
 
 ### P3: Czy mogę pracować sam, bez pary?
 **Odpowiedź:** Nie, kurs wymaga pracy w parach. Możesz poprosić prowadzącego o przydzielenie partnera.
@@ -110,16 +110,16 @@ git push
 
 ---
 
-## Ocenianie i checkpointy
+## Ocenianie i punkt kontrolnyy
 
-### P16: Co to jest Checkpoint 3.0?
+### P16: Co to jest punkt kontrolny 3.0?
 **Odpowiedź:** Minimalny poziom kompetencji = zaliczenie. Obejmuje:
 - Smoke test (system startuje)
 - Procedury obowiązkowe (np. benchmarking, pomiary)
 - Diagnoza błędu
-- Evidence/lab0X.md wypełniony
+- raport `evidence/lab0X.md` wypełniony
 
-### P17: Jeśli nie przejdę Checkpoint 3.0?
+### P17: Jeśli nie przejdę punkt kontrolny 3.0?
 **Odpowiedź:** Możesz:
 - Poprawić do następnych zajęć (na koniec kursu)
 - Pracować z prowadzącym na dodatkowych godzinach
@@ -175,7 +175,7 @@ git push
 
 ### Lab 4
 
-**P27: "Depth API zwraca null"**
+**P27: „API głębi (Depth API) zwraca `null`”**
 → Sprawdzenia:
 ```
 ✓ Urządzenie obsługuje Depth API
@@ -224,7 +224,7 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 ### Lab 7
 
 **P33: "Matryca testów — wiele FAIL**
-→ Może być, jeśli Lab X były niekompletne. Jeśli >= 70% PASS, to Checkpoint 3.0 przechodzi.
+→ Może być, jeśli Lab X były niekompletne. Jeśli co najmniej 70% testów ma wynik pozytywny, to punkt kontrolny 3.0 przechodzi.
 
 **P34: "FPS pada w stress teście"**
 → Przyczyny (w kolejności):
@@ -244,7 +244,7 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 4. **Przyczyna:** Co odkryłeś?
 5. **Wynik:** Czy naprawiłeś?
 
-### P36: Co wpisać w evidence/lab0X.md?
+### P36: Co wpisać w raporcie `evidence/lab0X.md`?
 **Odpowiedź:** Użyj szablonu (evidence_template_lab0X.md). Zawiera:
 - Numery indeksów
 - Tabelę pomiarów
@@ -284,7 +284,7 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 
 **Pamiętaj:**
 - Kurs nie karze Ciebie, ale uczy Cię
-- Checkpoint 3.0 jest całkowicie osiągalny
+- punkt kontrolny 3.0 jest całkowicie osiągalny
 - Jeśli utkniesz, pytaj — prowadzący powinien pomagać, nie karać
 - Git i debugging będą Ci potrzebne w pracy — to jest cenne doświadczenie
 

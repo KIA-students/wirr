@@ -57,7 +57,7 @@ namespace KIA.WiRR.Editor
             Step("2. Platforma", "Wybierz profil Windows/Standalone i użyj Switch Platform. Dla zwykłej aplikacji desktopowej XR nie jest wymagane. Dla PC VR/OpenXR skonfiguruj OpenXR także dla grupy Standalone.");
             Step("3. Ustawienia", "Sprawdź rozdzielczość, tryb pełnoekranowy, Graphics API i ewentualne ustawienia OpenXR. Development Build włączaj do diagnostyki; do pomiarów końcowych używaj konfiguracji zapisanej w raporcie.");
             Step("4. Build", "Kliknij Build. Wskaż pusty katalog docelowy. Unity utworzy plik .exe oraz katalog danych aplikacji — przenoś je razem.");
-            Step("5. Build And Run", "Jeżeli chcesz od razu uruchomić program na tym samym PC, użyj Build And Run.");
+            Step("5. Zbuduj i uruchom", "Jeżeli chcesz od razu uruchomić program na tym samym PC, użyj przycisku `Build And Run`.");
             Note("Typowy wynik: plik .exe + katalog *_Data. Nie jest to APK i nie można zainstalować go na urządzeniu z Androidem.");
         }
 
@@ -67,9 +67,9 @@ namespace KIA.WiRR.Editor
             Step("1. Moduły Unity", "W Unity Hub dla używanej wersji edytora zainstaluj Android Build Support, Android SDK & NDK Tools oraz OpenJDK.");
             Step("2. Telefon", "W Androidzie włącz Opcje programistyczne oraz Debugowanie USB. Podłącz telefon przewodem danych i zaakceptuj komunikat o zaufaniu/kluczu RSA.");
             Step("3. Sprawdzenie ADB", "W terminalu uruchom adb devices. Urządzenie powinno mieć status device, a nie unauthorized.");
-            Step("4. Platforma", "W File → Build Profiles wybierz Android i Switch Platform. Ustaw unikalny Package Name w Player Settings. Dla Lab 03–04 skonfiguruj wymagany provider AR (np. ARCore); nie kopiuj bezmyślnie ustawień Quest.");
+            Step("4. Platforma", "W File → Build Profiles wybierz Android i Switch Platform. Ustaw unikalny Package Name w Player Settings. Dla Lab 03–04 skonfiguruj wymagany moduł AR (np. ARCore); nie kopiuj bezmyślnie ustawień Quest.");
             Step("5. Sceny i orientacja", "Dodaj sceny do Scene List. Sprawdź orientację ekranu, wymagane uprawnienia kamery oraz minimalny/target API Level zgodny z urządzeniem i użytymi pakietami.");
-            Step("6. Build And Run", "Wybierz telefon w Run Device i użyj Build And Run. Unity zbuduje APK, zainstaluje go przez ADB i uruchomi.");
+            Step("6. Zbuduj i uruchom", "Wybierz telefon w polu `Run Device` i użyj przycisku `Build And Run`. Unity zbuduje APK, zainstaluje go przez ADB i uruchomi.");
             Step("7. Instalacja istniejącego APK", "Jeżeli APK jest już zbudowany, można użyć adb install -r nazwa.apk. Opcja -r aktualizuje istniejącą instalację bez ręcznego odinstalowania.");
             Command("adb devices");
             Command("adb install -r nazwa.apk");
@@ -85,7 +85,7 @@ namespace KIA.WiRR.Editor
             Step("4. Profil buildu", "W Unity 6 użyj File → Build Profiles. Jeżeli dostępny jest profil Meta Quest, włącz go i przełącz platformę; w przeciwnym razie użyj Android. Dla Quest wymagane są ustawienia Android/Meta Quest, a nie sam profil Windows.");
             Step("5. OpenXR", "W Project Settings → XR Plug-in Management włącz OpenXR dla Android/Meta Quest. Włącz wymagane funkcje Meta Quest Support. Nie myl tej konfiguracji z OpenXR dla Standalone/PC.");
             Step("6. Architektura", "Używaj ARM64. Sprawdź Player Settings, Graphics API i ustawienia renderowania przeznaczone dla urządzenia mobilnego. Quest ma znacznie mniejszy budżet CPU/GPU niż PC.");
-            Step("7. Build And Run", "W Build Profiles wybierz Quest w Run Device i kliknij Build And Run. Zapisz APK. Unity zainstaluje aplikację przez ADB i uruchomi ją w headsecie.");
+            Step("7. Zbuduj i uruchom", "W `Build Profiles` wybierz Quest w polu `Run Device` i kliknij `Build And Run`. Zapisz APK. Unity zainstaluje aplikację przez ADB i uruchomi ją w goglach.");
             Step("8. Instalacja APK ręcznie", "Gotowy APK można zainstalować poleceniem adb install -r nazwa.apk. Do diagnostyki przydatne są także adb logcat oraz Meta Quest Developer Hub.");
             Command("adb devices");
             Command("adb install -r nazwa.apk");
@@ -99,7 +99,7 @@ namespace KIA.WiRR.Editor
             Difference("Procesor", "Typowo x86-64 na komputerze.", "Typowo ARM64 na telefonie i Quest 3.");
             Difference("Grafika", "Większy budżet GPU, inne API i sterowniki.", "Mobilny GPU, większa presja na liczbę draw calls, fill-rate, pamięć i temperaturę.");
             Difference("XR/AR", "OpenXR dla Standalone dotyczy PC VR.", "OpenXR/Meta Quest albo ARCore dotyczą osobnej grupy Android/Meta Quest.");
-            Difference("Wejście", "Klawiatura, mysz, gamepad lub PC VR.", "Dotyk, sensory telefonu albo kontrolery/hand tracking Quest.");
+            Difference("Wejście", "Klawiatura, mysz, gamepad lub PC VR.", "Dotyk, sensory telefonu albo kontrolery i śledzenie dłoni na Quest.");
             Difference("Pliki i uprawnienia", "Klasyczny system plików desktopowych.", "Sandbox aplikacji Android i jawne uprawnienia, np. kamera.");
             Difference("Testowanie", "Build może działać na komputerze deweloperskim.", "Build trzeba zainstalować na urządzeniu; adb devices jest podstawowym testem połączenia.");
             Difference("Wydajność", "Nie przenoś wyników FPS z PC na urządzenie mobilne.", "Mierz standalone na docelowym urządzeniu i przy tej samej konfiguracji eksperymentu.");
