@@ -86,6 +86,8 @@ Quest 3 wymaga:
 
 Przed każdym benchmarkiem zapisz platformę, urządzenie, profil buildu i istotne ustawienia renderowania.
 
+Jeżeli zmieniasz platformę między PC i Androidem, po `Switch Platform` ponownie sprawdź XR Plug-in Management oraz aktywny profil renderowania przed wykonaniem pomiarów.
+
 ## Dokumentacja producentów
 
 - Unity — Build Profiles / Build Configuration: https://docs.unity3d.com/
