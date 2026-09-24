@@ -30,6 +30,7 @@ Pakiet zawiera:
 - **Walidacja raportu w CI**: techniczną kontrolę integralności raportu;
 - **Unitree G1 EDU**: dodatkowy model humanoidalnego robota z przykładowymi animacjami, importowany z `RoboAnimation.unitypackage`;
 - **HDRI i skybox**: dziewięć środowisk HDR dostępnych po instalacji UPM, z automatycznym tworzeniem materiału `Skybox/Panoramic`;
+- **XR Showcase**: pięć gotowych efektów przestrzennych z własną logiką Runtime: portal paralaksy 6DoF, Gaze Bloom, Telekinesis Orb, Diegetic HUD i World Scale Totem;
 - **Build & Deploy**: instrukcja wewnątrz Unity dla Windows PC, smartfona z Androidem i Meta Quest 3, razem z ADB i Build Profiles.
 
 ## Instalacja
@@ -132,6 +133,18 @@ Gotowe prefaby:
 Pojazd udostępnia metodę `SetExternalInput(Vector2 steeringAndThrottle, float brake)`, dlatego student może zastąpić wejście z klawiatury własnym panelem UI, kontrolerem XR albo innym źródłem sygnału bez modyfikacji fizyki pojazdu.
 
 Ruchome platformy **nie mają automatycznie skonfigurowanego XRI Teleportation Area**. W prefabie znajduje się jedynie `TeleportAreaPlaceholder`, aby student sam wykonał część ćwiczenia dotyczącą teleportacji i warstw interakcji.
+
+## XR Showcase — efekty charakterystyczne dla XR
+
+W sekcji **Scena i pomiary → Efekty charakterystyczne dla XR** dostępnych jest pięć samodzielnych demonstratorów. Każdy prefab ma już przypisany komponent Runtime i działa po wejściu w Play Mode bez zależności od XRI:
+
+- **XR_ParallaxPortal** + `WiRRHeadParallax` — wielowarstwowa paralaksa sterowana translacją głowy; pokazuje różnicę 3DoF/6DoF i head-coupled perspective;
+- **XR_GazeBloom** + `WiRRGazeBloom` — obiekt przestrzenny reagujący na kierunek patrzenia, z publicznym `SetExternalActivation()` do eye trackingu/XRI;
+- **XR_TelekinesisOrb** + `WiRRTelekinesisOrb` — gaze dwell i force-grab; `BeginHold()`, `Release()` i `ToggleHold()` można przypisać do zdarzeń XRI;
+- **XR_DiegeticHUD** + `WiRRHeadFollower` — miękko podążający panel; `Pin()`/`Unpin()` pozwala porównać UI body/head-referenced z world-locked;
+- **XR_WorldScaleTotem** + `WiRRProximityScale` — przejście miniatura → room-scale w funkcji odległości; `SetExternalFactor()` umożliwia sterowanie gestem, suwakiem lub kontrolerem.
+
+Zestaw jest przeznaczony do obserwacji zjawisk typowych dla XR, eksperymentów HCI i rozbudowy przez studentów. Nie zastępuje ocenianych zadań XRI. Szczegóły: `Documentation~/Reference/XR_SHOWCASE.md`.
 
 ## Dodatkowy model Unitree G1 EDU
 
