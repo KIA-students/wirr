@@ -28,7 +28,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Utwórz panel World Space i skonfiguruj obsługę UI dla XR.
 2. Dodaj co najmniej dwa rodzaje feedbacku: wizualny, dźwiękowy lub haptyczny.
-3. Sprawdź hover/select/zakończenie oraz usuń wielokrotne aktywacje jednego działania.
+3. Sprawdź stany `Hover`/`Select` oraz zakończenie oraz usuń wielokrotne aktywacje jednego działania.
 4. Wykonaj po pięć prób A/B/C i zapisz czas oraz błędne aktywacje.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
@@ -54,7 +54,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 ### 5.0: Quest 3 i SSQ
 
 1. Wypełnij SSQ PRE dla obu osób przed ekspozycją.
-2. Uruchom scenariusz standalone na Quest 3 i zweryfikuj interakcję oraz lokomocję.
+2. Uruchom scenariusz samodzielnej aplikacji na Quest 3 i zweryfikuj interakcję oraz lokomocję.
 3. Wykonaj A/B/C na wskazanej osobie po trzy próby, zapisując czas, błędy i komfort 0–10.
 4. Wypełnij SSQ POST i sformułuj wniosek ograniczony do tej sesji.
 

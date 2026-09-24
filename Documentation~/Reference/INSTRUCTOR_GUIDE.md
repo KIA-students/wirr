@@ -4,8 +4,8 @@
 
 **Kurs:** Wirtualna i Rozszerzona Rzeczywistość (studia II stopnia)  
 **Czas:** ~15–18 godzin (2–3 tygodnie, ~6h/tydzień)  
-**Format:** 7 laboratoriów, każde z systemem checkpointów (3.0–5.0)  
-**Zaliczenie:** Checkpoint 3.0 na każdym laboratorium  
+**Format:** 7 laboratoriów, każde z systemem punktów kontrolnych (3.0–5.0)  
+**Zaliczenie:** Punkt kontrolny 3.0 na każdym laboratorium  
 **Ocena:** 3.0–5.0 w zależności od poziomu zaawansowania  
 
 ---
@@ -30,18 +30,18 @@ Razem: ~11 godzin czystego czasu + 4–6h na debug/prace domowe
 
 ---
 
-## Jak oceniać checkpointy
+## Jak oceniać punkt kontrolnyy
 
-### Checkpoint 3.0 (Zaliczenie)
+### Punkt kontrolny 3.0 (Zaliczenie)
 
 **Czas oceny:** max 90 sekund (demonstracja)
 
 **Kryteria:**
 1. ✓ Smoke test — czy system startuje bez błędów krytycznych?
-2. ✓ Checkpoint 3.0 procedury — czy wszystkie wymagane kroki są ukończone?
+2. ✓ Punkt kontrolny 3.0 procedury — czy wszystkie wymagane kroki są ukończone?
 3. ✓ Pomiary — czy dane są przynajmniej przybliżone (nie musimy być perfekcjonistami)?
 4. ✓ Diagnoza — czy para znalazła błąd i wdrożyła poprawkę?
-5. ✓ Evidence/lab0X.md — czy raport jest wypełniony?
+5. ✓ raport `raport `evidence/lab0X.md`` — czy raport jest wypełniony?
 
 **Werdykt:**
 - >= 4/5 kryteriów → **PASS (3.0)**
@@ -49,7 +49,7 @@ Razem: ~11 godzin czystego czasu + 4–6h na debug/prace domowe
 
 ---
 
-### Checkpointy 3.5–5.0 (Wyższa ocena)
+### Punkt kontrolnyy 3.5–5.0 (Wyższa ocena)
 
 Te oceny są **opcjonalne** — student może wziąć ocenę 3.0 i przejść dalej.
 
@@ -59,7 +59,7 @@ Jeśli chce wyższą:
 - **4.5:** Eksperymenty, optymalizacja, porównanie wielometodowe
 - **5.0:** Automatyzacja, eksploracja granic, raport produkcyjny
 
-**Szacunkowy czas:** +30–60 min pracy domowej na checkpoint
+**Zakres dodatkowy:** zadania ponad wymagania podstawowego punktu kontrolnego
 
 ---
 
@@ -226,8 +226,8 @@ Każde laboratorium ma swoją macierz. Przygotuj je przed zajęciami:
 
 ### Na końcu Lab (15 min)
 1. Każda para pokazuje ostatni commit
-2. Krótka ocena Checkpoint 3.0 (< 2 min na parę)
-3. Zebranie evidence/lab0X.md
+2. Ocena punktu kontrolnego 3.0
+3. Zebranie raport `evidence/lab0X.md`
 4. Krótkie podsumowanie: co się nauczyliśmy?
 
 ---
@@ -249,7 +249,7 @@ git log --author="Imię" lab0X...lab0X-start --oneline
 
 ## Gotowość do produkcji (Lab 7)
 
-Checkpoint 3.0 na Lab 7 oznacza, że system jest **gotowy do testów** (nie do pełnego wdrożenia).
+Punkt kontrolny 3.0 na Lab 7 oznacza, że system jest **gotowy do testów** (nie do pełnego wdrożenia).
 
 Oczekuj:
 - FPS >= 60 (VR) / >= 30 (AR)

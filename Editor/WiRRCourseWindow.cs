@@ -458,7 +458,7 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("Ruch, fizyka i dźwięk", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
-                    "Opcjonalne prefaby do eksperymentów w Play Mode. Unosząca i wahadłowa platforma nadają się do badań ruchu, układów odniesienia i komfortu XR; pojazd — do Input System i fizyki; wyrzutnia — do triggerów, impulsów i kolizji; beacon audio — do dźwięku przestrzennego i multimodalnej informacji zwrotnej. Platformy mają tylko TeleportAreaPlaceholder — XRI student konfiguruje samodzielnie.",
+                    "Opcjonalne prefaby do eksperymentów w trybie Play. Unosząca i wahadłowa platforma nadają się do badań ruchu, układów odniesienia i komfortu XR; pojazd — do systemu wejścia (Input System) i fizyki; wyrzutnia — do wyzwalaczy (triggerów), impulsów i kolizji; kinetyczny sygnalizator dźwiękowy — do dźwięku przestrzennego i multimodalnej informacji zwrotnej. Platformy zawierają jedynie `TeleportAreaPlaceholder`; konfigurację XRI student wykonuje samodzielnie.",
                     MessageType.Info);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -494,11 +494,11 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("Efekty charakterystyczne dla XR", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
-                    "Pięć gotowych demonstratorów projektowanych specjalnie pod doświadczenie przestrzenne i 6DoF. Każdy ma już przypisany komponent Runtime i działa od razu w Play Mode bez XRI. Skrypty udostępniają też publiczne metody, które można później podłączyć do XRI Select/Hover, kontrolerów lub hand trackingu.",
+                    "Pięć gotowych demonstratorów zaprojektowanych specjalnie do doświadczeń przestrzennych i 6DoF. Każdy ma przypisany komponent warstwy Runtime i działa od razu w trybie Play bez XRI. Skrypty udostępniają też publiczne metody, które można później podłączyć do zdarzeń `Select`/`Hover` XRI, kontrolerów lub śledzenia dłoni.",
                     MessageType.Info);
 
                 EditorGUILayout.HelpBox(
-                    "Portal paralaksy: przesuń głowę na boki i w pionie — warstwy zmieniają położenie względem siebie, tworząc head-coupled depth. Gaze Bloom: obiekt rozkwita pod spojrzeniem. Telekinesis Orb: utrzymaj spojrzenie, aby przyciągnąć kulę. Diegetic HUD: panel miękko podąża za użytkownikiem i może zostać przypięty do świata. World Scale Totem: podejdź, aby przejść od miniatury do skali pomieszczenia.",
+                    "Portal paralaksy: przesuń głowę na boki i w pionie — warstwy zmieniają położenie względem siebie, tworząc głębię zależną od ruchu głowy. Gaze Bloom: obiekt rozkwita pod spojrzeniem. Telekinesis Orb: utrzymaj spojrzenie, aby przyciągnąć kulę. Diegetic HUD: panel miękko podąża za użytkownikiem i może zostać zakotwiczony w świecie. World Scale Totem: podejdź, aby przejść od miniatury do skali pomieszczenia.",
                     MessageType.None);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -529,16 +529,16 @@ namespace KIA.WiRR.Editor
                     WiRRXrShowcaseTools.RemoveShowcase(lab.Number);
 
                 if (WiRRXrShowcaseTools.ShowcaseExists(lab.Number))
-                    DrawInlineStatus("Demonstratory XR są aktywne. Najlepiej oceniaj je w headsetcie z 6DoF, a nie wyłącznie w Game View.", SuccessAccent);
+                    DrawInlineStatus("Demonstratory XR są aktywne. Najlepiej oceniaj je w goglach z 6DoF, a nie wyłącznie w oknie `Game View`.", SuccessAccent);
 
                 EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("Mixed Reality: świat rzeczywisty + wirtualny", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
-                    "Pięć demonstratorów łączy dane z otoczenia z obiektami wirtualnymi. Każdy ma działający fallback do testów w Editorze oraz publiczne API do podłączenia prawdziwego źródła: kamery/passthrough, hand trackingu, detekcji ludzi, depth/spatial mesh albo Scene Understanding ścian.",
+                    "Pięć demonstratorów łączy dane z otoczenia z obiektami wirtualnymi. Każdy ma działający tryb zastępczy do testów w Edytorze oraz publiczne API do podłączenia rzeczywistego źródła: kamery lub passthrough, śledzenia dłoni, detekcji ludzi, danych głębi, siatki przestrzennej albo modułu Scene Understanding wykrywającego ściany.",
                     MessageType.Info);
 
                 EditorGUILayout.HelpBox(
-                    "Camera Window: obraz kamery z wirtualnym reticle. Hand Aura: holograficzna warstwa na realnej dłoni i detekcja pinch. People Awareness: anonimowe strefy wokół wykrytych osób. Spatial Scanner: punkty z depth/spatial mesh nanoszone na otoczenie. Wall Portal: wirtualna zawartość przyklejana do wykrytej ściany.",
+                    "Camera Window: obraz kamery z wirtualnym wskaźnikiem. Hand Aura: holograficzna warstwa na rzeczywistej dłoni i wykrywanie gestu szczypnięcia (pinch). People Awareness: anonimowe strefy wokół wykrytych osób. Spatial Scanner: punkty z danych głębi lub siatki przestrzennej nanoszone na otoczenie. Wall Portal: wirtualna zawartość kotwiona do wykrytej ściany.",
                     MessageType.None);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -569,7 +569,7 @@ namespace KIA.WiRR.Editor
                     WiRRMixedRealityShowcaseTools.RemoveShowcase(lab.Number);
 
                 if (WiRRMixedRealityShowcaseTools.ShowcaseExists(lab.Number))
-                    DrawInlineStatus("Demonstratory MR są aktywne. Fallbacki działają bez zewnętrznego SDK; prawdziwe sensory podłącz przez publiczne API komponentów Runtime.", SuccessAccent);
+                    DrawInlineStatus("Demonstratory MR są aktywne. Tryby zastępcze działają bez zewnętrznego SDK; rzeczywiste sensory podłącz przez publiczne API komponentów warstwy Runtime.", SuccessAccent);
 
                 using (new EditorGUILayout.HorizontalScope())
                 {
@@ -581,21 +581,21 @@ namespace KIA.WiRR.Editor
                 }
 
                 EditorGUILayout.HelpBox(
-                    "Nie traktuj gotowych prefabów jako produktu końcowego. Otwórz instrukcję implementacji, wybierz provider dla swojego urządzenia, wygeneruj adapter w folderze Scripts i rozbuduj demonstrator o jedną mierzalną funkcję: np. confidence, predykcję, pełny hand skeleton, okluzję, persistent anchor albo dynamiczną strefę człowieka.",
+                    "Nie traktuj gotowych prefabów jako produktu końcowego. Otwórz instrukcję implementacji, wybierz dostawcę danych dla swojego urządzenia, wygeneruj adapter w folderze `Scripts` i rozbuduj demonstrator o jedną mierzalną funkcję: np. uwzględnienie pewności detekcji, predykcję, pełny szkielet dłoni, okluzję, trwałą kotwicę (persistent anchor) albo dynamiczną strefę człowieka.",
                     MessageType.None);
 
                 EditorGUILayout.HelpBox(
-                    "Prywatność: demonstrator People Awareness wymaga jedynie pozycji osób i nie potrzebuje twarzy, nazw ani identyfikacji biometrycznej. Camera Window uruchamia WebCamTexture dopiero po zgodzie systemowej. Na Quest passthrough jest zwykle warstwą platformową — nie należy zakładać, że jest dostępny jako zwykły WebCamTexture.",
+                    "Prywatność: demonstrator People Awareness wymaga jedynie pozycji osób i nie potrzebuje twarzy, nazw ani identyfikacji biometrycznej. Camera Window uruchamia WebCamTexture dopiero po zgodzie systemowej. Na Quest tryb passthrough jest zwykle realizowany przez warstwę platformową — nie należy zakładać, że jest dostępny jako zwykły `WebCamTexture`.",
                     MessageType.Warning);
 
                 EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("Mobile AR: rozszerzona rzeczywistość na telefonie", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
-                    "Pięć demonstratorów zaprojektowanych specjalnie pod smartfon z AR Foundation/ARCore: raycast z miejsca dotyku, marker obrazu, pomiar odległości, dopasowanie oświetlenia i rysowanie po realnych powierzchniach. Najbardziej pasują do Lab 03–04, ale można ich używać w dowolnym workspace.",
+                    "Pięć demonstratorów zaprojektowanych specjalnie do smartfona z AR Foundation/ARCore: rzutowanie promienia z miejsca dotyku, marker obrazu, pomiar odległości, dopasowanie oświetlenia i rysowanie po rzeczywistych powierzchniach. Najbardziej pasują do Lab 03–04, ale można ich używać w dowolnym obszarze roboczym.",
                     MessageType.Info);
 
                 EditorGUILayout.HelpBox(
-                    "Tap Placement: umieszczanie obiektu na plane/depth. Image Marker Portal: zawartość zakotwiona do rozpoznanego obrazu. World Ruler: dwa tapy = pomiar w metrach. Light Match: obiekt reaguje na realne światło. Surface Painter: przeciąganie palcem tworzy wirtualny ślad na rzeczywistej powierzchni.",
+                    "Tap Placement: umieszczanie obiektu na wykrytej płaszczyźnie lub z użyciem danych głębi. Image Marker Portal: zawartość zakotwiona do rozpoznanego obrazu. World Ruler: dwa dotknięcia ekranu wyznaczają pomiar w metrach. Light Match: obiekt reaguje na rzeczywiste oświetlenie. Surface Painter: przeciąganie palcem tworzy wirtualny ślad na rzeczywistej powierzchni.",
                     MessageType.None);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -626,7 +626,7 @@ namespace KIA.WiRR.Editor
                     WiRRMobileARShowcaseTools.RemoveShowcase(lab.Number);
 
                 if (WiRRMobileARShowcaseTools.ShowcaseExists(lab.Number))
-                    DrawInlineStatus("Demonstratory Mobile AR są aktywne. Fallback służy do testu logiki; tracking i dokładność sprawdź na fizycznym telefonie.", SuccessAccent);
+                    DrawInlineStatus("Demonstratory Mobile AR są aktywne. Tryb zastępczy służy wyłącznie do testu logiki; śledzenie i dokładność sprawdź na fizycznym telefonie.", SuccessAccent);
 
                 using (new EditorGUILayout.HorizontalScope())
                 {
@@ -638,7 +638,7 @@ namespace KIA.WiRR.Editor
                 }
 
                 EditorGUILayout.HelpBox(
-                    "Adaptery są tworzone w Assets/WiRR/LabXX/Scripts/MobileARAdapters i nie są automatycznie nadpisywane. To właściwe miejsce na ARRaycastManager, ARTrackedImageManager i ARCameraManager; Runtime WiRR pozostaje niezależny od konkretnej wersji AR Foundation.",
+                    "Adaptery są tworzone w Assets/WiRR/LabXX/Scripts/MobileARAdapters i nie są automatycznie nadpisywane. To właściwe miejsce na ARRaycastManager, ARTrackedImageManager i ARCameraManager; Warstwa Runtime WiRR pozostaje niezależna od konkretnej wersji AR Foundation.",
                     MessageType.None);
 
                 EditorGUILayout.Space(7);
@@ -665,7 +665,7 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("HDRI i skybox", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
-                    "HDRI mogą zastąpić domyślny skybox i jednocześnie dostarczyć światło środowiskowe. W benchmarku traktuj zmianę HDRI, Exposure i Rotation jako zmianę warunku eksperymentalnego. Do skyboxa używaj plików *_HDR.exr; pliki *_TONEMAPPED.jpg są podglądem LDR.",
+                    "HDRI mogą zastąpić domyślny skybox i jednocześnie dostarczyć światło środowiskowe. W pomiarze porównawczym traktuj zmianę HDRI oraz parametrów `Exposure` i `Rotation` jako zmianę warunku eksperymentalnego. Do skyboxa używaj plików *_HDR.exr; pliki *_TONEMAPPED.jpg są podglądem LDR.",
                     MessageType.Info);
 
                 var hdriLabels = new string[WiRRHdriTools.Environments.Length];

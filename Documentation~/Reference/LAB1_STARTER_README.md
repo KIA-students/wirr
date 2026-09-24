@@ -115,7 +115,7 @@ public class PerformanceBenchmark : MonoBehaviour {
 
 - Smoke check: 5 min
 - Wejściówka: 10 min
-- Benchmark baseline: 15 min
+- Pomiar wariantu bazowego
 - Audyt urządzeń: 30 min
 - Diagnoza: 20 min
 - Oddanie: 10 min

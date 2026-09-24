@@ -1,4 +1,4 @@
-# Setup Repozytorium — Dla Studentów
+# Konfiguracja repozytorium — dla studentów
 
 ## Klonowanie i Konfiguracja
 
@@ -47,7 +47,7 @@ git push origin team-15/lab01-kowalski-nowak
 
 ### 5. Oddanie
 
-Przygotuj evidence:
+Przygotuj raport wykonania:
 
 ```bash
 # Skopiuj template
@@ -140,7 +140,7 @@ git push --force  # Tylko na własnej gałęzi!
 
 ---
 
-## Workflow tygodniowy
+## Tygodniowy przepływ pracy
 
 ```
 Przed zajęciami:

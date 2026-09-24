@@ -37,9 +37,9 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 ### 4.0: Transport i bufor
 
 1. Zarejestruj 30 wartości inter-arrival JointState.
-2. Wykonaj warianty bufora A/B/C i zapisz Hz, delay, jitter oraz płynność.
+2. Wykonaj warianty bufora A/B/C i zapisz Hz, opóźnienie, drgania czasowe (jitter) oraz płynność.
 3. Wykonaj co najmniej 10 pomiarów RTT.
-4. Wybierz kompromis bufora ograniczający jitter bez nadmiernego opóźnienia.
+4. Wybierz kompromis bufora ograniczający drgania czasowe (jitter) bez nadmiernego opóźnienia.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
@@ -54,7 +54,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 ### 5.0: Kontrolowany błąd bliźniaka
 
-1. Zapisz baseline: jointy, Hz i RTT.
+1. Zapisz wariant bazowy: przeguby, Hz i RTT.
 2. Wprowadź kontrolowany błąd v5 i zanotuj objaw.
 3. Wykonaj H1/H2, test diagnostyczny i minimalną poprawkę.
 4. Po naprawie wyznacz maksymalny błąd synchronizacji i potwierdź STALE→LIVE.

@@ -27,7 +27,7 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - Input System: __________
 - Tryb PC: XR Interaction Simulator / inne: __________
 - Scena: `Assets/Scenes/Lab02_Interaction.unity`
-- Quest 3 standalone build: tak / nie / niezweryfikowano
+- samodzielna aplikacja na Quest 3: tak / nie / niezweryfikowano
 
 ---
 
@@ -94,7 +94,7 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 | Reset | działa / nie działa |
 | Potwierdź alarm | działa / nie działa |
 | stan: gotowy → montaż → alarm → ukończono | działa / nie działa |
-| Hover różni się od Select | tak / nie |
+| Stan `Hover` różni się od `Select` | tak / nie |
 | osobny dźwięk sukcesu i błędu | tak / nie |
 | żądanie haptyki jest generowane | tak / nie |
 
@@ -183,8 +183,8 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 | Test | Wynik |
 |---|---|
-| build standalone uruchamia się | działa / nie działa |
-| tracking 6DoF | działa / nie działa |
+| samodzielna aplikacja uruchamia się | działa / nie działa |
+| śledzenie 6DoF | działa / nie działa |
 | Direct Grab | działa / nie działa |
 | Ray/UI | działa / nie działa |
 | teleportacja | działa / nie działa |

@@ -78,11 +78,11 @@
 
 3. **Podczas Lab X:**
    - Otwórz instrukcję .docx (główne źródło)
-   - Kopia template raportu: `cp evidence_template_lab0X.md evidence/lab0X.md`
+   - Kopia szablonu raportu: `cp evidence_template_lab0X.md evidence/lab0X.md`
    - Jeśli utkniesz: przeczytaj FAQ.md lub zapytaj prowadzącego
 
 4. **Po Lab X:**
-   - Wypeł evidence/lab0X.md
+   - Wypełnij raport `evidence/lab0X.md`
    - Git push
    - Czekaj na recenzję prowadzącego
 
@@ -106,7 +106,7 @@
    - Prowadź zajęcia zgodnie z .docx
    - Oceniaj wg GRADING_MATRIX.md (max 90 sekund/parę)
    - Znotuj oceny
-   - Archiwizuj evidence/lab0X.md od każdej pary
+   - Archiwizuj raport `evidence/lab0X.md` każdej pary
 
 4. **Po Lab X:**
    - Merge'uj gałęzie do main (Quality Gate)

@@ -75,13 +75,13 @@ Wszystkie pliki znajdują się w: `/starter-files/`
 
 3. **Przed Lab 1:**
    - Skopis LAB1_STARTER_README.md
-   - Przygotuj workspace
+   - Przygotuj obszar roboczy
    - Poczekaj na prowadzącego
 
 ### Dla Prowadzącego (1. dzień)
 
 1. **Przeczytaj INSTRUCTOR_GUIDE.md**
-   - Zrozum system checkpointów
+   - Poznaj system punktów kontrolnych
    - Przygotuj checklist oceny
    - Zanotuj typowe problemy
 
@@ -113,9 +113,9 @@ Wszystkie pliki znajdują się w: `/starter-files/`
 Na koniec kursu (Lab 7):
 
 1. ✓ 7 gałęzi Gita (team-NR/lab0X-...)
-2. ✓ 7 raportów (evidence/lab0[1-7].md)
+2. ✓ 7 raportów (`evidence/lab0[1-7].md`)
 3. ✓ 7 commitów "fix(...)" z diagnozą błędu
-4. ✓ Checkpoint 3.0 na każdym Lab (mogą być wyższe oceny)
+4. ✓ Punkt kontrolny 3.0 na każdym laboratorium (mogą być wyższe oceny)
 
 **Rezultat:** Zaliczenie kursu + portfolio 7 projektów XR
 

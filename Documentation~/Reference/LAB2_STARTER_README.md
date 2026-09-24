@@ -93,14 +93,14 @@ public class Lab02Trial : MonoBehaviour {
 
 - XR Grab Interactable: https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@latest/
 - XR Socket Interactor: https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@latest/
-- Teleportation Provider: https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@latest/
+- Dokumentacja komponentu `Teleportation Provider`: https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@latest/
 
 ---
 
 ## Timeline Lab 2
 
 - Wejściówka: 10 min
-- Setup repozytorium: 5 min
+- Konfiguracja repozytorium
 - Implementacja interakcji: 25 min
 - Lokomocja: 15 min
 - Pomiary i diagnoza: 30 min

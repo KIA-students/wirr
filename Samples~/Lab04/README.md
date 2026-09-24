@@ -15,12 +15,12 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 
 ## Zadania krok po kroku
 
-### 3.0: Depth API
+### 3.0: API głębi (Depth API)
 
-1. Sprawdź dostępność Depth, bieżący tryb i rozdzielczość ramki.
+1. Sprawdź dostępność danych głębi, bieżący tryb i rozdzielczość ramki.
 2. Zdefiniuj mierzalny warunek sukcesu dla danych głębi.
 3. Wykonaj v1 w A/B/C po trzy powtórzenia i zapisz successRate.
-4. Brak Depth oznacz jako niedostępność, nie jako wartość zero.
+4. Brak danych głębi oznacz jako niedostępność, a nie jako wartość zero.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
@@ -33,7 +33,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
-### 4.0: Depth-raycast
+### 4.0: Rzutowanie promienia z użyciem danych głębi
 
 1. Ustaw powierzchnię kolejno w 0.50, 1.00 i 1.50 m.
 2. Wykonaj po pięć prób na odległość i oznacz HIT/MISS.
@@ -53,7 +53,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 ### 5.0: Kontrolowany błąd
 
-1. Wykonaj baseline dla wybranej mierzalnej cechy.
+1. Wykonaj pomiar wariantu bazowego dla wybranej mierzalnej cechy.
 2. Wprowadź v5 i zapisz H1/H2.
 3. Wykonaj test rozstrzygający oraz trzy powtórzenia.
 4. Zastosuj minimalną poprawkę i wykonaj trzy pomiary po naprawie.

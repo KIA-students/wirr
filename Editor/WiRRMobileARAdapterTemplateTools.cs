@@ -82,7 +82,7 @@ public sealed class {className} : MonoBehaviour
 ";
 
         private static string TapPlacementTemplate() =>
-Header("TapPlacementARFoundationAdapterStarter", "raycast ekranu telefonu do plane/depth i podanie pozy do AR_TapPlacement") +
+Header("TapPlacementARFoundationAdapterStarter", "rzutowanie promienia z ekranu telefonu do wykrytej płaszczyzny lub danych głębi i przekazanie pozycji do AR_TapPlacement") +
 @"    [SerializeField] private WiRRMobileARTapPlacement target;
 
     public void PushHit(Vector3 point, Vector3 normal, bool valid, float confidence = 1f)
@@ -94,7 +94,7 @@ Header("TapPlacementARFoundationAdapterStarter", "raycast ekranu telefonu do pla
     // TODO AR Foundation:
     // 1. Dodaj ARRaycastManager.
     // 2. Odczytaj bieżącą pozycję dotyku.
-    // 3. Raycastuj do TrackableType.PlaneWithinPolygon lub depth hit.
+    // 3. Wykonaj rzutowanie promienia do `TrackableType.PlaneWithinPolygon` lub wykorzystaj trafienie z danych głębi.
     // 4. Z pierwszego trafienia pobierz pose.position i pose.up.
     // 5. Wywołaj PushHit(...).
     // 6. Sam komponent WiRR obsługuje tap i ConfirmPlacement().
@@ -102,7 +102,7 @@ Header("TapPlacementARFoundationAdapterStarter", "raycast ekranu telefonu do pla
 ";
 
         private static string ImageTrackingTemplate() =>
-Header("ImageTrackingARFoundationAdapterStarter", "mapowanie ARTrackedImage na AR_ImageMarkerPortal") +
+Header("ImageTrackingARFoundationAdapterStarter", "mapowanie `ARTrackedImage` na AR_ImageMarkerPortal") +
 @"    [SerializeField] private WiRRMobileARImageAnchor target;
 
     public void PushImage(
@@ -130,15 +130,15 @@ Header("ImageTrackingARFoundationAdapterStarter", "mapowanie ARTrackedImage na A
     }
 
     // TODO AR Foundation:
-    // 1. Dodaj ARTrackedImageManager i Reference Image Library.
-    // 2. Obsłuż trackablesChanged / updated images.
+    // 1. Dodaj `ARTrackedImageManager` i bibliotekę obrazów referencyjnych (Reference Image Library).
+    // 2. Obsłuż zdarzenie zmiany śledzonych obrazów (`trackablesChanged`) i obrazy zaktualizowane przez system.
     // 3. Przekaż referenceImage.name, transform pose i referenceImage.size.
-    // 4. Gdy trackingState przestaje być Tracking, wywołaj LostImage().
+    // 4. Gdy `trackingState` przestaje mieć stan `Tracking`, wywołaj `LostImage()`.
 }
 ";
 
         private static string RulerTemplate() =>
-Header("RulerARFoundationAdapterStarter", "raycast powierzchni pod dotykiem do AR_WorldRuler") +
+Header("RulerARFoundationAdapterStarter", "rzutowanie promienia do powierzchni pod dotykiem dla AR_WorldRuler") +
 @"    [SerializeField] private WiRRMobileARRuler target;
 
     public void PushCandidate(Vector3 point, Vector3 normal, bool valid)
@@ -155,7 +155,7 @@ Header("RulerARFoundationAdapterStarter", "raycast powierzchni pod dotykiem do A
 
     // TODO AR Foundation:
     // 1. Użyj ARRaycastManager z pozycją aktualnego dotyku.
-    // 2. Preferuj plane/depth zgodnie z celem eksperymentu.
+    // 2. Wybierz wykrytą płaszczyznę lub dane głębi zgodnie z celem eksperymentu.
     // 3. Przekaż hit.position oraz hit.rotation * Vector3.up.
     // 4. WiRR sam interpretuje pierwszy i drugi tap jako A/B.
     // 5. Wyświetl target.DistanceMeters w swoim UI.
@@ -182,8 +182,8 @@ Header("LightEstimationARFoundationAdapterStarter", "przekazanie estymacji oświ
 
     // TODO AR Foundation:
     // 1. Dodaj ARCameraManager.
-    // 2. Włącz wymagane Light Estimation w ARCameraManager.
-    // 3. W frameReceived odczytaj dostępne: averageBrightness /
+    // 2. Włącz wymagane opcje estymacji oświetlenia (Light Estimation) w `ARCameraManager`.
+    // 3. W zdarzeniu `frameReceived` odczytaj dostępne parametry, np. `averageBrightness` /
     //    averageColorTemperature / colorCorrection / mainLightColor /
     //    mainLightDirection / mainLightIntensityLumens.
     // 4. Znormalizuj jasność do zakresu 0..1 dla tego ćwiczenia.
@@ -192,7 +192,7 @@ Header("LightEstimationARFoundationAdapterStarter", "przekazanie estymacji oświ
 ";
 
         private static string PainterTemplate() =>
-Header("SurfacePainterARFoundationAdapterStarter", "raycast śledzący palec i nanoszenie wirtualnego śladu na realną powierzchnię") +
+Header("SurfacePainterARFoundationAdapterStarter", "rzutowanie promienia śledzące palec i nanoszenie wirtualnego śladu na rzeczywistą powierzchnię") +
 @"    [SerializeField] private WiRRMobileARSurfacePainter target;
 
     public void PushHit(Vector3 point, Vector3 normal, bool valid)
@@ -210,8 +210,8 @@ Header("SurfacePainterARFoundationAdapterStarter", "raycast śledzący palec i n
     // TODO AR Foundation:
     // 1. W każdej klatce, gdy palec dotyka ekranu, wykonaj ARRaycastManager.Raycast.
     // 2. Przekaż hit.position i normalną powierzchni przez PushHit().
-    // 3. WiRR sam wykonuje PaintAtCurrentHit() podczas drag.
-    // 4. Porównaj plane raycast z depth raycast: ciągłość, jitter i koszt.
+    // 3. WiRR sam wykonuje `PaintAtCurrentHit()` podczas przeciągania palca.
+    // 4. Porównaj rzutowanie do wykrytej płaszczyzny z wykorzystaniem danych głębi: ciągłość, drgania położenia (jitter) i koszt obliczeniowy.
 }
 ";
     }

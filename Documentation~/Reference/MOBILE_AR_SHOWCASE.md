@@ -2,9 +2,9 @@
 
 Zestaw **Mobile AR Showcase** zawiera pięć gotowych demonstratorów zaprojektowanych pod klasyczny scenariusz AR na telefonie: kamera tylna, ekran dotykowy, AR Foundation/ARCore i obserwowanie świata przez ekran urządzenia.
 
-Każdy prefab ma przypisany skrypt Runtime oraz fallback do testów w Unity Editor. Wersja urządzeniowa pozostaje provider-neutralna: kod studenta może podać wyniki AR Foundation do prostego API WiRR bez dodawania zależności AR Foundation do Runtime pakietu.
+Każdy prefab ma przypisany skrypt Runtime oraz tryb zastępczy do testów w Edytorze Unity. Wersja urządzeniowa pozostaje niezależna od dostawcy danych: kod studenta może podać wyniki AR Foundation do prostego API WiRR bez dodawania zależności AR Foundation do Runtime pakietu.
 
-Fallbacki są celowo aktywne **tylko w Unity Editor**. W buildzie Android brak danych od providera AR oznacza brak hitu/trackingu/estymacji zamiast sztucznego wyniku; dzięki temu nie da się pomylić symulacji z realnym pomiarem na telefonie.
+Tryby zastępcze są celowo aktywne **tylko w Edytorze Unity**. W buildzie Android brak danych od dostawcy danych AR oznacza brak trafienia, śledzenia lub estymacji zamiast sztucznego wyniku; dzięki temu nie da się pomylić symulacji z realnym pomiarem na telefonie.
 
 Prefaby powstają w `Assets/WiRR/Common/Prefabs/MobileAR`, a ich instancje w scenie w `WiRR_TeachingAssets/MobileARShowcase`.
 
@@ -15,14 +15,14 @@ Prefaby powstają w `Assets/WiRR/Common/Prefabs/MobileAR`, a ich instancje w sce
 **Skrypt:** `WiRRMobileARTapPlacement`.
 
 **API:**
-- `SetSurfaceHit(point, normal, valid, confidence)` — aktualny wynik raycastu;
+- `SetSurfaceHit(point, normal, valid, confidence)` — aktualny wynik rzutu promienia;
 - `SetSurfacePose(pose, valid, confidence)` — alternatywnie gotowa poza;
 - `ConfirmPlacement()` — umieszcza obiekt;
 - `ClearPlacement()` — usuwa bieżące umieszczenie.
 
 Na telefonie adapter zwykle wykorzystuje `ARRaycastManager`. W Editorze skrypt używa `Physics.Raycast` do colliderów sceny.
 
-**Co warto badać:** czas pierwszej detekcji powierzchni, błąd skali 1:1, stabilność reticle, zachowanie na krawędzi plane i różnicę plane raycast vs depth raycast.
+**Co warto badać:** czas pierwszej detekcji powierzchni, błąd skali 1:1, stabilność wskaźnika położenia, zachowanie na krawędzi płaszczyzny oraz różnicę między rzutowaniem promienia do płaszczyzny i wykorzystaniem danych głębi.
 
 ## 2. AR_ImageMarkerPortal
 
@@ -37,7 +37,7 @@ Na telefonie adapter zwykle wykorzystuje `ARRaycastManager`. W Editorze skrypt u
 
 Adapter AR Foundation korzysta z `ARTrackedImageManager` i Reference Image Library. Fizyczny rozmiar obrazu jest wykorzystywany do skalowania zawartości.
 
-**Co warto badać:** dystans i kąt rozpoznania, częściowe zasłonięcie, czas odzyskania trackingu, wpływ jakości tekstury markera oraz błędu zadeklarowanego rozmiaru fizycznego.
+**Co warto badać:** dystans i kąt rozpoznania, częściowe zasłonięcie, czas odzyskania śledzenia, wpływ jakości tekstury markera oraz błędu zadeklarowanego rozmiaru fizycznego.
 
 ## 3. AR_WorldRuler
 
@@ -54,7 +54,7 @@ Adapter AR Foundation korzysta z `ARTrackedImageManager` i Reference Image Libra
 
 Komponent celowo nie wymaga TextMeshPro. Student może wyświetlić `DistanceMeters` w dowolnym własnym UI.
 
-**Co warto badać:** błąd pomiaru względem wzorca, zależność błędu od odległości, kąta obserwacji, rodzaju raycastu i jakości trackingu.
+**Co warto badać:** błąd pomiaru względem wzorca, zależność błędu od odległości, kąta obserwacji, rodzaju rzutu promienia i jakości śledzenia.
 
 ## 4. AR_LightMatchObject
 
@@ -66,9 +66,9 @@ Komponent celowo nie wymaga TextMeshPro. Student może wyświetlić `DistanceMet
 - `SetLightEstimate(normalizedIntensity, lightColor, mainLightDirection, confidence)`;
 - właściwości `Intensity01`, `Confidence`.
 
-Adapter AR Foundation zwykle korzysta z `ARCameraManager.frameReceived`. Należy pamiętać, że konkretne urządzenie może udostępniać tylko część pól Light Estimation.
+Adapter AR Foundation zwykle korzysta z `ARCameraManager.frameReceived`. Należy pamiętać, że konkretne urządzenie może udostępniać tylko część parametrów estymacji oświetlenia (Light Estimation).
 
-**Co warto badać:** dopasowanie obiektu w jasnym/ciemnym środowisku, różnicę z/bez light estimation, dostępność parametrów na różnych telefonach oraz opóźnienie reakcji.
+**Co warto badać:** dopasowanie obiektu w jasnym/ciemnym środowisku, różnicę między wersją z estymacją oświetlenia i bez niej, dostępność parametrów na różnych telefonach oraz opóźnienie reakcji.
 
 ## 5. AR_SurfacePainter
 
@@ -85,7 +85,7 @@ Adapter AR Foundation zwykle korzysta z `ARCameraManager.frameReceived`. Należy
 
 Prefab używa puli 120 markerów i nie tworzy nowych GameObjectów podczas rysowania. W urządzeniu adapter aktualizuje hit dla aktualnej pozycji palca.
 
-**Co warto badać:** ciągłość śladu, jitter, różnicę plane/depth raycast, koszt dużej liczby punktów i zachowanie przy granicy kilku wykrytych płaszczyzn.
+**Co warto badać:** ciągłość śladu, drgania położenia (jitter), różnicę między rzutowaniem do płaszczyzny i wykorzystaniem danych głębi, koszt dużej liczby punktów i zachowanie przy granicy kilku wykrytych płaszczyzn.
 
 ## Startery AR Foundation
 
@@ -107,23 +107,23 @@ Startery nie są nadpisywane przy ponownym użyciu generatora. Są kodem student
 
 1. Zbuduj aplikację Android na urządzenie wspierające wymagane funkcje ARCore.
 2. Uruchom scenę w dobrze oświetlonym miejscu.
-3. Poczekaj na stabilizację trackingu i detekcję powierzchni.
+3. Poczekaj na stabilizację śledzenia i detekcję powierzchni.
 4. Sprawdź działanie elementu bez szybkich ruchów telefonu.
 5. Powtórz przy innym kącie i odległości.
 6. Wykonaj co najmniej trzy pomiary, jeśli element zwraca błąd/czas/dystans.
-7. Zapisz model telefonu, wersję Androida, warunki i aktywny provider.
+7. Zapisz model telefonu, wersję Androida, warunki i aktywny moduł AR / dostawcę danych.
 
 ## Proponowane dalsze rozszerzenia
 
-- pinch-to-scale i obrót dwoma palcami dla Tap Placement;
+- skalowanie gestem szczypnięcia i obrót dwoma palcami dla Tap Placement;
 - persistent anchors i odtwarzanie po restarcie;
 - semantic placement tylko na podłodze/stole/ścianie;
 - image-to-world handoff po utracie markera;
 - pomiar powierzchni i objętości w AR Ruler;
-- confidence-aware ruler pokazujący niepewność;
-- occlusion z environment depth;
+- linijkę AR pokazującą niepewność pomiaru;
+- okluzję wykorzystującą mapę głębi otoczenia (environment depth);
 - mesh/stroke zamiast punktowego Surface Painter;
 - zapisywanie i współdzielenie rysunków między urządzeniami;
 - porównanie dwóch telefonów pod kątem plane detection, dryfu i błędu pomiaru.
 
-Najlepszą rozbudową jest taka, dla której można zdefiniować baseline, jedną kontrolowaną zmianę i konkretną metrykę: czas [s], błąd [cm], dryf [cm/min], FPS, latency [ms] albo skuteczność rozpoznania [%].
+Najlepszą rozbudową jest taka, dla której można zdefiniować wariant bazowy, jedną kontrolowaną zmianę i konkretną metrykę: czas [s], błąd [cm], dryf [cm/min], FPS, opóźnienie [ms] albo skuteczność rozpoznania [%].

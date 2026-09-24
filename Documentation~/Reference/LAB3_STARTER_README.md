@@ -35,7 +35,7 @@ Assets/Models/ (placeholder)
 
 1. Git: `git switch -c team-<nr>/lab03-<nazwiska>`
 2. Konfiguracja Android: Edit → Project Settings → Player → Android
-3. Kompilacja: File → Build and Run
+3. Kompilacja i uruchomienie: `File → Build Profiles` → `Build And Run`
 4. Na telefonie: pozwól na dostęp do kamery
 
 ---
