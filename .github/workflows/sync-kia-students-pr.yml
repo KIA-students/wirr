@@ -101,7 +101,10 @@ jobs:
           export_sha="$(git rev-parse HEAD)"
 
           if [ -n "${SYNC_TOKEN}" ]; then
-            git -c http.extraHeader= push --force \
+            # actions/checkout zapisuje własny nagłówek Authorization. Usuń go,
+            # aby push był rzeczywiście uwierzytelniony tokenem właściciela.
+            git config --local --unset-all http.https://github.com/.extraheader || true
+            git push --force \
               "https://x-access-token:${SYNC_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
               "HEAD:refs/heads/${EXPORT_BRANCH}"
           else
