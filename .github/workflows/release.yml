@@ -87,6 +87,7 @@ jobs:
               "WiRRHdriTools.cs",
               "WiRRBuildGuideWindow.cs",
               "WiRRXrShowcaseTools.cs",
+              "WiRRMixedRealityShowcaseTools.cs",
               "WiRROnboarding.cs",
           ):
               source = root / "Editor" / editor_file
@@ -128,6 +129,7 @@ jobs:
               root / "Documentation~" / "Reference" / "EXTRA_ASSETS.md",
               root / "Documentation~" / "Reference" / "BUILD_AND_DEPLOY.md",
               root / "Documentation~" / "Reference" / "XR_SHOWCASE.md",
+              root / "Documentation~" / "Reference" / "MIXED_REALITY_SHOWCASE.md",
               root / "Textures" / "HDRI" / "README.md",
           )
           for document in required_docs:
@@ -164,6 +166,11 @@ jobs:
               "WiRRTelekinesisOrb.cs",
               "WiRRHeadFollower.cs",
               "WiRRProximityScale.cs",
+              "WiRRCameraFeedMixer.cs",
+              "WiRRHandAura.cs",
+              "WiRRPeopleAwareness.cs",
+              "WiRRSpatialSurfaceScanner.cs",
+              "WiRRWallAnchor.cs",
           )
           for runtime_file in runtime_dynamic_files:
               source = root / "Runtime" / runtime_file
@@ -187,6 +194,33 @@ jobs:
               for signature in signatures:
                   if signature not in source_text:
                       raise SystemExit(f"Brak API XR w {filename}: {signature}")
+
+          mr_showcase_source = (root / "Editor" / "WiRRMixedRealityShowcaseTools.cs").read_text(encoding="utf-8")
+          if mr_showcase_source.count("new Definition(") != 5:
+              raise SystemExit("Mixed Reality Showcase nie zawiera dokładnie pięciu demonstratorów.")
+
+          mr_runtime_expectations = {
+              "WiRRCameraFeedMixer.cs": (
+                  "SetExternalTexture(Texture texture)",
+                  "StartWebCamera()",
+                  "StopWebCamera()",
+              ),
+              "WiRRHandAura.cs": ("SetHandPose(", "SetTracked(bool tracked)", "Pinch01"),
+              "WiRRPeopleAwareness.cs": ("SetPeople(Vector3[] worldPositions)", "SetPerson(int slot"),
+              "WiRRSpatialSurfaceScanner.cs": (
+                  "SubmitSurfaceSample(Vector3 worldPoint",
+                  "SubmitSurfaceSamples(Vector3[] worldPoints",
+              ),
+              "WiRRWallAnchor.cs": (
+                  "SetWallPlane(Vector3 center",
+                  "TryAnchorFromViewerRay()",
+              ),
+          }
+          for filename, signatures in mr_runtime_expectations.items():
+              source_text = (root / "Runtime" / filename).read_text(encoding="utf-8")
+              for signature in signatures:
+                  if signature not in source_text:
+                      raise SystemExit(f"Brak API Mixed Reality w {filename}: {signature}")
 
           runtime_asmdef = json.loads(
               (root / "Runtime" / "KIA.WiRR.Runtime.asmdef").read_text(encoding="utf-8")
@@ -304,7 +338,8 @@ jobs:
           - składnię aplikacji WebSim;
           - obecność dziewięciu panoram HDRI oraz instrukcji skybox;
           - obecność wbudowanej instrukcji budowania PC / Android / Quest 3;
-          - komplet pięciu demonstratorów XR oraz ich skryptów Runtime i publicznego API integracyjnego.
+          - komplet pięciu demonstratorów XR oraz ich skryptów Runtime i publicznego API integracyjnego;
+          - komplet pięciu demonstratorów Mixed Reality dla kamery, dłoni, ludzi, spatial/depth i ścian wraz z neutralnym API providerów.
 
           Archiwa dołączone do wydania zawierają pakiet UPM oraz sumy kontrolne SHA-256.
           """

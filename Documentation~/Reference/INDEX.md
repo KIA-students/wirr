@@ -19,6 +19,7 @@
     ├── 📄 REPOSITORY_SETUP.md
     ├── 📄 BUILD_AND_DEPLOY.md
     ├── 📄 XR_SHOWCASE.md
+    ├── 📄 MIXED_REALITY_SHOWCASE.md
     ├── 📄 EXTRA_ASSETS.md
     ├── 📄 INSTRUCTOR_GUIDE.md
     ├── 📄 FAQ.md
@@ -118,6 +119,7 @@
 - Jak Git? → REPOSITORY_SETUP.md
 - Jak zbudować aplikację PC/Android/Quest? → BUILD_AND_DEPLOY.md
 - Jak działają demonstratory XR? → XR_SHOWCASE.md
+- Jak połączyć kamerę, dłonie, ludzi i otoczenie z warstwą wirtualną? → MIXED_REALITY_SHOWCASE.md
 - Do czego służą dodatkowe prefaby, materiały i HDRI? → EXTRA_ASSETS.md
 - Jak oceniam? → GRADING_MATRIX.md
 
