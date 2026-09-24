@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- dodano zestaw `Mobile AR Showcase` z pięcioma prefabami przeznaczonymi na smartfon: `AR_TapPlacement`, `AR_ImageMarkerPortal`, `AR_WorldRuler`, `AR_LightMatchObject` i `AR_SurfacePainter`;
+- `WiRRMobileARTapPlacement` obsługuje reticle, tap-to-place, zewnętrzny hit plane/depth oraz fallback `Physics.Raycast` do testów w Editorze;
+- `WiRRMobileARImageAnchor` przyjmuje pose i fizyczny rozmiar obrazu referencyjnego oraz płynnie skaluje/zakotwicza zawartość;
+- `WiRRMobileARRuler` implementuje dwupunktowy pomiar w metrach, linię, podziałkę oraz `DistanceMeters` dostępne dla własnego UI;
+- `WiRRMobileARLightMatch` przyjmuje znormalizowaną jasność, kolor i kierunek głównego światła i dopasowuje wirtualne oświetlenie;
+- `WiRRMobileARSurfacePainter` umożliwia rysowanie po realnych powierzchniach przez drag i używa puli 120 markerów bez runtime instantiate;
+- dodano pięć starterów integracji AR Foundation dla raycastu, image tracking, ruler, light estimation i surface painter; startery trafiają do projektu studenta i nie są automatycznie nadpisywane;
+- dodano okno `WiRR → Pomoc → Mobile AR: telefon` oraz dokument `MOBILE_AR_SHOWCASE.md` z procedurą uruchomienia, walidacji i propozycjami dalszej rozbudowy;
+
 - dodano zestaw `Mixed Reality Showcase` z pięcioma prefabami: `MR_CameraWindow`, `MR_HandAura`, `MR_PeopleAwareness`, `MR_SpatialSurfaceScanner` i `MR_WallPortal`;
 - `WiRRCameraFeedMixer` obsługuje `WebCamTexture`, zewnętrzną `Texture`, mirrorowanie obrazu i kontrolowane uruchamianie/zatrzymywanie kamery;
 - `WiRRHandAura` przyjmuje pozycję nadgarstka oraz pięciu opuszków, wizualizuje śledzoną dłoń i wyznacza `Pinch01` z odległości kciuk–wskazujący;
