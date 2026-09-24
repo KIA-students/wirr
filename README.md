@@ -133,7 +133,7 @@ Ruchome platformy **nie mają automatycznie skonfigurowanego XRI Teleportation A
 
 ## Dodatkowy model Unitree G1 EDU
 
-W katalogu głównym pakietu znajduje się `RoboAnimation.unitypackage`. Zawiera model 3D humanoidalnego robota **Unitree G1 EDU** oraz przykładowe klipy animacji. W panelu **Scena i pomiary → Dodatkowe modele 3D** można otworzyć standardowy import Unity przyciskiem **Importuj Unitree G1 EDU + animacje**.
+W katalogu głównym pakietu znajduje się `RoboAnimation.unitypackage`. Zawiera model 3D humanoidalnego robota **Unitree G1 EDU** oraz przykładowe klipy animacji. W panelu **Scena i pomiary → Dodatkowe modele 3D** można otworzyć standardowy import Unity przyciskiem **Importuj Unitree G1 EDU + animacje**. Import odbywa się przez standardowe okno Unity, dzięki czemu przed zatwierdzeniem student widzi listę dodawanych zasobów.
 
 Model jest opcjonalnym zasobem uzupełniającym:
 - w **Lab 05** może służyć jako złożony, wieloczęściowy model porównawczy do audytu kosztu renderowania, pamięci, materiałów i LOD;
