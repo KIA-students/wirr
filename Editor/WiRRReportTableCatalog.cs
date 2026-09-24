@@ -237,7 +237,9 @@ namespace KIA.WiRR.Editor
             "4.5" => new[] {
                 T("lab01_phy_a", "PHY-A: dynamiczne Rigidbody", new[]{"0","25","50","100","200","400","800"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Physics ms","Delta FPS %"}),
                 T("lab01_phy_c", "PHY-C: Fixed Timestep", new[]{"0.0333","0.0250","0.0200","0.0167","0.0133","0.0111"}, new[]{"kroki/s","FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Physics ms"}) },
-            "5.0" => new[] { T("lab01_quest_tests", "Quest 3: testy funkcjonalne", new[]{"obrót głowy","translacja głowy","lewy kontroler","prawy kontroler","Select","standalone bez Link"}, new[]{"Wynik","Uwagi"}) },
+            "5.0" => new[] {
+                T("lab01_quest_tests", "Quest 3: testy funkcjonalne", new[]{"obrót głowy","translacja głowy","lewy kontroler","prawy kontroler","Select","standalone bez Link"}, new[]{"Wynik","Uwagi"}),
+                T("lab01_quest_performance", "PC i Quest standalone: pomiary porównawcze", new[]{"PC","Quest standalone"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","ms 1","ms 2","ms 3","Mediana ms","Uwagi"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
 
@@ -255,7 +257,7 @@ namespace KIA.WiRR.Editor
 
         private static IReadOnlyList<WiRRReportTable> Lab03(string cp) => cp switch
         {
-            "3.0" => new[] { T("lab03_tracking_conditions", "Tracking: warunki eksperymentalne", new[]{"A","B","C"}, new[]{"Powt. 1 s","Powt. 2 s","Powt. 3 s","Mediana s","notTrackingReason/uwagi"}) },
+            "3.0" => new[] { T("lab03_tracking_conditions", "Tracking i pierwsza płaszczyzna: warunki eksperymentalne", new[]{"A","B","C"}, new[]{"Tracking 1 s","Tracking 2 s","Tracking 3 s","Mediana tracking s","Płaszczyzna 1 s","Płaszczyzna 2 s","Płaszczyzna 3 s","Mediana płaszczyzny s","notTrackingReason/uwagi"}) },
             "3.5" => new[] { T("lab03_placement", "Raycast i placement", new[]{"A","B","C"}, new[]{"Poprawne trafienia /10","Mediana błędu mm","Uwagi"}) },
             "4.0" => new[] {
                 T("lab03_drift", "Kotwica: pomiar po powrocie", new[]{"1","2","3"}, new[]{"Błąd końcowy mm","Tracking","notTrackingReason","Uwagi"}),
@@ -300,7 +302,9 @@ namespace KIA.WiRR.Editor
             "3.0" => new[] {
                 T("lab06_environment", "Konfiguracja środowiska", new[]{"ROS 2","Gazebo Sim","ros_gz","gz_ros2_control","Robot","ROS-TCP Connector","Endpoint","IPv4 hosta","Port","Transport"}, new[]{"Wartość"}),
                 T("lab06_robot_motion", "Test ruchu robota", new[]{"Próba 1","Próba 2","Próba 3"}, new[]{"Komenda joint1","Komenda joint2","JointState joint1","JointState joint2","Gazebo/Unity zgodne?"}) },
-            "3.5" => new[] { T("lab06_mapping", "Mapowanie JointState → Unity", new[]{"joint1","joint2","joint3"}, new[]{"Obiekt Unity","Typ","Oś lokalna","sign","offset","Jednostka"}) },
+            "3.5" => new[] {
+                T("lab06_mapping", "Mapowanie JointState → Unity", new[]{"joint1","joint2","joint3"}, new[]{"Obiekt Unity","Typ","Oś lokalna","sign","offset","Jednostka"}),
+                T("lab06_mapping_check", "Trzy pozycje kontrolne przegubów", new[]{"Pozycja 1","Pozycja 2","Pozycja 3"}, new[]{"joint1 źródło deg","joint1 Unity deg","joint1 błąd deg","joint2 źródło deg","joint2 Unity deg","joint2 błąd deg","joint3 źródło deg","joint3 Unity deg","joint3 błąd deg"}) },
             "4.0" => new[] {
                 T("lab06_interarrival", "Inter-arrival: pierwsze 30 próbek", new[]{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"}, new[]{"inter-arrival ms"}),
                 T("lab06_buffer", "Buforowanie i interpolacja: wariant v3", new[]{"A","B","C"}, new[]{"Źródło","Hz","Delay ms","Buffer","T średnie ms","sT ms","Płynność"}),

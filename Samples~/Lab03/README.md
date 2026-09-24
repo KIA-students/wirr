@@ -18,8 +18,8 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 ### 3.0: Tracking i płaszczyzny
 
 1. Uruchom aplikację na urządzeniu i zmierz czas do SessionTracking.
-2. Zmierz czas do pierwszej użytecznej płaszczyzny.
-3. Powtórz po trzy razy dla warunków A/B/C; zapisuj notTrackingReason.
+2. Zmierz osobno czas do pierwszej użytecznej płaszczyzny.
+3. Dla każdego warunku A/B/C wykonaj trzy próby i zapisz oba czasy dla każdej próby; zapisuj też notTrackingReason.
 4. Opisz warunki otoczenia i ograniczenia pomiaru.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.

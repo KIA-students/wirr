@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 0.8.2 (2026-09-24)
+
+- po pierwszej instalacji danej wersji w konkretnym projekcie `WiRR Course Toolkit` otwiera się automatycznie jeden raz i od razu wskazuje kolejny krok;
+- każdy punkt kontrolny w `WiRR Course Toolkit` pokazuje teraz bezpośrednio obowiązkowe pola wyniku oraz wszystkie tabele pomiarowe z formularza raportu;
+- uzupełniono surowe pomiary PC–Quest w Lab 01, osobne serie czasu do `SessionTracking` i pierwszej płaszczyzny w Lab 03 oraz trzy pozycje kontrolne JointState→Unity w Lab 06;
+- Lab 05 jawnie wymaga pomiaru czasu importu zasobu, zgodnie z obowiązkowym polem formularza;
+- dodano narzędzie importu `RoboAnimation.unitypackage` z modeliem 3D humanoidalnego robota Unitree G1 EDU i przykładowymi animacjami;
+- model Unitree G1 EDU jest dostępny jako dodatkowy zasób szczególnie dla Lab 05, Lab 06 i Lab 07; przykładowe animacje nie są traktowane jako źródło JointState ani referencja pomiarowa bliźniaka cyfrowego;
+- workflow wydania sprawdza obecność pakietu modelu i narzędzia importującego przed publikacją.
+
+
 ## 0.8.1 (2026-09-23)
 
 - dodano katalog zadań `WiRRLabTaskCatalog` dla laboratoriów 01–07, zgodny z punktami kontrolnymi 3.0–5.0 i polami raportu;

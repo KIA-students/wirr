@@ -71,11 +71,11 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - Moderator: __________
 - Warunki: __________
 
-| Warunek | Powtórzenie 1 [s] | Powtórzenie 2 [s] | Powtórzenie 3 [s] | Mediana [s] | notTrackingReason / uwagi |
-|---|---:|---:|---:|---:|---|
-| A | | | | | |
-| B | | | | | |
-| C (jeśli dotyczy) | | | | | |
+| Warunek | Tracking 1 [s] | Tracking 2 [s] | Tracking 3 [s] | Mediana tracking [s] | Płaszczyzna 1 [s] | Płaszczyzna 2 [s] | Płaszczyzna 3 [s] | Mediana płaszczyzny [s] | notTrackingReason / uwagi |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| A | | | | | | | | | |
+| B | | | | | | | | | |
+| C (jeśli dotyczy) | | | | | | | | | |
 
 **Odpowiedź na pytanie badawcze:** __________
 

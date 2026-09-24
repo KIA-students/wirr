@@ -68,8 +68,8 @@ namespace KIA.WiRR.Editor
                     {
                         "Zweryfikuj na Meta Horizon Link obrót i translację głowy, oba kontrolery oraz akcję Select; traktuj Link wyłącznie jako test funkcjonalny.",
                         "Zbuduj i uruchom aplikację jako standalone na Quest 3, bez aktywnego Link.",
-                        "Sprawdź działanie 6DoF, kontrolerów i sceny, a następnie wykonaj co najmniej trzy pomiary bazowe standalone.",
-                        "Powtórz wybrany eksperyment kontrolny na PC i Quest 3 przy możliwie zbliżonych warunkach oraz porównaj kierunek i skalę efektu."
+                        "Sprawdź działanie 6DoF, kontrolerów i sceny, a następnie wykonaj trzy pomiary standalone: FPS i ms/klatkę.",
+                        "W tych samych możliwie zbliżonych warunkach wykonaj trzy pomiary na PC; zapisz obie serie w tabeli PC/Quest, policz mediany i porównaj kierunek oraz skalę efektu."
                     },
                     "Dowód: test funkcjonalny Quest, pomiary standalone i porównanie PC z Quest w sekcji 5.0.")
             },
@@ -127,8 +127,8 @@ namespace KIA.WiRR.Editor
                     new[]
                     {
                         "Skonfiguruj AR Session, XR Origin dla AR oraz wykrywanie płaszczyzn i uruchom aplikację na obsługiwanym urządzeniu.",
-                        "Zmierz czas od startu do SessionTracking oraz czas do wykrycia pierwszej użytecznej płaszczyzny.",
-                        "Wykonaj trzy powtórzenia dla każdego warunku A/B/C; zapisuj czas oraz notTrackingReason, jeżeli tracking nie jest dostępny.",
+                        "Zmierz osobno czas od startu do SessionTracking oraz czas do wykrycia pierwszej użytecznej płaszczyzny.",
+                        "Wykonaj trzy powtórzenia dla każdego warunku A/B/C; zapisuj oba czasy dla każdej próby oraz notTrackingReason, jeżeli tracking nie jest dostępny.",
                         "Opisz warunki otoczenia i najważniejsze ograniczenie pomiaru, tak aby wynik można było odtworzyć."
                     },
                     "Dowód: czasy trackingu i płaszczyzny dla A/B/C oraz opis notTrackingReason."),
@@ -241,8 +241,8 @@ namespace KIA.WiRR.Editor
                     new[]
                     {
                         "Skonfiguruj LOD Group dla LOD0, LOD1 i LOD2; sprawdź przejścia w odległości oraz brak znikania kluczowych elementów modelu.",
-                        "Wykonaj trzy próby benchmarku dla wariantów A, B i C w tym samym miejscu pomiaru: Editor albo Build.",
-                        "Zapisuj mean/median/p95 czasu klatki, FPS, triangles, renderers, material slots, CPU ms, GPU ms, batches i pamięć.",
+                        "Zmierz czas importu wybranego wariantu zasobu, a następnie wykonaj trzy próby benchmarku dla wariantów A, B i C w tym samym miejscu pomiaru: Editor albo Build.",
+                        "Zapisuj czas importu, mean/median/p95 czasu klatki, FPS, triangles, renderers, material slots, CPU ms, GPU ms, batches i pamięć.",
                         "Porównaj redukcję geometrii z rzeczywistą zmianą kosztu klatki i wskaż, gdzie dalsze upraszczanie przestaje dawać proporcjonalny zysk."
                     },
                     "Dowód: geometrie LOD, konfiguracja LOD Group i trzyserie benchmarku."),
@@ -281,8 +281,8 @@ namespace KIA.WiRR.Editor
                     {
                         "Dla każdego przegubu zapisz obiekt Unity, typ ruchu, oś lokalną, sign, offset i jednostkę.",
                         "Mapuj po polu name wiadomości JointState i sprawdź odporność na inną kolejność elementów w tablicy position.",
-                        "Ustaw trzy znane pozycje robota i porównaj kąt joint1, joint2 i joint3 między źródłem a Unity.",
-                        "Policz błąd w stopniach dla każdego przegubu i wyjaśnij ewentualny znak, offset lub różnicę konwencji osi."
+                        "Ustaw trzy znane pozycje robota i dla każdej zapisz kąty joint1, joint2 i joint3 zarówno w źródle, jak i w Unity.",
+                        "Dla każdej z trzech pozycji policz błąd w stopniach dla każdego przegubu, a następnie wyjaśnij ewentualny znak, offset lub różnicę konwencji osi."
                     },
                     "Dowód: tabela mapowania i błędy przegubów w sekcji 3.5."),
                 new WiRRLabTask("4.0", "Transport, jitter i bufor interpolacji", "Zmierz regularność danych i wpływ bufora na płynność oraz opóźnienie.",

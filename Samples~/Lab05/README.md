@@ -10,8 +10,9 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 4. Użyj **Utwórz / napraw aktywną scenę**.
 5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
 6. Przygotuj model CAD i co najmniej dwa alternatywne formaty/ustawienia eksportu.
-7. Utwórz scenę Lab05 i geometrię referencyjną do kontroli skali.
-8. Wszystkie benchmarki wykonuj w tych samych warunkach Editor/Build i na tej samej kamerze.
+7. Opcjonalnie w sekcji **Scena i pomiary → Dodatkowe modele 3D** zaimportuj model **Unitree G1 EDU + animacje** jako dodatkowy, bardziej złożony zasób porównawczy. Nie zastępuje on obowiązkowego modelu CAD.
+8. Utwórz scenę Lab05 i geometrię referencyjną do kontroli skali.
+9. Wszystkie benchmarki wykonuj w tych samych warunkach Editor/Build i na tej samej kamerze.
 
 ## Zadania krok po kroku
 
@@ -36,9 +37,10 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 ### 4.0: LOD i benchmark
 
 1. Skonfiguruj LOD Group i sprawdź przejścia między poziomami.
-2. Wykonaj po trzy próby benchmarku dla A/B/C.
-3. Zapisz mean/median/p95, FPS, triangles, renderers, material slots, CPU/GPU ms, batches i pamięć.
-4. Wskaż punkt, w którym dalsza redukcja geometrii nie daje proporcjonalnego zysku.
+2. Zmierz czas importu wybranego wariantu zasobu.
+3. Wykonaj po trzy próby benchmarku dla A/B/C.
+4. Zapisz czas importu, mean/median/p95, FPS, triangles, renderers, material slots, CPU/GPU ms, batches i pamięć.
+5. Wskaż punkt, w którym dalsza redukcja geometrii nie daje proporcjonalnego zysku.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
@@ -73,6 +75,7 @@ Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dy
 1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
 2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab05/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
 3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
+4. **Importuj Unitree G1 EDU + animacje** — otwiera `RoboAnimation.unitypackage`; model może być dodatkowym przypadkiem porównawczym, ale nie zastępuje obowiązkowego zasobu CAD ani jego pipeline'u.
 
 Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
 

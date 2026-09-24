@@ -60,6 +60,8 @@ jobs:
               "README.md",
               "CHANGELOG.md",
               "LICENSE",
+              "RoboAnimation.unitypackage",
+              "RoboAnimation.unitypackage.meta",
           ]
           missing = [path for path in required if not (root / path).exists()]
           if missing:
@@ -81,6 +83,8 @@ jobs:
               "WiRRSurfaceTextureLibrary.cs",
               "WiRROptionalPrefabTools.cs",
               "WiRRDynamicPrefabTools.cs",
+              "WiRRAdditionalModelTools.cs",
+              "WiRROnboarding.cs",
           ):
               source = root / "Editor" / editor_file
               meta = root / "Editor" / f"{editor_file}.meta"
@@ -142,14 +146,35 @@ jobs:
           if len(samples) != 7:
               raise SystemExit(f"Oczekiwano 7 próbek laboratoriów, znaleziono: {len(samples)}")
 
+          checkpoints = ("3.0", "3.5", "4.0", "4.5", "5.0")
+          task_source = (root / "Editor" / "WiRRLabTaskCatalog.cs").read_text(encoding="utf-8")
+          table_source = (root / "Editor" / "WiRRReportTableCatalog.cs").read_text(encoding="utf-8")
+          schema_source = (root / "Editor" / "WiRRReportSchemaCatalog.cs").read_text(encoding="utf-8")
+
+          if task_source.count("new WiRRLabTask(") != 35:
+              raise SystemExit("Katalog zadań nie zawiera dokładnie 7 × 5 checkpointów.")
+
+          for checkpoint in checkpoints:
+              if task_source.count(f'new WiRRLabTask("{checkpoint}"') != 7:
+                  raise SystemExit(f"Niespójny katalog zadań dla checkpointu {checkpoint}.")
+              if table_source.count(f'"{checkpoint}" =>') != 7:
+                  raise SystemExit(f"Niespójny katalog tabel pomiarowych dla checkpointu {checkpoint}.")
+              if schema_source.count(f', "{checkpoint}",') != 7:
+                  raise SystemExit(f"Niespójny schemat raportów dla checkpointu {checkpoint}.")
+
           for number, sample in enumerate(samples, 1):
               expected_prefix = f"Laboratorium {number:02d}:"
               name = sample.get("displayName", "")
               path = sample.get("path", "")
               if not name.startswith(expected_prefix):
                   raise SystemExit(f"Niespójna nazwa próbki {number}: {name}")
-              if not (root / path).exists():
+              sample_root = root / path
+              if not sample_root.exists():
                   raise SystemExit(f"Brak katalogu próbki: {path}")
+              guide = (sample_root / "README.md").read_text(encoding="utf-8")
+              for checkpoint in checkpoints:
+                  if f"### {checkpoint}" not in guide:
+                      raise SystemExit(f"Brak checkpointu {checkpoint} w instrukcji próbki Lab {number:02d}.")
 
           Path("release-version.txt").write_text(version, encoding="utf-8")
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:

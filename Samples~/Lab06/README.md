@@ -12,6 +12,7 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 6. Wybierz jedną topologię: LOCAL, LAN albo WEBSIM.
 7. Dla WebSim uruchom `docker compose up --build`, ustaw adres WebSocket, kod sesji i model; dla LOCAL/LAN uruchom ROS 2 i Gazebo.
 8. Utwórz model w Unity, uruchom Play Mode i uzyskaj stan LIVE przed pomiarami.
+9. Opcjonalnie zaimportuj **Unitree G1 EDU + animacje** z sekcji **Scena i pomiary → Dodatkowe modele 3D** jako dodatkową reprezentację wizualną. Klipy animacji nie zastępują `JointState` i nie są źródłem danych pomiarowych.
 
 ## Zadania krok po kroku
 
@@ -28,8 +29,8 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Dla każdego joint zapisz obiekt Unity, oś, sign, offset i jednostkę.
 2. Mapuj po nazwie joint, nie po indeksie tablicy position.
-3. Ustaw trzy znane pozycje i porównaj joint1/joint2/joint3 między źródłem a Unity.
-4. Policz błąd w stopniach i wyjaśnij różnice konwencji.
+3. Ustaw trzy znane pozycje i dla każdej zapisz joint1/joint2/joint3 osobno w źródle oraz w Unity.
+4. Dla każdej pozycji policz błąd każdego przegubu w stopniach i wyjaśnij różnice konwencji.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
@@ -73,6 +74,7 @@ Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dy
 1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
 2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab06/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
 3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
+4. **Importuj Unitree G1 EDU + animacje** — dodatkowy model humanoidalny do wizualizacji i prób sceny. W obowiązkowych pomiarach mapowania używaj danych ze źródła ROS 2/WebSim; animacja modelu nie jest referencją JointState.
 
 Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
 
