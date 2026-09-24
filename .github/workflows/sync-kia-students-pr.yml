@@ -47,6 +47,8 @@ jobs:
       - name: Zbuduj publiczny snapshot
         id: export
         shell: bash
+        env:
+          SYNC_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
         run: |
           set -euo pipefail
 
@@ -97,7 +99,15 @@ jobs:
 
           git commit -m "sync: aktualizacja publicznego pakietu WiRR"
           export_sha="$(git rev-parse HEAD)"
-          git push --force origin "HEAD:refs/heads/${EXPORT_BRANCH}"
+
+          if [ -n "${SYNC_TOKEN}" ]; then
+            git -c http.extraHeader= push --force \
+              "https://x-access-token:${SYNC_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+              "HEAD:refs/heads/${EXPORT_BRANCH}"
+          else
+            echo "::warning::Brak KIA_STUDENTS_SYNC_TOKEN; gałąź eksportowa zostanie wysłana tokenem GitHub Actions."
+            git push --force origin "HEAD:refs/heads/${EXPORT_BRANCH}"
+          fi
 
           {
             echo "needs_pr=true"
@@ -258,10 +268,8 @@ jobs:
             fi
 
             if [ "${conclusion}" = "action_required" ]; then
-              echo "Kontrola #${run_id} wymaga zatwierdzenia; zatwierdzam i czekam na wykonanie."
-              gh api --method POST "repos/${UPSTREAM_REPOSITORY}/actions/runs/${run_id}/approve"
-              sleep 5
-              continue
+              echo "::error::Kontrola #${run_id} wymaga ręcznego zatwierdzenia. Gałąź eksportowa powinna być wysyłana tokenem właściciela, aby uniknąć tego stanu."
+              exit 1
             fi
 
             if [ "${status}" = "completed" ]; then
