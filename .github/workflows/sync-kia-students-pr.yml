@@ -215,6 +215,36 @@ jobs:
         run: |
           echo "Zmiany są objęte istniejącym Pull Requestem: ${{ steps.existing.outputs.url }}" >> "${GITHUB_STEP_SUMMARY}"
 
+      - name: Scal zweryfikowany Pull Request
+        if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          pr_number="$(
+            gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls" \
+              -f state=open \
+              -f base="${UPSTREAM_BRANCH}" \
+              -f head="MatPomGit:${EXPORT_BRANCH}" \
+              --jq '.[0].number // ""'
+          )"
+
+          if [ -z "${pr_number}" ]; then
+            echo "::error::Nie znaleziono otwartego Pull Requestu synchronizacji."
+            exit 1
+          fi
+
+          echo "Czekam na kontrole PR #${pr_number}."
+          gh pr checks "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --watch --interval 5
+          gh pr merge "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --merge
+
+          {
+            echo
+            echo "Zweryfikowany Pull Request #${pr_number} został scalony do ${UPSTREAM_REPOSITORY}."
+          } >> "${GITHUB_STEP_SUMMARY}"
+
       - name: Ostrzeż o odziedziczonej automatyzacji w repozytorium kursu
         if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true' && steps.existing.outputs.number != ''
         shell: bash
