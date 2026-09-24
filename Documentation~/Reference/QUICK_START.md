@@ -28,6 +28,7 @@ Wszystkie pliki znajdują się w: `/starter-files/`
    BUILD_AND_DEPLOY.md         (PC, Android, Quest 3)
    XR_SHOWCASE.md              (gotowe efekty 6DoF, gaze, distant interaction i skala)
    MIXED_REALITY_SHOWCASE.md    (kamera, dłonie, ludzie, depth/spatial mesh i ściany)
+   MIXED_REALITY_IMPLEMENTATION.md (adaptery, walidacja i dalsza rozbudowa MR)
    EXTRA_ASSETS.md             (dodatkowe modele, prefaby, HDRI)
    ```
 

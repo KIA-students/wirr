@@ -159,6 +159,13 @@ W sekcji **Scena i pomiary → Mixed Reality: świat rzeczywisty + wirtualny** z
 
 Pełny opis API, fallbacków, prywatności i scenariuszy integracji znajduje się w `Documentation~/Reference/MIXED_REALITY_SHOWCASE.md`.
 
+Dla studentów dostępna jest również szczegółowa ścieżka implementacyjna **WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa**. Okno prowadzi przez architekturę `provider → adapter → komponent WiRR → wizualizacja`, konwersję współrzędnych, lifecycle trackingu, walidację i proponowane rozszerzenia.
+
+Przycisk **Utwórz startery adapterów MR** generuje w `Assets/WiRR/LabXX/Scripts/MixedRealityAdapters` pięć kompilowalnych plików startowych. Są one własnym kodem studenta i nie są automatycznie nadpisywane. Dzięki nim zależność od Meta SDK, AR Foundation, XR Hands lub własnego CV/depth pozostaje w projekcie studenta, a nie w provider-neutralnym Runtime WiRR.
+
+Dokument `Documentation~/Reference/MIXED_REALITY_IMPLEMENTATION.md` zawiera pełną procedurę dla każdego elementu oraz propozycje rozbudowy w poziomach łatwy / średni / zaawansowany z przykładowymi metrykami.
+
+
 ## Dodatkowy model Unitree G1 EDU
 
 W katalogu głównym pakietu znajduje się `RoboAnimation.unitypackage`. Zawiera model 3D humanoidalnego robota **Unitree G1 EDU** oraz przykładowe klipy animacji. W panelu **Scena i pomiary → Dodatkowe modele 3D** można otworzyć standardowy import Unity przyciskiem **Importuj Unitree G1 EDU + animacje**. Import odbywa się przez standardowe okno Unity, dzięki czemu przed zatwierdzeniem student widzi listę dodawanych zasobów. Po imporcie model i animacje stają się zwykłymi zasobami projektu studenta i mogą być używane w scenach oraz pomiarach tak jak pozostałe modele.

@@ -100,7 +100,7 @@ Drugi zestaw pięciu demonstratorów pokazuje nie tylko wirtualne efekty XR, ale
 - **MR_SpatialSurfaceScanner** — wizualizacja punktów z depth/spatial mesh, z raycastowym fallbackiem do testów w Editorze;
 - **MR_WallPortal** — portal i wirtualna głębia kotwione do wykrytej ściany przez `WiRRWallAnchor` i `WiRRHeadParallax`.
 
-Każdy prefab ma gotową logikę Runtime i jednocześnie jawny punkt integracji z konkretnym providerem. Szczegółowy opis znajduje się w `Documentation~/Reference/MIXED_REALITY_SHOWCASE.md`.
+Każdy prefab ma gotową logikę Runtime i jednocześnie jawny punkt integracji z konkretnym providerem. Szczegółowy opis znajduje się w `Documentation~/Reference/MIXED_REALITY_SHOWCASE.md`. Jeżeli chcesz podłączyć realny sensor lub SDK i rozbudować prefab, użyj `MIXED_REALITY_IMPLEMENTATION.md` albo okna `WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa`; można tam również wygenerować pięć starterów adapterów do własnego folderu `Scripts`.
 
 ## Unitree G1 EDU
 
