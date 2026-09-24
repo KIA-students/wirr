@@ -55,8 +55,8 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Sprawdź przez Meta Horizon Link obrót/translację głowy, kontrolery i Select; Link traktuj tylko funkcjonalnie.
 2. Zbuduj aplikację standalone na Quest 3 i uruchom ją bez Link.
-3. Wykonaj co najmniej trzy pomiary baseline standalone i zweryfikuj 6DoF.
-4. Powtórz wybrany eksperyment na PC i Quest 3, a następnie porównaj kierunek i skalę efektu.
+3. Wykonaj trzy pomiary standalone i zapisz FPS oraz ms/klatkę; zweryfikuj 6DoF.
+4. W tych samych możliwie zbliżonych warunkach wykonaj trzy pomiary na PC, policz mediany dla obu platform i porównaj kierunek oraz skalę efektu.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
