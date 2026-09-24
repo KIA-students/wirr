@@ -102,6 +102,20 @@ Drugi zestaw pięciu demonstratorów pokazuje nie tylko wirtualne efekty XR, ale
 
 Każdy prefab ma gotową logikę Runtime i jednocześnie jawny punkt integracji z konkretnym providerem. Szczegółowy opis znajduje się w `Documentation~/Reference/MIXED_REALITY_SHOWCASE.md`. Jeżeli chcesz podłączyć realny sensor lub SDK i rozbudować prefab, użyj `MIXED_REALITY_IMPLEMENTATION.md` albo okna `WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa`; można tam również wygenerować pięć starterów adapterów do własnego folderu `Scripts`.
 
+## Mobile AR: rozszerzona rzeczywistość na telefonie
+
+Pakiet zawiera również pięć demonstratorów przeznaczonych specjalnie do AR na smartfonie:
+
+- **AR_TapPlacement** — reticle i umieszczanie obiektu przez tap na powierzchni plane/depth;
+- **AR_ImageMarkerPortal** — zawartość zakotwiona do rozpoznanego obrazu z Reference Image Library;
+- **AR_WorldRuler** — pomiar odległości w świecie przez dwa tapy;
+- **AR_LightMatchObject** — dopasowanie wirtualnego światła i materiału do estymacji oświetlenia kamery;
+- **AR_SurfacePainter** — rysowanie palcem po realnych powierzchniach z użyciem raycastu.
+
+Każdy element ma fallback do testów w Editorze i publiczne API dla AR Foundation. Przycisk `Utwórz startery AR Foundation` generuje kod studenta w `Assets/WiRR/LabXX/Scripts/MobileARAdapters` bez modyfikowania provider-neutralnego Runtime WiRR.
+
+Szczegóły znajdują się w `Documentation~/Reference/MOBILE_AR_SHOWCASE.md` oraz w `WiRR → Pomoc → Mobile AR: telefon`.
+
 ## Unitree G1 EDU
 
 `RoboAnimation.unitypackage` zawiera model 3D humanoidalnego robota Unitree G1 EDU oraz przykładowe animacje.

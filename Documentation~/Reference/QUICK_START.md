@@ -29,6 +29,7 @@ Wszystkie pliki znajdują się w: `/starter-files/`
    XR_SHOWCASE.md              (gotowe efekty 6DoF, gaze, distant interaction i skala)
    MIXED_REALITY_SHOWCASE.md    (kamera, dłonie, ludzie, depth/spatial mesh i ściany)
    MIXED_REALITY_IMPLEMENTATION.md (adaptery, walidacja i dalsza rozbudowa MR)
+   MOBILE_AR_SHOWCASE.md         (tap, image tracking, ruler, light estimation, painter)
    EXTRA_ASSETS.md             (dodatkowe modele, prefaby, HDRI)
    ```
 

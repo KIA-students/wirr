@@ -589,6 +589,59 @@ namespace KIA.WiRR.Editor
                     MessageType.Warning);
 
                 EditorGUILayout.Space(7);
+                EditorGUILayout.LabelField("Mobile AR: rozszerzona rzeczywistość na telefonie", EditorStyles.miniBoldLabel);
+                EditorGUILayout.HelpBox(
+                    "Pięć demonstratorów zaprojektowanych specjalnie pod smartfon z AR Foundation/ARCore: raycast z miejsca dotyku, marker obrazu, pomiar odległości, dopasowanie oświetlenia i rysowanie po realnych powierzchniach. Najbardziej pasują do Lab 03–04, ale można ich używać w dowolnym workspace.",
+                    MessageType.Info);
+
+                EditorGUILayout.HelpBox(
+                    "Tap Placement: umieszczanie obiektu na plane/depth. Image Marker Portal: zawartość zakotwiona do rozpoznanego obrazu. World Ruler: dwa tapy = pomiar w metrach. Light Match: obiekt reaguje na realne światło. Surface Painter: przeciąganie palcem tworzy wirtualny ślad na rzeczywistej powierzchni.",
+                    MessageType.None);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Tap Placement", GUILayout.Height(28)))
+                        WiRRMobileARShowcaseTools.CreateTapPlacement(lab.Number);
+                    if (GUILayout.Button("Image Marker Portal", GUILayout.Height(28)))
+                        WiRRMobileARShowcaseTools.CreateImagePortal(lab.Number);
+                }
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("World Ruler", GUILayout.Height(28)))
+                        WiRRMobileARShowcaseTools.CreateRuler(lab.Number);
+                    if (GUILayout.Button("Light Match Object", GUILayout.Height(28)))
+                        WiRRMobileARShowcaseTools.CreateLightMatch(lab.Number);
+                }
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Surface Painter", GUILayout.Height(28)))
+                        WiRRMobileARShowcaseTools.CreateSurfacePainter(lab.Number);
+                    if (GUILayout.Button("Dodaj cały zestaw Mobile AR", GUILayout.Height(28)))
+                        WiRRMobileARShowcaseTools.CreateAll(lab.Number);
+                }
+
+                if (GUILayout.Button("Usuń demonstratory Mobile AR ze sceny", GUILayout.Height(24)))
+                    WiRRMobileARShowcaseTools.RemoveShowcase(lab.Number);
+
+                if (WiRRMobileARShowcaseTools.ShowcaseExists(lab.Number))
+                    DrawInlineStatus("Demonstratory Mobile AR są aktywne. Fallback służy do testu logiki; tracking i dokładność sprawdź na fizycznym telefonie.", SuccessAccent);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Instrukcja Mobile AR", GUILayout.Height(30)))
+                        WiRRMobileARGuideWindow.Open(lab.Number);
+
+                    if (GUILayout.Button("Utwórz startery AR Foundation", GUILayout.Height(30)))
+                        WiRRMobileARAdapterTemplateTools.CreateAll(lab.Number);
+                }
+
+                EditorGUILayout.HelpBox(
+                    "Adaptery są tworzone w Assets/WiRR/LabXX/Scripts/MobileARAdapters i nie są automatycznie nadpisywane. To właściwe miejsce na ARRaycastManager, ARTrackedImageManager i ARCameraManager; Runtime WiRR pozostaje niezależny od konkretnej wersji AR Foundation.",
+                    MessageType.None);
+
+                EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("Dodatkowe modele 3D", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
                     "Pakiet zawiera dodatkowy model humanoidalnego robota Unitree G1 EDU z przykładowymi animacjami (RoboAnimation.unitypackage). Jest szczególnie przydatny w Lab 05 jako złożony zasób 3D, w Lab 06 jako dodatkowa reprezentacja wizualna robota oraz w Lab 07 jako realistyczny obiekt do testów wydajności i walidacji. Przykładowe animacje nie są pomiarem JointState ani źródłem prawdy dla bliźniaka cyfrowego.",

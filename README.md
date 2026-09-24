@@ -32,6 +32,7 @@ Pakiet zawiera:
 - **HDRI i skybox**: dziewięć środowisk HDR dostępnych po instalacji UPM, z automatycznym tworzeniem materiału `Skybox/Panoramic`;
 - **XR Showcase**: pięć gotowych efektów przestrzennych z własną logiką Runtime: portal paralaksy 6DoF, Gaze Bloom, Telekinesis Orb, Diegetic HUD i World Scale Totem;
 - **Mixed Reality Showcase**: pięć prefabów łączących warstwę wirtualną z kamerą, dłońmi, ludźmi, depth/spatial mesh i wykrytymi ścianami;
+- **Mobile AR Showcase**: pięć demonstratorów na smartfon: Tap Placement, Image Marker Portal, World Ruler, Light Match Object i Surface Painter;
 - **Build & Deploy**: instrukcja wewnątrz Unity dla Windows PC, smartfona z Androidem i Meta Quest 3, razem z ADB i Build Profiles.
 
 ## Instalacja
@@ -158,6 +159,21 @@ W sekcji **Scena i pomiary → Mixed Reality: świat rzeczywisty + wirtualny** z
 - **MR_WallPortal** + `WiRRWallAnchor` — wirtualny portal dopasowywany do wykrytej ściany przez `SetWallPlane(center, normal, size)`; zawartość za ścianą ma dodatkowo head-coupled parallax.
 
 Pełny opis API, fallbacków, prywatności i scenariuszy integracji znajduje się w `Documentation~/Reference/MIXED_REALITY_SHOWCASE.md`.
+
+## Mobile AR Showcase — AR na smartfonie
+
+W sekcji **Scena i pomiary → Mobile AR: rozszerzona rzeczywistość na telefonie** dostępnych jest pięć prefabów przeznaczonych pod dotyk, tylną kamerę i AR Foundation/ARCore:
+
+- **AR_TapPlacement** + `WiRRMobileARTapPlacement` — reticle śledzący plane/depth i umieszczanie obiektu przez tap;
+- **AR_ImageMarkerPortal** + `WiRRMobileARImageAnchor` — wirtualna zawartość kotwiona do rozpoznanego obrazu;
+- **AR_WorldRuler** + `WiRRMobileARRuler` — dwupunktowy pomiar dystansu z wynikiem `DistanceMeters`;
+- **AR_LightMatchObject** + `WiRRMobileARLightMatch` — adaptacja wirtualnego światła i materiałów do estymacji oświetlenia kamery;
+- **AR_SurfacePainter** + `WiRRMobileARSurfacePainter` — rysowanie po realnych powierzchniach podczas przeciągania palcem.
+
+Każdy komponent działa w Editorze z fallbackiem opartym na colliderach lub symulacji, ale dokładność AR należy testować na fizycznym telefonie. Generator starterów tworzy pięć plików integracyjnych w `Assets/WiRR/LabXX/Scripts/MobileARAdapters`, przeznaczonych do podłączenia `ARRaycastManager`, `ARTrackedImageManager` i `ARCameraManager`.
+
+Instrukcja w Unity: **WiRR → Pomoc → Mobile AR: telefon**. Dokumentacja: `Documentation~/Reference/MOBILE_AR_SHOWCASE.md`.
+
 
 Dla studentów dostępna jest również szczegółowa ścieżka implementacyjna **WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa**. Okno prowadzi przez architekturę `provider → adapter → komponent WiRR → wizualizacja`, konwersję współrzędnych, lifecycle trackingu, walidację i proponowane rozszerzenia.
 

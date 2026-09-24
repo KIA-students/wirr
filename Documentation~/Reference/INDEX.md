@@ -21,6 +21,7 @@
     ├── 📄 XR_SHOWCASE.md
     ├── 📄 MIXED_REALITY_SHOWCASE.md
     ├── 📄 MIXED_REALITY_IMPLEMENTATION.md
+    ├── 📄 MOBILE_AR_SHOWCASE.md
     ├── 📄 EXTRA_ASSETS.md
     ├── 📄 INSTRUCTOR_GUIDE.md
     ├── 📄 FAQ.md
@@ -122,6 +123,7 @@
 - Jak działają demonstratory XR? → XR_SHOWCASE.md
 - Jak połączyć kamerę, dłonie, ludzi i otoczenie z warstwą wirtualną? → MIXED_REALITY_SHOWCASE.md
 - Jak samodzielnie zaimplementować i rozbudować elementy MR? → MIXED_REALITY_IMPLEMENTATION.md
+- Jak używać gotowych demonstratorów AR na telefonie? → MOBILE_AR_SHOWCASE.md
 - Do czego służą dodatkowe prefaby, materiały i HDRI? → EXTRA_ASSETS.md
 - Jak oceniam? → GRADING_MATRIX.md
 
