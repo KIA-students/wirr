@@ -1,0 +1,75 @@
+name: Scal publiczny WiRR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/merge-kia-sync.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  merge:
+    if: github.repository == 'MatPomGit/wirr'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      UPSTREAM_REPOSITORY: KIA-students/wirr
+      UPSTREAM_BRANCH: main
+      EXPORT_BRANCH: sync/public-main
+    steps:
+      - name: Scal po zielonej kontroli publicznej
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          pr_number="$(
+            gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls" \
+              -f state=open \
+              -f base="${UPSTREAM_BRANCH}" \
+              -f head="MatPomGit:${EXPORT_BRANCH}" \
+              --jq '.[0].number // ""'
+          )"
+
+          if [ -z "${pr_number}" ]; then
+            echo 'Brak otwartego PR synchronizacji — nic do scalenia.'
+            exit 0
+          fi
+
+          head_sha="$(gh api "repos/${UPSTREAM_REPOSITORY}/pulls/${pr_number}" --jq '.head.sha')"
+          verified=false
+
+          for attempt in $(seq 1 60); do
+            run_json="$(
+              gh api --method GET "repos/${UPSTREAM_REPOSITORY}/actions/runs" \
+                -f event=pull_request \
+                -f head_sha="${head_sha}" \
+                -f per_page=20
+            )"
+            status="$(printf '%s' "${run_json}" | jq -r '.workflow_runs[] | select(.name == "Kontrola publicznej zawartości") | .status' | head -n1)"
+            conclusion="$(printf '%s' "${run_json}" | jq -r '.workflow_runs[] | select(.name == "Kontrola publicznej zawartości") | (.conclusion // "")' | head -n1)"
+
+            if [ "${status}" = "completed" ]; then
+              if [ "${conclusion}" = "success" ]; then
+                verified=true
+                break
+              fi
+              echo "::error::Kontrola publiczna zakończyła się wynikiem: ${conclusion}"
+              exit 1
+            fi
+
+            echo "Kontrola publiczna jeszcze trwa (${attempt}/60)."
+            sleep 5
+          done
+
+          if [ "${verified}" != "true" ]; then
+            echo '::error::Nie uzyskano zielonej kontroli publicznej.'
+            exit 1
+          fi
+
+          gh pr merge "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --merge
+          echo "Scalono PR #${pr_number} do ${UPSTREAM_REPOSITORY}."
