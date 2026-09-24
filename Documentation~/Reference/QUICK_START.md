@@ -22,9 +22,11 @@ Wszystkie pliki znajdują się w: `/starter-files/`
    evidence_template_lab07.md
    ```
 
-3. **Instrukcje Repozytorium** (przed Lab 1)
+3. **Instrukcje techniczne** (przed Lab 1)
    ```
    REPOSITORY_SETUP.md        (git workflow, struktura)
+   BUILD_AND_DEPLOY.md         (PC, Android, Quest 3)
+   EXTRA_ASSETS.md             (dodatkowe modele, prefaby, HDRI)
    ```
 
 ---
@@ -54,7 +56,7 @@ Wszystkie pliki znajdują się w: `/starter-files/`
    ```bash
    # Pobierz LAB1_STARTER_README.md
    # Przeczytaj checklist:
-   - [ ] Unity 2022 LTS zainstalowany
+   - [ ] Unity 6000.6.x zainstalowany
    - [ ] Projekt otwarty
    - [ ] Pakiety zainstalowane
    ```
