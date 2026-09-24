@@ -28,7 +28,9 @@ Pakiet zawiera:
 - **Raporty WiRR**: formularz, automatyczny zapis, tabele pomiarowe i raport JSON;
 - **Wysyłanie przez Git**: wysłanie raportu do repozytorium;
 - **Walidacja raportu w CI**: techniczną kontrolę integralności raportu;
-- **Unitree G1 EDU**: dodatkowy model humanoidalnego robota z przykładowymi animacjami, importowany z `RoboAnimation.unitypackage`.
+- **Unitree G1 EDU**: dodatkowy model humanoidalnego robota z przykładowymi animacjami, importowany z `RoboAnimation.unitypackage`;
+- **HDRI i skybox**: dziewięć środowisk HDR dostępnych po instalacji UPM, z automatycznym tworzeniem materiału `Skybox/Panoramic`;
+- **Build & Deploy**: instrukcja wewnątrz Unity dla Windows PC, smartfona z Androidem i Meta Quest 3, razem z ADB i Build Profiles.
 
 ## Instalacja
 
@@ -39,7 +41,7 @@ W Unity wybierz:
 Repozytorium studenckie:
 
 ```text
-https://github.com/KIA-students/wirr.git
+https://github.com/KIA-students/wirr.git#v0.9.0
 ```
 
 Pakiet znajduje się w katalogu głównym repozytorium. Po pierwszej instalacji danej wersji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wymagana wersja to Unity **6000.6.x** lub nowsza zgodna wersja 6000.6.
@@ -133,14 +135,42 @@ Ruchome platformy **nie mają automatycznie skonfigurowanego XRI Teleportation A
 
 ## Dodatkowy model Unitree G1 EDU
 
-W katalogu głównym pakietu znajduje się `RoboAnimation.unitypackage`. Zawiera model 3D humanoidalnego robota **Unitree G1 EDU** oraz przykładowe klipy animacji. Nazwa pliku w repozytorium to dokładnie `RoboAnimation.unitypackage`. W panelu **Scena i pomiary → Dodatkowe modele 3D** można otworzyć standardowy import Unity przyciskiem **Importuj Unitree G1 EDU + animacje**. Import odbywa się przez standardowe okno Unity, dzięki czemu przed zatwierdzeniem student widzi listę dodawanych zasobów. Po imporcie model i animacje stają się zwykłymi zasobami projektu studenta i mogą być używane w scenach oraz pomiarach tak jak pozostałe modele.
+W katalogu głównym pakietu znajduje się `RoboAnimation.unitypackage`. Zawiera model 3D humanoidalnego robota **Unitree G1 EDU** oraz przykładowe klipy animacji. W panelu **Scena i pomiary → Dodatkowe modele 3D** można otworzyć standardowy import Unity przyciskiem **Importuj Unitree G1 EDU + animacje**. Import odbywa się przez standardowe okno Unity, dzięki czemu przed zatwierdzeniem student widzi listę dodawanych zasobów. Po imporcie model i animacje stają się zwykłymi zasobami projektu studenta i mogą być używane w scenach oraz pomiarach tak jak pozostałe modele.
 
 Model jest opcjonalnym zasobem uzupełniającym:
 - w **Lab 05** może służyć jako złożony, wieloczęściowy model porównawczy do audytu kosztu renderowania, pamięci, materiałów i LOD;
 - w **Lab 06** może służyć jako dodatkowa reprezentacja wizualna robota podczas pracy z architekturą bliźniaka cyfrowego;
 - w **Lab 07** może być użyty jako realistyczne obciążenie sceny w testach wydajności, stabilności i regresji.
 
-Przykładowe animacje z pakietu służą do demonstracji ruchu. Nie są źródłem `JointState`, nie zastępują pomiarów ROS 2/WebSim i nie stanowią referencji poprawności mapowania przegubów. Import modelu jest opcjonalny i nie zmienia kryteriów zaliczenia żadnego laboratorium.
+Przykładowe animacje z pakietu służą do demonstracji ruchu. Nie są źródłem `JointState`, nie zastępują pomiarów ROS 2/WebSim i nie stanowią referencji poprawności mapowania przegubów. Import modelu jest opcjonalny i nie zmienia kryteriów zaliczenia żadnego laboratorium. Jeżeli model nie jest potrzebny w danym ćwiczeniu, można pominąć jego import i nie zwiększać niepotrzebnie rozmiaru projektu studenta.
+
+## HDRI i skybox
+
+WiRR 0.9.0 udostępnia w instalowalnym pakiecie dziewięć środowisk HDRI: Amsterdam, Clean Horizon, Day Sky, Evening Environment, Forrest, Indoor Environment, Near Lake, Night Sky i Tower.
+
+W panelu **Scena i pomiary → HDRI i skybox** student wybiera panoramę, widzi jej proponowane zastosowanie i może użyć **Ustaw wybrane HDRI jako Skybox**. Narzędzie tworzy edytowalny materiał `Skybox/Panoramic` w `Assets/WiRR/Common/Skyboxes`, przypisuje plik EXR i ustawia materiał jako skybox aktywnej sceny.
+
+Przykładowe zastosowania:
+- **Clean Horizon** — neutralne benchmarki i porównania materiałów;
+- **Amsterdam** — szkło, metal i złożone tło miejskie;
+- **Indoor Environment** — odbicia i materiały we wnętrzu;
+- **Night Sky** — emisja, sztuczne światła i czytelność UI w ciemności;
+- **Day Sky / Tower** — ekspozycja, sylwetka i otwarte środowisko;
+- **Forrest / Near Lake / Evening Environment** — warunki bardziej złożone percepcyjnie.
+
+Do oświetlenia używane są pliki `*_HDR.exr`; odpowiadające im pliki `*_TONEMAPPED.jpg` służą głównie jako podgląd LDR. Ręczna procedura znajduje się w `Textures/HDRI/README.md`: materiał `Skybox/Panoramic` → EXR → `Window → Rendering → Lighting` → `Environment → Skybox Material`.
+
+## Budowanie aplikacji na PC, Android i Quest 3
+
+W Unity dostępne jest okno **WiRR → Pomoc → Budowanie i instalacja**, a skrócony przycisk znajduje się także w sekcji **Scena i pomiary**. Instrukcja rozdziela trzy przypadki:
+
+- **Windows PC** — Build Profiles, Scene List, profil Standalone, `Build` / `Build And Run`, wynik `.exe + *_Data`;
+- **smartfon Android** — Android Build Support, SDK/NDK/OpenJDK, Debugowanie USB, `adb devices`, profil Android, ARCore w laboratoriach AR, instalacja przez `Build And Run` lub `adb install -r`;
+- **Meta Quest 3 standalone** — Developer Mode, ADB, profil Meta Quest/Android, OpenXR dla Android/Meta Quest, Meta Quest Support, ARM64 i instalacja APK na headset.
+
+Pakiet wyjaśnia również, dlaczego aplikacja PC i APK nie są tym samym buildem oraz dlaczego APK dla smartfona AR i Quest 3 może wymagać różnych providerów XR/AR, wejścia, uprawnień i ustawień renderowania. Meta Horizon Link jest opisany jako szybka ścieżka PC VR, a nie zamiennik pomiarów buildu standalone na Quest 3.
+
+Pełne materiały referencyjne: `Documentation~/Reference/EXTRA_ASSETS.md` oraz `Documentation~/Reference/BUILD_AND_DEPLOY.md`.
 
 ## Strona kursu (GitHub Pages)
 

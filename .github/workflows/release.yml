@@ -84,6 +84,8 @@ jobs:
               "WiRROptionalPrefabTools.cs",
               "WiRRDynamicPrefabTools.cs",
               "WiRRAdditionalModelTools.cs",
+              "WiRRHdriTools.cs",
+              "WiRRBuildGuideWindow.cs",
               "WiRROnboarding.cs",
           ):
               source = root / "Editor" / editor_file
@@ -120,6 +122,35 @@ jobs:
 
           if not (root / "THIRD_PARTY_TEXTURES.md").is_file():
               raise SystemExit("Brak THIRD_PARTY_TEXTURES.md")
+
+          required_docs = (
+              root / "Documentation~" / "Reference" / "EXTRA_ASSETS.md",
+              root / "Documentation~" / "Reference" / "BUILD_AND_DEPLOY.md",
+              root / "Textures" / "HDRI" / "README.md",
+          )
+          for document in required_docs:
+              if not document.is_file():
+                  raise SystemExit(f"Brak wymaganej dokumentacji: {document}")
+
+          hdri_root = root / "Textures" / "HDRI"
+          required_hdri = {
+              "Amsterdam": "DayEnvironmentHDRI101_2K_HDR.exr",
+              "CleanHorizon": "DaySkyHDRI006B_2K_HDR.exr",
+              "DaySky": "DaySkyHDRI046A_2K_HDR.exr",
+              "EveningEnvironment": "EveningEnvironmentHDRI003_2K_HDR.exr",
+              "Forrest": "DayEnvironmentHDRI078_2K_HDR.exr",
+              "IndoorEnvironment": "IndoorEnvironmentHDRI012_2K_HDR.exr",
+              "NearLake": "DayEnvironmentHDRI096_2K_HDR.exr",
+              "NightSky": "NightSkyHDRI008_2K_HDR.exr",
+              "Tower": "DaySkyHDRI039A_2K_HDR.exr",
+          }
+          for folder, filename in required_hdri.items():
+              hdri = hdri_root / folder / filename
+              if not hdri.is_file() or hdri.stat().st_size < 1_000_000:
+                  raise SystemExit(f"Brak lub nieprawidłowy plik HDRI: {hdri}")
+
+          if len(list(hdri_root.glob("*/*_HDR.exr"))) != 9:
+              raise SystemExit("Oczekiwano dokładnie 9 panoram HDRI EXR.")
 
           runtime_dynamic_files = (
               "WiRRLoopMotion.cs",
@@ -246,7 +277,9 @@ jobs:
           - obecność wszystkich siedmiu próbek laboratoriów;
           - składnię walidatora raportów;
           - testy punktacji SSQ;
-          - składnię aplikacji WebSim.
+          - składnię aplikacji WebSim;
+          - obecność dziewięciu panoram HDRI oraz instrukcji skybox;
+          - obecność wbudowanej instrukcji budowania PC / Android / Quest 3.
 
           Archiwa dołączone do wydania zawierają pakiet UPM oraz sumy kontrolne SHA-256.
           """

@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## 0.9.0 (2026-09-24)
+
+- dodano opisy proponowanych zastosowań przy dodatkowych materiałach dydaktycznych, prefabach Grid, demonstratorach materiałów, ruchu, fizyki i dźwięku oraz modelu Unitree G1 EDU;
+- przeniesiono dziewięć środowisk HDRI z projektu deweloperskiego do instalowalnej części pakietu `Textures/HDRI`, dzięki czemu są dostępne po instalacji UPM;
+- dodano `WiRRHdriTools` i sekcję „HDRI i skybox”: wybór panoramy, opis zastosowania oraz automatyczne utworzenie materiału `Skybox/Panoramic` i przypisanie go do aktywnej sceny;
+- dodano ręczną instrukcję zmiany skyboxa, opis różnicy między plikami HDR EXR i podglądami tonemapped JPG oraz zalecenia eksperymentalne dotyczące Exposure i Rotation;
+- dodano okno `WiRR → Pomoc → Budowanie i instalacja` z osobnymi procedurami dla Windows PC, smartfona z Androidem i Meta Quest 3;
+- instrukcja buildów obejmuje Build Profiles, Scene List, Android Build Support, SDK/NDK/OpenJDK, ADB, `adb devices`, `adb install -r`, OpenXR/Meta Quest, ARM64 oraz rozróżnienie Meta Horizon Link od buildu standalone;
+- dodano dokumenty `EXTRA_ASSETS.md`, `BUILD_AND_DEPLOY.md` i `Textures/HDRI/README.md`;
+- workflow wydania sprawdza obecność nowych narzędzi, dokumentacji i komplet dziewięciu panoram HDRI przed publikacją.
+
+
 ## 0.8.2 (2026-09-24)
 
 - po pierwszej instalacji danej wersji w konkretnym projekcie `WiRR Course Toolkit` otwiera się automatycznie jeden raz i od razu wskazuje kolejny krok;

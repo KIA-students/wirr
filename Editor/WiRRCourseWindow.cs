@@ -9,6 +9,7 @@ namespace KIA.WiRR.Editor
         private const string LabPrefKey = "KIA.WiRR.SelectedLab";
         private const string CourseUrl = "https://kia-students.github.io/wirr/";
         private const string TaskPrefPrefix = "KIA.WiRR.Task";
+        private const string HdriPrefKey = "KIA.WiRR.HdriIndex";
         private static WiRRCourseWindow openWindow;
 
         private static readonly Color HeaderAccent = new Color(0.12f, 0.63f, 0.86f);
@@ -381,7 +382,7 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("Materiały dydaktyczne", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
-                    "Opcjonalny zestaw rozpoznawalnych obiektów zastępuje pustą scenę i ręczne modelowanie prymitywów. Prefaby są generowane w Assets/WiRR/LabXX/Prefabs/Generated. Nie dodają za studenta komponentów XRI, AR ani mapowania ROS stanowiących cel ćwiczenia.",
+                    "Opcjonalne materiały dydaktyczne zapewniają powtarzalne otoczenie i obiekty eksperymentalne. Użyj „Dodaj środowisko” do kontroli skali 1:1, orientacji, nawigacji i wspólnego tła między zespołami. „Dodaj zestaw eksperymentalny” służy do szybkiego przygotowania powtarzalnych warunków A/B/C. Prefaby są generowane w Assets/WiRR/LabXX/Prefabs/Generated i nie konfigurują za studenta XRI, AR ani mapowania ROS.",
                     MessageType.Info);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -401,7 +402,7 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.Space(5);
                 EditorGUILayout.LabelField("Prefaby teksturowane Grid", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
-                    "Drugi zestaw pomocy scenicznych korzysta z rodzin grid-1, grid_2 i grid-4 (w narzędziu: Grid1, Grid2 i Grid3). Tekstury są kopiowane do Assets/WiRR/Common/Textures/Generated i używane do generowania edytowalnych materiałów URP.",
+                    "Prefaby Grid są powierzchniami referencyjnymi do kontroli skali i orientacji, testów jakości tekstur, odległości obserwacji i oświetlenia oraz jako punkty odniesienia w AR/XR. Korzystają z rodzin grid-1, grid_2 i grid-4; robocze kopie materiałów powstają w Assets/WiRR/Common.",
                     MessageType.None);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -421,7 +422,7 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("Opcjonalne laboratorium materiałów", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
-                    "Dodatkowe demonstratory do Lab 01 i Lab 05, ale dostępne w każdej scenie. Pokazują wpływ rozdzielczości tekstury, normal mapy, kanałów PBR, tilingu i mipmap oraz różnice między wieloma materiałami z biblioteki WiRR.",
+                    "Demonstratory materiałów są szczególnie przydatne w Lab 01 i 05. Galeria materiałów porównuje powierzchnie przy tym samym świetle; 128–1024 pokazuje kompromis ostrość–pamięć; Normal map rozdziela geometrię od pozornego detalu; Kanały PBR pokazują udział albedo/normal/roughness/metalness/AO; Tiling i mipmapy pomagają badać powtarzanie tekstury i aliasing.",
                     MessageType.Info);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -457,7 +458,7 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.Space(7);
                 EditorGUILayout.LabelField("Ruch, fizyka i dźwięk", EditorStyles.miniBoldLabel);
                 EditorGUILayout.HelpBox(
-                    "Opcjonalne prefaby działające w Play Mode. Pokazują ruch zapętlony, kinematyczne Rigidbody, triggery i impulsy, dźwięk proceduralny oraz sterowanie pojazdem. Platformy zawierają tylko TeleportAreaPlaceholder: komponent XRI student dodaje samodzielnie.",
+                    "Opcjonalne prefaby do eksperymentów w Play Mode. Unosząca i wahadłowa platforma nadają się do badań ruchu, układów odniesienia i komfortu XR; pojazd — do Input System i fizyki; wyrzutnia — do triggerów, impulsów i kolizji; beacon audio — do dźwięku przestrzennego i multimodalnej informacji zwrotnej. Platformy mają tylko TeleportAreaPlaceholder — XRI student konfiguruje samodzielnie.",
                     MessageType.Info);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -510,6 +511,48 @@ namespace KIA.WiRR.Editor
 
                 if (!WiRRAdditionalModelTools.UnitreePackageAvailable)
                     DrawInlineStatus("Brak RoboAnimation.unitypackage w zainstalowanym pakiecie WiRR.", WarningAccent);
+
+                EditorGUILayout.Space(7);
+                EditorGUILayout.LabelField("HDRI i skybox", EditorStyles.miniBoldLabel);
+                EditorGUILayout.HelpBox(
+                    "HDRI mogą zastąpić domyślny skybox i jednocześnie dostarczyć światło środowiskowe. W benchmarku traktuj zmianę HDRI, Exposure i Rotation jako zmianę warunku eksperymentalnego. Do skyboxa używaj plików *_HDR.exr; pliki *_TONEMAPPED.jpg są podglądem LDR.",
+                    MessageType.Info);
+
+                var hdriLabels = new string[WiRRHdriTools.Environments.Length];
+                for (var i = 0; i < hdriLabels.Length; i++)
+                    hdriLabels[i] = WiRRHdriTools.Environments[i].Name;
+
+                var hdriIndex = Mathf.Clamp(EditorPrefs.GetInt(HdriPrefKey, 0), 0, hdriLabels.Length - 1);
+                var nextHdri = EditorGUILayout.Popup("Środowisko HDRI", hdriIndex, hdriLabels);
+                if (nextHdri != hdriIndex)
+                {
+                    hdriIndex = nextHdri;
+                    EditorPrefs.SetInt(HdriPrefKey, hdriIndex);
+                }
+
+                EditorGUILayout.HelpBox(
+                    "Proponowane zastosowanie: " + WiRRHdriTools.Environments[hdriIndex].SuggestedUse,
+                    MessageType.None);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Ustaw wybrane HDRI jako Skybox", GUILayout.Height(28)))
+                        WiRRHdriTools.ApplySkybox(hdriIndex);
+                    if (GUILayout.Button("Pokaż katalog HDRI", GUILayout.Height(28)))
+                        WiRRHdriTools.RevealHdris();
+                }
+
+                EditorGUILayout.HelpBox(
+                    "Ręcznie: Packages → WiRR Course Toolkit → Textures → HDRI → wybierz EXR; utwórz Material ze shaderem Skybox/Panoramic; przypisz EXR; Window → Rendering → Lighting → Environment → Skybox Material. Exposure i Rotation reguluj na materiale.",
+                    MessageType.None);
+
+                EditorGUILayout.Space(7);
+                EditorGUILayout.LabelField("Budowanie i instalacja aplikacji", EditorStyles.miniBoldLabel);
+                EditorGUILayout.HelpBox(
+                    "PC i Android/Quest są osobnymi targetami. Różnią się formatem buildu, architekturą, XR/AR providerem, uprawnieniami i budżetem wydajności. Otwórz instrukcję przed pierwszym Build And Run albo przed pomiarem na urządzeniu.",
+                    MessageType.Info);
+                if (GUILayout.Button("Otwórz instrukcję PC / Android / Quest 3", GUILayout.Height(30)))
+                    WiRRBuildGuideWindow.Open();
 
                 if (lab.Number == 6)
                     EditorGUILayout.HelpBox(
