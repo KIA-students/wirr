@@ -222,10 +222,10 @@ namespace KIA.WiRR.Editor
                 new WiRRLabTask("3.0", "Import i audyt modelu CAD", "Ustal, co zmienia się między modelem źródłowym a zasobem używanym w Unity.",
                     new[]
                     {
-                        "Zapisz format źródłowy, łańcuch konwersji oraz informację, które cechy CAD są zachowywane lub tracone po eksporcie.",
-                        "Zaimportuj model do Unity, sprawdź jednostki, skalę i wymiary względem geometrii referencyjnej.",
+                        "Sprawdź obowiązkowy model Assets/WiRR/Lab05/Models/Source/makerbeam_bracket_90degree.stp, plik ATTRIBUTION.md i zachowaj STEP bez zmian.",
+                        "Wykonaj tessellację STEP do FBX lub OBJ, zapisz użyte narzędzie, tolerancję, jednostki i osie; do Unity importuj powstały mesh, a nie traktuj standardowego Model Importera jako importera STEP.",
                         "Wykonaj audyt topologii: vertices, triangles, submeshes, material slots, boundary, non-manifold, degenerate oraz wskaźniki jakości q05/qMedian.",
-                        "Porównaj warianty eksportu A/B/C i wskaż różnice w rozmiarze, hierarchii, UV, materiałach oraz wymiarach."
+                        "Porównaj FBX, OBJ i kontrolowany wariant STL pochodzące z tego samego źródła; wskaż różnice w rozmiarze, hierarchii, UV, materiałach oraz wymiarach."
                     },
                     "Dowód: audyt baseline i porównanie formatów/eksportu w sekcji 3.0."),
                 new WiRRLabTask("3.5", "Triangulacja i kandydaci LOD", "Zredukuj złożoność bez utraty cech istotnych funkcjonalnie.",
@@ -259,7 +259,7 @@ namespace KIA.WiRR.Editor
                     new[]
                     {
                         "Wprowadź kontrolowany błąd v5, wykonaj pomiar baseline, fault i repaired, zapisując geometrię, hierarchię, czas klatki i błąd funkcjonalny.",
-                        "Porównaj dostępne potoki: STEP→DCC→FBX/glTF, USD, bezpośrednia siatka lub inny uzasadniony wariant.",
+                        "Porównaj role STEP, FBX/OBJ/STL, USD oraz opisów robota URDF/MJCF; wskaż, gdzie znajduje się geometria, a gdzie hierarchia lub semantyka potrzebna do symulacji.",
                         "Wskaż najważniejsze ryzyko wybranego pipeline, np. skalę, triangulację, materiały, hierarchię, UV albo utratę semantyki CAD.",
                         "Wybierz finalny model XR i podsumuj kompromis między liczbą trójkątów, materiałami, wydajnością, pamięcią i jakością."
                     },

@@ -8,12 +8,30 @@
 
 ---
 
-## Model CAD
+## Model źródłowy
 
-- Nazwa modelu: _________________
-- Rozmiar oryginału: ___k poligonów
-- Skalowanie: Factor = ______
-- Root scale: (1, 1, 1) ? TAK / NIE
+- Model: `makerbeam_bracket_90degree.stp`
+- Format: STEP AP214 / B-Rep
+- Ścieżka: `Assets/WiRR/Lab05/Models/Source/`
+- Autor / źródło: Benjamin Aigner / FreeCAD Parts Library
+- Licencja zasobu: CC-BY-3.0
+- Model źródłowy zachowany bez zmian: TAK / NIE
+- Narzędzie tessellacji: __________________
+- Ustawienia tessellacji: __________________
+- Format pierwszego mesha po tessellacji: FBX / OBJ / inny: ______
+- Jednostka źródłowa: __________________
+- Wymiar referencyjny 1: __________________
+- Wymiar referencyjny 2: __________________
+- Root scale po poprawnym imporcie: (1, 1, 1) ? TAK / NIE
+
+## Łańcuch konwersji
+
+```text
+STEP -> __________________ -> __________________ -> Unity
+```
+
+- Informacja zachowana: __________________
+- Informacja utracona lub zmieniona: __________________
 
 ---
 

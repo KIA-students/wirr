@@ -23,6 +23,7 @@
     ├── 📄 MIXED_REALITY_IMPLEMENTATION.md
     ├── 📄 MOBILE_AR_SHOWCASE.md
     ├── 📄 EXTRA_ASSETS.md
+    ├── 📄 MODEL_FORMATS_AND_CONVERSION.md
     ├── 📄 INSTRUCTOR_GUIDE.md
     ├── 📄 FAQ.md
     ├── 📄 GRADING_MATRIX.md
@@ -125,6 +126,7 @@
 - Jak samodzielnie zaimplementować i rozbudować elementy MR? → MIXED_REALITY_IMPLEMENTATION.md
 - Jak używać gotowych demonstratorów AR na telefonie? → MOBILE_AR_SHOWCASE.md
 - Do czego służą dodatkowe prefaby, materiały i HDRI? → EXTRA_ASSETS.md
+- Jak rozróżniać i konwertować URDF, MJCF, USD, STEP, STL, OBJ i FBX? → MODEL_FORMATS_AND_CONVERSION.md
 - Jak oceniam? → GRADING_MATRIX.md
 
 **Dla prowadzącego:**
