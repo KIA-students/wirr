@@ -1,6 +1,6 @@
 {
   "name": "pl.prz.kia.wirr",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "WiRR Course Toolkit",
   "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i rozszerzona rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera interaktywne listy zadań dla punktów kontrolnych 3.0–5.0, generowane prefaby dydaktyczne, teksturowane zestawy Grid, bibliotekę materiałów PBR, dziewięć środowisk HDRI z narzędziem skybox, pięć demonstratorów XR, pięć demonstratorów Mixed Reality z adapterami niezależnymi od dostawcy danych oraz pięć demonstratorów Mobile AR na smartfon z integracją AR Foundation. Pakiet zawiera także model Unitree G1 EDU z animacjami, demonstratory ruchu, fizyki i dźwięku oraz wbudowane instrukcje budowania i instalowania aplikacji na PC, smartfonie z Androidem i Meta Quest 3. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
   "unity": "6000.6",

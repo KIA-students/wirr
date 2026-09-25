@@ -24,6 +24,18 @@ Wspólny model źródłowy jest celowy: wszystkie pary rozpoczynają od tej same
 
 Nie próbuj otwierać pliku STEP bezpośrednio standardowym Model Importerem Unity. Najpierw wykonaj tessellację w narzędziu CAD lub konwerterze, a do Unity zaimportuj np. FBX lub OBJ. STL wykorzystuj świadomie jako przykład reprezentacji o mniejszej ilości informacji.
 
+## Szybki wybór formatu
+
+- **STEP/STP**: źródło prawdy dla geometrii CAD i wymiarów.
+- **STL**: sama triangulowana powierzchnia; użyteczny jako świadomie stratny wariant.
+- **OBJ + MTL**: statyczny mesh z UV, normalnymi i podstawowymi materiałami; dobry do inspekcji i wymiany.
+- **FBX**: bogatszy asset DCC do Unity, z hierarchią, transformacjami, materiałami, riggingiem i animacją.
+- **URDF**: opis robota dla ROS; linki, jointy, visual/collision, limity i dane inertial, zwykle z osobnymi plikami mesh.
+- **MJCF**: opis modelu MuJoCo, w tym elementy symulacyjne, np. actuators, tendons, sensors i contact.
+- **USD**: kompozycja sceny z primów, warstw, referencji, wariantów i instancji; dobry dla złożonych scen i digital twins.
+
+Nie konwertuj „w ciemno”. Najpierw zapisz, które informacje są wymagane w kolejnym etapie pipeline'u. Jeżeli format docelowy nie potrafi ich przechować, utrata danych jest cechą konwersji, a nie błędem narzędzia.
+
 ## Zadania krok po kroku
 
 ### 3.0: Import i audyt CAD
