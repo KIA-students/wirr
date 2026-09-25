@@ -137,11 +137,26 @@ jobs:
               root / "Documentation~" / "Reference" / "MIXED_REALITY_SHOWCASE.md",
               root / "Documentation~" / "Reference" / "MIXED_REALITY_IMPLEMENTATION.md",
               root / "Documentation~" / "Reference" / "MOBILE_AR_SHOWCASE.md",
+              root / "Documentation~" / "Reference" / "MODEL_FORMATS_AND_CONVERSION.md",
               root / "Textures" / "HDRI" / "README.md",
           )
           for document in required_docs:
               if not document.is_file():
                   raise SystemExit(f"Brak wymaganej dokumentacji: {document}")
+
+          lab05_source = root / "Samples~" / "Lab05" / "Models" / "Source"
+          lab05_step = lab05_source / "makerbeam_bracket_90degree.stp"
+          lab05_attribution = lab05_source / "ATTRIBUTION.md"
+          if not lab05_step.is_file() or lab05_step.stat().st_size < 10_000:
+              raise SystemExit("Brak lub nieprawidłowy model STEP Lab 05.")
+          step_text = lab05_step.read_text(encoding="utf-8")
+          if not step_text.startswith("ISO-10303-21;") or "END-ISO-10303-21;" not in step_text:
+              raise SystemExit("Model referencyjny Lab 05 nie jest kompletnym plikiem STEP.")
+          if not lab05_attribution.is_file():
+              raise SystemExit("Brak atrybucji modelu referencyjnego Lab 05.")
+          attribution = lab05_attribution.read_text(encoding="utf-8")
+          if "Benjamin Aigner" not in attribution or "CC-BY-3.0" not in attribution:
+              raise SystemExit("Atrybucja modelu Lab 05 jest niekompletna.")
 
           hdri_root = root / "Textures" / "HDRI"
           required_hdri = {

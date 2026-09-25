@@ -1,6 +1,7 @@
 using System.IO;
 using KIA.WiRR;
 using UnityEditor;
+using UnityEditor.PackageManager;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -43,6 +44,7 @@ namespace KIA.WiRR.Editor
         public static void PrepareLabWorkspace(int labNumber)
         {
             EnsureFolders(labNumber);
+            EnsureReferenceAssets(labNumber);
             EnsureWorkspaceScene(labNumber);
             AssetDatabase.Refresh();
         }
@@ -242,6 +244,62 @@ namespace KIA.WiRR.Editor
 
                 Undo.DestroyObjectImmediate(marker);
             }
+        }
+
+        private static void EnsureReferenceAssets(int labNumber)
+        {
+            if (labNumber != 5)
+                return;
+
+            var packageInfo = PackageInfo.FindForPackageName("pl.prz.kia.wirr");
+            if (packageInfo == null || string.IsNullOrWhiteSpace(packageInfo.resolvedPath))
+            {
+                Debug.LogWarning("[WiRR] Nie można odnaleźć katalogu pakietu. Model referencyjny Lab 05 nie został skopiowany.");
+                return;
+            }
+
+            var copies = new[]
+            {
+                new
+                {
+                    Source = Path.Combine(packageInfo.resolvedPath, "Samples~", "Lab05", "Models", "Source", "makerbeam_bracket_90degree.stp"),
+                    TargetFolder = $"{GetLabRootPath(5)}/Models/Source",
+                    FileName = "makerbeam_bracket_90degree.stp"
+                },
+                new
+                {
+                    Source = Path.Combine(packageInfo.resolvedPath, "Samples~", "Lab05", "Models", "Source", "ATTRIBUTION.md"),
+                    TargetFolder = $"{GetLabRootPath(5)}/Models/Source",
+                    FileName = "ATTRIBUTION.md"
+                },
+                new
+                {
+                    Source = Path.Combine(packageInfo.resolvedPath, "Documentation~", "Reference", "MODEL_FORMATS_AND_CONVERSION.md"),
+                    TargetFolder = $"{GetLabRootPath(5)}/Documentation",
+                    FileName = "MODEL_FORMATS_AND_CONVERSION.md"
+                }
+            };
+
+            var copiedAny = false;
+            foreach (var copy in copies)
+            {
+                if (!File.Exists(copy.Source))
+                {
+                    Debug.LogWarning($"[WiRR] Brak zasobu referencyjnego Lab 05: {copy.Source}");
+                    continue;
+                }
+
+                EnsureFolder(copy.TargetFolder);
+                var target = Path.GetFullPath(Path.Combine(copy.TargetFolder, copy.FileName));
+                if (File.Exists(target))
+                    continue;
+
+                File.Copy(copy.Source, target, false);
+                copiedAny = true;
+            }
+
+            if (copiedAny)
+                Debug.Log($"[WiRR] Skopiowano model STEP i dokumentację Lab 05 do {GetLabRootPath(5)}.");
         }
 
         private static void EnsureFolder(string assetPath)

@@ -33,10 +33,13 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ## Model źródłowy
 
-- nazwa: __________
-- format źródłowy: STEP / STP / FBX / OBJ / STL / USD / USDZ / inny: __________
-- czy użyto importera USD / Pixyz / innego pluginu Unity: __________
-- program źródłowy: __________
+- obowiązkowy model referencyjny: `makerbeam_bracket_90degree.stp`
+- ścieżka: `Assets/WiRR/Lab05/Models/Source/`
+- format źródłowy: STEP AP214 / B-Rep
+- autor / pochodzenie: Benjamin Aigner / FreeCAD Parts Library
+- licencja zasobu: CC-BY-3.0
+- narzędzie użyte do tessellacji: __________
+- czy użyto dodatkowego importera / konwertera (USD, Pixyz, URDF Studio, Convert3D, inny): __________
 - jednostka źródłowa: __________
 - rozmiar pliku: __________
 - liczba części / obiektów: __________
@@ -49,6 +52,8 @@ SOURCE -> __________ -> __________ -> __________ -> Unity
 ```
 
 ### Informacja zachowana / utracona
+
+Przed wpisaniem wyniku określ, czy analizujesz geometrię CAD, mesh, opis robota czy opis sceny.
 
 | Etap | Format wejściowy | Format wyjściowy | Zachowane informacje | Utracone / zmienione informacje |
 |---|---|---|---|---|

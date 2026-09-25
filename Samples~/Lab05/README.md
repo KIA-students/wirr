@@ -9,10 +9,20 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
 4. Użyj **Utwórz / napraw aktywną scenę**.
 5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Przygotuj model CAD i co najmniej dwa alternatywne formaty/ustawienia eksportu.
-7. Opcjonalnie w sekcji **Scena i pomiary → Dodatkowe modele 3D** zaimportuj model **Unitree G1 EDU + animacje** jako dodatkowy, bardziej złożony zasób porównawczy. Nie zastępuje on obowiązkowego modelu CAD.
-8. Utwórz scenę Lab05 i geometrię referencyjną do kontroli skali.
-9. Wszystkie pomiary porównawcze wykonuj w tych samych warunkach Edytor/kompilacja i na tej samej kamerze.
+6. Użyj obowiązkowego modelu referencyjnego **makerbeam_bracket_90degree.stp**. Po przygotowaniu workspace plik powinien znajdować się w **Assets/WiRR/Lab05/Models/Source/** razem z plikiem **ATTRIBUTION.md**.
+7. Otwórz **Assets/WiRR/Lab05/Documentation/MODEL_FORMATS_AND_CONVERSION.md**. Dokument wyjaśnia różnice między URDF, MJCF, USD, STEP, STL, OBJ i FBX oraz podaje bezpieczne ścieżki konwersji.
+8. Zachowaj STEP bez zmian. W katalogu roboczym przygotuj co najmniej dwa warianty po tessellacji lub konwersji, np. FBX, OBJ i celowo stratny STL.
+9. Opcjonalnie w sekcji **Scena i pomiary → Dodatkowe modele 3D** zaimportuj model **Unitree G1 EDU + animacje** jako bardziej złożony zasób porównawczy. Nie zastępuje on obowiązkowego źródła STEP.
+10. Utwórz scenę Lab05 i geometrię referencyjną do kontroli skali.
+11. Wszystkie pomiary porównawcze wykonuj w tych samych warunkach Edytor/kompilacja i na tej samej kamerze.
+
+## Model referencyjny i pochodzenie
+
+Obowiązkowym źródłem jest **makerbeam_bracket_90degree.stp**, wspornik MakerBeam zapisany jako STEP AP214/B-Rep. Model pochodzi z FreeCAD Parts Library, autor: Benjamin Aigner, licencja zasobu: **CC-BY-3.0**. Pakiet nie zmienia licencji modelu. Szczegóły atrybucji znajdują się w **Models/Source/ATTRIBUTION.md**.
+
+Wspólny model źródłowy jest celowy: wszystkie pary rozpoczynają od tej samej geometrii, dzięki czemu można porównywać wpływ tessellacji, formatu pośredniego, topologii i LOD zamiast mieszać te czynniki z różnicami pomiędzy modelami.
+
+Nie próbuj otwierać pliku STEP bezpośrednio standardowym Model Importerem Unity. Najpierw wykonaj tessellację w narzędziu CAD lub konwerterze, a do Unity zaimportuj np. FBX lub OBJ. STL wykorzystuj świadomie jako przykład reprezentacji o mniejszej ilości informacji.
 
 ## Zadania krok po kroku
 
