@@ -20,6 +20,62 @@ USD także nie jest po prostu kolejnym formatem mesha. Może złożyć scenę z 
 
 STEP stoi po drugiej stronie pipeline'u. Jest właściwym źródłem geometrii inżynierskiej. Przejście STEP do FBX, OBJ lub STL wymaga tessellacji, czyli zamiany dokładnych powierzchni na skończoną siatkę.
 
+### STEP/STP: geometria inżynierska, nie gotowy asset czasu rzeczywistego
+
+STEP należy traktować jako źródło prawdy dla modelu CAD. W typowym pliku znajdują się dokładne bryły i powierzchnie B-Rep, krzywe, krawędzie oraz relacje topologiczne. W zależności od profilu STEP może przenosić także strukturę produktu i dodatkowe metadane. Najważniejsze jest to, że powierzchnia walca lub otworu nie musi być zapisana jako zbiór trójkątów.
+
+Aby taki model wyświetlić w Unity, trzeba wykonać tessellację. To pierwszy moment, w którym dokładna powierzchnia zostaje zastąpiona aproksymacją. Dlatego zapisuj parametry tessellacji i nie nadpisuj pliku STEP wynikiem konwersji. STEP powinien pozostać punktem odniesienia do kontroli wymiarów.
+
+### STL: najprostsza siatka, mało informacji poza geometrią
+
+STL opisuje powierzchnię jako zbiór trójkątnych facetów. Jest prosty, szeroko obsługiwany i dobry do druku 3D lub do świadomego sprawdzania, co zostaje utracone po redukcji modelu do samej geometrii. Nie jest natomiast dobrym formatem źródłowym dla złożonego assetu XR.
+
+Typowy STL nie przenosi hierarchii części, UV, standardowych materiałów, rigu ani animacji. Jednostka długości także nie jest zapisana w sposób, na którym można bezpiecznie polegać w całym pipeline. Jeżeli po STEP utworzysz STL, a następnie FBX, późniejszy FBX nie odzyska informacji, które zniknęły już na etapie STEP do STL.
+
+### OBJ + MTL: czytelny format statycznej siatki
+
+OBJ jest tekstowym formatem wymiany geometrii. Może przechowywać pozycje wierzchołków, współrzędne UV, normalne, ściany i grupy. Materiały są zwykle opisane w osobnym pliku MTL, a tekstury pozostają kolejnymi plikami zależnymi.
+
+OBJ jest bardzo użyteczny jako format pośredni, ponieważ łatwo go sprawdzić w wielu narzędziach i dobrze nadaje się do statycznych meshy. Nie jest jednak pełnym opisem animowanego robota lub sceny. Nie zachowuje w standardowy sposób rigu, skinningu, jointów, danych inertial ani fizyki symulatora. Kopiując OBJ, pamiętaj o MTL i teksturach, inaczej wizualnie poprawna geometria może stracić wygląd.
+
+### FBX: bogaty format wymiany DCC i wygodny cel dla Unity
+
+FBX jest formatem wymiany assetów 3D używanym w pipeline'ach DCC i silnikach czasu rzeczywistego. Może przenosić mesh, hierarchię obiektów, transformacje, UV, normalne, materiały, kości, skinning i animację. Unity wykorzystuje FBX w swoim łańcuchu importu, dlatego jest to zwykle najbardziej przewidywalny format końcowy po przygotowaniu modelu w Blenderze lub innym DCC.
+
+FBX nie zastępuje jednak CAD. Po konwersji STEP do FBX pracujesz już na tessellowanej geometrii. Ponadto różne eksportery mogą inaczej interpretować osie, skalę, materiały, animacje lub pivoty. Po eksporcie warto ponownie otworzyć FBX w niezależnym narzędziu i porównać go z modelem źródłowym.
+
+### URDF: semantyczny opis robota w ekosystemie ROS
+
+URDF jest dokumentem XML opisującym strukturę robota. Najważniejsze elementy to linki i jointy, a nie sam mesh. Link może zawierać osobno geometrię visual, collision oraz dane inertial, a joint określa relację parent-child, położenie, oś ruchu i limity. URDF często wskazuje na zewnętrzne pliki STL, OBJ lub DAE.
+
+Z tego powodu konwersja FBX do URDF nie polega na zmianie rozszerzenia. Mesh może stać się geometrią visual lub collision, ale drzewo kinematyczne, osie przegubów, ograniczenia, masy i bezwładności trzeba zachować lub zbudować jawnie. Xacro należy traktować jako mechanizm generowania URDF z makr, a nie jako format geometrii.
+
+### MJCF: model symulacyjny MuJoCo
+
+MJCF jest językiem modelowania MuJoCo. Opisuje zagnieżdżone ciała, jointy i geometrię, ale może również definiować elementy stricte symulacyjne, takie jak actuators, tendons, sensors, kontakty, parametry tarcia i ustawienia solvera. To więcej niż sama kinematyka.
+
+Przy konwersji MJCF do URDF część tych informacji może nie mieć bezpośredniego odpowiednika. W drugą stronę narzędzie konwertujące może utworzyć poprawną strukturę ciał i przegubów, ale nie odtworzy automatycznie całego modelu sterowania lub kontaktu charakterystycznego dla MuJoCo.
+
+### USD: opis i kompozycja sceny
+
+USD służy do budowania złożonych scen z primów i wielu warstw. Referencje, payloady, warianty i instancje pozwalają składać duże assety bez kopiowania wszystkiego do jednego pliku. Schematy mogą rozszerzać opis o materiały, fizykę i artykulację.
+
+USD jest dobrym formatem dla złożonych pipeline'ów symulacyjnych, digital twins i scen, ale spłaszczenie sceny do FBX albo OBJ może usunąć strukturę kompozycji. Model może wyglądać identycznie, a mimo to stracić warianty, referencje, instancing lub część danych fizycznych. USD nie zastępuje też parametrycznego źródła CAD.
+
+### Jak wybrać format
+
+| Cel | Preferowane źródło lub format roboczy | Dlaczego |
+|---|---|---|
+| zachować dokładną geometrię mechaniczną | STEP/STP | utrzymuje reprezentację CAD/B-Rep zamiast wyłącznie trójkątów |
+| przygotować statyczny mesh do kontroli lub wymiany | OBJ + MTL | prosty i łatwy do inspekcji, zachowuje UV i normalne |
+| przygotować finalny asset do standardowego importera Unity | FBX | przenosi bogatszą hierarchię DCC, a Unity używa FBX w łańcuchu importu |
+| zachować tylko prostą powierzchnię triangulowaną | STL | minimalna reprezentacja, dobra także jako kontrolowany wariant stratny |
+| opisać robota dla ROS | URDF + osobne meshe | zachowuje linki, jointy, visual/collision i inertial |
+| opisać model do MuJoCo | MJCF + zasoby mesh | zachowuje semantykę symulacji MuJoCo |
+| złożyć rozbudowaną scenę lub digital twin | USD | obsługuje warstwy, referencje, warianty, instancing i rozszerzenia schematów |
+
+Najważniejsza reguła brzmi: wybieraj format według informacji, które muszą przetrwać, a nie według tego, który plik jest najmniejszy lub najłatwiej otworzyć.
+
 ## 2. Co Unity importuje bezpośrednio
 
 Standardowy Model Importer Unity 6 obsługuje przede wszystkim FBX, DAE, DXF i OBJ. Unity używa FBX wewnętrznie w łańcuchu importu i rekomenduje FBX jako przewidywalny format wymiany z narzędziami DCC.

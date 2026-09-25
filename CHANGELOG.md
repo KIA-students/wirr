@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3 (2026-09-25)
+
+- dokończono opisy STEP/STP, STL, OBJ+MTL, FBX, URDF, MJCF i USD, rozdzielając geometrię CAD, mesh czasu rzeczywistego, semantykę robota i kompozycję sceny;
+- dodano krótką regułę wyboru formatu zależnie od celu oraz wyjaśnienia, których informacji nie da się odzyskać po konwersji stratnej;
+- rozszerzono README Lab 05 o skróconą ściągę formatu, tak aby student przed konwersją określał wymagane informacje, a nie wybierał format wyłącznie według rozszerzenia.
+
 ## 1.0.2 (2026-09-25)
 
 - doprecyzowano przewodnik Lab 05 na podstawie aktualnych deklaracji Convert3D: dla STEP wskazano typowe wyjścia GLB/STL/OBJ/DXF/DWG oraz bezpieczny pipeline pośredni do FBX zamiast zakładania bezpośredniej konwersji;
