@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '17 * * * *'
+    - cron: '17 */6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -88,6 +88,11 @@ jobs:
           source_sha="$(git rev-parse HEAD)"
           upstream_sha="$(git rev-parse "upstream/${UPSTREAM_BRANCH}")"
 
+          {
+            echo "source_sha=${source_sha}"
+            echo "upstream_sha=${upstream_sha}"
+          } >> "${GITHUB_OUTPUT}"
+
           private_paths=(
             ".github/workflows/sync-kia-students-pr.yml"
             ".github/workflows/sync-from-kia-students.yml"
@@ -143,8 +148,6 @@ jobs:
 
           {
             echo "needs_pr=true"
-            echo "source_sha=${source_sha}"
-            echo "upstream_sha=${upstream_sha}"
             echo "export_sha=${export_sha}"
           } >> "${GITHUB_OUTPUT}"
 
@@ -163,6 +166,56 @@ jobs:
         shell: bash
         run: |
           echo "Publiczna zawartość jest już zgodna z KIA-students/wirr."
+
+      - name: Wyrównaj historię forka po opublikowaniu zmian
+        if: steps.export.outputs.needs_pr != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          source_sha="${{ steps.export.outputs.source_sha }}"
+          upstream_sha="${{ steps.export.outputs.upstream_sha }}"
+
+          # Nie twórz kolejnego commita, jeśli main jest już bezpośrednio
+          # zakotwiczony na bieżącym KIA-students/wirr:main.
+          first_parent="$(git rev-parse "${source_sha}^" 2>/dev/null || true)"
+          if [ "${first_parent}" = "${upstream_sha}" ]; then
+            echo "Historia forka jest już wyrównana."
+            exit 0
+          fi
+
+          private_paths=(
+            ".github/workflows/sync-kia-students-pr.yml"
+          )
+
+          git checkout -B reconcile-source "${upstream_sha}"
+
+          for path in "${private_paths[@]}"; do
+            if git cat-file -e "${source_sha}:${path}" 2>/dev/null; then
+              mkdir -p "$(dirname "${path}")"
+              git show "${source_sha}:${path}" > "${path}"
+              git add -- "${path}"
+            fi
+          done
+
+          if git diff --cached --quiet HEAD --; then
+            target_sha="${upstream_sha}"
+          else
+            git commit -m "chore: reconcile fork ancestry [skip ci]"
+            target_sha="$(git rev-parse HEAD)"
+          fi
+
+          git push \
+            --force-with-lease="refs/heads/main:${source_sha}" \
+            origin "${target_sha}:refs/heads/main"
+
+          {
+            echo "## Historia forka wyrównana"
+            echo
+            echo "Publiczna zawartość jest zgodna z KIA-students/wirr."
+            echo "Gałąź main została ponownie zakotwiczona na bieżącym upstreamie,"
+            echo "z zachowaniem wyłącznie źródłowej automatyzacji synchronizacji."
+          } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Oczyść metadane starszych Pull Requestów
         if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
