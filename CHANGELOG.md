@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.6 (2026-10-06)
+
+- dodano lekką gałąź instalacyjną `upm` przeznaczoną dla Unity Package Manager;
+- gałąź `upm` nie zawiera projektu deweloperskiego `Project~` ani ciężkich bibliotek `Textures/HDRI` i `Textures/Surfaces`;
+- zachowano kod pakietu, wszystkie próbki laboratoriów, sample VITURE XR, dokumentację, WebSim, lekkie tekstury Grid i `RoboAnimation.unitypackage`;
+- rozmiar bieżącego snapshotu UPM wynosi około 10,7 MB zamiast setek megabajtów pełnego drzewa repozytorium;
+- materiały studenckie zostały przełączone na lekki kanał instalacyjny `upm`;
+- workflow synchronizacji przygotowano do automatycznej publikacji analogicznej lekkiej gałęzi `upm` w repozytorium kursu.
+
 ## 1.0.5 (2026-10-06)
 
 - dodano trzy gotowe sceny Unity dla okularów VITURE XR:
