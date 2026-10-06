@@ -23,6 +23,14 @@ namespace KIA.WiRR
 
         private Transform generatedRoot;
 
+        public WiRRVitureDemoPreset Preset => preset;
+
+        public void Configure(WiRRVitureDemoPreset demoPreset, float ipd = 0.064f)
+        {
+            preset = demoPreset;
+            ipdMeters = Mathf.Clamp(ipd, 0.050f, 0.075f);
+        }
+
         private void Start()
         {
             if (rebuildOnStart)

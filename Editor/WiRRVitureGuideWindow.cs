@@ -31,6 +31,11 @@ namespace KIA.WiRR.Editor
             {
                 if (GUILayout.Button("Utwórz rig Full SBS", GUILayout.Height(28)))
                     WiRRVitureTools.CreateFullSbsRig();
+                if (GUILayout.Button("Wygeneruj 3 sceny", GUILayout.Height(28)))
+                    WiRRVitureTools.CreateDemoScenes();
+            }
+            using (new EditorGUILayout.HorizontalScope())
+            {
                 if (GUILayout.Button("VITURE Academy", GUILayout.Height(28)))
                     Application.OpenURL(AcademyUrl);
                 if (GUILayout.Button("Pobierz SpaceWalker", GUILayout.Height(28)))
@@ -52,11 +57,12 @@ namespace KIA.WiRR.Editor
         private static void DrawUnity()
         {
             Heading("Przykład Unity: Full SBS 3840×1080");
-            Step("1. Rig", "Użyj przycisku „Utwórz rig Full SBS”. WiRR tworzy dwie kamery z równoległymi osiami i rozstawem początkowym 64 mm.");
-            Step("2. Obraz", "Lewa kamera renderuje lewą połowę, prawa prawą połowę ekranu. Każde oko otrzymuje 1920×1080 w docelowym framebufferze 3840×1080.");
-            Step("3. Build", "Dla PC ustaw okno lub pełny ekran 3840×1080. Nie używaj zwykłego 1920×1080 jako docelowego obrazu Full SBS, jeśli chcesz zachować pełną rozdzielczość na oko.");
-            Step("4. Okulary", "Podłącz VITURE jako ekran USB-C/DisplayPort i włącz tryb 3D odpowiednim przyciskiem dla danego modelu.");
-            Step("5. Walidacja", "Sprawdź, czy obiekt blisko kamery ma większą dysparację niż obiekt daleki. Jeżeli obraz powoduje dyskomfort, zmniejsz bazę stereo/IPD lub głębokość sceny.");
+            Step("1. Sceny demonstracyjne", "Użyj „Wygeneruj 3 sceny” albo zaimportuj sample VITURE XR z Package Managera. Otrzymasz demonstrację warstw głębi, scenę komfortu stereo oraz źródło 2D do Immersive 3D.");
+            Step("2. Rig", "Użyj przycisku „Utwórz rig Full SBS”. WiRR tworzy dwie kamery z równoległymi osiami i rozstawem początkowym 64 mm.");
+            Step("3. Obraz", "Lewa kamera renderuje lewą połowę, prawa prawą połowę ekranu. Każde oko otrzymuje 1920×1080 w docelowym framebufferze 3840×1080.");
+            Step("4. Build", "Dla PC ustaw okno lub pełny ekran 3840×1080. Nie używaj zwykłego 1920×1080 jako docelowego obrazu Full SBS, jeśli chcesz zachować pełną rozdzielczość na oko.");
+            Step("5. Okulary", "Podłącz VITURE jako ekran USB-C/DisplayPort i włącz tryb 3D odpowiednim przyciskiem dla danego modelu.");
+            Step("6. Walidacja", "Sprawdź, czy obiekt blisko kamery ma większą dysparację niż obiekt daleki. Jeżeli obraz powoduje dyskomfort, zmniejsz bazę stereo/IPD lub głębokość sceny.");
             Note("To jest demonstrator stereoskopii, nie pełny headset VR. Nie zakłada automatycznie 6DoF ani kontrolerów.");
         }
 
