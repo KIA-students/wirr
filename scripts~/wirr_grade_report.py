@@ -21,9 +21,9 @@ def validate_identity(report: dict) -> list[str]:
     if report.get("schemaVersion") != SCHEMA: issues.append("Nieobsługiwana wersja raportu.")
     if not isinstance(report.get("labNumber"), int) or not 1 <= report["labNumber"] <= 7: issues.append("Nieprawidłowy numer laboratorium.")
     if not nonempty(report.get("submissionId")): issues.append("Brak identyfikatora raportu.")
-    if not nonempty(report.get("teamId")): issues.append("Brak identyfikatora zespołu.")
+    if not nonempty(report.get("teamId")): issues.append("Brak identyfikatora studenta.")
     indices = [str(v).strip() for v in (report.get("studentIndices") or []) if nonempty(v)]
-    if len(indices) not in (2, 3): issues.append("Raport musi zawierać 2 albo 3 numery indeksów.")
+    if len(indices) != 1: issues.append("Raport musi zawierać dokładnie jeden numer indeksu.")
     if any(not re.fullmatch(r"\d+", value) for value in indices): issues.append("Numery indeksów mogą zawierać tylko cyfry.")
     if len(set(indices)) != len(indices): issues.append("Numery indeksów nie mogą się powtarzać.")
     return issues

@@ -86,22 +86,22 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(10);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField("Dane zespołu", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Dane studenta", EditorStyles.boldLabel);
                 EditorGUILayout.HelpBox(
-                    "Podaj identyfikator zespołu i numery indeksów 2–3 osób. Nie wpisuj imion ani nazwisk. Na podstawie numerów indeksów system automatycznie obliczy warianty v1–v5.",
+                    "Praca jest indywidualna. Podaj identyfikator studenta i jeden numer indeksu. Nie wpisuj imienia ani nazwiska. Na podstawie numeru indeksu system automatycznie obliczy warianty v1–v5.",
                     MessageType.None);
 
                 EditorGUI.BeginChangeCheck();
                 document.teamId = EditorGUILayout.TextField(
-                    new GUIContent("Identyfikator zespołu", "Krótka nazwa zespołu używana w nazwie zgłoszenia, np. ZESPOL-04."),
+                    new GUIContent("Identyfikator studenta", "Krótki identyfikator używany w nazwie zgłoszenia, np. S123456."),
                     document.teamId ?? string.Empty);
 
-                while (document.studentIndices.Count < 3)
+                while (document.studentIndices.Count < 1)
                     document.studentIndices.Add(string.Empty);
 
-                document.studentIndices[0] = EditorGUILayout.TextField("Numer indeksu: osoba 1", document.studentIndices[0]);
-                document.studentIndices[1] = EditorGUILayout.TextField("Numer indeksu: osoba 2", document.studentIndices[1]);
-                document.studentIndices[2] = EditorGUILayout.TextField("Numer indeksu: osoba 3 (opcjonalnie)", document.studentIndices[2]);
+                document.studentIndices[0] = EditorGUILayout.TextField("Numer indeksu", document.studentIndices[0]);
+                while (document.studentIndices.Count > 1)
+                    document.studentIndices.RemoveAt(document.studentIndices.Count - 1);
 
                 if (EditorGUI.EndChangeCheck())
                 {
@@ -112,7 +112,7 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.Space(4);
                 var sum = WiRRReportStore.GetValue(document, "variant.sum");
                 EditorGUILayout.LabelField(
-                    string.IsNullOrWhiteSpace(sum) ? "Suma indeksów S: brak" : $"Suma indeksów S: {sum}",
+                    string.IsNullOrWhiteSpace(sum) ? "Wartość S: brak" : $"Wartość S = numer indeksu: {sum}",
                     EditorStyles.miniBoldLabel);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -125,7 +125,7 @@ namespace KIA.WiRR.Editor
                     }
                 }
                 EditorGUILayout.LabelField(
-                    "Suma S oraz warianty v1–v5 są obliczane automatycznie.",
+                    "S = numer indeksu; warianty v1–v5 są obliczane automatycznie.",
                     EditorStyles.wordWrappedMiniLabel);
             }
         }
@@ -502,7 +502,7 @@ namespace KIA.WiRR.Editor
                 else
                 {
                     EditorGUILayout.HelpBox(
-                        "Raport nie jest jeszcze gotowy do wysłania. Uzupełnij dane zespołu, wymagane pola etapu 3.0 i dane pomiarowe tego etapu.",
+                        "Raport nie jest jeszcze gotowy do wysłania. Uzupełnij dane studenta, wymagane pola etapu 3.0 i dane pomiarowe tego etapu.",
                         MessageType.Warning);
                 }
 

@@ -1,11 +1,10 @@
 # Laboratorium 7 — walidacja i testy akceptacyjne systemu XR
 
-## 1. Zespół i środowisko
+## 1. Student i środowisko
 
-- Osoba 1: 
-- Osoba 2: 
-- Indeksy: `i1 = `, `i2 = `
-- `S = i1 + i2 = `
+- Identyfikator studenta: 
+- Numer indeksu: `i = `
+- `S = i = `
 - Warianty: `v1 = `, `v2 = `, `v3 = `, `v4 = `, `v5 = `
 - Data: 
 - Commit bazowy: 

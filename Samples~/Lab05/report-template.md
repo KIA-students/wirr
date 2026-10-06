@@ -4,9 +4,8 @@
 
 ## Identyfikacja i warianty
 
-- Osoba A — numer indeksu: __________
-- Osoba B — numer indeksu: __________
-- `S = i1 + i2`: __________
+- Numer indeksu `i`: __________
+- `S = i`: __________
 - `v1` (3.0): ___
 - `v2` (3.5): ___
 - `v3` (4.0): ___
@@ -15,7 +14,7 @@
 - Data: __________
 - Stanowisko: __________
 
-Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
+Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 

@@ -4,9 +4,8 @@
 
 ## Identyfikacja i warianty
 
-- Osoba A — numer indeksu: __________
-- Osoba B — numer indeksu: __________
-- Suma `S = i1 + i2`: __________
+- Numer indeksu `i`: __________
+- `S = i`: __________
 - `v1` (3.0): ___
 - `v2` (3.5): ___
 - `v3` (4.0): ___
@@ -15,7 +14,7 @@
 - Data: __________
 - Stanowisko: __________
 
-Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
+Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
@@ -191,7 +190,7 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 | Snap Turn | działa / nie działa |
 | fizyczna haptyka | działa / nie działa / niezweryfikowano |
 
-## SSQ — Osoba A
+## SSQ — student
 
 > Do raportu wpisuj wyłącznie wyniki liczbowe. Formularz źródłowy znajduje się w `resources/SSQ-Lab.pdf` / Załącznik nr 1 instrukcji.
 
@@ -205,23 +204,10 @@ Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - jeśli przerwano: `przerwanie bezpieczeństwa` / nie dotyczy
 - czas ekspozycji [s]: __________
 
-## SSQ — Osoba B
-
-| Pomiar | N | O | D | TS |
-|---|---:|---:|---:|---:|
-| PRE | | | | |
-| POST | | | | |
-| **POST − PRE** | | | | |
-
-- ekspozycja zakończona zgodnie z planem: tak / nie
-- jeśli przerwano: `przerwanie bezpieczeństwa` / nie dotyczy
-- czas ekspozycji [s]: __________
-
 ## Interpretacja SSQ
 
-- Która podskala zmieniła się najbardziej u Osoby A? __________
-- Która podskala zmieniła się najbardziej u Osoby B? __________
-- Czy kierunek zmian był podobny? __________
+- Która podskala zmieniła się najbardziej? __________
+- Czy zmiana ma znaczenie dla interpretacji tej sesji? __________
 - Wniosek ograniczony do danych z tej sesji: __________
 
 Nie używaj SSQ jako diagnozy medycznej i nie wnioskuj o trwałej podatności danej osoby.

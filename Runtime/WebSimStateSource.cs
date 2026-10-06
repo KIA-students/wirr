@@ -14,8 +14,8 @@ namespace KIA.WiRR
         [Tooltip("Adres backendu WebSim, np. ws://127.0.0.1:9090 lub adres WSS.")]
         [SerializeField] private string backendWebSocketUrl = "";
         [InspectorName("Kod sesji")]
-        [Tooltip("Kod identyfikujący sesję lub zespół w WebSim.")]
-        [SerializeField] private string sessionCode = "TEAM01";
+        [Tooltip("Kod identyfikujący indywidualną sesję studenta w WebSim.")]
+        [SerializeField] private string sessionCode = "STUDENT01";
         [InspectorName("Identyfikator robota")]
         [Tooltip("Identyfikator modelu robota używany przez backend WebSim.")]
         [SerializeField] private string robotId = "rrbot";
