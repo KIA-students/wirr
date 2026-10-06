@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.5 (2026-10-06)
+
+- dodano trzy gotowe sceny Unity dla okularów VITURE XR:
+  - `VITURE_01_StereoDepthLayers.unity` do demonstracji warstw głębi w natywnym Full SBS;
+  - `VITURE_02_StereoComfort.unity` do porównania dysparacji i komfortu stereo;
+  - `VITURE_03_Immersive2D_Source.unity` jako źródło 2D do porównania z Immersive 3D 2D-to-3D;
+- dodano `WiRRVitureDemoBootstrap`, który buduje sceny demonstracyjne w Play Mode bez zależności od XRI i konkretnej wersji URP;
+- dodano polecenie `WiRR → VITURE XR → Wygeneruj 3 sceny demonstracyjne`, zapisujące sceny bezpośrednio przez aktualnie używaną wersję Unity do `Assets/WiRR/VITURE/Demos`;
+- rozbudowano okno pomocy VITURE i sample Package Managera o workflow demonstracji scen;
+- zaktualizowano pakiet do wersji `1.0.5`.
+
 ## 1.0.4 (2026-10-06)
 
 - dodano obsługę okularów VITURE XR jako stereoskopowego wyświetlacza Full SBS;

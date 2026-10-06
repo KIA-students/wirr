@@ -223,13 +223,15 @@ Do oświetlenia używane są pliki `*_HDR.exr`; odpowiadające im pliki `*_TONEM
 
 ## VITURE XR: Full SBS i Immersive 3D
 
-WiRR 1.0.4 dodaje obsługę okularów VITURE XR jako stereoskopowego wyświetlacza Full SBS.
+WiRR 1.0.5 dodaje obsługę okularów VITURE XR oraz trzy gotowe sceny demonstracyjne do prezentacji stereoskopii Full SBS i porównania z Immersive 3D.
 
 W Unity dostępne są:
 - `WiRR → VITURE XR → Utwórz przykład Full SBS 3840x1080`;
 - `WiRR → VITURE XR → Instrukcja VITURE XR`;
+- `WiRR → VITURE XR → Wygeneruj 3 sceny demonstracyjne`;
 - sample `VITURE XR: Full SBS i Immersive 3D` w Package Managerze;
-- komponent runtime `WiRRVitureSbsRig`.
+- sceny `VITURE_01_StereoDepthLayers`, `VITURE_02_StereoComfort` i `VITURE_03_Immersive2D_Source`;
+- komponenty runtime `WiRRVitureSbsRig` i `WiRRVitureDemoBootstrap`.
 
 Przykład tworzy dwie równoległe kamery i dzieli framebuffer na lewą oraz prawą połowę. Dla pełnej jakości VITURE użyj 3840×1080, czyli 1920×1080 na oko. Dokumentacja rozdziela natywne stereo SBS od funkcji Immersive 3D, która programowo konwertuje zwykłą treść 2D do obrazu stereoskopowego.
 
