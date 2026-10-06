@@ -45,10 +45,10 @@ W Unity wybierz:
 Repozytorium studenckie:
 
 ```text
-https://github.com/KIA-students/wirr.git#v1.0.1
+https://github.com/KIA-students/wirr.git#main
 ```
 
-Pakiet znajduje się w katalogu głównym repozytorium. Po pierwszej instalacji danej wersji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wymagana wersja to Unity **6000.6.x** lub nowsza zgodna wersja 6000.6.
+Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#main` wskazuje bieżącą wersję z głównej gałęzi repozytorium, niezależnie od numeracji wydań. Repozytorium pakietu: [KIA-students/wirr](https://github.com/KIA-students/wirr). Po pierwszej instalacji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wymagana wersja to Unity **6000.6.x** lub nowsza zgodna wersja 6000.6.
 
 ## Struktura repozytorium
 
@@ -264,9 +264,9 @@ Podstawową ścieżką jest `WiRR → Raporty → Formularz raportu laboratoryjn
 
 Formularz zawiera pola opisowe oraz tabele wyników wymagane przez dane ćwiczenie. Szkic jest automatycznie zapisywany lokalnie w `Library/WiRRReports`.
 
-Student podaje identyfikator zespołu i 2–3 numery indeksów. Warianty zadania są wyliczane automatycznie. Do wysłania raportu wymagany jest kompletny etap 3.0. Etapy 3.5–5.0 są opcjonalne; student może zakończyć raport na dowolnym kompletnym etapie, a wyższy etap wymaga ukończenia poprzednich. Wartości jednoznacznie wynikające z danych surowych: m.in. mediany, wybrane sumy, R=P×S i statystyki RTT: formularz oblicza automatycznie i pokazuje jako pola tylko do odczytu.
+Każdy student pracuje samodzielnie. Student podaje identyfikator studenta i dokładnie jeden numer indeksu. Warianty zadania są wyliczane automatycznie z tego numeru. Do wysłania raportu wymagany jest kompletny etap 3.0. Etapy 3.5–5.0 są opcjonalne; student może zakończyć raport na dowolnym kompletnym etapie, a wyższy etap wymaga ukończenia poprzednich. Wartości jednoznacznie wynikające z danych surowych: m.in. mediany, wybrane sumy, R=P×S i statystyki RTT: formularz oblicza automatycznie i pokazuje jako pola tylko do odczytu.
 
-Finalny raport ma schemat `wirr-report/1.0`. Zawiera wyłącznie dane raportu: identyfikację zgłoszenia, laboratorium, zespół, numery indeksów, daty oraz odpowiedzi i wyniki. Pakiet nie dołącza telemetryki pracy studenta, danych o systemie, GPU, historii plików ani innych dodatkowych metadanych środowiska.
+Finalny raport ma schemat `wirr-report/1.0`. Zawiera wyłącznie dane raportu: identyfikację zgłoszenia, laboratorium, identyfikator studenta, numer indeksu, daty oraz odpowiedzi i wyniki. Pakiet nie dołącza telemetryki pracy studenta, danych o systemie, GPU, historii plików ani innych dodatkowych metadanych środowiska.
 
 Markdown `report-template.md` w materiałach laboratoryjnych pozostaje formatem referencyjnym i awaryjnym.
 
@@ -279,14 +279,14 @@ Standardowa ścieżka:
 Przycisk **Wyślij raport** zapisuje finalny JSON w strukturze:
 
 ```text
-students/reports/<team>/lab-XX/<submissionId>.json
+students/reports/<student>/lab-XX/<submissionId>.json
 ```
 
 i przygotowuje dedykowaną gałąź raportową. Pakiet korzysta z lokalnej konfiguracji `git`; nie przechowuje tokenu GitHub. Jeśli dostępny jest zalogowany GitHub CLI (`gh`), może utworzyć Pull Request automatycznie. W przeciwnym razie student tworzy PR z wypchniętej gałęzi. Wysyłka wymaga konta GitHub z prawem zapisu do repozytorium kursu.
 
 ## Walidacja CI
 
-Proces CI `.github/workflows/wirr-report-grade.yml` wykonuje wyłącznie kontrolę techniczną raportu. Sprawdza m.in. wersję schematu, numer laboratorium, identyfikator raportu, identyfikator zespołu oraz 2–3 poprawne i unikalne numery indeksów.
+Proces CI `.github/workflows/wirr-report-grade.yml` wykonuje wyłącznie kontrolę techniczną raportu. Sprawdza m.in. wersję schematu, numer laboratorium, identyfikator raportu, identyfikator studenta oraz dokładnie jeden poprawny numer indeksu.
 
 CI nie wystawia oceny merytorycznej i nie analizuje sposobu pracy studenta. Ocenę raportu wykonuje prowadzący.
 

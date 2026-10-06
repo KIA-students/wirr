@@ -4,9 +4,8 @@
 
 ## Identyfikacja i warianty
 
-- Student 1 — numer indeksu: __________
-- Student 2 — numer indeksu: __________
-- Suma `S = i1 + i2`: __________
+- Numer indeksu `i`: __________
+- `S = i`: __________
 - `v1` (3.0): ___
 - `v2` (3.5): ___
 - `v3` (4.0): ___
@@ -18,7 +17,7 @@
 - Unity: __________
 - Gałąź robocza: `lab01-work`
 
-Wzór: `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
+Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 

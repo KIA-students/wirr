@@ -33,7 +33,7 @@ namespace KIA.WiRR.Editor
             }
             var now = DateTime.UtcNow.ToString("O");
             var document = new WiRRReportDocument { submissionId = Guid.NewGuid().ToString("N"), labNumber = lab, createdAtUtc = now, updatedAtUtc = now };
-            while (document.studentIndices.Count < 3) document.studentIndices.Add(string.Empty);
+            while (document.studentIndices.Count < 1) document.studentIndices.Add(string.Empty);
             Save(document);
             return document;
         }
@@ -64,9 +64,9 @@ namespace KIA.WiRR.Editor
             if (document.schemaVersion != "wirr-report/1.0") errors.Add("Nieobsługiwana wersja raportu.");
             if (document.labNumber < 1 || document.labNumber > 7) errors.Add("Nieprawidłowy numer laboratorium.");
             if (string.IsNullOrWhiteSpace(document.submissionId)) errors.Add("Brak identyfikatora raportu.");
-            if (string.IsNullOrWhiteSpace(document.teamId)) errors.Add("Wpisz identyfikator zespołu.");
+            if (string.IsNullOrWhiteSpace(document.teamId)) errors.Add("Wpisz identyfikator studenta.");
             var indices = (document.studentIndices ?? new List<string>()).Where(v => !string.IsNullOrWhiteSpace(v)).Select(v => v.Trim()).ToArray();
-            if (indices.Length < 2 || indices.Length > 3) errors.Add("Podaj 2 albo 3 numery indeksów.");
+            if (indices.Length != 1) errors.Add("Podaj dokładnie jeden numer indeksu.");
             if (indices.Any(v => !long.TryParse(v, out _))) errors.Add("Numery indeksów mogą zawierać tylko cyfry.");
             if (indices.Distinct().Count() != indices.Length) errors.Add("Numery indeksów nie mogą się powtarzać.");
             return errors;
@@ -100,7 +100,7 @@ namespace KIA.WiRR.Editor
             if (markSubmitted) document.submittedAtUtc = DateTime.UtcNow.ToString("O");
             var folder = Path.Combine(Root, "exports");
             Directory.CreateDirectory(folder);
-            var team = Sanitize(document.teamId, "team");
+            var team = Sanitize(document.teamId, "student");
             var path = Path.Combine(folder, $"{team}-lab{document.labNumber:00}-{document.submissionId}.json");
             File.WriteAllText(path, JsonUtility.ToJson(document, true));
             return path;
@@ -111,7 +111,7 @@ namespace KIA.WiRR.Editor
         private static void UpdateVariants(WiRRReportDocument document)
         {
             var values = document.studentIndices.Where(v => long.TryParse(v, out _)).Select(long.Parse).ToArray();
-            if (values.Length < 2)
+            if (values.Length < 1)
             {
                 SetValue(document, "variant.sum", string.Empty);
                 for (var k = 1; k <= 5; k++) SetValue(document, $"variant.v{k}", string.Empty);
@@ -126,7 +126,7 @@ namespace KIA.WiRR.Editor
         {
             document.answers = document.answers ?? new List<WiRRReportValue>();
             document.studentIndices = document.studentIndices ?? new List<string>();
-            while (document.studentIndices.Count < 3) document.studentIndices.Add(string.Empty);
+            while (document.studentIndices.Count < 1) document.studentIndices.Add(string.Empty);
             return document;
         }
 
