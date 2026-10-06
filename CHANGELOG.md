@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.4 (2026-10-06)
+
+- dodano obsługę okularów VITURE XR jako stereoskopowego wyświetlacza Full SBS;
+- dodano komponent `WiRRVitureSbsRig`, który tworzy parę kamer z równoległymi osiami i kompozycją side-by-side do pojedynczego framebuffera;
+- dodano generator `WiRR → VITURE XR → Utwórz przykład Full SBS 3840x1080`;
+- dodano okno pomocy `WiRR → VITURE XR → Instrukcja VITURE XR` z procedurą przełączania 2D/3D dla serii One/Pro i Luma;
+- dodano instrukcję odtwarzania materiałów Full SBS 3840×1080 oraz rozróżnienie Full SBS i Half-SBS;
+- dodano opis Immersive 3D, czyli programowej konwersji 2D-to-3D w ekosystemie VITURE, z poziomami głębokości i trybami Movie/Game;
+- dodano sample `VITURE XR: Full SBS i Immersive 3D` widoczny w Unity Package Manager;
+- dodano dokument `Documentation~/Reference/VITURE_XR.md` z przykładem eksperymentu porównującego 2D, natywne stereo SBS i 2D-to-3D;
+- zaktualizowano pakiet do wersji `1.0.4`.
+
 ## 1.0.3 (2026-09-25)
 
 - dokończono opisy STEP/STP, STL, OBJ+MTL, FBX, URDF, MJCF i USD, rozdzielając geometrię CAD, mesh czasu rzeczywistego, semantykę robota i kompozycję sceny;

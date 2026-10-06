@@ -2,14 +2,62 @@
 <h2 class="page-title">Jak rozpocząć laboratoria WiRR</h2>
 <p>Laboratoria wykonujesz <strong>samodzielnie</strong>. Każdy student prowadzi własny projekt Unity, wykonuje własne pomiary i wysyła własny raport. Wszystkie materiały przeznaczone dla studentów są publikowane w repozytorium <a href="https://github.com/KIA-students/wirr"><strong>KIA-students/wirr</strong></a>.</p>
 <p>Pakiet WiRR przygotowuje środowisko, instaluje wymagane zależności, udostępnia materiały startowe, pomaga zweryfikować konfigurację i obsługuje raportowanie. Nie wykonuje ocenianych zadań za studenta.</p>
-<p class="notice"><strong>Konfiguracja kursu:</strong> Unity <strong>6000.6.x</strong>. Pakiet instaluj z gałęzi <strong>main</strong>, dzięki czemu instrukcja nie zależy od numeru konkretnego wydania.</p>
+<p class="notice"><strong>Konfiguracja kursu:</strong> zalecany system to <strong>Windows 11 64-bit</strong>, a obsługiwana linia edytora to <strong>Unity 6 (6000.x)</strong>; wersja aktualnie zweryfikowana kursowo to <strong>6000.6.4f1</strong>. Pakiet instaluj z gałęzi <strong>main</strong>, dzięki czemu instrukcja nie zależy od numeru konkretnego wydania.</p>
 
-<section><h3>1. Przygotowanie przed pierwszym laboratorium</h3><ol class="steps">
-<li>Zainstaluj <strong>Unity Hub</strong> oraz wskazaną wersję Unity 6000.6.x. Dla projektu wybierz szablon <strong>Universal 3D (URP)</strong>.</li>
+<section><h3>1. Przygotowanie przed pierwszym laboratorium</h3>
+<p><strong>System referencyjny:</strong> Windows 11 64-bit. Obsługiwanym wariantem alternatywnym jest <strong>Ubuntu 22.04 lub 24.04 LTS 64-bit</strong>. Unity 6 wspiera oba te wydania Ubuntu; na Linuxie zalecane są sterowniki producenta GPU lub aktualne Mesa zgodnie z wymaganiami Unity.</p>
+
+<h4>Wymagane składniki</h4>
+<ul>
+<li>Unity Hub oraz Unity <strong>6 (6000.x)</strong>;</li>
+<li>moduły Unity: <strong>Android Build Support</strong>, <strong>Android SDK &amp; NDK Tools</strong>, <strong>OpenJDK</strong>;</li>
+<li><strong>Git</strong>;</li>
+<li>IDE C# z integracją Unity: Visual Studio 2022 na Windows albo Rider / VS Code z rozszerzeniem Unity na Ubuntu;</li>
+<li><strong>GitHub CLI</strong> opcjonalnie, ale zalecane;</li>
+<li><strong>Docker Desktop</strong> na Windows albo <strong>Docker Engine + Compose plugin</strong> na Ubuntu przed Laboratorium 06;</li>
+<li><strong>Android Studio</strong> opcjonalnie, zalecane do ADB, Logcat i diagnostyki Androida. Do samego buildu używaj SDK/NDK/OpenJDK dostarczonych przez Unity Hub.</li>
+</ul>
+
+<h4>Windows 11</h4>
+<ol class="steps">
+<li>Zainstaluj Unity Hub i Unity 6 (6000.x). W <strong>Add modules</strong> zaznacz Android Build Support, Android SDK &amp; NDK Tools oraz OpenJDK.</li>
+<li>Zainstaluj Git. Zalecane: Visual Studio 2022 Community z workloadem <strong>Game development with Unity</strong>.</li>
+<li>Opcjonalnie zainstaluj GitHub CLI i Android Studio.</li>
+<li>Przed Lab 06 zainstaluj Docker Desktop i sprawdź <code>docker compose version</code>.</li>
+</ol>
+
+<h4>Ubuntu 22.04 / 24.04 LTS</h4>
+<ol class="steps">
+<li>Zainstaluj Unity Hub i Unity 6 (6000.x). W <strong>Add modules</strong> doinstaluj Android Build Support, Android SDK &amp; NDK Tools oraz OpenJDK. Unity zaleca używanie wersji SDK/NDK/JDK dostarczonych z Hubem.</li>
+<li>Zainstaluj podstawowe narzędzia:
+<pre><code>sudo apt update
+sudo apt install git curl ca-certificates</code></pre></li>
+<li>Opcjonalnie zainstaluj GitHub CLI zgodnie z instrukcją projektu GitHub CLI.</li>
+<li>Przed Lab 06 zainstaluj Docker Engine z oficjalnego repozytorium Dockera oraz pakiety <code>docker-ce</code>, <code>docker-ce-cli</code>, <code>containerd.io</code>, <code>docker-buildx-plugin</code> i <code>docker-compose-plugin</code>.</li>
+<li>Sprawdź:
+<pre><code>git --version
+docker --version
+docker compose version</code></pre></li>
+</ol>
+
+<p class="notice"><strong>C#:</strong> nie twórz dodatkowego projektu <code>dotnet new</code>, pliku <code>.csproj</code> ani katalogów <code>bin/</code> lub <code>obj/</code> wewnątrz <code>Assets</code>. Unity 6 (6000.x) używa dla skryptów projektu języka C# 9 w typowej konfiguracji. Pliki generowane przez zwykły projekt .NET, np. <code>obj/.../*.GlobalUsings.g.cs</code>, mogą zawierać konstrukcję <code>global using</code> wymagającą C# 10 i powodować błąd CS8773. Nie naprawiaj tego przez wymuszanie C# 10 w <code>csc.rsp</code>.</p>
+<ol class="steps">
+<li>Zainstaluj <strong>Unity Hub</strong> oraz najnowszą dostępną wersję <strong>Unity 6 (6000.x)</strong>. Podczas instalacji edytora wybierz <strong>Add modules</strong> i zaznacz:
+<ul>
+<li><strong>Android Build Support</strong>,</li>
+<li><strong>Android SDK &amp; NDK Tools</strong>,</li>
+<li><strong>OpenJDK</strong>.</li>
+</ul>
+Te trzy składniki są wymagane do budowania i instalowania aplikacji na smartfonach z Androidem oraz Meta Quest 3.</li>
+<li>Zainstaluj środowisko do edycji C#, najlepiej <strong>Visual Studio 2022 Community</strong> z workloadem <strong>Game development with Unity</strong> albo inne IDE poprawnie skonfigurowane z Unity.</li>
+<li><strong>Android Studio</strong> jest zalecane. Nie jest wymagane do samego buildu Unity, jeśli używasz SDK/NDK/JDK dostarczonych przez Unity Hub, ale ułatwia diagnostykę Androida, ADB, SDK Manager i analizę logów.</li>
 <li>Zainstaluj <strong>Git</strong> i sprawdź w terminalu <code>git --version</code>. Po instalacji Git uruchom ponownie Unity Hub.</li>
 <li>Zaloguj się do GitHub. Repozytorium kursu dla studentów to <a href="https://github.com/KIA-students/wirr"><code>KIA-students/wirr</code></a>. Do wysłania raportu wymagane jest lokalne uwierzytelnienie Git, np. przez Git Credential Manager albo SSH.</li>
 <li>Opcjonalnie zainstaluj i zaloguj <strong>GitHub CLI</strong>. Polecenie <code>gh auth status</code> powinno potwierdzić logowanie. Dzięki temu pakiet może automatycznie utworzyć Pull Request po wysłaniu raportu.</li>
-</ol><pre><code>git --version
+<li>Przed Laboratorium 06 zainstaluj <strong>Docker Desktop</strong> na Windows. WebSim korzysta z Dockera; ROS 2 i Gazebo nie muszą być instalowane lokalnie do wariantu WebSim.</li>
+</ol>
+<p>Po instalacji Unity utwórz projekt z szablonu <strong>Universal 3D (URP)</strong>.</p>
+<pre><code>git --version
 gh --version
 gh auth status</code></pre></section>
 
@@ -48,7 +96,7 @@ gh auth status</code></pre></section>
 <li>Użyj <strong>Wyślij raport</strong>. Finalny raport ma format JSON zgodny ze schematem <code>wirr-report/1.0</code>.</li>
 </ol>
 <p><strong>Ścieżka oddania:</strong> <code>Raport → Sprawdź → Wyślij → GitHub → walidacja CI → prowadzący</code>. Raport nie jest wysyłany e-mailem, przez Teams ani Moodle, chyba że prowadzący wyraźnie wskaże inaczej.</p>
-<p class="notice"><strong>Prywatność:</strong> aktualna wersja WiRR Reports wysyła treść raportu i dane identyfikujące zgłoszenie. Nie dołącza historii pracy w Unity, danych o systemie lub GPU, listy modyfikowanych plików ani telemetryki aktywności.</p></section>
+<p class="notice"><strong>Log aktywności:</strong> WiRR automatycznie zapisuje zdarzenia wysokiego poziomu związane z wykonywaniem laboratorium wraz z czasem UTC i dołącza ten timeline do raportu. Rejestrowane są m.in. uruchomienia narzędzi WiRR, instalacja zależności, import materiałów, przygotowanie sceny, walidacja, Play Mode, postęp checklisty i operacje raportu. Log nie obejmuje treści kodu, klawiatury, zrzutów ekranu ani aktywności poza Unity.</p></section>
 
 <section><h3>6. Gdzie trafia raport</h3><ol class="steps">
 <li>Raport trafia do repozytorium <a href="https://github.com/KIA-students/wirr"><code>KIA-students/wirr</code></a> jako plik <code>students/reports/&lt;student&gt;/lab-XX/&lt;submissionId&gt;.json</code>.</li>
@@ -69,6 +117,7 @@ gh auth status</code></pre></section>
 <section><h3>8. Gdy import lub raportowanie nie działa</h3><ul>
 <li><strong>Git nie został znaleziony:</strong> sprawdź <code>git --version</code>, dostępność Git w PATH i uruchom ponownie Unity Hub.</li>
 <li><strong>Nie znaleziono package.json:</strong> użyj adresu Git repozytorium, a nie adresu strony GitHub. Użyj URL z <code>#main</code>.</li>
+<li><strong>Błąd „Feature 'global using directive' is not available in C# 9.0 / use language version 10.0 or greater”:</strong> sprawdź ścieżkę błędu. Jeśli prowadzi do <code>Assets/.../obj/...GlobalUsings.g.cs</code>, usuń z <code>Assets</code> dodatkowy projekt .NET oraz jego katalogi <code>obj</code>/<code>bin</code>. Nie ustawiaj <code>-langversion:10</code>. Następnie zamknij Unity, usuń katalogi <code>Library</code>, <code>Temp</code> i <code>obj</code> projektu Unity, po czym otwórz projekt ponownie.</li>
 <li><strong>Brak menu WiRR:</strong> poczekaj na kompilację, otwórz Console i usuń pierwszy czerwony błąd. Sprawdź wersję Unity.</li>
 <li><strong>Brak sceny lub materiałów:</strong> zaimportuj próbkę wybranego laboratorium i użyj <strong>Utwórz / napraw aktywną scenę</strong>.</li>
 <li><strong>Przycisk „Wyślij raport” jest nieaktywny:</strong> uzupełnij dane studenta, wymagane pola etapu 3.0 oraz wymagane tabele pomiarowe, następnie ponownie sprawdź kompletność.</li>

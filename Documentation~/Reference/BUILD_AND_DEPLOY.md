@@ -1,6 +1,12 @@
 # Budowanie i instalacja aplikacji WiRR
 
-Ta instrukcja dotyczy Unity 6000.6.x i projektu URP używanego na kursie WiRR. W Unity dostępne jest także okno `WiRR → Pomoc → Budowanie i instalacja`, które prowadzi przez te same kroki.
+Ta instrukcja dotyczy Unity 6 (6000.x) i projektu URP używanego na kursie WiRR. W Unity dostępne jest także okno `WiRR → Pomoc → Budowanie i instalacja`, które prowadzi przez te same kroki.
+
+## Środowisko referencyjne
+
+Na kursie zalecany jest **Windows 11 64-bit**. Obsługiwanym wariantem alternatywnym jest **Ubuntu 22.04 lub 24.04 LTS 64-bit**. Ułatwia to utrzymanie wspólnej konfiguracji stanowisk dla Unity, ADB, Android/Quest i Dockera. Pełna procedura instalacyjna znajduje się w `ENVIRONMENT_SETUP.md`.
+
+Do pracy z kodem C# zalecane jest **Visual Studio 2022 Community** z workloadem **Game development with Unity** na Windows albo Rider / VS Code z integracją Unity na Ubuntu. **Android Studio** jest zalecane jako narzędzie pomocnicze do ADB, SDK Manager, Logcat i diagnostyki Androida. Nie jest wymagane do samego buildu, jeśli Unity korzysta z SDK, NDK i OpenJDK zainstalowanych przez Unity Hub.
 
 ## Najważniejsza zasada
 
@@ -94,3 +100,10 @@ Jeżeli zmieniasz platformę między PC i Androidem, po `Switch Platform` ponown
 - Meta — konfiguracja projektu Unity dla Meta Quest: https://developers.meta.com/horizon/documentation/unity/unity-project-setup/
 - Meta — przygotowanie gogli do programowania i ADB: https://developers.meta.com/horizon/documentation/unity/unity-env-device-setup/
 - Meta — przegląd konfiguracji budowania aplikacji: https://developers.meta.com/horizon/documentation/unity/unity-build/
+
+
+## Błąd C# 10 / CS8773
+
+Jeżeli Unity zgłasza `Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater`, nie traktuj tego jako polecenia aktualizacji C#. Najpierw sprawdź ścieżkę pliku błędu. Typowy przypadek to `Assets/.../obj/...GlobalUsings.g.cs` wygenerowany przez dodatkowy projekt .NET utworzony wewnątrz `Assets`.
+
+Usuń dodatkowy projekt .NET lub jego katalogi `bin` i `obj`, nie używaj `dotnet new` wewnątrz `Assets` i nie wymuszaj `-langversion:10` w `csc.rsp`. W razie potrzeby po zamknięciu Unity usuń `Library`, `Temp` i główny `obj`, a następnie otwórz projekt ponownie.

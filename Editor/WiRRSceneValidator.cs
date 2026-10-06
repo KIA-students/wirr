@@ -45,6 +45,10 @@ namespace KIA.WiRR.Editor
                 else
                     Debug.Log(prefix + result.Message);
             }
+
+            var errors = results.Count(r => r.Severity == WiRRValidationSeverity.Error);
+            var warnings = results.Count(r => r.Severity == WiRRValidationSeverity.Warning);
+            WiRRActivityLogger.Record("configuration_validated", labNumber, $"errors={errors};warnings={warnings}");
             return results;
         }
 

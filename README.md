@@ -48,7 +48,16 @@ Repozytorium studenckie:
 https://github.com/KIA-students/wirr.git#main
 ```
 
-Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#main` wskazuje bieżącą wersję z głównej gałęzi repozytorium, niezależnie od numeracji wydań. Repozytorium pakietu: [KIA-students/wirr](https://github.com/KIA-students/wirr). Po pierwszej instalacji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wymagana wersja to Unity **6000.6.x** lub nowsza zgodna wersja 6000.6.
+Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#main` wskazuje bieżącą wersję z głównej gałęzi repozytorium, niezależnie od numeracji wydań. Repozytorium pakietu: [KIA-students/wirr](https://github.com/KIA-students/wirr). Po pierwszej instalacji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wymagana wersja to najnowszą dostępną wersję **Unity 6 (6000.x)** lub nowsza zgodna wersja 6000.6.
+
+### Zalecane środowisko przed pierwszym laboratorium
+
+Środowisko referencyjne kursu to **Windows 11 64-bit**. W Unity Hub dla najnowszą dostępną wersję **Unity 6 (6000.x)** należy doinstalować:
+- **Android Build Support**;
+- **Android SDK & NDK Tools**;
+- **OpenJDK**.
+
+Te moduły są wymagane do budowania na Androida i Meta Quest 3. Do pracy z C# zalecane jest **Visual Studio 2022 Community** z workloadem **Game development with Unity** albo równoważne IDE. **Android Studio** jest zalecane do diagnostyki Androida, ADB, SDK Manager i Logcat, ale nie jest wymagane do samego buildu Unity, jeśli używane są narzędzia Android dostarczone przez Unity Hub. Przed Laboratorium 06 należy również zainstalować **Docker Desktop**.
 
 ## Struktura repozytorium
 
@@ -212,6 +221,20 @@ Przykładowe zastosowania:
 
 Do oświetlenia używane są pliki `*_HDR.exr`; odpowiadające im pliki `*_TONEMAPPED.jpg` służą głównie jako podgląd LDR. Ręczna procedura znajduje się w `Textures/HDRI/README.md`: materiał `Skybox/Panoramic` → EXR → `Window → Rendering → Lighting` → `Environment → Skybox Material`.
 
+## VITURE XR: Full SBS i Immersive 3D
+
+WiRR 1.0.4 dodaje obsługę okularów VITURE XR jako stereoskopowego wyświetlacza Full SBS.
+
+W Unity dostępne są:
+- `WiRR → VITURE XR → Utwórz przykład Full SBS 3840x1080`;
+- `WiRR → VITURE XR → Instrukcja VITURE XR`;
+- sample `VITURE XR: Full SBS i Immersive 3D` w Package Managerze;
+- komponent runtime `WiRRVitureSbsRig`.
+
+Przykład tworzy dwie równoległe kamery i dzieli framebuffer na lewą oraz prawą połowę. Dla pełnej jakości VITURE użyj 3840×1080, czyli 1920×1080 na oko. Dokumentacja rozdziela natywne stereo SBS od funkcji Immersive 3D, która programowo konwertuje zwykłą treść 2D do obrazu stereoskopowego.
+
+Pełna instrukcja: `Documentation~/Reference/VITURE_XR.md`.
+
 ## Budowanie aplikacji na PC, Android i Quest 3
 
 W Unity dostępne jest okno **WiRR → Pomoc → Budowanie i instalacja**, a skrócony przycisk znajduje się także w sekcji **Scena i pomiary**. Instrukcja rozdziela trzy przypadki:
@@ -266,7 +289,7 @@ Formularz zawiera pola opisowe oraz tabele wyników wymagane przez dane ćwiczen
 
 Każdy student pracuje samodzielnie. Student podaje identyfikator studenta i dokładnie jeden numer indeksu. Warianty zadania są wyliczane automatycznie z tego numeru. Do wysłania raportu wymagany jest kompletny etap 3.0. Etapy 3.5–5.0 są opcjonalne; student może zakończyć raport na dowolnym kompletnym etapie, a wyższy etap wymaga ukończenia poprzednich. Wartości jednoznacznie wynikające z danych surowych: m.in. mediany, wybrane sumy, R=P×S i statystyki RTT: formularz oblicza automatycznie i pokazuje jako pola tylko do odczytu.
 
-Finalny raport ma schemat `wirr-report/1.0`. Zawiera wyłącznie dane raportu: identyfikację zgłoszenia, laboratorium, identyfikator studenta, numer indeksu, daty oraz odpowiedzi i wyniki. Pakiet nie dołącza telemetryki pracy studenta, danych o systemie, GPU, historii plików ani innych dodatkowych metadanych środowiska.
+Finalny raport ma schemat `wirr-report/1.0`. Zawiera identyfikację zgłoszenia, laboratorium, identyfikator studenta, numer indeksu, daty, odpowiedzi i wyniki oraz automatyczny log zdarzeń wysokiego poziomu związanych z realizacją laboratorium. Timeline zapisuje m.in. uruchomienie narzędzi WiRR, wybór laboratorium, instalację zależności, import materiałów, przygotowanie sceny, walidację, zmiany checklisty, wejścia do Play Mode i operacje raportu wraz z czasem UTC. Nie zapisuje treści kodu, naciśnięć klawiszy, zrzutów ekranu ani aktywności poza Unity.
 
 Markdown `report-template.md` w materiałach laboratoryjnych pozostaje formatem referencyjnym i awaryjnym.
 
@@ -286,7 +309,7 @@ i przygotowuje dedykowaną gałąź raportową. Pakiet korzysta z lokalnej konfi
 
 ## Walidacja CI
 
-Proces CI `.github/workflows/wirr-report-grade.yml` wykonuje wyłącznie kontrolę techniczną raportu. Sprawdza m.in. wersję schematu, numer laboratorium, identyfikator raportu, identyfikator studenta oraz dokładnie jeden poprawny numer indeksu.
+Proces CI `.github/workflows/wirr-report-grade.yml` wykonuje wyłącznie kontrolę techniczną raportu. Sprawdza m.in. wersję schematu, numer laboratorium, identyfikator raportu, identyfikator studenta, dokładnie jeden poprawny numer indeksu oraz obecność i podstawową spójność automatycznego timeline'u aktywności.
 
 CI nie wystawia oceny merytorycznej i nie analizuje sposobu pracy studenta. Ocenę raportu wykonuje prowadzący.
 
@@ -307,9 +330,9 @@ Walidator uruchamiany w Pull Request jest pobierany z zaufanej gałęzi bazowej,
 
 `icon.png` jest podstawowym logo pakietu i jest używany w dokumentacji oraz w oknach Unity **WiRR Course Toolkit** i **WiRR Raport**. `.icon.png` jest ikoną wyświetlaną przez Unity Package Manager. `icon.ico` pozostaje zasobem ikony aplikacyjnej dla środowisk wymagających formatu ICO. Zestaw faviconów jest przechowywany jako `favicon_io.zip`.
 
-## Prywatność
+## Log aktywności i prywatność
 
-WiRR Reports służy do przekazania sprawozdania, a nie do monitorowania aktywności studenta. Do repozytorium trafia raport, nie historia pracy w Unity.
+WiRR automatycznie prowadzi lokalny log zdarzeń wysokiego poziomu związanych z realizacją laboratorium i dołącza go do wysyłanego raportu. Log zawiera nazwy technicznych zdarzeń, ich czas UTC, numer laboratorium, ogólny wynik operacji oraz wybrane czasy trwania, np. sesji Play Mode. Nie obejmuje treści kodu, naciśnięć klawiszy, zrzutów ekranu, zawartości innych aplikacji ani aktywności poza Unity. Pole `activitySummary.elapsedSeconds` oznacza odstęp czasu pomiędzy pierwszym i ostatnim zapisanym zdarzeniem, a nie ciągły czas aktywnej pracy.
 
 ## Licencja
 

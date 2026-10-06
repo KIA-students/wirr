@@ -1,9 +1,9 @@
 {
   "name": "pl.prz.kia.wirr",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "displayName": "WiRR Course Toolkit",
-  "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i rozszerzona rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera interaktywne listy zadań dla punktów kontrolnych 3.0–5.0, generowane prefaby dydaktyczne, teksturowane zestawy Grid, bibliotekę materiałów PBR, dziewięć środowisk HDRI z narzędziem skybox, pięć demonstratorów XR, pięć demonstratorów Mixed Reality z adapterami niezależnymi od dostawcy danych oraz pięć demonstratorów Mobile AR na smartfon z integracją AR Foundation. Pakiet zawiera także model Unitree G1 EDU z animacjami, demonstratory ruchu, fizyki i dźwięku oraz wbudowane instrukcje budowania i instalowania aplikacji na PC, smartfonie z Androidem i Meta Quest 3. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
-  "unity": "6000.6",
+  "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i rozszerzona rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera interaktywne listy zadań dla punktów kontrolnych 3.0–5.0, generowane prefaby dydaktyczne, teksturowane zestawy Grid, bibliotekę materiałów PBR, dziewięć środowisk HDRI z narzędziem skybox, pięć demonstratorów XR, pięć demonstratorów Mixed Reality z adapterami niezależnymi od dostawcy danych oraz pięć demonstratorów Mobile AR na smartfon z integracją AR Foundation. Pakiet zawiera także obsługę okularów VITURE XR z demonstratorem Full SBS 3840×1080, instrukcją filmów 3D SBS i Immersive 3D 2D-to-3D, a także model Unitree G1 EDU z animacjami, demonstratory ruchu, fizyki i dźwięku oraz wbudowane instrukcje budowania i instalowania aplikacji na PC, smartfonie z Androidem i Meta Quest 3. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
+  "unity": "6000.0",
   "documentationUrl": "https://kia-students.github.io/wirr/",
   "changelogUrl": "https://github.com/KIA-students/wirr/blob/main/CHANGELOG.md",
   "licensesUrl": "https://github.com/KIA-students/wirr/blob/main/LICENSE",
@@ -11,7 +11,6 @@
     "name": "Katedra Informatyki i Automatyki, Politechnika Rzeszowska"
   },
   "dependencies": {
-    "com.unity.render-pipelines.universal": "17.7.0",
     "com.unity.inputsystem": "1.20.0"
   },
   "samples": [
@@ -49,6 +48,11 @@
       "displayName": "Laboratorium 07: Walidacja i testy akceptacyjne XR",
       "description": "Końcowa walidacja jakości rozwiązania XR. Etapy kluczowe: 3.0: test podstawowy (smoke test) i kryteria akceptacji; 3.5: wydajność CPU/GPU, pamięć i transport; 4.0: użyteczność, skuteczność i błędne aktywacje; 4.5: kontrolowany błąd, przywracanie działania i test regresyjny; 5.0: automatyzacja testów, analiza ryzyka R=P×S i decyzja AKCEPTUJ / AKCEPTUJ WARUNKOWO / ODRZUĆ.",
       "path": "Samples~/Lab07"
+    },
+    {
+      "displayName": "VITURE XR: Full SBS i Immersive 3D",
+      "description": "Przykład stereoskopii dla okularów VITURE XR: Full SBS 3840×1080, przełączanie 2D/3D, odtwarzanie materiałów SBS oraz porównanie z Immersive 3D 2D-to-3D.",
+      "path": "Samples~/VITURE XR"
     }
   ],
   "keywords": [
@@ -62,6 +66,10 @@
     "reports",
     "education",
     "PRz",
-    "WiRR"
+    "WiRR",
+    "VITURE",
+    "SBS",
+    "stereoscopic",
+    "Immersive 3D"
   ]
 }
