@@ -33,6 +33,7 @@ namespace KIA.WiRR.Editor
             titleContent = WiRRBranding.Title("WiRR Raport");
             labNumber = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 7);
             document = WiRRReportStore.LoadOrCreate(labNumber);
+            WiRRActivityLogger.Record("report_opened", labNumber, "ok");
             InitializeSectionFoldouts();
         }
 
@@ -63,6 +64,9 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.HelpBox(
                 "Wypełniaj formularz na podstawie rzeczywiście wykonanych pomiarów. Do wysłania raportu wymagany jest kompletny etap 3.0. Etapy 3.5–5.0 są opcjonalne. Pola oznaczone „automatycznie” są wyliczane z danych w tabelach i nie trzeba ich przepisywać ręcznie.",
                 MessageType.Info);
+            EditorGUILayout.HelpBox(
+                "WiRR zapisuje techniczny log zdarzeń wysokiego poziomu związanych z realizacją laboratorium wraz z czasem ich wystąpienia. Log jest automatycznie dołączany do wysyłanego raportu; nie obejmuje treści kodu, klawiatury, zrzutów ekranu ani aktywności poza Unity.",
+                MessageType.None);
 
             var labels = WiRRLabCatalog.GetPopupLabels();
             var newLab = EditorGUILayout.Popup("Laboratorium", labNumber - 1, labels) + 1;
@@ -507,7 +511,10 @@ namespace KIA.WiRR.Editor
                 }
 
                 if (GUILayout.Button("Sprawdź kompletność raportu", GUILayout.Height(32)))
+                {
                     evaluation = liveEvaluation;
+                    WiRRActivityLogger.Record("report_checked", labNumber, liveEvaluation.CanSubmit ? "ready" : "incomplete");
+                }
 
                 if (evaluation != null)
                     DrawEvaluation();
@@ -517,6 +524,7 @@ namespace KIA.WiRR.Editor
                     if (GUILayout.Button("Wyślij raport", GUILayout.Height(38)))
                     {
                         evaluation = WiRRReportEvaluator.Evaluate(document);
+                        WiRRActivityLogger.Record("report_submission_started", labNumber, "requested");
                         var result = WiRRGitSubmission.Submit(
                             document,
                             WiRRGitSubmission.DefaultRepositoryUrl,

@@ -96,6 +96,7 @@ namespace KIA.WiRR.Editor
 
         public static string ExportFinal(WiRRReportDocument document, bool markSubmitted)
         {
+            WiRRActivityLogger.AttachTo(document);
             Save(document);
             if (markSubmitted) document.submittedAtUtc = DateTime.UtcNow.ToString("O");
             var folder = Path.Combine(Root, "exports");
@@ -126,6 +127,8 @@ namespace KIA.WiRR.Editor
         {
             document.answers = document.answers ?? new List<WiRRReportValue>();
             document.studentIndices = document.studentIndices ?? new List<string>();
+            document.activitySummary = document.activitySummary ?? new WiRRActivitySummary();
+            document.activityTimeline = document.activityTimeline ?? new List<WiRRActivityEvent>();
             while (document.studentIndices.Count < 1) document.studentIndices.Add(string.Empty);
             return document;
         }

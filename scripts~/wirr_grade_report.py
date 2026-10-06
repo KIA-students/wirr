@@ -29,9 +29,32 @@ def validate_identity(report: dict) -> list[str]:
     return issues
 
 
+def validate_activity(report: dict) -> list[str]:
+    issues = []
+    timeline = report.get("activityTimeline")
+    summary = report.get("activitySummary")
+    if not isinstance(timeline, list) or not timeline:
+        issues.append("Brak automatycznego timeline'u aktywności.")
+        return issues
+    if not isinstance(summary, dict):
+        issues.append("Brak podsumowania timeline'u aktywności.")
+    for event in timeline:
+        if not isinstance(event, dict):
+            issues.append("Nieprawidłowy wpis timeline'u aktywności.")
+            continue
+        if not nonempty(event.get("eventName")) or not nonempty(event.get("timestampUtc")):
+            issues.append("Wpis timeline'u nie zawiera nazwy zdarzenia lub czasu UTC.")
+        if event.get("labNumber") != report.get("labNumber"):
+            issues.append("Timeline zawiera zdarzenie przypisane do innego laboratorium.")
+        duration = event.get("durationSeconds", 0)
+        if not isinstance(duration, (int, float)) or duration < 0:
+            issues.append("Nieprawidłowy czas trwania zdarzenia w timeline.")
+    return issues
+
+
 def evaluate(path: Path) -> dict:
     report = json.loads(path.read_text(encoding="utf-8"))
-    blocking = validate_identity(report)
+    blocking = validate_identity(report) + validate_activity(report)
     answers = {str(x.get("key")): str(x.get("value") or "").strip() for x in report.get("answers") or [] if isinstance(x, dict) and nonempty(x.get("key"))}
     checkpoints = []
     for grade, prefix in CHECKPOINTS:
@@ -46,6 +69,8 @@ def evaluate(path: Path) -> dict:
         "teamId": report.get("teamId"),
         "labNumber": report.get("labNumber"),
         "blockingIssues": blocking,
+        "activityEventCount": len(report.get("activityTimeline") or []),
+        "activitySummary": report.get("activitySummary") or {},
         "checkpoints": checkpoints,
         "note": "CI sprawdza integralność raportu. Ocena merytoryczna należy do prowadzącego."
     }
