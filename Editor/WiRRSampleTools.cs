@@ -29,10 +29,12 @@ namespace KIA.WiRR.Editor
             if (result)
             {
                 WiRRSceneTools.PrepareLabWorkspace(labNumber);
+                WiRRActivityLogger.Record("course_sample_imported", labNumber, "success");
                 Debug.Log($"[WiRR] Zaimportowano próbkę i przygotowano folder roboczy laboratorium {labNumber:00}: {WiRRSceneTools.GetLabRootPath(labNumber)}");
             }
             else
             {
+                WiRRActivityLogger.Record("course_sample_imported", labNumber, "failed");
                 Debug.Log($"[WiRR] Import próbki nie został wykonany: {sample.displayName}");
             }
             return result;
@@ -82,7 +84,10 @@ namespace KIA.WiRR.Editor
             }
 
             if (importedAny)
+            {
                 WiRRSceneTools.PrepareLabWorkspace(labNumber);
+                WiRRActivityLogger.Record("official_samples_imported", labNumber, "success");
+            }
         }
 
         public static bool IsCourseSampleImported(int labNumber)

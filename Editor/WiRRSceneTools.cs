@@ -47,6 +47,7 @@ namespace KIA.WiRR.Editor
             EnsureReferenceAssets(labNumber);
             EnsureWorkspaceScene(labNumber);
             AssetDatabase.Refresh();
+            WiRRActivityLogger.Record("workspace_prepared", labNumber, "success");
         }
 
         public static void PrepareBaseScene(int labNumber)
@@ -72,6 +73,8 @@ namespace KIA.WiRR.Editor
             {
                 Debug.Log($"[WiRR] Naprawiono scenę bazową dla laboratorium {labNumber:00}.");
             }
+
+            WiRRActivityLogger.Record("base_scene_prepared", labNumber, "success");
         }
 
         public static void ToggleMetrics(int labNumber)
@@ -85,6 +88,7 @@ namespace KIA.WiRR.Editor
             }
 
             var metrics = tools.GetComponent<WiRRFrameMetrics>();
+            var wasPresent = metrics != null;
             if (metrics == null)
             {
                 Undo.AddComponent<WiRRFrameMetrics>(tools);
@@ -97,6 +101,7 @@ namespace KIA.WiRR.Editor
             }
 
             EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+            WiRRActivityLogger.Record("metrics_probe_toggled", labNumber, wasPresent ? "disabled" : "enabled");
         }
 
         public static void EnsureFolders(int labNumber)

@@ -35,13 +35,13 @@ namespace KIA.WiRR.Editor
             var exported = WiRRReportStore.ExportFinal(document, true);
             var projectRoot = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
             var cacheRoot = Path.Combine(projectRoot, "Library", "WiRRReports", "submission-repo");
-            var team = WiRRReportStore.Sanitize(document.teamId, "team");
+            var student = WiRRReportStore.Sanitize(document.teamId, "student");
             var stamp = DateTime.UtcNow.ToString("yyyyMMdd-HHmmss");
-            var branch = $"report/{team}/lab{document.labNumber:00}-{stamp}";
+            var branch = $"report/{student}/lab{document.labNumber:00}-{stamp}";
             reportsPath = (reportsPath ?? DefaultReportsPath).Trim().Trim('/').Replace('\\', '/');
             baseBranch = string.IsNullOrWhiteSpace(baseBranch) ? DefaultBaseBranch : baseBranch.Trim();
             repositoryUrl = string.IsNullOrWhiteSpace(repositoryUrl) ? DefaultRepositoryUrl : repositoryUrl.Trim();
-            var relative = $"{reportsPath}/{team}/lab-{document.labNumber:00}/{document.submissionId}.json";
+            var relative = $"{reportsPath}/{student}/lab-{document.labNumber:00}/{document.submissionId}.json";
 
             try
             {
@@ -65,14 +65,14 @@ namespace KIA.WiRR.Editor
                 File.Copy(exported, destination, true);
 
                 if (Run(cacheRoot, "git", $"add -- {Q(relative)}", 10000).code != 0) return Fail("Nie udało się przygotować raportu do wysłania.");
-                if (Run(cacheRoot, "git", $"commit -m {Q($"report(wirr): {team} lab {document.labNumber:00}")}", 30000).code != 0) return Fail("Nie udało się utworzyć zgłoszenia.");
+                if (Run(cacheRoot, "git", $"commit -m {Q($"report(wirr): {student} lab {document.labNumber:00}")}", 30000).code != 0) return Fail("Nie udało się utworzyć zgłoszenia.");
                 var push = Run(cacheRoot, "git", $"push -u origin {Q(branch)}", 120000);
                 if (push.code != 0) return Fail("Nie udało się wysłać raportu. Sprawdź logowanie do GitHub i uprawnienia do repozytorium. " + push.error);
 
                 var prCreated = false;
                 if (Run(cacheRoot, "gh", "--version", 5000, false).code == 0 && !string.IsNullOrWhiteSpace(repositorySlug))
                 {
-                    var title = $"Raport WiRR: {team}: laboratorium {document.labNumber:00}";
+                    var title = $"Raport WiRR: {student}: laboratorium {document.labNumber:00}";
                     var body = "Raport laboratoryjny WiRR. Ocena merytoryczna należy do prowadzącego.";
                     prCreated = Run(cacheRoot, "gh", $"pr create --repo {Q(repositorySlug)} --base {Q(baseBranch)} --head {Q(branch)} --title {Q(title)} --body {Q(body)}", 60000, false).code == 0;
                 }

@@ -21,17 +21,40 @@ def validate_identity(report: dict) -> list[str]:
     if report.get("schemaVersion") != SCHEMA: issues.append("Nieobsługiwana wersja raportu.")
     if not isinstance(report.get("labNumber"), int) or not 1 <= report["labNumber"] <= 7: issues.append("Nieprawidłowy numer laboratorium.")
     if not nonempty(report.get("submissionId")): issues.append("Brak identyfikatora raportu.")
-    if not nonempty(report.get("teamId")): issues.append("Brak identyfikatora zespołu.")
+    if not nonempty(report.get("teamId")): issues.append("Brak identyfikatora studenta.")
     indices = [str(v).strip() for v in (report.get("studentIndices") or []) if nonempty(v)]
-    if len(indices) not in (2, 3): issues.append("Raport musi zawierać 2 albo 3 numery indeksów.")
+    if len(indices) != 1: issues.append("Raport musi zawierać dokładnie jeden numer indeksu.")
     if any(not re.fullmatch(r"\d+", value) for value in indices): issues.append("Numery indeksów mogą zawierać tylko cyfry.")
     if len(set(indices)) != len(indices): issues.append("Numery indeksów nie mogą się powtarzać.")
     return issues
 
 
+def validate_activity(report: dict) -> list[str]:
+    issues = []
+    timeline = report.get("activityTimeline")
+    summary = report.get("activitySummary")
+    if not isinstance(timeline, list) or not timeline:
+        issues.append("Brak automatycznego timeline'u aktywności.")
+        return issues
+    if not isinstance(summary, dict):
+        issues.append("Brak podsumowania timeline'u aktywności.")
+    for event in timeline:
+        if not isinstance(event, dict):
+            issues.append("Nieprawidłowy wpis timeline'u aktywności.")
+            continue
+        if not nonempty(event.get("eventName")) or not nonempty(event.get("timestampUtc")):
+            issues.append("Wpis timeline'u nie zawiera nazwy zdarzenia lub czasu UTC.")
+        if event.get("labNumber") != report.get("labNumber"):
+            issues.append("Timeline zawiera zdarzenie przypisane do innego laboratorium.")
+        duration = event.get("durationSeconds", 0)
+        if not isinstance(duration, (int, float)) or duration < 0:
+            issues.append("Nieprawidłowy czas trwania zdarzenia w timeline.")
+    return issues
+
+
 def evaluate(path: Path) -> dict:
     report = json.loads(path.read_text(encoding="utf-8"))
-    blocking = validate_identity(report)
+    blocking = validate_identity(report) + validate_activity(report)
     answers = {str(x.get("key")): str(x.get("value") or "").strip() for x in report.get("answers") or [] if isinstance(x, dict) and nonempty(x.get("key"))}
     checkpoints = []
     for grade, prefix in CHECKPOINTS:
@@ -46,6 +69,8 @@ def evaluate(path: Path) -> dict:
         "teamId": report.get("teamId"),
         "labNumber": report.get("labNumber"),
         "blockingIssues": blocking,
+        "activityEventCount": len(report.get("activityTimeline") or []),
+        "activitySummary": report.get("activitySummary") or {},
         "checkpoints": checkpoints,
         "note": "CI sprawdza integralność raportu. Ocena merytoryczna należy do prowadzącego."
     }

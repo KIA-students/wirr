@@ -34,8 +34,35 @@ jobs:
               sleep 1
             done
             ros2 topic list | grep -qx /wirr/status
-            ros2 topic pub --once /wirr/control std_msgs/msg/String "{data: \"{\\\"session\\\":\\\"TEAMCI\\\",\\\"robot\\\":\\\"rrbot\\\",\\\"action\\\":\\\"create\\\"}\"}"
-            timeout 10 ros2 topic echo --once /wirr/TEAMCI/joint_states sensor_msgs/msg/JointState | grep -q "joint1"
+
+            # DDS discovery can lag immediately after container startup. Retry the
+            # idempotent create command until the backend actually exposes the
+            # session topic instead of assuming the first one-shot publication
+            # was delivered.
+            session_ready=0
+            for attempt in {1..10}; do
+              ros2 topic pub --once /wirr/control std_msgs/msg/String "{data: \"{\\\"session\\\":\\\"TEAMCI\\\",\\\"robot\\\":\\\"rrbot\\\",\\\"action\\\":\\\"create\\\",\\\"attempt\\\":$attempt}\"}" >/tmp/wirr-create.log 2>&1 || true
+
+              for settle in {1..6}; do
+                if ros2 topic list | grep -qx /wirr/TEAMCI/joint_states; then
+                  session_ready=1
+                  break
+                fi
+                sleep 0.5
+              done
+
+              [ "$session_ready" -eq 1 ] && break
+            done
+
+            if [ "$session_ready" -ne 1 ]; then
+              cat /tmp/wirr-create.log || true
+              echo "TEAMCI session was not created after retries" >&2
+              exit 1
+            fi
+
+            joint_state="$(timeout 10 ros2 topic echo --once /wirr/TEAMCI/joint_states sensor_msgs/msg/JointState)"
+            grep -q "joint1" <<< "$joint_state"
+            grep -q "joint2" <<< "$joint_state"
           '
 
       - name: Show logs on failure

@@ -42,6 +42,17 @@ jobs:
           git remote add upstream "https://github.com/${UPSTREAM_REPOSITORY}.git"
           git fetch --no-tags upstream "${UPSTREAM_BRANCH}"
 
+      - name: Usuń przestarzałe gałęzie robocze
+        shell: bash
+        run: |
+          set -euo pipefail
+          for branch in lab01-start release/1.0.0-polish; do
+            if git ls-remote --exit-code --heads origin "refs/heads/${branch}" >/dev/null 2>&1; then
+              echo "Usuwam przestarzałą gałąź: ${branch}"
+              git push origin --delete "${branch}"
+            fi
+          done
+
       - name: Sprawdź gotowość uwierzytelnienia
         id: auth
         shell: bash
@@ -55,6 +66,87 @@ jobs:
           else
             echo "available=true" >> "${GITHUB_OUTPUT}"
           fi
+
+      - name: Opublikuj lekką gałąź UPM
+        shell: bash
+        env:
+          SOURCE_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          source_root="${GITHUB_WORKSPACE}"
+          stage="${RUNNER_TEMP}/wirr-upm"
+          rm -rf "${stage}"
+          mkdir -p "${stage}"
+
+          # Pakiet instalacyjny zawiera kod, próbki, dokumentację i lekkie zasoby.
+          # Ciężki projekt deweloperski oraz opcjonalne HDRI/PBR nie są pobierane
+          # przy zwykłej instalacji przez Unity Package Manager.
+          for path in             Editor Runtime Samples~ Documentation~ WebSim~ scripts~             package.json package.json.meta             README.md README.md.meta             CHANGELOG.md CHANGELOG.md.meta             LICENSE LICENSE.meta             THIRD_PARTY_TEXTURES.md             .icon.png .icon.png.meta icon.png icon.png.meta icon.ico icon.ico.meta             RoboAnimation.unitypackage RoboAnimation.unitypackage.meta             Editor.meta Runtime.meta Textures.meta; do
+            if [ -e "${source_root}/${path}" ]; then
+              cp -a "${source_root}/${path}" "${stage}/"
+            fi
+          done
+
+          mkdir -p "${stage}/Textures"
+          cp -a "${source_root}/Textures/Grid" "${stage}/Textures/"
+          cp -a "${source_root}/Textures/Grid.meta" "${stage}/Textures/"
+
+          # Kontrola, że ciężkie katalogi nie trafiły do szybkiej dystrybucji.
+          test ! -e "${stage}/Project~"
+          test ! -e "${stage}/Textures/HDRI"
+          test ! -e "${stage}/Textures/Surfaces"
+
+          # Gałąź upm jest publikowana w repozytorium źródłowym MatPomGit/wirr,
+          # więc jej własny adres instalacyjny jest dozwolony. Kontrola odwołań
+          # MatPomGit pozostaje niżej dla sanitizowanego eksportu do KIA-students.
+
+          python3 - "${stage}" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          root = Path(sys.argv[1])
+          package = json.loads((root / "package.json").read_text(encoding="utf-8"))
+          labs = [
+              item for item in package.get("samples", [])
+              if str(item.get("displayName", "")).startswith("Laboratorium ")
+          ]
+          if len(labs) != 7:
+              raise SystemExit(f"UPM: oczekiwano 7 laboratoriów, znaleziono {len(labs)}")
+          if not any(item.get("displayName") == "VITURE XR: Full SBS i Immersive 3D"
+                     for item in package.get("samples", [])):
+              raise SystemExit("UPM: brak sample VITURE XR")
+          for required in ("Editor", "Runtime", "Samples~", "Documentation~", "Textures/Grid"):
+              if not (root / required).exists():
+                  raise SystemExit(f"UPM: brak {required}")
+          PY
+
+          size_mb="$(du -sm "${stage}" | awk '{print $1}')"
+          echo "Lekki snapshot UPM: ${size_mb} MB"
+
+          (
+            cd "${stage}"
+            git init -q
+            git checkout -q --orphan upm
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -q -m "upm: lekki snapshot WiRR"
+            # Gałąź UPM jest artefaktem dystrybucyjnym repozytorium źródłowego.
+            # Nie wymaga uprawnień zapisu do KIA-students/wirr. Publiczna zawartość
+            # repozytorium kursu jest aktualizowana osobno przez sanitizowany PR.
+            git remote add source "https://x-access-token:${SOURCE_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+            git push --force source HEAD:refs/heads/upm
+          )
+
+          {
+            echo "## Lekka dystrybucja UPM"
+            echo
+            echo "- gałąź: `${GITHUB_REPOSITORY}#upm`"
+            echo "- rozmiar snapshotu roboczego: ${size_mb} MB"
+            echo "- pominięto: `Project~`, `Textures/HDRI`, `Textures/Surfaces`"
+          } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Zamknij bezpośrednie PR-y z gałęzi main
         if: steps.auth.outputs.available == 'true'
@@ -165,7 +257,12 @@ jobs:
         if: steps.export.outputs.needs_pr != 'true'
         shell: bash
         run: |
+          set -euo pipefail
           echo "Publiczna zawartość jest już zgodna z KIA-students/wirr."
+          if git ls-remote --exit-code --heads origin "refs/heads/${EXPORT_BRANCH}" >/dev/null 2>&1; then
+            echo "Usuwam niepotrzebną gałąź eksportową: ${EXPORT_BRANCH}"
+            git push origin --delete "${EXPORT_BRANCH}"
+          fi
 
       - name: Wyrównaj historię forka po opublikowaniu zmian
         if: steps.export.outputs.needs_pr != 'true'

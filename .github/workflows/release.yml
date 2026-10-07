@@ -94,6 +94,8 @@ jobs:
               "WiRRMobileARGuideWindow.cs",
               "WiRRMobileARAdapterTemplateTools.cs",
               "WiRROnboarding.cs",
+              "WiRRVitureTools.cs",
+              "WiRRVitureGuideWindow.cs",
           ):
               source = root / "Editor" / editor_file
               meta = root / "Editor" / f"{editor_file}.meta"
@@ -138,6 +140,7 @@ jobs:
               root / "Documentation~" / "Reference" / "MIXED_REALITY_IMPLEMENTATION.md",
               root / "Documentation~" / "Reference" / "MOBILE_AR_SHOWCASE.md",
               root / "Documentation~" / "Reference" / "MODEL_FORMATS_AND_CONVERSION.md",
+              root / "Documentation~" / "Reference" / "VITURE_XR.md",
               root / "Textures" / "HDRI" / "README.md",
           )
           for document in required_docs:
@@ -198,6 +201,8 @@ jobs:
               "WiRRMobileARRuler.cs",
               "WiRRMobileARLightMatch.cs",
               "WiRRMobileARSurfacePainter.cs",
+              "WiRRVitureSbsRig.cs",
+              "WiRRVitureDemoBootstrap.cs",
           )
           for runtime_file in runtime_dynamic_files:
               source = root / "Runtime" / runtime_file
@@ -355,8 +360,26 @@ jobs:
               raise SystemExit("package.json nie deklaruje zależności com.unity.inputsystem")
 
           samples = package.get("samples", [])
-          if len(samples) != 7:
-              raise SystemExit(f"Oczekiwano 7 próbek laboratoriów, znaleziono: {len(samples)}")
+          lab_samples = [
+              sample for sample in samples
+              if str(sample.get("displayName", "")).startswith("Laboratorium ")
+          ]
+          extra_samples = [
+              sample for sample in samples
+              if sample not in lab_samples
+          ]
+          if len(lab_samples) != 7:
+              raise SystemExit(
+                  f"Oczekiwano 7 próbek laboratoriów, znaleziono: {len(lab_samples)} "
+                  f"(łącznie wszystkich próbek: {len(samples)})"
+              )
+
+          viture_samples = [
+              sample for sample in extra_samples
+              if sample.get("displayName") == "VITURE XR: Full SBS i Immersive 3D"
+          ]
+          if len(viture_samples) != 1:
+              raise SystemExit("Brak dokładnie jednej dodatkowej próbki VITURE XR.")
 
           checkpoints = ("3.0", "3.5", "4.0", "4.5", "5.0")
           task_source = (root / "Editor" / "WiRRLabTaskCatalog.cs").read_text(encoding="utf-8")
@@ -374,7 +397,7 @@ jobs:
               if schema_source.count(f', "{checkpoint}",') != 7:
                   raise SystemExit(f"Niespójny schemat raportów dla checkpointu {checkpoint}.")
 
-          for number, sample in enumerate(samples, 1):
+          for number, sample in enumerate(lab_samples, 1):
               expected_prefix = f"Laboratorium {number:02d}:"
               name = sample.get("displayName", "")
               path = sample.get("path", "")
@@ -387,6 +410,20 @@ jobs:
               for checkpoint in checkpoints:
                   if f"### {checkpoint}" not in guide:
                       raise SystemExit(f"Brak checkpointu {checkpoint} w instrukcji próbki Lab {number:02d}.")
+
+          viture_sample = viture_samples[0]
+          viture_root = root / viture_sample.get("path", "")
+          if not viture_root.is_dir():
+              raise SystemExit("Brak katalogu próbki VITURE XR.")
+          required_viture_scenes = (
+              "VITURE_01_StereoDepthLayers.unity",
+              "VITURE_02_StereoComfort.unity",
+              "VITURE_03_Immersive2D_Source.unity",
+          )
+          for scene_name in required_viture_scenes:
+              scene = viture_root / "Scenes" / scene_name
+              if not scene.is_file():
+                  raise SystemExit(f"Brak sceny demonstracyjnej VITURE XR: {scene_name}")
 
           Path("release-version.txt").write_text(version, encoding="utf-8")
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
@@ -435,7 +472,7 @@ jobs:
           body = match.group("body").strip()
           notes = f"""# WiRR {version}
 
-          Stabilne wydanie pakietu dydaktycznego WiRR dla Unity 6000.6.x.
+          Stabilne wydanie pakietu dydaktycznego WiRR dla Unity 6 (6000.x).
 
           ## Instalacja z tego wydania
 
@@ -455,7 +492,7 @@ jobs:
 
           Przed publikacją automatycznie sprawdzono:
           - spójność `package.json` i `CHANGELOG.md`;
-          - obecność wszystkich siedmiu próbek laboratoriów;
+          - obecność wszystkich siedmiu próbek laboratoriów oraz dodatkowych próbek opcjonalnych;
           - składnię walidatora raportów;
           - testy punktacji SSQ;
           - składnię aplikacji WebSim;
@@ -464,7 +501,8 @@ jobs:
           - komplet pięciu demonstratorów XR oraz ich skryptów Runtime i publicznego API integracyjnego;
           - komplet pięciu demonstratorów Mixed Reality dla kamery, dłoni, ludzi, spatial/depth i ścian wraz z neutralnym API providerów;
           - instrukcję implementacji MR, generator pięciu starterów adapterów i sekcje zachęcające do mierzalnej dalszej rozbudowy;
-          - komplet pięciu demonstratorów Mobile AR na smartfon wraz z API Runtime, instrukcją i pięcioma starterami AR Foundation.
+          - komplet pięciu demonstratorów Mobile AR na smartfon wraz z API Runtime, instrukcją i pięcioma starterami AR Foundation;
+          - obsługę VITURE XR, instrukcję Full SBS / Immersive 3D oraz trzy sceny demonstracyjne.
 
           Archiwa dołączone do wydania zawierają pakiet UPM oraz sumy kontrolne SHA-256.
           """

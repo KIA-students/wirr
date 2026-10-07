@@ -75,6 +75,7 @@ namespace KIA.WiRR.Editor
             openWindow = this;
             selectedLab = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 7);
             titleContent = WiRRBranding.Title("WiRR Course Toolkit");
+            WiRRActivityLogger.Record("course_toolkit_opened", selectedLab, "ok");
         }
 
         private void OnDisable()
@@ -92,6 +93,7 @@ namespace KIA.WiRR.Editor
             var lab = WiRRLabCatalog.Get(selectedLab);
             windowScroll = EditorGUILayout.BeginScrollView(windowScroll);
 
+            DrawEnvironmentPreflight(lab);
             DrawPreparationOverview(lab);
             DrawDependencySection(lab);
             DrawWorkspaceSection(lab);
@@ -219,8 +221,81 @@ namespace KIA.WiRR.Editor
 
                 selectedLab = newIndex + 1;
                 EditorPrefs.SetInt(LabPrefKey, selectedLab);
+                WiRRActivityLogger.Record("lab_selected", selectedLab, "ok");
+                WiRREnvironmentPreflight.Refresh(selectedLab);
                 validationResults = null;
                 GUI.FocusControl(null);
+            }
+        }
+
+        private void DrawEnvironmentPreflight(WiRRLabDefinition lab)
+        {
+            EditorGUILayout.Space(8);
+            using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                EditorGUILayout.LabelField("Stan środowiska", sectionTitleStyle);
+                EditorGUILayout.LabelField(
+                    "WiRR sprawdza środowisko dla wybranego laboratorium. Brakujące pakiety Unity Package Manager może doinstalować automatycznie; moduły Unity Hub są wykrywane i wymagają doinstalowania przez Hub.",
+                    EditorStyles.wordWrappedMiniLabel);
+                EditorGUILayout.Space(5);
+
+                var items = WiRREnvironmentPreflight.Get(lab.Number);
+                foreach (var item in items)
+                {
+                    Color accent;
+                    string prefix;
+                    switch (item.State)
+                    {
+                        case WiRREnvironmentState.Ready:
+                            accent = SuccessAccent;
+                            prefix = "GOTOWE";
+                            break;
+                        case WiRREnvironmentState.Missing:
+                            accent = ErrorAccent;
+                            prefix = "BRAK";
+                            break;
+                        default:
+                            accent = WarningAccent;
+                            prefix = "UWAGA";
+                            break;
+                    }
+
+                    DrawInlineStatus($"{prefix} · {item.Label}\n{item.Detail}", accent);
+                }
+
+                EditorGUILayout.Space(4);
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Sprawdź ponownie", GUILayout.Height(28)))
+                    {
+                        WiRREnvironmentPreflight.Refresh(lab.Number);
+                        WiRRActivityLogger.Record("environment_preflight_refreshed", lab.Number, "manual");
+                    }
+
+                    using (new EditorGUI.DisabledScope(
+                               WiRRPackageInstaller.IsBusy ||
+                               !WiRREnvironmentPreflight.HasAutoRepairableProblems(lab.Number)))
+                    {
+                        if (GUILayout.Button("Napraw automatycznie", GUILayout.Height(28)))
+                            WiRREnvironmentPreflight.AutoRepair(lab.Number);
+                    }
+                }
+
+                if (WiRREnvironmentPreflight.HasBlockingProblems(lab.Number))
+                {
+                    EditorGUILayout.HelpBox(
+                        "Nie wszystkie braki można naprawić z poziomu pakietu. Android Build Support, Android SDK & NDK Tools i OpenJDK doinstaluj w Unity Hub: Installs → używana wersja Unity → Add modules.",
+                        MessageType.Warning);
+
+                    if (GUILayout.Button("Otwórz instrukcję przygotowania środowiska", GUILayout.Height(25)))
+                        Application.OpenURL(CourseUrl + "#unity");
+                }
+                else
+                {
+                    EditorGUILayout.HelpBox(
+                        "Środowisko nie zawiera wykrytych braków blokujących dla wybranego laboratorium.",
+                        MessageType.Info);
+                }
             }
         }
 
@@ -853,7 +928,13 @@ namespace KIA.WiRR.Editor
                         taskStepStyle);
 
                     if (next != current)
+                    {
                         EditorPrefs.SetBool(key, next);
+                        WiRRActivityLogger.Record(
+                            "task_step_changed",
+                            labNumber,
+                            $"checkpoint={task.Checkpoint};state={(next ? "completed" : "reopened")}");
+                    }
                 }
 
                 EditorGUILayout.Space(3);
@@ -951,6 +1032,9 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.HelpBox(
                     "Etapy od 3.5 do 5.0 są opcjonalne. Formularz automatycznie oblicza wartości pochodne, jeśli wynikają jednoznacznie z danych pomiarowych.",
                     MessageType.Info);
+                EditorGUILayout.HelpBox(
+                    "Pakiet rejestruje zdarzenia wysokiego poziomu związane z wykonywaniem laboratorium i ich czas. Zapis jest dołączany do raportu; nie obejmuje treści kodu ani aktywności poza Unity.",
+                    MessageType.None);
 
                 if (PrimaryButton("Otwórz formularz raportu WiRR", ReportAccent, 34f))
                     WiRRReportWindow.Open();

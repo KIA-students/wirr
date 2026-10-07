@@ -16,6 +16,29 @@ namespace KIA.WiRR
         public string updatedAtUtc;
         public string submittedAtUtc;
         public List<WiRRReportValue> answers = new List<WiRRReportValue>();
+        public WiRRActivitySummary activitySummary = new WiRRActivitySummary();
+        public List<WiRRActivityEvent> activityTimeline = new List<WiRRActivityEvent>();
+    }
+
+    [Serializable]
+    public sealed class WiRRActivitySummary
+    {
+        public string firstEventAtUtc;
+        public string lastEventAtUtc;
+        public double elapsedSeconds;
+        public double playModeSeconds;
+        public int playModeSessions;
+        public int eventCount;
+    }
+
+    [Serializable]
+    public sealed class WiRRActivityEvent
+    {
+        public string eventName;
+        public int labNumber;
+        public string timestampUtc;
+        public string result;
+        public double durationSeconds;
     }
 
     [Serializable]

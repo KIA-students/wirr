@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.0.6 (2026-10-06)
+
+- dodano lekką gałąź instalacyjną `upm` przeznaczoną dla Unity Package Manager;
+- gałąź `upm` nie zawiera projektu deweloperskiego `Project~` ani ciężkich bibliotek `Textures/HDRI` i `Textures/Surfaces`;
+- zachowano kod pakietu, wszystkie próbki laboratoriów, sample VITURE XR, dokumentację, WebSim, lekkie tekstury Grid i `RoboAnimation.unitypackage`;
+- rozmiar bieżącego snapshotu UPM wynosi około 10,7 MB zamiast setek megabajtów pełnego drzewa repozytorium;
+- materiały studenckie zostały przełączone na lekki kanał instalacyjny `upm`;
+- workflow synchronizacji przygotowano do automatycznej publikacji analogicznej lekkiej gałęzi `upm` w repozytorium kursu.
+
+## 1.0.5 (2026-10-06)
+
+- dodano trzy gotowe sceny Unity dla okularów VITURE XR:
+  - `VITURE_01_StereoDepthLayers.unity` do demonstracji warstw głębi w natywnym Full SBS;
+  - `VITURE_02_StereoComfort.unity` do porównania dysparacji i komfortu stereo;
+  - `VITURE_03_Immersive2D_Source.unity` jako źródło 2D do porównania z Immersive 3D 2D-to-3D;
+- dodano `WiRRVitureDemoBootstrap`, który buduje sceny demonstracyjne w Play Mode bez zależności od XRI i konkretnej wersji URP;
+- dodano polecenie `WiRR → VITURE XR → Wygeneruj 3 sceny demonstracyjne`, zapisujące sceny bezpośrednio przez aktualnie używaną wersję Unity do `Assets/WiRR/VITURE/Demos`;
+- rozbudowano okno pomocy VITURE i sample Package Managera o workflow demonstracji scen;
+- zaktualizowano pakiet do wersji `1.0.5`.
+
+## 1.0.4 (2026-10-06)
+
+- dodano obsługę okularów VITURE XR jako stereoskopowego wyświetlacza Full SBS;
+- dodano komponent `WiRRVitureSbsRig`, który tworzy parę kamer z równoległymi osiami i kompozycją side-by-side do pojedynczego framebuffera;
+- dodano generator `WiRR → VITURE XR → Utwórz przykład Full SBS 3840x1080`;
+- dodano okno pomocy `WiRR → VITURE XR → Instrukcja VITURE XR` z procedurą przełączania 2D/3D dla serii One/Pro i Luma;
+- dodano instrukcję odtwarzania materiałów Full SBS 3840×1080 oraz rozróżnienie Full SBS i Half-SBS;
+- dodano opis Immersive 3D, czyli programowej konwersji 2D-to-3D w ekosystemie VITURE, z poziomami głębokości i trybami Movie/Game;
+- dodano sample `VITURE XR: Full SBS i Immersive 3D` widoczny w Unity Package Manager;
+- dodano dokument `Documentation~/Reference/VITURE_XR.md` z przykładem eksperymentu porównującego 2D, natywne stereo SBS i 2D-to-3D;
+- zaktualizowano pakiet do wersji `1.0.4`.
+
 ## 1.0.3 (2026-09-25)
 
 - dokończono opisy STEP/STP, STL, OBJ+MTL, FBX, URDF, MJCF i USD, rozdzielając geometrię CAD, mesh czasu rzeczywistego, semantykę robota i kompozycję sceny;
