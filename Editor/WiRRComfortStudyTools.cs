@@ -89,6 +89,9 @@ namespace KIA.WiRR.Editor
             try
             {
                 var path = Folder + "/" + name + ".prefab";
+                // Re-running the tool must never overwrite a student-edited prefab.
+                var existing = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                if (existing != null) return existing;
                 var saved = PrefabUtility.SaveAsPrefabAsset(root, path);
                 if (saved == null) throw new InvalidOperationException("Nie udało się utworzyć " + path);
                 return saved;
