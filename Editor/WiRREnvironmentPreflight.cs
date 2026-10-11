@@ -67,7 +67,7 @@ namespace KIA.WiRR.Editor
 
         public static void Refresh(int labNumber)
         {
-            cachedLab = Math.Max(1, Math.Min(7, labNumber));
+            cachedLab = Math.Max(1, Math.Min(8, labNumber));
             lastRefreshUtc = DateTime.UtcNow;
             cachedItems = Build(cachedLab);
         }

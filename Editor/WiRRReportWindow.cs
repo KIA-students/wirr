@@ -31,7 +31,7 @@ namespace KIA.WiRR.Editor
         private void OnEnable()
         {
             titleContent = WiRRBranding.Title("WiRR Raport");
-            labNumber = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 7);
+            labNumber = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 8);
             document = WiRRReportStore.LoadOrCreate(labNumber);
             WiRRActivityLogger.Record("report_opened", labNumber, "ok");
             InitializeSectionFoldouts();

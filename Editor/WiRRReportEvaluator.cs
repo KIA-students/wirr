@@ -31,7 +31,7 @@ namespace KIA.WiRR.Editor
             WiRRReportCalculator.Recalculate(document);
             var result = new WiRRReportEvaluation();
             result.BlockingIssues.AddRange(WiRRReportStore.ValidateIdentity(document));
-            if (document == null || document.labNumber < 1 || document.labNumber > 7) return result;
+            if (document == null || document.labNumber < 1 || document.labNumber > 8) return result;
 
             var chainOpen = result.BlockingIssues.Count == 0;
             foreach (var grade in Grades)

@@ -62,7 +62,7 @@ namespace KIA.WiRR.Editor
             var errors = new List<string>();
             if (document == null) { errors.Add("Brak dokumentu raportu."); return errors; }
             if (document.schemaVersion != "wirr-report/1.0") errors.Add("Nieobsługiwana wersja raportu.");
-            if (document.labNumber < 1 || document.labNumber > 7) errors.Add("Nieprawidłowy numer laboratorium.");
+            if (document.labNumber < 1 || document.labNumber > 8) errors.Add("Nieprawidłowy numer laboratorium.");
             if (string.IsNullOrWhiteSpace(document.submissionId)) errors.Add("Brak identyfikatora raportu.");
             if (string.IsNullOrWhiteSpace(document.teamId)) errors.Add("Wpisz identyfikator studenta.");
             var indices = (document.studentIndices ?? new List<string>()).Where(v => !string.IsNullOrWhiteSpace(v)).Select(v => v.Trim()).ToArray();
@@ -75,7 +75,7 @@ namespace KIA.WiRR.Editor
         public static IReadOnlyList<string> Validate(WiRRReportDocument document, string throughCheckpoint = null)
         {
             var errors = new List<string>(ValidateIdentity(document));
-            if (document == null || document.labNumber < 1 || document.labNumber > 7) return errors;
+            if (document == null || document.labNumber < 1 || document.labNumber > 8) return errors;
 
             foreach (var section in WiRRReportSchemaCatalog.Get(document.labNumber))
             {
