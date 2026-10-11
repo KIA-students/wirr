@@ -6,12 +6,15 @@ on:
       - 'WebSim~/src/**'
       - 'WebSim~/compose.yaml'
       - 'WebSim~/Dockerfile'
-      - 'WebSim~/requirements.txt'
       - '.github/workflows/websim-smoke.yml'
   push:
     branches: [main]
     paths:
-      - 'WebSim~/**'
+      - 'WebSim~/src/**'
+      - 'WebSim~/compose.yaml'
+      - 'WebSim~/Dockerfile'
+      - 'WebSim~/ros_entrypoint.sh'
+      - 'WebSim~/.dockerignore'
       - '.github/workflows/websim-smoke.yml'
 
 permissions:
