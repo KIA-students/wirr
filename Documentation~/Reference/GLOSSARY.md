@@ -212,9 +212,7 @@
 
 ## S
 
-## S
-
-**Seed** — Wartość inicjalizacyjna. W tym kursie = suma numerów indeksów.
+**Seed** — Wartość inicjalizacyjna. W tym kursie S = własny numer indeksu, zgodnie z indywidualnym raportem.
 
 **Segmentation** — Podział obrazu na kategorie (osoba, tło, itp.).
 

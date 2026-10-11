@@ -36,12 +36,12 @@
     },
     {
       "displayName": "Laboratorium 05: Optymalizacja modeli CAD",
-      "description": "Przygotowanie modeli inżynierskich do wydajnego użycia w XR. Etapy kluczowe: 3.0: audyt modelu CAD i topologii; 3.5: poziomy LOD; 4.0: czas importu, pamięć i koszt klatki; 4.5: diagnostyka oraz naprawa geometrii; 5.0: wybór potoku przetwarzania STEP→DCC→FBX/glTF, USD lub bezpośredniej siatki i ocena ryzyka.",
+      "description": "Przygotowanie CAD do XR. 3.0: audyt; 3.5: triangulacja; 4.0: LOD i pomiary; 4.5: materiały i koszt klatki; 5.0: kontrolowany błąd, hipotezy H1/H2 i minimalna poprawka.",
       "path": "Samples~/Lab05"
     },
     {
       "displayName": "Laboratorium 06: Bliźniak cyfrowy ROS 2 + Gazebo",
-      "description": "Budowa i walidacja prostego bliźniaka cyfrowego robota. Etapy kluczowe: 3.0: źródło symulacji LOCAL/LAN/WEBSIM i przepływ Gazebo→ROS 2→Unity; 3.5: zgodność stanu przegubów; 4.0: opóźnienie, zmienność opóźnienia transmisji (jitter) i bufor interpolacji; 4.5: utrata danych, stan STALE i przywracanie połączenia; 5.0: błąd synchronizacji oraz poprawny powrót STALE→LIVE.",
+      "description": "Bliźniak cyfrowy LOCAL/LAN/WEBSIM. 3.0: źródło i transmisja stanu; 3.5: zgodność przegubów; 4.0: jitter i bufor interpolacji; 4.5: RTT, co najmniej 50 próbek na warunek; 5.0: kontrolowany błąd i STALE→LIVE.",
       "path": "Samples~/Lab06"
     },
     {
@@ -51,7 +51,7 @@
     },
     {
       "displayName": "Laboratorium 08: Wynalazca XR i demonstrator integracyjny",
-      "description": "Ósme laboratorium: własny prototyp XR/AR, 3 próby kontrolowane, jedna poprawka, lokalny automatyczny JSON i raport, wariant PC działający bez dodatkowego XR SDK.",
+      "description": "Demonstrator integracyjny XR/AR. 3.0: problem i scena; 3.5: testy negatywne i anulowanie; 4.0: sześć prób A1–A3/B1–B3; 4.5: poprawka i regresja; 5.0: integracja dwóch umiejętności i odtworzenie. Wariant PC bez dodatkowego XR SDK.",
       "path": "Samples~/Lab08"
     },
     {
@@ -78,3 +78,4 @@
     "Immersive 3D"
   ]
 }
+

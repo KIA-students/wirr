@@ -103,7 +103,8 @@ namespace KIA.WiRR.Editor
             }
             if (results == null || results.schema != "wirr-lab08/1" || results.trials == null ||
                 results.trials.Count == 0 || results.trials.Count > 6 ||
-                results.trials.Any(trial => trial == null || trial.seconds < 0f ||
+                results.trials.Where(trial => trial != null).GroupBy(trial => (trial.variant, trial.attempt)).Any(group => group.Count() > 1) ||
+                results.trials.Any(trial => trial == null || trial.seconds < 0f || float.IsNaN(trial.seconds) || float.IsInfinity(trial.seconds) ||
                     (trial.variant != "A" && trial.variant != "B") || trial.attempt < 1 || trial.attempt > 3))
             {
                 EditorUtility.DisplayDialog("WiRR Lab08", "Niepoprawny albo pusty JSON eksperymentu. Nie wpisano danych.", "OK");
@@ -116,24 +117,31 @@ namespace KIA.WiRR.Editor
             WiRRReportStore.SetValue(report, "cp30.scenario", results.scenario);
             WiRRReportStore.SetValue(report, "cp30.attempts", results.trials.Count.ToString(CultureInfo.InvariantCulture));
             WiRRReportStore.SetValue(report, "cp30.successes", results.trials.Count(trial => trial.success).ToString(CultureInfo.InvariantCulture));
-            var table = WiRRReportTableCatalog.Get(8, "3.0").First();
-            // Do not replace empty rows with zeros: evidence must stay honest.
-            for (var i = 0; i < Math.Min(3, baseline.Length); i++)
+            var table = WiRRReportTableCatalog.Get(8, "4.0").First();
+            foreach (var row in table.Rows)
+            foreach (var column in table.Columns)
+                WiRRReportStore.SetValue(report, WiRRReportTableCatalog.CellKey(table, row, column), string.Empty);
+            foreach (var trial in results.trials)
             {
-                var trial = baseline[i];
-                WiRRReportStore.SetValue(report, WiRRReportTableCatalog.CellKey(table, table.Rows[i], table.Columns[0]),
+                var row = table.Rows[(trial.variant == "A" ? 0 : 3) + trial.attempt - 1];
+                WiRRReportStore.SetValue(report, WiRRReportTableCatalog.CellKey(table, row, table.Columns[0]),
                     trial.seconds.ToString("F3", CultureInfo.InvariantCulture));
-                WiRRReportStore.SetValue(report, WiRRReportTableCatalog.CellKey(table, table.Rows[i], table.Columns[1]),
+                WiRRReportStore.SetValue(report, WiRRReportTableCatalog.CellKey(table, row, table.Columns[1]),
                     trial.success ? "TAK" : "NIE");
-                WiRRReportStore.SetValue(report, WiRRReportTableCatalog.CellKey(table, table.Rows[i], table.Columns[2]),
+                WiRRReportStore.SetValue(report, WiRRReportTableCatalog.CellKey(table, row, table.Columns[2]),
                     trial.deviceMode ?? "UNSPECIFIED");
+                WiRRReportStore.SetValue(report, WiRRReportTableCatalog.CellKey(table, row, table.Columns[3]), trial.variant);
             }
 
             SetMedian(report, "cp35.median_s", baseline);
-            if (baseline.Length > 0) WiRRReportStore.SetValue(report, "cp35.source", results.deviceMode + " (zgłoszony przez program)");
+            WiRRReportStore.SetValue(report, "cp35.source",
+                string.IsNullOrWhiteSpace(results.deviceMode) ? string.Empty : results.deviceMode + " (zgłoszony przez program)");
             SetMedian(report, "cp45.before_s", baseline);
             SetMedian(report, "cp45.after_s", improved);
             var compare = WiRRReportTableCatalog.Get(8, "4.5").First();
+            foreach (var row in compare.Rows)
+            foreach (var column in compare.Columns)
+                WiRRReportStore.SetValue(report, WiRRReportTableCatalog.CellKey(compare, row, column), string.Empty);
             if (baseline.Length > 0)
             {
                 FillComparison(report, compare, 0, baseline);
@@ -164,8 +172,8 @@ namespace KIA.WiRR.Editor
         private static void SetMedian(WiRRReportDocument report, string key, WiRRLab08Trial[] trials)
         {
             var times = trials.Where(trial => trial.success).Select(trial => (double)trial.seconds).OrderBy(time => time).ToArray();
-            if (times.Length > 0)
-                WiRRReportStore.SetValue(report, key, Median(times).ToString("F3", CultureInfo.InvariantCulture));
+            WiRRReportStore.SetValue(report, key,
+                times.Length > 0 ? Median(times).ToString("F3", CultureInfo.InvariantCulture) : string.Empty);
         }
 
         private static double Median(double[] ordered) =>
@@ -183,3 +191,4 @@ namespace KIA.WiRR.Editor
         }
     }
 }
+

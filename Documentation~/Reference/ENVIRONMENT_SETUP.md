@@ -17,7 +17,7 @@ Jeśli Unity jest już zainstalowane, od razu otwórz [Lab 01](../../Samples~/La
 ## Wymagane składniki
 
 - Unity Hub;
-- **zatwierdzona dla kursu wersja Unity 6000.6.x**;
+- **Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.x**;
 - Android Build Support;
 - Android SDK & NDK Tools;
 - OpenJDK;

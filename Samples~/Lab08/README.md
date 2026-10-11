@@ -13,6 +13,7 @@
 - [Ścieżka D: VITURE stereo i czytelność](#ścieżka-d-viture-stereo-i-czytelność)
 - [Eksperyment i porównanie przed i po](#eksperyment-i-porównanie-przed-i-po)
 - [Jedna karta raportu, bez przepisywania pomiarów](#jedna-karta-raportu-bez-przepisywania-pomiarów)
+- [Punkty kontrolne](#punkty-kontrolne)
 - [Zaliczenie i pomysł wynalazczy](#zaliczenie-i-pomysł-wynalazczy)
 - [Jeżeli coś nie działa](#jeżeli-coś-nie-działa)
 - [Dla ambitnych](#dla-ambitnych)
@@ -80,12 +81,22 @@ Zacznij od działającego obrazu 2D, a dopiero potem włącz Full SBS odpowiedni
 
 - W gotowym demonstratorze naciśnij **Eksportuj wyniki JSON**. Program zapisze czasy prób, liczbę sukcesów i wariant **UNITY_EDITOR**; nie udaje pomiarów z gogli.
 - W Unity wybierz **WiRR → Lab 08 → Importuj wyniki demonstratora do raportu**. Wybierz wyeksportowany JSON. Formularz uzupełni metryki z rzeczywistego testu, a nie wartości przykładowe.
-- W **WiRR → Raporty → Formularz raportu laboratoryjnego** wybierz **Lab 08**. Zapisz tylko hipotezę, wniosek i pomysł nowego zastosowania.
+- W **WiRR → Raporty → Formularz raportu laboratoryjnego** wybierz **Lab 08**. Uzupełnij problem, kryterium akceptacji, test negatywny, hipotezę, interpretację A/B, regresję i uzasadnienie integracji.
 - Całą sesję Lab 07+08 możesz ująć w jednej [karcie bloku IV](../../Documentation~/Reference/FOUR_BLOCK_MISSIONS.md). Nie zbieraj danych medycznych ani wrażliwych.
+
+## Punkty kontrolne
+
+| Etap | Wymagany dowód |
+|---|---|
+| 3.0 | Problem użytkownika, mierzalne kryterium, działająca scena i tryb platformy |
+| 3.5 | Sukces, anulowanie, powtórne wskazanie i test negatywny |
+| 4.0 | A1–A3 i B1–B3, dane surowe, obliczenia i hipoteza |
+| 4.5 | Jedna poprawka, interpretacja A/B i test regresyjny |
+| 5.0 | Integracja dwóch umiejętności, ryzyka, akceptacja i odtworzenie |
 
 ## Zaliczenie i pomysł wynalazczy
 
-Zademonstruj działającą scenę, trzy próby, jedną poprawkę i jedno uzasadnienie nowego zastosowania. **Ocena indywidualna nie zależy od Ligi XR**. Wyróżnione pomysły grup mogą otrzymać punkty dobrowolne, zatwierdzane przez prowadzącego. Brak prywatnego urządzenia nie obniża oceny.
+Zademonstruj działającą scenę, trzy próby A i trzy próby B, jedną poprawkę oraz uzasadnienie wartości rozwiązania dla użytkownika. **Ocena indywidualna nie zależy od Ligi XR**. Wyróżnione pomysły grup mogą otrzymać punkty dobrowolne, zatwierdzane przez prowadzącego. Brak prywatnego urządzenia nie obniża oceny.
 
 ## Jeżeli coś nie działa
 
@@ -99,3 +110,4 @@ Jeśli Unity nie kompiluje: [Windows/Ubuntu](../../Documentation~/Reference/OS_S
 - [Meta Passthrough](https://developers.meta.com/vr/essentials/horizon-os-passthrough/): projektuj MR, które nie zasłania realnych przeszkód.
 
 Zaproponuj jedną własną funkcję, którą warto wdrożyć poza laboratorium. Nie jest wymagane kupowanie zasobów Unity Asset Store.
+

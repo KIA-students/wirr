@@ -128,24 +128,25 @@ namespace KIA.WiRR.Editor
             new WiRRReportSection("5.0: kontrolowany błąd i diagnoza", "5.0", M("cp50.fault","Kontrolowany błąd"), M("cp50.h1","H1"), M("cp50.h2","H2"), M("cp50.test","Test rozstrzygający i wynik"), M("cp50.fix","Minimalna poprawka"), M("cp50.answer","Diagnoza końcowa"))
         };
 
+        // Field IDs remain stable across checkpoint moves to preserve saved drafts.
         private static IReadOnlyList<WiRRReportSection> Lab05() => new[]
         {
             CommonEnvironment(),
-            new WiRRReportSection("3.0: audyt modelu CAD", "3.0", T("cp30.source_format","Format źródłowy"), I("cp30.triangles_before","Liczba trójkątów przed"), I("cp30.triangles_after","Liczba trójkątów po"), M("cp30.answer","Ocena topologii / importu")),
-            new WiRRReportSection("3.5: LOD", "3.5", I("cp35.lod0_triangles","LOD0: liczba trójkątów"), I("cp35.lod1_triangles","LOD1: liczba trójkątów"), I("cp35.lod2_triangles","LOD2: liczba trójkątów"), M("cp35.answer","Kompromis między jakością a kosztem obliczeniowym")),
-            new WiRRReportSection("4.0: wydajność zasobu", "4.0", N("cp40.import_s","Czas importu","s"), N("cp40.memory_mb","Pamięć zasobu","MB"), N("cp40.frame_ms","Mediana czasu klatki","ms"), M("cp40.answer","Wniosek")),
-            new WiRRReportSection("4.5: diagnostyka geometrii", "4.5", M("cp45.issue","Wykryty problem geometrii"), M("cp45.fix","Zastosowana naprawa"), N("cp45.error_before","Miara błędu przed", "", false), N("cp45.error_after","Miara błędu po", "", false), M("cp45.answer","Weryfikacja naprawy")),
-            new WiRRReportSection("5.0: potok przetwarzania", "5.0", C("cp50.pipeline","Wybrany potok przetwarzania","STEP→DCC→FBX/glTF","USD","bezpośrednia siatka","inna"), M("cp50.risk","Najważniejsze ryzyko potoku przetwarzania"), M("cp50.answer","Uzasadnienie końcowe"))
+            new WiRRReportSection("3.0: import i audyt modelu CAD", "3.0", T("cp30.source_format","Format źródłowy"), I("cp30.triangles_before","Liczba trójkątów przed"), I("cp30.triangles_after","Liczba trójkątów po"), M("cp30.answer","Ocena topologii / importu")),
+            new WiRRReportSection("3.5: triangulacja i jakość siatki", "3.5", M("cp35.answer","Porównanie wariantów A/B/C i zachowanie cech funkcjonalnych")),
+            new WiRRReportSection("4.0: LOD i pomiar wydajności", "4.0", I("cp35.lod0_triangles","LOD0: liczba trójkątów"), I("cp35.lod1_triangles","LOD1: liczba trójkątów"), I("cp35.lod2_triangles","LOD2: liczba trójkątów"), N("cp40.import_s","Czas importu","s"), N("cp40.memory_mb","Pamięć zasobu","MB"), N("cp40.frame_ms","Mediana czasu klatki","ms"), M("cp40.answer","Kompromis jakości, LOD i kosztu klatki")),
+            new WiRRReportSection("4.5: materiały, tekstury i kolizje", "4.5", M("cp45.issue","Badany koszt materiałów, tekstur albo kolizji"), M("cp45.fix","Zmieniony parametr w warunkach A/B/C"), N("cp45.error_before","Miara błędu przed", "", false), N("cp45.error_after","Miara błędu po", "", false), M("cp45.answer","Interpretacja kosztu i jakości")),
+            new WiRRReportSection("5.0: kontrolowany błąd i finalny model", "5.0", M("cp50.fault","Kontrolowany błąd"), M("cp50.h1","H1"), M("cp50.h2","H2"), M("cp50.test","Test rozstrzygający i wynik"), M("cp50.fix","Minimalna poprawka i ponowny pomiar"), C("cp50.pipeline","Wybrany potok przetwarzania","STEP→DCC→FBX/glTF","USD","bezpośrednia siatka","inna"), M("cp50.risk","Najważniejsze ryzyko potoku przetwarzania"), M("cp50.answer","Uzasadnienie finalnego modelu"))
         };
 
         private static IReadOnlyList<WiRRReportSection> Lab06() => new[]
         {
             CommonEnvironment(),
-            new WiRRReportSection("3.0: źródło symulacji", "3.0", C("cp30.mode","Tryb","LOCAL","LAN","WEBSIM"), T("cp30.ros_version","ROS 2"), T("cp30.gazebo_version","Gazebo"), N("cp30.joint_rate_hz","Częstotliwość wiadomości /joint_states","Hz"), M("cp30.answer","Weryfikacja przepływu danych Gazebo → ROS 2 → Unity")),
-            new WiRRReportSection("3.5: zgodność stanu", "3.5", N("cp35.joint1_error_deg","Błąd przegubu joint1","deg"), N("cp35.joint2_error_deg","Błąd przegubu joint2","deg"), N("cp35.joint3_error_deg","Błąd przegubu joint3","deg",false), M("cp35.answer","Wniosek dotyczący zgodności stanu")),
-            new WiRRReportSection("4.0: transport i bufor", "4.0", N("cp40.latency_ms","Mediana czasu RTT","ms"), N("cp40.jitter_ms","Zmienność odstępów między wiadomościami (jitter)","ms"), N("cp40.buffer_ms","Opóźnienie bufora interpolacji","ms"), M("cp40.answer","Wniosek dotyczący transmisji danych")),
-            new WiRRReportSection("4.5: utrata danych i STALE", "4.5", N("cp45.stale_ms","Czas do wykrycia stanu STALE","ms"), N("cp45.recovery_ms","Czas powrotu do stanu LIVE","ms"), M("cp45.h1","H1"), M("cp45.h2","H2"), M("cp45.answer","Diagnoza")),
-            new WiRRReportSection("5.0: wynik końcowy", "5.0", N("cp50.sync_error_deg","Maksymalny błąd synchronizacji","deg"), B("cp50.recovery_pass","Powrót STALE → LIVE działa poprawnie"), M("cp50.answer","Wniosek dotyczący bliźniaka cyfrowego"))
+            new WiRRReportSection("3.0: źródło stanu", "3.0", C("cp30.mode","Tryb","LOCAL","LAN","WEBSIM"), T("cp30.ros_version","ROS 2"), T("cp30.gazebo_version","Gazebo albo N/A z uzasadnieniem dla WebSim"), N("cp30.joint_rate_hz","Częstotliwość wiadomości JointState","Hz"), M("cp30.answer","Weryfikacja przepływu danych ze źródła do Unity")),
+            new WiRRReportSection("3.5: mapowanie przegubów", "3.5", N("cp35.joint1_error_deg","Błąd przegubu joint1","deg"), N("cp35.joint2_error_deg","Błąd przegubu joint2","deg"), N("cp35.joint3_error_deg","Błąd przegubu joint3","deg",false), M("cp35.answer","Mapowanie po nazwach; joint3 = N/A dla RRBot z dwoma przegubami")),
+            new WiRRReportSection("4.0: buforowanie i interpolacja", "4.0", N("cp40.jitter_ms","Zmienność odstępów między wiadomościami (jitter)","ms"), N("cp40.buffer_ms","Opóźnienie bufora interpolacji","ms"), M("cp40.answer","Porównanie wariantów bufora; WebSim wymaga własnego komponentu lub przejścia na LOCAL/LAN")),
+            new WiRRReportSection("4.5: pomiar RTT", "4.5", N("cp40.latency_ms","Mediana bazowych próbek RTT","ms"), M("cp45.h1","H1"), M("cp45.h2","H2"), M("cp45.answer","Co najmniej 50 próbek na warunek; nie utożsamiaj RTT z opóźnieniem jednostronnym")),
+            new WiRRReportSection("5.0: STALE, awaria i odzyskanie", "5.0", N("cp45.stale_ms","Czas do wykrycia stanu STALE","ms"), N("cp45.recovery_ms","Czas powrotu do stanu LIVE","ms"), N("cp50.sync_error_deg","Maksymalny błąd synchronizacji","deg"), B("cp50.recovery_pass","Powrót STALE → LIVE działa poprawnie"), M("cp50.answer","Objaw, hipoteza, test, poprawka i ponowny pomiar"))
         };
 
         private static IReadOnlyList<WiRRReportSection> Lab07() => new[]
@@ -158,32 +159,37 @@ namespace KIA.WiRR.Editor
             new WiRRReportSection("5.0: automatyzacja, ryzyko i decyzja", "5.0", B("cp50.automated_pass","Automatyczny test zaliczony"), B("cp50.controlled_fail","Wykazano kontrolowany wynik FAIL"), I("cp50.max_risk","Maksymalny priorytet ryzyka R = P × S"), C("cp50.acceptance","Decyzja","ACCEPT","ACCEPT WITH CONDITIONS","REJECT"), M("cp50.answer","Uzasadnienie decyzji"))
         };
 
-        // Lab 08 deliberately has a minimal required baseline: the student
-        // imports measurements from the local demonstrator instead of typing
-        // dozens of metrics into tables.
+        // The latest Lab 08 manuscript defines the checkpoints; saved IDs are retained.
         private static IReadOnlyList<WiRRReportSection> Lab08() => new[]
         {
             CommonEnvironment(),
-            new WiRRReportSection("3.0: działający demonstrator", "3.0",
-                T("cp30.scenario", "Cel i wariant demonstratora"),
-                I("cp30.attempts", "Liczba wykonanych prób"),
-                I("cp30.successes", "Udane próby"),
-                M("cp30.answer", "Co zaobserwowano?")),
-            new WiRRReportSection("3.5: pomiar", "3.5",
-                N("cp35.median_s", "Mediana czasu próby", "s"),
+            new WiRRReportSection("3.0: problem i działająca scena", "3.0",
+                T("cp30.scenario", "Problem użytkownika i cel demonstratora"),
+                T("cp30.acceptance", "Mierzalne kryterium akceptacji"),
                 T("cp35.source", "Źródło i rzeczywisty tryb danych"),
-                M("cp35.answer", "Krótki wniosek z pomiaru")),
-            new WiRRReportSection("4.0: diagnoza", "4.0",
-                M("cp40.issue", "Zaobserwowana trudność"),
-                M("cp40.diagnosis", "Przyczyna i sposób sprawdzenia")),
-            new WiRRReportSection("4.5: jedna poprawka", "4.5",
+                B("cp30.running", "Kontrola trzech różnych elementów działa"),
+                M("cp30.answer", "Konfiguracja i dowód działania")),
+            new WiRRReportSection("3.5: sukces, anulowanie i test negatywny", "3.5",
+                M("cp35.negative_test", "Wynik ponownego wskazania tego samego elementu"),
+                M("cp35.cancel_test", "Wynik przerwania próby"),
+                M("cp35.answer", "Dowód poprawnej logiki zakończenia próby")),
+            new WiRRReportSection("4.0: sześć prób A/B i obliczenia", "4.0",
+                I("cp30.attempts", "Liczba faktycznie wykonanych prób"),
+                I("cp30.successes", "Udane próby"),
+                N("cp35.median_s", "Mediana poprawnych prób A", "s", false),
+                T("cp40.hypothesis", "Hipoteza i zmienna zależna"),
+                M("cp40.diagnosis", "Wyniki A/B, niepowodzenia i ograniczenia danych")),
+            new WiRRReportSection("4.5: poprawka i regresja", "4.5",
                 T("cp45.change", "Zmieniony jeden parametr"),
-                N("cp45.before_s", "Mediana przed", "s"),
-                N("cp45.after_s", "Mediana po", "s"),
-                M("cp45.answer", "Czy poprawka pomogła?")),
-            new WiRRReportSection("5.0: Wynalazca XR", "5.0",
-                M("cp50.application", "Zastosowanie poza grami VR"),
-                M("cp50.two_skills", "Dwie technologie/umiejętności kursowe"),
+                N("cp45.before_s", "Mediana poprawnych prób A", "s", false),
+                N("cp45.after_s", "Mediana poprawnych prób B", "s", false),
+                M("cp45.regression", "Wynik testu negatywnego i regresyjnego"),
+                M("cp45.answer", "Interpretacja czasu, skuteczności i ograniczeń")),
+            new WiRRReportSection("5.0: demonstrator integracyjny", "5.0",
+                M("cp50.application", "Wartość rozwiązania dla użytkownika względem 2D"),
+                M("cp50.two_skills", "Dwie wykorzystane umiejętności kursowe"),
+                M("cp50.risk", "Ryzyka i decyzja akceptacyjna"),
+                M("cp50.reproduction", "Commit, dowody odtworzenia i demonstracja"),
                 M("cp50.limitations", "Ograniczenia rozwiązania"))
         };
     }

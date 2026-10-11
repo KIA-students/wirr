@@ -1,44 +1,95 @@
-# WiRR Lab 08. Krótki raport demonstratora integracyjnego
+# WiRR Lab 08. Raport demonstratora integracyjnego
 
-## Spis treści
-- [Wygenerowane dane](#wygenerowane-dane)
-- [Hipoteza i warianty](#hipoteza-i-warianty)
-- [Trzy krótkie wnioski](#trzy-krótkie-wnioski)
-- [Kontrola przed oddaniem](#kontrola-przed-oddaniem)
+**Przedmiot:** Wirtualna i rozszerzona rzeczywistość  
+**Laboratorium:** 08, Wynalazca XR  
+**Student / identyfikator:**  
+**Data, wersja Unity (min. 6000.6.5f1):**  
+**SHA commita:**  
 
-## Wygenerowane dane
+## 1. Problem i scenariusz
+- Użytkownik i rzeczywisty problem:
+- Cel demonstratora poza grami:
+- Wybrana ścieżka: A PC/Quest | B telefon AR | C ROS 2 | D VITURE
+- Wersja Unity, wersja pakietu WiRR i wymaganych pakietów:
+- System operacyjny i rzeczywiście wykorzystany sprzęt:
+- Tryb danych: UNITY_EDITOR / XR_SIM / QUEST / PHONE_AR / ROS_REPLAY / ROS_LIVE / VITURE / NV
+- Dlaczego wybrana metoda XR jest uzasadniona względem 2D:
+- Kryterium akceptacji zdefiniowane przed próbami:
 
-**Nie przepisuj ręcznie danych z konsoli.** Uruchom w scenie WiRR_Lab08_Inspection, wykonaj próbę i wybierz „Eksportuj wyniki JSON”. Następnie w Unity użyj **WiRR → Lab 08 → Importuj wyniki demonstratora do raportu**. Liczba prób, czasy, sukcesy i tryb pracy powstaną z prawdziwego lokalnego logu, a nie z przykładowych wartości.
+## 2. Hipoteza i kontrola zmiennych
+- Hipoteza:
+- Zmienna niezależna:
+- Wartość A (przed):
+- Wartość B (po):
+- Zmienna zależna, jednostka:
+- Kontrolowane warunki:
+- Możliwe zakłócenia:
+- Kryterium sukcesu:
 
-| Parametr | Wartość |
-|---|---|
-| Unity, system i GPU | Wypełnia lokalna karta misji WiRR |
-| Scena i tryb | Wypełnia karta; student potwierdza sprzęt |
-| Liczba prób | Z lokalnego JSON |
-| Sukcesy / błędy | Z lokalnego JSON |
-| Czasy prób i mediana | Z lokalnego JSON |
-| Źródło danych | UNITY_EDITOR, QUEST lub inne zgodnie z rzeczywistym uruchomieniem |
+## 3. Uruchomienie i kompletność demonstratora
+- Ścieżka zapisanej sceny Unity i lista skryptów:
+- Czy użyto generatora WiRR, czy samodzielnej konfiguracji:
+- Czy kamera, Collidery, Input System i referencje są prawidłowo połączone:
+- Wynik testu trzykrotnego wskazania jednego celu:
+- Wynik testu przerwania:
+- Lokalizacja oryginalnego pliku JSON w Console:
+- Dokładna różnica między A i B:
+- Wyniki prób treningowych, wyłączonych z analizy:
 
-## Hipoteza i warianty
+## 4. Próby surowe
+Dane wpisz z prawdziwego JSON lub z logów. Brakująca próba = NV, nigdy 0.
 
-- **Jaką potrzebę użytkownika rozwiązuje demonstrator?** …
-- **Hipoteza:** …
-- **Wariant bazowy A:** …
-- **Jedna zmiana w wariancie B:** …
-- **Czy porównanie było uczciwe?** …
+| Próba | Wariant | Sukces TAK/NIE/NV | Czas [s]/NV | Tryb sprzętowy | Obserwacja |
+|---|---|---|---|---|---|
+| 1 | A | | | | |
+| 2 | A | | | | |
+| 3 | A | | | | |
+| 4 | B | | | | |
+| 5 | B | | | | |
+| 6 | B | | | | |
 
-## Trzy krótkie wnioski
+- Lokalizacja JSON/CSV z oryginalnymi wynikami:
+- Metoda wykonania pomiaru:
+- Jeśli była próba treningowa, potwierdź wyłączenie jej z analizy:
+- Jeśli A i B wykonywano w różnych sesjach Play, wskaż oba eksporty źródłowe:
+- Status testów F01–F06:
 
-- **Odkrycie:** …
-- **Problem, przyczyna i poprawka:** …
-- **Nowe zastosowanie poza grami VR:** …
+## 5. Wyniki i interpretacja
 
-## Kontrola przed oddaniem
+| Miara | A | B |
+|---|---:|---:|
+| Rzeczywista liczba prób | | |
+| Sukcesy | | |
+| Niepowodzenia | | |
+| Mediana czasu poprawnych prób [s], jeśli określona | | |
+| Tryb pomiarowy | | |
 
-- [ ] Działa scena, bez błędów blokujących.
-- [ ] Jest rzeczywisty wynik trzech prób lub rzetelnie opisany problem.
-- [ ] Tryb działania PC/VR/AR/REPLAY oznaczono prawdziwie.
-- [ ] Jedna poprawka została przetestowana.
-- [ ] Raport zawiera trzy krótkie wnioski. Żadna wartość nie została wymyślona.
+- Różnica median B - A [s] albo NV:
+- Czy kryterium akceptacji osiągnięto? Dowód:
+- Czy obserwacje są spójne z hipotezą?
+- Dlaczego liczba prób i ich kolejność ograniczają wnioski?
 
-Wystarczy pokazać scenę, lokalny plik raportu lub krótki materiał dokumentujący wynik. Nie wymagamy nagrywania uczestników ani dodatkowego uruchamiania GitHub Actions.
+## 6. Testy funkcjonalne, negatywne i regresja
+
+| Test | Oczekiwany wynik | Wynik A PASS/FAIL/NV | Wynik B PASS/FAIL/NV | Dowód |
+|---|---|---|---|---|
+| Trzy różne cele | Zapis sukcesu | | | |
+| Ponowne wskazanie tego samego celu | Bez podwójnego zaliczenia | | | |
+| Przerwanie | Wynik nieudany | | | |
+| Utrata danych / trackingu, jeśli dotyczy | Widoczny status, bez fałszywego LIVE | | | |
+
+- Rozpoznany błąd lub ryzyko:
+- Jedna poprawka i jej uzasadnienie:
+- Test regresyjny po poprawce:
+
+## 7. Wnioski, granice i demonstracja
+- Co działa i co faktycznie wykazano:
+- Co pozostaje niezweryfikowane (NV/UNSUPPORTED):
+- Czego nie można wnioskować z użytej platformy:
+- Pomysł rozwoju i nowa funkcja dla użytkownika:
+- Opis pokazu 60–90 s:
+- Ścieżka do sceny Unity:
+- Ścieżki do dowodów (zrzuty bez danych osobowych, logi, wyniki):
+- SHA ostatniego commita:
+
+Nie zastępuj wyników z urządzeń fizycznych wynikami UNITY_EDITOR lub ROS_REPLAY. Nie wymagamy osobnych slajdów.

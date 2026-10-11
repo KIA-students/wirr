@@ -22,7 +22,9 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ## Środowisko
 
-- Unity: __________
+- Unity (minimum 6000.6.5f1): __________
+- Tryb: telefon ARCore / UNITY_EDITOR / REPLAY: __________
+- Dostępność funkcji sprzętowych (NV/UNSUPPORTED): __________
 - AR Foundation: __________
 - Google ARCore XR Plugin: __________
 - XR Plug-in Management: __________
@@ -31,8 +33,8 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - Graphics API: __________
 - Minimum API Level: __________
 - ARCore: Required / Optional: __________
-- dane głębi: wymagane / opcjonalne (`Required` / `Optional`): __________
-- Scena: `Assets/Scenes/Lab04_SceneUnderstanding.unity`
+- Depth: Required / Optional: __________
+- Scena: `Assets/WiRR/Lab04/Scenes/Lab04_SceneUnderstanding.unity`
 - Gałąź: `lab04-work`
 
 ## Kontrola konfiguracji
@@ -55,7 +57,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 3.0 — API głębi (Depth API) i diagnostyka
+# Punkt kontrolny 3.0 — Depth API i diagnostyka
 
 ## Stan subsystemu
 
@@ -64,7 +66,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - `requestedEnvironmentDepthMode`: __________
 - `currentEnvironmentDepthMode`: __________
 - `environmentDepthTemporalSmoothingEnabled`: __________
-- rozdzielczość ostatniej klatki danych głębi: __________
+- rozdzielczość ostatniej klatki depth: __________
 
 ## Eksperyment v1
 
@@ -95,13 +97,15 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 | Raw | | | |
 | Smoothed | | | |
 
+- Wygładzanie żądane / aktywne / wspierane przez subsystem: __________
+
 ## Eksperyment v2
 
 - Wariant `v2`: ___
 - Zmienna: __________
 - Hipoteza: __________
 
-| Warunek | Tryb / jakość | Błędy okluzji / 10 | Żądana głębia (`Requested depth`) | Bieżąca głębia (`Current depth`) | Uwagi |
+| Warunek | Tryb / jakość | Błędy okluzji / 10 | Requested depth | Current depth | Uwagi |
 |---|---|---:|---|---|---|
 | A | | | | | |
 | B | | | | | |
@@ -114,11 +118,11 @@ Dominująca sygnatura:
 - [ ] opóźnienie po ruchu
 - [ ] inna: __________
 
-**Wniosek o wygładzaniu i jakości danych głębi:** __________
+**Wniosek o smoothingu / jakości depth:** __________
 
 ---
 
-# Punkt kontrolny 4.0 — rzutowanie promienia z użyciem danych głębi i błąd odległości
+# Punkt kontrolny 4.0 — depth-raycast i błąd odległości
 
 ## Konfiguracja
 
@@ -126,6 +130,7 @@ Dominująca sygnatura:
 - `Fallback To Plane`: false
 - marker prefab: __________
 - sposób wyznaczenia dystansu referencyjnego: __________
+- Czy referencja odpowiada odległości euklidesowej kamera–punkt trafienia: __________
 
 ## Seria bazowa
 
@@ -200,6 +205,10 @@ Dominująca sygnatura:
 | Światło od przodu | | | | | | |
 | Oświetlenie mieszane | | | | | | |
 
+- Environmental HDR: funkcje żądane / aktywne / dostępne pola: __________
+- Czy korzystano z environment probes: tak / nie / nie dotyczy, dlaczego: __________
+- Wynik weryfikacji kierunku światła i cieni: __________
+
 ## Eksperyment v4
 
 - Wariant `v4`: ___
@@ -237,15 +246,15 @@ Dominująca sygnatura:
 - Wynik testu: __________
 - Najbardziej prawdopodobna przyczyna: __________
 
-## Wariant bazowy → błąd → naprawa
+## Baseline → błąd → naprawa
 
 | Stan | Powt. 1 | Powt. 2 | Powt. 3 | Mediana / wynik zbiorczy | Uwagi |
 |---|---:|---:|---:|---:|---|
-| wariant bazowy | | | | | |
+| baseline | | | | | |
 | kontrolowany błąd | | | | | |
 | po naprawie | | | | | |
 
-- Czy wynik po naprawie wrócił w pobliże wariantu bazowego? __________
+- Czy wynik po naprawie wrócił w pobliże baseline? __________
 - Czy sygnatura błędu była zgodna z przewidywaniem? __________
 - Minimalna poprawka: __________
 
@@ -253,10 +262,10 @@ Dominująca sygnatura:
 
 # Wnioski
 
-1. **API głębi (Depth API):** __________
+1. **Depth API:** __________
 2. **Okluzja:** __________
-3. **Rzutowanie promienia z użyciem danych głębi:** __________
-4. **Estymacja oświetlenia:** __________
+3. **Depth-raycast:** __________
+4. **Light estimation:** __________
 5. **Najbardziej wrażliwy warunek środowiskowy:** __________
 6. **Najważniejsze ograniczenie metody:** __________
 

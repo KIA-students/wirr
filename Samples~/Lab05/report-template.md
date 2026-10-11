@@ -20,14 +20,18 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ## Środowisko
 
-- Unity: __________
+- Unity (minimum 6000.6.5f1): __________
+- Wersje pakietów URP, Input System i XRI z packages-lock.json: __________
+- Środowisko pomiaru: Unity Editor / build PC / build Quest 3 / inne: __________
+- VSync, targetFrameRate i profil jakości: __________
 - URP: __________
 - Blender / inne DCC: __________
-- narzędzie CAD / konwerter STEP: __________
+- narzędzie CAD / konwerter STEP (jeśli użyte): __________
+- Jeśli brak narzędzia CAD: źródło mesha referencyjnego, parametry konwersji i zakres NV: __________
 - system operacyjny: __________
 - GPU: __________
 - rozdzielczość / tryb renderowania: __________
-- scena: `Assets/Scenes/Lab05_CADOptimization.unity`
+- scena: `Assets/WiRR/Lab05/Scenes/Lab05_CADOptimization.unity`
 - gałąź: `lab05-work`
 
 ## Model źródłowy
@@ -43,6 +47,8 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - rozmiar pliku: __________
 - liczba części / obiektów: __________
 - czy zachowano oryginalny plik bez zmian: tak / nie
+- dostęp do źródłowego STEP i pomiaru CAD: TAK / NV: __________
+- wariant pracy: pełna tessellacja CAD / referencyjny mesh: __________
 
 ## Łańcuch konwersji
 
@@ -94,7 +100,7 @@ Przed wpisaniem wyniku określ, czy analizujesz geometrię CAD, mesh, opis robot
 
 # Punkt kontrolny 3.0 — format, import i audyt topologii
 
-## Audyt topologii — wariant bazowy
+## Baseline topology audit
 
 | Pole | Wynik |
 |---|---:|
@@ -105,6 +111,9 @@ Przed wpisaniem wyniku określ, czy analizujesz geometrię CAD, mesh, opis robot
 | Material slots | |
 | Boundary edges | |
 | Non-manifold edges | |
+| Czy mesh był readable i objęty audytem? | |
+| Liczba pominiętych nieczytelnych meshy | |
+| Szwy UV/normalnych jako możliwe pozorne granice topologii | |
 | Degenerate triangles | |
 | q05 | |
 | qMedian | |
@@ -169,13 +178,13 @@ Przed wpisaniem wyniku określ, czy analizujesz geometrię CAD, mesh, opis robot
 
 ---
 
-# Punkt kontrolny 4.0 — LOD i pomiar wydajności
+# Punkt kontrolny 4.0 — LOD i benchmark
 
 ## Finalne geometrie LOD
 
 | Model | Rozmiar pliku | Vertices | Triangles | Submesh | Materiały | q05 | qMedian | Uwagi |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| Wariant bazowy | | | | | | | | |
+| Baseline | | | | | | | | |
 | LOD0 | | | | | | | | |
 | LOD1 | | | | | | | | |
 | LOD2 | | | | | | | | |
@@ -194,7 +203,11 @@ Przed wpisaniem wyniku określ, czy analizujesz geometrię CAD, mesh, opis robot
 - `v3`: ___
 - zmienna: __________
 - warunki stałe: __________
-- miejsce pomiaru: Edytor / kompilacja: __________
+- miejsce pomiaru: Editor / Build: __________
+- VSync / limit FPS / odświeżanie ekranu: __________
+- CPU Main Thread [ms], Render Thread [ms], GPU [ms] (jeśli dostępne): __________
+- Czy audyt obejmował wszystkie meshe (Read/Write)? __________
+- Czy seria ma co najmniej trzy niezależne powtórzenia? __________
 - czas importu wybranego wariantu zasobu [s]: __________
 
 | Warunek | Próba | mean ms | median ms | p95 ms | FPS z mediany | Triangles | Renderers | Material slots | CPU [ms] | GPU [ms] | Draw calls / batches | Pamięć |
@@ -217,7 +230,7 @@ Przed wpisaniem wyniku określ, czy analizujesz geometrię CAD, mesh, opis robot
 
 # Punkt kontrolny 4.5 — materiały, draw calls, tekstury i kolizje
 
-## Wariant bazowy renderowania i fizyki
+## Baseline render / physics
 
 - renderers: __________
 - submeshes: __________
@@ -261,18 +274,18 @@ Przed wpisaniem wyniku określ, czy analizujesz geometrię CAD, mesh, opis robot
 - przewidywanie H2: __________
 - test rozstrzygający: __________
 
-## `baseline` (wariant bazowy) → `fault` (usterka) → `repaired` (po naprawie)
+## Baseline → fault → repaired
 
 | Stan | Wymiar [m] | Vertices | Triangles | Boundary | q05 | Materiały | Hierarchia OK? | median ms | p95 ms | Błąd funkcjonalny | Uwagi |
 |---|---:|---:|---:|---:|---:|---:|---|---:|---:|---|---|
-| wariant bazowy | | | | | | | | | | | |
-| usterka | | | | | | | | | | | |
-| po naprawie | | | | | | | | | | | |
+| baseline | | | | | | | | | | | |
+| fault | | | | | | | | | | | |
+| repaired | | | | | | | | | | | |
 
 - obserwacja rozstrzygająca H1/H2: __________
 - przyczyna: __________
 - minimalna poprawka: __________
-- czy stan po naprawie wrócił do poziomu wariantu bazowego: tak / częściowo / nie
+- czy stan repaired wrócił do baseline: tak / częściowo / nie
 - dlaczego: __________
 
 ---
@@ -281,7 +294,7 @@ Przed wpisaniem wyniku określ, czy analizujesz geometrię CAD, mesh, opis robot
 
 | Wariant | Vertices | Triangles | Submesh | Materiały | median ms | p95 ms | Draw calls / batches | Pamięć | Najważniejszy kompromis |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Wariant bazowy | | | | | | | | | |
+| Baseline | | | | | | | | | |
 | LOD0 | | | | | | | | | |
 | LOD1 | | | | | | | | | |
 | LOD2 | | | | | | | | | |
@@ -307,7 +320,7 @@ Przed wpisaniem wyniku określ, czy analizujesz geometrię CAD, mesh, opis robot
 
 # Git
 
-- commit wariantu bazowego: __________
+- commit z baseline: __________
 - commit z LOD: __________
 - commit finalny: __________
 - najwyższy osiągnięty punkt kontrolny: 3.0 / 3.5 / 4.0 / 4.5 / 5.0

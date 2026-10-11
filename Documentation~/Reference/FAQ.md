@@ -11,7 +11,7 @@
 **Odpowiedź:** Zakres podstawowy odpowiada punktowi kontrolnemu 3.0 na każdym laboratorium; wyższe oceny wymagają wykonania dodatkowych zadań i pomiarów.
 
 ### P3: Czy mogę pracować sam, bez pary?
-**Odpowiedź:** Nie, kurs wymaga pracy w parach. Możesz poprosić prowadzącego o przydzielenie partnera.
+**Odpowiedź:** Możesz współpracować przy stanowisku, ale raport i ocenę przygotowujesz indywidualnie, według własnego numeru indeksu.
 
 ### P4: Co jeśli urządzenie (Quest/Android) mi nie działa?
 **Odpowiedź:** 
@@ -26,34 +26,22 @@
 ## Technika & Unity
 
 ### P5: Jaka wersja Unity?
-**Odpowiedź:** Unity 2022 LTS (6000.0.23+). **Musi być ta sama** dla wszystkich Lab!
+**Odpowiedź:** Kursowa wersja to Unity 6000.6.5f1 lub nowsza zgodna wersja z linii 6000.6.x. Zapisz rzeczywistą wersję w raporcie.
 
 ### P6: Czy mogę używać Unity 2023/2024?
-**Odpowiedź:** Nie. XR packagei mogą być niestabilne w nowszych wersjach.
+**Odpowiedź:** Użyj wersji kursowej z P5. Przed migracją istniejącego projektu zachowaj jego kopię i sprawdź zgodność pakietów.
 
 ### P7: Pakiety — które zainstalować?
-**Odpowiedź:** Przeczytaj LAB1_STARTER_README.md — tam jest pełna lista. Najważniejsze:
-```
-XR Interaction Toolkit 3.1.3+
-XR Plugin Management 4.4.1+
-Input System 1.8.3+
-AR Foundation 5.1.0+ (dla Lab 3–4)
-```
+**Odpowiedź:** Użyj [konfiguracji środowiska](ENVIRONMENT_SETUP.md) i manifestu `Project~/Packages/manifest.json`. Nie dobieraj starszych wersji z archiwalnych poradników.
 
 ### P8: Co jeśli pakiet nie zainstaluje się?
-**Odpowiedź:**
-```bash
-# 1. Zamknij Unity
-# 2. Usuń foldery: Library/ Packages/
-# 3. Otwórz projekt — Unity ponownie pobierze pakiety
-# 4. Jeśli problem trwa: zmień Unity version na 2022.3.20f1
-```
+**Odpowiedź:** Zachowaj kopię projektu i pliki `Packages/manifest.json` oraz `Packages/packages-lock.json`. Sprawdź dostęp do repozytorium, adres UPM i pierwszy błąd w Console. Nie usuwaj katalogu Packages. Ewentualną odbudowę pamięci podręcznej Library wykonaj po zamknięciu Unity.
 
 ### P9: Konsola wyświetla RED error
 **Odpowiedź:** Przeczytaj error — zwykle mówi dokładnie, co nie tak:
 - `Missing reference` → brakuje referencji w Inspectorze
 - `NullReferenceException` → skrypt próbuje użyć null obiektu
-- `Assembly definition version...` → usuń `Packages/packages-lock.json` i przeładuj
+- `Assembly definition version...` → sprawdź wersje zależności i pierwszy błąd kompilacji; zachowaj kopię manifestu i lockfile
 
 ### P10: Profiler nie pokazuje danych
 **Odpowiedź:** 
@@ -75,24 +63,17 @@ AR Foundation 5.1.0+ (dla Lab 3–4)
 **Odpowiedź:** Sprawdź:
 ```bash
 # 1. Czy jesteś na gałęzi, nie na main?
-git branch  # → powinieneś być na team-NR/lab0X-...
+git branch  # → powinieneś być na lab01-work
 
 # 2. Czy masz dostęp do repozytorium?
 git remote -v  # → pokaż URL
 
 # 3. Spróbuj:
-git push --set-upstream origin team-NR/lab0X-...
+git push --set-upstream origin lab01-work
 ```
 
 ### P13: Wgrałem Library/ — co teraz?
-**Odpowiedź:** Zaraz po pushingu:
-```bash
-git reset --soft HEAD~1
-git reset HEAD Library/
-git checkout Library/
-git commit -m "remove: library (oops)"
-git push --force-with-lease
-```
+**Odpowiedź:** Usuń pamięć podręczną z indeksu Git, zachowując pliki lokalnie: `git rm -r --cached -- Library`. Dodaj `/Library/` do `.gitignore`, zatwierdź poprawkę i wykonaj zwykły push. Nie przepisuj historii współdzielonej gałęzi.
 
 ### P14: Merge conflict — co robić?
 **Odpowiedź:** Nie wchodź w panikę!
@@ -110,29 +91,22 @@ git push
 
 ---
 
-## Ocenianie i punkt kontrolnyy
+## Ocenianie i punkty kontrolne
 
 ### P16: Co to jest punkt kontrolny 3.0?
-**Odpowiedź:** Minimalny poziom kompetencji = zaliczenie. Obejmuje:
-- Smoke test (system startuje)
-- Procedury obowiązkowe (np. benchmarking, pomiary)
-- Diagnoza błędu
-- raport `evidence/lab0X.md` wypełniony
+**Odpowiedź:** Minimalny kompletny zakres danego laboratorium. Szczegółowe kryteria zawierają aktualna instrukcja i [matryca](GRADING_MATRIX.md); wymagania nie są identyczne we wszystkich laboratoriach.
 
 ### P17: Jeśli nie przejdę punkt kontrolny 3.0?
-**Odpowiedź:** Możesz:
-- Poprawić do następnych zajęć (na koniec kursu)
-- Pracować z prowadzącym na dodatkowych godzinach
-- W skrajnym wypadku Lab 7 będzie egzaminem poprawkowym
+**Odpowiedź:** Ustal termin i zakres poprawy z prowadzącym. Nie zakładaj, że inne laboratorium zastępuje brakujące zaliczenie.
 
 ### P18: Czy mogę wziąć ocenę 3.0 i pójść dalej?
 **Odpowiedź:** Tak! Oceny 3.5+ są opcjonalne.
 
 ### P19: Ile czasu mam na poprawę do wyższej oceny?
-**Odpowiedź:** Do końca kursu (koniec tygodnia 4). Jeśli chcesz 4.0+ na Lab 1, możesz wrócić do tego zaraz po Lab 2.
+**Odpowiedź:** Terminy popraw ustala prowadzący. Kampania obejmuje osiem laboratoriów w czterech blokach.
 
 ### P20: Czy mogę udzielić sobie samemu ocenę?
-**Odpowiedź:** Nie. Ocenę przyznaje prowadzący (demo < 90 sekund).
+**Odpowiedź:** Nie. Narzędzie sprawdza kompletność raportu, a ocenę przyznaje prowadzący na podstawie dowodów i demonstracji.
 
 ---
 
@@ -141,7 +115,7 @@ git push
 ### Lab 1
 
 **P21: "XR Origin ma skalę (2, 2, 2), nie (1, 1, 1)"**
-→ To jest błąd Import Settings, nie Transform. Przeczytaj LAB1_STARTER_README.
+→ Sprawdź skalę Transform obiektu XR Origin oraz jego rodziców. Dla sceny bazowej ustaw (1, 1, 1) i zweryfikuj wymiar Cube_1m.
 
 **P22: "FPS wynosi 20, to OK?"**
 → Na Quest powinno być >= 60 (90), na Android >= 30. Jeśli mniej, sprawdź Draw Calls i shader cost.
@@ -210,9 +184,9 @@ git push
 → Sprawdzenia:
 ```bash
 # Terminal:
-ros2 node list           # Czy unity_listener pojawia się?
-ros2 topic list          # Czy /robot/state jest publikowany?
-ros2 topic echo /robot/state  # Czy dane płyną?
+ros2 node list           # Czy uruchomiono źródło i ROS-TCP Endpoint?
+ros2 topic list          # Czy /joint_states jest publikowany?
+ros2 topic echo /joint_states  # Czy dane płyną?
 ```
 
 **P32: "Latency > 500ms"**
@@ -224,7 +198,7 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 ### Lab 7
 
 **P33: "Matryca testów — wiele FAIL**
-→ Może być, jeśli Lab X były niekompletne. Jeśli co najmniej 70% testów ma wynik pozytywny, to punkt kontrolny 3.0 przechodzi.
+→ Porównaj wyniki z kryteriami akceptacji z Lab 07. Każdy FAIL wymaga wyjaśnienia; nie ma ogólnego progu 70% zastępującego kryteria instrukcji.
 
 **P34: "FPS pada w stress teście"**
 → Przyczyny (w kolejności):
@@ -237,7 +211,7 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 ## Nauka & wnioski
 
 ### P35: Jak napisać dobrą diagnozę?
-**Odpowiedź:** Schemat 3 kroków:
+**Odpowiedź:** Schemat 5 kroków:
 1. **Objaw:** Co dokładnie obserwujesz? (np. "FPS pada z 90 do 20")
 2. **Hipoteza:** Dlaczego tak się dzieje? (np. "Shader cost")
 3. **Test:** Jak to sprawdzić? (np. "Zmienić shader na prostszy")
@@ -245,11 +219,7 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 5. **Wynik:** Czy naprawiłeś?
 
 ### P36: Co wpisać w raporcie `evidence/lab0X.md`?
-**Odpowiedź:** Użyj szablonu (evidence_template_lab0X.md). Zawiera:
-- Numery indeksów
-- Tabelę pomiarów
-- Diagnozę
-- Wnioski (min. 2 zdania)
+**Odpowiedź:** Użyj `Samples~/LabXX/report-template.md` lub formularza WiRR. Wpisz własny indeks, warianty, dane surowe, obliczenia i wnioski wymagane dla wybranego punktu kontrolnego. Wyślij raport zgodnie z [procedurą](STUDENT_SUBMISSIONS.md).
 
 ### P37: "Moja diagnoza mówi: 'No idea'"
 **Odpowiedź:** To nie wystarczy. Spróbuj:
@@ -269,7 +239,7 @@ ros2 topic echo /robot/state  # Czy dane płyną?
 - Dyżury: (sprawdź plan dyżurów na stronie KIA)
 
 ### P39: Czy są godziny dodatkowe?
-**Odpowiedź:** Tak, w ostatnim tygodniu (tydzień 4) po Lab 7. Zarezerwuj czas u prowadzącego.
+**Odpowiedź:** Sprawdź aktualne dyżury i ustal termin z prowadzącym.
 
 ### P40: Nie rozumiem materiału
 **Odpowiedź:**

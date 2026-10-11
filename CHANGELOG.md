@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Zsynchronizowano osiem szablonów raportów z aktualnymi instrukcjami MatPomGit/prz.
+- Ujednolicono punkty kontrolne Lab 05, 06 i 08, formularze, tabele, zadania i opisy próbek.
+- Import Lab 08 zachowuje sześć prób A/B, odrzuca duplikaty i niepoprawne czasy oraz usuwa stare wyniki przed ponownym importem.
+- Zaktualizowano wersję kursową Unity, poradniki i FAQ; poprawiono walidację ośmiu laboratoriów w CI. Wersje preview nie tworzą stabilnych wydań.
+
 ## 1.1.0-preview.1 (kampania 4 × 2, przygotowanie 11 października 2026)
 
 - Rozbudowano rzeczywistą listę laboratoriów UPM z 7 do **8**. Dodano Samples~/Lab08, katalog zadań, formularz i tabelę WiRR Reports, obsługę paneli i lokalnego generatora demonstratora.

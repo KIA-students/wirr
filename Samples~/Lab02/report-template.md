@@ -25,8 +25,8 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - OpenXR: __________
 - Input System: __________
 - Tryb PC: XR Interaction Simulator / inne: __________
-- Scena: `Assets/Scenes/Lab02_Interaction.unity`
-- samodzielna aplikacja na Quest 3: tak / nie / niezweryfikowano
+- Scena: `Assets/WiRR/Lab02/Scenes/Lab02_Interaction.unity`
+- Quest 3 standalone build: tak / nie / niezweryfikowano
 
 ---
 
@@ -93,7 +93,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 | Reset | działa / nie działa |
 | Potwierdź alarm | działa / nie działa |
 | stan: gotowy → montaż → alarm → ukończono | działa / nie działa |
-| Stan `Hover` różni się od `Select` | tak / nie |
+| Hover różni się od Select | tak / nie |
 | osobny dźwięk sukcesu i błędu | tak / nie |
 | żądanie haptyki jest generowane | tak / nie |
 
@@ -182,8 +182,8 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 | Test | Wynik |
 |---|---|
-| samodzielna aplikacja uruchamia się | działa / nie działa |
-| śledzenie 6DoF | działa / nie działa |
+| build standalone uruchamia się | działa / nie działa |
+| tracking 6DoF | działa / nie działa |
 | Direct Grab | działa / nie działa |
 | Ray/UI | działa / nie działa |
 | teleportacja | działa / nie działa |
@@ -206,8 +206,9 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ## Interpretacja SSQ
 
-- Która podskala zmieniła się najbardziej? __________
-- Czy zmiana ma znaczenie dla interpretacji tej sesji? __________
+- Która podskala zmieniła się najbardziej u Osoby A? __________
+- Która podskala zmieniła się najbardziej u Osoby B? __________
+- Czy kierunek zmian był podobny? __________
 - Wniosek ograniczony do danych z tej sesji: __________
 
 Nie używaj SSQ jako diagnozy medycznej i nie wnioskuj o trwałej podatności danej osoby.

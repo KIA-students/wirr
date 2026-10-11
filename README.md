@@ -115,7 +115,7 @@ Repozytorium studenckie:
 https://github.com/KIA-students/wirr.git#main
 ```
 
-Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#main` wskazuje bieżącą publiczną wersję pakietu w repozytorium kursu. Repozytorium pakietu: [KIA-students/wirr](https://github.com/KIA-students/wirr). Po pierwszej instalacji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wymagana wersja to najnowszą dostępną wersję **Unity 6 (6000.x)** lub nowsza zgodna wersja 6000.6.
+Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#main` wskazuje bieżącą publiczną wersję pakietu w repozytorium kursu. Repozytorium pakietu: [KIA-students/wirr](https://github.com/KIA-students/wirr). Po pierwszej instalacji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wersja kursowa to **Unity 6000.6.5f1** lub nowsza zgodna poprawka z linii **6000.6.x**. Zachowaj zestaw pakietów projektu i zapisz rzeczywiste wersje w raporcie.
 
 ### Zalecane środowisko przed pierwszym laboratorium
 
@@ -406,4 +406,5 @@ WiRR automatycznie prowadzi lokalny log zdarzeń wysokiego poziomu związanych z
 ## Licencja
 
 Szczegóły znajdują się w pliku `LICENSE`.
+
 
