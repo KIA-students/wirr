@@ -6,6 +6,10 @@
 
 Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
 
+## Zanim utworzysz projekt: konto i licencja Unity
+
+**Pracownia PRz:** docelową drogą bez indywidualnego logowania jest aktywowana przez administratora **Unity Education Grant License**. **Nie udostępniamy studentom hasła do konta funkcyjnego**. **Komputer prywatny:** indywidualne Unity ID i darmowa licencja Personal; opcjonalnie zweryfikowany Unity Student Plan z Pro Editor, zasobami Synty i Odin. Szczegóły: [Unity ID i licencje na Lab 01](Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md).
+
 ## Nowa ścieżka: misje XR i karta sesji
 
 W gałęzi rozwojowej dodano okno **WiRR → Misje i odkrycia (4 bloki)**. Automatycznie sprawdza obecność zapisanych scen Lab 01–08, odnajduje lokalne eksporty JSON WiRR Reports dla Lab 01–07 i przygotowuje **jedną kartę Markdown na blok**. Przenosi do niej wyłącznie zarejestrowane już wartości, metadane Unity i liczniki aktywności. Student sam wpisuje tylko **jedno odkrycie, jedną diagnozę i jeden pomysł nowego zastosowania**. Raport zapisuje się lokalnie, bez wysyłania danych do GitHub i bez uruchamiania GitHub Actions.

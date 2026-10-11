@@ -1,5 +1,12 @@
 # Laboratorium 1 — XR Origin, Audyt i Wydajność
 
+## Konto Unity: nie potrzebujesz wspólnego loginu
+
+Na komputerze uczelnianym z **aktywną Unity Education Grant License** student może pracować bez indywidualnego logowania. Stanowisko musi wcześniej skonfigurować administrator. **Nie udostępniamy loginu i hasła wspólnego konta Unity.** Na własnym komputerze użyj swojego Unity ID i bezpłatnej licencji Personal; darmowy Student Plan jest rozszerzeniem opcjonalnym.
+
+Przewodnik z krokami i korzyściami dla studentów: [Lab 01: Unity ID i licencje](../../Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md). Jeżeli pracujesz z próbką zaimportowaną do Assets, skorzystaj z dokumentu w pakiecie WiRR.
+
+
 ## Co Powinieneś Pobrać
 
 Przed Lab 1 pobierz i skonfiguruj następujące:
