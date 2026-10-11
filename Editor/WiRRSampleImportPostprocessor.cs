@@ -45,7 +45,7 @@ namespace KIA.WiRR.Editor
             if (!belongsToWiRR)
                 return 0;
 
-            for (var labNumber = 1; labNumber <= 7; labNumber++)
+            for (var labNumber = 1; labNumber <= 8; labNumber++)
             {
                 var polishName = $"Laboratorium {labNumber:00}";
                 var legacyName = $"Lab {labNumber:00}";

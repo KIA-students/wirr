@@ -31,7 +31,7 @@ namespace KIA.WiRR.Editor
             var window = GetWindow<WiRRMixedRealityGuideWindow>();
             window.titleContent = new GUIContent("WiRR · MR Guide");
             window.minSize = new Vector2(760, 680);
-            window.labNumber = Mathf.Clamp(selectedLab, 1, 7);
+            window.labNumber = Mathf.Clamp(selectedLab, 1, 8);
             window.Show();
         }
 
@@ -43,7 +43,7 @@ namespace KIA.WiRR.Editor
                 "Gotowe prefaby są punktem startowym, a nie końcem ćwiczenia. Najważniejszy wzorzec to: sensor lub SDK → mały adapter w projekcie studenta → komponent WiRR → wizualizacja. Dzięki temu można zmienić AR Foundation na Meta SDK albo własny model CV bez przepisywania logiki prefabu.",
                 MessageType.Info);
 
-            labNumber = EditorGUILayout.IntSlider("Laboratorium / obszar roboczy", labNumber, 1, 7);
+            labNumber = EditorGUILayout.IntSlider("Laboratorium / obszar roboczy", labNumber, 1, 8);
 
             using (new EditorGUILayout.HorizontalScope())
             {
