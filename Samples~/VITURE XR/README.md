@@ -10,7 +10,7 @@
 - [Alternatywa: wygenerowanie scen w projekcie](#alternatywa-wygenerowanie-scen-w-projekcie)
 - [Szybka konfiguracja](#szybka-konfiguracja)
 - [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
-
+- [Wyzwanie dodatkowe: operator potrafi bezpiecznie przerwać](#wyzwanie-dodatkowe-operator-potrafi-bezpiecznie-przerwać)
 
 ## Szybki wybór ścieżki
 - **Mam kompatybilne okulary i wyjście USB-C z wideo:** przejdź do [szybkiej konfiguracji](#szybka-konfiguracja), a następnie [StereoDepthLayers](#viture_01_stereodepthlayersunity).

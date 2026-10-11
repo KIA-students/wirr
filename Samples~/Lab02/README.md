@@ -13,7 +13,7 @@
 - [Zakończenie laboratorium](#zakończenie-laboratorium)
 - [Materiały dydaktyczne](#materiały-dydaktyczne)
 - [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
-
+- [Wyzwanie dodatkowe: operator potrafi bezpiecznie przerwać](#wyzwanie-dodatkowe-operator-potrafi-bezpiecznie-przerwać)
 
 ## Szybki wybór ścieżki
 - **Nie mam gotowej sceny Lab 01:** [wróć do pierwszej sceny](../Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).

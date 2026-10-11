@@ -7,9 +7,6 @@
 - [Rozszerzenia dobrowolne](#rozszerzenia-dobrowolne)
 - [Materiały archiwalne](#materiały-archiwalne)
 
-
-**Jak czytać?** Wybierz laboratorium z tabeli, a potem użyj spisu treści i sekcji „Szybki wybór ścieżki”. Nie musisz powtarzać raz wykonanych instalacji.
-
 ## Jeśli dopiero zaczynasz
 - [Mam lub nie mam zainstalowanego Unity: wybór systemu](OS_SETUP.md#wybierz-aktualną-sytuację).
 - [Mam lub nie mam konta Unity: licencje](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).

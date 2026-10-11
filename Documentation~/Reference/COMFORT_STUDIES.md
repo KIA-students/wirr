@@ -9,9 +9,9 @@
 - [Warunki uczestnictwa](#warunki-uczestnictwa)
 - [Eksperyment A: ruch obrazu i wskazówki ruchu własnego](#eksperyment-a-ruch-obrazu-i-wskazówki-ruchu-własnego)
 - [Eksperyment B: wirtualna głębia i stała odległość optyczna](#eksperyment-b-wirtualna-głębia-i-stała-odległość-optyczna)
+- [Techniczne wyzwanie: automatyczny STOP i limit 10 prób](#techniczne-wyzwanie-automatyczny-stop-i-limit-10-prób)
 - [Raport: jedno odkrycie zamiast testu odporności](#raport-jedno-odkrycie-zamiast-testu-odporności)
   - [Literatura](#literatura)
-
 
 ## Gdzie przejść?
 - **Chcę przeprowadzić wyjaśnienie na monitorze:** przejdź do [eksperymentu A](#eksperyment-a-ruch-obrazu-i-wskazówki-ruchu-własnego) lub [B](#eksperyment-b-wirtualna-głębia-i-stała-odległość-optyczna).

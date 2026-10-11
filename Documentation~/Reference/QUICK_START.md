@@ -2,17 +2,17 @@
 
 ## Spis treści
 
+- [Skocz do właściwej ścieżki](#skocz-do-właściwej-ścieżki)
 - [Co Pobrać na początku](#co-pobrać-na-początku)
   - [Dla Każdego Studenta](#dla-każdego-studenta)
 - [Dla Prowadzącego](#dla-prowadzącego)
 - [Kroków na początku kursu](#kroków-na-początku-kursu)
   - [Dla Studentów (1. dzień)](#dla-studentów-1-dzień)
   - [Dla Prowadzącego (1. dzień)](#dla-prowadzącego-1-dzień)
-- [⏱️ Harmonogram (cztery bloki laboratoryjne)](#️-harmonogram-23-tygodnie)
+- [⏱️ Harmonogram (2–3 tygodnie)](#️-harmonogram-23-tygodnie)
 - [Cel: Co Student Musi Zrobić](#cel-co-student-musi-zrobić)
 - [Dokumentacja](#dokumentacja)
 - [Pytania?](#pytania)
-
 
 ## Skocz do właściwej ścieżki
 - Jeśli **Unity nie jest zainstalowane**, [przejdź do instalacji](OS_SETUP.md#unity-nie-jest-zainstalowane).

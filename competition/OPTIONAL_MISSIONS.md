@@ -7,9 +7,6 @@
 - [Zasada fair play](#zasada-fair-play)
 - [Wyzwanie bezpiecznego operatora: 10 prób](#wyzwanie-bezpiecznego-operatora-10-prób)
 
-
-**Ligę tworzą dwie grupy laboratoryjne.** Wspólne doświadczenia są najważniejsze; nie trzeba uczestniczyć w dodatkowej rywalizacji, aby zaliczyć laboratoria.
-
 ## Nazwij drużynę
 
 Każda grupa może uzgodnić swoją nazwę podczas pierwszych zajęć. [Generator propozycji](https://kia-students.github.io/wirr/#liga) tworzy losowe, zabawne zestawienia technologiczne, np. **Kwantowe Kapibary**, **Rekurencyjne Pierogi**, **Neonowe Dziobaki** lub **Zrobotyzowane Wombaty**. Można użyć dowolnej innej kulturalnej nazwy.
