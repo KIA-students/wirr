@@ -16,7 +16,7 @@ namespace KIA.WiRR.Editor
 
         public static void Recalculate(WiRRReportDocument document)
         {
-            if (document == null || document.labNumber < 1 || document.labNumber > 7)
+            if (document == null || document.labNumber < 1 || document.labNumber > 8)
                 return;
 
             foreach (var section in WiRRReportSchemaCatalog.Get(document.labNumber))
@@ -281,10 +281,10 @@ namespace KIA.WiRR.Editor
                     break;
 
                 case 6:
-                    SetFieldFromColumnMedian(document, "cp40.latency_ms", "4.0", "lab06_rtt", "rtt_ms");
+                    SetFieldFromColumnMedian(document, "cp40.latency_ms", "4.5", "lab06_rtt", "rtt_ms");
                     SetFieldFromColumnStdDev(document, "cp40.jitter_ms", "4.0", "lab06_interarrival", "inter_arrival_ms");
-                    SetFieldFromSingleCell(document, "cp45.stale_ms", "4.5", "lab06_stale", "pomiar", "detekcja_stale_ms");
-                    SetFieldFromSingleCell(document, "cp45.recovery_ms", "4.5", "lab06_stale", "pomiar", "odzyskanie_live_ms");
+                    SetFieldFromSingleCell(document, "cp45.stale_ms", "5.0", "lab06_stale", "pomiar", "detekcja_stale_ms");
+                    SetFieldFromSingleCell(document, "cp45.recovery_ms", "5.0", "lab06_stale", "pomiar", "odzyskanie_live_ms");
                     break;
 
                 case 7:
@@ -615,3 +615,4 @@ namespace KIA.WiRR.Editor
         }
     }
 }
+

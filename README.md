@@ -4,7 +4,74 @@
 
 # WiRR Course Toolkit
 
-Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
+## Spis treści
+
+- [Szybka nawigacja po instrukcjach](#szybka-nawigacja-po-instrukcjach)
+- [Zanim utworzysz projekt: konto i licencja Unity](#zanim-utworzysz-projekt-konto-i-licencja-unity)
+- [Nowa ścieżka: misje XR i karta sesji](#nowa-ścieżka-misje-xr-i-karta-sesji)
+- [Dwa gotowe, krótkie stanowiska do nauki o komforcie XR](#dwa-gotowe-krótkie-stanowiska-do-nauki-o-komforcie-xr)
+- [Liga drużyn i misje poza zajęciami](#liga-drużyn-i-misje-poza-zajęciami)
+- [Repozytorium kursu](#repozytorium-kursu)
+- [Zasada działania](#zasada-działania)
+- [Instalacja](#instalacja)
+  - [Zalecane środowisko przed pierwszym laboratorium](#zalecane-środowisko-przed-pierwszym-laboratorium)
+- [Struktura repozytorium](#struktura-repozytorium)
+- [Laboratoria i zależności](#laboratoria-i-zależności)
+- [Prefaby dydaktyczne](#prefaby-dydaktyczne)
+  - [Teksturowane prefaby Grid](#teksturowane-prefaby-grid)
+- [Opcjonalne laboratorium materiałów](#opcjonalne-laboratorium-materiałów)
+- [Ruch, fizyka i dźwięk](#ruch-fizyka-i-dźwięk)
+- [XR Showcase — efekty charakterystyczne dla XR](#xr-showcase--efekty-charakterystyczne-dla-xr)
+- [Mixed Reality Showcase — rzeczywistość jako część sceny](#mixed-reality-showcase--rzeczywistość-jako-część-sceny)
+- [Mobile AR Showcase — AR na smartfonie](#mobile-ar-showcase--ar-na-smartfonie)
+- [Dodatkowy model Unitree G1 EDU](#dodatkowy-model-unitree-g1-edu)
+- [HDRI i skybox](#hdri-i-skybox)
+- [VITURE XR: Full SBS i Immersive 3D](#viture-xr-full-sbs-i-immersive-3d)
+- [Budowanie aplikacji na PC, Android i Quest 3](#budowanie-aplikacji-na-pc-android-i-quest-3)
+- [Strona kursu (GitHub Pages)](#strona-kursu-github-pages)
+- [WebSim](#websim)
+- [Raportowanie](#raportowanie)
+- [Wysyłanie raportu](#wysyłanie-raportu)
+- [Walidacja CI](#walidacja-ci)
+- [Zalecany przebieg pracy studenta](#zalecany-przebieg-pracy-studenta)
+- [Identyfikacja wizualna](#identyfikacja-wizualna)
+- [Log aktywności i prywatność](#log-aktywności-i-prywatność)
+- [Licencja](#licencja)
+
+Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–8, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
+
+## Kampania 4 × 2: dokładnie osiem laboratoriów
+
+**[Otwórz spis kampanii i cztery przewodniki spotkań](Documentation~/Campaign/README.md)**. Pierwsze planowane spotkanie [Lab 01 + Lab 02, wtorek 13 października 2026](Documentation~/Campaign/BLOK-01.md) ma uproszczoną ścieżkę uruchomienia bez pełnej konfiguracji XR. Lab 08 jest pełnoprawną, ósmą próbką pakietu Unity i ma automatyczny pomiar prób w demonstratorze PC.
+
+## Szybka nawigacja po instrukcjach
+
+- **Nie mam zainstalowanego Unity:** [Windows lub Ubuntu, krok po kroku](Documentation~/Reference/OS_SETUP.md#unity-nie-jest-zainstalowane).
+- **Mam już Unity:** [pierwsze 10 minut Lab 01](Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Nie mam konta Unity:** [instrukcja kont i licencji](Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- **Mam konto i aktywną licencję:** [przejdź bezpośrednio do laboratorium](Documentation~/Reference/INDEX.md#cztery-bloki-laboratoryjne).
+- **Pracuję na Ubuntu:** [Ubuntu](Documentation~/Reference/OS_SETUP.md#ubuntu); **Windows:** [Windows](Documentation~/Reference/OS_SETUP.md#windows).
+- **Potrzebuję Quest/AR/VITURE:** [systemy i urządzenia](Documentation~/Reference/OS_SETUP.md#urzadzenia-xr).
+- **Chcę studiować komfort VR:** [dwa krótkie doświadczenia](Documentation~/Reference/COMFORT_STUDIES.md) i [watchdog do 10 prób](Documentation~/Reference/XR_SAFETY_WATCHDOG.md).
+- **Szukam innego laboratorium:** [kampania: wszystkie 8 laboratoriów](Documentation~/Campaign/README.md) lub [indeks](Documentation~/Reference/INDEX.md).
+
+## Zanim utworzysz projekt: konto i licencja Unity
+
+**Pracownia PRz:** docelową drogą bez indywidualnego logowania jest aktywowana przez administratora **Unity Education Grant License**. **Nie udostępniamy studentom hasła do konta funkcyjnego**. **Komputer prywatny:** indywidualne Unity ID i darmowa licencja Personal; opcjonalnie zweryfikowany Unity Student Plan z Pro Editor, zasobami Synty i Odin. Szczegóły: [Unity ID i licencje na Lab 01](Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md).
+
+## Nowa ścieżka: misje XR i karta sesji
+
+W gałęzi rozwojowej dodano okno **WiRR → Misje i odkrycia (4 bloki)**. Automatycznie sprawdza obecność zapisanych scen Lab 01–08, odnajduje lokalne eksporty JSON WiRR Reports dla Lab 01–08 i przygotowuje **jedną kartę Markdown na blok**. Przenosi do niej wyłącznie zarejestrowane już wartości, metadane Unity i liczniki aktywności. Student sam wpisuje tylko **jedno odkrycie, jedną diagnozę i jeden pomysł nowego zastosowania**. Raport zapisuje się lokalnie, bez wysyłania danych do GitHub i bez uruchamiania GitHub Actions.
+
+**Lab 08** jest obecnie osobną próbką demonstratora i ma własny formularz WiRR Reports. Pozwala zaimportować rzeczywisty lokalny JSON, nie przypisuje niezmierzonych danych. Instrukcja: [Lab 08](Samples~/Lab08/README.md) oraz [kampania 4 × 2](Documentation~/Campaign/README.md).
+
+## Dwa gotowe, krótkie stanowiska do nauki o komforcie XR
+
+Menu **WiRR → Komfort XR** generuje dwa prefaby: wolno poruszające się punkty odniesienia i porównanie wirtualnych odległości. Pokazy nie poruszają kamerą, uruchamia się je ręcznie, automatycznie kończą się po maksymalnie 8/10 sekundach i można je przerwać. Dokument: [Komfort, choroba symulatorowa oraz wergencja i akomodacja](Documentation~/Reference/COMFORT_STUDIES.md). **Nie są to testy wytrzymałości na objawy.**
+
+## Liga drużyn i misje poza zajęciami
+
+Dwie grupy G1/G2 mogą zaproponować własną nazwę przez prosty generator w zakładce **Liga XR**. Czwarta kategoria rywalizacji to dobrowolne zadania poza zajęciami, najwyżej **8 punktów bonusowych na grupę**. Punkty i nazwy zatwierdza prowadzący, a bezpośrednie zbieranie danych osobowych studentów nie jest potrzebne. W gałęzi rozwojowej mechanizm jest w [competition/](competition/README.md).
 
 ## Repozytorium kursu
 
@@ -23,7 +90,7 @@ Pakiet zawiera:
 - **Samples Manager**: import materiałów dla wybranego laboratorium;
 - **Scene Tools / Validator**: przygotowanie i kontrolę sceny;
 - **Narzędzia warstwy Runtime**: lekkie komponenty pomiarowe;
-- **Checklisty zadań Lab 01–07**: krok po kroku prowadzą przez punkty kontrolne 3.0–5.0 i wskazują wymagany dowód pomiarowy;
+- **Checklisty zadań Lab 01–08**: krok po kroku prowadzą przez punkty kontrolne 3.0–5.0 i wskazują wymagany dowód pomiarowy;
 - **WebSim**: połączenie Unity ze środowiskiem ROS 2/Gazebo przez rosbridge;
 - **Raporty WiRR**: formularz, automatyczny zapis, tabele pomiarowe i raport JSON;
 - **Wysyłanie przez Git**: wysłanie raportu do repozytorium;
@@ -48,16 +115,16 @@ Repozytorium studenckie:
 https://github.com/KIA-students/wirr.git#main
 ```
 
-Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#main` wskazuje bieżącą publiczną wersję pakietu w repozytorium kursu. Repozytorium pakietu: [KIA-students/wirr](https://github.com/KIA-students/wirr). Po pierwszej instalacji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wymagana wersja to najnowszą dostępną wersję **Unity 6 (6000.x)** lub nowsza zgodna wersja 6000.6.
+Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#main` wskazuje bieżącą publiczną wersję pakietu w repozytorium kursu. Repozytorium pakietu: [KIA-students/wirr](https://github.com/KIA-students/wirr). Po pierwszej instalacji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wersja kursowa to **Unity 6000.6.5f1** lub nowsza zgodna poprawka z linii **6000.6.x**. Zachowaj zestaw pakietów projektu i zapisz rzeczywiste wersje w raporcie.
 
 ### Zalecane środowisko przed pierwszym laboratorium
 
-Środowisko referencyjne kursu to **Windows 11 64-bit**. W Unity Hub dla najnowszą dostępną wersję **Unity 6 (6000.x)** należy doinstalować:
+Środowisko referencyjne kursu to **Windows 11 64-bit lub wspierane Ubuntu 22.04/24.04 x64**. Na Ubuntu ścieżka Quest to zazwyczaj Android APK uruchamiana na urządzeniu, a nie PC VR przez Meta Quest Link. W Unity Hub dla **wersji Unity 6000.6.x zatwierdzonej dla kursu** należy doinstalować:
 - **Android Build Support**;
 - **Android SDK & NDK Tools**;
 - **OpenJDK**.
 
-Te moduły są wymagane do budowania na Androida i Meta Quest 3. Do pracy z C# zalecane jest **Visual Studio 2022 Community** z workloadem **Game development with Unity** albo równoważne IDE. **Android Studio** jest zalecane do diagnostyki Androida, ADB, SDK Manager i Logcat, ale nie jest wymagane do samego buildu Unity, jeśli używane są narzędzia Android dostarczone przez Unity Hub. Przed Laboratorium 06 należy również zainstalować **Docker Desktop**.
+Te moduły są wymagane do budowania na Androida i Meta Quest 3. Do pracy z C# zalecane jest **Visual Studio 2022 Community** z workloadem **Game development with Unity** albo równoważne IDE. **Android Studio** jest zalecane do diagnostyki Androida, ADB, SDK Manager i Logcat, ale nie jest wymagane do samego buildu Unity, jeśli używane są narzędzia Android dostarczone przez Unity Hub. Przed Laboratorium 06 prowadzący udostępnia stanowisko ROS 2/Gazebo; Docker Desktop nie jest warunkiem wstępnym każdego komputera studenta. Na Ubuntu można użyć natywnego ROS 2, na Windows połączenia LAN do stanowiska Ubuntu.
 
 ## Struktura repozytorium
 
@@ -339,4 +406,5 @@ WiRR automatycznie prowadzi lokalny log zdarzeń wysokiego poziomu związanych z
 ## Licencja
 
 Szczegóły znajdują się w pliku `LICENSE`.
+
 

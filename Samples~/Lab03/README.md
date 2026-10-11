@@ -1,5 +1,26 @@
 # Lab 03 — Rejestracja i kotwice AR
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Przygotowanie](#przygotowanie)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Śledzenie i płaszczyzny](#30-śledzenie-i-płaszczyzny)
+  - [3.5: Rzutowanie promienia i skala 1:1](#35-rzutowanie-promienia-i-skala-11)
+  - [4.0: Kotwica i dryf](#40-kotwica-i-dryf)
+  - [4.5: Rejestracja dwupunktowa](#45-rejestracja-dwupunktowa)
+  - [5.0: Kontrolowany błąd](#50-kontrolowany-błąd)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
+
+
+## Szybki wybór ścieżki
+- **Nie uruchomiłem jeszcze Unity:** [instalacja Unity](../../Documentation~/Reference/OS_SETUP.md#unity-nie-jest-zainstalowane).
+- **Mam telefon obsługujący ARCore:** [konfiguracja Android i ADB](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr), a potem [śledzenie i płaszczyzny](#30-śledzenie-i-płaszczyzny).
+- **Nie mam odpowiedniego telefonu lub kabla:** rozpocznij symulację/replay i analizę ograniczeń, następnie wróć do [zadań laboratorium](#zadania-krok-po-kroku).
+- **Pracuję na Ubuntu:** [narzędzia Android i USB na Ubuntu](../../Documentation~/Reference/OS_SETUP.md#ubuntu); **na Windows:** [tutaj](../../Documentation~/Reference/OS_SETUP.md#windows).
+
+
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 3. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
 ## Przygotowanie
@@ -64,7 +85,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
 2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź raport** i popraw wskazane braki.
+3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
 4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
 
 ## Materiały dydaktyczne
@@ -77,3 +98,4 @@ Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dy
 Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
 
 `report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+

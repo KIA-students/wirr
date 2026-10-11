@@ -1,210 +1,85 @@
-# Konfiguracja repozytorium — dla studentów
+# Konfiguracja repozytorium dla studentów
 
-## Klonowanie i Konfiguracja
+Polecenia wykonuj w katalogu **własnego projektu Unity** z `Assets`, `Packages` i `ProjectSettings`. Instalacja pakietu WiRR przez UPM nie wymaga klonowania repozytorium kursu ani dostępu do zapisu.
 
-### 1. Klonuj repozytorium
-```bash
-git clone <URL_REPOZYTORIUM> xr-lab
-cd xr-lab
+## Spis treści
+
+- [Przygotowanie projektu](#przygotowanie-projektu)
+- [Pierwszy commit](#pierwszy-commit)
+- [Praca na laboratorium](#praca-na-laboratorium)
+- [Oddanie raportu](#oddanie-raportu)
+- [Naprawa problemów](#naprawa-problemów)
+
+## Przygotowanie projektu
+
+1. Otwórz działający projekt z poprzednich zajęć. Jeżeli go nie masz, wykonaj [konfigurację środowiska](ENVIRONMENT_SETUP.md).
+2. Użyj kursowej wersji Unity 6000.6.5f1 lub zgodnej z linii 6000.6.x. Rzeczywistą wersję zapisz w raporcie.
+3. Zachowaj `Packages/manifest.json`, `Packages/packages-lock.json`, `ProjectSettings` oraz pliki `.meta` zasobów. Zmiany zależności zatwierdzaj razem ze zmianami projektu.
+4. Nie wykonuj poleceń Git w `Library/PackageCache` ani w katalogu pobranego pakietu.
+
+## Pierwszy commit
+
+W katalogu projektu utwórz `.gitignore`:
+
+```gitignore
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Bb]uild/
+[Bb]uilds/
 ```
 
-### 2. Sprawdzenie wersji
-```bash
-# Powinno być Lab01-Lab07
-git branch -a
-
-# Pokaż aktualną wersję pakietów
-cat Packages/packages-lock.json | grep "version"
-```
-
-### 3. Przygotowanie do Lab X
-
-Dla każdego laboratorium:
-
-```bash
-# Przejdź na gałąź startową
-git switch labXX-start
-
-# Utwórz gałąź pracy
-git switch -c team-<NUMER_GRUPY>/labXX-<NAZWISKO1>-<NAZWISKO2>
-
-# Np. dla Lab 1, grupa 15:
-# git switch -c team-15/lab01-kowalski-nowak
-```
-
-### 4. Pracuj i zacommituj
-
-Podczas pracy:
+Jeżeli projekt nie ma jeszcze repozytorium:
 
 ```bash
-# Po każdym logicznym kroku
-git add Assets/Scripts/MyScript.cs
-git commit -m "feat(lab01): initial benchmark implementation"
-
-# Na koniec Lab
-git push origin team-15/lab01-kowalski-nowak
+git init
+git add .gitignore Assets Packages ProjectSettings
+git commit -m "Initialize Unity project with WiRR"
 ```
 
-### 5. Oddanie
+Nie ignoruj wszystkich plików `.asset`: mogą zawierać materiały i konfigurację potrzebne do odtworzenia sceny. Jeżeli masz własne zdalne repozytorium projektu, sprawdź jego adres przez `git remote -v` przed wysłaniem zmian.
 
-Przygotuj raport wykonania:
+## Praca na laboratorium
+
+Z działającego stanu projektu utwórz gałąź, np. dla Lab 01:
 
 ```bash
-# Skopiuj template
-cp evidence_template_labXX.md evidence/labXX.md
-
-# Wypeł raport
-# (edytuj w edytorze tekstu)
-
-# Zacommituj
-git add evidence/labXX.md
-git commit -m "docs(lab01): finalize evidence report"
-git push
+git switch -c lab01-work
 ```
 
----
-
-## Gałąź Main — Nie Rób Tego!
+Jeżeli gałąź już istnieje, użyj `git switch lab01-work`. Zapisuj sceny w Unity, a następnie zatwierdzaj wykonane etapy:
 
 ```bash
-# ❌ NIE RÓB
-git push origin team-15/lab01-kowalski-nowak:main
-
-# ✓ RÓB (prowadzący merge'uje)
-git push origin team-15/lab01-kowalski-nowak
+git status
+git add Assets Packages ProjectSettings
+git commit -m "Complete Lab 01 baseline experiment"
 ```
 
-Prowadzący będzie merge'ować każdą gałąź ręcznie (Quality Gate).
+Dla następnego laboratorium utwórz `lab02-work` z działającego stanu poprzedniego ćwiczenia. Kurs obejmuje osiem laboratoriów. Nie zakładaj istnienia gałęzi `labXX-start` w swoim projekcie.
 
----
-
-## Struktura Repozytorium
-
-```
-xr-lab/
-├── .git/                      # Historia Git (automatyczne)
-├── Assets/
-│   ├── Scenes/
-│   │   ├── Lab01_Baseline.unity
-│   │   ├── Lab02_Interaction.unity
-│   │   ├── Lab03_AR.unity
-│   │   └── ... (aż do Lab07)
-│   ├── Scripts/
-│   │   ├── Lab01/
-│   │   ├── Lab02/
-│   │   └── ... (katalogi na każdy lab)
-│   ├── Prefabs/
-│   ├── Shaders/
-│   └── Models/ (CAD dla Lab 5)
-├── Packages/
-│   ├── packages-lock.json    # NIE ZMIENIAJ!
-│   └── manifest.json
-├── ProjectSettings/
-│   ├── ProjectVersion.txt    # Zawsze Unity 2022 LTS
-│   └── ...
-├── evidence/                  # Twoje raporty
-│   ├── lab01.md
-│   ├── lab02.md
-│   └── ... (aż do lab07.md)
-├── README.md                 # Instrukcje kursu
-└── .gitignore               # Ignoruj: Library, Temp, Build, itd.
-```
-
----
-
-## Co NIE Wgrywaj do Git
-
-Plik `.gitignore` powinien zawierać:
-
-```
-Library/
-Temp/
-Build/
-*.log
-*.csproj
-*.sln
-.DS_Store
-obj/
-bin/
-*.asset (duże)
-```
-
-Jeśli przypadkowo wgrasz:
+Jeżeli własne repozytorium zdalne jest skonfigurowane:
 
 ```bash
-# Usuń z historii (OSTATNIA SZANSA!)
-git rm --cached Library/ Temp/ Build/
-git commit --amend
-git push --force  # Tylko na własnej gałęzi!
+git push --set-upstream origin lab01-work
 ```
 
----
+Nie wpisuj nazwisk do nazw publicznych gałęzi. Raport i warianty są indywidualne: `S = i`, gdzie `i` to własny numer indeksu.
 
-## Tygodniowy przepływ pracy
+## Oddanie raportu
 
-```
-Przed zajęciami:
-  1. git fetch origin
-  2. git switch lab0X-start
-  3. git pull origin lab0X-start
+1. Otwórz formularz **WiRR → Raporty → Formularz raportu laboratoryjnego**.
+2. Uzupełnij własny identyfikator, indeks, warianty i rzeczywiste dowody.
+3. Wybierz **Sprawdź kompletność raportu**, popraw braki, a następnie **Wyślij raport**. Kompletność formularza nie oznacza przyznania oceny.
+4. Wysyłka tworzy gałąź raportu i PR do `main` repozytorium kursu. Wymaga skonfigurowanego Git i odpowiedniego dostępu.
+5. Gdy wysyłka automatyczna nie jest dostępna, użyj awaryjnego szablonu Markdown z próbki danego laboratorium, zapisz `evidence/labNN.md` i przekaż go kanałem wskazanym przez prowadzącego.
 
-Podczas zajęć:
-  1. git switch -c team-NR/lab0X-...
-  2. Pracuj, commituj, pushuj
+Szczegóły: [oddawanie raportów](STUDENT_SUBMISSIONS.md). Gałąź `upm` służy instalacji pakietu, a nie oddawaniu raportów.
 
-Po zajęciach:
-  1. Wypeł evidence/lab0X.md
-  2. git add, git commit, git push
-  3. Poczekaj na recenzję prowadzącego
+## Naprawa problemów
 
-Przejście do Lab X+1:
-  1. Prowadzący merge'uje: lab0X-start → main
-  2. Nowa gałąź startowa: lab0(X+1)-start
-  3. Powtórz proces
-```
-
----
-
-## Jeśli Coś Pójdzie Nie Tak
-
-### Merge Conflict?
-```bash
-# Nie wchodź w panikę!
-git status  # Pokaż, które pliki w konflikcie
-
-# Edytuj pliki, usuń markery <<<<<<, ======, >>>>>>
-# Rozwiąż logicznie (np. weź wersję z naszej gałęzi)
-
-git add <plik>
-git commit -m "resolve: merge conflict in Assets/Scenes/Lab01.unity"
-git push
-```
-
-### Wgrałeś Coś Dużego (Library/)?
-```bash
-# Natychmiast (zanim ktoś pushuje):
-git reset --soft HEAD~1      # Cofnij commit, ale zachowaj pliki
-git reset HEAD Library/      # Wyłącz z staging
-git checkout Library/        # Przywróć z dysku
-git commit -m "remove: library (oops)"
-git push --force-with-lease
-```
-
-### Jesteś w Innej Gałęzi Niż Chciałeś?
-```bash
-git status                   # Pokaż bieżącą gałąź
-git switch -c team-15/lab01-...  # Utwórz nową z tym samym kodem
-git switch lab01-start       # Cofnij czasowe zmiany
-```
-
----
-
-## Wsparcie
-
-- **Prowadzący:** Czat/Email na zajęciach
-- **Peer review:** Każdy commit przeglądany przez parę
-- **Dokumentacja:** W tym pliku + linki w `README.md`
-
----
-
-
+- **Library trafiło do Git:** wykonaj `git rm -r --cached -- Library`, uzupełnij `.gitignore`, zatwierdź poprawkę i wyślij zwykłym push. Pliki lokalne pozostaną na dysku.
+- **Konflikt scalania:** sprawdź `git status`, rozwiąż konflikt, zachowując potrzebne zmiany, a następnie zatwierdź wynik. Nie usuwaj całego projektu.
+- **Push odrzucony:** sprawdź adres `origin`, dostęp i nazwę gałęzi. Nie używaj wymuszonego push jako pierwszej metody naprawy.
+- **Unity nie kompiluje:** sprawdź pierwszy błąd Console oraz [FAQ](FAQ.md). Zachowaj kopię manifestu, lockfile i własnych zasobów.

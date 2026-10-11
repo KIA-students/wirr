@@ -1,6 +1,19 @@
 # VITURE XR: stereoskopia SBS i Immersive 3D
 
-WiRR obsługuje okulary VITURE XR jako zewnętrzny stereoskopowy wyświetlacz Full SBS oraz jako platformę do demonstracji różnicy między natywnym renderowaniem stereo a programową konwersją 2D-to-3D.
+## Spis treści
+
+- [Trzy różne tryby](#trzy-różne-tryby)
+  - [1. Zwykłe 2D](#1-zwykłe-2d)
+  - [2. Natywne 3D Full SBS](#2-natywne-3d-full-sbs)
+  - [3. Immersive 3D: 2D-to-3D](#3-immersive-3d-2d-to-3d)
+- [Przełączanie 2D / 3D](#przełączanie-2d--3d)
+  - [VITURE One i VITURE Pro](#viture-one-i-viture-pro)
+  - [VITURE Luma Series](#viture-luma-series)
+- [Odtwarzanie pliku 3D SBS](#odtwarzanie-pliku-3d-sbs)
+- [Przykład Unity](#przykład-unity)
+- [Ćwiczenie porównawcze](#ćwiczenie-porównawcze)
+- [Oficjalne materiały](#oficjalne-materiały)
+- [Opcjonalny eksperyment percepcji głębi](#opcjonalny-eksperyment-percepcji-głębi)
 
 ## Trzy różne tryby
 
@@ -92,3 +105,7 @@ Nie używaj wyniku Immersive 3D do pomiarów metrologicznych geometrii.
 - VITURE Academy: https://www.viture.com/academy
 - VITURE Download Center: https://www.viture.com/academy/download
 - Immersive 3D: https://www.viture.com/blog/a-worlds-first-turn-2d-into-magical-3d-in-real-time
+
+## Opcjonalny eksperyment percepcji głębi
+
+Porównanie nie wymaga zwiększania wergencji lub dysparycji do wartości powodujących dyskomfort. Jeżeli chcesz zobaczyć zależność między sygnałami stereoskopowymi a stałą odległością optyczną, przejdź do [bezpiecznej demonstracji](COMFORT_STUDIES.md#eksperyment-b-wirtualna-głębia-i-stała-odległość-optyczna). Przy braku okularów skorzystaj z monitora i porównania dwóch renderów.

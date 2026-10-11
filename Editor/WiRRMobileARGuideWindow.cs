@@ -31,7 +31,7 @@ namespace KIA.WiRR.Editor
             var window = GetWindow<WiRRMobileARGuideWindow>();
             window.titleContent = new GUIContent("WiRR · Mobile AR");
             window.minSize = new Vector2(760, 650);
-            window.labNumber = Mathf.Clamp(selectedLab, 1, 7);
+            window.labNumber = Mathf.Clamp(selectedLab, 1, 8);
             window.Show();
         }
 
@@ -43,7 +43,7 @@ namespace KIA.WiRR.Editor
                 "Te demonstratory są projektowane pod ekran telefonu: kamera tylna urządzenia, dotyk i rzutowanie promienia z pozycji palca, ARCore/AR Foundation i pionowy lub poziomy ekran. Tryb zastępczy w Edytorze służy wyłącznie do sprawdzenia logiki; wynik AR oceniaj na realnym telefonie.",
                 MessageType.Info);
 
-            labNumber = EditorGUILayout.IntSlider("Laboratorium / obszar roboczy", labNumber, 1, 7);
+            labNumber = EditorGUILayout.IntSlider("Laboratorium / obszar roboczy", labNumber, 1, 8);
             using (new EditorGUILayout.HorizontalScope())
             {
                 if (GUILayout.Button("Utwórz 5 starterów AR Foundation", GUILayout.Height(30)))

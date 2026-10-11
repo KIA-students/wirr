@@ -31,7 +31,7 @@ namespace KIA.WiRR.Editor
             return lab switch
             {
                 1 => Lab01(checkpoint), 2 => Lab02(checkpoint), 3 => Lab03(checkpoint), 4 => Lab04(checkpoint),
-                5 => Lab05(checkpoint), 6 => Lab06(checkpoint), 7 => Lab07(checkpoint),
+                5 => Lab05(checkpoint), 6 => Lab06(checkpoint), 7 => Lab07(checkpoint), 8 => Lab08(checkpoint),
                 _ => Array.Empty<WiRRReportTable>()
             };
         }
@@ -307,12 +307,12 @@ namespace KIA.WiRR.Editor
                 T("lab06_mapping_check", "Trzy pozycje kontrolne przegubów", new[]{"Pozycja 1","Pozycja 2","Pozycja 3"}, new[]{"joint1 źródło deg","joint1 Unity deg","joint1 błąd deg","joint2 źródło deg","joint2 Unity deg","joint2 błąd deg","joint3 źródło deg","joint3 Unity deg","joint3 błąd deg"}) },
             "4.0" => new[] {
                 T("lab06_interarrival", "Inter-arrival: pierwsze 30 próbek", new[]{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"}, new[]{"inter-arrival ms"}),
-                T("lab06_buffer", "Buforowanie i interpolacja: wariant v3", new[]{"A","B","C"}, new[]{"Źródło","Hz","Delay ms","Buffer","T średnie ms","sT ms","Płynność"}),
-                T("lab06_rtt", "RTT: próbki", new[]{"1","2","3","4","5","6","7","8","9","10"}, new[]{"RTT ms"}) },
+                T("lab06_buffer", "Buforowanie i interpolacja: wariant v3", new[]{"A","B","C"}, new[]{"Źródło","Hz","Delay ms","Buffer","T średnie ms","sT ms","Płynność"}) },
             "4.5" => new[] {
-                T("lab06_rtt_compare", "RTT: wariant v4", new[]{"A","B"}, new[]{"N","mean ms","min ms","max ms","Warunki"}),
-                T("lab06_stale", "LIVE / STALE", new[]{"Pomiar"}, new[]{"próg STALE ms","joint_states Hz","pauza Gazebo s","detekcja STALE ms","odzyskanie LIVE ms"}) },
-            "5.0" => new[] { T("lab06_fault", "Eksperyment diagnostyczny", new[]{"baseline","kontrolowany błąd","po naprawie"}, new[]{"Stan / wynik","joint1","joint2","Hz","RTT ms","Uwagi"}) },
+                T("lab06_rtt", "RTT: próbki", new[]{"1","2","3","4","5","6","7","8","9","10"}, new[]{"RTT ms"}),
+                T("lab06_rtt_compare", "RTT: wariant v4", new[]{"A","B"}, new[]{"N","mean ms","min ms","max ms","Warunki"}) },
+            "5.0" => new[] {
+                T("lab06_stale", "LIVE / STALE", new[]{"Pomiar"}, new[]{"próg STALE ms","joint_states Hz","pauza Gazebo s","detekcja STALE ms","odzyskanie LIVE ms"}), T("lab06_fault", "Eksperyment diagnostyczny", new[]{"baseline","kontrolowany błąd","po naprawie"}, new[]{"Stan / wynik","joint1","joint2","Hz","RTT ms","Uwagi"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
 
@@ -326,6 +326,21 @@ namespace KIA.WiRR.Editor
             "4.0" => new[] { T("lab07_usability", "Użyteczność i dostępność", new[]{"U1","U2","U3"}, new[]{"Cel użytkownika","Sukces?","Czas/próby","Błędne aktywacje","Pomoc","Problem dostępności"}) },
             "4.5" => new[] { T("lab07_regression", "Test regresji", new[]{"REG-01","REG-02"}, new[]{"Test","Przed poprawką","Po poprawce","Status końcowy","Dowód"}) },
             "5.0" => new[] { T("lab07_risk", "Macierz ryzyka", new[]{"R-01","R-02","R-03"}, new[]{"Ryzyko","P","S","R","Dowód","Działanie ograniczające","Ryzyko resztkowe"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+ 
+        private static IReadOnlyList<WiRRReportTable> Lab08(string cp) => cp switch
+        {
+            "3.0" => Array.Empty<WiRRReportTable>(),
+            "3.5" => Array.Empty<WiRRReportTable>(),
+            "5.0" => Array.Empty<WiRRReportTable>(),
+            "4.0" => new[] { T("lab08_trials", "Sześć prób A/B (z pliku JSON)",
+                        new[]{"Próba 1", "Próba 2", "Próba 3", "Próba 4", "Próba 5", "Próba 6"},
+                        new[]{"Czas [s]", "Sukces", "Tryb danych", "Wariant"},
+                        "Próby 1–3 = A, 4–6 = B. Niepowodzenia zachowaj; brak pomiaru oznacz NV, nie zerem.") },
+            "4.5" => new[] { T("lab08_comparison", "Wariant bazowy i poprawiony",
+                        new[]{"Przed zmianą", "Po zmianie"},
+                        new[]{"Mediana czasu [s]", "Sukcesy", "Uwagi"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
     }

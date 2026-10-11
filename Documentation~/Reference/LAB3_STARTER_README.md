@@ -1,60 +1,113 @@
-# Laboratorium 3 — Rejestracja AR
+# Lab 03 — Rejestracja i kotwice AR
 
-## Co Powinieneś Pobrać
+Instrukcja kursowa: WiRR Lab 03 v1.0.3. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.x.
 
-- ✓ Projekt z Lab 1–2
-- ✓ Telefon Android z ARCore (dostępność: https://developers.google.com/ar/devices)
+## Spis treści
 
-### Nowe pakiety
-```
-AR Foundation         5.1.0+
-ARCore XR Plugin      5.1.0+
-XR Hands              1.4.0+
-```
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Przygotowanie](#przygotowanie)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Śledzenie i płaszczyzny](#30-śledzenie-i-płaszczyzny)
+  - [3.5: Rzutowanie promienia i skala 1:1](#35-rzutowanie-promienia-i-skala-11)
+  - [4.0: Kotwica i dryf](#40-kotwica-i-dryf)
+  - [4.5: Rejestracja dwupunktowa](#45-rejestracja-dwupunktowa)
+  - [5.0: Kontrolowany błąd](#50-kontrolowany-błąd)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
 
-### Pliki
-```
-Assets/Scenes/Lab03_AR.unity
-Assets/Scripts/RegistrationError.cs
-Assets/Models/ (placeholder)
-```
 
----
+## Szybki wybór ścieżki
+- **Nie uruchomiłem jeszcze Unity:** [instalacja Unity](../../Documentation~/Reference/OS_SETUP.md#unity-nie-jest-zainstalowane).
+- **Mam telefon obsługujący ARCore:** [konfiguracja Android i ADB](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr), a potem [śledzenie i płaszczyzny](#30-śledzenie-i-płaszczyzny).
+- **Nie mam odpowiedniego telefonu lub kabla:** rozpocznij symulację/replay i analizę ograniczeń, następnie wróć do [zadań laboratorium](#zadania-krok-po-kroku).
+- **Pracuję na Ubuntu:** [narzędzia Android i USB na Ubuntu](../../Documentation~/Reference/OS_SETUP.md#ubuntu); **na Windows:** [tutaj](../../Documentation~/Reference/OS_SETUP.md#windows).
 
-## Checklist
 
-- [ ] Android Build Support zainstalowany
-- [ ] Telefon z ARCore podłączony
-- [ ] USB debugging ON
-- [ ] Lab03_AR.unity otwarta
-- [ ] ARPlaneManager w scenie
+Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 3. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
----
+## Przygotowanie
 
-## Start Lab 3
+1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 03.
+2. Użyj **Zainstaluj / napraw zależności**.
+3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
+4. Użyj **Utwórz / napraw aktywną scenę**.
+5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
+6. Zainstaluj AR Foundation/ARCore oraz wymagane próbki.
+7. Utwórz scenę Lab03 i zweryfikuj AR Session, XR Origin i wykrywanie płaszczyzn.
+8. Przygotuj fizyczne punkty odniesienia oraz model o znanych wymiarach.
 
-1. Git: `git switch -c team-<nr>/lab03-<nazwiska>`
-2. Konfiguracja Android: Edit → Project Settings → Player → Android
-3. Kompilacja i uruchomienie: `File → Build Profiles` → `Build And Run`
-4. Na telefonie: pozwól na dostęp do kamery
+## Zadania krok po kroku
 
----
+### 3.0: Śledzenie i płaszczyzny
 
-## Kod
+1. Uruchom aplikację na urządzeniu i zmierz czas do SessionTracking.
+2. Zmierz osobno czas do pierwszej użytecznej płaszczyzny.
+3. Dla każdego warunku A/B/C wykonaj trzy próby i zapisz oba czasy dla każdej próby; zapisuj też notTrackingReason.
+4. Opisz warunki otoczenia i ograniczenia pomiaru.
 
-### RegistrationError.cs
-```csharp
-using UnityEngine;
+Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
-public class RegistrationError : MonoBehaviour {
-    int pairIndexSum = 0; // WPISZ
-    
-    public void RecordError(float distanceFromOriginMeters, float errorMeters) {
-        Debug.Log($"REGISTRATION_ERROR distance={distanceFromOriginMeters:F2}m error={errorMeters:F2}m seed={pairIndexSum}");
-    }
-}
-```
+### 3.5: Rzutowanie promienia i skala 1:1
 
----
+1. Ustaw model w jednostkach metrycznych i zachowaj skalę 1:1.
+2. Umieszczaj model wyłącznie po poprawnym rzucie promienia do płaszczyzny.
+3. Dla A/B/C wykonaj po 10 prób i policz poprawne trafienia.
+4. Zmierz medianę błędu pozycjonowania bez korygowania go skalą modelu.
 
-**Razem: ~90 minut**
+Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+
+### 4.0: Kotwica i dryf
+
+1. Utwórz kotwicę przy fizycznym punkcie referencyjnym.
+2. Przejdź zadaną ścieżkę, wróć i zmierz odchylenie od znacznika.
+3. Wykonaj trzy powtórzenia wariantu bazowego oraz serię A/B/C, zapisując stan śledzenia.
+4. Policz medianę dryfu i określ charakter błędu.
+
+Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+
+### 4.5: Rejestracja dwupunktowa
+
+1. Wyznacz fizyczne punkty O i X oraz niezależnie zmierz OX.
+2. Zarejestruj układ na O i X i zmierz e1, e2, e3.
+3. Powtórz pełną rejestrację trzy razy; policz e_med i e_max.
+4. Wskaż główne źródło niepewności i sposób jego ograniczenia.
+
+Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+
+### 5.0: Kontrolowany błąd
+
+1. Wykonaj trzy pomiary wariantu bazowego.
+2. Wprowadź błąd v5 i zapisz H1/H2.
+3. Wykonaj test rozstrzygający i trzy pomiary ze stanem błędnym.
+4. Napraw minimalnie, wykonaj trzy pomiary i sprawdź powrót e_med do poziomu wariantu bazowego.
+
+Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+
+## Zakończenie laboratorium
+
+1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
+2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
+3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
+4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
+
+## Materiały dydaktyczne
+Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
+
+1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
+2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab03/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
+3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
+
+Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
+
+`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+
+
+<a id="checklist"></a>
+<a id="co-powinieneś-pobrać"></a>
+<a id="kod"></a>
+<a id="laboratorium-3--rejestracja-ar"></a>
+<a id="najpierw-wybierz-ścieżkę"></a>
+<a id="nowe-pakiety"></a>
+<a id="pliki"></a>
+<a id="registrationerrorcs"></a>
+<a id="start-lab-3"></a>
