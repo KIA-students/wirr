@@ -10,7 +10,7 @@
 
 ## Zasada
 
-Każda instrukcja studentów ma **spis treści w pierwszym ekranie** oraz pytania warunkowe, które pozwalają pominąć czynności już wykonane. Nie opisuj od nowa instalacji Git, Unity Hub, Android SDK, ARCore ani ROS 2, jeśli istnieje aktualna, wspólna instrukcja.
+Kampania obejmuje **dokładnie cztery bloki i osiem laboratoriów (01–08)**. Każda instrukcja studentów ma **spis treści w pierwszym ekranie** oraz pytania warunkowe, które pozwalają pominąć czynności już wykonane. Nie opisuj od nowa instalacji Git, Unity Hub, Android SDK, ARCore ani ROS 2, jeśli istnieje aktualna, wspólna instrukcja.
 
 ## Pierwszy rozdział: ścieżka warunkowa
 
@@ -34,7 +34,7 @@ Używaj czytelnych nagłówków Markdown i lokalnych fragmentów URL, np. [Lab 0
 
 ## Kontrola jakości
 
-Uruchom **lokalnie**, po zmianie struktury instrukcji:
+Uruchom **lokalnie**, po zmianie struktury instrukcji, w tym Lab 08 i pięciu plików Documentation~/Campaign/:
 
     python3 scripts~/verify_instruction_navigation.py
 

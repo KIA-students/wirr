@@ -52,8 +52,10 @@ def sources(root: Path) -> list[Path]:
         "XR_SAFETY_WATCHDOG.md", "QUICK_START.md", "INDEX.md",
         "ENVIRONMENT_SETUP.md", "BUILD_AND_DEPLOY.md",
         "FOUR_BLOCK_MISSIONS.md", "VITURE_XR.md",
-    ] + [f"LAB{i}_STARTER_README.md" for i in range(1, 8)]
+    ] + [f"LAB{i}_STARTER_README.md" for i in range(1, 9)]
     lab += [reference / n for n in names if (reference / n).exists()]
+    campaign = root / "Documentation~" / "Campaign"
+    lab += [campaign / n for n in ("README.md", "BLOK-01.md", "BLOK-02.md", "BLOK-03.md", "BLOK-04.md")]
     lab.append(root / "competition" / "OPTIONAL_MISSIONS.md")
     return lab
 
