@@ -31,3 +31,10 @@ Student wybiera jawnie tryb REAL/SIM/REPLAY i dopisuje jedno zdanie odkrycia, di
 - opublikować razem z nowymi instrukcjami WiRR z repozytorium repozytorium instrukcji.
 
 Do czasu tego testu jest to funkcja **gałęzi rozwojowej**, nie potwierdzona funkcja wydania produkcyjnego.
+
+
+## Konto Unity, opcjonalne misje i komfort XR
+- **Nie udostępniaj współdzielonego hasła Unity**. Na stanowiskach uczelni wybierz aktywowaną przez administratora Education Grant License, a prywatny komputer może korzystać z indywidualnego Unity Personal/Student. Instrukcja: **UNITY_ACCESS_AND_LICENSES.md**.
+- Generator zabawnych nazw w oknie **Misje i odkrycia** jest lokalny; propozycje zatwierdza prowadzący. Także strona WiRR ma generator i cztery dodatkowe, dobrowolne wyzwania z limitem **+8 punktów na grupę**, niezależne od ocen indywidualnych.
+- **WiRR → Komfort XR** generuje prefab bardzo łagodnego ruchu odniesienia i prefab obserwacji wirtualnej głębi; oba są uruchamiane wyłącznie dobrowolnie i samoczynnie kończą próbę. Szczegóły: **COMFORT_STUDIES.md**. Nie należy wywoływać ani porównywać objawów zdrowotnych studentów.
+- Materiały i kod pozostają w gałęzi roboczej aż do testu Unity. Zmiany w rankingach mogą być synchronizowane po zatwierdzeniu; stan wyników repozytorium studentów nie może być zastąpiony kopią roboczą.

@@ -2,6 +2,14 @@
 
 ## Unreleased (ścieżka czterech bloków, 2026-10-11)
 
+- Lab 01: osobna ścieżka bez indywidualnego konta na pracownianych stanowiskach z Education Grant License, darmowe własne Unity Personal i opcjonalny Unity Student Plan. Nie udostępniamy wspólnego loginu.
+- Dwa rzeczywiste, bezpiecznie ograniczone czasowo stanowiska obserwacyjne komfortu XR, generowane jako prefaby Unity z programami C#, dokumentacja i zatrzymanie na żądanie.
+- Dwie grupy mogą zaproponować nazwy generowane na stronie WWW lub w panelu Unity; propozycje zatwierdza prowadzący.
+- Cztery dobrowolne misje poza zajęciami i do +8 grupowych punktów. Nie ma konkursu wytrzymałości na nudności ani wpływu ligi na oceny indywidualne.
+- Testy rankingu i lokalnych aktualizatorów punktacji; kosztowny workflow ROS 2 jest ręczny lub reaguje na zmiany backendu w main.
+
+
+
 - Dodano lokalne okno **WiRR → Misje i odkrycia (4 bloki)** z automatycznym wykrywaniem scen i lokalnych eksportów JSON.
 - Karta sesji Markdown zawiera metadane projektu i istniejące wyniki, ale nie wykonuje nowych pomiarów ani nie wystawia oceny.
 - Raport działa offline i nie wywołuje workflow GitHub Actions. Dodano wyjaśnienie granic automatyzacji i obsługi Lab 08.
