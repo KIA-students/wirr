@@ -27,6 +27,7 @@ namespace KIA.WiRR
         private bool running;
         private bool sawPresence;
         private bool sawTracking;
+        private bool sawValidHead;
         private bool hasPreviousPosition;
         private Vector3 previousPosition;
         private float lastPositionTime;
@@ -96,6 +97,7 @@ namespace KIA.WiRR
             startedAt = Time.unscaledTime;
             sawPresence = false;
             sawTracking = false;
+            sawValidHead = false;
             hasPreviousPosition = false;
             lostPresenceAt = -1f;
             lostTrackingAt = -1f;
@@ -161,8 +163,12 @@ namespace KIA.WiRR
             if (!head.isValid)
             {
                 sensorStatus = "NO_VALID_HMD: use simulated buttons";
+                // Only an HMD that was valid earlier in the SAME trial can be
+                // considered disconnected. An editor without HMD is unsupported.
+                if (sawValidHead) Finish("HEAD_DEVICE_DISCONNECTED", true, false);
                 return;
             }
+            sawValidHead = true;
 
             bool present;
             if (head.TryGetFeatureValue(CommonUsages.userPresence, out present))
@@ -232,6 +238,11 @@ namespace KIA.WiRR
         private void OnApplicationFocus(bool hasFocus)
         {
             if (!hasFocus) Finish("FOCUS_LOST", true, false);
+        }
+
+        private void OnApplicationPause(bool paused)
+        {
+            if (paused) Finish("APPLICATION_PAUSED", true, false);
         }
 
         private void OnDisable() => Finish("COMPONENT_DISABLED", false, false);
