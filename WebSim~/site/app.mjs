@@ -1,15 +1,18 @@
 import { symptoms, score, difference } from './ssq.mjs';
+import { renderLeague } from './league.mjs';
 const $ = id => document.getElementById(id);
 const links = [...document.querySelectorAll('nav a')];
 function navigate() {
- const id = ['unity','websim','ssq'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'unity';
+ const id = ['unity','websim','ssq','liga'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'unity';
  for (const link of links) {
   const selected = link.hash === `#${id}`;
   if (selected) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
   $(link.hash.slice(1)).hidden = !selected;
  }
+ if (id === 'liga') renderLeague($('league-results'));
 }
 window.addEventListener('hashchange', navigate);
+$('league-refresh').addEventListener('click', () => renderLeague($('league-results')));
 navigate();
 const answers = { pre: Array(16).fill(null), post: Array(16).fill(null) };
 const times = {pre: null, post: null};

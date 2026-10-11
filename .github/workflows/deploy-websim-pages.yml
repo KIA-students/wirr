@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'WebSim~/site/**'
+      - 'competition/scoreboard.json'
       - 'WebSim~/tests/**'
       - '.github/workflows/deploy-websim-pages.yml'
   push:
@@ -31,6 +32,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Stage approved public scores
+        run: |
+          mkdir -p WebSim~/site/competition
+          cp competition/scoreboard.json WebSim~/site/competition/scoreboard.json
       - name: Test SSQ scoring
         run: node --test WebSim~/tests/*.test.mjs
       - name: Validate static site
