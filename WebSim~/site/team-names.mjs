@@ -14,14 +14,16 @@ export const NOUNS = Object.freeze([
   'Piksele', 'Czajniki', 'Ryśki'
 ]);
 export function suggestNames(count = 3, random = Math.random) {
+  const maximum = ADJECTIVES.length * NOUNS.length;
   const limit = Math.min(Math.max(0, Math.floor(count)), 8);
-  const result = new Set();
-  let attempts = 0;
-  while (result.size < limit && attempts < 120) {
-    const a = ADJECTIVES[Math.floor(random() * ADJECTIVES.length) % ADJECTIVES.length];
-    const b = NOUNS[Math.floor(random() * NOUNS.length) % NOUNS.length];
-    result.add(a + ' ' + b);
-    attempts++;
+  const used = new Set(), results = [];
+  for (let i=0; i<limit; i++) {
+    // The draw is clamped; when a custom RNG repeats, fall back to the next
+    // combination so exactly three different proposals are still returned.
+    let index = Math.min(maximum - 1, Math.max(0, Math.floor(random() * maximum)));
+    while (used.has(index)) index = (index + 1) % maximum;
+    used.add(index);
+    results.push(ADJECTIVES[Math.floor(index / NOUNS.length)] + ' ' + NOUNS[index % NOUNS.length]);
   }
-  return [...result];
+  return results;
 }

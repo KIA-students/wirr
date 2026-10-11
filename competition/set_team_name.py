@@ -10,7 +10,7 @@ from pathlib import Path
 from update_score import validate
 
 DEFAULT = Path(__file__).with_name("scoreboard.json")
-SAFE = re.compile(r"^[\w\sĄĆĘŁŃÓŚŹŻąćęłńóśźż-]+$", re.UNICODE)
+SAFE = re.compile(r"^[^\\W_]+(?:[ -][^\\W_]+)*$", re.UNICODE)
 
 
 def change_name(board: dict, group: str, name: str) -> dict:
