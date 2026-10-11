@@ -25,7 +25,7 @@ Przewodniki bloków: **[Blok I](BLOK-01.md) · [Blok II](BLOK-02.md) · [Blok II
 
 Na wtorek przygotowane jest laboratorium **01 + 02**, z działającą alternatywą na ekranie PC. Właśnie ten blok ma pierwszeństwo przy przygotowaniu stanowisk. Jeśli przedmiot jest już w dalszej części semestru, użyj odpowiedniego bloku z powyższej tabeli; kolejność nie wymaga resetowania projektu.
 
-**Przygotowanie organizacyjne do poniedziałku 12 października:** sprawdź projekt Unity 6000.6.x na stanowisku uczelnianym, aktywowaną licencję, pierwszy Play, jeden model fizyczny, przewód USB-C z transmisją danych i jedna sprawną parę Quest 3. Prawdziwy test Quest jest cenny, ale **nie jest warunkiem wykonania Lab 01 na PC**. [Lista preflight prowadzącego](../Reference/INSTRUCTOR_GUIDE.md).
+**[Sprawdź listę gotowości na poniedziałek 12 października](PRZED-WTORKIEM.md).** Przygotowanie organizacyjne: sprawdź projekt Unity 6000.6.x na stanowisku uczelnianym, aktywowaną licencję, pierwszy Play, jeden model fizyczny, przewód USB-C z transmisją danych i jedna sprawną parę Quest 3. Prawdziwy test Quest jest cenny, ale **nie jest warunkiem wykonania Lab 01 na PC**. [Lista preflight prowadzącego](../Reference/INSTRUCTOR_GUIDE.md).
 
 ## Jak zacząć bez instalowania wszystkiego
 
