@@ -1,74 +1,24 @@
-# Laboratorium 4 — Mieszanie Rzeczywistości
+# Laboratorium 04. Rozumienie sceny AR
 
-## Co powinieneś pobrać
+Niniejszy dokument jest skrótem dla pakietu Unity. Aktualna, autorytatywna instrukcja laboratoryjna znajduje się w repozytorium `MatPomGit/prz`:
 
-- ✓ Projekt z Lab 3 (Android AR)
-- ✓ Telefon z Androidem obsługujący API głębi (Depth API)
+- [Instrukcja PDF, WiRR Lab 04](https://github.com/MatPomGit/prz/blob/main/courses/wirtualna-i-rozszerzona-rzeczywistosc/laboratories/lab-04-rozumienie-sceny-i-mieszanie-rzeczywistosci/wirr_lab04.pdf)
+- [Kod LaTeX](https://github.com/MatPomGit/prz/blob/main/courses/wirtualna-i-rozszerzona-rzeczywistosc/laboratories/lab-04-rozumienie-sceny-i-mieszanie-rzeczywistosci/wirr_lab04.tex)
 
-### Nowe komponenty
-```
-Depth API: Edit → Project Settings → ARCore → Enable Depth API
-Shader do okluzji (zawarte w Assets/Shaders/)
-```
+## Wymagania
 
-### Pliki
-```
-Assets/Scenes/Lab04_SceneUnderstanding.unity
-Assets/Shaders/OccludedModel.shader
-Assets/Scripts/LightingController.cs
-```
+- Unity **6000.6.5f1 lub nowsze**, pod warunkiem zgodności pakietów użytych w projekcie.
+- Działająca scena Android AR z Lab 03.
+- AR Foundation i Google ARCore XR Plugin w zgodnej parze wersji.
+- Na telefonie: dostępność ARCore Depth należy sprawdzić w runtime, a nie zakładać na podstawie modelu urządzenia.
 
----
+## Procedura
 
-## Checklist
+1. Zapisz kopię sceny Lab 03 pod nazwą `Assets/WiRR/Lab04/Scenes/Lab04_SceneUnderstanding.unity`.
+2. Na kamerze AR dodaj `AROcclusionManager` oraz sprawdź działanie `ARCameraManager` i `ARCameraBackground`.
+3. Wykonaj diagnostykę Depth API oraz żądanych i aktywnych trybów okluzji.
+4. Przeprowadź pomiary okluzji i trafień `ARRaycastManager` w trybie `TrackableType.Depth`.
+5. Zbadaj estymację oświetlenia, rozdzielając dostępność Ambient Intensity i Environmental HDR.
+6. Uzupełnij raport i zachowaj surowe dane, wyniki `HIT/MISS` i brak danych oznaczony `NA/NV`.
 
-- [ ] Lab 3 zaliczony
-- [ ] API głębi (Depth API) dostępne na telefonie
-- [ ] Shader zaimportowany
-- [ ] LightingController.cs przygotowany
-
----
-
-## Start Lab 4
-
-1. Git: `git switch -c team-<nr>/lab04-<nazwiska>`
-2. Kopiuj scenę: `cp Assets/Scenes/Lab03_AR.unity Assets/Scenes/Lab04_SceneUnderstanding.unity`
-3. Dodaj ARDepthManager do sceny
-4. Przypisz shader do modelu
-
----
-
-## Kod
-
-### LightingController.cs
-```csharp
-using UnityEngine;
-using UnityEngine.XR.ARFoundation;
-
-public class LightingController : MonoBehaviour {
-    int pairIndexSum = 0; // WPISZ
-    ARCameraManager cameraManager;
-    Light directionalLight;
-    
-    void Start() {
-        cameraManager = GetComponent<ARCameraManager>();
-        directionalLight = GetComponentInChildren<Light>();
-    }
-    
-    void Update() {
-        if (cameraManager.TryGetLatestFrame(
-            ARCameraFrameEventArgs.LightEstimateUpdatedFlag,
-            out ARCameraAcquisitionFrame frame)) {
-            
-            var lightEstimate = frame.lightEstimate;
-            if (lightEstimate != null) {
-                directionalLight.intensity = lightEstimate.averageBrightness;
-                directionalLight.color = lightEstimate.colorCorrection;
-                Debug.Log($"LIGHT brightness={lightEstimate.averageBrightness:F2} seed={pairIndexSum}");
-            }
-        }
-    }
-}
-```
-
----
+**Uwaga:** historyczne instrukcje odwołujące się do `ARDepthManager`, `ARCameraManager.TryGetLatestFrame` albo `ARCameraAcquisitionFrame` nie opisują aktualnej implementacji AR Foundation 6. Nie kopiuj z nich kodu C#. Kompletne przykłady czterech skryptów znajdują się w aktualnym PDF.
