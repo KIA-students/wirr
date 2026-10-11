@@ -112,7 +112,7 @@ jobs:
               if str(item.get("displayName", "")).startswith("Laboratorium ")
           ]
           if len(labs) != 8:
-              raise SystemExit(f"UPM: oczekiwano 7 laboratoriów, znaleziono {len(labs)}")
+              raise SystemExit(f"UPM: oczekiwano 8 laboratoriów, znaleziono {len(labs)}")
           if not any(item.get("displayName") == "VITURE XR: Full SBS i Immersive 3D"
                      for item in package.get("samples", [])):
               raise SystemExit("UPM: brak sample VITURE XR")
