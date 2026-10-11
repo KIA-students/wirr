@@ -1,6 +1,7 @@
 # Standard nawigacji w instrukcjach WiRR
 
 ## Spis treści
+
 - [Zasada](#zasada)
 - [Pierwszy rozdział: ścieżka warunkowa](#pierwszy-rozdział-ścieżka-warunkowa)
 - [Spis treści i kotwice](#spis-treści-i-kotwice)

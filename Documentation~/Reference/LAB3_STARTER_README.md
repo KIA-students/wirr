@@ -11,7 +11,6 @@
 - [Kod](#kod)
   - [RegistrationError.cs](#registrationerrorcs)
 
-
 ## Najpierw wybierz ścieżkę
 - **Mam działającą scenę z poprzedniego laboratorium:** [otwórz aktualne Lab 03](../../Samples~/Lab03/README.md#szybki-wybór-ścieżki) i pomiń powtórną instalację.
 - **Nie mam Unity / konta:** [system operacyjny](OS_SETUP.md#wybierz-aktualną-sytuację) lub [licencja](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).

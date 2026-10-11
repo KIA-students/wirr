@@ -15,9 +15,6 @@
 - [Oficjalne materiały](#oficjalne-materiały)
 - [Opcjonalny eksperyment percepcji głębi](#opcjonalny-eksperyment-percepcji-głębi)
 
-
-WiRR obsługuje okulary VITURE XR jako zewnętrzny stereoskopowy wyświetlacz Full SBS oraz jako platformę do demonstracji różnicy między natywnym renderowaniem stereo a programową konwersją 2D-to-3D.
-
 ## Trzy różne tryby
 
 ### 1. Zwykłe 2D

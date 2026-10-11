@@ -9,13 +9,12 @@
   - [2. Projekt startowy (starter template)](#2-projekt-startowy-starter-template)
   - [3. Pakiety wymagane](#3-pakiety-wymagane)
   - [4. Konfiguracja XR Origin (pre-configured)](#4-konfiguracja-xr-origin-pre-configured)
-- [Checklist — Przed Lab 1](#checklist-przed-lab-1)
+- [Checklist — Przed Lab 1](#checklist--przed-lab-1)
 - [Na Początku Lab 1](#na-początku-lab-1)
 - [Skrypty do pobrania](#skrypty-do-pobrania)
   - [PerformanceBenchmark.cs](#performancebenchmarkcs)
 - [Dokumentacja](#dokumentacja)
 - [Timeline Lab 1](#timeline-lab-1)
-
 
 ## Najpierw wybierz ścieżkę
 - **Mam działającą scenę z poprzedniego laboratorium:** [otwórz aktualne Lab 01](../../Samples~/Lab01/README.md#szybki-wybór-ścieżki) i pomiń powtórną instalację.

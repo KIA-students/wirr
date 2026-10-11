@@ -5,18 +5,15 @@
 - [Wybierz docelową platformę](#wybierz-docelową-platformę)
 - [Środowisko referencyjne](#środowisko-referencyjne)
 - [Najważniejsza zasada](#najważniejsza-zasada)
-- [PC — Windows](#pc-windows)
-- [Android — smartfon](#android-smartfon)
+- [PC — Windows](#pc--windows)
+- [Android — smartfon](#android--smartfon)
   - [Przygotowanie Unity](#przygotowanie-unity)
   - [Przygotowanie telefonu](#przygotowanie-telefonu)
   - [Budowanie](#budowanie)
-- [Meta Quest 3 — aplikacja samodzielna](#meta-quest-3-aplikacja-samodzielna)
+- [Meta Quest 3 — aplikacja samodzielna](#meta-quest-3--aplikacja-samodzielna)
 - [Smartfon a Quest 3](#smartfon-a-quest-3)
 - [Dokumentacja producentów](#dokumentacja-producentów)
-- [Błąd C# 10 / CS8773](#błąd-c-10-cs8773)
-
-
-Ta instrukcja dotyczy Unity 6 (6000.x) i projektu URP używanego na kursie WiRR. W Unity dostępne jest także okno `WiRR → Pomoc → Budowanie i instalacja`, które prowadzi przez te same kroki.
+- [Błąd C# 10 / CS8773](#błąd-c-10--cs8773)
 
 ## Wybierz docelową platformę
 

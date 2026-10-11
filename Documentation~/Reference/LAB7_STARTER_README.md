@@ -19,7 +19,6 @@
 - [Zaliczenie](#zaliczenie)
 - [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
 
-
 ## Najpierw wybierz ścieżkę
 - **Mam działającą scenę z poprzedniego laboratorium:** [otwórz aktualne Lab 07](../../Samples~/Lab07/README.md#szybki-wybór-ścieżki) i pomiń powtórną instalację.
 - **Nie mam Unity / konta:** [system operacyjny](OS_SETUP.md#wybierz-aktualną-sytuację) lub [licencja](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).

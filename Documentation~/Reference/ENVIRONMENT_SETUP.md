@@ -5,13 +5,10 @@
 - [Zanim pobierzesz cokolwiek](#zanim-pobierzesz-cokolwiek)
 - [Wymagane składniki](#wymagane-składniki)
 - [Windows 11 64-bit](#windows-11-64-bit)
-- [Ubuntu 22.04 / 24.04 LTS 64-bit](#ubuntu-2204-2404-lts-64-bit)
+- [Ubuntu 22.04 / 24.04 LTS 64-bit](#ubuntu-2204--2404-lts-64-bit)
 - [Ważne: C# 9 a komunikat o C# 10](#ważne-c-9-a-komunikat-o-c-10)
   - [Jak naprawić](#jak-naprawić)
 - [Kontrola przed laboratorium](#kontrola-przed-laboratorium)
-
-
-Instrukcja referencyjna dla laboratoriów WiRR. Wybierz system: [Windows](OS_SETUP.md#windows) lub [Ubuntu](OS_SETUP.md#ubuntu). Oba są przewidziane dla podstawowych doświadczeń; sposób uruchamiania niektórych urządzeń XR różni się między systemami.
 
 ## Zanim pobierzesz cokolwiek
 
