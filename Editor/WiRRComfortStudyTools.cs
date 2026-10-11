@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 namespace KIA.WiRR.Editor
 {
     /// <summary>
-    /// Creates two self-contained, conservative comfort-study prefabs.
+    /// Creates two comfortable observation prefabs and a technical watchdog prefab.
     /// No additional XR/AR packages or external models are needed.
     /// Scenes are not played automatically and no account is required.
     /// </summary>
@@ -18,8 +18,9 @@ namespace KIA.WiRR.Editor
         private const string Folder = "Assets/WiRR/Common/Prefabs/ComfortStudy";
         private const string OpticName = "WiRR_Comfort_OpticFlow";
         private const string DepthName = "WiRR_Comfort_DepthCues";
+        private const string SafetyName = "WiRR_Comfort_SafetyWatchdog";
 
-        [MenuItem("WiRR/Komfort XR/Utwórz 2 prefaby i stanowiska obserwacyjne", priority = 80)]
+        [MenuItem("WiRR/Komfort XR/Utwórz 3 prefaby: obserwacja i watchdog", priority = 80)]
         public static void CreateStations()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
@@ -32,20 +33,31 @@ namespace KIA.WiRR.Editor
             EnsureFolder(Folder);
             var optic = SavePrefab(OpticName, BuildVisualMotion());
             var depth = SavePrefab(DepthName, BuildDepthCues());
+            var safety = SavePrefab(SafetyName, BuildSafetyGate());
 
             if (SceneManager.GetActiveScene().IsValid())
             {
-                PlaceIfMissing(optic, OpticName);
-                PlaceIfMissing(depth, DepthName);
+                var opticObject = PlaceIfMissing(optic, OpticName);
+                var depthObject = PlaceIfMissing(depth, DepthName);
+                var safetyObject = PlaceIfMissing(safety, SafetyName);
+                var gate = safetyObject != null ? safetyObject.GetComponent<WiRRComfortSafetyGate>() : null;
+                if (gate != null)
+                {
+                    Undo.RecordObject(gate, "Połącz techniczny watchdog z demonstratorami");
+                    gate.Configure(
+                        opticObject != null ? opticObject.GetComponent<WiRRVisualMotionStudy>() : null,
+                        depthObject != null ? depthObject.GetComponent<WiRRDepthCueStudy>() : null);
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(gate);
+                }
                 EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
             }
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            Debug.Log("[WiRR] Gotowe prefaby: " + optic.name + ", " + depth.name +
+            Debug.Log("[WiRR] Gotowe prefaby: " + optic.name + ", " + depth.name + ", " + safety.name +
                       ". Student rozpoczyna pokaz ręcznie, Space/A; Esc/B przerywa. Nie uruchamiać dla wywoływania objawów.");
             EditorUtility.DisplayDialog("WiRR, komfort XR",
-                "Utworzono dwa prefaby i stanowiska obserwacyjne. Pokazy są krótkie i wymagają ręcznego uruchomienia. " +
-                "Nie służą do wywoływania nudności ani rywalizacji w odporności. Wymagany jest obserwator i możliwość natychmiastowego przerwania.", "OK");
+                "Utworzono dwa prefaby obserwacyjne i watchdog do 10 prób technicznych. Pokazy są krótkie i wymagają ręcznego uruchomienia. " +
+                "Nie służą do wywoływania nudności ani rywalizacji w odporności. Watchdog reaguje tylko na sygnały techniczne i syntetyczne. Wymagany jest obserwator i możliwość natychmiastowego przerwania.", "OK");
         }
 
         private static GameObject BuildVisualMotion()
@@ -81,6 +93,13 @@ namespace KIA.WiRR.Editor
                 new Vector3(-1.9f, 2.6f, 2.9f));
             var component = root.AddComponent<WiRRDepthCueStudy>();
             component.Configure(marker.transform);
+            return root;
+        }
+
+        private static GameObject BuildSafetyGate()
+        {
+            var root = new GameObject(SafetyName);
+            root.AddComponent<WiRRComfortSafetyGate>();
             return root;
         }
 
@@ -143,15 +162,16 @@ namespace KIA.WiRR.Editor
             return material;
         }
 
-        private static void PlaceIfMissing(GameObject prefab, string name)
+        private static GameObject PlaceIfMissing(GameObject prefab, string name)
         {
             var scene = SceneManager.GetActiveScene();
             foreach (var root in scene.GetRootGameObjects())
-                if (root.name == name) return;
+                if (root.name == name) return root;
 
             var instance = PrefabUtility.InstantiatePrefab(prefab, scene) as GameObject;
-            if (instance == null) return;
+            if (instance == null) return null;
             Undo.RegisterCreatedObjectUndo(instance, "WiRR " + name);
+            return instance;
         }
 
         private static void EnsureFolder(string path)
