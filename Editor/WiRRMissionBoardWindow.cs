@@ -45,7 +45,10 @@ namespace KIA.WiRR.Editor
             "UNSUPPORTED"
         };
 
+        private static readonly string[] GroupLabels = { "Nie wybrano", "G1: grupa 1", "G2: grupa 2" };
+
         private int blockIndex;
+        private int selectedGroup;
         private int selectedMode;
         private Vector2 scroll;
         private string discovery = "";
@@ -64,6 +67,7 @@ namespace KIA.WiRR.Editor
         private void OnEnable()
         {
             blockIndex = Mathf.Clamp(EditorPrefs.GetInt("KIA.WiRR.MissionBlock", 0), 0, Blocks.Length - 1);
+            selectedGroup = Mathf.Clamp(EditorPrefs.GetInt("KIA.WiRR.MissionGroup", 0), 0, 2);
         }
 
         private void OnGUI()
@@ -132,6 +136,12 @@ namespace KIA.WiRR.Editor
                 "Wskaż rzeczywisty tryb i uzupełnij tylko trzy krótkie obserwacje.",
                 MessageType.None);
 
+            var group = EditorGUILayout.Popup("Moja grupa laboratoryjna", selectedGroup, GroupLabels);
+            if (group != selectedGroup)
+            {
+                selectedGroup = group;
+                EditorPrefs.SetInt("KIA.WiRR.MissionGroup", selectedGroup);
+            }
             selectedMode = EditorGUILayout.Popup("Tryb faktyczny", selectedMode, Modes);
             EditorGUILayout.LabelField("Jedno odkrycie z eksperymentu");
             discovery = EditorGUILayout.TextArea(discovery, GUILayout.MinHeight(46));
@@ -194,6 +204,7 @@ namespace KIA.WiRR.Editor
             writer.AppendLine($"# WiRR – {Missions[blockIndex]}");
             writer.AppendLine();
             writer.AppendLine($"- Data UTC: {DateTime.UtcNow:O}");
+            writer.AppendLine($"- Grupa laboratoryjna: {GroupLabels[selectedGroup]}");
             writer.AppendLine($"- Unity: {Application.unityVersion}");
             writer.AppendLine($"- System: {Escape(SystemInfo.operatingSystem)}");
             writer.AppendLine($"- GPU: {Escape(SystemInfo.graphicsDeviceName)}");
