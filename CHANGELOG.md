@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Zsynchronizowano osiem szablonów raportów z aktualnymi instrukcjami MatPomGit/prz.
+- Zsynchronizowano osiem szablonów raportów z aktualnymi instrukcjami kursu WiRR.
 - Ujednolicono punkty kontrolne Lab 05, 06 i 08, formularze, tabele, zadania i opisy próbek.
 - Import Lab 08 zachowuje sześć prób A/B, odrzuca duplikaty i niepoprawne czasy oraz usuwa stare wyniki przed ponownym importem.
 - Zaktualizowano wersję kursową Unity, poradniki i FAQ; poprawiono walidację ośmiu laboratoriów w CI. Wersje preview nie tworzą stabilnych wydań.
