@@ -33,6 +33,7 @@ namespace KIA.WiRR
             if (observationTarget != null) originalPosition = observationTarget.localPosition;
         }
 
+        [ContextMenu("Rozpocznij jedną krótką demonstrację")]
         public void Begin()
         {
             if (!isActiveAndEnabled || observationTarget == null || active || completed) return;
@@ -42,6 +43,7 @@ namespace KIA.WiRR
             Debug.Log("[WiRR][Comfort] Łagodna zmiana wirtualnej odległości. To nie jest pomiar akomodacji.");
         }
 
+        [ContextMenu("Przerwij demonstrację")]
         public void StopStudy()
         {
             if (observationTarget != null) observationTarget.localPosition = originalPosition;

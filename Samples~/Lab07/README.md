@@ -79,3 +79,10 @@ Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dy
 Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
 
 `report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+
+
+## Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia
+
+Wybierz **WiRR → Komfort XR → Utwórz 2 prefaby i stanowiska obserwacyjne**. Powstaną prawdziwe prefaby Unity z łagodnym ruchem wskazówek wizualnych (maks. 8 s) i krótkim porównaniem wirtualnej głębi (maks. 10 s). Ich zadaniem nie jest wywoływanie nudności, lecz nauka projektowania komfortowych scen.
+
+Instrukcja pełna: **Documentation~/Reference/COMFORT_STUDIES.md**. Przy pracy w goglach potrzebny jest świadomy ochotnik, osoba obserwująca i możliwość natychmiastowego przerwania. Reszta grupy może wykonać równoważną analizę na monitorze. **Nie przyznaje się punktów za fizjologiczną odporność ani wystąpienie objawów.**

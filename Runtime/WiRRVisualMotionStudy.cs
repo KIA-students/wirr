@@ -33,6 +33,7 @@ namespace KIA.WiRR
             if (movingReference != null) referencePosition = movingReference.localPosition;
         }
 
+        [ContextMenu("Rozpocznij jedną krótką demonstrację")]
         public void Begin()
         {
             if (!isActiveAndEnabled || movingReference == null || running || completed) return;
@@ -42,6 +43,7 @@ namespace KIA.WiRR
             Debug.Log("[WiRR][Comfort] Rozpoczęto dobrowolną, łagodną prezentację ruchu otoczenia. Kamera pozostaje nieruchoma.");
         }
 
+        [ContextMenu("Przerwij demonstrację")]
         public void StopStudy()
         {
             if (movingReference != null) movingReference.localPosition = referencePosition;

@@ -103,6 +103,8 @@ namespace KIA.WiRR.Editor
                         WiRRSceneTools.OpenLabScene(Blocks[blockIndex][1]);
                 }
             }
+            if (GUILayout.Button("Komfort XR: wygeneruj dwa prefaby obserwacyjne"))
+                WiRRComfortStudyTools.CreateStations();
             if (GUILayout.Button("Liga XR: aktualny ranking grup"))
                 Application.OpenURL("https://kia-students.github.io/wirr/#liga");
             if (GUILayout.Button("Zaawansowane narzędzia (zależności, urządzenia)"))

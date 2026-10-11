@@ -16,6 +16,10 @@ W gałęzi rozwojowej dodano okno **WiRR → Misje i odkrycia (4 bloki)**. Autom
 
 **Uwaga:** Lab 08 jest nową sceną integracyjną, nie istnieje jeszcze w dotychczasowym formularzu JSON. Pulpit uczciwie to sygnalizuje. Nie traktuj istnienia sceny i eksportu jako automatycznego dowodu pracy na prawdziwym sprzęcie ani jako automatycznej oceny. Instrukcja: [FOUR_BLOCK_MISSIONS](Documentation~/Reference/FOUR_BLOCK_MISSIONS.md).
 
+## Dwa gotowe, krótkie stanowiska do nauki o komforcie XR
+
+Menu **WiRR → Komfort XR** generuje dwa prefaby: wolno poruszające się punkty odniesienia i porównanie wirtualnych odległości. Pokazy nie poruszają kamerą, uruchamia się je ręcznie, automatycznie kończą się po maksymalnie 8/10 sekundach i można je przerwać. Dokument: [Komfort, choroba symulatorowa oraz wergencja i akomodacja](Documentation~/Reference/COMFORT_STUDIES.md). **Nie są to testy wytrzymałości na objawy.**
+
 ## Liga drużyn i misje poza zajęciami
 
 Dwie grupy G1/G2 mogą zaproponować własną nazwę przez prosty generator w zakładce **Liga XR**. Czwarta kategoria rywalizacji to dobrowolne zadania poza zajęciami, najwyżej **8 punktów bonusowych na grupę**. Punkty i nazwy zatwierdza prowadzący, a bezpośrednie zbieranie danych osobowych studentów nie jest potrzebne. W gałęzi rozwojowej mechanizm jest w [competition/](competition/README.md).
