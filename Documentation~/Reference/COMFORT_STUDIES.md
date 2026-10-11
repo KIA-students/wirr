@@ -1,5 +1,25 @@
 # Komfort XR: choroba symulatorowa, wergencja i akomodacja
 
+## Spis treści
+
+- [Gdzie przejść?](#gdzie-przejść)
+- [Po co wykonujemy te eksperymenty?](#po-co-wykonujemy-te-eksperymenty)
+- [Gotowe programy i prefaby](#gotowe-programy-i-prefaby)
+  - [Uruchomienie i przerwanie](#uruchomienie-i-przerwanie)
+- [Warunki uczestnictwa](#warunki-uczestnictwa)
+- [Eksperyment A: ruch obrazu i wskazówki ruchu własnego](#eksperyment-a-ruch-obrazu-i-wskazówki-ruchu-własnego)
+- [Eksperyment B: wirtualna głębia i stała odległość optyczna](#eksperyment-b-wirtualna-głębia-i-stała-odległość-optyczna)
+- [Raport: jedno odkrycie zamiast testu odporności](#raport-jedno-odkrycie-zamiast-testu-odporności)
+  - [Literatura](#literatura)
+
+
+## Gdzie przejść?
+- **Chcę przeprowadzić wyjaśnienie na monitorze:** przejdź do [eksperymentu A](#eksperyment-a-ruch-obrazu-i-wskazówki-ruchu-własnego) lub [B](#eksperyment-b-wirtualna-głębia-i-stała-odległość-optyczna).
+- **Mam Quest, VITURE lub inne gogle:** przeczytaj najpierw [warunki uczestnictwa](#warunki-uczestnictwa) oraz [procedurę przerwania](#gotowe-programy-i-prefaby).
+- **Nie mam gotowych prefabów:** [generator w Unity](#gotowe-programy-i-prefaby).
+- **Chcę poeksperymentować z detekcją sygnałów XR:** [techniczna misja bezpieczeństwa](XR_SAFETY_WATCHDOG.md), z limitem 10 prób i bez punktów za wystąpienie objawów.
+
+
 ## Po co wykonujemy te eksperymenty?
 VR angażuje jednocześnie widzenie, zmysł równowagi i kontrolę ruchów oczu. Informacje z tych układów mogą być niespójne. Cybersickness może obejmować nudności, zawroty głowy i dezorientację. **Wergencja** określa zbieżność osi widzenia obu oczu na obiekcie, natomiast **akomodacja** to ustawienie ostrości przez soczewkę oka. W tradycyjnym wyświetlaczu stereoskopowym obraz może pozornie znajdować się na różnych głębokościach, mimo że optyczna odległość jego ogniskowania pozostaje stała.
 

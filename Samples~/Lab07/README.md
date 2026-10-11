@@ -1,5 +1,27 @@
 # Lab 07 — Walidacja i testy akceptacyjne
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Przygotowanie](#przygotowanie)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Kryteria i smoke test](#30-kryteria-i-smoke-test)
+  - [3.5: Wydajność i stabilność](#35-wydajność-i-stabilność)
+  - [4.0: Użyteczność i dostępność](#40-użyteczność-i-dostępność)
+  - [4.5: Awaria i regresja](#45-awaria-i-regresja)
+  - [5.0: Automatyzacja i ryzyko](#50-automatyzacja-i-ryzyko)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
+- [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
+
+
+## Szybki wybór ścieżki
+- **Mam działający demonstrator:** zacznij od [kryteriów i smoke testu](#30-kryteria-i-smoke-test).
+- **Nie mam fizycznego urządzenia:** wykorzystaj działającą symulację i opisz ograniczenia, zamiast instalować niesprawdzone sterowniki.
+- **Chcę sprawdzić komfort użytkownika:** [dobrowolne stanowiska komfortu XR](../../Documentation~/Reference/COMFORT_STUDIES.md).
+- **Chcę przetestować awarie:** [kontrolowany błąd i regresja](#45-awaria-i-regresja), bez ryzykownej ekspozycji uczestników.
+
+
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 7. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
 ## Przygotowanie

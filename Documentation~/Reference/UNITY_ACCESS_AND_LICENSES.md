@@ -1,5 +1,26 @@
 # Lab 01. Dostęp do Unity bez wspólnego hasła
 
+## Spis treści
+
+- [Nawigacja warunkowa](#nawigacja-warunkowa)
+- [Wybierz jedną z trzech ścieżek](#wybierz-jedną-z-trzech-ścieżek)
+- [Wariant A: komputer uczelniany, licencja Grant](#wariant-a-komputer-uczelniany-licencja-grant)
+- [Wariant B: własny komputer, bezpłatne Unity Personal](#wariant-b-własny-komputer-bezpłatne-unity-personal)
+- [Wariant C: darmowy Unity Student Plan (opcjonalnie)](#wariant-c-darmowy-unity-student-plan-opcjonalnie)
+- [Ścieżka awaryjna bez konta w trakcie zajęć](#ścieżka-awaryjna-bez-konta-w-trakcie-zajęć)
+- [Pytanie do samodzielnego rozważenia](#pytanie-do-samodzielnego-rozważenia)
+  - [Oficjalne źródła](#oficjalne-źródła)
+
+
+## Nawigacja warunkowa
+- **Jestem na uczelnianym PC i licencja już działa:** nie loguj się na wspólne konto; wróć do [pierwszego doświadczenia](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Komputer uczelniany nie ma jeszcze aktywnej licencji:** [Wariant A](#wariant-a-komputer-uczelniany-licencja-grant); zgłoś to administratorowi.
+- **Mam Unity ID i Personal:** pomiń rejestrację i przejdź do [pracy w Unity](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Nie mam Unity ID, pracuję na własnym komputerze:** [Wariant B](#wariant-b-własny-komputer-bezpłatne-unity-personal).
+- **Chcę skorzystać z darmowego planu studenckiego:** [Wariant C](#wariant-c-darmowy-unity-student-plan-opcjonalnie).
+- **Nie mam Unity Hub:** [instalacja zależna od systemu](OS_SETUP.md#unity-nie-jest-zainstalowane).
+
+
 **Cel:** rozpocząć pracę w Unity na uczelnianym lub własnym komputerze, nie tracąc zajęć na zakładanie kont. Konto Unity i uprawnienie do uruchomienia edytora to dwie różne rzeczy.
 
 ## Wybierz jedną z trzech ścieżek

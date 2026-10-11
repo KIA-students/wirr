@@ -1,5 +1,28 @@
 # Lab 02 — Interakcja i manipulacja XR
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Przygotowanie](#przygotowanie)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Chwyt, socket i ray](#30-chwyt-socket-i-ray)
+  - [3.5: UI i feedback](#35-ui-i-feedback)
+  - [4.0: Lokomocja](#40-lokomocja)
+  - [4.5: Scenariusz i diagnostyka](#45-scenariusz-i-diagnostyka)
+  - [5.0: Quest 3 i SSQ](#50-quest-3-i-ssq)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
+- [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
+
+
+## Szybki wybór ścieżki
+- **Nie mam gotowej sceny Lab 01:** [wróć do pierwszej sceny](../Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Mam działający projekt:** [od razu przejdź do interakcji](#zadania-krok-po-kroku).
+- **Brakuje XRI:** doinstaluj tylko pakiety używane w tym wariancie, zobacz [warunki startu](../../Documentation~/Reference/OS_SETUP.md#pakiety-xr-tylko-gdy-potrzebne).
+- **Chcę przejść do rzeczywistego sprzętu:** najpierw [uruchomienie urządzeń](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr), potem [Quest 3 i SSQ](#50-quest-3-i-ssq).
+- **Chcę poznać ograniczenia percepcji:** [Komfort XR](../../Documentation~/Reference/COMFORT_STUDIES.md).
+
+
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 2. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
 ## Przygotowanie

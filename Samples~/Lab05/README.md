@@ -1,5 +1,28 @@
 # Lab 05 — Optymalizacja modeli CAD
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Przygotowanie](#przygotowanie)
+- [Model referencyjny i pochodzenie](#model-referencyjny-i-pochodzenie)
+- [Szybki wybór formatu](#szybki-wybór-formatu)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Import i audyt CAD](#30-import-i-audyt-cad)
+  - [3.5: Triangulacja i LOD](#35-triangulacja-i-lod)
+  - [4.0: LOD i pomiar wydajności](#40-lod-i-pomiar-wydajności)
+  - [4.5: Materiały, draw calls i kolizje](#45-materiały-draw-calls-i-kolizje)
+  - [5.0: Pipeline finalny](#50-pipeline-finalny)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
+
+
+## Szybki wybór ścieżki
+- **Mam gotowy model FBX/OBJ:** [przejdź do importu i audytu](#30-import-i-audyt-cad).
+- **Mam tylko STEP:** [wybierz konwersję](#szybki-wybór-formatu), a potem [import CAD](#30-import-i-audyt-cad).
+- **Nie mam zainstalowanego programu CAD:** użyj dostarczonego modelu referencyjnego z [rozdziału o jego pochodzeniu](#model-referencyjny-i-pochodzenie).
+- **Brak działającego projektu Unity:** [powrót do pierwszej sceny](../Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+
+
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 5. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
 ## Przygotowanie

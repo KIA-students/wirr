@@ -1,5 +1,19 @@
 # Szybki start — WiRR Lab 1–7
 
+## Spis treści
+
+- [Co Pobrać na początku](#co-pobrać-na-początku)
+  - [Dla Każdego Studenta](#dla-każdego-studenta)
+- [Dla Prowadzącego](#dla-prowadzącego)
+- [Kroków na początku kursu](#kroków-na-początku-kursu)
+  - [Dla Studentów (1. dzień)](#dla-studentów-1-dzień)
+  - [Dla Prowadzącego (1. dzień)](#dla-prowadzącego-1-dzień)
+- [⏱️ Harmonogram (2–3 tygodnie)](#️-harmonogram-23-tygodnie)
+- [Cel: Co Student Musi Zrobić](#cel-co-student-musi-zrobić)
+- [Dokumentacja](#dokumentacja)
+- [Pytania?](#pytania)
+
+
 ## Co Pobrać na początku
 
 Wszystkie pliki znajdują się w: `/starter-files/`

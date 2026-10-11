@@ -1,5 +1,31 @@
 # Lab 01 — Środowisko XR i audyt urządzeń
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Konto Unity: nie potrzebujesz wspólnego loginu](#konto-unity-nie-potrzebujesz-wspólnego-loginu)
+- [Pierwsze 10 minut: eksperyment zamiast instalatora](#pierwsze-10-minut-eksperyment-zamiast-instalatora)
+- [Przygotowanie dalszych eksperymentów](#przygotowanie-dalszych-eksperymentów)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Pomiar bazowy PC](#30-pomiar-bazowy-pc)
+  - [3.5: Obciążenie CPU i GC](#35-obciążenie-cpu-i-gc)
+  - [4.0: Koszt renderowania](#40-koszt-renderowania)
+  - [4.5: Koszt fizyki](#45-koszt-fizyki)
+  - [5.0: Meta Quest 3](#50-meta-quest-3)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
+
+
+## Szybki wybór ścieżki
+- **Nie mam Unity Hub lub edytora:** przejdź do [instalacji Unity](../../Documentation~/Reference/OS_SETUP.md#unity-nie-jest-zainstalowane), a następnie wróć do [pierwszego eksperymentu](#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Unity jest już zainstalowane:** od razu wykonaj [pierwsze 10 minut](#pierwsze-10-minut-eksperyment-zamiast-instalatora). Nie reinstaluj.
+- **Nie mam konta/licencji Unity:** wybierz [odpowiedni wariant licencji](../../Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md#wybierz-jedną-z-trzech-ścieżek).
+- **Mam działające konto i licencję:** pomiń formalności i przejdź do [pierwszych 10 minut](#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Ubuntu:** [instrukcja instalacji i diagnostyka Ubuntu](../../Documentation~/Reference/OS_SETUP.md#ubuntu).
+- **Windows:** [instrukcja instalacji i diagnostyka Windows](../../Documentation~/Reference/OS_SETUP.md#windows).
+- **Projekt działa, chcę więcej:** [zaawansowane eksperymenty](#zadania-krok-po-kroku) albo [komfort XR](../../Documentation~/Reference/COMFORT_STUDIES.md).
+
+
 ## Konto Unity: nie potrzebujesz wspólnego loginu
 
 Na komputerze uczelnianym z **aktywną Unity Education Grant License** student może pracować bez indywidualnego logowania. Stanowisko musi wcześniej skonfigurować administrator. **Nie udostępniamy loginu i hasła wspólnego konta Unity.** Na własnym komputerze użyj swojego Unity ID i bezpłatnej licencji Personal; darmowy Student Plan jest rozszerzeniem opcjonalnym.

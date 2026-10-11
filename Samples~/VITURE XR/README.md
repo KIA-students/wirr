@@ -1,5 +1,24 @@
 # VITURE XR: przykładowe sceny WiRR
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Sceny](#sceny)
+  - [VITURE_01_StereoDepthLayers.unity](#viture_01_stereodepthlayersunity)
+  - [VITURE_02_StereoComfort.unity](#viture_02_stereocomfortunity)
+  - [VITURE_03_Immersive2D_Source.unity](#viture_03_immersive2d_sourceunity)
+- [Alternatywa: wygenerowanie scen w projekcie](#alternatywa-wygenerowanie-scen-w-projekcie)
+- [Szybka konfiguracja](#szybka-konfiguracja)
+- [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
+
+
+## Szybki wybór ścieżki
+- **Mam kompatybilne okulary i wyjście USB-C z wideo:** przejdź do [szybkiej konfiguracji](#szybka-konfiguracja), a następnie [StereoDepthLayers](#viture_01_stereodepthlayersunity).
+- **Nie mam okularów:** najpierw zobacz sceny w oknie Game lub na monitorze, porównaj wynik 2D i parę SBS. Nie twierdź, że testowałeś fizyczne okulary.
+- **Obraz jest czarny:** sprawdź wideo USB-C / DP Alt Mode i [system operacyjny](../../Documentation~/Reference/OS_SETUP.md).
+- **Chcę sprawdzić konflikty wskazówek głębi:** [komfort stereo i akomodacja](../../Documentation~/Reference/COMFORT_STUDIES.md#eksperyment-b-wirtualna-głębia-i-stała-odległość-optyczna).
+
+
 Sample zawiera trzy gotowe sceny Unity do prezentacji działania okularów VITURE XR.
 
 ## Sceny
