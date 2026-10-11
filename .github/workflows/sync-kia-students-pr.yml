@@ -3,8 +3,7 @@ name: Synchronizacja do KIA-students
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: '17 */6 * * *'
+  # Changes are exported after an actual main update; no periodic polling.
   workflow_dispatch:
 
 permissions:
