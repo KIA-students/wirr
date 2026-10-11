@@ -1,4 +1,10 @@
 <p align="center">
+<img src="icon.png" alt="WiRR" width="128">
+</p>
+
+</p>
+
+# WiRR Course Toolkit
 
 ## Spis treści
 
@@ -33,11 +39,6 @@
 - [Identyfikacja wizualna](#identyfikacja-wizualna)
 - [Log aktywności i prywatność](#log-aktywności-i-prywatność)
 - [Licencja](#licencja)
-
-  <img src="icon.png" alt="WiRR" width="128">
-</p>
-
-# WiRR Course Toolkit
 
 Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–8, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
 
