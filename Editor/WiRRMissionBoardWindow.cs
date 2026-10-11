@@ -84,6 +84,10 @@ namespace KIA.WiRR.Editor
 
             EditorGUILayout.Space(8);
             EditorGUILayout.LabelField("Punkty kontrolne", EditorStyles.boldLabel);
+            var preparedScenes = Blocks[blockIndex].Count(lab => ScenePaths(lab).Length > 0);
+            var progressRect = GUILayoutUtility.GetRect(18, 22, GUILayout.ExpandWidth(true));
+            EditorGUI.ProgressBar(progressRect, preparedScenes / (float)Blocks[blockIndex].Length,
+                $"Przygotowane sceny: {preparedScenes}/{Blocks[blockIndex].Length} (nie ocena)");
 
             foreach (var lab in Blocks[blockIndex])
             {
