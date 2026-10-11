@@ -1,5 +1,33 @@
 # Laboratorium 7 — Walidacja i Testy
 
+## Spis treści
+
+- [Najpierw wybierz ścieżkę](#najpierw-wybierz-ścieżkę)
+- [Co powinieneś pobrać](#co-powinieneś-pobrać)
+  - [Nowe pakiety (opcjonalnie)](#nowe-pakiety-opcjonalnie)
+  - [Pliki](#pliki)
+- [Checklist](#checklist)
+- [Start Lab 7](#start-lab-7)
+- [Checklista Smoke Testsów](#checklista-smoke-testsów)
+- [Pomiar wydajności (Profiler)](#pomiar-wydajności-profiler)
+- [Raport `evidence/lab07.md`](#raport-evidencelab07md)
+- [Identyfikacja pary](#identyfikacja-pary)
+- [Smoke Tests](#smoke-tests)
+- [Matryca Funkcjonalna](#matryca-funkcjonalna)
+- [Wydajność](#wydajność)
+- [Błąd Systemowy](#błąd-systemowy)
+- [Zaliczenie](#zaliczenie)
+- [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
+
+
+## Najpierw wybierz ścieżkę
+- **Mam działającą scenę z poprzedniego laboratorium:** [otwórz aktualne Lab 07](../../Samples~/Lab07/README.md#szybki-wybór-ścieżki) i pomiń powtórną instalację.
+- **Nie mam Unity / konta:** [system operacyjny](OS_SETUP.md#wybierz-aktualną-sytuację) lub [licencja](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- **Windows:** [uruchomienie Windows](OS_SETUP.md#windows); **Ubuntu:** [uruchomienie Ubuntu](OS_SETUP.md#ubuntu).
+- **Potrzebuję więcej szczegółów:** [pełny przewodnik Lab 07](../../Samples~/Lab07/README.md) zawiera spis treści i ścieżki wariantowe.
+- **Nie mam sprzętu XR:** rozpocznij od symulatora lub dostarczonego logu; nie instaluj wszystkiego w ciemno.
+
+
 ## Co powinieneś pobrać
 
 - ✓ Projekt z Lab 1–6 (wszystkie merged na main)

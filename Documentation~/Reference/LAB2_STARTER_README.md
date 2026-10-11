@@ -1,5 +1,29 @@
 # Laboratorium 2 — Interakcja i Lokomocja VR
 
+## Spis treści
+
+- [Najpierw wybierz ścieżkę](#najpierw-wybierz-ścieżkę)
+- [Co Powinieneś Pobrać](#co-powinieneś-pobrać)
+  - [Warunki wstępne](#warunki-wstępne)
+  - [Nowe pliki do pobrania](#nowe-pliki-do-pobrania)
+  - [Pakiety — bez zmian](#pakiety-bez-zmian)
+- [Checklist — Przed Lab 2](#checklist-przed-lab-2)
+- [Na Początku Lab 2](#na-początku-lab-2)
+- [Skrypty do pobrania](#skrypty-do-pobrania)
+  - [Lab02Trial.cs — Rejestrator czasów](#lab02trialcs-rejestrator-czasów)
+- [Dokumentacja](#dokumentacja)
+- [Timeline Lab 2](#timeline-lab-2)
+- [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
+
+
+## Najpierw wybierz ścieżkę
+- **Mam działającą scenę z poprzedniego laboratorium:** [otwórz aktualne Lab 02](../../Samples~/Lab02/README.md#szybki-wybór-ścieżki) i pomiń powtórną instalację.
+- **Nie mam Unity / konta:** [system operacyjny](OS_SETUP.md#wybierz-aktualną-sytuację) lub [licencja](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- **Windows:** [uruchomienie Windows](OS_SETUP.md#windows); **Ubuntu:** [uruchomienie Ubuntu](OS_SETUP.md#ubuntu).
+- **Potrzebuję więcej szczegółów:** [pełny przewodnik Lab 02](../../Samples~/Lab02/README.md) zawiera spis treści i ścieżki wariantowe.
+- **Nie mam sprzętu XR:** rozpocznij od symulatora lub dostarczonego logu; nie instaluj wszystkiego w ciemno.
+
+
 ## Co Powinieneś Pobrać
 
 ### Warunki wstępne

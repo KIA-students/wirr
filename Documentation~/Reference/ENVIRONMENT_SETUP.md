@@ -1,11 +1,26 @@
 # Przygotowanie środowiska WiRR
 
-Instrukcja referencyjna dla laboratoriów WiRR. Zalecanym systemem jest **Windows 11 64-bit**. Obsługiwanym wariantem alternatywnym jest **Ubuntu 22.04 lub 24.04 LTS 64-bit**.
+## Spis treści
+
+- [Zanim pobierzesz cokolwiek](#zanim-pobierzesz-cokolwiek)
+- [Wymagane składniki](#wymagane-składniki)
+- [Windows 11 64-bit](#windows-11-64-bit)
+- [Ubuntu 22.04 / 24.04 LTS 64-bit](#ubuntu-2204-2404-lts-64-bit)
+- [Ważne: C# 9 a komunikat o C# 10](#ważne-c-9-a-komunikat-o-c-10)
+  - [Jak naprawić](#jak-naprawić)
+- [Kontrola przed laboratorium](#kontrola-przed-laboratorium)
+
+
+Instrukcja referencyjna dla laboratoriów WiRR. Wybierz system: [Windows](OS_SETUP.md#windows) lub [Ubuntu](OS_SETUP.md#ubuntu). Oba są przewidziane dla podstawowych doświadczeń; sposób uruchamiania niektórych urządzeń XR różni się między systemami.
+
+## Zanim pobierzesz cokolwiek
+
+Jeśli Unity jest już zainstalowane, od razu otwórz [Lab 01](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora). Jeśli nie, użyj [OS_SETUP](OS_SETUP.md#unity-nie-jest-zainstalowane). Konto i licencję opisuje osobna [instrukcja](UNITY_ACCESS_AND_LICENSES.md). ROS 2, AR Foundation, XRI i Android Studio nie są niezbędne do pierwszej sceny URP.
 
 ## Wymagane składniki
 
 - Unity Hub;
-- najnowsza dostępna wersja **Unity 6 (6000.x)**;
+- **zatwierdzona dla kursu wersja Unity 6000.6.x**;
 - Android Build Support;
 - Android SDK & NDK Tools;
 - OpenJDK;

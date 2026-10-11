@@ -1,217 +1,36 @@
-# Indeks plików WiRR Lab 1–7
+# Indeks materiałów WiRR: cztery bloki, osiem laboratoriów
 
-## Struktura Pakietu
+## Spis treści
 
-```
-/mnt/user-data/outputs/
-│
-├── 📄 DOWNLOAD_SUMMARY.txt              ← CZYTAJ PIERWSZY
-├── 📄 Laboratorium_1_XR_Pełna_Instrukcja.docx
-├── 📄 Laboratorium_2_XR_Pełna_Instrukcja.docx
-├── 📄 Laboratorium_3_XR_Pełna_Instrukcja.docx
-├── 📄 Laboratorium_4_XR_Pełna_Instrukcja.docx
-├── 📄 Laboratorium_5_XR_Pełna_Instrukcja.docx
-├── 📄 Laboratorium_6_XR_Pełna_Instrukcja.docx
-├── 📄 Laboratorium_7_XR_Pełna_Instrukcja.docx
-│
-└── starter-files/
-    ├── 📄 QUICK_START.md                ← CZYTAJ DRUGIE
-    ├── 📄 REPOSITORY_SETUP.md
-    ├── 📄 BUILD_AND_DEPLOY.md
-    ├── 📄 XR_SHOWCASE.md
-    ├── 📄 MIXED_REALITY_SHOWCASE.md
-    ├── 📄 MIXED_REALITY_IMPLEMENTATION.md
-    ├── 📄 MOBILE_AR_SHOWCASE.md
-    ├── 📄 EXTRA_ASSETS.md
-    ├── 📄 MODEL_FORMATS_AND_CONVERSION.md
-    ├── 📄 INSTRUCTOR_GUIDE.md
-    ├── 📄 FAQ.md
-    ├── 📄 GRADING_MATRIX.md
-    ├── 📄 GLOSSARY.md
-    ├── 📄 INDEX.md                      ← JESTEŚ TUTAJ
-    │
-    ├── 📄 LAB1_STARTER_README.md
-    ├── 📄 LAB2_STARTER_README.md
-    ├── 📄 LAB3_STARTER_README.md
-    ├── 📄 LAB4_STARTER_README.md
-    ├── 📄 LAB5_STARTER_README.md
-    ├── 📄 LAB6_STARTER_README.md
-    ├── 📄 LAB7_STARTER_README.md
-    │
-    ├── 📄 evidence_template_lab01.md
-    ├── 📄 evidence_template_lab02.md
-    ├── 📄 evidence_template_lab03.md
-    ├── 📄 evidence_template_lab04.md
-    ├── 📄 evidence_template_lab05.md
-    ├── 📄 evidence_template_lab06.md
-    ├── 📄 evidence_template_lab07.md
-    │
-    └── cs-snippets/
-        ├── 📄 Lab01_PerformanceBenchmark.cs
-        ├── 📄 Lab02_Trial.cs
-        ├── 📄 Lab03_RegistrationError.cs
-        ├── 📄 Lab04_LightingController.cs
-        ├── 📄 Lab05_PerformanceBenchmark.cs
-        ├── 📄 Lab06_ROS2Manager.cs
-        ├── 📄 Lab06_RobotStateListener.cs
-        └── 📄 Lab07_TestRunner.cs
-```
+- [Jeśli dopiero zaczynasz](#jeśli-dopiero-zaczynasz)
+- [Cztery bloki laboratoryjne](#cztery-bloki-laboratoryjne)
+- [Rozszerzenia dobrowolne](#rozszerzenia-dobrowolne)
+- [Materiały archiwalne](#materiały-archiwalne)
 
----
 
-## Jak nawigować po materiałach
+**Jak czytać?** Wybierz laboratorium z tabeli, a potem użyj spisu treści i sekcji „Szybki wybór ścieżki”. Nie musisz powtarzać raz wykonanych instalacji.
 
-### Jeśli jesteś **STUDENTEM**:
+## Jeśli dopiero zaczynasz
+- [Mam lub nie mam zainstalowanego Unity: wybór systemu](OS_SETUP.md#wybierz-aktualną-sytuację).
+- [Mam lub nie mam konta Unity: licencje](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- [Pierwsze 10 minut bez instalowania XR](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- [Jak korzystać z wygodnych, krótkich doświadczeń komfortu VR](COMFORT_STUDIES.md).
+- [Wyzwanie techniczne: watchdog i maks. 10 prób](XR_SAFETY_WATCHDOG.md).
 
-1. **Przeczytaj najpierw:**
-   ```
-   QUICK_START.md                 (orientacja)
-   REPOSITORY_SETUP.md            (git workflow)
-   GLOSSARY.md                    (słownictwo)
-   ```
+## Cztery bloki laboratoryjne
 
-2. **Przed każdym Lab X:**
-   ```
-   LAB<X>_STARTER_README.md       (co pobrać, checklist)
-   Laboratorium_<X>_..docx        (pełna instrukcja — przeczytaj całą!)
-   evidence_template_lab0X.md     (do wklejenia w repo)
-   ```
+| Blok | Laboratoria i instrukcje | Koncepcja |
+|---|---|---|
+| I | [Lab 01](../../Samples~/Lab01/README.md) · [Lab 02](../../Samples~/Lab02/README.md) | Scena i interakcja VR |
+| II | [Lab 03](../../Samples~/Lab03/README.md) · [Lab 04](../../Samples~/Lab04/README.md) | AR, głębia i okluzja |
+| III | [Lab 05](../../Samples~/Lab05/README.md) · [Lab 06](../../Samples~/Lab06/README.md) | CAD, LOD i bliźniak |
+| IV | [Lab 07](../../Samples~/Lab07/README.md) · Lab 08, własny demonstrator w oknie Misje WiRR | Walidacja i prototyp |
 
-3. **Podczas Lab X:**
-   - Otwórz instrukcję .docx (główne źródło)
-   - Kopia szablonu raportu: `cp evidence_template_lab0X.md evidence/lab0X.md`
-   - Jeśli utkniesz: przeczytaj FAQ.md lub zapytaj prowadzącego
+## Rozszerzenia dobrowolne
+- [VITURE: stereo i Full SBS](../../Samples~/VITURE%20XR/README.md).
+- [Liga XR: nazwa grupy i misje poza zajęciami](../../competition/OPTIONAL_MISSIONS.md).
+- [Szybki start](QUICK_START.md), [budowanie na Android/Quest](BUILD_AND_DEPLOY.md), [ustawienia środowiska](ENVIRONMENT_SETUP.md).
+- [Słownik XR](GLOSSARY.md), [FAQ](FAQ.md), [formaty CAD](MODEL_FORMATS_AND_CONVERSION.md).
 
-4. **Po Lab X:**
-   - Wypełnij raport `evidence/lab0X.md`
-   - Git push
-   - Czekaj na recenzję prowadzącego
-
-### Jeśli jesteś **PROWADZĄCYM**:
-
-1. **Przeczytaj najpierw:**
-   ```
-   INSTRUCTOR_GUIDE.md            (ogólna strategia)
-   GRADING_MATRIX.md              (jak oceniać szybko)
-   FAQ.md                         (typowe problemy)
-   GLOSSARY.md                    (by rozumieć studentów)
-   ```
-
-2. **Przed każdym Lab X:**
-   ```
-   Laboratorium_<X>_..docx        (przeczytaj całą instrukcję)
-   GRADING_MATRIX.md → sekcja Lab X (przygotuj checklist)
-   ```
-
-3. **Podczas Lab X:**
-   - Prowadź zajęcia zgodnie z .docx
-   - Oceniaj wg GRADING_MATRIX.md (max 90 sekund/parę)
-   - Znotuj oceny
-   - Archiwizuj raport `evidence/lab0X.md` każdej pary
-
-4. **Po Lab X:**
-   - Merge'uj gałęzie do main (Quality Gate)
-   - Ustaw nową gałąź startową dla Lab X+1
-   - Wyślij feedb feedback
-
-### Szybkie Odnośniki:
-
-**Dla studentów:**
-- Pytanie techniczne? → FAQ.md
-- Nie wiem co to znaczy? → GLOSSARY.md
-- Jak Git? → REPOSITORY_SETUP.md
-- Jak zbudować aplikację PC/Android/Quest? → BUILD_AND_DEPLOY.md
-- Jak działają demonstratory XR? → XR_SHOWCASE.md
-- Jak połączyć kamerę, dłonie, ludzi i otoczenie z warstwą wirtualną? → MIXED_REALITY_SHOWCASE.md
-- Jak samodzielnie zaimplementować i rozbudować elementy MR? → MIXED_REALITY_IMPLEMENTATION.md
-- Jak używać gotowych demonstratorów AR na telefonie? → MOBILE_AR_SHOWCASE.md
-- Do czego służą dodatkowe prefaby, materiały i HDRI? → EXTRA_ASSETS.md
-- Jak rozróżniać i konwertować URDF, MJCF, USD, STEP, STL, OBJ i FBX? → MODEL_FORMATS_AND_CONVERSION.md
-- Jak oceniam? → GRADING_MATRIX.md
-
-**Dla prowadzącego:**
-- Jak prowadzić Lab X? → Laboratorium_X..docx
-- Jak ocenić szybko? → GRADING_MATRIX.md + max 90 s
-- Student ma problem? → INSTRUCTOR_GUIDE.md (troubleshooting)
-- Jak zaplanować kurs? → INSTRUCTOR_GUIDE.md (timeline)
-
----
-
-## Wersje plików
-
-Wszystkie pliki: **Wersja 2.0, gotowa do wdrożenia, 13 września 2026 r.**
-
-| Plik | Typ | Rozmiar | Przeznaczenie |
-|------|-----|---------|---------------|
-| .docx | Instrukcje | ~45–58 KB każdy | Studenci + Prowadzący (czytaj na zajęciach) |
-| README.md | Szybki start | ~2–3 KB | Studenci (czytaj PRZED zajęciami) |
-| evidence_template.md | Raport | ~2 KB | Studenci (kopuj do repo) |
-| cs-snippets/*.cs | Kod | ~1–2 KB | Studenci (wklej do Unity) |
-| GUIDE.md / FAQ.md / MATRIX.md | Dokumentacja | ~5–10 KB | Prowadzący (przygotowanie) |
-| GLOSSARY.md | Słownik | ~8 KB | Wszyscy (gdy nie rozumiesz terminu) |
-
----
-
-## Ścieżka uczenia (zależności między labami)
-
-```
-Lab 1 (Fundament: XR Origin, Profiler)
-    ↓ (zależy od)
-Lab 2 (Interakcja: Chwyt, UI)
-    ↓ (niezależy od 1–2, ale):
-Lab 3 (AR: Rejestracja)
-    ↓
-Lab 4 (AR: Mieszanie realności)
-    ↓
-Lab 5 (Optymalizacja CAD)  ← Niezależy od Lab 3–4, ale razem z Lab 6
-    ↓
-Lab 6 (ROS 2: Bliźniak cyfrowy)
-    ↓ (integruje wszystkie)
-Lab 7 (Walidacja: Smoke + Functional + Performance)
-    ↓
-Zaliczenie kursu
-```
-
-**Legenda:**
-- Lab 1–2: VR (Quest 3)
-- Lab 3–4: AR (Android)
-- Lab 5–6: Mixed
-- Lab 7: Wszystko razem
-
----
-
-## Checklist pobierania
-
-### Dla Studenta
-
-- [ ] Pobierz QUICK_START.md
-- [ ] Pobierz REPOSITORY_SETUP.md
-- [ ] Pobierz GLOSSARY.md
-- [ ] Pobierz LAB1_STARTER_README.md
-- [ ] Pobierz Laboratorium_1_..docx
-- [ ] Pobierz evidence_template_lab01.md
-- [ ] (Powielaj dla Lab 2–7)
-
-### Dla Prowadzącego
-
-- [ ] Pobierz INSTRUCTOR_GUIDE.md
-- [ ] Pobierz GRADING_MATRIX.md
-- [ ] Pobierz FAQ.md (dla wiedzy)
-- [ ] Pobierz wszystkie Laboratorium_*.docx
-- [ ] Przygotuj checklist oceny (print!)
-- [ ] (Opcjonalnie) GLOSSARY.md dla zrozumienia studentów
-
----
-
-## Wsparcie
-
-- **Błąd w pliku?** → Kontakt z prowadzącym
-- **Nie wiem gdzie znaleźć plik?** → Ten INDEX.md
-- **Pytanie techniczne?** → FAQ.md
-- **Nie rozumiem terminu?** → GLOSSARY.md
-
----
-
-**Wersja:** 2.0 • 13 września 2026 r.  
-**Data generacji:** 8 września 2026 r.
-
+## Materiały archiwalne
+Dawne szablony i pliki Lab 1–7 pozostają w repozytorium, ale ich listy zależności, wersje Unity i schemat wielu raportów mogą być nieaktualne. W razie sprzeczności pierwszeństwo mają aktualne rozdziały instrukcji Samples oraz wymagania prowadzącego.

@@ -8,11 +8,18 @@
 - [Kroków na początku kursu](#kroków-na-początku-kursu)
   - [Dla Studentów (1. dzień)](#dla-studentów-1-dzień)
   - [Dla Prowadzącego (1. dzień)](#dla-prowadzącego-1-dzień)
-- [⏱️ Harmonogram (2–3 tygodnie)](#️-harmonogram-23-tygodnie)
+- [⏱️ Harmonogram (cztery bloki laboratoryjne)](#️-harmonogram-23-tygodnie)
 - [Cel: Co Student Musi Zrobić](#cel-co-student-musi-zrobić)
 - [Dokumentacja](#dokumentacja)
 - [Pytania?](#pytania)
 
+
+## Skocz do właściwej ścieżki
+- Jeśli **Unity nie jest zainstalowane**, [przejdź do instalacji](OS_SETUP.md#unity-nie-jest-zainstalowane).
+- Jeśli **Unity działa**, [rozpocznij Lab 01](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- Jeśli **nie masz konta/licencji**, wybierz [procedurę Unity ID](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- Jeśli używasz **Ubuntu**, [skocz do Ubuntu](OS_SETUP.md#ubuntu); jeśli **Windows**, [tutaj](OS_SETUP.md#windows).
+- Jeśli chcesz tylko wykonać laboratorium, nie wczytuj całej archiwalnej listy zadań i pakietów; [indeks nowego kursu](INDEX.md).
 
 ## Co Pobrać na początku
 

@@ -1,5 +1,25 @@
 # Laboratorium 4 — Mieszanie Rzeczywistości
 
+## Spis treści
+
+- [Najpierw wybierz ścieżkę](#najpierw-wybierz-ścieżkę)
+- [Co powinieneś pobrać](#co-powinieneś-pobrać)
+  - [Nowe komponenty](#nowe-komponenty)
+  - [Pliki](#pliki)
+- [Checklist](#checklist)
+- [Start Lab 4](#start-lab-4)
+- [Kod](#kod)
+  - [LightingController.cs](#lightingcontrollercs)
+
+
+## Najpierw wybierz ścieżkę
+- **Mam działającą scenę z poprzedniego laboratorium:** [otwórz aktualne Lab 04](../../Samples~/Lab04/README.md#szybki-wybór-ścieżki) i pomiń powtórną instalację.
+- **Nie mam Unity / konta:** [system operacyjny](OS_SETUP.md#wybierz-aktualną-sytuację) lub [licencja](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- **Windows:** [uruchomienie Windows](OS_SETUP.md#windows); **Ubuntu:** [uruchomienie Ubuntu](OS_SETUP.md#ubuntu).
+- **Potrzebuję więcej szczegółów:** [pełny przewodnik Lab 04](../../Samples~/Lab04/README.md) zawiera spis treści i ścieżki wariantowe.
+- **Nie mam sprzętu XR:** rozpocznij od symulatora lub dostarczonego logu; nie instaluj wszystkiego w ciemno.
+
+
 ## Co powinieneś pobrać
 
 - ✓ Projekt z Lab 3 (Android AR)
