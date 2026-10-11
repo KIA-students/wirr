@@ -1,5 +1,13 @@
 # Liga XR: dwie grupy, cztery rundy
 
+## Spis treści
+
+- [Punktacja za blok](#punktacja-za-blok)
+- [Aktualizacja wyniku](#aktualizacja-wyniku)
+- [Własne nazwy i cztery dodatkowe misje](#własne-nazwy-i-cztery-dodatkowe-misje)
+- [Dodatkowa misja VR z watchdogiem](#dodatkowa-misja-vr-z-watchdogiem)
+
+
 Jedynym źródłem prawdy o punktach po publikacji jest competition/scoreboard.json w KIA-students/wirr. Wartość null oznacza brak oceny, nie zero punktów. W momencie utworzenia ligi żadna grupa nie prowadzi.
 
 ## Punktacja za blok
@@ -32,3 +40,7 @@ Zakładka na stronie kursowej: https://kia-students.github.io/wirr/#liga
 Nazwę drużyny ustalają studenci, przy użyciu generatora na stronie kursu lub własnego pomysłu. Prowadzący zatwierdza nazwę wywołaniem `python competition/set_team_name.py --group G1 --name "Kwantowe Kapibary"`. Żaden login nie jest potrzebny do losowania propozycji.
 
 Zasady dobrowolnych misji z limitem **8 punktów na grupę poza zajęciami** zawiera [OPTIONAL_MISSIONS.md](OPTIONAL_MISSIONS.md). Jeden zatwierdzony rezultat z kodem `xr-optics`, `robot-failsafe`, `accessible-hud` lub `ar-measurement` daje 1–2 punkty na grupę, nie na osobę. Obsługuje je lokalny `competition/add_sidequest.py`. Wynik grupowy nie wpływa na indywidualną ocenę.
+
+## Dodatkowa misja VR z watchdogiem
+
+Kod bonusowy **xr-optics** obejmuje [zadanie Safe XR Watchdog](../Documentation~/Reference/XR_SAFETY_WATCHDOG.md), z lokalnym limitem 10 prób. Publiczny ranking przyznaje punkty dopiero po zatwierdzeniu jakości rozwiązania przez prowadzącego. Nie publikuje raportów o objawach ani nie punktuje narażania uczestników na dyskomfort.

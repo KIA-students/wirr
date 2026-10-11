@@ -27,7 +27,7 @@ VR angażuje jednocześnie widzenie, zmysł równowagi i kontrolę ruchów oczu.
 
 ## Gotowe programy i prefaby
 
-W Unity wybierz **WiRR → Komfort XR → Utwórz 2 prefaby i stanowiska obserwacyjne**. Generator tworzy w folderze Assets/WiRR/Common/Prefabs/ComfortStudy:
+W Unity wybierz **WiRR → Komfort XR → Utwórz 3 prefaby: obserwacja i watchdog**. Generator tworzy w folderze Assets/WiRR/Common/Prefabs/ComfortStudy:
 
 - **WiRR_Comfort_OpticFlow.prefab**, z komponentem WiRRVisualMotionStudy. Umożliwia jeden łagodny, ograniczony do 8 s ruch **pasków referencyjnych**, a nie kamery XR.
 - **WiRR_Comfort_DepthCues.prefab**, z komponentem WiRRDepthCueStudy. Umożliwia jedno płynne porównanie wirtualnych odległości obiektu, ograniczone do 10 s, **bez zmiany IPD, projekcji kamery i optyki gogli**.
@@ -63,6 +63,14 @@ Prefaby zawierają prawdziwe obiekty Unity i programy C#. Generowane są lokalni
 3. Zapisz, które wskazówki głębi działają w obu wariantach: perspektywa, wielkość kątowa, zasłanianie. Która z nich wynika z różnicy obrazu pomiędzy lewym i prawym okiem?
 4. Wyjaśnij na schemacie, dlaczego para kamer stereo o stałym rozstawie nie zmienia odległości ogniskowania fizycznego wyświetlacza. **Nie twierdź, że Unity mierzy akomodację oczu**.
 5. W wariancie VITURE sprawdź najpierw poprawny tryb 2D i Full SBS. Nie zwiększaj samowolnie rozstawu kamer lub ekstremalnej dysparycji w celu wywołania dwojenia obrazu.
+
+## Techniczne wyzwanie: automatyczny STOP i limit 10 prób
+
+Do sceny dodano trzeci prefab **WiRR_Comfort_SafetyWatchdog**, który obserwuje wyłącznie techniczne sygnały XR: utratę obecności (jeśli urządzenie wspiera userPresence), utratę śledzenia, skok położenia i utratę fokusu aplikacji. Skok nie oznacza upadku; brak czujnika nie oznacza zdjęcia gogli.
+
+Na PC przetestuj syntetyczne przyciski symulujące te zdarzenia. Limit wynosi **10 prób lokalnych na grupę i stanowisko**. Wynikiem jest raport JSON o rodzaju zatrzymania, nie pomiar objawów lub odporności uczestnika. W Lidze XR misja **xr-optics** może otrzymać punkty za prawidłowy STOP i wyjaśnienie ograniczeń, nigdy za wywoływanie dolegliwości.
+
+Dokładne kroki, ograniczenia sensorów i powiązanie z raportem: [Wyzwanie Bezpieczny operator VR](XR_SAFETY_WATCHDOG.md).
 
 ## Raport: jedno odkrycie zamiast testu odporności
 

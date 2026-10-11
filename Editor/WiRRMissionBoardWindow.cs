@@ -1,4 +1,8 @@
 using System;
+
+## Spis treści
+
+
 using System.IO;
 using System.Globalization;
 using System.Linq;
@@ -118,7 +122,7 @@ namespace KIA.WiRR.Editor
                         WiRRSceneTools.OpenLabScene(Blocks[blockIndex][1]);
                 }
             }
-            if (GUILayout.Button("Komfort XR: wygeneruj dwa prefaby obserwacyjne"))
+            if (GUILayout.Button("Komfort XR: 3 prefaby i watchdog (10 prób)"))
                 WiRRComfortStudyTools.CreateStations();
             if (GUILayout.Button("Liga XR: aktualny ranking grup"))
                 Application.OpenURL("https://kia-students.github.io/wirr/#liga");

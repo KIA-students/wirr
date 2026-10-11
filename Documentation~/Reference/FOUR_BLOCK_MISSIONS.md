@@ -1,5 +1,15 @@
 # Misje WiRR: cztery bloki i lokalna karta sesji (wersja robocza)
 
+## Spis treści
+
+  - [Start bez zbędnej konfiguracji](#start-bez-zbędnej-konfiguracji)
+  - [Co jest automatyczne](#co-jest-automatyczne)
+  - [Czego pakiet nie udaje](#czego-pakiet-nie-udaje)
+- [Przed wydaniem produkcyjnym](#przed-wydaniem-produkcyjnym)
+- [Konto Unity, opcjonalne misje i komfort XR](#konto-unity-opcjonalne-misje-i-komfort-xr)
+- [Ścieżki warunkowe i doświadczenia komfortu](#ścieżki-warunkowe-i-doświadczenia-komfortu)
+
+
 Nowe okno **WiRR → Misje i odkrycia (4 bloki)** to uproszczony pulpit pracy z czterema blokami (Lab 01–02, 03–04, 05–06, 07–08). Jest dodatkiem do istniejącego **WiRR Reports**, a nie nowym automatycznym systemem oceniania.
 
 ### Start bez zbędnej konfiguracji
@@ -38,3 +48,7 @@ Do czasu tego testu jest to funkcja **gałęzi rozwojowej**, nie potwierdzona fu
 - Generator zabawnych nazw w oknie **Misje i odkrycia** jest lokalny; propozycje zatwierdza prowadzący. Także strona WiRR ma generator i cztery dodatkowe, dobrowolne wyzwania z limitem **+8 punktów na grupę**, niezależne od ocen indywidualnych.
 - **WiRR → Komfort XR** generuje prefab bardzo łagodnego ruchu odniesienia i prefab obserwacji wirtualnej głębi; oba są uruchamiane wyłącznie dobrowolnie i samoczynnie kończą próbę. Szczegóły: **COMFORT_STUDIES.md**. Nie należy wywoływać ani porównywać objawów zdrowotnych studentów.
 - Materiały i kod pozostają w gałęzi roboczej aż do testu Unity. Zmiany w rankingach mogą być synchronizowane po zatwierdzeniu; stan wyników repozytorium studentów nie może być zastąpiony kopią roboczą.
+
+## Ścieżki warunkowe i doświadczenia komfortu
+
+Konto/licencję sprawdź przez [instrukcję Unity](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa); instalację rozdzielają [Windows i Ubuntu](OS_SETUP.md#wybierz-aktualną-sytuację). WiRR generuje [trzy prefaby komfortu i bezpieczeństwa](COMFORT_STUDIES.md), w tym [dziesięciopróbowy watchdog](XR_SAFETY_WATCHDOG.md). Żadne z tych zadań nie wymaga wywoływania objawów u uczestnika.

@@ -105,6 +105,10 @@ Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfiguruj�
 
 ## Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia
 
-Wybierz **WiRR → Komfort XR → Utwórz 2 prefaby i stanowiska obserwacyjne**. Powstaną prawdziwe prefaby Unity z łagodnym ruchem wskazówek wizualnych (maks. 8 s) i krótkim porównaniem wirtualnej głębi (maks. 10 s). Ich zadaniem nie jest wywoływanie nudności, lecz nauka projektowania komfortowych scen.
+Wybierz **WiRR → Komfort XR → Utwórz 3 prefaby: obserwacja i watchdog**. Powstaną prawdziwe prefaby Unity z łagodnym ruchem wskazówek wizualnych (maks. 8 s) i krótkim porównaniem wirtualnej głębi (maks. 10 s). Ich zadaniem nie jest wywoływanie nudności, lecz nauka projektowania komfortowych scen.
 
 Instrukcja pełna: **Documentation~/Reference/COMFORT_STUDIES.md**. Przy pracy w goglach potrzebny jest świadomy ochotnik, osoba obserwująca i możliwość natychmiastowego przerwania. Reszta grupy może wykonać równoważną analizę na monitorze. **Nie przyznaje się punktów za fizjologiczną odporność ani wystąpienie objawów.**
+
+## Wyzwanie dodatkowe: operator potrafi bezpiecznie przerwać
+
+Po zrealizowaniu podstawowego doświadczenia sprawdź [automatyczną detekcję zdjęcia gogli, utraty śledzenia i skoku danych](../../Documentation~/Reference/XR_SAFETY_WATCHDOG.md). Możesz wykonać do 10 krótkich prób technicznych, także wyłącznie na PC. **Nie wykonuj nagłych ruchów głową dla punktów.** Punktuje się poprawność prototypu i interpretacji, a nie podatność na objawy.

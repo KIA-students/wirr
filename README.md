@@ -1,10 +1,56 @@
 <p align="center">
+
+## Spis treści
+
+- [Szybka nawigacja po instrukcjach](#szybka-nawigacja-po-instrukcjach)
+- [Zanim utworzysz projekt: konto i licencja Unity](#zanim-utworzysz-projekt-konto-i-licencja-unity)
+- [Nowa ścieżka: misje XR i karta sesji](#nowa-ścieżka-misje-xr-i-karta-sesji)
+- [Dwa gotowe, krótkie stanowiska do nauki o komforcie XR](#dwa-gotowe-krótkie-stanowiska-do-nauki-o-komforcie-xr)
+- [Liga drużyn i misje poza zajęciami](#liga-drużyn-i-misje-poza-zajęciami)
+- [Repozytorium kursu](#repozytorium-kursu)
+- [Zasada działania](#zasada-działania)
+- [Instalacja](#instalacja)
+  - [Zalecane środowisko przed pierwszym laboratorium](#zalecane-środowisko-przed-pierwszym-laboratorium)
+- [Struktura repozytorium](#struktura-repozytorium)
+- [Laboratoria i zależności](#laboratoria-i-zależności)
+- [Prefaby dydaktyczne](#prefaby-dydaktyczne)
+  - [Teksturowane prefaby Grid](#teksturowane-prefaby-grid)
+- [Opcjonalne laboratorium materiałów](#opcjonalne-laboratorium-materiałów)
+- [Ruch, fizyka i dźwięk](#ruch-fizyka-i-dźwięk)
+- [XR Showcase — efekty charakterystyczne dla XR](#xr-showcase--efekty-charakterystyczne-dla-xr)
+- [Mixed Reality Showcase — rzeczywistość jako część sceny](#mixed-reality-showcase--rzeczywistość-jako-część-sceny)
+- [Mobile AR Showcase — AR na smartfonie](#mobile-ar-showcase--ar-na-smartfonie)
+- [Dodatkowy model Unitree G1 EDU](#dodatkowy-model-unitree-g1-edu)
+- [HDRI i skybox](#hdri-i-skybox)
+- [VITURE XR: Full SBS i Immersive 3D](#viture-xr-full-sbs-i-immersive-3d)
+- [Budowanie aplikacji na PC, Android i Quest 3](#budowanie-aplikacji-na-pc-android-i-quest-3)
+- [Strona kursu (GitHub Pages)](#strona-kursu-github-pages)
+- [WebSim](#websim)
+- [Raportowanie](#raportowanie)
+- [Wysyłanie raportu](#wysyłanie-raportu)
+- [Walidacja CI](#walidacja-ci)
+- [Zalecany przebieg pracy studenta](#zalecany-przebieg-pracy-studenta)
+- [Identyfikacja wizualna](#identyfikacja-wizualna)
+- [Log aktywności i prywatność](#log-aktywności-i-prywatność)
+- [Licencja](#licencja)
+
   <img src="icon.png" alt="WiRR" width="128">
 </p>
 
 # WiRR Course Toolkit
 
 Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
+
+## Szybka nawigacja po instrukcjach
+
+- **Nie mam zainstalowanego Unity:** [Windows lub Ubuntu, krok po kroku](Documentation~/Reference/OS_SETUP.md#unity-nie-jest-zainstalowane).
+- **Mam już Unity:** [pierwsze 10 minut Lab 01](Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Nie mam konta Unity:** [instrukcja kont i licencji](Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- **Mam konto i aktywną licencję:** [przejdź bezpośrednio do laboratorium](Documentation~/Reference/INDEX.md#cztery-bloki-laboratoryjne).
+- **Pracuję na Ubuntu:** [Ubuntu](Documentation~/Reference/OS_SETUP.md#ubuntu); **Windows:** [Windows](Documentation~/Reference/OS_SETUP.md#windows).
+- **Potrzebuję Quest/AR/VITURE:** [systemy i urządzenia](Documentation~/Reference/OS_SETUP.md#urzadzenia-xr).
+- **Chcę studiować komfort VR:** [dwa krótkie doświadczenia](Documentation~/Reference/COMFORT_STUDIES.md) i [watchdog do 10 prób](Documentation~/Reference/XR_SAFETY_WATCHDOG.md).
+- **Szukam innego laboratorium:** [pełny spis dokumentów](Documentation~/Reference/INDEX.md).
 
 ## Zanim utworzysz projekt: konto i licencja Unity
 

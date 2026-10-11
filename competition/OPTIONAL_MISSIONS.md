@@ -1,5 +1,13 @@
 # Liga XR: nazwa drużyny i misje poza zajęciami
 
+## Spis treści
+
+- [Nazwij drużynę](#nazwij-drużynę)
+- [Cztery misje dodatkowe poza zajęciami](#cztery-misje-dodatkowe-poza-zajęciami)
+- [Zasada fair play](#zasada-fair-play)
+- [Wyzwanie bezpiecznego operatora: 10 prób](#wyzwanie-bezpiecznego-operatora-10-prób)
+
+
 **Ligę tworzą dwie grupy laboratoryjne.** Wspólne doświadczenia są najważniejsze; nie trzeba uczestniczyć w dodatkowej rywalizacji, aby zaliczyć laboratoria.
 
 ## Nazwij drużynę
@@ -18,7 +26,7 @@ Każda misja jest **dobrowolna**, można ją zrobić zdalnie na zwykłym kompute
 
 | Kod | Przygoda | Dowód w projekcie | Maksimum |
 |---|---|---|---:|
-| \`xr-optics\` | **Optyczny detektyw:** rysunek lub demonstrator wyjaśniający wergencję i akomodację bez wywoływania bólu | 1 grafika, krótki opis, rozróżnienie symulacji i prawdziwego pomiaru | 2 |
+| \`xr-optics\` | **Bezpieczny operator VR:** demonstrator wergencji i akomodacji lub watchdog poprawnie zatrzymujący próbę po sygnale utraty trackingu, fokusu albo zdjęcia gogli | Raport techniczny i wyjaśnienie ograniczeń czujnika; do 10 prób testowych lokalnie, bez wywoływania objawów | 2 |
 | \`robot-failsafe\` | **Robot ma prawo milczeć:** wskaźnik LIVE/STALE z nagranego logu ROS | minimalny projekt lub test i wyjaśnienie niezawodności | 2 |
 | \`accessible-hud\` | **HUD dla każdego:** dostępny interfejs z dużą czcionką i alternatywą dla koloru | dwa warianty porównawcze i jedno uzasadnienie | 2 |
 | \`ar-measurement\` | **Mierz, nie zgaduj:** porównanie linijki z AR albo z wynikami referencyjnymi | kilka pomiarów, analiza błędu i ograniczenia | 2 |
@@ -34,3 +42,7 @@ Ta komenda jest **przykładem składni, nie przyznaniem punktów**. Aktualizacja
 ## Zasada fair play
 
 Punkty oznaczają jakość odkrycia, nie odporność na nudności, liczbę godzin w goglach, liczbę commitów ani posiadanie drogich urządzeń. Wyniki są grupowe, a indywidualne zaliczenie od ligi niezależne.
+
+## Wyzwanie bezpiecznego operatora: 10 prób
+
+W ramach **xr-optics** studenci mogą wykonać [techniczną misję Watchdog](../Documentation~/Reference/XR_SAFETY_WATCHDOG.md): na prawdziwym albo symulowanym wejściu XR sprawdzić wykrycie zdjęcia gogli, braku trackingu i nagłego skoku pozycji. **Duży skok nie jest dowodem utraty równowagi.** Licznik dopuszcza maksymalnie 10 prób na stanowisko i grupę. Punkty są za bezpieczny STOP i analizę błędów, a nie czas do wystąpienia nudności.
