@@ -1,12 +1,9 @@
 name: WebSim smoke test
 
 on:
-  pull_request:
-    paths:
-      - 'WebSim~/src/**'
-      - 'WebSim~/compose.yaml'
-      - 'WebSim~/Dockerfile'
-      - '.github/workflows/websim-smoke.yml'
+  # Expensive Docker/ROS test runs on backend changes to main or manually,
+  # not on every new commit in a teaching-materials pull request.
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
