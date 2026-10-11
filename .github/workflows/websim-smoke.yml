@@ -3,7 +3,10 @@ name: WebSim smoke test
 on:
   pull_request:
     paths:
-      - 'WebSim~/**'
+      - 'WebSim~/src/**'
+      - 'WebSim~/compose.yaml'
+      - 'WebSim~/Dockerfile'
+      - 'WebSim~/requirements.txt'
       - '.github/workflows/websim-smoke.yml'
   push:
     branches: [main]
