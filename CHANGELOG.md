@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased (ścieżka czterech bloków, 2026-10-11)
+
+- Dodano lokalne okno **WiRR → Misje i odkrycia (4 bloki)** z automatycznym wykrywaniem scen i lokalnych eksportów JSON.
+- Karta sesji Markdown zawiera metadane projektu i istniejące wyniki, ale nie wykonuje nowych pomiarów ani nie wystawia oceny.
+- Raport działa offline i nie wywołuje workflow GitHub Actions. Dodano wyjaśnienie granic automatyzacji i obsługi Lab 08.
+- Zaktualizowano opis ścieżki Ubuntu oraz stanowiska ROS 2. Wymaga testu kompilacji w Unity przed wydaniem produkcyjnym.
+
 ## 1.0.6 (2026-10-06)
 
 - dodano lekką gałąź instalacyjną `upm` przeznaczoną dla Unity Package Manager;

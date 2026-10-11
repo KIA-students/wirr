@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using KIA.WiRR;
@@ -202,7 +203,8 @@ namespace KIA.WiRR.Editor
                             writer.AppendLine("- Eksport JSON: istnieje (lokalny, bez wysyłki)");
                             writer.AppendLine($"- Zdarzenia Unity: {document.activitySummary?.eventCount ?? 0}");
                             writer.AppendLine($"- Sesje Play Mode: {document.activitySummary?.playModeSessions ?? 0}");
-                            writer.AppendLine($"- Czas Play Mode [s]: {document.activitySummary?.playModeSeconds ?? 0:F1} (informacyjny, nie ocena)");
+                            var playSeconds = document.activitySummary?.playModeSeconds ?? 0.0;
+                            writer.AppendLine("- Czas Play Mode [s]: " + playSeconds.ToString("F1", CultureInfo.InvariantCulture) + " (informacyjny, nie ocena)");
                             var evidence = document.answers == null
                                 ? Array.Empty<WiRRReportValue>()
                                 : document.answers.Where(x => x != null && x.key != null

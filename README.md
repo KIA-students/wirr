@@ -6,6 +6,12 @@
 
 Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
 
+## Nowa ścieżka: misje XR i karta sesji
+
+W gałęzi rozwojowej dodano okno **WiRR → Misje i odkrycia (4 bloki)**. Automatycznie sprawdza obecność zapisanych scen Lab 01–08, odnajduje lokalne eksporty JSON WiRR Reports dla Lab 01–07 i przygotowuje **jedną kartę Markdown na blok**. Przenosi do niej wyłącznie zarejestrowane już wartości, metadane Unity i liczniki aktywności. Student sam wpisuje tylko **jedno odkrycie, jedną diagnozę i jeden pomysł nowego zastosowania**. Raport zapisuje się lokalnie, bez wysyłania danych do GitHub i bez uruchamiania GitHub Actions.
+
+**Uwaga:** Lab 08 jest nową sceną integracyjną, nie istnieje jeszcze w dotychczasowym formularzu JSON. Pulpit uczciwie to sygnalizuje. Nie traktuj istnienia sceny i eksportu jako automatycznego dowodu pracy na prawdziwym sprzęcie ani jako automatycznej oceny. Instrukcja: [FOUR_BLOCK_MISSIONS](Documentation~/Reference/FOUR_BLOCK_MISSIONS.md).
+
 ## Repozytorium kursu
 
 Publiczne repozytorium kursu znajduje się pod adresem [KIA-students/wirr](https://github.com/KIA-students/wirr). To z niego studenci instalują pakiet przez Unity Package Manager i do niego odnoszą się materiały kursowe.
@@ -52,12 +58,12 @@ Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#main` wskazuje
 
 ### Zalecane środowisko przed pierwszym laboratorium
 
-Środowisko referencyjne kursu to **Windows 11 64-bit**. W Unity Hub dla najnowszą dostępną wersję **Unity 6 (6000.x)** należy doinstalować:
+Środowisko referencyjne kursu to **Windows 11 64-bit lub wspierane Ubuntu 22.04/24.04 x64**. Na Ubuntu ścieżka Quest to zazwyczaj Android APK uruchamiana na urządzeniu, a nie PC VR przez Meta Quest Link. W Unity Hub dla **wersji Unity 6000.6.x zatwierdzonej dla kursu** należy doinstalować:
 - **Android Build Support**;
 - **Android SDK & NDK Tools**;
 - **OpenJDK**.
 
-Te moduły są wymagane do budowania na Androida i Meta Quest 3. Do pracy z C# zalecane jest **Visual Studio 2022 Community** z workloadem **Game development with Unity** albo równoważne IDE. **Android Studio** jest zalecane do diagnostyki Androida, ADB, SDK Manager i Logcat, ale nie jest wymagane do samego buildu Unity, jeśli używane są narzędzia Android dostarczone przez Unity Hub. Przed Laboratorium 06 należy również zainstalować **Docker Desktop**.
+Te moduły są wymagane do budowania na Androida i Meta Quest 3. Do pracy z C# zalecane jest **Visual Studio 2022 Community** z workloadem **Game development with Unity** albo równoważne IDE. **Android Studio** jest zalecane do diagnostyki Androida, ADB, SDK Manager i Logcat, ale nie jest wymagane do samego buildu Unity, jeśli używane są narzędzia Android dostarczone przez Unity Hub. Przed Laboratorium 06 prowadzący udostępnia stanowisko ROS 2/Gazebo; Docker Desktop nie jest warunkiem wstępnym każdego komputera studenta. Na Ubuntu można użyć natywnego ROS 2, na Windows połączenia LAN do stanowiska Ubuntu.
 
 ## Struktura repozytorium
 
