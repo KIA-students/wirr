@@ -1,17 +1,12 @@
 name: Deploy WebSim Pages
 
 on:
-  pull_request:
-    paths:
-      - 'WebSim~/site/**'
-      - 'competition/scoreboard.json'
-      - 'WebSim~/tests/**'
-      - '.github/workflows/deploy-websim-pages.yml'
   push:
     branches: [main]
     paths:
       - 'WebSim~/site/**'
       - 'WebSim~/tests/**'
+      - 'competition/scoreboard.json'
       - '.github/workflows/deploy-websim-pages.yml'
   workflow_dispatch:
 
