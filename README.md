@@ -1,7 +1,5 @@
 <p align="center">
-<img src="icon.png" alt="WiRR" width="128">
-</p>
-
+  <img src="icon.png" alt="WiRR" width="128">
 </p>
 
 # WiRR Course Toolkit
