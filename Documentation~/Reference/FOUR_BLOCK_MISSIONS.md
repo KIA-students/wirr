@@ -2,6 +2,10 @@
 
 Nowe okno **WiRR → Misje i odkrycia (4 bloki)** to uproszczony pulpit pracy z czterema blokami (Lab 01–02, 03–04, 05–06, 07–08). Jest dodatkiem do istniejącego **WiRR Reports**, a nie nowym automatycznym systemem oceniania.
 
+### Start bez zbędnej konfiguracji
+
+Po pierwszym imporcie WiRR otwiera pulpit misji zamiast rozbudowanego instalatora. Kliknij **Start: Lab XX**. Pakiet utworzy minimalną scenę i foldery tylko, jeśli ich nie ma, po czym otworzy scenę; bez dodatkowego ARCore, ROS 2 ani ciężkich zależności. Uwaga: jest to scena demonstracyjna PC, nie gotowa aplikacja XR. Kiedy wybierzesz doświadczenie na fizycznym urządzeniu, przejdź do zaawansowanych narzędzi. Przycisk **Liga XR** otwiera wyłącznie publiczny ranking.
+
 ### Co jest automatyczne
 - odczyt wersji Unity, systemu operacyjnego i informacji o GPU;
 - wykrywanie zapisanych scen w Assets/WiRR/LabNN;
@@ -24,6 +28,6 @@ Student wybiera jawnie tryb REAL/SIM/REPLAY i dopisuje jedno zdanie odkrycia, di
 - przetestować zapis Markdown i odczyt przykładowych JSON;
 - sprawdzić, że pobieranie danych nie wymaga Internetu ani tokenów;
 - potwierdzić, że nie ma błędów kompilacji C# w Editor;
-- opublikować razem z nowymi instrukcjami WiRR z repozytorium MatPomGit/prz.
+- opublikować razem z nowymi instrukcjami WiRR z repozytorium repozytorium instrukcji.
 
 Do czasu tego testu jest to funkcja **gałęzi rozwojowej**, nie potwierdzona funkcja wydania produkcyjnego.

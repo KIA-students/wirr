@@ -27,8 +27,8 @@ namespace KIA.WiRR.Editor
                 return;
 
             EditorPrefs.SetBool(key, true);
-            WiRRCourseWindow.Open();
-            Debug.Log($"[WiRR] Pierwsze uruchomienie WiRR {packageInfo.version}: otwarto panel Narzędzia kursu.");
+            WiRRMissionBoardWindow.Open();
+            Debug.Log($"[WiRR] Pierwsze uruchomienie WiRR {packageInfo.version}: otwarto prosty pulpit Misje i odkrycia.");
         }
     }
 }

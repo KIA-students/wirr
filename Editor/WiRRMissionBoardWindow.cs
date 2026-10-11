@@ -83,6 +83,27 @@ namespace KIA.WiRR.Editor
             }
 
             EditorGUILayout.Space(8);
+            EditorGUILayout.LabelField("Wystartuj bez instalowania dodatkowych pakietów", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox(
+                "Otwórz minimalną scenę na PC. Możesz od razu eksperymentować na " +
+                "monitorze i w symulatorze; telefon AR i Quest skonfigurujesz dopiero, " +
+                "gdy wybierzesz eksperyment sprzętowy. Scena nie jest nadpisywana.",
+                MessageType.Info);
+            using (new EditorGUI.DisabledScope(EditorApplication.isCompiling || EditorApplication.isPlaying))
+            {
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Start: Lab " + Blocks[blockIndex][0].ToString("00")))
+                        WiRRSceneTools.OpenLabScene(Blocks[blockIndex][0]);
+                    if (GUILayout.Button("Start: Lab " + Blocks[blockIndex][1].ToString("00")))
+                        WiRRSceneTools.OpenLabScene(Blocks[blockIndex][1]);
+                }
+            }
+            if (GUILayout.Button("Liga XR: aktualny ranking grup"))
+                Application.OpenURL("https://kia-students.github.io/wirr/#liga");
+            if (GUILayout.Button("Zaawansowane narzędzia (zależności, urządzenia)"))
+                WiRRCourseWindow.Open();
+
             EditorGUILayout.LabelField("Punkty kontrolne", EditorStyles.boldLabel);
             var preparedScenes = Blocks[blockIndex].Count(lab => ScenePaths(lab).Length > 0);
             var progressRect = GUILayoutUtility.GetRect(18, 22, GUILayout.ExpandWidth(true));

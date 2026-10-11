@@ -193,6 +193,15 @@ jobs:
           git checkout -B "${EXPORT_BRANCH}" "upstream/${UPSTREAM_BRANCH}"
           git read-tree --reset -u "${source_sha}"
 
+          # The competition scoreboard belongs to the COURSE repository, not
+          # to this development snapshot. Keep all already approved scores.
+          # An initial scoreboard is exported only if the course has none yet.
+          if git ls-tree -r --name-only "upstream/${UPSTREAM_BRANCH}" -- competition \
+               | grep -q '^competition/'; then
+            git checkout "upstream/${UPSTREAM_BRANCH}" -- competition
+            echo "Zachowano aktualny ranking studentów z KIA-students/wirr."
+          fi
+
           for path in "${private_paths[@]}"; do
             git rm -f --ignore-unmatch -- "${path}"
           done
