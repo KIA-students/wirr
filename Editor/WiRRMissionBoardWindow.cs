@@ -1,8 +1,4 @@
 using System;
-
-## Spis treści
-
-
 using System.IO;
 using System.Globalization;
 using System.Linq;
@@ -138,18 +134,15 @@ namespace KIA.WiRR.Editor
             foreach (var lab in Blocks[blockIndex])
             {
                 var hasScene = ScenePaths(lab).Length > 0;
-                var hasExport = lab <= 7 && FindLatestExport(lab) != null;
+                var hasExport = FindLatestExport(lab) != null;
                 var status = hasScene ? "Scena zapisana" : "Brak zapisanej sceny";
-                if (lab <= 7)
-                    status += hasExport ? " | JSON wyeksportowany" : " | JSON jeszcze nie wyeksportowany";
-                else
-                    status += " | Lab 08: własna scena, brak formularza w pakiecie 1.0";
+                status += hasExport ? " | JSON wyeksportowany" : " | JSON jeszcze nie wyeksportowany";
 
                 EditorGUILayout.LabelField($"Lab {lab:00}: {status}", EditorStyles.wordWrappedLabel);
             }
 
             EditorGUILayout.Space(8);
-            if (GUILayout.Button("Otwórz formularz WiRR Reports (Lab 01–07)"))
+            if (GUILayout.Button("Otwórz formularz WiRR Reports (Lab 01–08)"))
                 WiRRReportWindow.Open();
 
             EditorGUILayout.HelpBox(
@@ -266,11 +259,7 @@ namespace KIA.WiRR.Editor
                 var scenes = ScenePaths(lab);
                 writer.AppendLine($"- Sceny w projekcie: {(scenes.Length == 0 ? "BRAK" : string.Join(", ", scenes.Select(path => Escape(path, 120))))}");
                 var path = FindLatestExport(lab);
-                if (lab == 8)
-                {
-                    writer.AppendLine("- Lab 08: brak formularza JSON w WiRR 1.0; pokaż scenę lub nagranie.");
-                }
-                else if (path == null)
+                if (path == null)
                 {
                     writer.AppendLine("- Eksport WiRR JSON: BRAK. Nie zakładaj, że pomiary wykonano.");
                 }
