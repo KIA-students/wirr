@@ -1,0 +1,96 @@
+{
+  "schema_version": "wirr-team-league/1",
+  "season": "2026/2027",
+  "revision": 0,
+  "updated_at": null,
+  "rules": {
+    "max_per_round": 10,
+    "dimensions": [
+      {
+        "id": "experiment",
+        "label": "Eksperyment i pomiary",
+        "max": 4
+      },
+      {
+        "id": "reasoning",
+        "label": "Interpretacja i diagnostyka",
+        "max": 3
+      },
+      {
+        "id": "innovation",
+        "label": "Pomysł i prototyp",
+        "max": 2
+      },
+      {
+        "id": "cooperation",
+        "label": "Współpraca",
+        "max": 1
+      }
+    ]
+  },
+  "groups": [
+    {
+      "id": "G1",
+      "label": "Grupa laboratoryjna 1"
+    },
+    {
+      "id": "G2",
+      "label": "Grupa laboratoryjna 2"
+    }
+  ],
+  "rounds": [
+    {
+      "id": 1,
+      "title": "Architekci przestrzeni",
+      "labs": [
+        1,
+        2
+      ],
+      "status": "pending",
+      "scores": {
+        "G1": null,
+        "G2": null
+      }
+    },
+    {
+      "id": 2,
+      "title": "Kartografowie rzeczywistości",
+      "labs": [
+        3,
+        4
+      ],
+      "status": "pending",
+      "scores": {
+        "G1": null,
+        "G2": null
+      }
+    },
+    {
+      "id": 3,
+      "title": "Inżynierowie cyfrowego bliźniaka",
+      "labs": [
+        5,
+        6
+      ],
+      "status": "pending",
+      "scores": {
+        "G1": null,
+        "G2": null
+      }
+    },
+    {
+      "id": 4,
+      "title": "Wynalazcy XR",
+      "labs": [
+        7,
+        8
+      ],
+      "status": "pending",
+      "scores": {
+        "G1": null,
+        "G2": null
+      }
+    }
+  ],
+  "history": []
+}
