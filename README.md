@@ -39,7 +39,11 @@
 
 # WiRR Course Toolkit
 
-Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
+Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–8, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
+
+## Kampania 4 × 2: dokładnie osiem laboratoriów
+
+**[Otwórz spis kampanii i cztery przewodniki spotkań](Documentation~/Campaign/README.md)**. Pierwsze planowane spotkanie [Lab 01 + Lab 02, wtorek 13 października 2026](Documentation~/Campaign/BLOK-01.md) ma uproszczoną ścieżkę uruchomienia bez pełnej konfiguracji XR. Lab 08 jest pełnoprawną, ósmą próbką pakietu Unity i ma automatyczny pomiar prób w demonstratorze PC.
 
 ## Szybka nawigacja po instrukcjach
 
@@ -50,7 +54,7 @@ Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzec
 - **Pracuję na Ubuntu:** [Ubuntu](Documentation~/Reference/OS_SETUP.md#ubuntu); **Windows:** [Windows](Documentation~/Reference/OS_SETUP.md#windows).
 - **Potrzebuję Quest/AR/VITURE:** [systemy i urządzenia](Documentation~/Reference/OS_SETUP.md#urzadzenia-xr).
 - **Chcę studiować komfort VR:** [dwa krótkie doświadczenia](Documentation~/Reference/COMFORT_STUDIES.md) i [watchdog do 10 prób](Documentation~/Reference/XR_SAFETY_WATCHDOG.md).
-- **Szukam innego laboratorium:** [pełny spis dokumentów](Documentation~/Reference/INDEX.md).
+- **Szukam innego laboratorium:** [kampania: wszystkie 8 laboratoriów](Documentation~/Campaign/README.md) lub [indeks](Documentation~/Reference/INDEX.md).
 
 ## Zanim utworzysz projekt: konto i licencja Unity
 
@@ -58,9 +62,9 @@ Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzec
 
 ## Nowa ścieżka: misje XR i karta sesji
 
-W gałęzi rozwojowej dodano okno **WiRR → Misje i odkrycia (4 bloki)**. Automatycznie sprawdza obecność zapisanych scen Lab 01–08, odnajduje lokalne eksporty JSON WiRR Reports dla Lab 01–07 i przygotowuje **jedną kartę Markdown na blok**. Przenosi do niej wyłącznie zarejestrowane już wartości, metadane Unity i liczniki aktywności. Student sam wpisuje tylko **jedno odkrycie, jedną diagnozę i jeden pomysł nowego zastosowania**. Raport zapisuje się lokalnie, bez wysyłania danych do GitHub i bez uruchamiania GitHub Actions.
+W gałęzi rozwojowej dodano okno **WiRR → Misje i odkrycia (4 bloki)**. Automatycznie sprawdza obecność zapisanych scen Lab 01–08, odnajduje lokalne eksporty JSON WiRR Reports dla Lab 01–08 i przygotowuje **jedną kartę Markdown na blok**. Przenosi do niej wyłącznie zarejestrowane już wartości, metadane Unity i liczniki aktywności. Student sam wpisuje tylko **jedno odkrycie, jedną diagnozę i jeden pomysł nowego zastosowania**. Raport zapisuje się lokalnie, bez wysyłania danych do GitHub i bez uruchamiania GitHub Actions.
 
-**Uwaga:** Lab 08 jest nową sceną integracyjną, nie istnieje jeszcze w dotychczasowym formularzu JSON. Pulpit uczciwie to sygnalizuje. Nie traktuj istnienia sceny i eksportu jako automatycznego dowodu pracy na prawdziwym sprzęcie ani jako automatycznej oceny. Instrukcja: [FOUR_BLOCK_MISSIONS](Documentation~/Reference/FOUR_BLOCK_MISSIONS.md).
+**Lab 08** jest obecnie osobną próbką demonstratora i ma własny formularz WiRR Reports. Pozwala zaimportować rzeczywisty lokalny JSON, nie przypisuje niezmierzonych danych. Instrukcja: [Lab 08](Samples~/Lab08/README.md) oraz [kampania 4 × 2](Documentation~/Campaign/README.md).
 
 ## Dwa gotowe, krótkie stanowiska do nauki o komforcie XR
 
@@ -87,7 +91,7 @@ Pakiet zawiera:
 - **Samples Manager**: import materiałów dla wybranego laboratorium;
 - **Scene Tools / Validator**: przygotowanie i kontrolę sceny;
 - **Narzędzia warstwy Runtime**: lekkie komponenty pomiarowe;
-- **Checklisty zadań Lab 01–07**: krok po kroku prowadzą przez punkty kontrolne 3.0–5.0 i wskazują wymagany dowód pomiarowy;
+- **Checklisty zadań Lab 01–08**: krok po kroku prowadzą przez punkty kontrolne 3.0–5.0 i wskazują wymagany dowód pomiarowy;
 - **WebSim**: połączenie Unity ze środowiskiem ROS 2/Gazebo przez rosbridge;
 - **Raporty WiRR**: formularz, automatyczny zapis, tabele pomiarowe i raport JSON;
 - **Wysyłanie przez Git**: wysłanie raportu do repozytorium;

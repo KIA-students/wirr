@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0-preview.1 (kampania 4 × 2, przygotowanie 11 października 2026)
+
+- Rozbudowano rzeczywistą listę laboratoriów UPM z 7 do **8**. Dodano Samples~/Lab08, katalog zadań, formularz i tabelę WiRR Reports, obsługę paneli i lokalnego generatora demonstratora.
+- Lab 08 zawiera automatyczne lokalne zapisy prób A/B do JSON i import rzeczywistych wyników do formularza bez przepisywania liczb.
+- W Documentation~/Campaign/ znajdują się **cztery przewodniki po dwie instrukcje**, wraz z planem pierwszych zajęć 13 października 2026. Spisy treści i odsyłacze Windows/Ubuntu ograniczają konieczność ponawiania konfiguracji.
+- Kod pozostaje rozwojowy do czasu kompilacji w Unity 6000.6.x; nie publikować w KIA-students bez weryfikacji.
+
 ## Unreleased (ścieżka czterech bloków, 2026-10-11)
 
 - Lab 01: osobna ścieżka bez indywidualnego konta na pracownianych stanowiskach z Education Grant License, darmowe własne Unity Personal i opcjonalny Unity Student Plan. Nie udostępniamy wspólnego loginu.

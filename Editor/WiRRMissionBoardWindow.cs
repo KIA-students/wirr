@@ -142,6 +142,10 @@ namespace KIA.WiRR.Editor
             }
 
             EditorGUILayout.Space(8);
+            if (blockIndex == 3 && GUILayout.Button("Lab 08: dodaj gotowy demonstrator inspekcji"))
+                WiRRLab08Tools.AddDemonstrator();
+            if (blockIndex == 3 && GUILayout.Button("Lab 08: importuj prawdziwe wyniki JSON"))
+                WiRRLab08Tools.ImportResults();
             if (GUILayout.Button("Otwórz formularz WiRR Reports (Lab 01–08)"))
                 WiRRReportWindow.Open();
 

@@ -143,6 +143,8 @@ namespace KIA.WiRR.Editor
                 FillComparison(report, compare, 1, improved);
             }
             WiRRReportStore.Save(report);
+            // The report window opens on the newly imported Lab 08.
+            EditorPrefs.SetInt("KIA.WiRR.SelectedLab", 8);
             EditorUtility.DisplayDialog("WiRR Lab08",
                 "Wczytano " + results.trials.Count + " rzeczywistych prób do szkicu raportu Lab 08. " +
                 "Uzupełnij hipotezę, interpretację i nowy pomysł. Brakujące wartości pozostały puste.", "OK");

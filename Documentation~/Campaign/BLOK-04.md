@@ -34,7 +34,7 @@
 5. Zaimportuj rzeczywisty JSON do **WiRR Reports (Lab 08)**. Dodaj krótkie uzasadnienie zastosowania.
 6. Zaprezentuj 60–90 sekund działania bez osobnej prezentacji PowerPoint.
 
-[Pełne Lab 08](../../Samples~/Lab08/README.md#zadania-krok-po-kroku) oraz [gotowy szablon raportu](../../Samples~/Lab08/report-template.md).
+[Pełne Lab 08](../../Samples~/Lab08/README.md#pierwsze-pięć-minut-gotowa-scena) oraz [gotowy szablon raportu](../../Samples~/Lab08/report-template.md).
 
 ## Finał bez zbędnego raportowania
 

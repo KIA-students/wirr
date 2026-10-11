@@ -1,170 +1,47 @@
-# Szybki start — WiRR Lab 1–7
+# WiRR. Szybki start kampanii 4 × 2 laboratoria
+
+**Wersja robocza 1.1.0-preview.1.** Dokładnie 8 laboratoriów, po 2 w każdym z 4 bloków. Zacznij od pierwszego doświadczenia, nie od instalowania wszystkich SDK.
 
 ## Spis treści
+- [Którą ścieżkę wybierasz?](#którą-ścieżkę-wybierasz)
+- [Spotkanie 1: Lab 01 + Lab 02](#spotkanie-1-lab-01--lab-02)
+- [Spotkanie 2: Lab 03 + Lab 04](#spotkanie-2-lab-03--lab-04)
+- [Spotkanie 3: Lab 05 + Lab 06](#spotkanie-3-lab-05--lab-06)
+- [Spotkanie 4: Lab 07 + Lab 08](#spotkanie-4-lab-07--lab-08)
+- [Co zapisujesz po każdym spotkaniu?](#co-zapisujesz-po-każdym-spotkaniu)
+- [Co robisz, jeśli nie działa sprzęt?](#co-robisz-jeśli-nie-działa-sprzęt)
 
-- [Skocz do właściwej ścieżki](#skocz-do-właściwej-ścieżki)
-- [Co Pobrać na początku](#co-pobrać-na-początku)
-  - [Dla Każdego Studenta](#dla-każdego-studenta)
-- [Dla Prowadzącego](#dla-prowadzącego)
-- [Kroków na początku kursu](#kroków-na-początku-kursu)
-  - [Dla Studentów (1. dzień)](#dla-studentów-1-dzień)
-  - [Dla Prowadzącego (1. dzień)](#dla-prowadzącego-1-dzień)
-- [⏱️ Harmonogram (2–3 tygodnie)](#️-harmonogram-23-tygodnie)
-- [Cel: Co Student Musi Zrobić](#cel-co-student-musi-zrobić)
-- [Dokumentacja](#dokumentacja)
-- [Pytania?](#pytania)
+## Którą ścieżkę wybierasz?
 
-## Skocz do właściwej ścieżki
-- Jeśli **Unity nie jest zainstalowane**, [przejdź do instalacji](OS_SETUP.md#unity-nie-jest-zainstalowane).
-- Jeśli **Unity działa**, [rozpocznij Lab 01](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
-- Jeśli **nie masz konta/licencji**, wybierz [procedurę Unity ID](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
-- Jeśli używasz **Ubuntu**, [skocz do Ubuntu](OS_SETUP.md#ubuntu); jeśli **Windows**, [tutaj](OS_SETUP.md#windows).
-- Jeśli chcesz tylko wykonać laboratorium, nie wczytuj całej archiwalnej listy zadań i pakietów; [indeks nowego kursu](INDEX.md).
+- **Nie masz Unity:** [instrukcja instalacji](OS_SETUP.md#unity-nie-jest-zainstalowane).
+- **Masz Unity:** [pierwsza scena w kilka minut](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Nie masz licencji/konta:** [Unity Education Grant, Personal i Student](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- **Windows:** [kroki dla Windows](OS_SETUP.md#windows), **Ubuntu:** [dla Ubuntu](OS_SETUP.md#ubuntu).
+- **Brak gogli i telefonu AR:** doświadczenia podstawowe rozpoczniesz na PC; tryb zaznacz jako **UNITY_EDITOR**, nie jako Quest lub ARCore.
+- **Masz gotowy projekt z poprzedniego bloku:** nie zakładaj nowego. Otwórz **WiRR → Misje i odkrycia** i odpowiednie Lab XX.
 
-## Co Pobrać na początku
+## Spotkanie 1: Lab 01 + Lab 02
 
-Wszystkie pliki znajdują się w: `/starter-files/`
+[Przewodnik bloku I: wtorek 13 października 2026](../Campaign/BLOK-01.md). W Lab 01 odkryjesz zależności skala–fizyka–FPS; w Lab 02 interakcję, chwyt, UI i komfort VR.
 
-### Dla Każdego Studenta
+## Spotkanie 2: Lab 03 + Lab 04
 
-1. **README dla Labu** (przed zajęciami)
-   ```
-   LAB1_STARTER_README.md    (instrukcja, checklist, czas)
-   LAB2_STARTER_README.md    (... itp.)
-   ...
-   LAB7_STARTER_README.md
-   ```
+[Przewodnik bloku II](../Campaign/BLOK-02.md): AR, kotwice, powierzchnie, Depth API i okluzja. Zależności telefonu dodasz dopiero, kiedy wybierzesz wariant Android.
 
-2. **Template Raportu** (do wklejenia w repozytorium)
-   ```
-   evidence_template_lab01.md (struktura evidence/lab01.md)
-   evidence_template_lab02.md (... itp.)
-   ...
-   evidence_template_lab07.md
-   ```
+## Spotkanie 3: Lab 05 + Lab 06
 
-3. **Instrukcje techniczne** (przed Lab 1)
-   ```
-   REPOSITORY_SETUP.md        (git workflow, struktura)
-   BUILD_AND_DEPLOY.md         (PC, Android, Quest 3)
-   XR_SHOWCASE.md              (gotowe efekty 6DoF, gaze, distant interaction i skala)
-   MIXED_REALITY_SHOWCASE.md    (kamera, dłonie, ludzie, depth/spatial mesh i ściany)
-   MIXED_REALITY_IMPLEMENTATION.md (adaptery, walidacja i dalsza rozbudowa MR)
-   MOBILE_AR_SHOWCASE.md         (tap, image tracking, ruler, light estimation, painter)
-   EXTRA_ASSETS.md             (dodatkowe modele, prefaby, HDRI)
-   ```
+[Przewodnik bloku III](../Campaign/BLOK-03.md): CAD, geometria i LOD, a następnie bliźniak robota ROS 2 z aktualnością danych LIVE/STALE/REPLAY. Brak ROS nie blokuje całego bloku.
 
----
+## Spotkanie 4: Lab 07 + Lab 08
 
-## Dla Prowadzącego
+[Przewodnik bloku IV](../Campaign/BLOK-04.md): najpierw diagnostyka i walidacja, potem **pełnoprawne Lab 08**, czyli własny demonstrator poza grami VR. Gotowy [przykład Lab 08](../../Samples~/Lab08/README.md) ma trzy obiekty inspekcji, automatyczny pomiar prób i lokalny JSON.
 
-1. **Instrukcja** (przygotowanie do zajęć)
-   ```
-   INSTRUCTOR_GUIDE.md        (jak oceniać, troubleshooting)
-   ```
+## Co zapisujesz po każdym spotkaniu?
 
-2. **Instrukcje Laboratoriów** (w formacie .docx)
-   ```
-   Laboratorium_1_XR_Pełna_Instrukcja.docx
-   Laboratorium_2_XR_Pełna_Instrukcja.docx
-   ...
-   Laboratorium_7_XR_Pełna_Instrukcja.docx
-   ```
+Jedna lokalna karta sesji w **WiRR → Misje i odkrycia**: dwa laboratoria, dane i tryby urządzeń z posiadanych pomiarów oraz trzy krótkie wypowiedzi studenta. Liczby pochodzą tylko z realnych zapisów, nie są generowane znikąd. W Lab 08 możesz zaimportować JSON bez ręcznego przepisywania czasów.
 
----
+Nie wymagamy tworzenia osobnego Pull Requestu ani uruchamiania GitHub Actions po każdym eksperymencie. [Pełny indeks materiałów](INDEX.md).
 
-## Kroków na początku kursu
+## Co robisz, jeśli nie działa sprzęt?
 
-### Dla Studentów (1. dzień)
-
-1. **Przygotowanie techniki:**
-   - [ ] System: **Windows 11 64-bit** albo **Ubuntu 22.04 / 24.04 LTS 64-bit**
-   - [ ] Unity Hub zainstalowany
-   - [ ] Najnowsza dostępna wersja **Unity 6 (6000.x)** zainstalowana
-   - [ ] Moduł **Android Build Support**
-   - [ ] **Android SDK & NDK Tools**
-   - [ ] **OpenJDK**
-   - [ ] IDE C#: Visual Studio 2022 Community z workloadem **Game development with Unity** na Windows albo Rider / VS Code z integracją Unity na Ubuntu
-   - [ ] Git
-   - [ ] Android Studio, zalecane do diagnostyki Android/ADB, ale niewymagane do samego buildu Unity
-   - [ ] Docker Desktop na Windows albo Docker Engine + Compose plugin na Ubuntu przed Laboratorium 06
-   - [ ] Projekt **Universal 3D (URP)** otwarty
-
-   W Unity Hub moduły Androida można doinstalować także później przez **Installs → ustawienia używanej wersji Unity → Add modules**.
-
-   Pełna procedura dla Windows i Ubuntu: **ENVIRONMENT_SETUP.md**.
-
-   **Nie uruchamiaj `dotnet new` wewnątrz katalogu `Assets`.** Jeśli Console zgłasza błąd CS8773 dotyczący `global using` i C# 10, sprawdź, czy ścieżka prowadzi do `Assets/.../obj/...GlobalUsings.g.cs`. Usuń taki dodatkowy projekt .NET lub jego katalogi `bin/obj`; nie wymuszaj C# 10 przez `csc.rsp`.
-
-2. **Konfiguracja Gita:**
-   ```bash
-   # Przeczytaj REPOSITORY_SETUP.md
-   git clone <URL_REPO> xr-lab
-   cd xr-lab
-   git switch -c team-<NR>/lab01-<NAZWISKA>
-   ```
-
-3. **Przed Lab 1:**
-   - Skopis LAB1_STARTER_README.md
-   - Przygotuj obszar roboczy
-   - Poczekaj na prowadzącego
-
-### Dla Prowadzącego (1. dzień)
-
-1. **Przeczytaj INSTRUCTOR_GUIDE.md**
-   - Poznaj system punktów kontrolnych
-   - Przygotuj checklist oceny
-   - Zanotuj typowe problemy
-
-2. **Otwórz Lab 1 instrukcję** (Laboratorium_1_XR_Pełna_Instrukcja.docx)
-   - Przeczytaj całą instrukcję
-   - Upewnij się, że rozumiesz diagnozy
-   - Przygotuj demo
-
-3. **Sprawdzenie techniki**
-   - Quest 3 / Android / Symulator uruchomiony
-   - Unity project kompiluje
-   - Repozytorium dostępne
-
----
-
-## ⏱️ Harmonogram (2–3 tygodnie)
-
-| Tydzień | Lab | Czas | Pobranie |
-|---------|-----|------|----------|
-| 1 | 1–2 | ~4h | LAB1_ & LAB2_README, evidence_template_lab0[12] |
-| 2 | 3–4 | ~3.5h | LAB3_ & LAB4_README, evidence_template_lab0[34] |
-| 3 | 5–6 | ~3.5h | LAB5_ & LAB6_README, evidence_template_lab0[56] |
-| 4 | 7 | ~2h | LAB7_README, evidence_template_lab07 |
-
----
-
-## Cel: Co Student Musi Zrobić
-
-Na koniec kursu (Lab 7):
-
-1. ✓ 7 gałęzi Gita (team-NR/lab0X-...)
-2. ✓ 7 raportów (`evidence/lab0[1-7].md`)
-3. ✓ 7 commitów "fix(...)" z diagnozą błędu
-4. ✓ Punkt kontrolny 3.0 na każdym laboratorium (mogą być wyższe oceny)
-
-**Rezultat:** Zaliczenie kursu + portfolio 7 projektów XR
-
----
-
-## Dokumentacja
-
-- **Dla studentów:** Każdy LAB_README.md zawiera linki
-- **Dla prowadzącego:** INSTRUCTOR_GUIDE.md
-- **Dla zaawansowanych:** evidence_template zawiera wskazówki
-
----
-
-## Pytania?
-
-- **Techniczne:** Przeczytaj REPOSITORY_SETUP.md + LAB_README
-- **Ocenianie:** Przeczytaj INSTRUCTOR_GUIDE.md
-- **Wątpliwości:** Skontaktuj się z prowadzącym
-
----
-
+Diagnozuj po kolei: zasilanie, przewód, uprawnienia USB, SDK, runtime, scena. Po 10–15 minutach bez rozwiązania przejdź do przygotowanej alternatywy, oznacz brak pomiaru fizycznego i kontynuuj naukę. Pomoc: [Windows i Ubuntu](OS_SETUP.md#najczęstsze-błędy).

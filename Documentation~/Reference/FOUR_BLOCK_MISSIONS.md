@@ -1,29 +1,45 @@
-# Misje WiRR: cztery bloki i lokalna karta sesji (wersja robocza)
+# WiRR: cztery bloki, osiem laboratoriów i jedna karta na sesję
 
 ## Spis treści
+- [Dokładnie cztery wyprawy](#dokładnie-cztery-wyprawy)
+- [Co działa w pakiecie 1.1.0-preview.1](#co-działa-w-pakiecie-110-preview1)
+- [Jedna karta sesji](#jedna-karta-sesji)
+- [Rzeczywiste urządzenia i warianty](#rzeczywiste-urządzenia-i-warianty)
+- [Stan wydania](#stan-wydania)
 
-- [Przed wydaniem produkcyjnym](#przed-wydaniem-produkcyjnym)
-- [Konto Unity, opcjonalne misje i komfort XR](#konto-unity-opcjonalne-misje-i-komfort-xr)
-- [Ścieżki warunkowe i doświadczenia komfortu](#ścieżki-warunkowe-i-doświadczenia-komfortu)
+## Dokładnie cztery wyprawy
 
-## Przed wydaniem produkcyjnym
-- uruchomić okno w czystym Unity 6000.6.x na Windows i Ubuntu;
-- przetestować zapis Markdown i odczyt przykładowych JSON;
-- sprawdzić, że pobieranie danych nie wymaga Internetu ani tokenów;
-- potwierdzić, że nie ma błędów kompilacji C# w Editor;
-- opublikować razem z nowymi instrukcjami WiRR z repozytorium repozytorium instrukcji.
+| Blok | Dwa laboratoria | Przewodnik |
+|---|---|---|
+| I | Lab 01 i Lab 02 | [Świat reaguje](../Campaign/BLOK-01.md) |
+| II | Lab 03 i Lab 04 | [Świat się miesza](../Campaign/BLOK-02.md) |
+| III | Lab 05 i Lab 06 | [Bliźniak rzeczywistości](../Campaign/BLOK-03.md) |
+| IV | Lab 07 i **Lab 08** | [Wynalazca XR](../Campaign/BLOK-04.md) |
 
-Trzeci prefab **WiRR_Comfort_SafetyWatchdog** umożliwia symulację zdjęcia gogli, utraty trackingu lub dużego skoku danych, z lokalnym limitem 10 prób i raportem wyłącznie technicznym. Szczegóły: [XR_SAFETY_WATCHDOG.md](XR_SAFETY_WATCHDOG.md).
+[Cała kampania](../Campaign/README.md) ma osiem oddzielnych instrukcji i osiem pozycji na liście laboratoriów Unity. Lab 08 to samodzielna próbka z formularzem JSON, nie opcjonalny dodatek do siedmiu starych laboratoriów.
 
-Do czasu tego testu jest to funkcja **gałęzi rozwojowej**, nie potwierdzona funkcja wydania produkcyjnego.
+## Co działa w pakiecie 1.1.0-preview.1
 
+Panel **WiRR → Misje i odkrycia (4 bloki)** udostępnia przyciski **Start: Lab XX** dla wszystkich ośmiu laboratoriów. Generuje bazowe sceny bez wymuszania ARCore, ROS 2 i Meta SDK. Klasyczny panel kursu i WiRR Reports również obsługują Lab 08.
 
-## Konto Unity, opcjonalne misje i komfort XR
-- **Nie udostępniaj współdzielonego hasła Unity**. Na stanowiskach uczelni wybierz aktywowaną przez administratora Education Grant License, a prywatny komputer może korzystać z indywidualnego Unity Personal/Student. Instrukcja: **UNITY_ACCESS_AND_LICENSES.md**.
-- Generator zabawnych nazw w oknie **Misje i odkrycia** jest lokalny; propozycje zatwierdza prowadzący. Także strona WiRR ma generator i cztery dodatkowe, dobrowolne wyzwania z limitem **+8 punktów na grupę**, niezależne od ocen indywidualnych.
-- **WiRR → Komfort XR** generuje prefab bardzo łagodnego ruchu odniesienia i prefab obserwacji wirtualnej głębi; oba są uruchamiane wyłącznie dobrowolnie i samoczynnie kończą próbę. Szczegóły: **COMFORT_STUDIES.md**. Nie należy wywoływać ani porównywać objawów zdrowotnych studentów.
-- Materiały i kod pozostają w gałęzi roboczej aż do testu Unity. Zmiany w rankingach mogą być synchronizowane po zatwierdzeniu; stan wyników repozytorium studentów nie może być zastąpiony kopią roboczą.
+W Lab 08 polecenie **WiRR → Lab 08 → Dodaj demonstrator inspekcji** przygotowuje prefab i trzy obiekty testowe, a **Importuj wyniki demonstratora do raportu** wczytuje rzeczywisty JSON z ukończonych prób. W pozostałych laboratoriach formularze pozostają zgodne z dotychczasowym formatem.
 
-## Ścieżki warunkowe i doświadczenia komfortu
+## Jedna karta sesji
 
-Konto/licencję sprawdź przez [instrukcję Unity](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa); instalację rozdzielają [Windows i Ubuntu](OS_SETUP.md#wybierz-aktualną-sytuację). WiRR generuje [trzy prefaby komfortu i bezpieczeństwa](COMFORT_STUDIES.md), w tym [dziesięciopróbowy watchdog](XR_SAFETY_WATCHDOG.md). Żadne z tych zadań nie wymaga wywoływania objawów u uczestnika.
+Po zakończeniu pary laboratoriów otwórz **WiRR → Misje i odkrycia**, wybierz blok i **Zapisz lokalną kartę sesji**. Karta zawiera dostępne sceny, metadane Unity, tryb zadeklarowany przez studenta i istniejące wyniki JSON.
+
+Student wpisuje tylko: **jedno odkrycie, jedną diagnozę i jeden pomysł nowego zastosowania**. Brak wpisu pomiarowego nie jest zastępowany zerem. Nie wystawiamy ocen za liczbę uruchomień ani za czas Play Mode.
+
+## Rzeczywiste urządzenia i warianty
+
+- [Unity, licencja i indywidualne konto](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- [Windows i Ubuntu](OS_SETUP.md#wybierz-aktualną-sytuację).
+- [Gogle i komfort XR](COMFORT_STUDIES.md).
+- [Wyzwanie techniczne watchdog, max. 10 prób](XR_SAFETY_WATCHDOG.md).
+- [Dobrowolna Liga XR, dwie grupy](../../competition/OPTIONAL_MISSIONS.md).
+
+Nie udostępnia się studentom wspólnego hasła Unity, nie wymaga prywatnego sprzętu i nie udaje się fizycznych pomiarów przy symulacji.
+
+## Stan wydania
+
+**Zmiany są na gałęzi roboczej MatPomGit/wirr.** Kod nowych prefabów i integrację Lab 08 trzeba przetestować w Unity 6000.6.x Windows i Ubuntu przed scaleniem z wydaniem produkcyjnym. Komplet dokumentów Markdown można czytać na GitHubie bez instalowania Unity. Po weryfikacji aktualizacja może zostać przeniesiona do KIA-students/wirr z zachowaniem dotychczasowych wyników ligi.
