@@ -26,3 +26,9 @@ X, Y, Z, W zastąp rzeczywistymi wartościami całkowitymi. Skrypt waliduje wyni
 Nie publikuj danych osobowych, indeksów, prywatnych obrazów kamer, danych lokalizacyjnych ani tokenów. Uzasadnienie jest wspólne dla całej grupy. Aktualizacje repozytorium roboczego muszą zachować punkty przechowywane w KIA-students/wirr, nawet jeśli lokalna kopia jest starsza.
 
 Zakładka na stronie kursowej: https://kia-students.github.io/wirr/#liga
+
+## Własne nazwy i cztery dodatkowe misje
+
+Nazwę drużyny ustalają studenci, przy użyciu generatora na stronie kursu lub własnego pomysłu. Prowadzący zatwierdza nazwę wywołaniem `python competition/set_team_name.py --group G1 --name "Kwantowe Kapibary"`. Żaden login nie jest potrzebny do losowania propozycji.
+
+Zasady dobrowolnych misji z limitem **8 punktów na grupę poza zajęciami** zawiera [OPTIONAL_MISSIONS.md](OPTIONAL_MISSIONS.md). Jeden zatwierdzony rezultat z kodem `xr-optics`, `robot-failsafe`, `accessible-hud` lub `ar-measurement` daje 1–2 punkty na grupę, nie na osobę. Obsługuje je lokalny `competition/add_sidequest.py`. Wynik grupowy nie wpływa na indywidualną ocenę.

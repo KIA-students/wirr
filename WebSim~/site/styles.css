@@ -21,3 +21,7 @@
 
 .league-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1rem 0}
 .league-tile{margin:0;text-align:center}.league-number{display:block;font-size:2rem;color:var(--accent)}.league-muted{font-size:.92rem}
+
+.team-proposals{display:flex;gap:.5rem;flex-wrap:wrap;margin:.75rem 0}
+#team-name-own{margin:.5rem;padding:.7rem;border:1px solid var(--line);border-radius:8px;max-width:100%;background:var(--card);color:var(--ink)}
+#team-naming label{display:inline-block;margin-right:.5rem}
