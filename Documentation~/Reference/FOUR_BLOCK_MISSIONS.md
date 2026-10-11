@@ -40,6 +40,8 @@ Student wybiera jawnie tryb REAL/SIM/REPLAY i dopisuje jedno zdanie odkrycia, di
 - potwierdzić, że nie ma błędów kompilacji C# w Editor;
 - opublikować razem z nowymi instrukcjami WiRR z repozytorium repozytorium instrukcji.
 
+Trzeci prefab **WiRR_Comfort_SafetyWatchdog** umożliwia symulację zdjęcia gogli, utraty trackingu lub dużego skoku danych, z lokalnym limitem 10 prób i raportem wyłącznie technicznym. Szczegóły: [XR_SAFETY_WATCHDOG.md](XR_SAFETY_WATCHDOG.md).
+
 Do czasu tego testu jest to funkcja **gałęzi rozwojowej**, nie potwierdzona funkcja wydania produkcyjnego.
 
 

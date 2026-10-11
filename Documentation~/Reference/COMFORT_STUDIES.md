@@ -32,6 +32,8 @@ W Unity wybierz **WiRR → Komfort XR → Utwórz 3 prefaby: obserwacja i watchd
 - **WiRR_Comfort_OpticFlow.prefab**, z komponentem WiRRVisualMotionStudy. Umożliwia jeden łagodny, ograniczony do 8 s ruch **pasków referencyjnych**, a nie kamery XR.
 - **WiRR_Comfort_DepthCues.prefab**, z komponentem WiRRDepthCueStudy. Umożliwia jedno płynne porównanie wirtualnych odległości obiektu, ograniczone do 10 s, **bez zmiany IPD, projekcji kamery i optyki gogli**.
 
+Trzeci prefab **WiRR_Comfort_SafetyWatchdog** zawiera moduł nadzoru technicznego, ograniczający doświadczenie do dziesięciu prób na grupę i stanowisko, monitorujący opcjonalne wejścia XR i eksportujący anonimowy raport. Zobacz [techniczną procedurę](XR_SAFETY_WATCHDOG.md).
+
 Prefaby zawierają prawdziwe obiekty Unity i programy C#. Generowane są lokalnie jednym poleceniem bez ARCore, ROS 2, kont Unity i pobierania dodatkowych zasobów. Żaden program nie startuje automatycznie ani nie zapętla ekspozycji.
 
 ### Uruchomienie i przerwanie
