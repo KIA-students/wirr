@@ -1,5 +1,28 @@
 # Lab 05 — Optymalizacja modeli CAD
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Przygotowanie](#przygotowanie)
+- [Model referencyjny i pochodzenie](#model-referencyjny-i-pochodzenie)
+- [Szybki wybór formatu](#szybki-wybór-formatu)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Import i audyt CAD](#30-import-i-audyt-cad)
+  - [3.5: Triangulacja i jakość siatki](#35-triangulacja-i-jakość-siatki)
+  - [4.0: LOD i pomiar wydajności](#40-lod-i-pomiar-wydajności)
+  - [4.5: Materiały, draw calls i kolizje](#45-materiały-draw-calls-i-kolizje)
+  - [5.0: Pipeline finalny](#50-pipeline-finalny)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
+
+
+## Szybki wybór ścieżki
+- **Mam gotowy model FBX/OBJ:** [przejdź do importu i audytu](#30-import-i-audyt-cad).
+- **Mam tylko STEP:** [wybierz konwersję](#szybki-wybór-formatu), a potem [import CAD](#30-import-i-audyt-cad).
+- **Nie mam zainstalowanego programu CAD:** użyj dostarczonego modelu referencyjnego z [rozdziału o jego pochodzeniu](#model-referencyjny-i-pochodzenie).
+- **Brak działającego projektu Unity:** [powrót do pierwszej sceny](../Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+
+
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 5. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
 ## Przygotowanie
@@ -20,7 +43,7 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 
 Obowiązkowym źródłem jest **makerbeam_bracket_90degree.stp**, wspornik MakerBeam zapisany jako STEP AP214/B-Rep. Model pochodzi z FreeCAD Parts Library, autor: Benjamin Aigner, licencja zasobu: **CC-BY-3.0**. Pakiet nie zmienia licencji modelu. Szczegóły atrybucji znajdują się w **Models/Source/ATTRIBUTION.md**.
 
-Wspólny model źródłowy jest celowy: wszystkie pary rozpoczynają od tej samej geometrii, dzięki czemu można porównywać wpływ tessellacji, formatu pośredniego, topologii i LOD zamiast mieszać te czynniki z różnicami pomiędzy modelami.
+Wspólny model źródłowy jest celowy: wszyscy studenci rozpoczynają od tej samej geometrii, dzięki czemu można porównywać wpływ tessellacji, formatu pośredniego, topologii i LOD zamiast mieszać te czynniki z różnicami pomiędzy modelami.
 
 Nie próbuj otwierać pliku STEP bezpośrednio standardowym Model Importerem Unity. Najpierw wykonaj tessellację w narzędziu CAD lub konwerterze, a do Unity zaimportuj np. FBX lub OBJ. STL wykorzystuj świadomie jako przykład reprezentacji o mniejszej ilości informacji.
 
@@ -47,12 +70,12 @@ Nie konwertuj „w ciemno”. Najpierw zapisz, które informacje są wymagane w 
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
-### 3.5: Triangulacja i LOD
+### 3.5: Triangulacja i jakość siatki
 
 1. Przygotuj trzy warianty triangulacji/redukcji A/B/C.
 2. Zmierz topologię i jakość każdego wariantu.
 3. Sprawdź zachowanie cech geometrycznych ważnych dla interakcji.
-4. Wybierz kandydatów LOD0/LOD1/LOD2 i zapisz ich liczbę trójkątów.
+4. Wybierz metodę zachowującą istotne cechy modelu; LOD0/1/2 przygotujesz w etapie 4.0.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
@@ -88,7 +111,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
 2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź raport** i popraw wskazane braki.
+3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
 4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
 
 ## Materiały dydaktyczne
@@ -102,3 +125,4 @@ Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dy
 Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
 
 `report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+

@@ -1,6 +1,27 @@
 # Budowanie i instalacja aplikacji WiRR
 
-Ta instrukcja dotyczy Unity 6 (6000.x) i projektu URP używanego na kursie WiRR. W Unity dostępne jest także okno `WiRR → Pomoc → Budowanie i instalacja`, które prowadzi przez te same kroki.
+## Spis treści
+
+- [Wybierz docelową platformę](#wybierz-docelową-platformę)
+- [Środowisko referencyjne](#środowisko-referencyjne)
+- [Najważniejsza zasada](#najważniejsza-zasada)
+- [PC — Windows](#pc--windows)
+- [Android — smartfon](#android--smartfon)
+  - [Przygotowanie Unity](#przygotowanie-unity)
+  - [Przygotowanie telefonu](#przygotowanie-telefonu)
+  - [Budowanie](#budowanie)
+- [Meta Quest 3 — aplikacja samodzielna](#meta-quest-3--aplikacja-samodzielna)
+- [Smartfon a Quest 3](#smartfon-a-quest-3)
+- [Dokumentacja producentów](#dokumentacja-producentów)
+- [Błąd C# 10 / CS8773](#błąd-c-10--cs8773)
+
+## Wybierz docelową platformę
+
+- **Chcesz tylko uruchomić Play w Editorze?** Przejdź do [Lab 01](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora), bez budowania instalatora.
+- **Windows PC:** [PC — Windows](#pc--windows).
+- **Telefon Android:** [Przygotowanie Unity](#przygotowanie-unity), a potem [telefonu](#przygotowanie-telefonu).
+- **Quest 3 bez PC Link:** [Meta Quest 3](#meta-quest-3--aplikacja-samodzielna).
+- **Ubuntu zamiast Windows:** [instrukcja Ubuntu](OS_SETUP.md#ubuntu) i profil Android; nie wymagaj Meta Quest Link Windows.
 
 ## Środowisko referencyjne
 

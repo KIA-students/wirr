@@ -67,7 +67,7 @@ namespace KIA.WiRR.Editor
 
         public static void Refresh(int labNumber)
         {
-            cachedLab = Math.Max(1, Math.Min(7, labNumber));
+            cachedLab = Math.Max(1, Math.Min(8, labNumber));
             lastRefreshUtc = DateTime.UtcNow;
             cachedItems = Build(cachedLab);
         }
@@ -96,7 +96,7 @@ namespace KIA.WiRR.Editor
                 "Unity",
                 unity6 ? WiRREnvironmentState.Ready : WiRREnvironmentState.Warning,
                 unity6
-                    ? $"{Application.unityVersion} · obsługiwana linia Unity 6; wersja zweryfikowana kursowo: 6000.6.4f1."
+                    ? $"{Application.unityVersion} · obsługiwana linia Unity 6; wersja kursowa: 6000.6.5f1; zgodność stanowiska potwierdź walidacją i uruchomieniem sceny."
                     : $"{Application.unityVersion} · pakiet jest projektowany dla Unity 6 (6000.x). Nowsza główna generacja wymaga ponownej walidacji kompatybilności."));
 
             var missingPackages = WiRRPackageInstaller.GetMissingPackagesForLab(labNumber);
@@ -256,3 +256,4 @@ namespace KIA.WiRR.Editor
         }
     }
 }
+

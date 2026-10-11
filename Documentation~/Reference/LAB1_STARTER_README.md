@@ -1,127 +1,142 @@
-# Laboratorium 1 — XR Origin, Audyt i Wydajność
+# Lab 01 — Środowisko XR i audyt urządzeń
 
-## Co Powinieneś Pobrać
+Instrukcja kursowa: WiRR Lab 01 v1.0.2. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.x.
 
-Przed Lab 1 pobierz i skonfiguruj następujące:
+## Spis treści
 
-### 1. Wersja Unity
-```
-Unity 2022 LTS (6000.0.23+) — **MUSI BYĆ TAT SAMA** dla całego kursu
-```
-Pobierz z: https://unity.com/download
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Konto Unity: nie potrzebujesz wspólnego loginu](#konto-unity-nie-potrzebujesz-wspólnego-loginu)
+- [Pierwsze 10 minut: eksperyment zamiast instalatora](#pierwsze-10-minut-eksperyment-zamiast-instalatora)
+- [Przygotowanie dalszych eksperymentów](#przygotowanie-dalszych-eksperymentów)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Pomiar bazowy PC](#30-pomiar-bazowy-pc)
+  - [3.5: Obciążenie CPU i GC](#35-obciążenie-cpu-i-gc)
+  - [4.0: Koszt renderowania](#40-koszt-renderowania)
+  - [4.5: Koszt fizyki](#45-koszt-fizyki)
+  - [5.0: Meta Quest 3](#50-meta-quest-3)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
 
-### 2. Projekt startowy (starter template)
-```
-Assets/
-├── Scenes/
-│   └── Lab01_Baseline.unity (pusty projekt z XR Origin)
-├── Scripts/
-│   ├── PerformanceBenchmark.cs (do wklejenia w Lab)
-│   └── TODO_Student.cs (placeholder)
-└── ProjectSettings/
-    └── ProjectVersion.txt
-```
 
-### 3. Pakiety wymagane
+## Szybki wybór ścieżki
+- **Nie mam Unity Hub lub edytora:** przejdź do [instalacji Unity](../../Documentation~/Reference/OS_SETUP.md#unity-nie-jest-zainstalowane), a następnie wróć do [pierwszego eksperymentu](#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Unity jest już zainstalowane:** od razu wykonaj [pierwsze 10 minut](#pierwsze-10-minut-eksperyment-zamiast-instalatora). Nie reinstaluj.
+- **Nie mam konta/licencji Unity:** wybierz [odpowiedni wariant licencji](../../Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md#wybierz-jedną-z-trzech-ścieżek).
+- **Mam działające konto i licencję:** pomiń formalności i przejdź do [pierwszych 10 minut](#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Ubuntu:** [instrukcja instalacji i diagnostyka Ubuntu](../../Documentation~/Reference/OS_SETUP.md#ubuntu).
+- **Windows:** [instrukcja instalacji i diagnostyka Windows](../../Documentation~/Reference/OS_SETUP.md#windows).
+- **Projekt działa, chcę więcej:** [zaawansowane eksperymenty](#zadania-krok-po-kroku) albo [komfort XR](../../Documentation~/Reference/COMFORT_STUDIES.md).
 
-Zainstaluj w Project → Window → Package Manager:
 
-```
-XR Interaction Toolkit        3.1.3+
-XR Plugin Management          4.4.1+
-XR Hands                       1.4.1+
-Input System                   1.8.3+
-```
+## Konto Unity: nie potrzebujesz wspólnego loginu
 
-**WAŻNE**: Nie aktualizuj pakietów między Lab 1 a Lab 7!
+Na komputerze uczelnianym z **aktywną Unity Education Grant License** student może pracować bez indywidualnego logowania. Stanowisko musi wcześniej skonfigurować administrator. **Nie udostępniamy loginu i hasła wspólnego konta Unity.** Na własnym komputerze użyj swojego Unity ID i bezpłatnej licencji Personal; darmowy Student Plan jest rozszerzeniem opcjonalnym.
 
-### 4. Konfiguracja XR Origin (pre-configured)
+Przewodnik z krokami i korzyściami dla studentów: [Lab 01: Unity ID i licencje](https://github.com/KIA-students/wirr/blob/main/Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md). Jego aktualizacja jest przygotowywana w pakiecie roboczym i będzie dostępna publicznie po wydaniu.
 
-W scenie `Lab01_Baseline.unity` jest już:
-- ✓ XR Origin (position 0,0,0 | scale 1,1,1)
-- ✓ XR Camera Manager
-- ✓ XR Interaction Manager
-- ✓ Input Action Manager (z akcjami)
 
-**Nie modyfikuj XR Origin na poszczególnych lab!**
+Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 1. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
----
+## Pierwsze 10 minut: eksperyment zamiast instalatora
 
-## Checklist — Przed Lab 1
+**Cel pierwszego doświadczenia:** sprawdzić, jak powstaje obraz sceny 3D, co oznacza 1 metr w Unity i jak zmiana jednego parametru wpływa na wynik.
 
-- [ ] Unity 2022 LTS zainstalowany
-- [ ] Projekt otwarty, brak RED errory w Console
-- [ ] Wszystkie 4 pakiety zainstalowane
-- [ ] Scene Lab01_Baseline.unity otwarta
-- [ ] Wersja pakietów zapisana w `packages-lock.json`
-- [ ] Git: `git clone <ADRES> xr-lab && cd xr-lab`
-- [ ] Gałąź: `git switch lab01-start`
+1. Otwórz gotowy projekt URP z pracowni albo samodzielnie utworzony projekt Unity. **Do pierwszego testu nie instaluj AR Foundation, ROS 2, Meta SDK ani Android Studio.**
+2. Otwórz **WiRR → Misje i odkrycia (4 bloki) → Start: Lab 01**. Jeżeli nie ma jeszcze tej wersji, otwórz zwykłą scenę 3D.
+3. Dodaj sześcian do sceny w odległości około dwóch metrów od kamery i sprawdź w Play, jak wygląda przy skali 0,5 m, 1 m i 2 m.
+4. Porównaj to ze swoją intuicją dotyczącą odległości. Zastanów się, dlaczego błędna skala w VR utrudnia pracę operatora urządzenia.
+5. Otwórz **Window → Analysis → Profiler**. Wykonaj trzy krótkie odczyty czasu klatki przed i po dodaniu np. 20 identycznych sześcianów. Wymień tylko jeden czynnik.
+6. Zapisz scenę. To już jest wartościowy punkt kontrolny. Nie przechodź do instalacji XR przed zakończeniem pierwszego testu.
 
----
+**Dla zainteresowanych:** kolejne rozdziały zawierają rozbudowane, oryginalne badania CPU, GPU, GC, fizyki i Quest 3. Są rozszerzeniem po opanowaniu podstaw, a nie listą instalacji wymaganych przed pierwszym Play.
 
-## Na Początku Lab 1
+## Przygotowanie dalszych eksperymentów
 
-1. **Utwórz gałąź:**
-```bash
-git switch -c team-<nr>/lab01-<nazwisko1>-<nazwisko2>
-```
+1. Gdy podstawowy eksperyment działa, otwórz panel zaawansowany `WiRR → Narzędzia kursu` i wybierz Lab 01.
+2. Użyj **Zainstaluj / napraw zależności** dopiero jeśli wybierasz interakcje XR lub rzeczywiste gogle.
+3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
+4. Użyj **Utwórz / napraw aktywną scenę**.
+5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
+6. Zainstaluj zależności oraz zaimportuj Starter Assets i XR Interaction Simulator.
+7. Utwórz lub napraw scenę Lab01, dodaj sondę metryk i uruchom walidator.
+8. Przed pomiarem wyłącz zbędne aplikacje i nie zmieniaj kilku parametrów eksperymentu jednocześnie.
 
-2. **Wczytaj kod:**
-   - Otwórz `PerformanceBenchmark.cs`
-   - Zastąp `int pairIndexSum = 0;` na sumę Twoich numerów indeksów
+## Zadania krok po kroku
 
-3. **Uruchom Play Mode** i obserwuj Console — powinien wypisywać FPS co ~300 klatek
+### 3.0: Pomiar bazowy PC
 
-4. **Odpowiedź wejściówka** (5 pytań, ~10 min)
+1. Uruchom scenę bez dodatkowego obciążenia i sprawdź stabilność FPS oraz czasu klatki.
+2. Wykonaj trzy próby wariantu bazowego i zapisuj FPS oraz ms/klatkę; do porównań użyj mediany.
+3. Wykonaj wariant v1 z formularza, zmieniając tylko wskazany czynnik.
+4. Porównaj warunek kontrolny z eksperymentalnym i zapisz wniosek.
 
----
+Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
-## Skrypty do pobrania
+### 3.5: Obciążenie CPU i GC
 
-### PerformanceBenchmark.cs
-```csharp
-using UnityEngine;
+1. Wykonaj CPU-A dla iterationsPerFrame: 0, 10000, 25000, 50000, 100000, 200000, 400000.
+2. Wykonaj CPU-B dla blocksPerFrame: 1, 2, 4, 8, 16, 32; po trzy próby na punkt.
+3. Wykonaj CPU-C dla allocationBytesPerFrame: 0, 1024, 4096, 16384, 65536, 262144; obserwuj GC Alloc.
+4. Zapisz reprezentatywny Main Thread ms i wskaż, kiedy ograniczeniem staje się CPU lub GC.
 
-public class PerformanceBenchmark : MonoBehaviour {
-    int pairIndexSum = 0; // WPISZ: suma numerów indeksów
-    float frameSum = 0;
-    int frameCount = 0;
-    
-    void Update() {
-        frameSum += Time.deltaTime;
-        frameCount++;
-        
-        if (frameCount == 300) {
-            float fps = frameCount / frameSum;
-            float ms = (frameSum / frameCount) * 1000f;
-            Debug.Log($"LAB01_BENCHMARK fps={fps:F1} ms={ms:F2} seed={pairIndexSum}");
-            frameCount = 0;
-            frameSum = 0;
-        }
-    }
-}
-```
+Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
----
+### 4.0: Koszt renderowania
 
-## Dokumentacja
+1. Wykonaj GPU-A dla 0, 100, 250, 500, 1000, 2000 i 4000 widocznych obiektów.
+2. Wykonaj GPU-B dla 1, 2, 4, 8, 16 i 32 materiałów.
+3. Wykonaj serię Render Scale: 0.60, 0.70, 0.80, 0.90, 1.00, 1.20.
+4. Porównaj FPS z Batches, SetPass i Triangles i wskaż dominujące wąskie gardło.
 
-- Unity XR Plugin Management: https://docs.unity3d.com/Manual/xr-plug-in-management.html
-- XR Interaction Toolkit: https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@latest/
+Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
----
+### 4.5: Koszt fizyki
 
-## Timeline Lab 1
+1. Wykonaj PHY-A dla 0, 25, 50, 100, 200, 400 i 800 dynamicznych Rigidbody.
+2. Zapisuj FPS, ms/klatkę i Physics.Processing, nie zmieniając ustawień renderowania.
+3. Wykonaj PHY-C dla Fixed Timestep: 0.0333, 0.0250, 0.0200, 0.0167, 0.0133, 0.0111 s.
+4. Wyjaśnij kompromis między częstotliwością symulacji a kosztem obliczeń.
 
-- Smoke check: 5 min
-- Wejściówka: 10 min
-- Pomiar wariantu bazowego
-- Audyt urządzeń: 30 min
-- Diagnoza: 20 min
-- Oddanie: 10 min
+Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
-**Razem: ~100 minut**
+### 5.0: Meta Quest 3
 
----
+1. Sprawdź przez Meta Horizon Link obrót/translację głowy, kontrolery i Select; Link traktuj tylko funkcjonalnie.
+2. Zbuduj samodzielną aplikację na Quest 3 i uruchom ją bez Link.
+3. Wykonaj trzy pomiary samodzielnej aplikacji i zapisz FPS oraz ms/klatkę; zweryfikuj 6DoF.
+4. W tych samych możliwie zbliżonych warunkach wykonaj trzy pomiary na PC, policz mediany dla obu platform i porównaj kierunek oraz skalę efektu.
 
-**Wersja: 2.0 • 1 listopada 2026 r.**
+Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+
+## Zakończenie laboratorium
+
+1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
+2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
+3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
+4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
+
+## Materiały dydaktyczne
+Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
+
+1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
+2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab01/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
+3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
+
+Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
+
+`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+
+
+<a id="1-wersja-unity"></a>
+<a id="2-projekt-startowy-starter-template"></a>
+<a id="3-pakiety-wymagane"></a>
+<a id="4-konfiguracja-xr-origin-pre-configured"></a>
+<a id="checklist--przed-lab-1"></a>
+<a id="co-powinieneś-pobrać"></a>
+<a id="dokumentacja"></a>
+<a id="laboratorium-1--xr-origin-audyt-i-wydajność"></a>
+<a id="na-początku-lab-1"></a>
+<a id="najpierw-wybierz-ścieżkę"></a>
+<a id="performancebenchmarkcs"></a>
+<a id="skrypty-do-pobrania"></a>
+<a id="timeline-lab-1"></a>

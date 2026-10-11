@@ -1,5 +1,24 @@
 # VITURE XR: przykładowe sceny WiRR
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Sceny](#sceny)
+  - [VITURE_01_StereoDepthLayers.unity](#viture_01_stereodepthlayersunity)
+  - [VITURE_02_StereoComfort.unity](#viture_02_stereocomfortunity)
+  - [VITURE_03_Immersive2D_Source.unity](#viture_03_immersive2d_sourceunity)
+- [Alternatywa: wygenerowanie scen w projekcie](#alternatywa-wygenerowanie-scen-w-projekcie)
+- [Szybka konfiguracja](#szybka-konfiguracja)
+- [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
+- [Wyzwanie dodatkowe: operator potrafi bezpiecznie przerwać](#wyzwanie-dodatkowe-operator-potrafi-bezpiecznie-przerwać)
+
+## Szybki wybór ścieżki
+- **Mam kompatybilne okulary i wyjście USB-C z wideo:** przejdź do [szybkiej konfiguracji](#szybka-konfiguracja), a następnie [StereoDepthLayers](#viture_01_stereodepthlayersunity).
+- **Nie mam okularów:** najpierw zobacz sceny w oknie Game lub na monitorze, porównaj wynik 2D i parę SBS. Nie twierdź, że testowałeś fizyczne okulary.
+- **Obraz jest czarny:** sprawdź wideo USB-C / DP Alt Mode i [system operacyjny](../../Documentation~/Reference/OS_SETUP.md).
+- **Chcę sprawdzić konflikty wskazówek głębi:** [komfort stereo i akomodacja](../../Documentation~/Reference/COMFORT_STUDIES.md#eksperyment-b-wirtualna-głębia-i-stała-odległość-optyczna).
+
+
 Sample zawiera trzy gotowe sceny Unity do prezentacji działania okularów VITURE XR.
 
 ## Sceny
@@ -30,7 +49,7 @@ Zawiera:
 - zestaw punktów na kilku głębokościach;
 - dalszy obiekt referencyjny.
 
-Można zmieniać `ipdMeters` w komponencie `WiRRVitureDemoBootstrap` i obserwować zmianę odczuwanej głębi. Nie należy zwiększać bazy stereo agresywnie; celem jest porównanie, a nie maksymalizacja efektu 3D.
+Najpierw użyj geometrii stereo zatwierdzonej dla urządzenia. **Nie manipuluj agresywnie parametrem ipdMeters ani dysparycją w celu wywołania bólu oczu lub dwojenia.** Celem jest wyjaśnienie, że optyczna odległość ogniskowania w konwencjonalnym wyświetlaczu jest stała, podczas gdy wskazówki wergencji wynikają z geometrii treści. Zwykła scena Unity nie mierzy fizjologicznej akomodacji.
 
 ### VITURE_03_Immersive2D_Source.unity
 
@@ -73,3 +92,14 @@ Dla Immersive 3D:
 - konwersję wykonuje oprogramowanie VITURE, a nie komponent Unity.
 
 Dokumentacja: `Documentation~/Reference/VITURE_XR.md`.
+
+
+## Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia
+
+Wybierz **WiRR → Komfort XR → Utwórz 3 prefaby: obserwacja i watchdog**. Powstaną prawdziwe prefaby Unity z łagodnym ruchem wskazówek wizualnych (maks. 8 s) i krótkim porównaniem wirtualnej głębi (maks. 10 s). Ich zadaniem nie jest wywoływanie nudności, lecz nauka projektowania komfortowych scen.
+
+Instrukcja pełna: **Documentation~/Reference/COMFORT_STUDIES.md**. Przy pracy w goglach potrzebny jest świadomy ochotnik, osoba obserwująca i możliwość natychmiastowego przerwania. Reszta grupy może wykonać równoważną analizę na monitorze. **Nie przyznaje się punktów za fizjologiczną odporność ani wystąpienie objawów.**
+
+## Wyzwanie dodatkowe: operator potrafi bezpiecznie przerwać
+
+Po zrealizowaniu podstawowego doświadczenia sprawdź [automatyczną detekcję zdjęcia gogli, utraty śledzenia i skoku danych](../../Documentation~/Reference/XR_SAFETY_WATCHDOG.md). Możesz wykonać do 10 krótkich prób technicznych, także wyłącznie na PC. **Nie wykonuj nagłych ruchów głową dla punktów.** Punktuje się poprawność prototypu i interpretacji, a nie podatność na objawy.

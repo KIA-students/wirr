@@ -28,10 +28,30 @@ namespace KIA.WiRR.Editor
             window.Show();
         }
 
+        /// <summary>Open an exact laboratory, even if an older report window is already visible.</summary>
+        public static void OpenForLab(int number)
+        {
+            number = Mathf.Clamp(number, 1, 8);
+            EditorPrefs.SetInt(LabPrefKey, number);
+            var window = GetWindow<WiRRReportWindow>();
+            if (window.document != null && window.labNumber != number)
+                WiRRReportStore.Save(window.document);
+            window.labNumber = number;
+            window.document = WiRRReportStore.LoadOrCreate(number);
+            window.evaluation = null;
+            window.submissionStatus = string.Empty;
+            window.tableFoldouts.Clear();
+            window.sectionFoldouts.Clear();
+            window.InitializeSectionFoldouts();
+            window.titleContent = WiRRBranding.Title("WiRR Raport");
+            window.minSize = new Vector2(680, 720);
+            window.Show();
+        }
+
         private void OnEnable()
         {
             titleContent = WiRRBranding.Title("WiRR Raport");
-            labNumber = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 7);
+            labNumber = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 8);
             document = WiRRReportStore.LoadOrCreate(labNumber);
             WiRRActivityLogger.Record("report_opened", labNumber, "ok");
             InitializeSectionFoldouts();

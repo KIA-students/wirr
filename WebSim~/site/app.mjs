@@ -1,16 +1,52 @@
 import { symptoms, score, difference } from './ssq.mjs';
+import { renderLeague } from './league.mjs';
+import { suggestNames } from './team-names.mjs';
 const $ = id => document.getElementById(id);
 const links = [...document.querySelectorAll('nav a')];
 function navigate() {
- const id = ['unity','websim','ssq'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'unity';
+ const id = ['unity','websim','ssq','liga'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'unity';
  for (const link of links) {
   const selected = link.hash === `#${id}`;
   if (selected) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
   $(link.hash.slice(1)).hidden = !selected;
  }
+ if (id === 'liga') renderLeague($('league-results'));
 }
 window.addEventListener('hashchange', navigate);
+$('league-refresh').addEventListener('click', () => renderLeague($('league-results')));
 navigate();
+
+const groupNameDraft = document.getElementById('team-name-own');
+const generatorOutput = document.getElementById('team-name-proposals');
+const generatorStatus = document.getElementById('team-name-feedback');
+document.getElementById('team-name-generate').addEventListener('click', () => {
+ generatorOutput.replaceChildren();
+ for (const proposed of suggestNames(3)) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = proposed;
+  button.addEventListener('click', () => {
+   groupNameDraft.value = proposed;
+   generatorStatus.textContent = 'Wybrana propozycja: ' + proposed + '. Pokaż ją prowadzącemu.';
+  });
+  generatorOutput.append(button);
+ }
+});
+document.getElementById('team-name-copy').addEventListener('click', async () => {
+ const name = groupNameDraft.value.trim().replace(/\s+/g,' ');
+ if (name.length < 3 || name.length > 48 || !/^[\p{L}\p{N} -]+$/u.test(name)) {
+  generatorStatus.textContent = 'Podaj nazwę o długości 3–48 znaków (litery, cyfry i spacje).';
+  return;
+ }
+ const group = document.getElementById('team-name-group').value;
+ const proposal = group + ': ' + name;
+ try {
+  await navigator.clipboard.writeText(proposal);
+  generatorStatus.textContent = 'Skopiowano. Wyślij propozycję prowadzącemu lub pokaż na zajęciach.';
+ } catch {
+  generatorStatus.textContent = 'Propozycja do przekazania prowadzącemu: ' + proposal;
+ }
+});
 const answers = { pre: Array(16).fill(null), post: Array(16).fill(null) };
 const times = {pre: null, post: null};
 let phase = 'pre';

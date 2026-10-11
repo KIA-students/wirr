@@ -1,5 +1,26 @@
 # Lab 06 — Bliźniak cyfrowy ROS 2 + Gazebo
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Przygotowanie](#przygotowanie)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Źródło stanu](#30-źródło-stanu)
+  - [3.5: Mapowanie przegubów](#35-mapowanie-przegubów)
+  - [4.0: Transport i bufor](#40-transport-i-bufor)
+  - [4.5: Pomiar RTT](#45-pomiar-rtt)
+  - [5.0: Kontrolowany błąd bliźniaka](#50-kontrolowany-błąd-bliźniaka)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
+
+
+## Szybki wybór ścieżki
+- **Mam działające stanowisko ROS 2 i /joint_states:** przejdź do [źródła stanu](#30-źródło-stanu) i potem [LIVE/STALE](#45-pomiar-rtt).
+- **Nie mam ROS 2 / Gazebo:** użyj przygotowanego logu i wariantu replay. Rozpoznaj ograniczenia w [źródle stanu](#30-źródło-stanu).
+- **Pracuję na Windows:** połącz się ze stanowiskiem Ubuntu przez sieć. Nie instaluj ROS 2 bez konieczności. [Systemy i urządzenia](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr).
+- **Pracuję na Ubuntu:** [ścieżka Ubuntu](../../Documentation~/Reference/OS_SETUP.md#ubuntu).
+
+
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 6. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
 ## Przygotowanie
@@ -29,7 +50,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Dla każdego joint zapisz obiekt Unity, oś, sign, offset i jednostkę.
 2. Mapuj po nazwie joint, nie po indeksie tablicy position.
-3. Ustaw trzy znane pozycje i dla każdej zapisz joint1/joint2/joint3 osobno w źródle oraz w Unity.
+3. Ustaw trzy znane pozycje i dla każdej zapisz rzeczywiste przeguby osobno; joint3 = N/A dla RRBot w źródle oraz w Unity.
 4. Dla każdej pozycji policz błąd każdego przegubu w stopniach i wyjaśnij różnice konwencji.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
@@ -38,23 +59,23 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Zarejestruj 30 wartości inter-arrival JointState.
 2. Wykonaj warianty bufora A/B/C i zapisz Hz, opóźnienie, drgania czasowe (jitter) oraz płynność.
-3. Wykonaj co najmniej 10 pomiarów RTT.
+3. Zapisz pierwsze 30 odstępów między wiadomościami. WebSim wymaga własnego bufora lub wykonania etapu w LOCAL/LAN.
 4. Wybierz kompromis bufora ograniczający drgania czasowe (jitter) bez nadmiernego opóźnienia.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
-### 4.5: LIVE/STALE
+### 4.5: Pomiar RTT
 
-1. Zapisz próg STALE i nominalne joint_states Hz.
-2. Zatrzymaj źródło danych i zmierz czas do STALE.
-3. Wznow źródło i zmierz czas powrotu do LIVE; porównaj warunki A/B.
-4. Zapisz H1/H2 dla źródła opóźnień i wykonaj test rozstrzygający.
+1. Uruchom jawny pomiar żądanie/odpowiedź. Dla WebSim przygotuj własny próbnik lub wykonaj etap w LOCAL/LAN.
+2. Wykonaj co najmniej 50 próbek na każdy warunek A/B wariantu v4. Zachowaj pełny log; pierwsze 10 próbek bazowych wpisz do formularza.
+3. Porównaj N, średnią, minimum i maksimum. Nie utożsamiaj RTT z jednostronnym opóźnieniem.
+4. Zapisz H1/H2, warunki sieci i wniosek diagnostyczny.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+Po zakończeniu uzupełnij etap 4.5 formularza oraz dołącz log.
 
 ### 5.0: Kontrolowany błąd bliźniaka
 
-1. Zapisz wariant bazowy: przeguby, Hz i RTT.
+1. Zapisz wariant bazowy, próg STALE i Hz. Zatrzymaj źródło danych; zmierz czas do STALE i powrotu do LIVE.
 2. Wprowadź kontrolowany błąd v5 i zanotuj objaw.
 3. Wykonaj H1/H2, test diagnostyczny i minimalną poprawkę.
 4. Po naprawie wyznacz maksymalny błąd synchronizacji i potwierdź STALE→LIVE.
@@ -65,7 +86,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
 2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź raport** i popraw wskazane braki.
+3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
 4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
 
 ## Materiały dydaktyczne
@@ -79,3 +100,4 @@ Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dy
 Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
 
 `report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+

@@ -1,5 +1,25 @@
 # Lab 04 — Rozumienie sceny i mieszanie rzeczywistości
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Przygotowanie](#przygotowanie)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: API głębi (Depth API)](#30-api-głębi-depth-api)
+  - [3.5: Okluzja](#35-okluzja)
+  - [4.0: Rzutowanie promienia z użyciem danych głębi](#40-rzutowanie-promienia-z-użyciem-danych-głębi)
+  - [4.5: Estymacja oświetlenia](#45-estymacja-oświetlenia)
+  - [5.0: Kontrolowany błąd](#50-kontrolowany-błąd)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
+
+
+## Szybki wybór ścieżki
+- **Mam działającą scenę AR z Lab 03:** przejdź wprost do [Depth API i okluzji](#30-api-głębi-depth-api).
+- **Nie mam działającego AR:** [wróć do śledzenia i płaszczyzn w Lab 03](../Lab03/README.md#30-śledzenie-i-płaszczyzny), zamiast reinstalować całość.
+- **Telefon nie wspiera Depth API:** użyj wariantu symulacyjnego i [przejdź do eksperymentu okluzji](#35-okluzja), jasno oznaczając brak pomiaru sprzętowego.
+
+
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 4. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
 ## Przygotowanie
@@ -64,7 +84,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
 2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź raport** i popraw wskazane braki.
+3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
 4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
 
 ## Materiały dydaktyczne
@@ -77,3 +97,4 @@ Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dy
 Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
 
 `report-template.md` pozostaje formatem referencyjnym i awaryjnym.
+

@@ -68,7 +68,8 @@ namespace KIA.WiRR.Editor
                 }),
             new WiRRLabDefinition(5, "Optymalizacja modeli CAD", "Laboratorium 05: Optymalizacja modeli CAD", Array.Empty<string>(), Array.Empty<WiRRExternalSample>()),
             new WiRRLabDefinition(6, "Bliźniak cyfrowy ROS 2 + Gazebo", "Laboratorium 06: Bliźniak cyfrowy ROS 2 + Gazebo", new[] { RosTcpConnectorUrl }, Array.Empty<WiRRExternalSample>()),
-            new WiRRLabDefinition(7, "Walidacja i testy akceptacyjne", "Laboratorium 07: Walidacja i testy akceptacyjne XR", new[] { "com.unity.test-framework" }, Array.Empty<WiRRExternalSample>())
+            new WiRRLabDefinition(7, "Walidacja i testy akceptacyjne", "Laboratorium 07: Walidacja i testy akceptacyjne XR", new[] { "com.unity.test-framework" }, Array.Empty<WiRRExternalSample>()),
+            new WiRRLabDefinition(8, "Wynalazca XR, demonstrator integracyjny", "Laboratorium 08: Wynalazca XR i demonstrator integracyjny", Array.Empty<string>(), Array.Empty<WiRRExternalSample>())
         };
 
         public static WiRRLabDefinition Get(int labNumber)

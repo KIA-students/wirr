@@ -1,11 +1,34 @@
 # Lab 02 — Interakcja i manipulacja XR
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Przygotowanie](#przygotowanie)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Chwyt, socket i ray](#30-chwyt-socket-i-ray)
+  - [3.5: UI i feedback](#35-ui-i-feedback)
+  - [4.0: Lokomocja](#40-lokomocja)
+  - [4.5: Scenariusz i diagnostyka](#45-scenariusz-i-diagnostyka)
+  - [5.0: Quest 3 i SSQ](#50-quest-3-i-ssq)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
+- [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
+- [Wyzwanie dodatkowe: operator potrafi bezpiecznie przerwać](#wyzwanie-dodatkowe-operator-potrafi-bezpiecznie-przerwać)
+
+## Szybki wybór ścieżki
+- **Nie mam gotowej sceny Lab 01:** [wróć do pierwszej sceny](../Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Mam działający projekt:** [od razu przejdź do interakcji](#zadania-krok-po-kroku).
+- **Brakuje XRI:** doinstaluj tylko pakiety używane w tym wariancie, zobacz [warunki startu](../../Documentation~/Reference/OS_SETUP.md#pakiety-xr-tylko-gdy-potrzebne).
+- **Chcę przejść do rzeczywistego sprzętu:** najpierw [uruchomienie urządzeń](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr), potem [Quest 3 i SSQ](#50-quest-3-i-ssq).
+- **Chcę poznać ograniczenia percepcji:** [Komfort XR](../../Documentation~/Reference/COMFORT_STUDIES.md).
+
+
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 2. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
 ## Przygotowanie
 
-1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 02.
-2. Użyj **Zainstaluj / napraw zależności**.
+1. W **WiRR → Misje i odkrycia** wybierz **Start: Lab 02**, aby natychmiast otworzyć scenę PC. Panel zaawansowany służy dopiero do integracji XR.
+2. Zależności XRI instaluj tylko wtedy, kiedy wykonujesz chwyt kontrolerem, teleportację lub pracujesz w symulatorze XR.
 3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
 4. Użyj **Utwórz / napraw aktywną scenę**.
 5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
@@ -64,7 +87,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
 2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź raport** i popraw wskazane braki.
+3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
 4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
 
 ## Materiały dydaktyczne
@@ -77,3 +100,15 @@ Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dy
 Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
 
 `report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+
+
+## Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia
+
+Wybierz **WiRR → Komfort XR → Utwórz 3 prefaby: obserwacja i watchdog**. Powstaną prawdziwe prefaby Unity z łagodnym ruchem wskazówek wizualnych (maks. 8 s) i krótkim porównaniem wirtualnej głębi (maks. 10 s). Ich zadaniem nie jest wywoływanie nudności, lecz nauka projektowania komfortowych scen.
+
+Instrukcja pełna: **Documentation~/Reference/COMFORT_STUDIES.md**. Przy pracy w goglach potrzebny jest świadomy ochotnik, osoba obserwująca i możliwość natychmiastowego przerwania. Reszta grupy może wykonać równoważną analizę na monitorze. **Nie przyznaje się punktów za fizjologiczną odporność ani wystąpienie objawów.**
+
+## Wyzwanie dodatkowe: operator potrafi bezpiecznie przerwać
+
+Po zrealizowaniu podstawowego doświadczenia sprawdź [automatyczną detekcję zdjęcia gogli, utraty śledzenia i skoku danych](../../Documentation~/Reference/XR_SAFETY_WATCHDOG.md). Możesz wykonać do 10 krótkich prób technicznych, także wyłącznie na PC. **Nie wykonuj nagłych ruchów głową dla punktów.** Punktuje się poprawność prototypu i interpretacji, a nie podatność na objawy.
+
