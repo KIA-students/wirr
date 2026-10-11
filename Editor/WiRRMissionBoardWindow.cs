@@ -47,6 +47,21 @@ namespace KIA.WiRR.Editor
 
         private static readonly string[] GroupLabels = { "Nie wybrano", "G1: grupa 1", "G2: grupa 2" };
 
+        private static readonly string[] NamePrefixes =
+        {
+            "Kwantowe", "Pikselowe", "Cybernetyczne", "Wirtualne", "Rekurencyjne",
+            "Neonowe", "Nadprzewodzące", "Binarne", "Mechaniczne", "Zrobotyzowane",
+            "Algorytmiczne", "Holograficzne", "Laserowe", "Bezkablowe", "Rozbrykane"
+        };
+        private static readonly string[] NameSubjects =
+        {
+            "Kapibary", "Pierogi", "Dziobaki", "Wombaty", "Roboty", "Bajty",
+            "Drony", "Pingwiny", "Kaktusy", "Wektory", "Żółwie", "Śrubokręty",
+            "Serwomechanizmy", "Jeże", "Transformatory", "Czipy"
+        };
+        private static readonly System.Random NamesRandom = new System.Random();
+
+        private string proposedTeamName = string.Empty;
         private int blockIndex;
         private int selectedGroup;
         private int selectedMode;
@@ -144,6 +159,24 @@ namespace KIA.WiRR.Editor
                 selectedGroup = group;
                 EditorPrefs.SetInt("KIA.WiRR.MissionGroup", selectedGroup);
             }
+            EditorGUILayout.HelpBox("Nazwa drużyny jest tylko propozycją. Prowadzący zatwierdza ją w rankingu; " +
+                "nie wysyłamy jej automatycznie ani nie zmieniamy publicznych punktów.", MessageType.None);
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                if (GUILayout.Button("Losuj zabawną nazwę"))
+                    proposedTeamName = NamePrefixes[NamesRandom.Next(NamePrefixes.Length)] +
+                        " " + NameSubjects[NamesRandom.Next(NameSubjects.Length)];
+                if (GUILayout.Button("Kopiuj dla prowadzącego"))
+                {
+                    var text = (selectedGroup == 1 ? "G1: " : selectedGroup == 2 ? "G2: " : "") +
+                        proposedTeamName.Trim();
+                    if (selectedGroup > 0 && ValidTeamName(proposedTeamName))
+                        EditorGUIUtility.systemCopyBuffer = text;
+                    else
+                        EditorUtility.DisplayDialog("WiRR", "Wybierz G1/G2 oraz poprawną nazwę 3–48 znaków.", "OK");
+                }
+            }
+            proposedTeamName = EditorGUILayout.TextField("Nazwa drużyny (propozycja)", proposedTeamName);
             selectedMode = EditorGUILayout.Popup("Tryb faktyczny", selectedMode, Modes);
             EditorGUILayout.LabelField("Jedno odkrycie z eksperymentu");
             discovery = EditorGUILayout.TextArea(discovery, GUILayout.MinHeight(46));
@@ -187,6 +220,14 @@ namespace KIA.WiRR.Editor
             return matches.OrderByDescending(File.GetLastWriteTimeUtc).FirstOrDefault();
         }
 
+        private static bool ValidTeamName(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value)) return false;
+            var trimmed = value.Trim();
+            return trimmed.Length >= 3 && trimmed.Length <= 48 &&
+                trimmed.All(ch => char.IsLetterOrDigit(ch) || ch == ' ' || ch == '-');
+        }
+
         private static string Escape(string value, int maximum = 240)
         {
             var safe = (value ?? string.Empty).Replace("|", "\\|")
@@ -207,6 +248,8 @@ namespace KIA.WiRR.Editor
             writer.AppendLine();
             writer.AppendLine($"- Data UTC: {DateTime.UtcNow:O}");
             writer.AppendLine($"- Grupa laboratoryjna: {GroupLabels[selectedGroup]}");
+            if (ValidTeamName(proposedTeamName))
+                writer.AppendLine("- Propozycja nazwy drużyny (bez zatwierdzenia): " + Escape(proposedTeamName, 48));
             writer.AppendLine($"- Unity: {Application.unityVersion}");
             writer.AppendLine($"- System: {Escape(SystemInfo.operatingSystem)}");
             writer.AppendLine($"- GPU: {Escape(SystemInfo.graphicsDeviceName)}");
