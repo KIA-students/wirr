@@ -2,9 +2,19 @@
 <h2 class="page-title">Jak rozpocząć laboratoria WiRR</h2>
 <p>Laboratoria wykonujesz <strong>samodzielnie</strong>. Każdy student prowadzi własny projekt Unity, wykonuje własne pomiary i wysyła własny raport. Wszystkie materiały przeznaczone dla studentów są publikowane w repozytorium <a href="https://github.com/KIA-students/wirr"><strong>KIA-students/wirr</strong></a>.</p>
 <p>Pakiet WiRR przygotowuje środowisko, instaluje wymagane zależności, udostępnia materiały startowe, pomaga zweryfikować konfigurację i obsługuje raportowanie. Nie wykonuje ocenianych zadań za studenta.</p>
-<p class="notice"><strong>Konfiguracja kursu:</strong> zalecany system to <strong>Windows 11 64-bit</strong>, a obsługiwana linia edytora to <strong>Unity 6 (6000.x)</strong>; wersja aktualnie zweryfikowana kursowo to <strong>6000.6.4f1</strong>. Pakiet instaluj z gałęzi <strong>main</strong>, dzięki czemu instrukcja nie zależy od numeru konkretnego wydania.</p>
+<p class="notice"><strong>Konfiguracja kursu:</strong> zalecany system to <strong>Windows 11 64-bit</strong>, a obsługiwana linia edytora to <strong>Unity 6 (6000.x)</strong>; wersja aktualnie zweryfikowana kursowo to <strong>6000.6.4f1</strong>. Pakiet instaluj z zatwierdzonego przez prowadzącego ref. Dostępna jest lekka gałąź UPM; jeżeli problem dotyczy importu, użyj na zajęciach sceny awaryjnej bez pakietu.</p>
 
-<section><h3>1. Przygotowanie przed pierwszym laboratorium</h3>
+<section id="quickstart"><h3>1. Zacznij od doświadczenia, nie od konfiguracji</h3>
+<p>Na pierwszych zajęciach wystarczy <strong>Unity 6000.6.x (URP)</strong> i podstawowa scena PC. Nie trzeba od razu instalować ARCore, ROS 2, Dockera, Android Studio ani całego zestawu SDK gogli.</p>
+<ol class="steps">
+<li>Otwórz przygotowany przez prowadzącego projekt Unity albo utwórz pusty projekt <strong>Universal 3D (URP)</strong>. Windows i Ubuntu mogą zacząć tak samo.</li>
+<li>Jeśli masz WiRR, otwórz <strong>WiRR → Misje i odkrycia (4 bloki) → Start: Lab 01</strong>. Powstanie minimalna scena, bez dodatkowych paczek XR. Jeśli nadal używasz starszej wersji WiRR, wybierz <strong>WiRR → Narzędzia kursu → Utwórz lub napraw scenę</strong>.</li>
+<li>Dodaj <strong>GameObject → 3D Object → Cube</strong>, przesuń obiekt w Inspector, włącz Play, zatrzymaj i zapisz scenę. Dopiero potem wybierz eksperyment na Quest 3, telefonie AR lub VITURE.</li>
+<li>Jeżeli import WiRR zawiedzie, pracuj na czystej scenie URP. Zapisz pierwszy błąd Console, ale nie trać bloku na powtarzanie instalacji.</li>
+</ol>
+<p class="notice">Wyzwanie: porównaj wrażenie odległości na monitorze i w goglach, a potem zaproponuj zastosowanie XR poza grami. Dwie grupy rywalizują w <a href="#liga"><strong>Lidze XR</strong></a>, a punkty przyznaje prowadzący za badanie i pomysł, nie za tempo ani liczbę commitów.</p>
+<details><summary><strong>Rozwiń: zaawansowana instalacja, Ubuntu, Android i Docker (tylko gdy potrzebne)</strong></summary>
+
 <p><strong>System referencyjny:</strong> Windows 11 64-bit. Obsługiwanym wariantem alternatywnym jest <strong>Ubuntu 22.04 lub 24.04 LTS 64-bit</strong>. Unity 6 wspiera oba te wydania Ubuntu; na Linuxie zalecane są sterowniki producenta GPU lub aktualne Mesa zgodnie z wymaganiami Unity.</p>
 
 <h4>Wymagane składniki</h4>
@@ -23,7 +33,7 @@
 <li>Zainstaluj Unity Hub i Unity 6 (6000.x). W <strong>Add modules</strong> zaznacz Android Build Support, Android SDK &amp; NDK Tools oraz OpenJDK.</li>
 <li>Zainstaluj Git. Zalecane: Visual Studio 2022 Community z workloadem <strong>Game development with Unity</strong>.</li>
 <li>Opcjonalnie zainstaluj GitHub CLI i Android Studio.</li>
-<li>Przed Lab 06 zainstaluj Docker Desktop i sprawdź <code>docker compose version</code>.</li>
+<li>Docker zainstaluj tylko wtedy, gdy potrzebujesz uruchomić lokalny backend ROS 2. Na zajęciach możesz połączyć się z przygotowanym serwerem prowadzącego.</li>
 </ol>
 
 <h4>Ubuntu 22.04 / 24.04 LTS</h4>
@@ -59,7 +69,7 @@ Te trzy składniki są wymagane do budowania i instalowania aplikacji na smartfo
 <p>Po instalacji Unity utwórz projekt z szablonu <strong>Universal 3D (URP)</strong>.</p>
 <pre><code>git --version
 gh --version
-gh auth status</code></pre></section>
+gh auth status</code></pre></details></section>
 
 <section><h3>2. Instalacja najnowszej wersji pakietu WiRR</h3><ol class="steps">
 <li>W Unity otwórz <strong>Window → Package Manager</strong> (w niektórych układach: Window → Package Management → Package Manager).</li>
@@ -71,8 +81,8 @@ gh auth status</code></pre></section>
 
 <section><h3>3. Schemat pracy na każdym laboratorium</h3><ol class="steps">
 <li>Otwórz <strong>WiRR → Narzędzia kursu</strong> i wybierz właściwe laboratorium.</li>
-<li>Uruchom <strong>Zainstaluj / napraw zależności laboratorium</strong>. Zaczekaj na zakończenie instalacji i kompilacji.</li>
-<li>Zaimportuj <strong>oficjalne próbki Unity</strong>, jeżeli są wymagane, oraz <strong>próbkę WiRR</strong>. Pakiet utworzy przestrzeń roboczą <code>Assets/WiRR/LabXX</code>.</li>
+<li>Jeśli wybrałeś eksperyment wymagający dodatkowego SDK, uruchom <strong>Zainstaluj / napraw zależności laboratorium</strong>. Pierwsza scena PC nie wymaga tego kroku.</li>
+<li>Zaimportuj tylko próbki potrzebne do wybranego eksperymentu. Podstawową przestrzeń roboczą <code>Assets/WiRR/LabXX</code> możesz przygotować jednym przyciskiem <strong>Start: Lab XX</strong>.</li>
 <li>Użyj <strong>Utwórz / napraw aktywną scenę</strong>, zapisz scenę i uruchom <strong>Sprawdź konfigurację laboratorium</strong>.</li>
 <li>W sekcji <strong>Zadania laboratoryjne</strong> wykonuj czynności w kolejności. Nie traktuj generatorów prefabów, przykładów XR/MR/AR ani materiałów demonstracyjnych jako gotowego rozwiązania ocenianego zadania.</li>
 <li>Dla każdego punktu kontrolnego wykonaj wymagany pomiar lub test i od razu zapisz wynik w formularzu raportu. Nie odkładaj odtwarzania danych pomiarowych na koniec zajęć.</li>
