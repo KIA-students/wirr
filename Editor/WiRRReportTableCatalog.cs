@@ -31,7 +31,7 @@ namespace KIA.WiRR.Editor
             return lab switch
             {
                 1 => Lab01(checkpoint), 2 => Lab02(checkpoint), 3 => Lab03(checkpoint), 4 => Lab04(checkpoint),
-                5 => Lab05(checkpoint), 6 => Lab06(checkpoint), 7 => Lab07(checkpoint),
+                5 => Lab05(checkpoint), 6 => Lab06(checkpoint), 7 => Lab07(checkpoint), 8 => Lab08(checkpoint),
                 _ => Array.Empty<WiRRReportTable>()
             };
         }
@@ -326,6 +326,17 @@ namespace KIA.WiRR.Editor
             "4.0" => new[] { T("lab07_usability", "Użyteczność i dostępność", new[]{"U1","U2","U3"}, new[]{"Cel użytkownika","Sukces?","Czas/próby","Błędne aktywacje","Pomoc","Problem dostępności"}) },
             "4.5" => new[] { T("lab07_regression", "Test regresji", new[]{"REG-01","REG-02"}, new[]{"Test","Przed poprawką","Po poprawce","Status końcowy","Dowód"}) },
             "5.0" => new[] { T("lab07_risk", "Macierz ryzyka", new[]{"R-01","R-02","R-03"}, new[]{"Ryzyko","P","S","R","Dowód","Działanie ograniczające","Ryzyko resztkowe"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+ 
+        private static IReadOnlyList<WiRRReportTable> Lab08(string cp) => cp switch
+        {
+            "3.0" => new[] { T("lab08_trials", "Trzy próby scenariusza (z pliku JSON)",
+                        new[]{"Próba 1", "Próba 2", "Próba 3"},
+                        new[]{"Czas [s]", "Sukces", "Tryb danych"}) },
+            "4.5" => new[] { T("lab08_comparison", "Wariant bazowy i poprawiony",
+                        new[]{"Przed zmianą", "Po zmianie"},
+                        new[]{"Mediana czasu [s]", "Sukcesy", "Uwagi"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
     }

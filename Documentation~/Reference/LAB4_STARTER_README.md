@@ -1,5 +1,18 @@
 # Laboratorium 04. Rozumienie sceny AR
 
+## Spis treści
+
+- [Najpierw wybierz ścieżkę](#najpierw-wybierz-ścieżkę)
+- [Wymagania](#wymagania)
+- [Procedura](#procedura)
+
+## Najpierw wybierz ścieżkę
+- **Mam działającą scenę z poprzedniego laboratorium:** [otwórz aktualne Lab 04](../../Samples~/Lab04/README.md#szybki-wybór-ścieżki) i pomiń powtórną instalację.
+- **Nie mam Unity / konta:** [system operacyjny](OS_SETUP.md#wybierz-aktualną-sytuację) lub [licencja](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- **Windows:** [uruchomienie Windows](OS_SETUP.md#windows); **Ubuntu:** [uruchomienie Ubuntu](OS_SETUP.md#ubuntu).
+- **Potrzebuję więcej szczegółów:** [pełny przewodnik Lab 04](../../Samples~/Lab04/README.md) zawiera spis treści i ścieżki wariantowe.
+- **Nie mam sprzętu XR:** rozpocznij od symulatora lub dostarczonego logu; nie instaluj wszystkiego w ciemno.
+
 Niniejszy dokument jest skrótem dla pakietu Unity. Aktualna, autorytatywna instrukcja laboratoryjna znajduje się w repozytorium `MatPomGit/prz`:
 
 - [Instrukcja PDF, WiRR Lab 04](https://github.com/MatPomGit/prz/blob/main/courses/wirtualna-i-rozszerzona-rzeczywistosc/laboratories/lab-04-rozumienie-sceny-i-mieszanie-rzeczywistosci/wirr_lab04.pdf)

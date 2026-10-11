@@ -1,5 +1,24 @@
 # Laboratorium 5: optymalizacja modeli CAD
 
+## Spis treści
+
+- [Najpierw wybierz ścieżkę](#najpierw-wybierz-ścieżkę)
+- [Co otrzymujesz z pakietu](#co-otrzymujesz-z-pakietu)
+- [Narzędzia](#narzędzia)
+- [Zanim rozpoczniesz](#zanim-rozpoczniesz)
+- [Minimalny pipeline](#minimalny-pipeline)
+- [Co musisz rozumieć przed konwersją](#co-musisz-rozumieć-przed-konwersją)
+- [Kontrola po każdej konwersji](#kontrola-po-każdej-konwersji)
+- [Zasada najważniejsza](#zasada-najważniejsza)
+
+## Najpierw wybierz ścieżkę
+- **Mam działającą scenę z poprzedniego laboratorium:** [otwórz aktualne Lab 05](../../Samples~/Lab05/README.md#szybki-wybór-ścieżki) i pomiń powtórną instalację.
+- **Nie mam Unity / konta:** [system operacyjny](OS_SETUP.md#wybierz-aktualną-sytuację) lub [licencja](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- **Windows:** [uruchomienie Windows](OS_SETUP.md#windows); **Ubuntu:** [uruchomienie Ubuntu](OS_SETUP.md#ubuntu).
+- **Potrzebuję więcej szczegółów:** [pełny przewodnik Lab 05](../../Samples~/Lab05/README.md) zawiera spis treści i ścieżki wariantowe.
+- **Nie mam sprzętu XR:** rozpocznij od symulatora lub dostarczonego logu; nie instaluj wszystkiego w ciemno.
+
+
 ## Co otrzymujesz z pakietu
 
 Po przygotowaniu workspace Lab 05 pakiet WiRR kopiuje do projektu:

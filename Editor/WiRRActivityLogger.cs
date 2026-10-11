@@ -51,7 +51,7 @@ namespace KIA.WiRR.Editor
             log.events.Add(new WiRRActivityEvent
             {
                 eventName = eventName.Trim(),
-                labNumber = Math.Max(1, Math.Min(7, labNumber)),
+                labNumber = Math.Max(1, Math.Min(8, labNumber)),
                 timestampUtc = DateTime.UtcNow.ToString("O"),
                 result = result ?? string.Empty,
                 durationSeconds = 0d
@@ -68,7 +68,7 @@ namespace KIA.WiRR.Editor
             log.events.Add(new WiRRActivityEvent
             {
                 eventName = eventName,
-                labNumber = Math.Max(1, Math.Min(7, labNumber)),
+                labNumber = Math.Max(1, Math.Min(8, labNumber)),
                 timestampUtc = DateTime.UtcNow.ToString("O"),
                 result = result ?? string.Empty,
                 durationSeconds = Math.Round(seconds, 3)
@@ -141,7 +141,7 @@ namespace KIA.WiRR.Editor
             Record("unity_editor_quitting", CurrentLab(), "ok");
         }
 
-        private static int CurrentLab() => Math.Max(1, Math.Min(7, EditorPrefs.GetInt(LabPrefKey, 1)));
+        private static int CurrentLab() => Math.Max(1, Math.Min(8, EditorPrefs.GetInt(LabPrefKey, 1)));
 
         private static string RootPath() =>
             Path.GetFullPath(Path.Combine(Application.dataPath, "../Library/WiRRReports"));

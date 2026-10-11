@@ -3,8 +3,7 @@ name: Synchronizacja do KIA-students
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: '17 */6 * * *'
+  # Changes are exported after an actual main update; no periodic polling.
   workflow_dispatch:
 
 permissions:
@@ -112,8 +111,8 @@ jobs:
               item for item in package.get("samples", [])
               if str(item.get("displayName", "")).startswith("Laboratorium ")
           ]
-          if len(labs) != 7:
-              raise SystemExit(f"UPM: oczekiwano 7 laboratoriów, znaleziono {len(labs)}")
+          if len(labs) != 8:
+              raise SystemExit(f"UPM: oczekiwano 8 laboratoriów, znaleziono {len(labs)}")
           if not any(item.get("displayName") == "VITURE XR: Full SBS i Immersive 3D"
                      for item in package.get("samples", [])):
               raise SystemExit("UPM: brak sample VITURE XR")
@@ -193,6 +192,15 @@ jobs:
 
           git checkout -B "${EXPORT_BRANCH}" "upstream/${UPSTREAM_BRANCH}"
           git read-tree --reset -u "${source_sha}"
+
+          # The competition scoreboard belongs to the COURSE repository, not
+          # to this development snapshot. Keep all already approved scores.
+          # An initial scoreboard is exported only if the course has none yet.
+          if git ls-tree -r --name-only "upstream/${UPSTREAM_BRANCH}" -- competition \
+               | grep -q '^competition/'; then
+            git checkout "upstream/${UPSTREAM_BRANCH}" -- competition
+            echo "Zachowano aktualny ranking studentów z KIA-students/wirr."
+          fi
 
           for path in "${private_paths[@]}"; do
             git rm -f --ignore-unmatch -- "${path}"

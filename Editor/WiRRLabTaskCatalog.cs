@@ -360,6 +360,46 @@ namespace KIA.WiRR.Editor
                         "Wybierz ACCEPT, ACCEPT WITH CONDITIONS albo REJECT wyłącznie na podstawie wcześniej zapisanych kryteriów blokujących, wyników testów i ryzyka; uzasadnij decyzję dowodami."
                     },
                     "Dowód: test automatyczny z PASS/FAIL, macierz ryzyka i uzasadniona decyzja akceptacyjna.")
+            },
+            new[]
+            {
+                new WiRRLabTask("3.0", "Uruchom działający prototyp", "Zbuduj własny użyteczny demonstrator XR na dotychczasowym projekcie.",
+                    new[]
+                    {
+                        "Otwórz Lab08 przez pulpit Misje WiRR. Wybierz jeden problem spoza gier i wskaż użytkownika.",
+                        "Na PC użyj generatora inspekcji bez dodatkowych SDK albo rozwiń istniejącą scenę VR, AR, VITURE lub robotyczną.",
+                        "Uruchom trzy próby kontrolne i wyeksportuj wynik JSON; brak sprzętu opisuj jako ograniczenie, nie jako udany test HMD.",
+                        "Przedstaw jedno odkrycie, jedną trudność i jeden pomysł nowego zastosowania."
+                    }, "Dowód: działająca scena, liczba prób i krótki wniosek."),
+                new WiRRLabTask("3.5", "Zmierz powtarzalność", "Poznaj różnicę między wrażeniem a zmierzoną jakością.",
+                    new[]
+                    {
+                        "Zdefiniuj jeden mierzalny wskaźnik: sukces, czas, błąd pozycjonowania albo utrata aktualności danych.",
+                        "Wykonaj trzy próby w takich samych warunkach; wyeksportuj wartości rejestrowane przez demonstrator.",
+                        "Porównaj wynik z wstępną hipotezą i oceń ograniczenie małej liczby prób."
+                    }, "Dowód: wynik rzeczywisty, nie przykład liczbowy."),
+                new WiRRLabTask("4.0", "Znajdź jedną przeszkodę", "Samodzielnie zdiagnozuj ograniczenie lub błąd.",
+                    new[]
+                    {
+                        "Zapisz jedno rzeczywiście zaobserwowane ograniczenie: interakcja, czytelność, dostępność, śledzenie albo opóźnienie.",
+                        "Rozróżnij przyczynę sprzętową, konfiguracyjną i problem interfejsu.",
+                        "Przeprowadź bezpieczny test potwierdzający diagnozę."
+                    }, "Dowód: obserwacja i krótkie wyjaśnienie."),
+                new WiRRLabTask("4.5", "Sprawdź minimalną poprawkę", "Pokaż, że jedna zmiana pomaga.",
+                    new[]
+                    {
+                        "Zmień jeden parametr UI, logiki albo danych źródłowych, bez przebudowy całej sceny.",
+                        "Wykonaj trzy próby po zmianie w tych samych warunkach.",
+                        "Zachowaj metryki przed i po, bez przypisywania fikcyjnych danych."
+                    }, "Dowód: wyniki przed i po, zwięzły komentarz."),
+                new WiRRLabTask("5.0", "Wynalazek poza grami", "Połącz poznane technologie w oryginalny, uzasadniony pomysł.",
+                    new[]
+                    {
+                        "Zaprezentuj w 60–90 sekund prototyp szkoleniowy, przemysłowy, medyczny, badawczy lub robotyczny.",
+                        "Wskaż dwie wykorzystane umiejętności z poprzednich laboratoriów.",
+                        "Wyjaśnij, co system wnosi ponad interfejs 2D i jakie ma ograniczenia.",
+                        "Zapisz możliwość następnej iteracji, bez dopisywania zbędnych formularzy."
+                    }, "Dowód: działający prototyp, uzasadnienie i wniosek.")
             }
         };
 

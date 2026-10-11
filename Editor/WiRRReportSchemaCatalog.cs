@@ -72,7 +72,7 @@ namespace KIA.WiRR.Editor
     {
         public static IReadOnlyList<WiRRReportSection> Get(int lab) => lab switch
         {
-            1 => Lab01(), 2 => Lab02(), 3 => Lab03(), 4 => Lab04(), 5 => Lab05(), 6 => Lab06(), 7 => Lab07(),
+            1 => Lab01(), 2 => Lab02(), 3 => Lab03(), 4 => Lab04(), 5 => Lab05(), 6 => Lab06(), 7 => Lab07(), 8 => Lab08(),
             _ => throw new ArgumentOutOfRangeException(nameof(lab))
         };
 
@@ -156,6 +156,35 @@ namespace KIA.WiRR.Editor
             new WiRRReportSection("4.0: użyteczność", "4.0", N("cp40.success_rate","Skuteczność","%"), I("cp40.false_activations","Błędne aktywacje"), I("cp40.assistance","Liczba podpowiedzi"), M("cp40.answer","Wniosek dotyczący użyteczności i dostępności")),
             new WiRRReportSection("4.5: kontrolowany błąd i test regresyjny", "4.5", T("cp45.fault","Kontrolowany błąd"), N("cp45.recovery_s","Czas przywracania poprawnego działania","s"), B("cp45.regression_pass","Test regresyjny zaliczony"), M("cp45.diagnosis","Hipotezy H1/H2, test rozstrzygający i poprawka")),
             new WiRRReportSection("5.0: automatyzacja, ryzyko i decyzja", "5.0", B("cp50.automated_pass","Automatyczny test zaliczony"), B("cp50.controlled_fail","Wykazano kontrolowany wynik FAIL"), I("cp50.max_risk","Maksymalny priorytet ryzyka R = P × S"), C("cp50.acceptance","Decyzja","ACCEPT","ACCEPT WITH CONDITIONS","REJECT"), M("cp50.answer","Uzasadnienie decyzji"))
+        };
+
+        // Lab 08 deliberately has a minimal required baseline: the student
+        // imports measurements from the local demonstrator instead of typing
+        // dozens of metrics into tables.
+        private static IReadOnlyList<WiRRReportSection> Lab08() => new[]
+        {
+            CommonEnvironment(),
+            new WiRRReportSection("3.0: działający demonstrator", "3.0",
+                T("cp30.scenario", "Cel i wariant demonstratora"),
+                I("cp30.attempts", "Liczba wykonanych prób"),
+                I("cp30.successes", "Udane próby"),
+                M("cp30.answer", "Co zaobserwowano?")),
+            new WiRRReportSection("3.5: pomiar", "3.5",
+                N("cp35.median_s", "Mediana czasu próby", "s"),
+                T("cp35.source", "Źródło i rzeczywisty tryb danych"),
+                M("cp35.answer", "Krótki wniosek z pomiaru")),
+            new WiRRReportSection("4.0: diagnoza", "4.0",
+                M("cp40.issue", "Zaobserwowana trudność"),
+                M("cp40.diagnosis", "Przyczyna i sposób sprawdzenia")),
+            new WiRRReportSection("4.5: jedna poprawka", "4.5",
+                T("cp45.change", "Zmieniony jeden parametr"),
+                N("cp45.before_s", "Mediana przed", "s"),
+                N("cp45.after_s", "Mediana po", "s"),
+                M("cp45.answer", "Czy poprawka pomogła?")),
+            new WiRRReportSection("5.0: Wynalazca XR", "5.0",
+                M("cp50.application", "Zastosowanie poza grami VR"),
+                M("cp50.two_skills", "Dwie technologie/umiejętności kursowe"),
+                M("cp50.limitations", "Ograniczenia rozwiązania"))
         };
     }
 }

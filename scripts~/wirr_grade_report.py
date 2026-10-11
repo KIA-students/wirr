@@ -19,7 +19,7 @@ def nonempty(value: object) -> bool:
 def validate_identity(report: dict) -> list[str]:
     issues = []
     if report.get("schemaVersion") != SCHEMA: issues.append("Nieobsługiwana wersja raportu.")
-    if not isinstance(report.get("labNumber"), int) or not 1 <= report["labNumber"] <= 7: issues.append("Nieprawidłowy numer laboratorium.")
+    if not isinstance(report.get("labNumber"), int) or not 1 <= report["labNumber"] <= 8: issues.append("Nieprawidłowy numer laboratorium.")
     if not nonempty(report.get("submissionId")): issues.append("Brak identyfikatora raportu.")
     if not nonempty(report.get("teamId")): issues.append("Brak identyfikatora studenta.")
     indices = [str(v).strip() for v in (report.get("studentIndices") or []) if nonempty(v)]

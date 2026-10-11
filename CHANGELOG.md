@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.1.0-preview.1 (kampania 4 × 2, przygotowanie 11 października 2026)
+
+- Rozbudowano rzeczywistą listę laboratoriów UPM z 7 do **8**. Dodano Samples~/Lab08, katalog zadań, formularz i tabelę WiRR Reports, obsługę paneli i lokalnego generatora demonstratora.
+- Lab 08 zawiera automatyczne lokalne zapisy prób A/B do JSON i import rzeczywistych wyników do formularza bez przepisywania liczb.
+- W Documentation~/Campaign/ znajdują się **cztery przewodniki po dwie instrukcje**, wraz z planem pierwszych zajęć 13 października 2026. Spisy treści i odsyłacze Windows/Ubuntu ograniczają konieczność ponawiania konfiguracji.
+- Kod pozostaje rozwojowy do czasu kompilacji w Unity 6000.6.x; nie publikować w KIA-students bez weryfikacji.
+
+## Unreleased (ścieżka czterech bloków, 2026-10-11)
+
+- Lab 01: osobna ścieżka bez indywidualnego konta na pracownianych stanowiskach z Education Grant License, darmowe własne Unity Personal i opcjonalny Unity Student Plan. Nie udostępniamy wspólnego loginu.
+- Dwa rzeczywiste, bezpiecznie ograniczone czasowo stanowiska obserwacyjne komfortu XR, generowane jako prefaby Unity z programami C#, dokumentacja i zatrzymanie na żądanie.
+- Dwie grupy mogą zaproponować nazwy generowane na stronie WWW lub w panelu Unity; propozycje zatwierdza prowadzący.
+- Cztery dobrowolne misje poza zajęciami i do +8 grupowych punktów. Nie ma konkursu wytrzymałości na nudności ani wpływu ligi na oceny indywidualne.
+- Testy rankingu i lokalnych aktualizatorów punktacji; kosztowny workflow ROS 2 jest ręczny lub reaguje na zmiany backendu w main.
+
+
+
+- Dodano lokalne okno **WiRR → Misje i odkrycia (4 bloki)** z automatycznym wykrywaniem scen i lokalnych eksportów JSON.
+- Karta sesji Markdown zawiera metadane projektu i istniejące wyniki, ale nie wykonuje nowych pomiarów ani nie wystawia oceny.
+- Raport działa offline i nie wywołuje workflow GitHub Actions. Dodano wyjaśnienie granic automatyzacji i obsługi Lab 08.
+- Zaktualizowano opis ścieżki Ubuntu oraz stanowiska ROS 2. Wymaga testu kompilacji w Unity przed wydaniem produkcyjnym.
+
 ## 1.0.6 (2026-10-06)
 
 - dodano lekką gałąź instalacyjną `upm` przeznaczoną dla Unity Package Manager;

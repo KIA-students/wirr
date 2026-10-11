@@ -1,5 +1,36 @@
 # Laboratorium 1 — XR Origin, Audyt i Wydajność
 
+## Spis treści
+
+- [Najpierw wybierz ścieżkę](#najpierw-wybierz-ścieżkę)
+- [Konto Unity: nie potrzebujesz wspólnego loginu](#konto-unity-nie-potrzebujesz-wspólnego-loginu)
+- [Co Powinieneś Pobrać](#co-powinieneś-pobrać)
+  - [1. Wersja Unity](#1-wersja-unity)
+  - [2. Projekt startowy (starter template)](#2-projekt-startowy-starter-template)
+  - [3. Pakiety wymagane](#3-pakiety-wymagane)
+  - [4. Konfiguracja XR Origin (pre-configured)](#4-konfiguracja-xr-origin-pre-configured)
+- [Checklist — Przed Lab 1](#checklist--przed-lab-1)
+- [Na Początku Lab 1](#na-początku-lab-1)
+- [Skrypty do pobrania](#skrypty-do-pobrania)
+  - [PerformanceBenchmark.cs](#performancebenchmarkcs)
+- [Dokumentacja](#dokumentacja)
+- [Timeline Lab 1](#timeline-lab-1)
+
+## Najpierw wybierz ścieżkę
+- **Mam działającą scenę z poprzedniego laboratorium:** [otwórz aktualne Lab 01](../../Samples~/Lab01/README.md#szybki-wybór-ścieżki) i pomiń powtórną instalację.
+- **Nie mam Unity / konta:** [system operacyjny](OS_SETUP.md#wybierz-aktualną-sytuację) lub [licencja](UNITY_ACCESS_AND_LICENSES.md#nawigacja-warunkowa).
+- **Windows:** [uruchomienie Windows](OS_SETUP.md#windows); **Ubuntu:** [uruchomienie Ubuntu](OS_SETUP.md#ubuntu).
+- **Potrzebuję więcej szczegółów:** [pełny przewodnik Lab 01](../../Samples~/Lab01/README.md) zawiera spis treści i ścieżki wariantowe.
+- **Nie mam sprzętu XR:** rozpocznij od symulatora lub dostarczonego logu; nie instaluj wszystkiego w ciemno.
+
+
+## Konto Unity: nie potrzebujesz wspólnego loginu
+
+Na komputerze uczelnianym z **aktywną Unity Education Grant License** student może pracować bez indywidualnego logowania. Stanowisko musi wcześniej skonfigurować administrator. **Nie udostępniamy loginu i hasła wspólnego konta Unity.** Na własnym komputerze użyj swojego Unity ID i bezpłatnej licencji Personal; darmowy Student Plan jest rozszerzeniem opcjonalnym.
+
+Przewodnik z krokami i korzyściami dla studentów: [Lab 01: Unity ID i licencje](../../Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md). Jeżeli pracujesz z próbką zaimportowaną do Assets, skorzystaj z dokumentu w pakiecie WiRR.
+
+
 ## Co Powinieneś Pobrać
 
 Przed Lab 1 pobierz i skonfiguruj następujące:

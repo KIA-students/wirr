@@ -58,7 +58,7 @@ namespace KIA.WiRR.Editor
 
         public static bool OptionalDemosExist(int labNumber)
         {
-            if (labNumber < 1 || labNumber > 7)
+            if (labNumber < 1 || labNumber > 8)
                 return false;
 
             var scene = SceneManager.GetActiveScene();
@@ -452,8 +452,8 @@ namespace KIA.WiRR.Editor
 
         private static void ValidateLabNumber(int labNumber)
         {
-            if (labNumber < 1 || labNumber > 7)
-                throw new ArgumentOutOfRangeException(nameof(labNumber), "Numer laboratorium musi należeć do zakresu 1–7.");
+            if (labNumber < 1 || labNumber > 8)
+                throw new ArgumentOutOfRangeException(nameof(labNumber), "Numer laboratorium musi należeć do zakresu 1–8.");
         }
     }
 }

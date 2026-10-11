@@ -16,7 +16,7 @@ namespace KIA.WiRR.Editor
 
         public static void Recalculate(WiRRReportDocument document)
         {
-            if (document == null || document.labNumber < 1 || document.labNumber > 7)
+            if (document == null || document.labNumber < 1 || document.labNumber > 8)
                 return;
 
             foreach (var section in WiRRReportSchemaCatalog.Get(document.labNumber))

@@ -1,5 +1,26 @@
 # Lab 06 — Bliźniak cyfrowy ROS 2 + Gazebo
 
+## Spis treści
+
+- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
+- [Przygotowanie](#przygotowanie)
+- [Zadania krok po kroku](#zadania-krok-po-kroku)
+  - [3.0: Źródło stanu](#30-źródło-stanu)
+  - [3.5: Mapowanie przegubów](#35-mapowanie-przegubów)
+  - [4.0: Transport i bufor](#40-transport-i-bufor)
+  - [4.5: LIVE/STALE](#45-livestale)
+  - [5.0: Kontrolowany błąd bliźniaka](#50-kontrolowany-błąd-bliźniaka)
+- [Zakończenie laboratorium](#zakończenie-laboratorium)
+- [Materiały dydaktyczne](#materiały-dydaktyczne)
+
+
+## Szybki wybór ścieżki
+- **Mam działające stanowisko ROS 2 i /joint_states:** przejdź do [źródła stanu](#30-źródło-stanu) i potem [LIVE/STALE](#45-livestale).
+- **Nie mam ROS 2 / Gazebo:** użyj przygotowanego logu i wariantu replay. Rozpoznaj ograniczenia w [źródle stanu](#30-źródło-stanu).
+- **Pracuję na Windows:** połącz się ze stanowiskiem Ubuntu przez sieć. Nie instaluj ROS 2 bez konieczności. [Systemy i urządzenia](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr).
+- **Pracuję na Ubuntu:** [ścieżka Ubuntu](../../Documentation~/Reference/OS_SETUP.md#ubuntu).
+
+
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 6. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
 ## Przygotowanie
