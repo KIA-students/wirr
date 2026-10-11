@@ -38,3 +38,21 @@ test('bad points and bad round status are rejected', () => {
  board.rounds[0].scores.G1 = null;
  assert.throws(()=>validateLeague(board), /Niespójny status/);
 });
+
+
+test('voluntary sidequest counts separately and does not invent a lab result', () => {
+ const board=clone();
+ board.sidequests.G1.push({task:'xr-optics',points:2,reason:'Zatwierdzono edukacyjny model optyki'});
+ const state=getStandings(board);
+ assert.equal(state.completedRounds,0);
+ assert.equal(state.groups[0].lab,0);
+ assert.equal(state.groups[0].bonus,2);
+ assert.equal(state.groups[0].total,2);
+ assert.equal(state.winner,'G1');
+});
+
+test('invalid and excessive sidequest bonuses are rejected', () => {
+ const board=clone();
+ board.sidequests.G1.push({task:'xr-optics',points:9});
+ assert.throws(()=>validateLeague(board),/Błędne bonusy/);
+});

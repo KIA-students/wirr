@@ -35,6 +35,20 @@ def validate(board: dict) -> None:
         state = "completed" if filled == 2 else "in_progress" if filled else "pending"
         if item["status"] != state:
             raise ValueError("Round status inconsistent")
+    if set(board.get("sidequests", {})) != {"G1", "G2"}:
+        raise ValueError("Missing G1/G2 sidequest tracking")
+    for group, entries in board["sidequests"].items():
+        if len(entries) > 4 or len({item["task"] for item in entries}) != len(entries):
+            raise ValueError("Sidequests must be unique and limited")
+        if sum(item["points"] for item in entries) > 8:
+            raise ValueError("Too many optional points")
+        for entry in entries:
+            if entry["task"] not in ("xr-optics", "robot-failsafe", "accessible-hud", "ar-measurement"):
+                raise ValueError("Unrecognized optional task")
+            if type(entry["points"]) is not int or entry["points"] not in (1, 2):
+                raise ValueError("Invalid optional points")
+            if not 4 <= len(entry["reason"].strip()) <= 300:
+                raise ValueError("Optional mission needs non-personal justification")
     if type(board.get("revision")) is not int or board["revision"] < 0:
         raise ValueError("Bad revision")
 

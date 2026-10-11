@@ -22,6 +22,13 @@ export function validateLeague(board) {
     const status = approved === 2 ? 'completed' : approved === 1 ? 'in_progress' : 'pending';
     if (round.status !== status) throw new Error('Niespójny status rundy');
   }
+  if (!board.sidequests || !Array.isArray(board.sidequests.G1) || !Array.isArray(board.sidequests.G2)) throw new Error('Brak danych bonusowych');
+  for (const id of ['G1','G2']) {
+    const items=board.sidequests[id];
+    if (items.length>4 || new Set(items.map(x=>x.task)).size!==items.length) throw new Error('Powtórzone zadania');
+    for (const item of items) if (!Number.isInteger(item.points) || item.points<1 || item.points>2) throw new Error('Błędne bonusy');
+    if(items.reduce((n,x)=>n+x.points,0)>8) throw new Error('Przekroczono bonus');
+  }
   return board;
 }
 
@@ -30,13 +37,15 @@ export function getStandings(board) {
   const done = board.rounds.filter(round => round.status === 'completed');
   const groups = board.groups.map(group => ({
     id: group.id, name: group.label, completed: done.length,
-    total: done.reduce((sum, round) => sum +
+    lab: done.reduce((sum, round) => sum +
       Object.values(round.scores[group.id].points).reduce((a,b) => a+b, 0), 0),
+    bonus: board.sidequests[group.id].reduce((n,item)=>n+item.points,0),
   }));
+  for(const group of groups) group.total=group.lab+group.bonus;
   const [a,b] = groups;
   return {
     groups, completedRounds: done.length, isFinal: done.length === 4,
-    winner: done.length === 0 || a.total === b.total ? null : a.total > b.total ? 'G1' : 'G2',
+    winner: (done.length === 0 && a.bonus === 0 && b.bonus === 0) || a.total === b.total ? null : a.total > b.total ? 'G1' : 'G2',
   };
 }
 
@@ -56,15 +65,15 @@ function render(board, target) {
       board.groups.find(group => group.id === summary.winner).label;
   target.append(el('h3', headline));
   target.append(el('p',
-    'Zatwierdzone rundy: ' + summary.completedRounds + '/4. ' +
+    'Zatwierdzone rundy: ' + summary.completedRounds + '/4; maks. bonus +8. ' +
     'Liczą się tylko rundy ocenione dla obu grup. ' +
     (board.updated_at ? 'Ostatnia aktualizacja: ' + new Date(board.updated_at).toLocaleString('pl-PL') + '.' : 'Punktów jeszcze nie przyznano.'),
     'league-muted'));
   const grid = el('div', undefined, 'league-grid');
   for (const group of summary.groups) {
     const tile = el('section', undefined, 'league-tile');
-    tile.append(el('h3', group.name), el('strong', group.total + ' / 40 pkt', 'league-number'));
-    tile.append(el('p', 'Zatwierdzone bloki: ' + group.completed + '/4'));
+    tile.append(el('h3', group.name), el('strong', group.total + ' / 48 pkt', 'league-number'));
+    tile.append(el('p', 'Bloki: ' + group.completed + '/4 | Misje dodatkowe: +' + group.bonus));
     grid.append(tile);
   }
   target.append(grid);
@@ -89,7 +98,7 @@ function render(board, target) {
     body.append(row);
   }
   table.append(body); wrap.append(table); target.append(wrap);
-  target.append(el('p', 'Punkty przyznaje prowadzący za eksperyment, rozumowanie, pomysł i współpracę. Nie wpływają na indywidualne oceny.'));
+  target.append(el('p', 'Punkty w blokach i opcjonalne misje dodatkowe zatwierdza prowadzący. Brak udziału w dodatkowych misjach nie wpływa na indywidualną ocenę.'));
   const p = el('p');
   const a = el('a', 'Regulamin i plik wyników na GitHubie');
   a.href = 'https://github.com/KIA-students/wirr/tree/main/competition';
