@@ -144,11 +144,10 @@ namespace KIA.WiRR.Editor
             }
             WiRRReportStore.Save(report);
             // The report window opens on the newly imported Lab 08.
-            EditorPrefs.SetInt("KIA.WiRR.SelectedLab", 8);
             EditorUtility.DisplayDialog("WiRR Lab08",
                 "Wczytano " + results.trials.Count + " rzeczywistych prób do szkicu raportu Lab 08. " +
                 "Uzupełnij hipotezę, interpretację i nowy pomysł. Brakujące wartości pozostały puste.", "OK");
-            WiRRReportWindow.Open();
+            WiRRReportWindow.OpenForLab(8);
         }
 
         private static void FillComparison(WiRRReportDocument report, WiRRReportTable table, int row, WiRRLab08Trial[] trials)
