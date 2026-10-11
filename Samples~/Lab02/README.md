@@ -4,8 +4,8 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 
 ## Przygotowanie
 
-1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 02.
-2. Użyj **Zainstaluj / napraw zależności**.
+1. W **WiRR → Misje i odkrycia** wybierz **Start: Lab 02**, aby natychmiast otworzyć scenę PC. Panel zaawansowany służy dopiero do integracji XR.
+2. Zależności XRI instaluj tylko wtedy, kiedy wykonujesz chwyt kontrolerem, teleportację lub pracujesz w symulatorze XR.
 3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
 4. Użyj **Utwórz / napraw aktywną scenę**.
 5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.

@@ -5,7 +5,7 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 ## Przygotowanie
 
 1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 07.
-2. Użyj **Zainstaluj / napraw zależności**.
+2. Doinstaluj narzędzia testowe tylko, jeśli planujesz test automatyczny. Profiler i podstawowy smoke-test możesz uruchomić bez instalacji nowych pakietów.
 3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
 4. Użyj **Utwórz / napraw aktywną scenę**.
 5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.

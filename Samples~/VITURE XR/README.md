@@ -30,7 +30,7 @@ Zawiera:
 - zestaw punktów na kilku głębokościach;
 - dalszy obiekt referencyjny.
 
-Można zmieniać `ipdMeters` w komponencie `WiRRVitureDemoBootstrap` i obserwować zmianę odczuwanej głębi. Nie należy zwiększać bazy stereo agresywnie; celem jest porównanie, a nie maksymalizacja efektu 3D.
+Najpierw użyj geometrii stereo zatwierdzonej dla urządzenia. **Nie manipuluj agresywnie parametrem ipdMeters ani dysparycją w celu wywołania bólu oczu lub dwojenia.** Celem jest wyjaśnienie, że optyczna odległość ogniskowania w konwencjonalnym wyświetlaczu jest stała, podczas gdy wskazówki wergencji wynikają z geometrii treści. Zwykła scena Unity nie mierzy fizjologicznej akomodacji.
 
 ### VITURE_03_Immersive2D_Source.unity
 
