@@ -7,6 +7,8 @@
 - [Rzeczywiste urządzenia i warianty](#rzeczywiste-urządzenia-i-warianty)
 - [Stan wydania](#stan-wydania)
 
+**Praktyczny przebieg od instalacji do raportu:** [jedna ścieżka pracy w Unity](UNITY_COURSE_JOURNEY.md). Liga XR pozostaje dobrowolna. HDRI/PBR to osobny pakiet Samples, nie część lekkiego UPM.
+
 ## Dokładnie cztery wyprawy
 
 | Blok | Dwa laboratoria | Przewodnik |
@@ -42,4 +44,4 @@ Nie udostępnia się studentom wspólnego hasła Unity, nie wymaga prywatnego sp
 
 ## Stan wydania
 
-**Zmiany są na gałęzi rozwojowej pakietu WiRR.** Kod nowych prefabów i integrację Lab 08 trzeba przetestować w Unity 6000.6.x Windows i Ubuntu przed scaleniem z wydaniem produkcyjnym. Komplet dokumentów Markdown można czytać na GitHubie bez instalowania Unity. Po weryfikacji aktualizacja może zostać przeniesiona do KIA-students/wirr z zachowaniem dotychczasowych wyników ligi.
+**Zawartość i stan wydania trzeba potwierdzić testem w Unity przed kolejną publikacją.** Kod nowych prefabów i integrację Lab 08 trzeba przetestować w Unity 6000.6.x Windows i Ubuntu przed scaleniem z wydaniem produkcyjnym. Komplet dokumentów Markdown można czytać na GitHubie bez instalowania Unity. Po weryfikacji aktualizacja może zostać przeniesiona do KIA-students/wirr z zachowaniem dotychczasowych wyników ligi.
