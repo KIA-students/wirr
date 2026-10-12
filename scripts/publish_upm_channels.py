@@ -2,6 +2,7 @@
 """Build independent, history-free UPM snapshots. Never modify source checkout."""
 import argparse
 import json
+import hashlib
 import pathlib
 import shutil
 
@@ -11,7 +12,7 @@ def included(path, channel):
     if any(part in {".git", "Library", "Temp", "Logs", "Build", "Builds"} for part in parts):
         return False
     if channel == "upm":
-        return not (parts[0] in {".github", "Project~"} or
+        return not (parts[0] in {".github", "Project~", "competition", "scripts", "tests"} or
                     (len(parts) > 1 and parts[0] == "Textures" and
                      parts[1] in {"HDRI", "Surfaces"}))
     return len(parts) > 1 and parts[0] == "Textures" and parts[1] in {"HDRI", "Surfaces"}
@@ -55,6 +56,18 @@ def build(channel, dest):
         src = ROOT / "THIRD_PARTY_TEXTURES.md"
         if src.exists():
             shutil.copy2(src, dest / src.name)
+    # Unity treats Git-installed packages as immutable: every importable file
+    # must already have a stable .meta sidecar in the distribution.
+    # Preserve existing Unity GUIDs; generate deterministic GUIDs only when absent.
+    for asset in sorted(dest.rglob("*")):
+        if not asset.is_file() or asset.suffix == ".meta" or asset.name == "package.json":
+            continue
+        if "Documentation~" in asset.relative_to(dest).parts or "Samples~" in asset.relative_to(dest).parts:
+            continue
+        meta = asset.with_name(asset.name + ".meta")
+        if not meta.exists():
+            guid = hashlib.md5(("pl.prz.kia.wirr/" + asset.relative_to(dest).as_posix()).encode("utf-8")).hexdigest()
+            meta.write_text("fileFormatVersion: 2\nguid: " + guid + "\n", encoding="utf-8")
     count = sum(1 for p in dest.rglob("*") if p.is_file())
     size = sum(p.stat().st_size for p in dest.rglob("*") if p.is_file())
     if count < (20 if channel == "upm" else 3):

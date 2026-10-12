@@ -17,7 +17,7 @@ namespace KIA.WiRR.Editor
             if (Application.isBatchMode || EditorApplication.isPlayingOrWillChangePlaymode || EditorApplication.isCompiling)
                 return;
 
-            var packageInfo = PackageInfo.FindForPackageName("pl.prz.kia.wirr");
+            var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForPackageName("pl.prz.kia.wirr");
             if (packageInfo == null || string.IsNullOrWhiteSpace(packageInfo.version))
                 return;
 

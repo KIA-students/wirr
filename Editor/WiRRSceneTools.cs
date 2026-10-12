@@ -256,7 +256,7 @@ namespace KIA.WiRR.Editor
             if (labNumber != 5)
                 return;
 
-            var packageInfo = PackageInfo.FindForPackageName("pl.prz.kia.wirr");
+            var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForPackageName("pl.prz.kia.wirr");
             if (packageInfo == null || string.IsNullOrWhiteSpace(packageInfo.resolvedPath))
             {
                 Debug.LogWarning("[WiRR] Nie można odnaleźć katalogu pakietu. Model referencyjny Lab 05 nie został skopiowany.");
