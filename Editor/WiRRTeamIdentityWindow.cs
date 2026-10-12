@@ -28,7 +28,7 @@ namespace KIA.WiRR.Editor
         private void OnEnable()
         {
             teamName = EditorPrefs.GetString("KIA.WiRR.TeamName", "");
-            group = Mathf.Clamp(EditorPrefs.GetInt("KIA.WiRR.MissionGroup", 0), 0, 2);
+            group = WiRRStudentProfile.Group;
         }
 
         private static bool IsValid(string name)
@@ -41,15 +41,15 @@ namespace KIA.WiRR.Editor
         private void OnGUI()
         {
             EditorGUILayout.LabelField("Moja grupa i nazwa drużyny", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox(
-                "Możesz zmienić nazwę w dowolnej chwili. Zapis jest lokalny; " +
-                "publiczną nazwę w Lidze XR zatwierdza prowadzący.", MessageType.Info);
+            EditorGUILayout.HelpBox("Nazwę możesz zmieniać. Przypisana grupa pozostaje stała; nazwę w publicznej Lidze XR zatwierdza prowadzący.", MessageType.Info);
             EditorGUI.BeginChangeCheck();
-            group = EditorGUILayout.Popup("Grupa laboratoryjna", group, Groups);
+            using (new EditorGUI.DisabledScope(WiRRStudentProfile.IsRegistered))
+                group = EditorGUILayout.Popup("Grupa laboratoryjna", group, Groups);
             teamName = EditorGUILayout.TextField("Nazwa drużyny", teamName);
             if (EditorGUI.EndChangeCheck())
             {
-                EditorPrefs.SetInt("KIA.WiRR.MissionGroup", group);
+                if (!WiRRStudentProfile.IsRegistered)
+                    EditorPrefs.SetInt("KIA.WiRR.MissionGroup", group);
                 // Save the draft even when temporarily incomplete during typing.
                 EditorPrefs.SetString("KIA.WiRR.TeamName", teamName);
             }
