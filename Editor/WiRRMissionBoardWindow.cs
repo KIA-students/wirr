@@ -47,21 +47,7 @@ namespace KIA.WiRR.Editor
 
         private static readonly string[] GroupLabels = { "Nie wybrano", "G1: grupa 1", "G2: grupa 2" };
 
-        private static readonly string[] NamePrefixes =
-        {
-            "Kwantowe", "Pikselowe", "Cybernetyczne", "Wirtualne", "Rekurencyjne",
-            "Neonowe", "Nadprzewodzące", "Binarne", "Mechaniczne", "Zrobotyzowane",
-            "Algorytmiczne", "Holograficzne", "Laserowe", "Bezkablowe", "Rozbrykane"
-        };
-        private static readonly string[] NameSubjects =
-        {
-            "Kapibary", "Pierogi", "Dziobaki", "Wombaty", "Roboty", "Bajty",
-            "Drony", "Pingwiny", "Kaktusy", "Wektory", "Żółwie", "Śrubokręty",
-            "Serwomechanizmy", "Jeże", "Transformatory", "Czipy"
-        };
-        private static readonly System.Random NamesRandom = new System.Random();
-
-        private string proposedTeamName = string.Empty;
+        private bool showAdvanced;
         private int blockIndex;
         private int selectedGroup;
         private int selectedMode;
@@ -83,6 +69,7 @@ namespace KIA.WiRR.Editor
         {
             blockIndex = Mathf.Clamp(EditorPrefs.GetInt("KIA.WiRR.MissionBlock", 0), 0, Blocks.Length - 1);
             selectedGroup = Mathf.Clamp(EditorPrefs.GetInt("KIA.WiRR.MissionGroup", 0), 0, 2);
+            showAdvanced = EditorPrefs.GetBool("KIA.WiRR.MissionAdvanced", false);
         }
 
         private void OnGUI()
@@ -118,12 +105,20 @@ namespace KIA.WiRR.Editor
                         WiRRSceneTools.OpenLabScene(Blocks[blockIndex][1]);
                 }
             }
-            if (GUILayout.Button("Komfort XR: 3 prefaby i watchdog (10 prób)"))
+            // Comfort stations belong to the testing/comfort block only.
+            if (blockIndex == 3 && GUILayout.Button("Lab 07: stanowiska komfortu XR i watchdog"))
                 WiRRComfortStudyTools.CreateStations();
-            if (GUILayout.Button("Liga XR: aktualny ranking grup"))
-                Application.OpenURL("https://kia-students.github.io/wirr/#liga");
-            if (GUILayout.Button("Zaawansowane narzędzia (zależności, urządzenia)"))
-                WiRRCourseWindow.Open();
+            showAdvanced = EditorGUILayout.Foldout(showAdvanced, "Narzędzia dodatkowe", true);
+            EditorPrefs.SetBool("KIA.WiRR.MissionAdvanced", showAdvanced);
+            if (showAdvanced)
+            {
+                if (GUILayout.Button("Zależności i urządzenia"))
+                    WiRRCourseWindow.Open();
+                if (GUILayout.Button("Ranking Ligi XR (strona kursu)"))
+                    Application.OpenURL("https://kia-students.github.io/wirr/#liga");
+                if (GUILayout.Button("Edytuj grupę i nazwę drużyny"))
+                    WiRRTeamIdentityWindow.Open();
+            }
 
             EditorGUILayout.LabelField("Punkty kontrolne", EditorStyles.boldLabel);
             var preparedScenes = Blocks[blockIndex].Count(lab => ScenePaths(lab).Length > 0);
@@ -154,30 +149,8 @@ namespace KIA.WiRR.Editor
                 "Wskaż rzeczywisty tryb i uzupełnij tylko trzy krótkie obserwacje.",
                 MessageType.None);
 
-            var group = EditorGUILayout.Popup("Moja grupa laboratoryjna", selectedGroup, GroupLabels);
-            if (group != selectedGroup)
-            {
-                selectedGroup = group;
-                EditorPrefs.SetInt("KIA.WiRR.MissionGroup", selectedGroup);
-            }
-            EditorGUILayout.HelpBox("Nazwa drużyny jest tylko propozycją. Prowadzący zatwierdza ją w rankingu; " +
-                "nie wysyłamy jej automatycznie ani nie zmieniamy publicznych punktów.", MessageType.None);
-            using (new EditorGUILayout.HorizontalScope())
-            {
-                if (GUILayout.Button("Losuj zabawną nazwę"))
-                    proposedTeamName = NamePrefixes[NamesRandom.Next(NamePrefixes.Length)] +
-                        " " + NameSubjects[NamesRandom.Next(NameSubjects.Length)];
-                if (GUILayout.Button("Kopiuj dla prowadzącego"))
-                {
-                    var text = (selectedGroup == 1 ? "G1: " : selectedGroup == 2 ? "G2: " : "") +
-                        proposedTeamName.Trim();
-                    if (selectedGroup > 0 && ValidTeamName(proposedTeamName))
-                        EditorGUIUtility.systemCopyBuffer = text;
-                    else
-                        EditorUtility.DisplayDialog("WiRR", "Wybierz G1/G2 oraz poprawną nazwę 3–48 znaków.", "OK");
-                }
-            }
-            proposedTeamName = EditorGUILayout.TextField("Nazwa drużyny (propozycja)", proposedTeamName);
+            // Identity is edited in a dedicated panel, never duplicated per block.
+            selectedGroup = Mathf.Clamp(EditorPrefs.GetInt("KIA.WiRR.MissionGroup", 0), 0, 2);
             selectedMode = EditorGUILayout.Popup("Tryb faktyczny", selectedMode, Modes);
             EditorGUILayout.LabelField("Jedno odkrycie z eksperymentu");
             discovery = EditorGUILayout.TextArea(discovery, GUILayout.MinHeight(46));
@@ -249,8 +222,9 @@ namespace KIA.WiRR.Editor
             writer.AppendLine();
             writer.AppendLine($"- Data UTC: {DateTime.UtcNow:O}");
             writer.AppendLine($"- Grupa laboratoryjna: {GroupLabels[selectedGroup]}");
-            if (ValidTeamName(proposedTeamName))
-                writer.AppendLine("- Propozycja nazwy drużyny (bez zatwierdzenia): " + Escape(proposedTeamName, 48));
+            var savedTeamName = EditorPrefs.GetString("KIA.WiRR.TeamName", "");
+            if (ValidTeamName(savedTeamName))
+                writer.AppendLine("- Lokalna nazwa drużyny (bez zatwierdzenia): " + Escape(savedTeamName, 48));
             writer.AppendLine($"- Unity: {Application.unityVersion}");
             writer.AppendLine($"- System: {Escape(SystemInfo.operatingSystem)}");
             writer.AppendLine($"- GPU: {Escape(SystemInfo.graphicsDeviceName)}");
