@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""Build independent, history-free UPM snapshots. Never modify source checkout."""
+import argparse
+import json
+import pathlib
+import shutil
+import subprocess
+import tempfile
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+EXCLUDE = {".git", ".github", "Project~", "Textures/HDRI", "Textures/Surfaces",
+           "Library", "Temp", "Logs", "Build", "Builds"}
+
+def included(path, channel):
+    parts = path.parts
+    if any(part in {".git", "Library", "Temp", "Logs", "Build", "Builds"} for part in parts):
+        return False
+    if channel == "upm":
+        return not (parts[0] in {".github", "Project~"} or
+                    (len(parts) > 1 and parts[0] == "Textures" and
+                     parts[1] in {"HDRI", "Surfaces"}))
+    return len(parts) > 1 and parts[0] == "Textures" and parts[1] in {"HDRI", "Surfaces"}
+
+def build(channel, dest):
+    if channel == "upm":
+        for file in ROOT.rglob("*"):
+            rel = file.relative_to(ROOT)
+            if not file.is_file() or not included(rel, channel):
+                continue
+            target = dest / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(file, target)
+    else:
+        for file in (ROOT / "Textures").rglob("*"):
+            rel = file.relative_to(ROOT)
+            if file.is_file() and included(rel, channel):
+                target = dest / rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(file, target)
+        manifest = {
+            "name": "pl.prz.kia.wirr.assets",
+            "version": "1.0.0",
+            "displayName": "WiRR Optional HDRI and PBR Assets",
+            "description": "Optional large visual assets for WiRR; not required for laboratories.",
+            "unity": "6000.0",
+            "author": {"name": "Katedra Informatyki i Automatyki, PRz"}
+        }
+        (dest / "package.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False)+"\n")
+        (dest / "README.md").write_text(
+            "# WiRR optional visual assets\n\n"
+            "Install as a separate Unity Package Manager git dependency using "
+            "`https://github.com/KIA-students/wirr.git#assets`. "
+            "The core WiRR package is required separately.\n"
+            "HDRI and PBR assets retain their original third-party licenses; "
+            "see the source repository THIRD_PARTY_TEXTURES.md.\n")
+        src = ROOT / "THIRD_PARTY_TEXTURES.md"
+        if src.exists():
+            shutil.copy2(src, dest / src.name)
+    count = sum(1 for p in dest.rglob("*") if p.is_file())
+    size = sum(p.stat().st_size for p in dest.rglob("*") if p.is_file())
+    if count < (20 if channel == "upm" else 3):
+        raise RuntimeError(f"Unexpectedly small {channel} snapshot: {count} files")
+    if channel == "upm" and any((dest / p).exists() for p in ("Project~", "Textures/HDRI", "Textures/Surfaces")):
+        raise RuntimeError("Heavy files leaked into core package")
+    if not (dest / "package.json").exists():
+        raise RuntimeError("UPM package.json missing")
+    print(f"{channel}: {count} files, {size} bytes (working snapshot, not network download)")
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--output", required=True)
+    args = ap.parse_args()
+    out = pathlib.Path(args.output).resolve()
+    if out == ROOT or ROOT in out.parents:
+        raise SystemExit("Output must be outside source repository")
+    out.mkdir(parents=True, exist_ok=True)
+    for channel in ("upm", "assets"):
+        dest = out / channel
+        if dest.exists():
+            shutil.rmtree(dest)
+        dest.mkdir()
+        build(channel, dest)
+
+if __name__ == "__main__":
+    main()
