@@ -70,6 +70,23 @@ namespace KIA.WiRR.Editor
         }
     }
 
+    [InitializeOnLoad]
+    internal static class WiRRStudentProfilePrompt
+    {
+        private const string PromptKey = "KIA.WiRR.Student.ProfilePromptShown";
+        static WiRRStudentProfilePrompt() => EditorApplication.update += PromptWhenReady;
+
+        private static void PromptWhenReady()
+        {
+            if (Application.isBatchMode || EditorApplication.isCompiling || EditorApplication.isUpdating ||
+                EditorApplication.isPlayingOrWillChangePlaymode) return;
+            EditorApplication.update -= PromptWhenReady;
+            if (WiRRStudentProfile.IsRegistered || SessionState.GetBool(PromptKey, false)) return;
+            SessionState.SetBool(PromptKey, true);
+            WiRRStudentProfileWindow.Open();
+        }
+    }
+
     public sealed class WiRRStudentProfileWindow : EditorWindow
     {
         private string index = "";
@@ -98,6 +115,7 @@ namespace KIA.WiRR.Editor
             {
                 if (WiRRStudentProfile.TryRegister(index, group, out var error))
                 {
+                    WiRRProgressTracker.Refresh();
                     Close();
                     WiRRMissionBoardWindow.Open();
                 }

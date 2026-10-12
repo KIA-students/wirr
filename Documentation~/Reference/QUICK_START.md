@@ -5,7 +5,7 @@
 1. Utwórz projekt **Universal 3D (URP)** i dodaj pakiet przez Unity Package Manager: `https://github.com/KIA-students/wirr.git#upm`.
 2. Otwórz **WiRR → Student → Profil i grupa**. Wpisz numer indeksu i grupę z planu zajęć. Grupa zostanie przypisana lokalnie na cały cykl; nazwa drużyny jest osobna i może się zmieniać.
 3. Otwórz **WiRR → Misje i odkrycia**. Wybierz aktualny blok i rozpocznij właściwe laboratorium.
-4. Wykonaj doświadczenie, zachowaj scenę i rzeczywiste wyniki. Następnie otwórz **Raport aktualnego laboratorium**.
+4. Wykonaj doświadczenie, zachowaj scenę i rzeczywiste wyniki. Następnie otwórz **Otwórz raport: Lab NN**, wybierając numer wykonywanego ćwiczenia.
 5. Powtórz dla drugiego laboratorium bloku, a na koniec zapisz lokalną kartę sesji.
 
 | Blok | Laboratoria | Obowiązkowy temat |

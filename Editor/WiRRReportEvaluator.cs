@@ -58,7 +58,7 @@ namespace KIA.WiRR.Editor
                         cp.Reasons.Add("Uzupełnij pole „" + field.Label + "”.");
                 }
 
-                foreach (var table in WiRRReportTableCatalog.Get(document.labNumber, grade))
+                foreach (var table in WiRRReportTableCatalog.Get(document.labNumber, grade, document))
                 {
                     var emptyRows = table.Rows
                         .Where(row => !table.Columns.Any(column =>
