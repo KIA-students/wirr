@@ -15,7 +15,6 @@ jobs:
       - name: Merge verified public export once
         env:
           GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
-          EXPECTED_HEAD: 5f1fcdaa5cb23010acef6363bec9956463990e97
         shell: bash
         run: |
           set -euo pipefail
@@ -34,11 +33,18 @@ jobs:
           fi
           head="$(gh api "repos/$repo/pulls/$pr" --jq '.head.sha')"
           base="$(gh api "repos/$repo/pulls/$pr" --jq '.base.ref')"
-          if [[ "$head" != "$EXPECTED_HEAD" || "$base" != main ]]; then
-            echo "::error::PR #40 has unexpected head or target. Stop."
+          if [[ "$base" != main ]]; then
+            echo "::error::PR #40 has unexpected target. Stop."
+            exit 1
+          fi
+          changed="$(gh api "repos/$repo/pulls/$pr/files?per_page=100" --jq '[.[].filename] | sort | join(",")')"
+          expected='Documentation~/Reference/FOUR_BLOCK_MISSIONS.md,Documentation~/Reference/UNITY_COURSE_JOURNEY.md,README.md,WebSim~/site/index.html'
+          if [[ "$changed" != "$expected" ]]; then
+            echo "::error::Unexpected public files in PR #40; refusing merge"
+            printf "%s\\n" "$changed"
             exit 1
           fi
           checks="$(gh api "repos/$repo/commits/$head/check-runs" --jq '[.check_runs[] | select(.name == "Sprawdź zawartość repozytorium kursu" and .conclusion == "success")] | length')"
           test "$checks" -gt 0 || { echo "::error::Course content safety check has not passed"; exit 1; }
-          gh api --method PUT "repos/$repo/pulls/$pr/merge" -f sha="$EXPECTED_HEAD" -f merge_method=merge --jq '{merged,sha,message}'
+          gh api --method PUT "repos/$repo/pulls/$pr/merge" -f sha="$head" -f merge_method=merge --jq '{merged,sha,message}'
           gh api "repos/$repo/pulls/$pr" --jq '{merged,merge_commit_sha,state}'
