@@ -4,13 +4,8 @@ import argparse
 import json
 import pathlib
 import shutil
-import subprocess
-import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-EXCLUDE = {".git", ".github", "Project~", "Textures/HDRI", "Textures/Surfaces",
-           "Library", "Temp", "Logs", "Build", "Builds"}
-
 def included(path, channel):
     parts = path.parts
     if any(part in {".git", "Library", "Temp", "Logs", "Build", "Builds"} for part in parts):
@@ -31,6 +26,9 @@ def build(channel, dest):
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(file, target)
     else:
+        for required in ("Textures/HDRI", "Textures/Surfaces"):
+            if not (ROOT / required).is_dir():
+                raise RuntimeError(f"Missing optional asset directory: {required}")
         for file in (ROOT / "Textures").rglob("*"):
             rel = file.relative_to(ROOT)
             if file.is_file() and included(rel, channel):
@@ -62,6 +60,8 @@ def build(channel, dest):
         raise RuntimeError(f"Unexpectedly small {channel} snapshot: {count} files")
     if channel == "upm" and any((dest / p).exists() for p in ("Project~", "Textures/HDRI", "Textures/Surfaces")):
         raise RuntimeError("Heavy files leaked into core package")
+    if channel == "assets" and not any((dest / "Textures" / "HDRI").rglob("*.exr")):
+        raise RuntimeError("Optional HDRI package is empty; refusing to publish")
     if not (dest / "package.json").exists():
         raise RuntimeError("UPM package.json missing")
     print(f"{channel}: {count} files, {size} bytes (working snapshot, not network download)")
