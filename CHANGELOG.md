@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.3 (2026-10-12)
+
+- Integracja zgłoszeń WiRR z kontami i bazą KIA, kolejka offline, panel prowadzącego i eksport CSV.
+- Przed włączeniem obowiązkowego raportowania wymagane testy Unity i import zapisów studentów.
+
+
+
 ## 1.1.1 (2026-10-12)
 
 - Ujednolicono lokalny eksport raportów z opisem formularza Unity
