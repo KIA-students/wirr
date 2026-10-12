@@ -24,6 +24,8 @@ namespace KIA.WiRR.Editor
             public string pseudonymousId;
             public string group;
             public string updatedAtUtc;
+            public string gradingStatus = "not_assessed";
+            public string submissionStatus = "local_only";
             public string unityVersion;
             public LabProgress[] labs;
         }
@@ -64,7 +66,12 @@ namespace KIA.WiRR.Editor
                     unityVersion = Application.unityVersion,
                     labs = labs
                 };
-                File.WriteAllText(target, JsonUtility.ToJson(snapshot, true));
+                var serialized = JsonUtility.ToJson(snapshot, true);
+                File.WriteAllText(target, serialized);
+                // Private, reviewable outbox. No client token or automatic network upload.
+                var queue = Path.Combine(root, "outbox");
+                Directory.CreateDirectory(queue);
+                File.WriteAllText(Path.Combine(queue, "progress.json"), serialized);
             }
             catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException)
             {

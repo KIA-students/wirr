@@ -1,30 +1,25 @@
-# Automatyczny postęp i przypisanie grupy
+# WiRR: rejestr postępu, identyfikator i ocena
 
-## Obecnie wdrożone
+## Ścieżka studenta
 
-Po pierwszym uruchomieniu Unity student wpisuje numer indeksu i wybiera grupę z oficjalnego harmonogramu. Przypisanie grupy jest blokowane **lokalnie na danym stanowisku** dla tego indeksu, również po zmianie projektu Unity. Nazwę drużyny może zmieniać niezależnie od grupy.
+Po zainstalowaniu pakietu Unity 6.6 student wpisuje numer indeksu i wybiera grupę G1/G2. Pakiet zapisuje numer lokalnie do wyliczania wariantów ćwiczeń. Każdemu indeksowi przypisuje losowy, stały na danym stanowisku identyfikator techniczny UUID, niezawierający indeksu, daty ani wersji Unity. Zmiana wersji Unity nie zmienia identyfikatora.
 
-Własny projekt zapisuje co około 60 sekund w `Library/WiRRProgress/progress.json` informację o:
-- dostępności zapisanej sceny dla każdego Lab 01–08,
-- obecności eksportu raportu,
-- oznaczeniu grupy oraz losowym technicznym identyfikatorze,
-- wersji Unity i czasie utworzenia snapshotu.
+Stan techniczny ośmiu laboratoriów jest automatycznie wykrywany i zapisywany co około 60 sekund w `Library/WiRRProgress/progress.json` i `Library/WiRRProgress/outbox/progress.json`. Pola: identyfikator techniczny, grupa, wersja Unity, czas oraz flagi `scenePrepared` i `reportExported` dla Lab 01–08. `gradingStatus=not_assessed` i `submissionStatus=local_only` zapobiegają myleniu aktywności z zatwierdzoną oceną.
 
-Snapshot nie zawiera numeru indeksu, pomiarów ani treści raportów. To **wskaźniki techniczne**, nie oceny ani potwierdzone ukończenie ćwiczenia. Szkice raportów przechowywane lokalnie mogą zawierać indeks zgodnie z wymaganiami wariantów ćwiczeń. Nie należy commitować katalogu `Library`.
+## Docelowa automatyczna synchronizacja bez GitHub loginu
 
-## Jeszcze niewdrożone: repozytorium zdalne
+**Jeszcze nieaktywna**: wyłącznie serwer pośredniczący, nie Unity, otrzymuje token do tworzenia PR w publicznym `KIA-students/wirr`. Wymagane są: indywidualny, jednorazowy kod aktywacyjny wydany przez prowadzącego (nie login GitHub); potwierdzenie indeksu, grupy i zgody na zakres publikacji; niezależne uwierzytelnienie kolejnych zgłoszeń; limity żądań i walidacja schematu; mapowanie indeksu na UUID w niepublicznej bazie.
 
-Nie wysyłamy informacji identyfikujących studentów do **publicznego** `KIA-students/wirr`. Przegląd repozytorium nie wykazał zatwierdzonego, uwierzytelnionego serwera odbierającego postępy studentów. Umieszczenie tokenu GitHub w pakiecie Unity, automatyczne tworzenie publicznych commitów z indeksami lub wykorzystanie osobistego konta prowadzącego byłoby niewłaściwe.
+Publiczne PR mają zawierać tylko zatwierdzone i pozbawione danych identyfikacyjnych zestawienia. Surowe raporty mogą zawierać numer indeksu, identyfikatory kont, dowolne teksty i dane pomiarowe, dlatego nie wolno bez kontroli ich automatycznie commitować do repozytorium publicznego. Serwer musi usuwać te dane przed publikacją, a prowadzący zatwierdza ocenę. Skrypt lokalnego sprawdzania poprawności raportu nie nadaje automatycznie oceny końcowej.
 
-Do automatycznego raportowania na serwer uczelniany należy przygotować osobny **prywatny** system zapisów: logowanie przez konto studenta, mapowanie indeks–grupa kontrolowane przez prowadzącego, API przyjmujące tylko minimalne metadane, kontrola dostępu, retencja danych i usuwanie, a dopiero po stronie serwera ewentualny commit do prywatnego repozytorium lub zapis bazy. Grupa powinna zostać zablokowana **po stronie serwera**, bo zapis `EditorPrefs` nie zabezpiecza przed zmianami na innym komputerze.
+## Dlaczego system jest etapowy
 
-Do czasu zatwierdzenia tego mechanizmu lokalny zapis postępu pozostaje automatyczny, ale **nie ma automatycznej wysyłki do GitHub**.
+Publiczny GitHub przechowuje historię, forki i kopie zmian. Nawet niewyróżniony jako taki numer indeksu może identyfikować studenta. Brak logowania w ogóle pozwala podszyć się pod dowolny indeks. Token repozytorium nie może być zapisany w dystrybuowanym pakiecie Unity. Obecnie repozytorium zawiera automatyczny **lokalny** zapis, lecz nie skonfigurowano bezpiecznych kodów aktywacyjnych ani produkcyjnego odbiornika.
 
-## Kryteria akceptacji przed włączeniem raportowania sieciowego
+## Kryterium włączenia publikacji
 
-- Brak poświadczeń GitHub, PAT i sekretów uczelni w aplikacji, `Assets`, `EditorPrefs` i raportach.
-- Uwierzytelnienie studenta i powiązanie numeru indeksu z jego kontem.
-- Jeden zatwierdzony przydział grupy na cały cykl i kontrolowana korekta przez prowadzącego.
-- Brak danych osobowych w logach CI i publicznych gałęziach `main`, `upm`, `assets`.
-- Ponawianie transmisji i idempotentne aktualizacje bez duplikowania wpisów.
-- Jawny opis zakresu danych, celu, okresu przechowywania i uprawnionych odbiorców.
+1. Uwierzytelniony backend z blokadą grupy po stronie serwera i prywatnym mapowaniem UUID–indeks.
+2. Walidator minimalizujący dane przed PR oraz lista dozwolonych pól.
+3. Oddzielenie wskaźnika postępu od oceny potwierdzonej przez prowadzącego.
+4. Retencja danych, sposób korekty i usunięcia, ochrona przed powieleniem wpisów.
+5. Testy pełnego scenariusza w Unity 6.6 i repozytorium testowym.
