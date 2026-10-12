@@ -1,6 +1,8 @@
-# Laboratorium 2 — raport: interakcja, lokomocja i komfort użytkownika w VR
+# Laboratorium 2: raport: interakcja, lokomocja i komfort użytkownika w VR
 
-> Uzupełniaj raport na bieżąco. Nie wpisuj nazwisk ani nie dołączaj skanów wypełnionego SSQ.
+> Uzupełniaj wyniki na bieżąco. Sekcję Quest 3 i SSQ wypełnij tylko po rzeczywistym teście w goglach.
+
+Wersja 1.0.0
 
 ## Identyfikacja i warianty
 
@@ -52,7 +54,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 3.0 — chwyt, socket, ray
+# Punkt kontrolny 3.0: chwyt, socket, ray
 
 ## Kontrola podstawowa
 
@@ -72,7 +74,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - Wariant `v1`: ___
 - Pytanie badawcze: __________
 - Przewidywanie przed pomiarem: __________
-- Warunki / poziomy moderatora: __________
+- Warunki / wartości badanego parametru: __________
 
 | Warunek | Próba 1 [s] | 2 | 3 | 4 | 5 | Mediana [s] | Błędy łącznie |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -84,7 +86,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 3.5 — UI i feedback
+# Punkt kontrolny 3.5: UI i feedback
 
 ## Panel World Space
 
@@ -114,7 +116,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 4.0 — lokomocja
+# Punkt kontrolny 4.0: lokomocja
 
 ## Konfiguracja
 
@@ -148,7 +150,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 4.5 — scenariusz i diagnostyka
+# Punkt kontrolny 4.5: scenariusz i diagnostyka
 
 ## Scenariusz bazowy
 
@@ -177,7 +179,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Meta Quest 3 i SSQ — obowiązkowe
+# Meta Quest 3 i SSQ: etap 5.0
 
 ## Kontrola Quest 3
 
@@ -191,7 +193,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 | Snap Turn | działa / nie działa |
 | fizyczna haptyka | działa / nie działa / niezweryfikowano |
 
-## SSQ — student
+## SSQ: student
 
 > Do raportu wpisuj wyłącznie wyniki liczbowe. Formularz źródłowy znajduje się w `resources/SSQ-Lab.pdf` / Załącznik nr 1 instrukcji.
 
@@ -207,26 +209,25 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ## Interpretacja SSQ
 
-- Która podskala zmieniła się najbardziej u Osoby A? __________
-- Która podskala zmieniła się najbardziej u Osoby B? __________
-- Czy kierunek zmian był podobny? __________
+- Która podskala zmieniła się najbardziej? __________
+- Czy objawy nasiliły się, pozostały bez zmian czy zmalały? __________
 - Wniosek ograniczony do danych z tej sesji: __________
 
 Nie używaj SSQ jako diagnozy medycznej i nie wnioskuj o trwałej podatności danej osoby.
 
 ---
 
-# Punkt kontrolny 5.0 — eksperyment na Quest 3
+# Punkt kontrolny 5.0: eksperyment na Quest 3
+
+W tym etapie wszystkie warianty mają dwa warunki A/B, po 3 próby na warunek.
 
 - Wariant `v5`: ___
-- Osoba wykonująca eksperyment: A / B
 - Pytanie badawcze: __________
 
 | Warunek | Próba 1 [s] | 2 | 3 | Mediana [s] | Błędy / korekty | Komfort 0–10 |
 |---|---:|---:|---:|---:|---:|---:|
 | A | | | | | | |
 | B | | | | | | |
-| C (jeśli dotyczy) | | | | | | |
 
 **Odpowiedź na pytanie badawcze:** __________
 
@@ -236,8 +237,8 @@ Nie używaj SSQ jako diagnozy medycznej i nie wnioskuj o trwałej podatności da
 
 1. **Interakcja:** __________
 2. **Lokomocja i komfort:** __________
-3. **Quest 3 / różnica względem symulatora:** __________
-4. **SSQ — wyłącznie wniosek z tej sesji:** __________
+3. **Quest 3 / różnica względem symulatora (jeśli wykonano):** __________
+4. **SSQ: wniosek z tej sesji (jeśli wykonano):** __________
 
 # Git
 
