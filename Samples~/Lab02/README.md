@@ -23,18 +23,15 @@
 - **Chcę poznać ograniczenia percepcji:** [Komfort XR](../../Documentation~/Reference/COMFORT_STUDIES.md).
 
 
-Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 2. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
+Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 2. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Misje i odkrycia`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
 
 ## Przygotowanie
 
-1. W **WiRR → Misje i odkrycia** wybierz **Start: Lab 02**, aby natychmiast otworzyć scenę PC. Panel zaawansowany służy dopiero do integracji XR.
-2. Zależności XRI instaluj tylko wtedy, kiedy wykonujesz chwyt kontrolerem, teleportację lub pracujesz w symulatorze XR.
-3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
-4. Użyj **Utwórz / napraw aktywną scenę**.
-5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Zainstaluj zależności oraz zaimportuj Starter Assets i XR Interaction Simulator.
-7. Utwórz scenę Lab02 i zweryfikuj XR Origin, Input Actions oraz warstwy interakcji.
-8. Przygotuj prosty scenariusz z obiektem chwytalnym, gniazdem, ray, UI i obszarem teleportacji.
+1. Po imporcie pakietu poczekaj na zakończenie kompilacji. W **Profilu WiRR** wpisz numer indeksu, wybierz grupę z planu i kliknij **Zapisz profil i przypisz grupę**. Dla grupy 2 wybierz **G2**. Profil można też otworzyć przez **WiRR → Student → Profil i grupa**.
+2. W **WiRR → Misje i odkrycia** wybierz blok I i **Start: Lab 02**. Ten przycisk przygotowuje scenę PC; nie oznacza ukończenia konfiguracji XRI.
+3. Do obowiązkowego chwytu, gniazda i promienia zainstaluj zależności XRI oraz zaimportuj **Starter Assets**, **XR Interaction Simulator** i próbkę WiRR Lab 02. Użyj panelu zaawansowanego, potem **Sprawdź konfigurację laboratorium**.
+4. Zachowaj działającą scenę Lab 01. W Lab 02 zapisz scenę interakcji w `Assets/WiRR/Lab02/Scenes`. Narzędzie tworzy `Lab02.unity`; własną kopię możesz zapisać jako `Lab02_Interaction.unity`. Zweryfikuj jeden XR Origin, jedną kamerę i XR Interaction Manager.
+5. Kliknij **Otwórz raport: Lab 02**. Sprawdź numer laboratorium, indeks, grupę i wyliczone warianty v1–v5. Przygotuj stanowisko z obiektem chwytalnym, gniazdem, promieniem, UI i obszarem teleportacji.
 
 ## Zadania krok po kroku
 
@@ -43,7 +40,7 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 1. Skonfiguruj XR Grab Interactable na obiekcie chwytalnym.
 2. Dodaj XR Socket Interactor i ogranicz go do właściwego obiektu/warstwy.
 3. Skonfiguruj XR Ray Interactor i potwierdź niezależne działanie chwytu, socketu i ray.
-4. Wykonaj po pięć prób A/B/C; zapisuj czas i liczbę błędów.
+4. Wykonaj po pięć prób w każdym warunku własnego wariantu (A/B, a C tylko gdy występuje w tabeli instrukcji); zapisuj czas i liczbę błędów.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
@@ -52,7 +49,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 1. Utwórz panel World Space i skonfiguruj obsługę UI dla XR.
 2. Dodaj co najmniej dwa rodzaje feedbacku: wizualny, dźwiękowy lub haptyczny.
 3. Sprawdź stany `Hover`/`Select` oraz zakończenie oraz usuń wielokrotne aktywacje jednego działania.
-4. Wykonaj po pięć prób A/B/C i zapisz czas oraz błędne aktywacje.
+4. Wykonaj po pięć prób w każdym warunku własnego wariantu (A/B, a C tylko gdy występuje w tabeli instrukcji) i zapisz czas oraz błędne aktywacje.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
@@ -60,7 +57,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Skonfiguruj teleportację wyłącznie na dozwolone powierzchnie.
 2. Sprawdź reticle, orientację po teleportacji i kolizję użytkownika z otoczeniem.
-3. Wykonaj po pięć prób A/B/C, zapisując czas oraz błędy/korekty.
+3. Wykonaj po pięć prób w każdym warunku własnego wariantu (A/B, a C tylko gdy występuje w tabeli instrukcji), zapisując czas oraz błędy/korekty.
 4. Zapisz, które elementy konfiguracji najbardziej wpływają na przewidywalność i komfort.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
@@ -76,19 +73,19 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 ### 5.0: Quest 3 i SSQ
 
-1. Wypełnij SSQ PRE dla obu osób przed ekspozycją.
+1. Wypełnij własny SSQ PRE przed ekspozycją.
 2. Uruchom scenariusz samodzielnej aplikacji na Quest 3 i zweryfikuj interakcję oraz lokomocję.
-3. Wykonaj A/B/C na wskazanej osobie po trzy próby, zapisując czas, błędy i komfort 0–10.
+3. Wykonaj dla własnego wariantu v5 po trzy próby w każdym wymaganym warunku, zapisując czas, błędy i komfort 0–10.
 4. Wypełnij SSQ POST i sformułuj wniosek ograniczony do tej sesji.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
 
 ## Zakończenie laboratorium
 
-1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
+1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego**, wybierz **Lab 02** i sprawdź najwyższy kompletny punkt kontrolny.
 2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
 3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
-4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
+4. Kliknij **Eksportuj raport lokalnie** dopiero po przejściu walidacji. Otworzy się folder z JSON w `Library/WiRRReports/exports`. Przekaż ten plik kanałem wskazanym przez prowadzącego. Eksport nie oznacza oddania pracy. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
 
 ## Materiały dydaktyczne
 Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
@@ -99,7 +96,9 @@ Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dy
 
 Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
 
-`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+`report-template.md` służy do awaryjnego raportu Markdown. Wypełnij formularz Unity albo szablon, zgodnie z kanałem wskazanym przez prowadzącego. Nie przepisuj wyników do obu formatów.
+
+**Postęp:** panel pokazuje zapisaną scenę i lokalny eksport. Stan jest aktualizowany po eksporcie i co około minutę. Opcjonalne menu **WiRR → Student → Włącz automatyczne wysyłanie na GitHub** synchronizuje techniczny postęp, a nie pełny raport ani ocenę.
 
 
 ## Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia

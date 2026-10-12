@@ -151,8 +151,9 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(12);
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("3. Przygotuj raport", EditorStyles.boldLabel);
-            if (GUILayout.Button("Otwórz raport aktualnego laboratorium"))
-                WiRRReportWindow.OpenForLab(Blocks[blockIndex][0]);
+            foreach (var lab in Blocks[blockIndex])
+                if (GUILayout.Button("Otwórz raport: Lab " + lab.ToString("00")))
+                    WiRRReportWindow.OpenForLab(lab);
 
             EditorGUILayout.EndVertical();
             EditorGUILayout.Space(12);

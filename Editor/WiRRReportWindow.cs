@@ -68,6 +68,12 @@ namespace KIA.WiRR.Editor
             if (document == null)
                 document = WiRRReportStore.LoadOrCreate(labNumber);
 
+            if (!WiRRStudentProfile.IsRegistered)
+            {
+                EditorGUILayout.HelpBox("Przed raportem zapisz numer indeksu i grupę w profilu WiRR.", MessageType.Warning);
+                if (GUILayout.Button("Otwórz profil studenta")) WiRRStudentProfileWindow.Open();
+                return;
+            }
             scroll = EditorGUILayout.BeginScrollView(scroll);
             DrawHeader();
             DrawIdentity();
@@ -184,7 +190,7 @@ namespace KIA.WiRR.Editor
             {
                 var required = section.Checkpoint == "3.0";
                 var optional = section.Checkpoint != "3.0" && section.Checkpoint != "COMMON";
-                var status = required ? ": wymagany do wysłania" : optional ? ": opcjonalny" : ": opcjonalne informacje";
+                var status = required ? ": wymagany do eksportu" : optional ? ": opcjonalny" : ": opcjonalne informacje";
                 var title = section.Checkpoint == "COMMON"
                     ? section.Title + status
                     : $"Etap {section.Title}" + status;
@@ -198,7 +204,7 @@ namespace KIA.WiRR.Editor
 
                 EditorGUILayout.HelpBox(SectionGuidance(section), required ? MessageType.Info : MessageType.None);
 
-                var tables = WiRRReportTableCatalog.Get(labNumber, section.Checkpoint);
+                var tables = WiRRReportTableCatalog.Get(labNumber, section.Checkpoint, document);
                 foreach (var table in tables)
                     DrawTable(section.Checkpoint, table);
 
@@ -219,7 +225,7 @@ namespace KIA.WiRR.Editor
         {
             var requiredFields = section.Fields.Where(f => f.Required).ToArray();
             var filled = requiredFields.Count(f => !string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(document, f.Id)));
-            var suffix = requiredForSubmission ? " · wymagane do wysłania" : string.Empty;
+            var suffix = requiredForSubmission ? " · wymagane do eksportu" : string.Empty;
             if (requiredFields.Length > 0)
             {
                 EditorGUILayout.LabelField(
@@ -227,7 +233,7 @@ namespace KIA.WiRR.Editor
                     EditorStyles.miniLabel);
             }
 
-            var tables = WiRRReportTableCatalog.Get(labNumber, section.Checkpoint);
+            var tables = WiRRReportTableCatalog.Get(labNumber, section.Checkpoint, document);
             if (tables.Count == 0)
                 return;
 
@@ -527,19 +533,19 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(14);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField("Sprawdzenie i wysłanie", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Sprawdzenie i eksport", EditorStyles.boldLabel);
 
                 var liveEvaluation = WiRRReportEvaluator.Evaluate(document);
                 if (liveEvaluation.CanSubmit)
                 {
                     EditorGUILayout.HelpBox(
-                        "Etap 3.0 jest kompletny. Raport może zostać wysłany. Etapy 3.5–5.0 nie są wymagane.",
+                        "Etap 3.0 jest kompletny. Raport można wyeksportować lokalnie. Etapy 3.5–5.0 nie są wymagane.",
                         MessageType.Info);
                 }
                 else
                 {
                     EditorGUILayout.HelpBox(
-                        "Raport nie jest jeszcze gotowy do wysłania. Uzupełnij dane studenta, wymagane pola etapu 3.0 i dane pomiarowe tego etapu.",
+                        "Raport nie jest jeszcze gotowy do eksportu. Uzupełnij dane studenta, wymagane pola etapu 3.0 i dane pomiarowe tego etapu.",
                         MessageType.Warning);
                 }
 
@@ -554,23 +560,31 @@ namespace KIA.WiRR.Editor
 
                 using (new EditorGUI.DisabledScope(EditorApplication.isCompiling || !liveEvaluation.CanSubmit))
                 {
-                    if (GUILayout.Button("Wyślij raport", GUILayout.Height(38)))
+                    if (GUILayout.Button("Eksportuj raport lokalnie", GUILayout.Height(38)))
                     {
                         evaluation = WiRRReportEvaluator.Evaluate(document);
-                        WiRRActivityLogger.Record("report_submission_started", labNumber, "requested");
-                        var result = WiRRGitSubmission.Submit(
-                            document,
-                            WiRRGitSubmission.DefaultRepositoryUrl,
-                            WiRRGitSubmission.DefaultRepositorySlug,
-                            WiRRGitSubmission.DefaultBaseBranch,
-                            WiRRGitSubmission.DefaultReportsPath);
-                        submissionStatus = result.Message;
+                        try
+                        {
+                            var path = WiRRReportStore.ExportFinal(document, false);
+                            WiRRActivityLogger.Record("report_exported", labNumber, "local");
+                            WiRRProgressTracker.Refresh();
+                            submissionStatus = "Raport zapisany lokalnie. Przekaż go kanałem wskazanym przez prowadzącego.";
+                            EditorUtility.RevealInFinder(path);
+                        }
+                        catch (System.IO.IOException exception)
+                        {
+                            submissionStatus = "Nie udało się zapisać raportu: " + exception.Message;
+                        }
+                        catch (UnauthorizedAccessException exception)
+                        {
+                            submissionStatus = "Brak uprawnień do zapisu raportu: " + exception.Message;
+                        }
                     }
                 }
 
                 if (!liveEvaluation.CanSubmit)
                     EditorGUILayout.LabelField(
-                        "Przycisk wysyłania uaktywni się po ukończeniu etapu 3.0.",
+                        "Przycisk eksportu uaktywni się po ukończeniu etapu 3.0.",
                         EditorStyles.wordWrappedMiniLabel);
 
                 if (!string.IsNullOrWhiteSpace(submissionStatus))
@@ -589,7 +603,7 @@ namespace KIA.WiRR.Editor
                 var status = cp.Complete
                     ? "kompletny"
                     : requiredForSubmission
-                        ? "niekompletny: wymagany do wysłania"
+                        ? "niekompletny: wymagany do eksportu"
                         : "niekompletny: etap opcjonalny";
 
                 var text = $"Etap {cp.Checkpoint}: {status}";

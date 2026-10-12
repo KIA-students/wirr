@@ -24,6 +24,7 @@ namespace KIA.WiRR.Editor
                     if (loaded != null && loaded.labNumber == lab)
                     {
                         loaded = EnsureCollections(loaded);
+                        ApplyStudentProfile(loaded);
                         UpdateVariants(loaded);
                         WiRRReportCalculator.Recalculate(loaded);
                         return loaded;
@@ -41,6 +42,7 @@ namespace KIA.WiRR.Editor
         public static void Save(WiRRReportDocument document)
         {
             EnsureCollections(document);
+            ApplyStudentProfile(document);
             document.updatedAtUtc = DateTime.UtcNow.ToString("O");
             UpdateVariants(document);
             WiRRReportCalculator.Recalculate(document);
@@ -108,6 +110,15 @@ namespace KIA.WiRR.Editor
         }
 
         public static string ToJson(WiRRReportDocument document) { Save(document); return JsonUtility.ToJson(document, true); }
+
+        private static void ApplyStudentProfile(WiRRReportDocument document)
+        {
+            if (!WiRRStudentProfile.IsRegistered) return;
+            document.teamId = "S" + WiRRStudentProfile.Identifier;
+            document.studentIndices.Clear();
+            document.studentIndices.Add(WiRRStudentProfile.Index);
+            document.group = WiRRStudentProfile.GroupLabel;
+        }
 
         private static void UpdateVariants(WiRRReportDocument document)
         {

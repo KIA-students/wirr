@@ -37,6 +37,11 @@ namespace KIA.WiRR.Editor
         {
             if (EditorApplication.timeSinceStartup < nextCheck) return;
             nextCheck = EditorApplication.timeSinceStartup + 60;
+            Refresh();
+        }
+
+        internal static void Refresh()
+        {
             if (Application.isBatchMode || EditorApplication.isPlayingOrWillChangePlaymode ||
                 EditorApplication.isCompiling || !WiRRStudentProfile.IsRegistered) return;
             try
