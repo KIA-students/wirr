@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - 'scripts/publish_upm_channels.py'
+      - 'Runtime/**'
+      - 'Editor/**'
+      - 'Samples~/**'
+      - 'package.json'
       - 'Editor/WiRRHdriTools.cs'
       - '.github/workflows/publish-student-upm.yml'
       - 'Documentation~/Reference/LIGHTWEIGHT_UPM.md'
