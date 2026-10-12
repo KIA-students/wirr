@@ -1,0 +1,17 @@
+{
+  "schema": "wirr-approved-individual-totals/1",
+  "students": [],
+  "groups": {
+    "G1": {
+      "members": 0,
+      "approvedTaskCount": 0,
+      "individualPointsSum": 0
+    },
+    "G2": {
+      "members": 0,
+      "approvedTaskCount": 0,
+      "individualPointsSum": 0
+    }
+  },
+  "notice": "Indywidualne wyniki nie są punktami grupowymi Ligi XR. Liga używa zatwierdzonego scoreboard.json."
+}
