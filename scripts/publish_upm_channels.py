@@ -11,7 +11,7 @@ def included(path, channel):
     if any(part in {".git", "Library", "Temp", "Logs", "Build", "Builds"} for part in parts):
         return False
     if channel == "upm":
-        return not (parts[0] in {".github", "Project~"} or
+        return not (parts[0] in {".github", "Project~", "competition", "scripts", "tests"} or
                     (len(parts) > 1 and parts[0] == "Textures" and
                      parts[1] in {"HDRI", "Surfaces"}))
     return len(parts) > 1 and parts[0] == "Textures" and parts[1] in {"HDRI", "Surfaces"}

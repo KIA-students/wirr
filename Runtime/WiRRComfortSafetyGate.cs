@@ -171,7 +171,7 @@ namespace KIA.WiRR
             sawValidHead = true;
 
             bool present;
-            if (head.TryGetFeatureValue(CommonUsages.userPresence, out present))
+            if (head.TryGetFeatureValue(UnityEngine.XR.CommonUsages.userPresence, out present))
             {
                 sensorStatus = "USER_PRESENCE_AVAILABLE";
                 if (present)
@@ -195,7 +195,7 @@ namespace KIA.WiRR
             }
 
             bool tracked;
-            if (head.TryGetFeatureValue(CommonUsages.isTracked, out tracked))
+            if (head.TryGetFeatureValue(UnityEngine.XR.CommonUsages.isTracked, out tracked))
             {
                 if (tracked)
                 {
@@ -214,7 +214,7 @@ namespace KIA.WiRR
             }
 
             Vector3 current;
-            if (head.TryGetFeatureValue(CommonUsages.devicePosition, out current))
+            if (head.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition, out current))
             {
                 var now = Time.unscaledTime;
                 var dt = now - lastPositionTime;
