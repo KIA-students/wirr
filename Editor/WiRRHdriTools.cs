@@ -21,7 +21,7 @@ namespace KIA.WiRR.Editor
 
     internal static class WiRRHdriTools
     {
-        private const string PackageRoot = "Packages/pl.prz.kia.wirr.assets/Textures/HDRI";
+        private const string SampleRoot = "Assets/Samples/WiRR Optional HDRI and PBR Assets/1.0.0/HDRI PBR/Textures/HDRI";
         private const string MaterialRoot = "Assets/WiRR/Common/Skyboxes";
 
         public static readonly WiRRHdriDefinition[] Environments =
@@ -52,8 +52,21 @@ namespace KIA.WiRR.Editor
                 return false;
 
             var definition = Environments[index];
-            var texturePath = $"{PackageRoot}/{definition.RelativePath}";
+            var texturePath = $"{SampleRoot}/{definition.RelativePath}";
             var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
+            if (texture == null)
+            {
+                var filename = System.IO.Path.GetFileNameWithoutExtension(definition.RelativePath);
+                foreach (var guid in AssetDatabase.FindAssets(filename + " t:Texture2D", new[] { "Assets/Samples" }))
+                {
+                    var candidate = AssetDatabase.GUIDToAssetPath(guid);
+                    if (candidate.EndsWith("/" + definition.RelativePath, StringComparison.Ordinal))
+                    {
+                        texture = AssetDatabase.LoadAssetAtPath<Texture2D>(candidate);
+                        break;
+                    }
+                }
+            }
             if (texture == null)
             {
                 Debug.LogWarning($"[WiRR] Opcjonalne HDRI nie jest zainstalowane. W Unity Package Manager dodaj https://github.com/KIA-students/wirr.git#assets (brak: {texturePath}).");
@@ -104,7 +117,7 @@ namespace KIA.WiRR.Editor
 
         public static void RevealHdris()
         {
-            var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(PackageRoot);
+            var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(SampleRoot);
             if (asset != null)
             {
                 Selection.activeObject = asset;
@@ -112,7 +125,7 @@ namespace KIA.WiRR.Editor
             }
             else
             {
-                Debug.LogWarning("[WiRR] Opcjonalne zasoby HDRI/PBR nie są zainstalowane. Dodaj https://github.com/KIA-students/wirr.git#assets przez Unity Package Manager.");
+                Debug.LogWarning("[WiRR] Opcjonalne zasoby HDRI/PBR nie są zainstalowane. Dodaj https://github.com/KIA-students/wirr.git#assets przez Package Manager, następnie zaimportuj sample HDRI PBR.");
             }
         }
 

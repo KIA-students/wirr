@@ -32,7 +32,7 @@ def build(channel, dest):
         for file in (ROOT / "Textures").rglob("*"):
             rel = file.relative_to(ROOT)
             if file.is_file() and included(rel, channel):
-                target = dest / rel
+                target = dest / "Samples~" / "HDRI-PBR" / rel
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(file, target)
         manifest = {
@@ -41,7 +41,8 @@ def build(channel, dest):
             "displayName": "WiRR Optional HDRI and PBR Assets",
             "description": "Optional large visual assets for WiRR; not required for laboratories.",
             "unity": "6000.0",
-            "author": {"name": "Katedra Informatyki i Automatyki, PRz"}
+            "author": {"name": "Katedra Informatyki i Automatyki, PRz"},
+            "samples": [{"displayName": "HDRI PBR", "description": "Opcjonalne biblioteki HDRI i PBR, importowane na żądanie.", "path": "Samples~/HDRI-PBR"}]
         }
         (dest / "package.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False)+"\n")
         (dest / "README.md").write_text(
@@ -60,7 +61,7 @@ def build(channel, dest):
         raise RuntimeError(f"Unexpectedly small {channel} snapshot: {count} files")
     if channel == "upm" and any((dest / p).exists() for p in ("Project~", "Textures/HDRI", "Textures/Surfaces")):
         raise RuntimeError("Heavy files leaked into core package")
-    if channel == "assets" and not any((dest / "Textures" / "HDRI").rglob("*.exr")):
+    if channel == "assets" and not any((dest / "Samples~" / "HDRI-PBR" / "Textures" / "HDRI").rglob("*.exr")):
         raise RuntimeError("Optional HDRI package is empty; refusing to publish")
     if not (dest / "package.json").exists():
         raise RuntimeError("UPM package.json missing")

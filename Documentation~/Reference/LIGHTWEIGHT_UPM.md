@@ -5,9 +5,9 @@ The student-facing repository is exclusively `KIA-students/wirr`.
 - Core: `https://github.com/KIA-students/wirr.git#upm`.
 - Optional HDRI/PBR: `https://github.com/KIA-students/wirr.git#assets`.
 
-The lightweight core branch excludes `Project~`, `Textures/HDRI`, and
+The optional package exposes a Unity Package Manager sample named **HDRI PBR**. After installing the optional package, explicitly click **Import** in its Samples panel. Merely adding the optional package does not import heavy textures into Assets.\n\nThe lightweight core branch excludes `Project~`, `Textures/HDRI`, and
 `Textures/Surfaces`; the optional branch contains those two asset trees and
-an independent `package.json` (`pl.prz.kia.wirr.assets`).
+an independent `package.json` and importable `Samples~/HDRI-PBR` (`pl.prz.kia.wirr.assets`).
 
 Run `python3 scripts/publish_upm_channels.py --output /tmp/wirr-dist` to
 inspect snapshots. Publishing is deliberately manual and uses the protected
