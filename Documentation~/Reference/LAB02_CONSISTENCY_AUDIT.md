@@ -2,6 +2,8 @@
 
 Stan odniesienia: `KIA-students/wirr:main` 3c27e0f67ea4182ec93a90ea334b2715dc829eff i `upm` f963abb1497d0cbcfbf6f42ed067fe9c8a7ec898 (12.10.2026). Kluczowe pliki edytora i próbka Lab 02 są w tych dwóch gałęziach identyczne.
 
+Wersja 1.0.0
+
 ## Wykryte problemy i poprawki
 
 | Problem | Poprawka |
@@ -39,7 +41,7 @@ Wariant: `v_k = 1 + ((i + 2(k - 1)) mod 5)`. Wiersz C nie jest wyświetlany ani 
 
 ## Materiały kursowe wymagające równoległej synchronizacji
 
-W repozytorium materiałów dydaktycznych należy ujednolicić `upm-setup.tex`, makro `raport` w `wirr_lab02.tex`, szablon Markdown i `sessions/lab-02.md`. Obecnie skrócona sesja opisuje trzy próby, a pełna instrukcja pięć. W dostępnym PDF v1.0.3 opisano wysyłkę pełnego raportu, podczas gdy aktualne źródło v1.0.4 już opisuje lokalny zapis. Wydanie PDF trzeba zbudować z ostatecznego, uzgodnionego źródła.
+Szablon Markdown, macierz wymagań oraz przewodnik prowadzącego ujednolicono z lokalnym eksportem JSON. Szablon jest samodzielny; Quest i SSQ należą do etapu 5.0, a tabela tego etapu ma tylko A/B. Skrócona sesja Lab 02 w materiałach dydaktycznych używa pięciu prób w etapach 3.0–4.0 i trzech w etapie 5.0. Wspólny opis instalacji musi wskazywać ten sam przycisk lokalnego eksportu. Wydanie PDF należy budować z aktualnego źródła.
 
 ## Walidacja i ograniczenia
 

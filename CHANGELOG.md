@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.1 (2026-10-12)
+
+- Ujednolicono lokalny eksport raportów z opisem formularza Unity
+- Poprawiono szablon Lab 02 dla pracy samodzielnej, SSQ w etapie 5.0 i dwóch warunków A/B tego etapu
+- Przewodnik prowadzącego obejmuje osiem laboratoriów i rzeczywiste wymagania serii pomiarowych
+
+
 ## Unreleased
 
 - Zsynchronizowano osiem szablonów raportów z aktualnymi instrukcjami kursu WiRR.
