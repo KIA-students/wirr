@@ -1,0 +1,46 @@
+name: Publish WiRR lightweight UPM and optional assets
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/publish_upm_channels.py'
+      - 'Editor/WiRRHdriTools.cs'
+      - '.github/workflows/publish-student-upm.yml'
+      - 'Documentation~/Reference/LIGHTWEIGHT_UPM.md'
+permissions:
+  contents: read
+concurrency:
+  group: wirr-student-upm-publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: student-package-publishing
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build isolated, shallow distributions
+        run: python3 scripts/publish_upm_channels.py --output "$RUNNER_TEMP/wirr-distributions"
+      - name: Publish dedicated orphan branches, never public main
+        env:
+          STUDENT_TOKEN: ${{ secrets.KIA_STUDENTS_PUBLISH_TOKEN }}
+          DIST_DIR: ${{ runner.temp }}/wirr-distributions
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "${STUDENT_TOKEN}" ]]; then
+            echo "::error::Configure KIA_STUDENTS_PUBLISH_TOKEN with write permission to KIA-students/wirr"
+            exit 1
+          fi
+          git config --global user.name 'wirr-publisher[bot]'
+          git config --global user.email 'wirr-publisher@users.noreply.github.com'
+          for channel in upm assets; do
+            cd "${DIST_DIR}/${channel}"
+            git init -b "${channel}"
+            git add -A
+            git commit -m "Publish WiRR ${channel} snapshot from ${GITHUB_SHA}"
+            git -c http.extraheader="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$STUDENT_TOKEN" | base64 -w0)" \
+              push "https://github.com/KIA-students/wirr.git" "HEAD:refs/heads/${channel}" --force
+          done
