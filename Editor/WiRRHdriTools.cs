@@ -21,7 +21,7 @@ namespace KIA.WiRR.Editor
 
     internal static class WiRRHdriTools
     {
-        private const string PackageRoot = "Packages/pl.prz.kia.wirr/Textures/HDRI";
+        private const string PackageRoot = "Packages/pl.prz.kia.wirr.assets/Textures/HDRI";
         private const string MaterialRoot = "Assets/WiRR/Common/Skyboxes";
 
         public static readonly WiRRHdriDefinition[] Environments =
@@ -56,7 +56,7 @@ namespace KIA.WiRR.Editor
             var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
             if (texture == null)
             {
-                Debug.LogError($"[WiRR] Nie znaleziono HDRI: {texturePath}");
+                Debug.LogWarning($"[WiRR] Opcjonalne HDRI nie jest zainstalowane. W Unity Package Manager dodaj https://github.com/KIA-students/wirr.git#assets (brak: {texturePath}).");
                 return false;
             }
 
@@ -112,7 +112,7 @@ namespace KIA.WiRR.Editor
             }
             else
             {
-                Debug.LogWarning($"[WiRR] Nie można otworzyć katalogu HDRI: {PackageRoot}");
+                Debug.LogWarning("[WiRR] Opcjonalne zasoby HDRI/PBR nie są zainstalowane. Dodaj https://github.com/KIA-students/wirr.git#assets przez Unity Package Manager.");
             }
         }
 
