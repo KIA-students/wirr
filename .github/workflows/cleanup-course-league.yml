@@ -1,0 +1,36 @@
+name: Archive legacy course league branch
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cleanup-course-league.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  archive-legacy:
+    if: github.repository == 'MatPomGit/wirr'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Delete legacy branch only after verifying its archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          repo="${GITHUB_REPOSITORY}"
+          legacy="sync/course-league-v1"
+          archive="archive/course-league-v1-20261011"
+          expected="627430abfe02b7b8f1cdde2803a5cd7b4de078e4"
+          old="$(gh api "repos/$repo/branches/$legacy" --jq '.commit.sha' 2>/dev/null || true)"
+          saved="$(gh api "repos/$repo/branches/$archive" --jq '.commit.sha')"
+          test "$saved" = "$expected" || { echo "::error::Archive ref changed"; exit 1; }
+          if [ -z "$old" ]; then
+            echo "Legacy branch already removed."
+            exit 0
+          fi
+          test "$old" = "$saved" || { echo "::error::Legacy branch changed; refusing deletion"; exit 1; }
+          open_prs="$(gh api "repos/$repo/pulls?state=open&head=MatPomGit:$legacy" --jq 'length')"
+          test "$open_prs" = 0 || { echo "::error::Legacy branch still has open pull requests"; exit 1; }
+          gh api --method DELETE "repos/$repo/git/refs/heads/$legacy"
+          echo "Archived unchanged historical branch at $archive and deleted $legacy."

@@ -189,6 +189,7 @@ jobs:
             ".github/workflows/sync-from-kia-students.yml"
             ".github/workflows/branch-hygiene.yml"
             ".github/workflows/finalize-student-pr40.yml"
+            ".github/workflows/cleanup-course-league.yml"
           )
 
           git checkout -B "${EXPORT_BRANCH}" "upstream/${UPSTREAM_BRANCH}"
@@ -273,55 +274,9 @@ jobs:
             git push origin --delete "${EXPORT_BRANCH}"
           fi
 
-      - name: Wyrównaj historię forka po opublikowaniu zmian
-        if: steps.export.outputs.needs_pr != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          source_sha="${{ steps.export.outputs.source_sha }}"
-          upstream_sha="${{ steps.export.outputs.upstream_sha }}"
-
-          # Nie twórz kolejnego commita, jeśli main jest już bezpośrednio
-          # zakotwiczony na bieżącym KIA-students/wirr:main.
-          first_parent="$(git rev-parse "${source_sha}^" 2>/dev/null || true)"
-          if [ "${first_parent}" = "${upstream_sha}" ]; then
-            echo "Historia forka jest już wyrównana."
-            exit 0
-          fi
-
-          private_paths=(
-            ".github/workflows/sync-kia-students-pr.yml"
-          )
-
-          git checkout -B reconcile-source "${upstream_sha}"
-
-          for path in "${private_paths[@]}"; do
-            if git cat-file -e "${source_sha}:${path}" 2>/dev/null; then
-              mkdir -p "$(dirname "${path}")"
-              git show "${source_sha}:${path}" > "${path}"
-              git add -- "${path}"
-            fi
-          done
-
-          if git diff --cached --quiet HEAD --; then
-            target_sha="${upstream_sha}"
-          else
-            git commit -m "chore: reconcile fork ancestry [skip ci]"
-            target_sha="$(git rev-parse HEAD)"
-          fi
-
-          git push \
-            --force-with-lease="refs/heads/main:${source_sha}" \
-            origin "${target_sha}:refs/heads/main"
-
-          {
-            echo "## Historia forka wyrównana"
-            echo
-            echo "Publiczna zawartość jest zgodna z KIA-students/wirr."
-            echo "Gałąź main została ponownie zakotwiczona na bieżącym upstreamie,"
-            echo "z zachowaniem wyłącznie źródłowej automatyzacji synchronizacji."
-          } >> "${GITHUB_STEP_SUMMARY}"
+      # Do not rebase or force-push source main to the public repository.
+      # Ahead/behind includes intentionally private CI and independent export history.
+      # The source remains authoritative; public changes flow through reviewed PRs.
 
       - name: Oczyść metadane starszych Pull Requestów
         if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
@@ -401,8 +356,14 @@ jobs:
           set -euo pipefail
 
           inherited=false
-          for path in             ".github/workflows/sync-kia-students-pr.yml"             ".github/workflows/sync-from-kia-students.yml"             ".github/workflows/branch-hygiene.yml" \
-            ".github/workflows/finalize-student-pr40.yml"; do
+          private_checks=(
+            ".github/workflows/sync-kia-students-pr.yml"
+            ".github/workflows/sync-from-kia-students.yml"
+            ".github/workflows/branch-hygiene.yml"
+            ".github/workflows/finalize-student-pr40.yml"
+            ".github/workflows/cleanup-course-league.yml"
+          )
+          for path in "${private_checks[@]}"; do
             if gh api "repos/${UPSTREAM_REPOSITORY}/contents/${path}" >/dev/null 2>&1; then
               inherited=true
               break
