@@ -67,7 +67,7 @@ def build(channel, dest):
         meta = asset.with_name(asset.name + ".meta")
         if not meta.exists():
             guid = hashlib.md5(("pl.prz.kia.wirr/" + asset.relative_to(dest).as_posix()).encode("utf-8")).hexdigest()
-            meta.write_text("fileFormatVersion: 2\\nguid: " + guid + "\\n", encoding="utf-8")
+            meta.write_text("fileFormatVersion: 2\nguid: " + guid + "\n", encoding="utf-8")
     count = sum(1 for p in dest.rglob("*") if p.is_file())
     size = sum(p.stat().st_size for p in dest.rglob("*") if p.is_file())
     if count < (20 if channel == "upm" else 3):
