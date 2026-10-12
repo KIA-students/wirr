@@ -1,6 +1,13 @@
 name: Publish WiRR lightweight UPM and optional assets
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/publish_upm_channels.py'
+      - 'Editor/WiRRHdriTools.cs'
+      - '.github/workflows/publish-student-upm.yml'
+      - 'Documentation~/Reference/LIGHTWEIGHT_UPM.md'
 permissions:
   contents: read
 concurrency:
