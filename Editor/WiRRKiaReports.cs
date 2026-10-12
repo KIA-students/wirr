@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
@@ -19,11 +20,38 @@ public sealed class WiRRKiaReports : EditorWindow {
  [Serializable] class Enrollment { public string course_id; }
  [Serializable] class Course { public string id,code; }
  [Serializable] class List<T> { public T[] items; }
+ [Serializable] class Receipt { public string client_submission_id; }
  [Serializable] class Item { public string id,owner,course,report; public int lab; }
  static T[] Array<T>(string value) { var x=JsonUtility.FromJson<List<T>>("{\"items\":"+value+"}"); return x.items??System.Array.Empty<T>(); }
  static string Folder { get { var p=Path.Combine(Directory.GetParent(Application.dataPath).FullName,"UserSettings","WiRRKiaQueue");Directory.CreateDirectory(p);return p; } }
  [MenuItem("WiRR/Student/Wyślij raport do KIA")]
  static void ShowWindow() => GetWindow<WiRRKiaReports>("WiRR / KIA");
+ // Public entry point for the canonical WiRRReportWindow. No filename heuristics.
+ public static void QueueReport(string path, int lab) {
+  if(lab<1||lab>8)throw new ArgumentOutOfRangeException(nameof(lab));
+  var json=File.ReadAllText(path,Encoding.UTF8).Trim();
+  if(!json.StartsWith("{")||!json.EndsWith("}"))throw new InvalidDataException("Raport nie jest obiektem JSON");
+  var window=GetWindow<WiRRKiaReports>("WiRR / KIA");
+  if(string.IsNullOrEmpty(window.jwt)||string.IsNullOrEmpty(window.course)) {
+   // Do not persist unauthenticated student reports in a shared machine queue.
+   window.message="Zaloguj się na konto KIA. Raport pozostał zapisany lokalnie: "+path;
+   window.Show();
+   return;
+  }
+  var item=new Item{id=Guid.NewGuid().ToString(),owner=window.uid,course=window.course,lab=lab,report=json};
+  File.WriteAllText(Path.Combine(Folder,item.id+".json"),JsonUtility.ToJson(item),Encoding.UTF8);
+  window.message="Zapisano w kolejce. Oczekiwanie na potwierdzenie KIA.";
+  window.Show(); _=window.Flush();
+ }
+ void OnEnable() { EditorApplication.update+=RetryPending; }
+ void OnDisable() { EditorApplication.update-=RetryPending; }
+ double nextRetry;
+ void RetryPending() {
+  if(string.IsNullOrEmpty(jwt)||string.IsNullOrEmpty(course)||busy)return;
+  if(EditorApplication.timeSinceStartup<nextRetry)return;
+  nextRetry=EditorApplication.timeSinceStartup+90;
+  if(Directory.GetFiles(Folder,"*.json").Length>0)_=Flush();
+ }
  void OnGUI() {
   EditorGUILayout.HelpBox(message,MessageType.Info);
   if(string.IsNullOrEmpty(jwt)){
@@ -82,9 +110,7 @@ public sealed class WiRRKiaReports : EditorWindow {
    if(lab==0)throw new Exception("Nazwa pliku musi zawierać Lab01 ... Lab08.");
    var data=File.ReadAllText(path,Encoding.UTF8).Trim();
    if(!data.StartsWith("{")||!data.EndsWith("}"))throw new Exception("Raport nie jest obiektem JSON.");
-   var item=new Item{id=Guid.NewGuid().ToString(),owner=uid,course=course,lab=lab,report=data};
-   File.WriteAllText(Path.Combine(Folder,item.id+".json"),JsonUtility.ToJson(item),Encoding.UTF8);
-   await Flush();
+   QueueReport(path,lab);
   }catch(Exception ex){message="Raport pozostaje lokalnie. "+ex.Message;Repaint();}
  }
  async Task Flush(){
@@ -98,10 +124,14 @@ public sealed class WiRRKiaReports : EditorWindow {
     r.Headers.TryAddWithoutValidation("Prefer","resolution=ignore-duplicates,return=representation");
     r.Content=new StringContent(payload,Encoding.UTF8,"application/json");
     var answer=await Do(r);
-    // Empty array is expected on retry; uniqueness means the same submission was already accepted.
+    // Confirm the authoritative row exists before deletion, including after a retry.
+    var confirmed=Array<Receipt>(await Do(Req(HttpMethod.Get,
+      "/rest/v1/wirr_submissions?select=client_submission_id&client_submission_id=eq."+Uri.EscapeDataString(item.id),jwt)));
+    if(confirmed.Length!=1||confirmed[0].client_submission_id!=item.id)
+      throw new Exception("Nie otrzymano serwerowego potwierdzenia zapisu");
     File.Delete(file);count++;
    }
-   message="Serwer KIA potwierdził przyjęcie "+count+" zgłoszeń.";
+   message="Serwer KIA potwierdził przyjęcie "+count+" zgłoszeń. Pozostałe w kolejce: "+Directory.GetFiles(Folder,"*.json").Length+". Powtórzenia odbywają się automatycznie podczas zalogowanej sesji.";
   }catch(Exception ex){message="Brak potwierdzenia serwera. Zachowano kolejkę: "+ex.Message;}
   finally{busy=false;Repaint();}
  }
