@@ -68,18 +68,22 @@ namespace KIA.WiRR.Editor
         private void OnEnable()
         {
             blockIndex = Mathf.Clamp(EditorPrefs.GetInt("KIA.WiRR.MissionBlock", 0), 0, Blocks.Length - 1);
-            selectedGroup = Mathf.Clamp(EditorPrefs.GetInt("KIA.WiRR.MissionGroup", 0), 0, 2);
+            selectedGroup = WiRRStudentProfile.Group;
             showAdvanced = EditorPrefs.GetBool("KIA.WiRR.MissionAdvanced", false);
         }
 
         private void OnGUI()
         {
             scroll = EditorGUILayout.BeginScrollView(scroll);
-            EditorGUILayout.LabelField("WiRR: cztery wyprawy odkrywcze", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox(
-                "Cel: działający eksperyment, diagnoza i nowy pomysł zastosowania. " +
-                "Nie oceniaj czasu pracy ani liczby kliknięć. Dane zapisujemy lokalnie, bez GitHub Actions.",
-                MessageType.Info);
+            EditorGUILayout.LabelField("WiRR | Obowiązkowa ścieżka", EditorStyles.boldLabel);
+            if (!WiRRStudentProfile.IsRegistered)
+            {
+                EditorGUILayout.HelpBox("Najpierw podaj numer indeksu i potwierdź grupę laboratoryjną.", MessageType.Warning);
+                if (GUILayout.Button("Skonfiguruj profil studenta")) WiRRStudentProfileWindow.Open();
+                EditorGUILayout.EndScrollView();
+                return;
+            }
+            EditorGUILayout.LabelField("Grupa: " + WiRRStudentProfile.GroupLabel, EditorStyles.miniLabel);
 
             var chosen = GUILayout.Toolbar(blockIndex, Missions);
             if (chosen != blockIndex)
@@ -89,12 +93,8 @@ namespace KIA.WiRR.Editor
             }
 
             EditorGUILayout.Space(8);
-            EditorGUILayout.LabelField("Wystartuj bez instalowania dodatkowych pakietów", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox(
-                "Otwórz minimalną scenę na PC. Możesz od razu eksperymentować na " +
-                "monitorze i w symulatorze; telefon AR i Quest skonfigurujesz dopiero, " +
-                "gdy wybierzesz eksperyment sprzętowy. Scena nie jest nadpisywana.",
-                MessageType.Info);
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.LabelField("1. Przygotuj scenę", EditorStyles.boldLabel);
             using (new EditorGUI.DisabledScope(EditorApplication.isCompiling || EditorApplication.isPlaying))
             {
                 using (new EditorGUILayout.HorizontalScope())
@@ -105,10 +105,14 @@ namespace KIA.WiRR.Editor
                         WiRRSceneTools.OpenLabScene(Blocks[blockIndex][1]);
                 }
             }
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.Space(12);
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.LabelField("2. Sprawdź postęp", EditorStyles.boldLabel);
             // Comfort stations belong to the testing/comfort block only.
             if (blockIndex == 3 && GUILayout.Button("Lab 07: stanowiska komfortu XR i watchdog"))
                 WiRRComfortStudyTools.CreateStations();
-            showAdvanced = EditorGUILayout.Foldout(showAdvanced, "Narzędzia dodatkowe", true);
+            showAdvanced = EditorGUILayout.Foldout(showAdvanced, "Więcej narzędzi i materiałów", true);
             EditorPrefs.SetBool("KIA.WiRR.MissionAdvanced", showAdvanced);
             if (showAdvanced)
             {
@@ -116,11 +120,13 @@ namespace KIA.WiRR.Editor
                     WiRRCourseWindow.Open();
                 if (GUILayout.Button("Ranking Ligi XR (strona kursu)"))
                     Application.OpenURL("https://kia-students.github.io/wirr/#liga");
-                if (GUILayout.Button("Edytuj grupę i nazwę drużyny"))
+                if (GUILayout.Button("Edytuj nazwę drużyny"))
                     WiRRTeamIdentityWindow.Open();
+                if (GUILayout.Button("Instrukcja i materiały rozszerzające"))
+                    Application.OpenURL("https://github.com/KIA-students/wirr/blob/main/Documentation~/Reference/UNITY_COURSE_JOURNEY.md");
             }
 
-            EditorGUILayout.LabelField("Punkty kontrolne", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Scena i raporty", EditorStyles.miniBoldLabel);
             var preparedScenes = Blocks[blockIndex].Count(lab => ScenePaths(lab).Length > 0);
             var progressRect = GUILayoutUtility.GetRect(18, 22, GUILayout.ExpandWidth(true));
             EditorGUI.ProgressBar(progressRect, preparedScenes / (float)Blocks[blockIndex].Length,
@@ -136,18 +142,22 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.LabelField($"Lab {lab:00}: {status}", EditorStyles.wordWrappedLabel);
             }
 
+            EditorGUILayout.EndVertical();
             EditorGUILayout.Space(8);
             if (blockIndex == 3 && GUILayout.Button("Lab 08: dodaj gotowy demonstrator inspekcji"))
                 WiRRLab08Tools.AddDemonstrator();
             if (blockIndex == 3 && GUILayout.Button("Lab 08: importuj prawdziwe wyniki JSON"))
                 WiRRLab08Tools.ImportResults();
-            if (GUILayout.Button("Otwórz formularz WiRR Reports (Lab 01–08)"))
-                WiRRReportWindow.Open();
+            EditorGUILayout.Space(12);
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.LabelField("3. Przygotuj raport", EditorStyles.boldLabel);
+            if (GUILayout.Button("Otwórz raport aktualnego laboratorium"))
+                WiRRReportWindow.OpenForLab(Blocks[blockIndex][0]);
 
-            EditorGUILayout.HelpBox(
-                "Scena i JSON są wykrywane automatycznie, ale NIE dowodzą pomiaru z urządzenia. " +
-                "Wskaż rzeczywisty tryb i uzupełnij tylko trzy krótkie obserwacje.",
-                MessageType.None);
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.Space(12);
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.LabelField("4. Podsumuj blok", EditorStyles.boldLabel);
 
             // Identity is edited in a dedicated panel, never duplicated per block.
             selectedGroup = Mathf.Clamp(EditorPrefs.GetInt("KIA.WiRR.MissionGroup", 0), 0, 2);
@@ -165,11 +175,8 @@ namespace KIA.WiRR.Editor
                     SaveSessionCard();
             }
 
-            EditorGUILayout.HelpBox(
-                "Raport pozostaje na komputerze studenta. Nie zbieramy numeru indeksu, " +
-                "nazwy konta systemowego, zdjęć, lokalizacji ani treści kodu. " +
-                "Wartości z tabel są przepisywane TYLKO z istniejących eksportów JSON.",
-                MessageType.None);
+            EditorGUILayout.LabelField("Postęp zapisuje się lokalnie. Synchronizacja z repozytorium wymaga bezpiecznej usługi uczelnianej.", EditorStyles.wordWrappedMiniLabel);
+            EditorGUILayout.EndVertical();
             EditorGUILayout.EndScrollView();
         }
 

@@ -111,19 +111,32 @@ namespace KIA.WiRR.Editor
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 EditorGUILayout.LabelField("Dane studenta", EditorStyles.boldLabel);
-                EditorGUILayout.HelpBox(
-                    "Praca jest indywidualna. Podaj identyfikator studenta i jeden numer indeksu. Nie wpisuj imienia ani nazwiska. Na podstawie numeru indeksu system automatycznie obliczy warianty v1–v5.",
-                    MessageType.None);
+                EditorGUILayout.LabelField("Indeks pochodzi z profilu WiRR, a warianty obliczają się automatycznie.", EditorStyles.wordWrappedMiniLabel);
 
+                if (WiRRStudentProfile.IsRegistered)
+                {
+                    document.teamId = "S" + WiRRStudentProfile.Identifier;
+                    if (document.studentIndices == null) document.studentIndices = new System.Collections.Generic.List<string>();
+                }
                 EditorGUI.BeginChangeCheck();
-                document.teamId = EditorGUILayout.TextField(
-                    new GUIContent("Identyfikator studenta", "Krótki identyfikator używany w nazwie zgłoszenia, np. S123456."),
-                    document.teamId ?? string.Empty);
+                if (WiRRStudentProfile.IsRegistered)
+                    EditorGUILayout.LabelField("Identyfikator raportu", document.teamId ?? "");
+                else
+                    document.teamId = EditorGUILayout.TextField("Identyfikator studenta", document.teamId ?? string.Empty);
 
                 while (document.studentIndices.Count < 1)
                     document.studentIndices.Add(string.Empty);
 
-                document.studentIndices[0] = EditorGUILayout.TextField("Numer indeksu", document.studentIndices[0]);
+                if (WiRRStudentProfile.IsRegistered)
+                {
+                    document.studentIndices[0] = WiRRStudentProfile.Index;
+                    if (string.IsNullOrWhiteSpace(document.teamId))
+                        document.teamId = "S" + WiRRStudentProfile.Identifier;
+                    EditorGUILayout.LabelField("Numer indeksu", WiRRStudentProfile.Index);
+                    EditorGUILayout.LabelField("Grupa", WiRRStudentProfile.GroupLabel);
+                }
+                else
+                    document.studentIndices[0] = EditorGUILayout.TextField("Numer indeksu", document.studentIndices[0]);
                 while (document.studentIndices.Count > 1)
                     document.studentIndices.RemoveAt(document.studentIndices.Count - 1);
 
