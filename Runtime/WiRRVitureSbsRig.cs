@@ -51,8 +51,9 @@ namespace KIA.WiRR
                 rightEye.transform.localRotation = Quaternion.identity;
             }
 
-            leftEye.stereoTargetEye = StereoTargetEyeMask.None;
-            rightEye.stereoTargetEye = StereoTargetEyeMask.None;
+            // URP/HDRP cameras use the active render pipeline, not the built-in
+            // stereoTargetEye API. Two independent viewport cameras provide SBS.
+            // Do not set stereoTargetEye here, including in OnValidate.
         }
 
         private void Awake() => Apply();
