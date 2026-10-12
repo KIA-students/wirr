@@ -44,3 +44,7 @@ Zasady dobrowolnych misji z limitem **8 punktów na grupę poza zajęciami** zaw
 ## Dodatkowa misja VR z watchdogiem
 
 Kod bonusowy **xr-optics** obejmuje [zadanie Safe XR Watchdog](../Documentation~/Reference/XR_SAFETY_WATCHDOG.md), z lokalnym limitem 10 prób. Publiczny ranking przyznaje punkty dopiero po zatwierdzeniu jakości rozwiązania przez prowadzącego. Nie publikuje raportów o objawach ani nie punktuje narażania uczestników na dyskomfort.
+
+## Nagroda dla zwycięskiej grupy
+
+Po ukończeniu czterech rund i zatwierdzeniu wyników przez prowadzącego, każdy student zwycięskiej grupy otrzymuje podwyższenie swojej indywidualnej oceny końcowej z przedmiotu o jeden stopień obowiązującej skali (np. 3,5 → 4,0; maksimum 5,0). Obowiązuje to po spełnieniu podstawowych warunków zaliczenia i pod warunkiem zgodności z zatwierdzonym sylabusem i zasadami oceniania. W razie remisu konieczne jest rozstrzygnięcie przez prowadzącego. Indywidualne punkty z laboratoriów i grupowe punkty Ligi XR są liczone osobno.
