@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.4 (2026-10-12)
+
+- Formularz raportu Unity przekazuje zweryfikowany JSON bezpośrednio do kolejki KIA z numerem laboratorium z formularza.
+- Po zalogowaniu przesyłka rozpoczyna się automatycznie; kolejne próby wysyłania uruchamiają się podczas sesji co 90 s.
+- Wysłany raport jest usuwany z kolejki dopiero po odczycie potwierdzenia z bazy KIA.
+- Nie zmienia to wymogu przetestowania Unity, kont studenckich i obsadzenia kursu rzeczywistą listą osób.
+
+
+
 ## 1.1.3 (2026-10-12)
 
 - Integracja zgłoszeń WiRR z kontami i bazą KIA, kolejka offline, panel prowadzącego i eksport CSV.
