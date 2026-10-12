@@ -1,6 +1,6 @@
 # Wymagania punktów kontrolnych WiRR
 
-Wersja 1.0.0
+Wersja 1.0.1
 
 ## Spis treści
 - [Środowisko i raport](#środowisko-i-raport)
@@ -27,7 +27,7 @@ Każdy wyższy etap obejmuje wcześniejsze wymagania. Wiersze poniżej odpowiada
 ## Dowody i ograniczenia
 Wymagane serie i interpretacje opisują [próbki laboratoriów](INDEX.md). Szablon `Samples~/LabNN/report-template.md` odpowiada szablonowi osadzonemu w PDF. Brak pomiaru oznacz NV; niewspierana funkcja nie jest wynikiem zerowym. WebSim nie dostarcza gotowego próbnika RTT ani bufora interpolacji: dla tych etapów przygotuj własne komponenty lub przejdź na LOCAL/LAN. Dla RRBot dwa rzeczywiste przeguby wystarczają, joint3 oznacz N/A.
 
-Użyj **WiRR → Raporty → Formularz raportu laboratoryjnego → Sprawdź kompletność raportu → Eksportuj raport lokalnie**. JSON zapisywany jest lokalnie. Przekaż go kanałem wskazanym przez prowadzącego. Eksport nie oznacza oddania ani zaliczenia.
+Użyj **WiRR → Raporty → Formularz raportu laboratoryjnego → Sprawdź kompletność raportu → Eksportuj raport lokalnie**. JSON zapisywany jest lokalnie. Dopóki automatyczna wysyłka do KIA nie przejdzie testu end-to-end, przekaż go kanałem ustalonym na zajęciach i uzyskaj potwierdzenie odbioru. Eksport nie oznacza oddania ani zaliczenia. Docelowa ewidencja i status wdrożenia: [GRADING_WORKFLOW.md](GRADING_WORKFLOW.md).
 
 Opcjonalna [synchronizacja postępu](STUDENT_GITHUB_REPORTING.md) zgłasza techniczny stan pracy. Nie przesyła pełnego raportu i nie zastępuje jego oddania.
 
