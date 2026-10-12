@@ -13,7 +13,7 @@ public sealed class WiRRKiaReports : EditorWindow {
  const string Api="https://ndebunrsdtulflzpemwd.supabase.co";
  const string Key="sb_publishable_00hCok_8Bm3nteWusHg2Eg_5fFwDsps";
  static readonly HttpClient Http=new HttpClient{Timeout=TimeSpan.FromSeconds(15)};
- string email="",password="",jwt="",uid="",course="",message="Zaloguj się na konto KIA."; bool busy;
+ string pendingPath=""; int pendingLab; string email="",password="",jwt="",uid="",course="",message="Zaloguj się na konto KIA."; bool busy;
  [Serializable] class Login { public string email,password; }
  [Serializable] class Auth { public string access_token; public Account user; }
  [Serializable] class Account { public string id; }
@@ -34,7 +34,8 @@ public sealed class WiRRKiaReports : EditorWindow {
   var window=GetWindow<WiRRKiaReports>("WiRR / KIA");
   if(string.IsNullOrEmpty(window.jwt)||string.IsNullOrEmpty(window.course)) {
    // Do not persist unauthenticated student reports in a shared machine queue.
-   window.message="Zaloguj się na konto KIA. Raport pozostał zapisany lokalnie: "+path;
+   window.pendingPath=path; window.pendingLab=lab;
+   window.message="Zaloguj się do KIA. Raport jest zapisany lokalnie; po zalogowaniu wysyłka rozpocznie się automatycznie.";
    window.Show();
    return;
   }
@@ -68,7 +69,7 @@ public sealed class WiRRKiaReports : EditorWindow {
     }
     if(GUILayout.Button("Ponów wysyłkę")) _=Flush();
    }
-   if(GUILayout.Button("Wyloguj")){jwt="";uid="";password="";course="";}
+   if(GUILayout.Button("Wyloguj")){jwt="";uid="";password="";course="";pendingPath="";}
   }
  }
  static HttpRequestMessage Req(HttpMethod method,string path,string token=""){
@@ -101,7 +102,10 @@ public sealed class WiRRKiaReports : EditorWindow {
    message=course==""?"Nie znaleziono aktywnego zapisu na kurs WIRR.":"Zalogowano. Raport można wysłać jednym przyciskiem.";
   }catch(Exception ex){jwt="";message="Błąd logowania: "+ex.Message;}
   finally{busy=false;Repaint();}
-  if(course!="")await Flush();
+  if(course!="") {
+   if(!string.IsNullOrEmpty(pendingPath)) { var path=pendingPath;var lab=pendingLab;pendingPath="";QueueReport(path,lab); }
+   await Flush();
+  }
  }
  async Task AddAndSend(string path){
   try{
