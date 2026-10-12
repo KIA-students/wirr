@@ -186,6 +186,7 @@ jobs:
 
           private_paths=(
             ".github/workflows/sync-kia-students-pr.yml"
+            ".github/workflows/publish-student-upm.yml"
             ".github/workflows/sync-from-kia-students.yml"
             ".github/workflows/branch-hygiene.yml"
             ".github/workflows/finalize-student-pr40.yml"
@@ -358,6 +359,7 @@ jobs:
           inherited=false
           private_checks=(
             ".github/workflows/sync-kia-students-pr.yml"
+            ".github/workflows/publish-student-upm.yml"
             ".github/workflows/sync-from-kia-students.yml"
             ".github/workflows/branch-hygiene.yml"
             ".github/workflows/finalize-student-pr40.yml"
