@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WiRR | ewidencja ocen</title><style>
+body{font:15px system-ui,sans-serif;max-width:1180px;margin:30px auto;padding:0 16px;color:#15243a}header{display:flex;justify-content:space-between;align-items:center}h1{font-size:25px}
+input,button,select{font:inherit;padding:8px;border:1px solid #a8b3c3;border-radius:6px}button{cursor:pointer;background:#eaf2fa}fieldset{border:1px solid #d1dbe5;border-radius:8px;margin:14px 0;padding:16px}table{border-collapse:collapse;width:100%;margin:16px 0}td,th{padding:8px;border-bottom:1px solid #dce2e8;text-align:left}th{background:#f2f5f8} .missing{color:#b33434}.approved{color:#207448}.received{color:#926200}small{color:#556}#grid{overflow-x:auto}.hidden{display:none}
+</style></head><body><header><h1>WiRR: ewidencja laboratoriów</h1><button id="logout" class="hidden">Wyloguj</button></header>
+<p id="status">Zaloguj się na istniejące konto prowadzącego KIA.</p>
+<fieldset id="login"><legend>Konto KIA</legend><input id="email" type="email" placeholder="E-mail"><input id="pass" type="password" placeholder="Hasło"><button id="signin">Zaloguj</button></fieldset>
+<section id="app" class="hidden">
+<fieldset><legend>Kontrola ocen</legend><label>Widok <select id="filter"><option value="all">Wszyscy</option><option value="missing">Braki</option><option value="received">Do zatwierdzenia</option><option value="approved">Komplet ocen</option></select></label> <button id="reload">Odśwież</button> <button id="csv">Eksport CSV</button>
+<p id="stats"></p></fieldset><div id="grid"></div>
+<fieldset><legend>Zatwierdź ocenę</legend><label>Student <select id="student"></select></label> <label>Laboratorium <select id="lab"></select></label> <label>Ocena <select id="grade"><option>3.0</option><option>3.5</option><option>4.0</option><option>4.5</option><option>5.0</option></select></label> <button id="approve">Zatwierdź</button>
+<p><small>Ocena może zostać zatwierdzona po merytorycznej weryfikacji pracy. Operacja zapisuje ID osoby zatwierdzającej.</small></p></fieldset>
+</section><script>
+"use strict";
+const root="https://ndebunrsdtulflzpemwd.supabase.co", key="sb_publishable_00hCok_8Bm3nteWusHg2Eg_5fFwDsps";
+const el=id=>document.getElementById(id);
+let token="",me="",course="",rows=[];
+function say(message){el("status").textContent=message}
+async function api(path,opt={}){
+ const r=await fetch(root+path,{...opt,headers:{"apikey":key,...(token?{"Authorization":"Bearer "+token}:{}),...(opt.body?{"Content-Type":"application/json"}:{}),...(opt.headers||{})}});
+ const txt=await r.text();if(!r.ok)throw Error("HTTP "+r.status+": "+txt);
+ return txt?JSON.parse(txt):null;
+}
+el("signin").onclick=async()=>{
+ try{
+ const data=await api("/auth/v1/token?grant_type=password",{method:"POST",body:JSON.stringify({email:el("email").value,password:el("pass").value})});
+ token=data.access_token;me=data.user.id;el("pass").value="";
+ const own=await api("/rest/v1/courses?select=id,code&code=eq.WIRR&owner_id=eq."+encodeURIComponent(me));
+ if(!own.length)throw Error("Konto nie jest prowadzącym kursu WIRR");
+ course=own[0].id;el("login").classList.add("hidden");el("app").classList.remove("hidden");el("logout").classList.remove("hidden");
+ say("Kurs WIRR 2026/2027. Oceny zapisują się w KIA.");await reload();
+ }catch(e){say("Logowanie/odczyt kursu: "+e.message)}
+};
+el("logout").onclick=()=>{token="";me="";course="";rows=[];el("app").classList.add("hidden");el("login").classList.remove("hidden");el("logout").classList.add("hidden");say("Wylogowano.")};
+async function reload(){try{rows=await api("/rest/v1/wirr_instructor_overview?select=course_id,student_id,group_code,lab_no,status,grade,received_at,graded_at&course_id=eq."+encodeURIComponent(course)+"&order=student_id,lab_no");render()}catch(e){say("Odczyt ewidencji: "+e.message)}}
+el("reload").onclick=reload;el("filter").onchange=render;
+function render(){
+ const groups=new Map();for(const r of rows){if(!groups.has(r.student_id))groups.set(r.student_id,{group:r.group_code,labs:{}});groups.get(r.student_id).labs[r.lab_no]=r}
+ const records=[...groups.entries()];const waiting=records.filter(([id,x])=>Object.values(x.labs).some(r=>r.status==="received")).length,missing=records.filter(([id,x])=>Object.values(x.labs).some(r=>r.status==="missing")).length;
+ el("stats").textContent="Studenci: "+records.length+" | Co najmniej jedno brakujące zgłoszenie: "+missing+" | Oczekująca ocena: "+waiting;
+ const grid=el("grid");grid.replaceChildren();
+ const t=document.createElement("table"),head=document.createElement("tr");
+ for(const name of ["Student","Grupa",...Array.from({length:8},(_,i)=>"Lab "+String(i+1).padStart(2,"0"))]){const th=document.createElement("th");th.textContent=name;head.append(th)}t.append(head);
+ const filter=el("filter").value;
+ for(const [id,x] of records){
+  const values=Object.values(x.labs);
+  if(filter==="missing"&&!values.some(r=>r.status==="missing"))continue;
+  if(filter==="received"&&!values.some(r=>r.status==="received"))continue;
+  if(filter==="approved"&&!values.every(r=>r.status==="approved"))continue;
+  const tr=document.createElement("tr");for(const name of [id,x.group||"",...Array.from({length:8},(_,i)=>{const r=x.labs[i+1];return r?(r.status==="approved"?Number(r.grade).toFixed(1):r.status==="received"?"Do oceny":"Brak"):"Brak"})]){
+   const td=document.createElement("td");td.textContent=name;
+   if(name==="Brak")td.className="missing";else if(name==="Do oceny")td.className="received";else if(/^\d\.\d$/.test(name))td.className="approved";
+   tr.append(td);
+  }t.append(tr);
+ }grid.append(t);
+ const chooser=el("student"),old=chooser.value;chooser.replaceChildren();
+ for(const [id,x] of records){const o=document.createElement("option");o.value=id;o.textContent=id+" ("+(x.group||"bez grupy")+")";chooser.append(o)}
+ if(old&&[...chooser.options].some(o=>o.value===old))chooser.value=old;
+}
+for(let i=1;i<=8;i++){let o=document.createElement("option");o.value=i;o.textContent="Lab "+String(i).padStart(2,"0");el("lab").append(o)}
+el("approve").onclick=async()=>{
+ const student=el("student").value,lab=Number(el("lab").value),grade=Number(el("grade").value);
+ if(!student||!confirm("Zatwierdzić ocenę "+grade.toFixed(1)+" dla studenta "+student+", Lab "+lab+"?"))return;
+ try{
+  const r=await api("/rest/v1/wirr_grades?on_conflict=course_id,student_id,lab_no",{method:"POST",headers:{"Prefer":"resolution=merge-duplicates,return=representation"},body:JSON.stringify({course_id:course,student_id:student,lab_no:lab,grade,graded_by:me,graded_at:new Date().toISOString()})});
+  say("Zatwierdzono ocenę "+grade.toFixed(1)+" dla Lab "+lab+".");await reload();
+ }catch(e){say("Zatwierdzenie nie powiodło się: "+e.message)}
+};
+el("csv").onclick=()=>{
+ const cols=["student_id","group_code","lab_no","status","grade","received_at","graded_at"];
+ const esc=x=>'"'+String(x??"").replaceAll('"','""')+'"';
+ const csv="\uFEFF"+cols.join(",")+"\r\n"+rows.map(r=>cols.map(c=>esc(r[c])).join(",")).join("\r\n");
+ const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
+ const a=document.createElement("a");a.href=url;a.download="wirr-oceny.csv";a.click();URL.revokeObjectURL(url);
+};
+</script></body></html>
