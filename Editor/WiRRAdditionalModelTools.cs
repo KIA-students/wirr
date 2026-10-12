@@ -48,7 +48,7 @@ namespace KIA.WiRR.Editor
         private static bool TryGetUnitreePackagePath(out string packagePath)
         {
             packagePath = string.Empty;
-            var packageInfo = PackageInfo.FindForPackageName(WiRRPackageName);
+            var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForPackageName(WiRRPackageName);
             if (packageInfo == null || string.IsNullOrWhiteSpace(packageInfo.resolvedPath))
                 return false;
 

@@ -59,7 +59,11 @@ namespace KIA.WiRR
             if (body == null || body.isKinematic || body.gameObject == gameObject)
                 return;
 
+            #if UNITY_6000_3_OR_NEWER
+            var id = body.GetEntityId().GetHashCode();
+#else
             var id = body.GetInstanceID();
+#endif
             var now = Time.time;
             if (lastImpulseTime.TryGetValue(id, out var previous) &&
                 now - previous < cooldownSeconds)
