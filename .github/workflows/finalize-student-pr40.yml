@@ -40,5 +40,5 @@ jobs:
           fi
           checks="$(gh api "repos/$repo/commits/$head/check-runs" --jq '[.check_runs[] | select(.name == "Sprawdź zawartość repozytorium kursu" and .conclusion == "success")] | length')"
           test "$checks" -gt 0 || { echo "::error::Course content safety check has not passed"; exit 1; }
-          gh pr merge "$pr" --repo "$repo" --merge --match-head-commit "$EXPECTED_HEAD"
+          gh api --method PUT "repos/$repo/pulls/$pr/merge" -f sha="$EXPECTED_HEAD" -f merge_method=merge --jq '{merged,sha,message}'
           gh api "repos/$repo/pulls/$pr" --jq '{merged,merge_commit_sha,state}'
