@@ -40,6 +40,10 @@
 
 Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–8, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
 
+## Jedna ścieżka pracy w Unity
+
+**[Od uruchomienia projektu do raportu, karty sesji i dobrowolnej Ligi XR](Documentation~/Reference/UNITY_COURSE_JOURNEY.md).** Zacznij od własnego projektu URP, zainstaluj lekki pakiet z `https://github.com/KIA-students/wirr.git#upm`, wykonaj doświadczenie i zapisz wyniki. HDRI/PBR to osobny, opcjonalny pakiet `https://github.com/KIA-students/wirr.git#assets`, a zasoby pojawiają się w projekcie dopiero po imporcie próbki z Samples. Cztery bloki obejmują osiem laboratoriów; Liga XR nie zastępuje indywidualnych raportów ani ocen.
+
 ## Kampania 4 × 2: dokładnie osiem laboratoriów
 
 **[Otwórz spis kampanii i cztery przewodniki spotkań](Documentation~/Campaign/README.md)**. Pierwsze planowane spotkanie [Lab 01 + Lab 02, wtorek 13 października 2026](Documentation~/Campaign/BLOK-01.md) ma uproszczoną ścieżkę uruchomienia bez pełnej konfiguracji XR. Lab 08 jest pełnoprawną, ósmą próbką pakietu Unity i ma automatyczny pomiar prób w demonstratorze PC.
@@ -112,10 +116,10 @@ W Unity wybierz:
 Repozytorium studenckie:
 
 ```text
-https://github.com/KIA-students/wirr.git#main
+https://github.com/KIA-students/wirr.git#upm
 ```
 
-Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#main` wskazuje bieżącą publiczną wersję pakietu w repozytorium kursu. Repozytorium pakietu: [KIA-students/wirr](https://github.com/KIA-students/wirr). Po pierwszej instalacji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wersja kursowa to **Unity 6000.6.5f1** lub nowsza zgodna poprawka z linii **6000.6.x**. Zachowaj zestaw pakietów projektu i zapisz rzeczywiste wersje w raporcie.
+Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#upm` wskazuje lekką publiczną dystrybucję pakietu bez ciężkich HDRI/PBR. Repozytorium pakietu: [KIA-students/wirr](https://github.com/KIA-students/wirr). Po pierwszej instalacji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wersja kursowa to **Unity 6000.6.5f1** lub nowsza zgodna poprawka z linii **6000.6.x**. Zachowaj zestaw pakietów projektu i zapisz rzeczywiste wersje w raporcie.
 
 ### Zalecane środowisko przed pierwszym laboratorium
 
