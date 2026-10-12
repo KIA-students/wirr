@@ -1,6 +1,6 @@
 # WiRR: ewidencja ocen i raportowanie
 
-Wersja 1.0.0
+Wersja 1.0.1
 
 ## Zasada
 
@@ -14,7 +14,13 @@ Lokalny audyt: `python tools/grading/grade_audit.py --roster roster.csv --record
 
 ## Docelowy transport
 
-Opcjonalnie zastosować osobny projekt Supabase przeznaczony dla WiRR, z uwierzytelnieniem i RLS, oddzielnymi rolami studenta i prowadzącego. Publiczny klient Unity nigdy nie przechowuje klucza `service_role`. Sam numer indeksu nie może stanowić uwierzytelnienia ani uprawniać do odczytu cudzych rekordów. Przesyłanie powinno być idempotentne (identyfikator zgłoszenia), lokalnie kolejkowane offline oraz kończyć się serwerowym potwierdzeniem. Ocena i zatwierdzenie po stronie prowadzącego. Bez testów end-to-end nie wolno deklarować uruchomienia automatycznej wysyłki.
+Projekt `KIA_tests` (`ndebunrsdtulflzpemwd`) zawiera wydzielone tabele `public.wirr_submissions` i `public.wirr_grades`. Korzystają one z istniejących kont, kursów i zapisów na zajęcia. Uwierzytelnienie odbywa się przez Supabase Auth; student musi być aktywnie zapisany do kursu i może dodawać oraz czytać tylko własne zgłoszenia. Prowadzący kursu może odczytywać zgłoszenia i zatwierdzać oceny. Zmiany schematu wdrożono; integracja klienta Unity i panelu ewidencji jest nadal do wykonania. Publiczny klient Unity nigdy nie przechowuje klucza `service_role`. Sam numer indeksu nie może stanowić uwierzytelnienia ani uprawniać do odczytu cudzych rekordów. Przesyłanie powinno być idempotentne (identyfikator zgłoszenia), lokalnie kolejkowane offline oraz kończyć się serwerowym potwierdzeniem. Ocena i zatwierdzenie po stronie prowadzącego. Bez testów end-to-end nie wolno deklarować uruchomienia automatycznej wysyłki.
+
+## Implementacja w istniejącej bazie
+
+Zgłoszenie do `wirr_submissions` zawiera UUID klienta `client_submission_id`, `course_id`, `student_id` równe ID uwierzytelnionego użytkownika, `lab_no` 1–8 i obiekt JSON `report`. Unikalne `client_submission_id` zapobiega cichym duplikatom. Tabela `wirr_grades` zawiera pojedynczą ocenę zatwierdzoną dla pary kurs–student–laboratorium; nie ma otwartych praw zapisu oceny przez studenta. Listę braków wyznaczają `enrollments` i brak zgłoszenia/oceny. Klucze prywatne nigdy nie trafiają do Unity.
+
+Nie publikuj numerów indeksów, raportów i eksportów ocen w repozytorium. Warstwa Unity ma używać tokenu uwierzytelnionego użytkownika z KIA, a nie anonimowego żądania. Dotychczasowy eksport JSON pozostaje ścieżką awaryjną do chwili pozytywnego testu całości.
 
 ## Kryteria odbioru
 
