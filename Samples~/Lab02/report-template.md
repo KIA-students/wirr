@@ -5,6 +5,7 @@
 ## Identyfikacja i warianty
 
 - Numer indeksu `i`: __________
+- Grupa laboratoryjna: G1 / G2
 - `S = i`: __________
 - `v1` (3.0): ___
 - `v2` (3.5): ___

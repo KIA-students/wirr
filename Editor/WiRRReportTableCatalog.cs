@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using KIA.WiRR;
 
 namespace KIA.WiRR.Editor
 {
@@ -26,11 +28,11 @@ namespace KIA.WiRR.Editor
 
     internal static class WiRRReportTableCatalog
     {
-        public static IReadOnlyList<WiRRReportTable> Get(int lab, string checkpoint)
+        public static IReadOnlyList<WiRRReportTable> Get(int lab, string checkpoint, WiRRReportDocument document = null)
         {
             return lab switch
             {
-                1 => Lab01(checkpoint), 2 => Lab02(checkpoint), 3 => Lab03(checkpoint), 4 => Lab04(checkpoint),
+                1 => Lab01(checkpoint), 2 => Lab02(checkpoint, document), 3 => Lab03(checkpoint), 4 => Lab04(checkpoint),
                 5 => Lab05(checkpoint), 6 => Lab06(checkpoint), 7 => Lab07(checkpoint), 8 => Lab08(checkpoint),
                 _ => Array.Empty<WiRRReportTable>()
             };
@@ -243,15 +245,27 @@ namespace KIA.WiRR.Editor
             _ => Array.Empty<WiRRReportTable>()
         };
 
-        private static IReadOnlyList<WiRRReportTable> Lab02(string cp) => cp switch
+        private static string[] Lab02Conditions(string cp, WiRRReportDocument document)
         {
-            "3.0" => new[] { T("lab02_cp30_conditions", "Chwyt / socket / ray: pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy"}) },
-            "3.5" => new[] { T("lab02_cp35_conditions", "UI i feedback: pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędne aktywacje"}) },
-            "4.0" => new[] { T("lab02_cp40_conditions", "Lokomocja: pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy/korekty"}) },
+            var index = document?.studentIndices?.FirstOrDefault();
+            if (!long.TryParse(index, out var sum)) return new[] { "A", "B", "C" };
+            var k = cp == "3.0" ? 1 : cp == "3.5" ? 2 : cp == "4.0" ? 3 : 5;
+            var variant = 1 + ((sum + 2L * (k - 1)) % 5L);
+            var three = cp == "3.0" ? variant == 2 || variant == 3 || variant == 4
+                : cp == "3.5" ? variant == 1 || variant == 2 || variant == 4
+                : cp == "4.0" ? variant == 1 || variant == 5 : false;
+            return three ? new[] { "A", "B", "C" } : new[] { "A", "B" };
+        }
+
+        private static IReadOnlyList<WiRRReportTable> Lab02(string cp, WiRRReportDocument document) => cp switch
+        {
+            "3.0" => new[] { T("lab02_cp30_conditions", "Chwyt / socket / ray: pomiary", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy"}) },
+            "3.5" => new[] { T("lab02_cp35_conditions", "UI i feedback: pomiary", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędne aktywacje"}) },
+            "4.0" => new[] { T("lab02_cp40_conditions", "Lokomocja: pomiary", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy/korekty"}) },
             "4.5" => new[] { T("lab02_scenario", "Scenariusz bazowy", new[]{"1","2","3","4","5"}, new[]{"Czas s","Upuszczenia","Błędne aktywacje","Nieudane teleportacje","Błędy osadzenia/reset","Uwagi"}) },
             "5.0" => new[] {
-                T("lab02_ssq", "SSQ: wyniki liczbowe", new[]{"Osoba A PRE","Osoba A POST","Osoba B PRE","Osoba B POST"}, new[]{"N","O","D","TS"}),
-                T("lab02_quest_experiment", "Eksperyment Quest 3", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Mediana s","Błędy/korekty","Komfort 0–10"}) },
+                T("lab02_ssq", "SSQ: wyniki liczbowe", new[]{"Osoba A PRE","Osoba A POST"}, new[]{"N","O","D","TS"}),
+                T("lab02_quest_experiment", "Eksperyment Quest 3", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Mediana s","Błędy/korekty","Komfort 0–10"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
 
