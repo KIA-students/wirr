@@ -188,6 +188,7 @@ jobs:
             ".github/workflows/sync-kia-students-pr.yml"
             ".github/workflows/sync-from-kia-students.yml"
             ".github/workflows/branch-hygiene.yml"
+            ".github/workflows/finalize-student-pr40.yml"
           )
 
           git checkout -B "${EXPORT_BRANCH}" "upstream/${UPSTREAM_BRANCH}"
@@ -400,7 +401,8 @@ jobs:
           set -euo pipefail
 
           inherited=false
-          for path in             ".github/workflows/sync-kia-students-pr.yml"             ".github/workflows/sync-from-kia-students.yml"             ".github/workflows/branch-hygiene.yml"; do
+          for path in             ".github/workflows/sync-kia-students-pr.yml"             ".github/workflows/sync-from-kia-students.yml"             ".github/workflows/branch-hygiene.yml"
+            ".github/workflows/finalize-student-pr40.yml"; do
             if gh api "repos/${UPSTREAM_REPOSITORY}/contents/${path}" >/dev/null 2>&1; then
               inherited=true
               break
