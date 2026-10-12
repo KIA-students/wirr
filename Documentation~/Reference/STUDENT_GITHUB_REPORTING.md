@@ -1,4 +1,8 @@
-# Automatyczne raportowanie WiRR do GitHub
+# Opcjonalne techniczne raportowanie WiRR do GitHub
+
+Wersja 1.0.1
+
+**Nie jest to obowiązkowa ani rekomendowana ścieżka oddawania prac.** Podstawowy proces ma wykorzystywać ewidencję kursu w KIA. Zobacz [GRADING_WORKFLOW.md](GRADING_WORKFLOW.md). Dotychczasowa ścieżka wymaga GitHub CLI i nie jest zalecana studentom.
 
 Dla studenta: zainstaluj Git i GitHub CLI (`gh`). Jednorazowo wykonaj `gh auth login` w terminalu, następnie w Unity 6.6 wybierz **WiRR → Student → Włącz automatyczne wysyłanie na GitHub**. Student musi mieć konto GitHub, ale nie loguje się ponownie przy każdym raporcie. Program co około pięć minut próbuje wysłać bieżący techniczny stan do własnego forka, a następnie otwiera lub aktualizuje PR do `KIA-students/wirr:main`. PR dotyczy wyłącznie `students/progress/<losowy-identyfikator>.json`, bez numeru indeksu i surowych pomiarów. Wysłanie PR nie oznacza jego automatycznego scalenia ani zaliczenia.
 

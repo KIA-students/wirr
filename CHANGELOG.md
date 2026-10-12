@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.2 (2026-10-12)
+
+- Dodano audyt kompletności ocen ośmiu laboratoriów i testy, z uwzględnieniem studentów bez zgłoszeń.
+- Zintegrowano projekt ewidencji z istniejącym KIA_tests w Supabase (wydzielone tabele oraz RLS); transmisja Unity wymaga jeszcze wdrożenia i testu.
+- Wyraźnie oddzielono opcjonalny GitHub PR postępu od docelowego oddawania raportów, z zachowaniem eksportu offline.
+
+## 1.1.1 (2026-10-12)
+
+- Ujednolicono lokalny eksport raportów z opisem formularza Unity
+- Poprawiono szablon Lab 02 dla pracy samodzielnej, SSQ w etapie 5.0 i dwóch warunków A/B tego etapu
+- Przewodnik prowadzącego obejmuje osiem laboratoriów i rzeczywiste wymagania serii pomiarowych
+
+
 ## Unreleased
 
 - Zsynchronizowano osiem szablonów raportów z aktualnymi instrukcjami kursu WiRR.
