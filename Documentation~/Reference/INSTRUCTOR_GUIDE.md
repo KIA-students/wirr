@@ -1,6 +1,6 @@
 # WiRR: przewodnik prowadzącego
 
-Wersja 1.0.1
+Wersja 1.0.0
 
 ## Zakres i dokumenty
 
@@ -13,7 +13,7 @@ Osiem laboratoriów, realizowanych samodzielnie. Kolejne bloki obejmują 01+02, 
 1. Otwórz scenę i potwierdź działanie elementów wymienionych w wybranym punkcie kontrolnym
 2. Sprawdź wariant wynikający z indeksu, rzeczywiste pomiary, jednostki i liczbę prób
 3. Poproś o interpretację wyniku i wyjaśnienie zastosowanej konfiguracji
-4. Otwórz zgłoszenie w ewidencji KIA, a do czasu uruchomienia synchronizacji lokalny JSON, i sprawdź laboratorium oraz grupę
+4. Otwórz lokalny JSON raportu i sprawdź numer laboratorium oraz grupę
 5. Zatwierdź ocenę w ewidencji prowadzącego
 
 Eksport raportu, zapis sceny i techniczny PR postępu nie oznaczają zaliczenia. Nie oceniaj pracy na podstawie liczby commitów ani czasu Play Mode.
@@ -34,7 +34,7 @@ Warunek C występuje wyłącznie w wariantach wskazanych w [tabeli wariantów](L
 
 Pakiet: `https://github.com/KIA-students/wirr.git#upm`. Student podaje indeks i grupę w **WiRR → Student → Profil i grupa**. Formularz otwiera przyciskiem właściwego laboratorium.
 
-**Eksportuj raport lokalnie** stanowi obecną ścieżkę awaryjną. Przygotowano osobne tabele WiRR w projekcie Supabase KIA_tests, lecz automatyczne przesłanie z Unity nie jest jeszcze uruchomione. Po potwierdzeniu testów w Unity student będzie mógł przesłać raport bez GitHub CLI. [Ewidencja i warunki uruchomienia](GRADING_WORKFLOW.md). Dotychczasowy [PR postępu](STUDENT_GITHUB_REPORTING.md) jest opcjonalny i nie stanowi kanału oddawania raportów.
+**Eksportuj raport lokalnie** zapisuje JSON bez transportu Git. Student przekazuje plik kanałem ustalonym na zajęciach. Opcjonalny [PR postępu](STUDENT_GITHUB_REPORTING.md) pozostaje osobną funkcją.
 
 ## Diagnostyka
 

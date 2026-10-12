@@ -533,7 +533,7 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(14);
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField("Sprawdzenie i eksport", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Sprawdzenie i przekazanie raportu", EditorStyles.boldLabel);
 
                 var liveEvaluation = WiRRReportEvaluator.Evaluate(document);
                 if (liveEvaluation.CanSubmit)
@@ -560,7 +560,7 @@ namespace KIA.WiRR.Editor
 
                 using (new EditorGUI.DisabledScope(EditorApplication.isCompiling || !liveEvaluation.CanSubmit))
                 {
-                    if (GUILayout.Button("Eksportuj raport lokalnie", GUILayout.Height(38)))
+                    if (GUILayout.Button("Zapisz i przekaż raport do KIA", GUILayout.Height(38)))
                     {
                         evaluation = WiRRReportEvaluator.Evaluate(document);
                         try
@@ -568,8 +568,8 @@ namespace KIA.WiRR.Editor
                             var path = WiRRReportStore.ExportFinal(document, false);
                             WiRRActivityLogger.Record("report_exported", labNumber, "local");
                             WiRRProgressTracker.Refresh();
-                            submissionStatus = "Raport zapisany lokalnie. Przekaż go kanałem wskazanym przez prowadzącego.";
-                            EditorUtility.RevealInFinder(path);
+                            WiRRKiaReports.QueueReport(path, labNumber);
+                            submissionStatus = "Raport zapisany lokalnie i umieszczony w kolejce KIA. Status dostarczenia sprawdź w oknie WiRR → Student → Wyślij raport do KIA.";
                         }
                         catch (System.IO.IOException exception)
                         {
