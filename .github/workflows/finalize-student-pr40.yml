@@ -1,0 +1,44 @@
+name: Finalize approved WiRR student sync PR 40
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/finalize-student-pr40.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    environment: student-package-publishing
+    steps:
+      - name: Merge verified public export once
+        env:
+          GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+          EXPECTED_HEAD: 5f1fcdaa5cb23010acef6363bec9956463990e97
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${GH_TOKEN}" || { echo "::error::Missing KIA_STUDENTS_SYNC_TOKEN"; exit 1; }
+          repo=KIA-students/wirr
+          pr=40
+          state="$(gh api "repos/$repo/pulls/$pr" --jq '.state')"
+          if [[ "$state" == closed ]]; then
+            merged="$(gh api "repos/$repo/pulls/$pr" --jq '.merged')"
+            if [[ "$merged" == true ]]; then
+              echo "PR #40 already merged"
+              exit 0
+            fi
+            echo "::error::PR #40 closed without merging"
+            exit 1
+          fi
+          head="$(gh api "repos/$repo/pulls/$pr" --jq '.head.sha')"
+          base="$(gh api "repos/$repo/pulls/$pr" --jq '.base.ref')"
+          if [[ "$head" != "$EXPECTED_HEAD" || "$base" != main ]]; then
+            echo "::error::PR #40 has unexpected head or target. Stop."
+            exit 1
+          fi
+          checks="$(gh api "repos/$repo/commits/$head/check-runs" --jq '[.check_runs[] | select(.name == "Sprawdź zawartość repozytorium kursu" and .conclusion == "success")] | length')"
+          test "$checks" -gt 0 || { echo "::error::Course content safety check has not passed"; exit 1; }
+          gh pr merge "$pr" --repo "$repo" --merge --match-head-commit "$EXPECTED_HEAD"
+          gh api "repos/$repo/pulls/$pr" --jq '{merged,merge_commit_sha,state}'
