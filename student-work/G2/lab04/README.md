@@ -6,4 +6,4 @@ Katalog organizacyjny laboratorium 04 dla grupy G2.
 
 Można tutaj zamieszczać wyłącznie zatwierdzone przez prowadzącego materiały zbiorcze lub anonimowe, bez numerów indeksów, nazwisk, indywidualnych odpowiedzi i danych SSQ.
 
-[Grupa G2](../README.md) · [Instrukcja przekazywania raportu](../../README.md)
+[Grupa G2](../README.md) · [Instrukcja przekazywania raportu](../../README.md) · [Przykład Lab 04](../../examples/lab04-report-example.md) · [Przykład Lab 04](../../examples/lab04-report-example.md)
