@@ -6,6 +6,7 @@
 - [Windows](#windows)
 - [Ubuntu](#ubuntu)
 - [Pakiety XR tylko gdy potrzebne](#pakiety-xr-tylko-gdy-potrzebne)
+- [Graf ścieżek uruchamiania](#graf-ścieżek-uruchamiania)
 - [Urzadzenia XR](#urzadzenia-xr)
 - [Najczęstsze błędy](#najczęstsze-błędy)
 
@@ -61,6 +62,22 @@ Jeśli wszystko działa, przejdź do [Lab 01](../../Samples~/Lab01/README.md#pie
 | Telefon AR (Lab 03–04) | AR Foundation, provider ARCore i kompatybilny telefon |
 | VITURE | Kabel obsługujący wideo i właściwy tryb SBS |
 | ROS 2 (Lab 06) | Przygotowany endpoint ROS albo log JointState |
+
+## Graf ścieżek uruchamiania
+
+```mermaid
+flowchart TD
+ A["Unity 6000.6.x + URP"] --> B["WiRR przez UPM + Input System"]
+ B --> C["Lab 01: Play / Profiler na PC"]
+ C --> D["XRI + Starter Assets + XR Interaction Simulator"]
+ D --> E["Lab 02: interakcje na PC"]
+ E --> F["OpenXR Android + moduły Android w Unity Hub"]
+ F --> G["ADB + Quest 3: standalone"]
+ C --> H["AR Foundation + ARCore XR Plugin"]
+ H --> I["Telefon zgodny z ARCore: AR"]
+```
+
+To graf **kolejności wdrażania**, nie diagram bezpośrednich zależności pakietów. Sprawdź najpierw ścieżkę PC, a dopiero później instaluj komponenty sprzętowe. [Instrukcja pierwszego laboratorium](../../Samples~/Lab01/README.md#graf-zależności-i-diagnostyka-scen) zawiera tabelę objawów i minimalne wymagania.
 
 ## Urzadzenia XR
 
