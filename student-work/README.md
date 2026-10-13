@@ -1,7 +1,5 @@
 # Prace laboratoryjne WiRR
 
-Katalog publiczny zawiera strukturę organizacyjną grup i laboratoriów oraz **przykłady**, nie jest miejscem publikowania indywidualnych prac ani rejestrem ocen.
-
 ## Grupy i laboratoria
 
 | Grupa | Laboratoria |
@@ -27,5 +25,3 @@ Katalog publiczny zawiera strukturę organizacyjną grup i laboratoriów oraz **
 3. Wpisz rzeczywiste warunki eksperymentu, surowe pomiary, obliczenia i wnioski.
 4. Użyj **Sprawdź kompletność raportu**, następnie **Eksportuj raport lokalnie**.
 5. Plik JSON w `Library/WiRRReports/exports` przekaż kanałem wyznaczonym przez prowadzącego.
-
-**Nie umieszczaj** w tym publicznym repozytorium numerów indeksów, nazwisk, indywidualnych wyników SSQ, ocen ani identyfikujących raportów. Same foldery G1/G2 służą orientacji i ewentualnej publikacji materiałów zbiorczych, anonimowych, zatwierdzonych przez prowadzącego. Eksport JSON nie oznacza automatycznego oddania pracy.
