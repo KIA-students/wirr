@@ -6,4 +6,4 @@ Katalog organizacyjny laboratorium 05 dla grupy G1.
 
 Można tutaj zamieszczać wyłącznie zatwierdzone przez prowadzącego materiały zbiorcze lub anonimowe, bez numerów indeksów, nazwisk, indywidualnych odpowiedzi i danych SSQ.
 
-[Grupa G1](../README.md) · [Instrukcja przekazywania raportu](../../README.md)
+[Grupa G1](../README.md) · [Instrukcja przekazywania raportu](../../README.md) · [Przykład Lab 05](../../examples/lab05-report-example.md)

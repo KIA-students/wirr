@@ -13,6 +13,12 @@ Katalog publiczny zawiera strukturę organizacyjną grup i laboratoriów oraz **
 
 - [Lab 01](examples/lab01-report-example.md): fikcyjne FPS, mediany i wniosek.
 - [Lab 02](examples/lab02-report-example.md): fikcyjne próby interakcji, błędy i mediana.
+- [Lab 03](examples/lab03-report-example.md): śledzenie AR i wykrywanie płaszczyzn.
+- [Lab 04](examples/lab04-report-example.md): dostępność Depth API i successRate.
+- [Lab 05](examples/lab05-report-example.md): audyt konwersji CAD i siatki.
+- [Lab 06](examples/lab06-report-example.md): źródło JointState w wariancie replay.
+- [Lab 07](examples/lab07-report-example.md): kryteria akceptacji, PASS/FAIL/NV.
+- [Lab 08](examples/lab08-report-example.md): demonstrator integracyjny, próby A/B.
 
 ## Przygotowanie raportu
 
