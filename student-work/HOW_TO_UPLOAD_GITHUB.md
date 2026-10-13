@@ -13,7 +13,7 @@
 ## Dodanie anonimowego materiału przez przeglądarkę
 
 1. Zaloguj się na [GitHub](https://github.com) do swojego konta (tryb ręczny wymaga konta GitHub; automatyczna wysyłka z Unity nie wymaga logowania).
-2. Otwórz folder grupy i laboratorium: [G1](../G1/README.md) lub [G2](../G2/README.md), następnie `lab01` ... `lab08`.
+2. Otwórz folder grupy i laboratorium: [G1](../G1/README.md) lub [G2](../G2/README.md), i pozostań w folderze tej grupy. Numer laboratorium zapisz w nazwie pliku, np. `lab02-report.json`.
 3. Wybierz **Add file → Upload files**, przeciągnij **anonimową kopię** dokumentu i wpisz zwięzły opis zmiany.
 4. Jeżeli masz prawo zapisu, wybierz utworzenie oddzielnej gałęzi i **Propose changes**, a następnie utwórz Pull Request. Jeśli nie masz prawa zapisu, GitHub może zaproponować fork repozytorium; jeśli nie, poproś prowadzącego o kanał dostarczenia pliku.
 5. Po utworzeniu PR poczekaj na weryfikację prowadzącego. **Utworzenie PR nie oznacza zaliczenia** ani automatycznego opublikowania raportu.
