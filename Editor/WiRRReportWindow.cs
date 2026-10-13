@@ -117,7 +117,7 @@ namespace KIA.WiRR.Editor
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 EditorGUILayout.LabelField("Dane studenta", EditorStyles.boldLabel);
-                EditorGUILayout.LabelField("Indeks pochodzi z profilu WiRR, a warianty obliczają się automatycznie.", EditorStyles.wordWrappedMiniLabel);
+                EditorGUILayout.LabelField("Samodzielnie: jeden indeks. W parze: dwa różne indeksy. Pierwszy indeks pochodzi z profilu WiRR.", EditorStyles.wordWrappedMiniLabel);
 
                 if (WiRRStudentProfile.IsRegistered)
                 {
@@ -143,8 +143,13 @@ namespace KIA.WiRR.Editor
                 }
                 else
                     document.studentIndices[0] = EditorGUILayout.TextField("Numer indeksu", document.studentIndices[0]);
-                while (document.studentIndices.Count > 1)
-                    document.studentIndices.RemoveAt(document.studentIndices.Count - 1);
+                if (document.studentIndices.Count > 2) document.studentIndices.RemoveRange(2, document.studentIndices.Count - 2);
+                bool pair = document.studentIndices.Count == 2;
+                bool requestedPair = EditorGUILayout.ToggleLeft("Pracujemy w parze (drugi numer indeksu)", pair);
+                if (requestedPair && !pair) document.studentIndices.Add(string.Empty);
+                else if (!requestedPair && pair) document.studentIndices.RemoveAt(1);
+                if (requestedPair)
+                    document.studentIndices[1] = EditorGUILayout.TextField("Indeks drugiej osoby", document.studentIndices[1]);
 
                 if (EditorGUI.EndChangeCheck())
                 {
@@ -155,7 +160,7 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.Space(4);
                 var sum = WiRRReportStore.GetValue(document, "variant.sum");
                 EditorGUILayout.LabelField(
-                    string.IsNullOrWhiteSpace(sum) ? "Wartość S: brak" : $"Wartość S = numer indeksu: {sum}",
+                    string.IsNullOrWhiteSpace(sum) ? "Wartość S: brak" : $"Wartość S (suma indeksów): {sum}",
                     EditorStyles.miniBoldLabel);
 
                 using (new EditorGUILayout.HorizontalScope())
@@ -168,7 +173,7 @@ namespace KIA.WiRR.Editor
                     }
                 }
                 EditorGUILayout.LabelField(
-                    "S = numer indeksu; warianty v1–v5 są obliczane automatycznie.",
+                    "S = suma podanych indeksów (dla jednej osoby: jej indeks). Warianty v1–v5 są obliczane automatycznie.",
                     EditorStyles.wordWrappedMiniLabel);
             }
         }
@@ -586,6 +591,26 @@ namespace KIA.WiRR.Editor
                     "Raporty robocze: <projekt Unity>/Library/WiRRReports. Wyeksportowane JSON: <projekt Unity>/Library/WiRRReports/exports. " +
                     "Zapis nie wymaga logowania. Po eksporcie program automatycznie wysyła raport do kolejki KIA, a nie bezpośrednio do GitHub.",
                     MessageType.Info);
+                if (GUILayout.Button("Otwórz zapisany raport JSON do edycji", GUILayout.Height(28)))
+                {
+                    var exportDir = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath, "../Library/WiRRReports/exports"));
+                    var selected = EditorUtility.OpenFilePanel("Wybierz raport Lab " + labNumber.ToString("00"), exportDir, "json");
+                    if (!string.IsNullOrEmpty(selected))
+                    {
+                        try
+                        {
+                            document = WiRRReportStore.ImportJson(labNumber, selected);
+                            evaluation = null;
+                            InitializeSectionFoldouts();
+                            submissionStatus = "Wczytano raport do formularza. Po edycji zapisz go ponownie przyciskiem eksportu.";
+                        }
+                        catch (System.Exception ex)
+                        {
+                            submissionStatus = "Nie można otworzyć raportu: " + ex.Message;
+                        }
+                    }
+                }
+
                 if (GUILayout.Button("Otwórz folder wyeksportowanych raportów", GUILayout.Height(27)))
                 {
                     var exportDir = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath, "../Library/WiRRReports/exports"));
