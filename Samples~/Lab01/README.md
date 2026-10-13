@@ -6,6 +6,7 @@
 - [Konto Unity: nie potrzebujesz wspólnego loginu](#konto-unity-nie-potrzebujesz-wspólnego-loginu)
 - [Pierwsze 10 minut: eksperyment zamiast instalatora](#pierwsze-10-minut-eksperyment-zamiast-instalatora)
 - [Przygotowanie dalszych eksperymentów](#przygotowanie-dalszych-eksperymentów)
+- [Graf zależności i diagnostyka scen](#graf-zależności-i-diagnostyka-scen)
 - [Zadania krok po kroku](#zadania-krok-po-kroku)
   - [3.0: Pomiar bazowy PC](#30-pomiar-bazowy-pc)
   - [3.5: Obciążenie CPU i GC](#35-obciążenie-cpu-i-gc)
@@ -55,9 +56,40 @@ Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Labor
 3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
 4. Użyj **Utwórz / napraw aktywną scenę**.
 5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Zainstaluj zależności oraz zaimportuj Starter Assets i XR Interaction Simulator.
-7. Utwórz lub napraw scenę Lab01, dodaj sondę metryk i uruchom walidator.
-8. Przed pomiarem wyłącz zbędne aplikacje i nie zmieniaj kilku parametrów eksperymentu jednocześnie.
+6. Utwórz lub napraw scenę Lab01, dodaj sondę metryk i uruchom walidator.
+7. Przed pomiarem wyłącz zbędne aplikacje i nie zmieniaj kilku parametrów eksperymentu jednocześnie.
+
+## Graf zależności i diagnostyka scen
+
+**Nie instaluj wszystkiego od razu.** Pierwsze Play w Lab 01 działa w zwykłej scenie URP. Pakiet WiRR deklaruje w `package.json` zależność od `com.unity.inputsystem`, natomiast XRI, OpenXR i AR Foundation zależą od wybranego eksperymentu.
+
+```mermaid
+flowchart TD
+    A["Unity Hub + Unity 6000.6.x"] --> B["Projekt Universal 3D (URP)"]
+    G["Git (import z repozytorium)"] --> C["Pakiet WiRR przez UPM"]
+    B --> C
+    C --> D["Input System (manifest WiRR)"]
+    D --> E["Lab 01: scena PC, Play, Profiler"]
+    E --> F["XRI + Starter Assets + XR Interaction Simulator"]
+    F --> H["Lab 02: grab, ray, socket, teleportacja"]
+    H --> I["OpenXR dla Android + Android Build Support"]
+    I --> J["SDK / NDK / OpenJDK + ADB + Quest 3"]
+    E --> K["AR Foundation + ARCore XR Plugin"]
+    K --> L["Telefon ARCore + autoryzacja ADB"]
+```
+
+Strzałki pokazują **kolejność konfiguracji**, nie wszystkie bezpośrednie zależności UPM. Meta Horizon Link to osobny wariant PC VR na Windows, nie warunek buildu standalone Quest. Edytor kodu jest przydatny do skryptów, ale nie jest warunkiem pierwszego Play.
+
+| Co uruchamiasz | Niezbędne dodatki | Jak potwierdzić |
+|---|---|---|
+| Lab 01, prosta scena PC | URP i import WiRR (Input System z manifestu) | Play bez błędów, Profiler pokazuje klatki |
+| Lab 02, chwyt i teleportacja | XR Interaction Toolkit, Starter Assets, XR Interaction Simulator | XR Origin, XR Interaction Manager, akcje i interaktory działają |
+| Quest 3 standalone | OpenXR dla Android, Android Build Support, SDK/NDK/OpenJDK, ADB | `adb devices -l`, poprawny Build Profile i uruchomienie APK |
+| Lab 03–04 na telefonie | AR Foundation + zgodny ARCore XR Plugin, kompatybilny telefon | Brak błędów Project Validation, działające śledzenie |
+
+**Gdy scena nie działa:** sprawdź pierwszy błąd w Unity Console → brakujące pakiety w Package Manager → poprawność wersji Unity i importu próbek → `WiRR → Narzędzia kursu → Sprawdź konfigurację laboratorium` → dopiero potem ustawienia OpenXR/ADB urządzenia. Nie naprawiaj wszystkiego naraz; po każdej zmianie wykonaj Play.
+
+Pełna procedura: [Instalacja i diagnostyka Windows/Ubuntu](../../Documentation~/Reference/OS_SETUP.md).
 
 ## Zadania krok po kroku
 
