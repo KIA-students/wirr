@@ -245,6 +245,26 @@ jobs:
             exit 0
           fi
 
+          # Nie zmieniaj SHA otwartego PR, jeśli sanitizowana treść jest identyczna.
+          # Dzięki temu prywatne zmiany workflow w repozytorium źródłowym nie
+          # resetują już zatwierdzonych kontroli publicznego snapshotu.
+          if git ls-remote --exit-code --heads origin "refs/heads/${EXPORT_BRANCH}" >/dev/null 2>&1; then
+            git fetch --no-tags origin \
+              "refs/heads/${EXPORT_BRANCH}:refs/remotes/origin/${EXPORT_BRANCH}"
+            prospective_tree="$(git write-tree)"
+            existing_export_sha="$(git rev-parse "refs/remotes/origin/${EXPORT_BRANCH}")"
+            existing_tree="$(git rev-parse "${existing_export_sha}^{tree}")"
+
+            if [ "${prospective_tree}" = "${existing_tree}" ]; then
+              {
+                echo "needs_pr=true"
+                echo "export_sha=${existing_export_sha}"
+              } >> "${GITHUB_OUTPUT}"
+              echo "Sanitizowany snapshot jest identyczny; zachowano istniejący SHA ${existing_export_sha:0:12}."
+              exit 0
+            fi
+          fi
+
           git commit -m "sync: aktualizacja publicznego pakietu WiRR"
           export_sha="$(git rev-parse HEAD)"
 
