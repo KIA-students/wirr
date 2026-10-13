@@ -52,6 +52,20 @@ jobs:
             fi
           done
 
+          # PR #45 was merged. Delete only the exact historical branch head,
+          # never delete a branch with new student work added after the merge.
+          merged_pr_sha="66b5003e43f66a998117c9ebbffeb33b9a7e48fd"
+          branch="feat/student-guided-progress-identity"
+          actual_sha="$(git ls-remote --heads origin "refs/heads/${branch}" | awk '{print $1}')"
+          if [ "${actual_sha}" = "${merged_pr_sha}" ]; then
+            echo "Usuwam scaloną gałąź PR #45: ${branch}"
+            git push origin --delete "${branch}"
+          elif [ -n "${actual_sha}" ]; then
+            echo "::warning::Gałąź ${branch} ma nowe zmiany; pozostawiono ją do oceny."
+          fi
+          # upm and sync/public-main are intentionally maintained distribution
+          # branches; archive/course-league-v1-20261011 preserves historical data.
+
       - name: Sprawdź gotowość uwierzytelnienia
         id: auth
         shell: bash
@@ -443,6 +457,12 @@ jobs:
           done
 
           if [ "${checks_seen}" != true ]; then
+            # Distinguish missing checks from GitHub's action_required state.
+            public_head="$(gh api "repos/${UPSTREAM_REPOSITORY}/pulls/${pr_number}" --jq '.head.sha')"
+            approvals="$(gh api "repos/${UPSTREAM_REPOSITORY}/actions/runs?per_page=30" --jq "[.workflow_runs[] | select(.head_sha == \"${public_head}\" and .conclusion == \"action_required\")] | length")"
+            if [ "${approvals}" -gt 0 ]; then
+              echo "::warning::PR #${pr_number} wymaga ręcznego 'Approve and run workflows' w KIA-students/wirr → Actions. Bez tej zgody GitHub nie uruchomi CI dla nowego commitu forka."
+            fi
             # On external fork PRs GitHub may require a maintainer to approve
             # the workflows. No checks is NOT evidence that tests passed.
             pr_url="https://github.com/${UPSTREAM_REPOSITORY}/pull/${pr_number}"
