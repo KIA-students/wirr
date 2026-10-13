@@ -583,8 +583,8 @@ namespace KIA.WiRR.Editor
 
                 if (GUILayout.Button("Przekaż raport (oddzielny proces)", GUILayout.Height(28)))
                 {
-                    EditorApplication.ExecuteMenuItem("WiRR/Student/Wyślij raport do KIA");
-                    submissionStatus = "Przekazywanie raportu jest osobnym procesem. Lokalny zapis nie powoduje automatycznej wysyłki.";
+                    EditorApplication.ExecuteMenuItem("WiRR/Student/Wyślij raport bez logowania");
+                    submissionStatus = "Wysyłanie jest niezależne od lokalnego zapisu. Potwierdzenie serwera pojawi się osobno.";
                 }
 
                 if (!liveEvaluation.CanSubmit)
