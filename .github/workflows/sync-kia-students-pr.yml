@@ -443,10 +443,21 @@ jobs:
           done
 
           if [ "${checks_seen}" != true ]; then
-            echo "::error::GitHub nie zarejestrował kontroli PR #${pr_number}."
-            exit 1
+            # On external fork PRs GitHub may require a maintainer to approve
+            # the workflows. No checks is NOT evidence that tests passed.
+            pr_url="https://github.com/${UPSTREAM_REPOSITORY}/pull/${pr_number}"
+            echo "::warning::Brak kontroli PR #${pr_number}. Możliwe, że workflow wymaga zatwierdzenia w repozytorium docelowym. Nie scalam PR bez kontroli."
+            {
+              echo "## Oczekiwanie na kontrole PR"
+              echo
+              echo "GitHub nie zgłosił kontroli dla [PR #${pr_number}](${pr_url})."
+              echo "Sprawdź zakładkę Checks/Actions i zatwierdź uruchomienie workflow z forka, jeśli GitHub tego wymaga."
+              echo "Automatyczne scalenie zostało bezpiecznie pominięte; kolejne uruchomienie synchronizacji ponowi próbę."
+            } >> "${GITHUB_STEP_SUMMARY}"
+            exit 0
           fi
 
+          # Nonzero means pending/failed checks or an API error: do not merge.
           gh pr checks "${pr_number}" \
             --repo "${UPSTREAM_REPOSITORY}" \
             --watch \
