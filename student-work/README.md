@@ -33,3 +33,7 @@ Katalog publiczny zawiera strukturę organizacyjną grup i laboratoriów oraz **
 ## Wspólny klucz kursu
 
 Pakiet Unity zawiera publiczny identyfikator kursu. Szczegóły: [PUBLIC_COURSE_KEY.md](../Documentation~/Reference/PUBLIC_COURSE_KEY.md). Nie zastępuje on logowania w obecnej usłudze KIA; endpoint bez logowania wymaga osobnego wdrożenia.
+
+## Ręczne dodawanie przez GitHub
+
+Zobacz [instrukcję wgrywania anonimowych materiałów przez stronę GitHub](HOW_TO_UPLOAD_GITHUB.md). Publiczny PR nie zastępuje wysłania rzeczywistego raportu do kolejki KIA.
