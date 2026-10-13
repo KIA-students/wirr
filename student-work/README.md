@@ -1,15 +1,10 @@
 # Prace laboratoryjne WiRR
 
-Katalog publiczny zawiera strukturę organizacyjną grup i laboratoriów oraz **przykłady**, nie jest miejscem publikowania indywidualnych prac ani rejestrem ocen.
+Katalog zawiera dwie grupy: G1 i G2. Numer laboratorium jest w nazwie raportu; nie tworzy się podkatalogów lab01–lab08. Repozytorium jest publiczne.
 
 ## Grupy i laboratoria
 
-| Grupa | Laboratoria |
-|---|---|
-| [G1](G1/README.md) | [01](G1/lab01/README.md) · [02](G1/lab02/README.md) · [03](G1/lab03/README.md) · [04](G1/lab04/README.md) · [05](G1/lab05/README.md) · [06](G1/lab06/README.md) · [07](G1/lab07/README.md) · [08](G1/lab08/README.md) |
-| [G2](G2/README.md) | [01](G2/lab01/README.md) · [02](G2/lab02/README.md) · [03](G2/lab03/README.md) · [04](G2/lab04/README.md) · [05](G2/lab05/README.md) · [06](G2/lab06/README.md) · [07](G2/lab07/README.md) · [08](G2/lab08/README.md) |
-
-## Przykładowe raporty
+| Grupa | Miejsce na raporty |\n|---|---|\n| [G1](G1/README.md) | `student-work/G1/labNN-<identyfikator>.json` |\n| [G2](G2/README.md) | `student-work/G2/labNN-<identyfikator>.json` |\n\n## Przykładowe raporty
 
 - [Lab 01](examples/lab01-report-example.md): fikcyjne FPS, mediany i wniosek.
 - [Lab 02](examples/lab02-report-example.md): fikcyjne próby interakcji, błędy i mediana.

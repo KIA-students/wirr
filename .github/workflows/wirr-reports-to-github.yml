@@ -1,0 +1,22 @@
+name: WiRR reports to KIA GitHub
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: wirr-reports-exporter
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'MatPomGit/wirr'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish queued reports to KIA-students/wirr
+        env:
+          WIRR_SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.WIRR_SUPABASE_SERVICE_ROLE_KEY }}
+          KIA_STUDENTS_SYNC_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+        run: python3 scripts/export_wirr_reports.py
