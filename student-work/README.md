@@ -1,7 +1,5 @@
 # Prace laboratoryjne WiRR
 
-Katalog publiczny zawiera strukturę organizacyjną grup i laboratoriów oraz **przykłady**, nie jest miejscem publikowania indywidualnych prac ani rejestrem ocen.
-
 ## Grupy i laboratoria
 
 | Grupa | Laboratoria |
