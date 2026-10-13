@@ -386,3 +386,55 @@ jobs:
             echo "Repozytorium kursu nie zawiera prywatnej automatyzacji."
           fi
 
+      - name: Scal sanitizowany Pull Request po pomyślnych kontrolach
+        if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          pr_number="$(
+            gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls" \
+              -f state=open \
+              -f base="${UPSTREAM_BRANCH}" \
+              -f head="MatPomGit:${EXPORT_BRANCH}" \
+              --jq '.[0].number // ""'
+          )"
+
+          if [ -z "${pr_number}" ]; then
+            echo "::error::Nie znaleziono sanitizowanego Pull Requestu do scalenia."
+            exit 1
+          fi
+
+          checks_seen=false
+          for attempt in {1..12}; do
+            set +e
+            checks_output="$(gh pr checks "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" 2>&1)"
+            set -e
+
+            if printf '%s\n' "${checks_output}" | grep -qi 'no checks reported'; then
+              sleep 5
+              continue
+            fi
+
+            checks_seen=true
+            break
+          done
+
+          if [ "${checks_seen}" != true ]; then
+            echo "::error::GitHub nie zarejestrował kontroli PR #${pr_number}."
+            exit 1
+          fi
+
+          gh pr checks "${pr_number}" \
+            --repo "${UPSTREAM_REPOSITORY}" \
+            --watch \
+            --interval 10
+
+          gh pr merge "${pr_number}" \
+            --repo "${UPSTREAM_REPOSITORY}" \
+            --squash \
+            --delete-branch
+
+          echo "Scalono sanitizowany PR #${pr_number} po zielonych kontrolach." >> "${GITHUB_STEP_SUMMARY}"
