@@ -452,9 +452,29 @@ jobs:
             --watch \
             --interval 10
 
-          gh pr merge "${pr_number}" \
-            --repo "${UPSTREAM_REPOSITORY}" \
-            --squash \
-            --delete-branch
+          set +e
+          merge_output="$(
+            gh pr merge "${pr_number}" \
+              --repo "${UPSTREAM_REPOSITORY}" \
+              --squash \
+              --delete-branch 2>&1
+          )"
+          merge_status=$?
+          set -e
+
+          if [ "${merge_status}" -ne 0 ]; then
+            if printf '%s\n' "${merge_output}" | grep -qi 'Resource not accessible'; then
+              echo "::warning::Token synchronizacji nie ma uprawnienia do scalenia PR #${pr_number}; PR pozostaje gotowy i zweryfikowany."
+              {
+                echo "## PR gotowy do scalenia"
+                echo
+                echo "Kontrole PR #${pr_number} przeszły, ale token synchronizacji nie ma uprawnienia `mergePullRequest`."
+              } >> "${GITHUB_STEP_SUMMARY}"
+              exit 0
+            fi
+
+            printf '%s\n' "${merge_output}" >&2
+            exit "${merge_status}"
+          fi
 
           echo "Scalono sanitizowany PR #${pr_number} po zielonych kontrolach." >> "${GITHUB_STEP_SUMMARY}"
