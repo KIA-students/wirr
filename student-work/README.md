@@ -25,3 +25,8 @@
 3. Wpisz rzeczywiste warunki eksperymentu, surowe pomiary, obliczenia i wnioski.
 4. Użyj **Sprawdź kompletność raportu**, następnie **Eksportuj raport lokalnie**.
 5. Plik JSON w `Library/WiRRReports/exports` przekaż kanałem wyznaczonym przez prowadzącego.
+
+## Wspólny klucz kursu
+
+Pakiet Unity zawiera publiczny identyfikator kursu. 
+Szczegóły: [PUBLIC_COURSE_KEY.md](../Documentation~/Reference/PUBLIC_COURSE_KEY.md).
