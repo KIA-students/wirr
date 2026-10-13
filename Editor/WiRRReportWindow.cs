@@ -560,7 +560,7 @@ namespace KIA.WiRR.Editor
 
                 using (new EditorGUI.DisabledScope(EditorApplication.isCompiling || !liveEvaluation.CanSubmit))
                 {
-                    if (GUILayout.Button("Zapisz i przekaż raport do KIA", GUILayout.Height(38)))
+                    if (GUILayout.Button("Zapisz raport lokalnie (bez logowania)", GUILayout.Height(38)))
                     {
                         evaluation = WiRRReportEvaluator.Evaluate(document);
                         try
@@ -568,8 +568,7 @@ namespace KIA.WiRR.Editor
                             var path = WiRRReportStore.ExportFinal(document, false);
                             WiRRActivityLogger.Record("report_exported", labNumber, "local");
                             WiRRProgressTracker.Refresh();
-                            WiRRKiaReports.QueueReport(path, labNumber);
-                            submissionStatus = "Raport zapisany lokalnie i umieszczony w kolejce KIA. Status dostarczenia sprawdź w oknie WiRR → Student → Wyślij raport do KIA.";
+                            submissionStatus = "Raport zapisany lokalnie: " + path + ". Nie został nigdzie wysłany. Przekazanie raportu to osobny proces.";
                         }
                         catch (System.IO.IOException exception)
                         {
@@ -580,6 +579,12 @@ namespace KIA.WiRR.Editor
                             submissionStatus = "Brak uprawnień do zapisu raportu: " + exception.Message;
                         }
                     }
+                }
+
+                if (GUILayout.Button("Przekaż raport (oddzielny proces)", GUILayout.Height(28)))
+                {
+                    EditorApplication.ExecuteMenuItem("WiRR/Student/Wyślij raport do KIA");
+                    submissionStatus = "Przekazywanie raportu jest osobnym procesem. Lokalny zapis nie powoduje automatycznej wysyłki.";
                 }
 
                 if (!liveEvaluation.CanSubmit)
