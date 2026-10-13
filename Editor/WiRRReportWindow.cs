@@ -568,7 +568,8 @@ namespace KIA.WiRR.Editor
                             var path = WiRRReportStore.ExportFinal(document, false);
                             WiRRActivityLogger.Record("report_exported", labNumber, "local");
                             WiRRProgressTracker.Refresh();
-                            submissionStatus = "Raport zapisany lokalnie: " + path + ". Nie został nigdzie wysłany. Przekazanie raportu to osobny proces.";
+                            submissionStatus = "Plik raportu: " + path + "\nW projekcie Unity: Library/WiRRReports/exports. Wysyłka do kolejki KIA rozpoczyna się automatycznie. Publikacja na GitHub jest odrębna.";
+                            WiRRPublicReportSubmission.SubmitFile(path, labNumber);
                         }
                         catch (System.IO.IOException exception)
                         {
@@ -581,7 +582,18 @@ namespace KIA.WiRR.Editor
                     }
                 }
 
-                if (GUILayout.Button("Przekaż raport (oddzielny proces)", GUILayout.Height(28)))
+                EditorGUILayout.HelpBox(
+                    "Raporty robocze: <projekt Unity>/Library/WiRRReports. Wyeksportowane JSON: <projekt Unity>/Library/WiRRReports/exports. " +
+                    "Zapis nie wymaga logowania. Po eksporcie program automatycznie wysyła raport do kolejki KIA, a nie bezpośrednio do GitHub.",
+                    MessageType.Info);
+                if (GUILayout.Button("Otwórz folder wyeksportowanych raportów", GUILayout.Height(27)))
+                {
+                    var exportDir = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath, "../Library/WiRRReports/exports"));
+                    System.IO.Directory.CreateDirectory(exportDir);
+                    EditorUtility.RevealInFinder(exportDir);
+                }
+
+                if (GUILayout.Button("Wyślij ponownie zapisany raport", GUILayout.Height(28)))
                 {
                     EditorApplication.ExecuteMenuItem("WiRR/Student/Wyślij raport bez logowania");
                     submissionStatus = "Wysyłanie jest niezależne od lokalnego zapisu. Potwierdzenie serwera pojawi się osobno.";

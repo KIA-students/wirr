@@ -1,5 +1,7 @@
 # Prace laboratoryjne WiRR
 
+Katalog publiczny zawiera strukturę organizacyjną grup i laboratoriów oraz **przykłady**, nie jest miejscem publikowania indywidualnych prac ani rejestrem ocen.
+
 ## Grupy i laboratoria
 
 | Grupa | Laboratoria |
@@ -26,7 +28,8 @@
 4. Użyj **Sprawdź kompletność raportu**, następnie **Eksportuj raport lokalnie**.
 5. Plik JSON w `Library/WiRRReports/exports` przekaż kanałem wyznaczonym przez prowadzącego.
 
+**Nie umieszczaj** w tym publicznym repozytorium numerów indeksów, nazwisk, indywidualnych wyników SSQ, ocen ani identyfikujących raportów. Same foldery G1/G2 służą orientacji i ewentualnej publikacji materiałów zbiorczych, anonimowych, zatwierdzonych przez prowadzącego. Eksport JSON nie oznacza automatycznego oddania pracy.
+
 ## Wspólny klucz kursu
 
-Pakiet Unity zawiera publiczny identyfikator kursu. 
-Szczegóły: [PUBLIC_COURSE_KEY.md](../Documentation~/Reference/PUBLIC_COURSE_KEY.md).
+Pakiet Unity zawiera publiczny identyfikator kursu. Szczegóły: [PUBLIC_COURSE_KEY.md](../Documentation~/Reference/PUBLIC_COURSE_KEY.md). Nie zastępuje on logowania w obecnej usłudze KIA; endpoint bez logowania wymaga osobnego wdrożenia.
