@@ -18,7 +18,7 @@
 ## Szybki wybór ścieżki
 - **Nie mam gotowej sceny Lab 01:** [wróć do pierwszej sceny](../Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
 - **Mam działający projekt:** [od razu przejdź do interakcji](#zadania-krok-po-kroku).
-- **Brakuje XRI:** doinstaluj tylko pakiety używane w tym wariancie, zobacz [warunki startu](../../Documentation~/Reference/OS_SETUP.md#pakiety-xr-tylko-gdy-potrzebne).
+- **Brakuje XRI:** zainstaluj XR Interaction Toolkit i wymagane próbki, zobacz [warunki startu](../../Documentation~/Reference/OS_SETUP.md#pakiety-xr-tylko-gdy-potrzebne).
 - **Chcę przejść do rzeczywistego sprzętu:** najpierw [uruchomienie urządzeń](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr), potem [Quest 3 i SSQ](#50-quest-3-i-ssq).
 - **Chcę poznać ograniczenia percepcji:** [Komfort XR](../../Documentation~/Reference/COMFORT_STUDIES.md).
 
@@ -48,7 +48,7 @@ Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **W
 
 1. Utwórz panel World Space i skonfiguruj obsługę UI dla XR.
 2. Dodaj co najmniej dwa rodzaje feedbacku: wizualny, dźwiękowy lub haptyczny.
-3. Sprawdź stany `Hover`/`Select` oraz zakończenie oraz usuń wielokrotne aktywacje jednego działania.
+3. Sprawdź stany `Hover`/`Select` oraz zakończenie interakcji; usuń wielokrotne aktywacje jednego działania.
 4. Wykonaj po pięć prób w każdym warunku własnego wariantu (A/B, a C tylko gdy występuje w tabeli instrukcji) i zapisz czas oraz błędne aktywacje.
 
 Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
