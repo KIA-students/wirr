@@ -201,6 +201,7 @@ jobs:
           private_paths=(
             ".github/workflows/sync-kia-students-pr.yml"
             ".github/workflows/wirr-reports-to-github.yml"
+            ".github/workflows/wirr-report-contract-tests.yml"
             "scripts/export_wirr_reports.py"
             ".github/workflows/publish-student-upm.yml"
             ".github/workflows/wirr-approved-points.yml"
