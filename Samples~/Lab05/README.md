@@ -1,5 +1,24 @@
 # Lab 05 — Optymalizacja modeli CAD
 
+## Obowiązkowe laboratorium: jedna ścieżka (około 35 minut)
+
+**Pytanie badawcze:** Jak szczegółowość modelu 3D wpływa na czytelność i wydajność sceny?
+
+1. Otwórz gotową scenę Lab 05 z modelem referencyjnym. Nie instaluj osobnego CAD ani konwertera STEP.
+2. Porównaj dwa dostępne poziomy szczegółowości modelu albo dwa przygotowane modele referencyjne.
+3. Zwróć uwagę na krawędzie, rozpoznawalność elementów i liczbę detali. Zapisz trzy zauważalne różnice.
+4. Jeśli Profiler jest gotowy, porównaj czas klatki przy tej samej kamerze; w przeciwnym razie skup się na obserwacji wizualnej.
+5. Wskaż, który model wybrałabyś lub wybrałbyś do demonstratora XR i uzasadnij wybór.
+
+**Co oddać:** Jeden raport Lab 05: porównanie dwóch modeli/poziomów szczegółowości, trzy obserwacje i wybór z uzasadnieniem. Uzupełnij numer indeksu i grupę, wyeksportuj raport lokalnie w panelu WiRR i przekaż go kanałem wskazanym przez prowadzącego. Nie wysyłaj całego projektu Unity.
+
+**Zaliczenie podstawowe:** wykonanie lub rzetelna analiza doświadczenia, udokumentowane obserwacje i merytoryczny wniosek. Dodatkowe poziomy 3.5–5.0, instalowanie całego stosu XR/ROS i praca z urządzeniem fizycznym nie są obowiązkowe w tej ścieżce.
+
+**Gdy stanowisko nie działa:** Wykorzystaj modele dostarczone w projekcie. Nie jest wymagane projektowanie CAD, triangulacja własnego STEP ani eksport formatu. Sposób dokumentowania niedostępnej funkcji potwierdza prowadzący.
+
+**Dalsze rozdziały** zachowano jako dokumentację rozszerzoną; nie są dodatkową listą obowiązkowych zadań.
+
+
 ## Spis treści
 
 - [Szybki wybór ścieżki](#szybki-wybór-ścieżki)

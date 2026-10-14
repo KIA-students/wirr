@@ -8,7 +8,7 @@
 4. Zapisz własną obserwację i wniosek. Otwórz **Otwórz raport: Lab NN**, wyeksportuj **jeden raport** i przekaż go kanałem wskazanym przez prowadzącego.
 5. Po drugim laboratorium bloku zachowaj lokalną kartę sesji jako pomoc w podsumowaniu. Nie musisz osobno jej przesyłać, chyba że prowadzący wyraźnie o to poprosi.
 
-**Jedno laboratorium = jeden raport.** Sam zapis lokalny ani eksport nie są automatycznym oddaniem pracy. Nie ma obowiązku używania Quest 3, instalowania Android Studio czy wykonywania rozszerzonych wariantów na ocenę 5.0.
+**Jedno laboratorium = jeden raport.** Wszystkie laboratoria 01–08 rozpoczynają się od krótkiej obowiązkowej ścieżki. Dalsze rozdziały instrukcji są materiałem rozszerzającym. Sam zapis lokalny ani eksport nie są automatycznym oddaniem pracy. Nie ma obowiązku używania Quest 3, instalowania Android Studio czy wykonywania rozszerzonych wariantów na ocenę 5.0.
 
 **Gdy środowisko nie działa:** korzystaj z dostępnego demonstratora PC, opisz ograniczenie i nie uzupełniaj brakujących danych zmyślonymi pomiarami. Prowadzący rozstrzyga, jak udokumentować niedostępną funkcję.
 

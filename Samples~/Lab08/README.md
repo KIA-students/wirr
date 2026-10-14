@@ -1,5 +1,24 @@
 # Laboratorium 08: Wynalazca XR, demonstrator integracyjny
 
+## Obowiązkowe laboratorium: jedna ścieżka (około 35 minut)
+
+**Pytanie badawcze:** Jak wykorzystać poznaną technologię XR do rozwiązania konkretnego problemu poza grami?
+
+1. Otwórz scenę Lab 08 lub skopiuj działającą scenę z wcześniejszego ćwiczenia.
+2. Wybierz jeden problem użytkownika, np. pokazanie kolejnego kroku montażu, wskazanie błędu albo ostrzeżenie o stanie urządzenia.
+3. Wprowadź jedną zauważalną zmianę w scenie, która pokazuje pomysł na rozwiązanie. Nie buduj aplikacji od zera.
+4. Przeprowadź trzy krótkie próby działania demonstratora albo trzy obserwacje przygotowanego scenariusza. Zapisz ograniczenie.
+5. Nadaj pomysłowi nazwę i uzasadnij, komu i w jakiej sytuacji mógłby pomóc.
+
+**Co oddać:** Jeden raport Lab 08: nazwa i cel demonstratora, opis zmiany, trzy obserwacje, ograniczenie i wniosek. Uzupełnij numer indeksu i grupę, wyeksportuj raport lokalnie w panelu WiRR i przekaż go kanałem wskazanym przez prowadzącego. Nie wysyłaj całego projektu Unity.
+
+**Zaliczenie podstawowe:** wykonanie lub rzetelna analiza doświadczenia, udokumentowane obserwacje i merytoryczny wniosek. Dodatkowe poziomy 3.5–5.0, instalowanie całego stosu XR/ROS i praca z urządzeniem fizycznym nie są obowiązkowe w tej ścieżce.
+
+**Gdy stanowisko nie działa:** Gdy rozbudowa sceny jest niemożliwa, przedstaw działający fragment demonstratora PC i opis projektowanego ulepszenia. Nie deklaruj funkcji, których nie uruchomiono. Sposób dokumentowania niedostępnej funkcji potwierdza prowadzący.
+
+**Dalsze rozdziały** zachowano jako dokumentację rozszerzoną; nie są dodatkową listą obowiązkowych zadań.
+
+
 **Kampania WiRR, blok IV, laboratorium 8/8.** Po Lab 07 wybierz jeden problem spoza gier VR i pokaż rozwiązanie, które łączy co najmniej dwie umiejętności z kursu. Pracujesz w istniejącym projekcie Unity; nie instaluj niczego, czego nie wymaga wybrany demonstrator.
 
 ## Spis treści

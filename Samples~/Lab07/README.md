@@ -1,5 +1,24 @@
 # Lab 07 — Walidacja i testy akceptacyjne
 
+## Obowiązkowe laboratorium: jedna ścieżka (około 35 minut)
+
+**Pytanie badawcze:** Jak wykryć problem z użytecznością demonstratora XR, zanim zacznie go używać ktoś inny?
+
+1. Otwórz gotowy demonstrator z wcześniejszego laboratorium. Nie doinstalowuj nowych narzędzi testowych.
+2. Wybierz jedną prostą czynność użytkownika, np. wskazanie obiektu, przeniesienie go lub odczyt stanu.
+3. Wykonaj trzy próby albo przeanalizuj trzy przygotowane przebiegi. Zanotuj błędy, niejasne informacje i czas, jeśli jest dostępny.
+4. Ulepsz jeden element interfejsu albo instrukcji, po czym ponownie sprawdź czynność.
+5. Zapisz kryterium akceptacji: po czym poznasz, że poprawka rzeczywiście pomaga?
+
+**Co oddać:** Jeden raport Lab 07: opis czynności, trzy obserwacje, jedna poprawka i kryterium akceptacji. Uzupełnij numer indeksu i grupę, wyeksportuj raport lokalnie w panelu WiRR i przekaż go kanałem wskazanym przez prowadzącego. Nie wysyłaj całego projektu Unity.
+
+**Zaliczenie podstawowe:** wykonanie lub rzetelna analiza doświadczenia, udokumentowane obserwacje i merytoryczny wniosek. Dodatkowe poziomy 3.5–5.0, instalowanie całego stosu XR/ROS i praca z urządzeniem fizycznym nie są obowiązkowe w tej ścieżce.
+
+**Gdy stanowisko nie działa:** Dopuszczalna jest demonstracja PC i analiza udostępnionego nagrania; bez wykonywania niebezpiecznych prób komfortowych. Sposób dokumentowania niedostępnej funkcji potwierdza prowadzący.
+
+**Dalsze rozdziały** zachowano jako dokumentację rozszerzoną; nie są dodatkową listą obowiązkowych zadań.
+
+
 ## Spis treści
 
 - [Szybki wybór ścieżki](#szybki-wybór-ścieżki)

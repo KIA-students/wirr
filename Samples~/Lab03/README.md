@@ -1,5 +1,24 @@
 # Lab 03 — Rejestracja i kotwice AR
 
+## Obowiązkowe laboratorium: jedna ścieżka (około 35 minut)
+
+**Pytanie badawcze:** Jak stabilnie umieścić wirtualny obiekt w rzeczywistej przestrzeni?
+
+1. Otwórz gotową scenę Lab 03 w Unity lub udostępniony pokaz rejestracji AR. Nie instaluj Android SDK ani ARCore tylko po to, żeby rozpocząć.
+2. Umieść wirtualny znacznik na wybranej powierzchni. Zanotuj, czy pozostaje w tym samym miejscu po zmianie punktu obserwacji.
+3. Powtórz obserwację trzykrotnie w tej samej konfiguracji. Zapisz, kiedy znacznik jest stabilny, a kiedy widoczny jest dryf lub utrata śledzenia.
+4. Zmień jeden warunek obserwacji, np. widoczne cechy powierzchni lub pozycję kamery, i porównaj zachowanie znacznika.
+5. Zaproponuj jedną zmianę, która poprawiłaby wiarygodność rejestracji.
+
+**Co oddać:** Jeden raport Lab 03: trzy obserwacje stabilności, jeden zmieniony warunek, porównanie i wniosek. Uzupełnij numer indeksu i grupę, wyeksportuj raport lokalnie w panelu WiRR i przekaż go kanałem wskazanym przez prowadzącego. Nie wysyłaj całego projektu Unity.
+
+**Zaliczenie podstawowe:** wykonanie lub rzetelna analiza doświadczenia, udokumentowane obserwacje i merytoryczny wniosek. Dodatkowe poziomy 3.5–5.0, instalowanie całego stosu XR/ROS i praca z urządzeniem fizycznym nie są obowiązkowe w tej ścieżce.
+
+**Gdy stanowisko nie działa:** Przy braku telefonu AR wykorzystaj dostępny pokaz lub zarejestrowaną sekwencję. Oznacz wynik jako obserwację nagrania, nie pomiar własnego urządzenia. Sposób dokumentowania niedostępnej funkcji potwierdza prowadzący.
+
+**Dalsze rozdziały** zachowano jako dokumentację rozszerzoną; nie są dodatkową listą obowiązkowych zadań.
+
+
 ## Spis treści
 
 - [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
