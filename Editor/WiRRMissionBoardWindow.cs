@@ -31,6 +31,20 @@ namespace KIA.WiRR.Editor
             "IV. Wynalazca XR"
         };
 
+        // Short mandatory experiences from Samples~/Lab01-Lab08/README.md.
+        // Extended experiments remain available in the documentation.
+        private static readonly string[] BasicExperiences =
+        {
+            "Skala, fizyka i czas klatki",
+            "Interakcja przed i po zmianie informacji zwrotnej",
+            "Stabilność znacznika i śledzenia AR",
+            "Okluzja: co zasłania wirtualny obiekt?",
+            "Dwa poziomy szczegółowości modelu 3D",
+            "Aktualność stanu cyfrowego bliźniaka: LIVE/STALE",
+            "Jedna poprawka użyteczności i ponowny test",
+            "Jeden pomysł na zastosowanie XR i trzy próby"
+        };
+
         private static readonly string[] Modes =
         {
             "NIE WYBRANO",
@@ -126,6 +140,19 @@ namespace KIA.WiRR.Editor
                     Application.OpenURL("https://github.com/KIA-students/wirr/blob/main/Documentation~/Reference/UNITY_COURSE_JOURNEY.md");
             }
 
+            EditorGUILayout.Space(8);
+            EditorGUILayout.LabelField("Obowiązkowe doświadczenia w tym bloku", EditorStyles.miniBoldLabel);
+            foreach (var lab in Blocks[blockIndex])
+            {
+                EditorGUILayout.LabelField(
+                    $"Lab {lab:00}: {BasicExperiences[lab - 1]}",
+                    EditorStyles.wordWrappedLabel);
+            }
+            EditorGUILayout.HelpBox(
+                "Wykonaj krótkie doświadczenie opisane na początku instrukcji danego laboratorium. " +
+                "Jedno laboratorium to jeden raport. Szczegółowe eksperymenty i dodatkowy sprzęt są opcjonalne.",
+                MessageType.Info);
+
             EditorGUILayout.LabelField("Scena i raporty", EditorStyles.miniBoldLabel);
             var preparedScenes = Blocks[blockIndex].Count(lab => ScenePaths(lab).Length > 0);
             var progressRect = GUILayoutUtility.GetRect(18, 22, GUILayout.ExpandWidth(true));
@@ -151,6 +178,12 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(12);
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("3. Przygotuj raport", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox(
+                "Formularz nadal wymaga kompletu danych dawnego etapu 3.0. " +
+                "Jeżeli krótki eksperyment nie dostarcza tych pomiarów, nie wpisuj liczb zastępczych. " +
+                "Zachowaj obserwacje i uzgodnij przekazanie wyniku z prowadzącym. " +
+                "Eksport uproszczonego raportu wymaga aktualizacji walidatora.",
+                MessageType.Warning);
             foreach (var lab in Blocks[blockIndex])
                 if (GUILayout.Button("Otwórz raport: Lab " + lab.ToString("00")))
                     WiRRReportWindow.OpenForLab(lab);
