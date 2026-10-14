@@ -1,5 +1,24 @@
 # Lab 06 — Bliźniak cyfrowy ROS 2 + Gazebo
 
+## Obowiązkowe laboratorium: jedna ścieżka (około 35 minut)
+
+**Pytanie badawcze:** Po czym poznać, że wirtualny robot pokazuje aktualny stan, a nie stare dane?
+
+1. Otwórz gotową demonstrację Lab 06 lub tryb REPLAY/WebSim dostarczony na stanowisku. Lokalna instalacja ROS 2 i Gazebo nie jest warunkiem rozpoczęcia.
+2. Obserwuj zmianę pozycji przegubu oraz status aktualności danych oznaczony LIVE/STALE, jeśli demonstrator go udostępnia.
+3. Porównaj trzy momenty: dane aktualne, zatrzymanie aktualizacji i przywrócenie transmisji (lub odpowiednie fragmenty odtwarzanej sekwencji).
+4. Zapisz, jak zmieniły się zachowanie modelu i informacja dla użytkownika; nie myl animacji z potwierdzeniem aktualności.
+5. Zaproponuj jeden czytelny sposób ostrzegania operatora o nieaktualnych danych.
+
+**Co oddać:** Jeden raport Lab 06: trzy stany transmisji/odtwarzania, obserwacja zachowania modelu i propozycja ostrzeżenia. Uzupełnij numer indeksu i grupę, wyeksportuj raport lokalnie w panelu WiRR i przekaż go kanałem wskazanym przez prowadzącego. Nie wysyłaj całego projektu Unity.
+
+**Zaliczenie podstawowe:** wykonanie lub rzetelna analiza doświadczenia, udokumentowane obserwacje i merytoryczny wniosek. Dodatkowe poziomy 3.5–5.0, instalowanie całego stosu XR/ROS i praca z urządzeniem fizycznym nie są obowiązkowe w tej ścieżce.
+
+**Gdy stanowisko nie działa:** Gdy nie działa ROS 2, korzystaj z przygotowanego REPLAY. Wyraźnie oznacz, że nie wykonywano pomiarów RTT ani połączenia LIVE. Sposób dokumentowania niedostępnej funkcji potwierdza prowadzący.
+
+**Dalsze rozdziały** zachowano jako dokumentację rozszerzoną; nie są dodatkową listą obowiązkowych zadań.
+
+
 ## Spis treści
 
 - [Szybki wybór ścieżki](#szybki-wybór-ścieżki)

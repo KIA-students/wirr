@@ -1,5 +1,24 @@
 # Lab 04 — Rozumienie sceny i mieszanie rzeczywistości
 
+## Obowiązkowe laboratorium: jedna ścieżka (około 35 minut)
+
+**Pytanie badawcze:** Dlaczego obiekt wirtualny czasem wygląda, jakby przenikał przez prawdziwą przeszkodę?
+
+1. Otwórz gotową scenę Lab 04 lub udostępnioną demonstrację głębi i okluzji.
+2. Obserwuj wirtualny obiekt przed rzeczywistą przeszkodą i za nią. Rozpoznaj, kiedy przeszkoda powinna zasłaniać obiekt.
+3. Porównaj trzy sytuacje: poprawne zasłanianie, brak zasłaniania i przypadek niejednoznaczny.
+4. Zmień jeden warunek demonstracji, jeśli scena to umożliwia (np. okluzję włącz/wyłącz), i opisz zmianę obrazu.
+5. Wyjaśnij jednym zdaniem, dlaczego sama poprawna geometria obiektu nie wystarcza do wiarygodnego AR.
+
+**Co oddać:** Jeden raport Lab 04: trzy sytuacje, wskazanie błędu okluzji, opis jednej zmiany i wniosek. Uzupełnij numer indeksu i grupę, wyeksportuj raport lokalnie w panelu WiRR i przekaż go kanałem wskazanym przez prowadzącego. Nie wysyłaj całego projektu Unity.
+
+**Zaliczenie podstawowe:** wykonanie lub rzetelna analiza doświadczenia, udokumentowane obserwacje i merytoryczny wniosek. Dodatkowe poziomy 3.5–5.0, instalowanie całego stosu XR/ROS i praca z urządzeniem fizycznym nie są obowiązkowe w tej ścieżce.
+
+**Gdy stanowisko nie działa:** Jeżeli stanowisko nie udostępnia danych głębi, porównaj przygotowane ujęcia lub symulację. Nie deklaruj pomiaru Depth API. Sposób dokumentowania niedostępnej funkcji potwierdza prowadzący.
+
+**Dalsze rozdziały** zachowano jako dokumentację rozszerzoną; nie są dodatkową listą obowiązkowych zadań.
+
+
 ## Spis treści
 
 - [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
