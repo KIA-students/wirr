@@ -77,7 +77,9 @@ namespace KIA.WiRR.Editor
             scroll = EditorGUILayout.BeginScrollView(scroll);
             DrawHeader();
             DrawIdentity();
-            DrawForm();
+            DrawReportMode();
+            if (IsBasicMode()) DrawBasicReport();
+            else DrawForm();
             DrawActions();
             EditorGUILayout.Space(12);
             EditorGUILayout.EndScrollView();
@@ -88,7 +90,7 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.Space(8);
             EditorGUILayout.LabelField("Raport laboratoryjny WiRR", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox(
-                "Wypełniaj formularz na podstawie rzeczywiście wykonanych pomiarów. Do wysłania raportu wymagany jest kompletny etap 3.0. Etapy 3.5–5.0 są opcjonalne. Pola oznaczone „automatycznie” są wyliczane z danych w tabelach i nie trzeba ich przepisywać ręcznie.",
+                "Wybierz krótki raport z obserwacją i wnioskiem albo dotychczasowy szczegółowy raport pomiarowy. Nie wpisuj fikcyjnych danych.",
                 MessageType.Info);
             EditorGUILayout.HelpBox(
                 "WiRR zapisuje techniczny log zdarzeń wysokiego poziomu związanych z realizacją laboratorium wraz z czasem ich wystąpienia. Log jest automatycznie dołączany do wysyłanego raportu; nie obejmuje treści kodu, klawiatury, zrzutów ekranu ani aktywności poza Unity.",
@@ -175,6 +177,55 @@ namespace KIA.WiRR.Editor
                 EditorGUILayout.LabelField(
                     "S = suma podanych indeksów (dla jednej osoby: jej indeks). Warianty v1–v5 są obliczane automatycznie.",
                     EditorStyles.wordWrappedMiniLabel);
+            }
+        }
+
+        private bool IsBasicMode()
+        {
+            var mode = WiRRReportStore.GetValue(document, "basic.mode");
+            if (mode == "true") return true;
+            if (mode == "false") return false;
+            // Historical reports have measurement keys and remain in advanced mode.
+            return document.answers == null || !document.answers.Any(a =>
+                a.key != null && a.key.StartsWith("cp", StringComparison.Ordinal) &&
+                !string.IsNullOrWhiteSpace(a.value));
+        }
+
+        private void DrawReportMode()
+        {
+            var basic = IsBasicMode();
+            var next = EditorGUILayout.ToggleLeft("Krótki raport (zalecany)", basic);
+            if (next != basic)
+            {
+                WiRRReportStore.SetValue(document, "basic.mode", next ? "true" : "false");
+                evaluation = null;
+            }
+        }
+
+        private void DrawBasicReport()
+        {
+            if (WiRRReportStore.GetValue(document, "basic.mode") != "true")
+                WiRRReportStore.SetValue(document, "basic.mode", "true");
+            EditorGUILayout.HelpBox(
+                "Jeden raport z obserwacjami i wnioskiem. Nie wpisuj pomiarów, których nie wykonano. " +
+                "Zaznacz, czy korzystano z rzeczywistego sprzętu, Unity PC czy nagrania.",
+                MessageType.Info);
+            DrawBasicField("basic.source", "Źródło obserwacji / tryb (np. Unity PC, XR, nagranie)");
+            DrawBasicField("basic.observation", "Co zaobserwowano? (uwzględnij rzeczywiste próby)");
+            DrawBasicField("basic.change", "Co zmieniono lub porównano?");
+            DrawBasicField("basic.conclusion", "Wniosek z doświadczenia");
+            DrawBasicField("basic.limits", "Ograniczenia / brak pomiarów (opcjonalnie)");
+        }
+
+        private void DrawBasicField(string key, string label)
+        {
+            EditorGUILayout.LabelField(label);
+            var oldValue = WiRRReportStore.GetValue(document, key);
+            var newValue = EditorGUILayout.TextArea(oldValue, GUILayout.MinHeight(56));
+            if (newValue != oldValue)
+            {
+                WiRRReportStore.SetValue(document, key, newValue);
+                evaluation = null;
             }
         }
 
@@ -544,13 +595,13 @@ namespace KIA.WiRR.Editor
                 if (liveEvaluation.CanSubmit)
                 {
                     EditorGUILayout.HelpBox(
-                        "Etap 3.0 jest kompletny. Raport można wyeksportować lokalnie. Etapy 3.5–5.0 nie są wymagane.",
+                        liveEvaluation.BasicMode ? "Krótki raport kompletny. Można go zapisać i przesłać." : "Etap 3.0 jest kompletny. Raport można wyeksportować lokalnie. Etapy 3.5–5.0 nie są wymagane.",
                         MessageType.Info);
                 }
                 else
                 {
                     EditorGUILayout.HelpBox(
-                        "Raport nie jest jeszcze gotowy do eksportu. Uzupełnij dane studenta, wymagane pola etapu 3.0 i dane pomiarowe tego etapu.",
+                        liveEvaluation.BasicMode ? "Uzupełnij tryb, obserwację, porównanie i wniosek oraz dane studenta." : "Uzupełnij dane studenta i wymagane pola oraz pomiary etapu 3.0.",
                         MessageType.Warning);
                 }
 
@@ -626,7 +677,7 @@ namespace KIA.WiRR.Editor
 
                 if (!liveEvaluation.CanSubmit)
                     EditorGUILayout.LabelField(
-                        "Przycisk eksportu uaktywni się po ukończeniu etapu 3.0.",
+                        liveEvaluation.BasicMode ? "Eksport wymaga uzupełnienia czterech pól krótkiego raportu." : "Przycisk eksportu uaktywni się po ukończeniu etapu 3.0.",
                         EditorStyles.wordWrappedMiniLabel);
 
                 if (!string.IsNullOrWhiteSpace(submissionStatus))
@@ -638,6 +689,14 @@ namespace KIA.WiRR.Editor
         {
             foreach (var issue in evaluation.BlockingIssues)
                 EditorGUILayout.HelpBox(issue, MessageType.Error);
+
+            if (evaluation.BasicMode)
+            {
+                EditorGUILayout.LabelField(
+                    evaluation.BasicComplete ? "Krótki raport: kompletny" : "Krótki raport: niekompletny",
+                    EditorStyles.boldLabel);
+                return;
+            }
 
             foreach (var cp in evaluation.Checkpoints)
             {
