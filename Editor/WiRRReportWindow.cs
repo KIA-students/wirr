@@ -624,7 +624,7 @@ namespace KIA.WiRR.Editor
                             var path = WiRRReportStore.ExportFinal(document, false);
                             WiRRActivityLogger.Record("report_exported", labNumber, "local");
                             WiRRProgressTracker.Refresh();
-                            submissionStatus = "Plik raportu: " + path + "\nW projekcie Unity: Library/WiRRReports/exports. Wysyłka do kolejki KIA rozpoczyna się automatycznie. Publikacja na GitHub jest odrębna.";
+                            submissionStatus = "Raport zapisany lokalnie: " + path + "\nRozpoczęto wysyłkę. Raport jest oddany dopiero po osobnym potwierdzeniu przyjęcia przez serwer.";
                             WiRRPublicReportSubmission.SubmitFile(path, labNumber);
                         }
                         catch (System.IO.IOException exception)
@@ -640,7 +640,7 @@ namespace KIA.WiRR.Editor
 
                 EditorGUILayout.HelpBox(
                     "Raporty robocze: <projekt Unity>/Library/WiRRReports. Wyeksportowane JSON: <projekt Unity>/Library/WiRRReports/exports. " +
-                    "Zapis nie wymaga logowania. Po eksporcie program automatycznie wysyła raport do kolejki KIA, a nie bezpośrednio do GitHub.",
+                    "Eksport oznacza zapis lokalny. Serwer osobno potwierdza przyjęcie, zapisując potwierdzenie obok pliku raportu.",
                     MessageType.Info);
                 if (GUILayout.Button("Otwórz zapisany raport JSON do edycji", GUILayout.Height(28)))
                 {
