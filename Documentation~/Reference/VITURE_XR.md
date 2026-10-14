@@ -1,5 +1,7 @@
 # VITURE XR: stereoskopia SBS i Immersive 3D
 
+> **Ważne dla posiadanych VITURE XR Luma Ultra:** [pełna procedura podłączenia, 2D, Full SBS, Windows/Ubuntu i SpaceWalker](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md#3-viture-xr-luma-ultra-fizyczne-podłączenie-2d-full-sbs-i-spacewalker). Dotychczasowy przykład generatora WiRR jest **3840×1080**, podczas gdy Luma Ultra ma **1920×1200 na oko** (natywna para **3840×1200**). Nie ogłaszaj działania 1200p, dopóki nie zweryfikujesz obsługi tej rozdzielczości w generatorze i fizycznym torze wideo.
+
 ## Spis treści
 
 - [Trzy różne tryby](#trzy-różne-tryby)
@@ -23,13 +25,13 @@ Okulary działają jak zewnętrzny ekran. Oba oczy otrzymują ten sam obraz.
 
 ### 2. Natywne 3D Full SBS
 
-VITURE XR obsługuje Full SBS. Dwa obrazy są umieszczone poziomo obok siebie. Dla pełnej rozdzielczości każde oko otrzymuje 1920×1080, dlatego cały framebuffer ma 3840×1080.
+Okulary VITURE wyświetlają Full SBS: dwa obrazy obok siebie. W wielu starszych trybach jest to **1920×1080 na oko**, razem **3840×1080**. **VITURE Luma Ultra natywnie oferuje 1920×1200 na oko**, czyli **3840×1200 łącznie**, o ile zgodny tor wideo i aplikacja obsługują ten format. Parametry i źródło: [specyfikacja Luma Ultra](https://www.viture.com/academy/product/viture-luma-ultra-dock-pack).
 
 W Unity użyj:
 
 `WiRR → VITURE XR → Utwórz przykład Full SBS 3840x1080`
 
-Generator tworzy:
+**Uwaga:** to obecnie generator demonstracyjny **1080p**, nie potwierdzony profil natywny Luma Ultra 1200p. Nie zmieniaj wymiarów bez kontroli render texture, viewportów i fizycznego testu. Generator tworzy:
 - `WiRR_VITURE_FullSBS`;
 - `VITURE_LeftEye`;
 - `VITURE_RightEye`;
@@ -64,7 +66,7 @@ Funkcje przycisków mogą zmieniać się wraz z firmware. Przed laboratorium zak
 
 1. Podłącz okulary VITURE do urządzenia obsługującego obraz przez USB-C/DisplayPort lub odpowiedni adapter.
 2. Otwórz materiał Full SBS.
-3. Dla pełnej jakości użyj 3840×1080, czyli 1920×1080 na oko.
+3. Dla starszego przykładu WiRR użyj **3840×1080** (1920×1080 na oko); dla **Luma Ultra** zweryfikuj tryb **3840×1200** (1920×1200 na oko). Użyta wartość musi odpowiadać rzeczywistemu wyjściu i trybowi urządzenia; nie deklaruj pełnej jakości natywnej na podstawie przykładu 1080p.
 4. Włącz tryb 3D w okularach.
 5. Jeżeli nadal widzisz dwa obrazy obok siebie, sprawdź tryb okularów, proporcje playera i format źródła.
 6. Na PC można użyć np. Kodi. Na Androidzie producent wskazuje VLC jako praktyczny odtwarzacz.
@@ -80,7 +82,7 @@ Komponent `WiRRVitureSbsRig`:
 - zachowuje równoległe osie kamer;
 - nie korzysta z Unity XR stereo target, ponieważ wynik ma być pojedynczym framebufferem SBS.
 
-Dla buildu PC ustaw docelową rozdzielczość okna lub pełnego ekranu na 3840×1080.
+Dla **istniejącego** generatora WiRR ustaw 3840×1080 i zweryfikuj wynik. Dla natywnego Luma Ultra docelowy format to **3840×1200**, ale wymaga dostosowania/testu render targetów, obsługi rozdzielczości wyjścia i fizycznego urządzenia. Nie traktuj obu formatów jako równoważnych.
 
 ## Ćwiczenie porównawcze
 
@@ -101,6 +103,13 @@ Możliwe pomiary:
 Nie używaj wyniku Immersive 3D do pomiarów metrologicznych geometrii.
 
 ## Oficjalne materiały
+
+- Luma Series, przyciski (R1 dłużej = 2D/3D): https://www.viture.com/en-MY/academy/xr-glasses/luma-series
+- Luma Ultra, parametry 1200p/6DoF: https://www.viture.com/academy/product/viture-luma-ultra-dock-pack
+- SpaceWalker Desktop Windows/macOS, połączenie USB z danymi i wideo: https://www.viture.com/academy/spacewalker/desktop
+- Procedura stanowiska WiRR: [Quest/Android/VITURE](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md)
+
+**Bezpieczna konfiguracja:** do odbioru wymagana jest demonstracja 2D, potem Full SBS tylko gdy działa. Samo podłączenie jako monitor nie udostępnia w Unity trackingu 6DoF ani dostępu do kamer Luma Ultra. Na Windows nie wyłączaj Secure Boot/BitLocker ani nie włączaj test-signing na urządzeniach uczelni bez zgody administratora; jeśli sterownik SpaceWalker tego wymaga, użyj demonstracji 2D/Full SBS bez SpaceWalker.
 
 - VITURE Academy: https://www.viture.com/academy
 - VITURE Download Center: https://www.viture.com/academy/download
