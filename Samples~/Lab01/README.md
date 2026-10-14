@@ -1,5 +1,24 @@
 # Lab 01 — Środowisko XR i audyt urządzeń
 
+## Obowiązkowe laboratorium: jedna ścieżka (około 35 minut)
+
+**Pytanie:** czy zmiana skali i złożoności sceny wpływa na to, co widzisz i jak płynnie działa środowisko?
+
+1. Otwórz działający projekt Unity i scenę Lab 01 przez **WiRR → Misje i odkrycia → Start: Lab 01**. Nie instaluj teraz XR, Android Studio ani ROS 2.
+2. Ustaw jeden sześcian przed kamerą. Porównaj jego skalę **0,5**, **1** i **2** przy tej samej pozycji kamery. Opisz jedną zauważoną różnicę.
+3. Włącz Play i zaobserwuj ruch sześcianu z Rigidbody. Wskaż, co spowodowało ruch i zatrzymanie.
+4. W **Window → Analysis → Profiler** porównaj czas klatki przed dodaniem i po dodaniu około 20 sześcianów. Zapisz po **trzy odczyty** z każdego stanu, w milisekundach, jeśli narzędzie je udostępnia.
+5. Zapisz scenę i jeden wniosek: która zmiana miała największy efekt i dlaczego?
+
+**Co oddać:** jeden raport **Lab 01** z numerem indeksu, grupą, obserwacją skali, sześcioma rzeczywiście zmierzonymi odczytami (lub oznaczeniem „nie zmierzono” wraz z przyczyną) i jednym wnioskiem. Wyeksportuj raport lokalnie z panelu WiRR i przekaż kanałem wskazanym przez prowadzącego. Zapis sceny pozostaje w projekcie i nie musi być osobno wysyłany.
+
+**Zaliczenie podstawowe:** wykonane trzy eksperymenty, poprawnie zapisane obserwacje i sensowny wniosek. **Gogle, Quest, zaawansowane profile GPU i dodatkowe etapy ocen 3.5–5.0 nie są wymagane** w tej ścieżce.
+
+**Gdy sprzęt nie działa:** użyj działającej sceny na PC. Nie wpisuj wymyślonych liczb. Jeżeli nie działa także Profiler, zapisz obserwację jakościową i przyczynę. Taki przypadek rozstrzyga prowadzący.
+
+Pozostała część pliku opisuje materiały rozszerzające i starszą, bardziej rozbudowaną procedurę. **Nie jest listą obowiązkowych zadań ani warunkiem zaliczenia podstawowego.**
+
+
 ## Spis treści
 
 - [Szybki wybór ścieżki](#szybki-wybór-ścieżki)

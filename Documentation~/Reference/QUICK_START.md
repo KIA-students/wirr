@@ -1,5 +1,18 @@
 # WiRR | Zacznij tutaj
 
+## Minimalny przebieg zajęć (obowiązujący)
+
+1. Otwórz działający projekt Unity 6.6 na stanowisku albo własny projekt URP z pakietem WiRR. Nie konfiguruj niepotrzebnych SDK.
+2. Wpisz **numer indeksu i grupę** w **WiRR → Student → Profil i grupa**.
+3. W **WiRR → Misje i odkrycia** uruchom aktualne laboratorium. Wykonaj krótki eksperyment wskazany na początku jego instrukcji.
+4. Zapisz własną obserwację i wniosek. Otwórz **Otwórz raport: Lab NN**, wyeksportuj **jeden raport** i przekaż go kanałem wskazanym przez prowadzącego.
+5. Po drugim laboratorium bloku zachowaj lokalną kartę sesji jako pomoc w podsumowaniu. Nie musisz osobno jej przesyłać, chyba że prowadzący wyraźnie o to poprosi.
+
+**Jedno laboratorium = jeden raport.** Sam zapis lokalny ani eksport nie są automatycznym oddaniem pracy. Nie ma obowiązku używania Quest 3, instalowania Android Studio czy wykonywania rozszerzonych wariantów na ocenę 5.0.
+
+**Gdy środowisko nie działa:** korzystaj z dostępnego demonstratora PC, opisz ograniczenie i nie uzupełniaj brakujących danych zmyślonymi pomiarami. Prowadzący rozstrzyga, jak udokumentować niedostępną funkcję.
+
+
 **Obowiązkowa ścieżka: profil → scena → eksperyment → raport.** Każdy student pracuje we własnym projekcie Unity 6.6 (6000.6.x). Nie instaluj wszystkich SDK na początku.
 
 1. Utwórz projekt **Universal 3D (URP)** i dodaj pakiet przez Unity Package Manager: `https://github.com/KIA-students/wirr.git#upm`.
