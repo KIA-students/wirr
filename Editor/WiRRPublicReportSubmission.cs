@@ -19,6 +19,13 @@ public static class WiRRPublicReportSubmission
         public string report;
     }
 
+    [Serializable]
+    private sealed class SubmissionReceipt
+    {
+        public bool accepted;
+        public string submission_id;
+    }
+
     private static readonly HttpClient Client = new HttpClient { Timeout = TimeSpan.FromSeconds(25) };
     public static async void SubmitFile(string path, int lab)
     {
@@ -48,6 +55,7 @@ public static class WiRRPublicReportSubmission
                     var body = await response.Content.ReadAsStringAsync();
                     if (!response.IsSuccessStatusCode || !body.Contains("\"accepted\":true"))
                         throw new IOException("Brak potwierdzenia odbioru. HTTP " + (int)response.StatusCode + ". " + body);
+                    File.WriteAllText(path + ".receipt.json", body, Encoding.UTF8);
                     EditorUtility.DisplayDialog("WiRR: raport przyjęty",
                         "Serwer KIA potwierdził odbiór raportu. Identyfikator: " + submissionId +
                         "\nRaport oczekuje w prywatnej kolejce. Publikacja na GitHub jest odrębnym procesem.", "OK");
@@ -59,6 +67,24 @@ public static class WiRRPublicReportSubmission
             Debug.LogWarning("WiRR: przesłanie raportu nie powiodło się: " + ex.Message);
             EditorUtility.DisplayDialog("WiRR: raport nadal lokalnie",
                 "Nie uzyskano potwierdzenia odbioru. Zachowano plik. Możesz ponowić przesłanie.\n" + ex.Message, "OK");
+        }
+    }
+
+    // Parse the receipt rather than matching whitespace-sensitive JSON text.
+    // Where the service echoes a submission identifier, it must match this request.
+    private static bool IsAcceptedResponse(string json, string submissionId)
+    {
+        if (string.IsNullOrWhiteSpace(json)) return false;
+        try
+        {
+            var receipt = JsonUtility.FromJson<SubmissionReceipt>(json);
+            if (receipt == null || !receipt.accepted) return false;
+            return string.IsNullOrEmpty(receipt.submission_id) ||
+                   string.Equals(receipt.submission_id, submissionId, StringComparison.OrdinalIgnoreCase);
+        }
+        catch (ArgumentException)
+        {
+            return false;
         }
     }
 
