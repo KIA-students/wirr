@@ -1,0 +1,18 @@
+name: Validate WiRR report contract
+on:
+  pull_request:
+    paths:
+      - 'scripts~/wirr_grade_report.py'
+      - 'scripts~/test_wirr_grade_report.py'
+      - '.github/workflows/wirr-report-contract-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test single, pair and basic report validation
+        run: python3 -m unittest discover -s scripts~ -p 'test_wirr_grade_report.py' -v
