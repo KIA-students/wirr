@@ -1,5 +1,7 @@
 # Budowanie i instalacja aplikacji WiRR
 
+> **Pełna i aktualna procedura dla prowadzącego:** [podłączenie i wdrażanie Meta Quest 3, telefonu Android AR oraz VITURE XR Luma Ultra](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md). Ten plik zawiera skrót historycznego procesu budowania, a nie dowód gotowego APK WiRR 2.0. Gogle Quest otrzymują APK; **VITURE jest ekranem źródłowego komputera/telefonu i nie instaluje się na nich zwykłego APK**.
+
 ## Spis treści
 
 - [Wybierz docelową platformę](#wybierz-docelową-platformę)
@@ -25,7 +27,7 @@
 
 ## Środowisko referencyjne
 
-Na kursie zalecany jest **Windows 11 64-bit**. Obsługiwanym wariantem alternatywnym jest **Ubuntu 22.04 lub 24.04 LTS 64-bit**. Ułatwia to utrzymanie wspólnej konfiguracji stanowisk dla Unity, ADB, Android/Quest i Dockera. Pełna procedura instalacyjna znajduje się w `ENVIRONMENT_SETUP.md`.
+Na stanowiskach laboratoryjnych **Ubuntu i Windows są równorzędnymi systemami** obowiązkowej ścieżki desktopowej WiRR 2.0. Do *budowania* aplikacji pomocniczych Quest/Android używa się jednego zweryfikowanego stanowiska developerskiego Ubuntu lub Windows. Meta Horizon Link jest oddzielną funkcją PC VR dla zgodnego Windows, a nie warunkiem użycia Quest standalone. Pełna procedura instalacyjna znajduje się w `ENVIRONMENT_SETUP.md`.
 
 Do pracy z kodem C# zalecane jest **Visual Studio 2022 Community** z workloadem **Game development with Unity** na Windows albo Rider / VS Code z integracją Unity na Ubuntu. **Android Studio** jest zalecane jako narzędzie pomocnicze do ADB, SDK Manager, Logcat i diagnostyki Androida. Nie jest wymagane do samego buildu, jeśli Unity korzysta z SDK, NDK i OpenJDK zainstalowanych przez Unity Hub.
 
@@ -44,6 +46,8 @@ PC, smartfon z Androidem i Meta Quest 3 są osobnymi platformami docelowymi komp
 7. Wynikiem jest zwykle plik `.exe` i katalog `*_Data`; należy przenosić je razem.
 
 ## Android — smartfon
+
+**Przed użyciem:** sprawdź model na [liście ARCore](https://developers.google.com/ar/devices) i osobno obsługę Depth API; zbuduj profil **Android ARCore**, nie Quest OpenXR. Podstawowa droga dla chętnego studenta to instalacja podpisanego APK z zatwierdzonego źródła; **ADB/debugowanie USB nie są wymagane na jego telefonie**. Pełna instrukcja: [Android AR](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md#2-telefon-android-opcjonalne-rzeczywiste-ar).
 
 ### Przygotowanie Unity
 W Unity Hub dla używanej wersji edytora doinstaluj:
@@ -75,6 +79,8 @@ Gotowy APK można również zainstalować ręcznie: `adb install -r nazwa.apk`.
 
 ## Meta Quest 3 — aplikacja samodzielna
 
+**Przed pierwszym użyciem:** konto w zweryfikowanym zespole deweloperskim Meta, Developer Mode w aplikacji Meta Horizon, kabel USB-C DATA, autoryzacja USB debugging. Dokładne ekrany i diagnostyka: [Quest 3](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md#1-meta-quest-3-od-pierwszego-podłączenia-do-działającego-apk). Wystarczy jeden skonfigurowany egzemplarz prowadzącego; nie wymagać kont Meta od studentów.
+
 Quest 3 jest urządzeniem Android/Meta Horizon OS, ale wymaga konfiguracji XR właściwej dla gogli.
 
 1. W Unity Hub zainstaluj Android Build Support, SDK/NDK i OpenJDK.
@@ -96,6 +102,8 @@ Do diagnostyki: `adb logcat`.
 Meta Horizon Link uruchamia aplikację PC VR strumieniowaną do gogli. Nie jest równoważny samodzielnej wersji aplikacji i nie powinien zastępować pomiaru wydajności APK uruchomionego bez Link.
 
 ## Smartfon a Quest 3
+
+**Trzeci przypadek:** okulary [VITURE XR Luma Ultra](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md#3-viture-xr-luma-ultra-fizyczne-podłączenie-2d-full-sbs-i-spacewalker) są ekranem, a nie kolejnym telefonem Android: do zwykłego 2D/Full SBS **nie** wgrywa się do nich APK.
 
 Oba urządzenia mogą otrzymać APK przez ADB, ale ten sam plik APK nie musi być poprawny dla obu konfiguracji.
 

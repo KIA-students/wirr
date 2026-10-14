@@ -29,6 +29,7 @@ Przejdź do [pełnego planu 4 × 2 laboratoria](../Campaign/README.md) i wybierz
 | IV | [Lab 07](../../Samples~/Lab07/README.md) · [Lab 08](../../Samples~/Lab08/README.md) | Walidacja i prototyp |
 
 ## Rozszerzenia dobrowolne
+- **[Meta Quest 3: Developer Mode, budowanie APK, ADB; Android AR: instalacja APK, ARCore; VITURE Luma Ultra: podłączenie i stereo](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md)**. Podręcznik przygotowania prowadzącego; nie jest obowiązkową instalacją dla studenta.
 - [VITURE: stereo i Full SBS](../../Samples~/VITURE%20XR/README.md).
 - [Liga XR: nazwa grupy i misje poza zajęciami](../../competition/OPTIONAL_MISSIONS.md).
 - [Szybki start](QUICK_START.md), [budowanie na Android/Quest](BUILD_AND_DEPLOY.md), [ustawienia środowiska](ENVIRONMENT_SETUP.md).
