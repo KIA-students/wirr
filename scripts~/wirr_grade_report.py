@@ -23,8 +23,8 @@ def validate_identity(report: dict) -> list[str]:
     if not nonempty(report.get("submissionId")): issues.append("Brak identyfikatora raportu.")
     if not nonempty(report.get("teamId")): issues.append("Brak identyfikatora studenta.")
     indices = [str(v).strip() for v in (report.get("studentIndices") or []) if nonempty(v)]
-    if len(indices) != 1: issues.append("Raport musi zawierać dokładnie jeden numer indeksu.")
-    if any(not re.fullmatch(r"\d+", value) for value in indices): issues.append("Numery indeksów mogą zawierać tylko cyfry.")
+    if not 1 <= len(indices) <= 2: issues.append("Raport musi zawierać jeden lub dwa numery indeksów.")
+    if any(not re.fullmatch(r"\d{5,12}", value) for value in indices): issues.append("Każdy numer indeksu musi mieć od 5 do 12 cyfr.")
     if len(set(indices)) != len(indices): issues.append("Numery indeksów nie mogą się powtarzać.")
     return issues
 
@@ -56,6 +56,12 @@ def evaluate(path: Path) -> dict:
     report = json.loads(path.read_text(encoding="utf-8"))
     blocking = validate_identity(report) + validate_activity(report)
     answers = {str(x.get("key")): str(x.get("value") or "").strip() for x in report.get("answers") or [] if isinstance(x, dict) and nonempty(x.get("key"))}
+    basic_mode = answers.get("basic.mode") == "true"
+    if basic_mode:
+        required = ("basic.source", "basic.observation", "basic.change", "basic.conclusion")
+        for key in required:
+            if not nonempty(answers.get(key)):
+                blocking.append(f"Uzupełnij pole raportu: {key}.")
     checkpoints = []
     for grade, prefix in CHECKPOINTS:
         count = sum(1 for key, value in answers.items() if key.startswith(prefix) and nonempty(value))
@@ -72,6 +78,8 @@ def evaluate(path: Path) -> dict:
         "activityEventCount": len(report.get("activityTimeline") or []),
         "activitySummary": report.get("activitySummary") or {},
         "checkpoints": checkpoints,
+        "reportMode": "basic" if basic_mode else "legacy",
+        "basicComplete": basic_mode and not any(not nonempty(answers.get(key)) for key in ("basic.source", "basic.observation", "basic.change", "basic.conclusion")),
         "note": "CI sprawdza integralność raportu. Ocena merytoryczna należy do prowadzącego."
     }
 
