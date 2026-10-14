@@ -179,11 +179,10 @@ namespace KIA.WiRR.Editor
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("3. Przygotuj raport", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox(
-                "Formularz nadal wymaga kompletu danych dawnego etapu 3.0. " +
-                "Jeżeli krótki eksperyment nie dostarcza tych pomiarów, nie wpisuj liczb zastępczych. " +
-                "Zachowaj obserwacje i uzgodnij przekazanie wyniku z prowadzącym. " +
-                "Eksport uproszczonego raportu wymaga aktualizacji walidatora.",
-                MessageType.Warning);
+                "Formularz oferuje krótki raport z obserwacją i wnioskiem. " +
+                "Nie wpisuj liczb zastępczych, jeśli pomiarów nie wykonano. " +
+                "Wyeksportuj raport i sprawdź osobne potwierdzenie przyjęcia przez serwer.",
+                MessageType.Info);
             foreach (var lab in Blocks[blockIndex])
                 if (GUILayout.Button("Otwórz raport: Lab " + lab.ToString("00")))
                     WiRRReportWindow.OpenForLab(lab);
