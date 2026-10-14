@@ -2,6 +2,8 @@
 
 Wersja 1.0.0
 
+> **Status tabeli 3.0–5.0:** poniższa macierz jest materiałem historycznym / rozszerzającym. Nie określa obecnie obowiązkowej ścieżki zaliczenia Lab 01–02. Wymagania bieżące i pojedynczy rezultat do oddania znajdują się na początku instrukcji [Lab 01](../../Samples~/Lab01/README.md) i [Lab 02](../../Samples~/Lab02/README.md). Pozostałe laboratoria będą ujednolicone w kolejnych etapach aktualizacji. Nie należy uzależniać zaliczenia Lab 01–02 od sprzętu Quest lub wariantów v1–v5.
+
 ## Spis treści
 - [Środowisko i raport](#środowisko-i-raport)
 - [Etapy laboratoriów](#etapy-laboratoriów)

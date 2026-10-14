@@ -1,5 +1,24 @@
 # Lab 02 — Interakcja i manipulacja XR
 
+## Obowiązkowe laboratorium: jedno doświadczenie (około 35 minut)
+
+**Pytanie:** co sprawia, że użytkownik od razu rozumie, jak przenieść wirtualny przedmiot do celu?
+
+1. Otwórz **WiRR → Misje i odkrycia → Start: Lab 02**. Wykorzystaj scenę i elementy interakcji, które są już przygotowane na stanowisku.
+2. Wskaż obiekt do przeniesienia, cel oraz sygnał potwierdzający udaną akcję. Przenieś obiekt **trzy razy**. Zapisz liczbę pomyłek lub czas każdej próby, jeśli pomiar jest dostępny.
+3. Zmień **jeden** element informacji zwrotnej, np. kolor celu albo podświetlenie poprawnego miejsca.
+4. Powtórz trzy próby. Porównaj, czy po zmianie łatwiej rozpoznać prawidłową akcję.
+5. Napisz jeden wniosek o użyteczności i jedną propozycję ulepszenia.
+
+**Co oddać:** jeden raport **Lab 02** z indeksem, grupą, krótkim opisem zmiany, wynikami **3 prób przed i 3 po zmianie**, jeśli można je zaobserwować lub zmierzyć, oraz jednym wnioskiem. Raport eksportuj lokalnie i prześlij kanałem wskazanym przez prowadzącego. Nie wysyłaj całego projektu Unity.
+
+**Zaliczenie podstawowe:** działająca albo przedstawiona w scenie demonstracyjnej interakcja, porównanie przed i po zmianie oraz uzasadniony wniosek. Konfiguracja XRI, Quest 3, teleportacja i SSQ nie są obowiązkowe w tej ścieżce.
+
+**Gdy nie działa XRI lub nie ma gogli:** wykonaj ćwiczenie na demonstratorze PC dostępnym na stanowisku. Jeżeli demonstrator nie pozwala na interakcję, opisz projekt i wykonaj obserwację udostępnionego pokazu, wyraźnie zaznaczając brak własnych pomiarów. Sposób zaliczenia potwierdza prowadzący.
+
+Dalsze sekcje dokumentują rozbudowane warianty techniczne. **Nie są obowiązkową listą zadań laboratoryjnych.**
+
+
 ## Spis treści
 
 - [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
