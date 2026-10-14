@@ -29,6 +29,7 @@ Pakiet laboratoryjny dla **Unity 6.6**. Osiem laboratoriów realizowanych w czte
 ## Potrzebujesz dodatkowej pomocy?
 
 [Instalacja i problemy techniczne](Documentation~/Reference/OS_SETUP.md) ·
+[Quest 3, Android AR i VITURE: podłączenie, budowanie i instalacja aplikacji](Documentation~/Reference/DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md) ·
 [Instrukcje czterech bloków](Documentation~/Campaign/README.md) ·
 [Pełny przewodnik pracy](Documentation~/Reference/UNITY_COURSE_JOURNEY.md) ·
 [Raporty i kryteria](Documentation~/Reference/GRADING_MATRIX.md) ·

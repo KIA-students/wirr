@@ -35,7 +35,7 @@ Po wejściu w Play Mode scena tworzy:
 Użycie:
 1. Otwórz scenę.
 2. Uruchom Play Mode.
-3. Ustaw Game View lub build na 3840×1080.
+3. Ustaw Game View lub build na 3840×1080 **dla bieżącego sample 1080p**. Na posiadanych okularach Luma Ultra nie jest to ich natywny tryb 1200p; sprawdź ograniczenie w [instrukcji wdrożeniowej](../../Documentation~/Reference/DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md#3-viture-xr-luma-ultra-fizyczne-podłączenie-2d-full-sbs-i-spacewalker).
 4. Podłącz okulary VITURE.
 5. Włącz tryb 3D.
 6. Porównaj dysparację obiektów bliskich i dalekich.
@@ -80,8 +80,10 @@ Ta metoda jest zalecanym fallbackiem, jeśli przyszła wersja Unity zmieni forma
 
 ## Szybka konfiguracja
 
-Dla natywnego Full SBS:
-- docelowy framebuffer: 3840×1080;
+**Ten sample jest starszym przykładem Full SBS 1080p, nie natywną implementacją Luma Ultra 1200p.** Pełne kroki podłączenia komputera Ubuntu/Windows, ustawienia ekranu i trybu R1 opisano w [przewodniku stanowiskowym](../../Documentation~/Reference/DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md#3-viture-xr-luma-ultra-fizyczne-podłączenie-2d-full-sbs-i-spacewalker). Zanim zaktualizujesz generatory, sprawdź rzeczywisty obraz 2D oraz negocjowany tryb monitora.
+
+Dla istniejącego demonstratora Full SBS:
+- framebuffer przykładu: **3840×1080**; **VITURE Luma Ultra natywnie ma 3840×1200** (1920×1200 na oko). Wymaga to zweryfikowanego osobnego profilu/zmian render targetów;
 - lewa połowa: lewe oko;
 - prawa połowa: prawe oko;
 - domyślny rozstaw kamer: 0,064 m;

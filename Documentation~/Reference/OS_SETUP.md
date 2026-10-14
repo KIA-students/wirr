@@ -81,11 +81,13 @@ To graf **kolejności wdrażania**, nie diagram bezpośrednich zależności paki
 
 ## Urzadzenia XR
 
+**Przejdź do [procedury sprzętowej Quest 3, Android AR i VITURE Luma Ultra](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md)**, jeżeli chcesz rzeczywiście podłączyć urządzenie, utworzyć plik APK, zainstalować aplikację lub rozpoznać błędny tor wideo. Wskazówki poniżej są tylko krótką diagnostyką. Przygotowanie wykonuje prowadzący; studentom nie należy przypisywać instalacji sterowników i SDK jako obowiązkowego zadania.
+
 **Quest 3:** gogle mają przycisk zasilania i złącze USB-C. Włącz tryb deweloperski na autoryzowanym koncie, podłącz przewód USB-C DATA i zaakceptuj żądanie na urządzeniu. Sprawdź **adb devices -l**.
 
 **Telefon:** sprawdź kompatybilność [ARCore](https://developers.google.com/ar/devices), włącz debugowanie USB i zaakceptuj autoryzację na ekranie. Brak obsługi Depth API nie oznacza braku ARCore.
 
-**VITURE:** sprawdź zwykły obraz 2D i obsługę DP Alt Mode. W Ubuntu użyj Settings → Displays, w Windows Ustawienia ekranu. Wybierz tryb SBS zgodnie z konkretną serią okularów.
+**VITURE Luma Ultra:** sprawdź obraz 2D na pełnym porcie USB-C z **DisplayPort Alt Mode**, a dla SpaceWalker dodatkowo transmisję danych USB. W Ubuntu użyj Settings → Displays, w Windows Ustawienia ekranu. **Luma Ultra ma 1920×1200 na oko**, więc nie należy przedstawiać przykładu WiRR 3840×1080 jako trybu natywnego 1200p. Pełna instrukcja: [Luma Ultra](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md#3-viture-xr-luma-ultra-fizyczne-podłączenie-2d-full-sbs-i-spacewalker).
 
 **ROS 2:** sprawdź **ros2 topic list**, a potem **ros2 topic echo /joint_states --once**, zanim diagnozujesz scenę Unity.
 
