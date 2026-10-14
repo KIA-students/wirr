@@ -506,6 +506,17 @@ jobs:
               exit 0
             fi
 
+            if printf '%s\n' "${merge_output}" | grep -qi 'base branch policy prohibits the merge'; then
+              echo "::notice::PR #${pr_number}: wymagania ochrony gałęzi nie pozwalają na natychmiastowe scalenie. Włączam auto-merge."
+              gh pr merge "${pr_number}" \
+                --repo "${UPSTREAM_REPOSITORY}" \
+                --squash \
+                --auto
+              echo "## PR oczekuje na warunki ochrony gałęzi" >> "${GITHUB_STEP_SUMMARY}"
+              echo "Włączono auto-merge dla PR #${pr_number}. Nie deklaruję scalenia przed potwierdzeniem GitHub." >> "${GITHUB_STEP_SUMMARY}"
+              exit 0
+            fi
+
             printf '%s\n' "${merge_output}" >&2
             exit "${merge_status}"
           fi
