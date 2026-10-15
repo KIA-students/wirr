@@ -26,6 +26,16 @@ Pakiet laboratoryjny dla **Unity 6.6**. Osiem laboratoriów realizowanych w czte
 
 **Postęp jest śledzony lokalnie.** Sam fakt przygotowania sceny lub wygenerowania raportu nie oznacza zaliczenia. Automatyczna wysyłka numerów indeksów i wyników do publicznego GitHub nie jest wykonywana. Grupa jest blokowana lokalnie po rejestracji, a zmianę po stronie uczelni zatwierdza prowadzący.
 
+## Wykłady: prezentacje PDF
+
+- [W01: Wprowadzenie do technologii XR](WebSim~/site/lectures/WiRR-w01.pdf)
+- [W02: Percepcja, optyka i ergonomia](WebSim~/site/lectures/WiRR-w02.pdf)
+- [W03: Geometria, kalibracja i rejestracja](WebSim~/site/lectures/WiRR-w03.pdf)
+- [W04: Śledzenie i rozumienie sceny](WebSim~/site/lectures/WiRR-w04.pdf)
+- [W05: Interakcja człowiek–system w XR](WebSim~/site/lectures/WiRR-w05.pdf)
+- [W06: Renderowanie i wydajność](WebSim~/site/lectures/WiRR-w06.pdf)
+- [W07: Cyfrowy bliźniak, ROS 2 i teleoperacja](WebSim~/site/lectures/WiRR-w07.pdf)
+
 ## Potrzebujesz dodatkowej pomocy?
 
 [Instalacja i problemy techniczne](Documentation~/Reference/OS_SETUP.md) ·
