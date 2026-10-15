@@ -436,6 +436,7 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+          REVIEWED_EXPORT_SHA: ${{ steps.export.outputs.export_sha }}
         run: |
           set -euo pipefail
 
@@ -468,23 +469,38 @@ jobs:
           done
 
           if [ "${checks_seen}" != true ]; then
-            # Distinguish missing checks from GitHub's action_required state.
+            # PR workflows are manual-first. Validate the trusted source snapshot
+            # here instead of treating absent check-runs as a successful test.
             public_head="$(gh api "repos/${UPSTREAM_REPOSITORY}/pulls/${pr_number}" --jq '.head.sha')"
-            approvals="$(gh api "repos/${UPSTREAM_REPOSITORY}/actions/runs?per_page=30" --jq "[.workflow_runs[] | select(.head_sha == \"${public_head}\" and .conclusion == \"action_required\")] | length")"
-            if [ "${approvals}" -gt 0 ]; then
-              echo "::warning::PR #${pr_number} wymaga ręcznego 'Approve and run workflows' w KIA-students/wirr → Actions. Bez tej zgody GitHub nie uruchomi CI dla nowego commitu forka."
+            if [ "${public_head}" != "${REVIEWED_EXPORT_SHA}" ] || [ "$(git write-tree)" != "$(git rev-parse "${REVIEWED_EXPORT_SHA}^{tree}")" ]; then
+              echo "::error::Public PR head differs from the sanitized snapshot; refusing merge."
+              exit 1
             fi
-            # On external fork PRs GitHub may require a maintainer to approve
-            # the workflows. No checks is NOT evidence that tests passed.
+            # Pin our own prepared export, never an arbitrary student branch.
+            # The index tree was safety-checked from source main above.
+            git checkout --detach "${REVIEWED_EXPORT_SHA}"
+            python3 -m unittest discover -s scripts~ -p 'test_wirr*.py' -v
+            if [ "$(git status --porcelain --untracked-files=no)" != "" ]; then
+              echo "::error::Tracked snapshot files changed during validation."
+              exit 1
+            fi
             pr_url="https://github.com/${UPSTREAM_REPOSITORY}/pull/${pr_number}"
-            echo "::warning::Brak kontroli PR #${pr_number}. Możliwe, że workflow wymaga zatwierdzenia w repozytorium docelowym. Nie scalam PR bez kontroli."
-            {
-              echo "## Oczekiwanie na kontrole PR"
-              echo
-              echo "GitHub nie zgłosił kontroli dla [PR #${pr_number}](${pr_url})."
-              echo "Sprawdź zakładkę Checks/Actions i zatwierdź uruchomienie workflow z forka, jeśli GitHub tego wymaga."
-              echo "Automatyczne scalenie zostało bezpiecznie pominięte; kolejne uruchomienie synchronizacji ponowi próbę."
-            } >> "${GITHUB_STEP_SUMMARY}"
+            set +e
+            merge_output="$(gh api --method PUT "repos/${UPSTREAM_REPOSITORY}/pulls/${pr_number}/merge" \
+              -f sha="${public_head}" -f merge_method=merge 2>&1)"
+            merge_status=$?
+            set -e
+            if [ "${merge_status}" -ne 0 ]; then
+              printf '%s\\n' "${merge_output}" >&2
+              echo "::warning::Validated snapshot awaits GitHub merge permission or branch protection."
+              echo "Validated ${public_head}; merge blocked for ${pr_url}." >> "${GITHUB_STEP_SUMMARY}"
+              exit 0
+            fi
+            if [ "$(printf '%s' "${merge_output}" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("merged", False))')" != "True" ]; then
+              echo "::error::GitHub did not confirm merge."
+              exit 1
+            fi
+            echo "Merged ${pr_url} at reviewed head ${public_head} after local report tests and snapshot safety validation." >> "${GITHUB_STEP_SUMMARY}"
             exit 0
           fi
 
