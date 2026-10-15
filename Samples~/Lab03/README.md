@@ -1,120 +1,76 @@
-# Lab 03 — Rejestracja i kotwice AR
+# Lab 03: Kotwica to nie gwarancja stałości
 
-## Obowiązkowe laboratorium: jedna ścieżka (około 35 minut)
+**Blok 02, część 1 z 2** · 90 minut · SIM_AR · 2.0.0-draft.3
 
-**Pytanie badawcze:** Jak stabilnie umieścić wirtualny obiekt w rzeczywistej przestrzeni?
+**Pytanie:** Czy stabilny hologram znajduje się w poprawnym miejscu?
 
-1. Otwórz gotową scenę Lab 03 w Unity lub udostępniony pokaz rejestracji AR. Nie instaluj Android SDK ani ARCore tylko po to, żeby rozpocząć.
-2. Umieść wirtualny znacznik na wybranej powierzchni. Zanotuj, czy pozostaje w tym samym miejscu po zmianie punktu obserwacji.
-3. Powtórz obserwację trzykrotnie w tej samej konfiguracji. Zapisz, kiedy znacznik jest stabilny, a kiedy widoczny jest dryf lub utrata śledzenia.
-4. Zmień jeden warunek obserwacji, np. widoczne cechy powierzchni lub pozycję kamery, i porównaj zachowanie znacznika.
-5. Zaproponuj jedną zmianę, która poprawiłaby wiarygodność rejestracji.
+## Co będziesz badać
 
-**Co oddać:** Jeden raport Lab 03: trzy obserwacje stabilności, jeden zmieniony warunek, porównanie i wniosek. Uzupełnij numer indeksu i grupę, wyeksportuj raport lokalnie w panelu WiRR i przekaż go kanałem wskazanym przez prowadzącego. Nie wysyłaj całego projektu Unity.
+Wykrycie płaszczyzny, trafienie promienia i utworzenie kotwicy to różne operacje. Błąd położenia oznacza różnicę względem znanej referencji; stabilność dotyczy zmian położenia w czasie. Stabilny model może mieć stałe przesunięcie. W SIM_AR referencja i błędy pochodzą z modelu. Rzeczywiste AR bez niezależnego odniesienia nie pozwala automatycznie zmierzyć bezwzględnej dokładności.
 
-**Zaliczenie podstawowe:** wykonanie lub rzetelna analiza doświadczenia, udokumentowane obserwacje i merytoryczny wniosek. Dodatkowe poziomy 3.5–5.0, instalowanie całego stosu XR/ROS i praca z urządzeniem fizycznym nie są obowiązkowe w tej ścieżce.
+## Jedno doświadczenie, trzy działania
 
-**Gdy stanowisko nie działa:** Przy braku telefonu AR wykorzystaj dostępny pokaz lub zarejestrowaną sekwencję. Oznacz wynik jako obserwację nagrania, nie pomiar własnego urządzenia. Sposób dokumentowania niedostępnej funkcji potwierdza prowadzący.
+Zacznij od 3.0. Kolejne poziomy rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie i przejść do drugiego laboratorium bloku. Pracuj solo lub w parze; w parze zamieniajcie role operatora i obserwatora.
 
-**Dalsze rozdziały** zachowano jako dokumentację rozszerzoną; nie są dodatkową listą obowiązkowych zadań.
+### 1. Umieść model w symulacji AR (3.0)
 
+Uruchom przygotowaną Galerię kotwic w trybie SIM_AR. Znajdź oznaczony punkt odniesienia i odcinek 0,30 m. Umieść przy nim model w skali 1:1. Sprawdź stan śledzenia i odczytaj błąd położenia w cm. Korzystasz z symulacji na komputerze; nie instaluj aplikacji na telefonie.
 
-## Spis treści
+### 2. Porównaj warunki i wyjaśnij (3.5–4.0)
 
-- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
-- [Przygotowanie](#przygotowanie)
-- [Zadania krok po kroku](#zadania-krok-po-kroku)
-  - [3.0: Śledzenie i płaszczyzny](#30-śledzenie-i-płaszczyzny)
-  - [3.5: Rzutowanie promienia i skala 1:1](#35-rzutowanie-promienia-i-skala-11)
-  - [4.0: Kotwica i dryf](#40-kotwica-i-dryf)
-  - [4.5: Rejestracja dwupunktowa](#45-rejestracja-dwupunktowa)
-  - [5.0: Kontrolowany błąd](#50-kontrolowany-błąd)
-- [Zakończenie laboratorium](#zakończenie-laboratorium)
-- [Materiały dydaktyczne](#materiały-dydaktyczne)
+Uruchom kolejno przygotowane warunki: powierzchnia z wieloma cechami i powierzchnia z małą liczbą cech. W obu zachowaj ten sam punkt odniesienia, tor kamery i model. Zbierz po trzy odczyty błędu w cm i porównaj ich rozrzut (3.5). W jednym wniosku wyjaśnij różnicę między stałym przesunięciem a niestabilnością modelu (4.0).
 
+### 3. Dobierz warunek i sprawdź powrót (4.5–5.0)
 
-## Szybki wybór ścieżki
-- **Nie uruchomiłem jeszcze Unity:** [instalacja Unity](../../Documentation~/Reference/OS_SETUP.md#unity-nie-jest-zainstalowane).
-- **Mam telefon obsługujący ARCore:** [konfiguracja Android i ADB](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr), a potem [śledzenie i płaszczyzny](#30-śledzenie-i-płaszczyzny).
-- **Nie mam odpowiedniego telefonu lub kabla:** rozpocznij symulację/replay i analizę ograniczeń, następnie wróć do [zadań laboratorium](#zadania-krok-po-kroku).
-- **Pracuję na Ubuntu:** [narzędzia Android i USB na Ubuntu](../../Documentation~/Reference/OS_SETUP.md#ubuntu); **na Windows:** [tutaj](../../Documentation~/Reference/OS_SETUP.md#windows).
+Wybierz warunek śledzenia, który lepiej utrzymuje model przy referencji, i potwierdź wybór ponowną próbą (4.5). Uruchom przygotowaną utratę śledzenia i wznowienie. Sprawdź położenie po powrocie oraz czas odzyskania. Dopisz do tego samego wniosku, czego symulacja nie mówi o dokładności rzeczywistego telefonu (5.0).
 
+## Co zrobić na ocenę
 
-Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 3. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
+| Poziom | Dowód z tego samego doświadczenia |
+|---|---|
+| 3.0 | Umieść model przy referencji w REAL/SIM |
+| 3.5 | Porównaj dwa warunki obserwacji/trackingu |
+| 4.0 | Wyjaśnij różnicę błędu pozycji |
+| 4.5 | Dobierz położenie lub warunki śledzenia zmniejszające błąd |
+| 5.0 | Ponów próbę po utracie/relocalizacji i wskaż niepewność; nie mieszaj SIM z REAL |
 
-## Przygotowanie
+Interpretację i ocenę końcową zatwierdza prowadzący.
 
-1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 03.
-2. Użyj **Zainstaluj / napraw zależności**.
-3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
-4. Użyj **Utwórz / napraw aktywną scenę**.
-5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Zainstaluj AR Foundation/ARCore oraz wymagane próbki.
-7. Utwórz scenę Lab03 i zweryfikuj AR Session, XR Origin i wykrywanie płaszczyzn.
-8. Przygotuj fizyczne punkty odniesienia oraz model o znanych wymiarach.
+## Co sprawdzić w zapisanym wyniku
 
-## Zadania krok po kroku
+| Wielkość | Jednostka | Kontrola |
+|---|---|---|
+| Błąd translacji względem referencji | cm | Tylko przy znanym punkcie odniesienia. |
+| Rozrzut odczytów i utraty śledzenia | cm / liczba | Rozdziel błąd systematyczny i zmienność. |
+| Czas ponownej lokalizacji | s | Brak odzyskania to nie zero sekund. |
 
-### 3.0: Śledzenie i płaszczyzny
+**Warunki porównania:** Ta sama referencja, model, skala, tor obserwacji i liczba odczytów. W symulacji zachowaj profil i seed.
 
-1. Uruchom aplikację na urządzeniu i zmierz czas do SessionTracking.
-2. Zmierz osobno czas do pierwszej użytecznej płaszczyzny.
-3. Dla każdego warunku A/B/C wykonaj trzy próby i zapisz oba czasy dla każdej próby; zapisuj też notTrackingReason.
-4. Opisz warunki otoczenia i ograniczenia pomiaru.
+**Nieważna próba:** Oznacz próbę jako nieważną przy braku referencji lub śledzenia. Nie mieszaj SIM_AR z REAL_AR w jednej serii.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Jeden wniosek
 
-### 3.5: Rzutowanie promienia i skala 1:1
+Warunek ___ zmienił ___; po utracie śledzenia ___, a wynik nie dowodzi ___.
 
-1. Ustaw model w jednostkach metrycznych i zachowaj skalę 1:1.
-2. Umieszczaj model wyłącznie po poprawnym rzucie promienia do płaszczyzny.
-3. Dla A/B/C wykonaj po 10 prób i policz poprawne trafienia.
-4. Zmierz medianę błędu pozycjonowania bez korygowania go skalą modelu.
+## Oddanie całego bloku
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+1. Blok 02: Lab 03 i Lab 04. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Na końcu bloku wyeksportuj lab03.json i lab04.json. Zaznacz oba pliki w menedżerze plików i utwórz ZIP WiRR-blok-02-G1-INDEKS.zip. Wstaw własną grupę i indeks. W parze wpisz oba indeksy rozdzielone łącznikiem. Nie zmieniaj tylko rozszerzenia.
+3. Wyślij ZIP na m.pomianek@prz.edu.pl; temat: WiRR blok 02, grupa, indeksy. W parze wysyła jedna osoba za obie. Nie dołączaj projektu Unity, slajdów ani sprawozdania.
+4. Brak eksportu: uzupełnij WiRR-blok-02-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP, na ten sam adres i z tym samym tematem. Bez Internetu zachowaj plik i wyślij po odzyskaniu połączenia. Zachowaj kopię zgłoszenia.
 
-### 4.0: Kotwica i dryf
+## Gdy stanowisko nie działa
 
-1. Utwórz kotwicę przy fizycznym punkcie referencyjnym.
-2. Przejdź zadaną ścieżkę, wróć i zmierz odchylenie od znacznika.
-3. Wykonaj trzy powtórzenia wariantu bazowego oraz serię A/B/C, zapisując stan śledzenia.
-4. Policz medianę dryfu i określ charakter błędu.
+Po 5 minutach bez możliwości rozpoczęcia zgłoś prowadzącemu pierwszy błąd. Przejdź z jego pomocą do przygotowanego stanowiska desktop. Nie instaluj SDK, nie buduj APK ani nie pisz brakującego modułu. Zapisz rzeczywisty tryb i wykonane etapy; brakującej liczby nie zastępuj zerem.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+Telefon i gogle nie są wymagane do żadnego progu. Nie zmieniaj komputera ani konfiguracji w trakcie porównania.
 
-### 4.5: Rejestracja dwupunktowa
+## Jak czytać schemat
 
-1. Wyznacz fizyczne punkty O i X oraz niezależnie zmierz OX.
-2. Zarejestruj układ na O i X i zmierz e1, e2, e3.
-3. Powtórz pełną rejestrację trzy razy; policz e_med i e_max.
-4. Wskaż główne źródło niepewności i sposób jego ograniczenia.
+**Błąd i stabilność:** Mały rozrzut oznacza powtarzalność odczytów; nie wyklucza stałego przesunięcia względem referencji.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+**Znane odniesienie:** W symulacji pozycja referencyjna jest znana. W realnym AR bez niezależnej referencji oceniaj stabilność, nie deklaruj bezwzględnej dokładności.
 
-### 5.0: Kontrolowany błąd
+**Utrata śledzenia:** Po ponownej lokalizacji sprawdź zarówno zmianę położenia, jak i rozrzut. Brak odczytu nie jest zerowym błędem.
 
-1. Wykonaj trzy pomiary wariantu bazowego.
-2. Wprowadź błąd v5 i zapisz H1/H2.
-3. Wykonaj test rozstrzygający i trzy pomiary ze stanem błędnym.
-4. Napraw minimalnie, wykonaj trzy pomiary i sprawdź powrót e_med do poziomu wariantu bazowego.
-
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
-
-## Zakończenie laboratorium
-
-1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
-2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
-4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
-
-## Materiały dydaktyczne
-Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
-
-1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
-2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab03/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
-3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
-
-Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
-
-`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
-
+[Pobierz szablon awaryjny całego bloku](../../Documentation~/WiRR2/WiRR-blok-02-raport-awaryjny.md)

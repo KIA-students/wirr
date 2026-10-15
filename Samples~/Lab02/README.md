@@ -1,132 +1,76 @@
-# Lab 02 — Interakcja i manipulacja XR
+# Lab 02: Chwycić, nie kliknąć: ergonomia manipulacji
 
-## Obowiązkowe laboratorium: jedno doświadczenie (około 35 minut)
+**Blok 01, część 2 z 2** · 90 minut · DESKTOP_SIM · 2.0.0-draft.3
 
-**Pytanie:** co sprawia, że użytkownik od razu rozumie, jak przenieść wirtualny przedmiot do celu?
+**Pytanie:** Kiedy chwyt bezpośredni ustępuje wskazywaniu promieniem?
 
-1. Otwórz **WiRR → Misje i odkrycia → Start: Lab 02**. Wykorzystaj scenę i elementy interakcji, które są już przygotowane na stanowisku.
-2. Wskaż obiekt do przeniesienia, cel oraz sygnał potwierdzający udaną akcję. Przenieś obiekt **trzy razy**. Zapisz liczbę pomyłek lub czas każdej próby, jeśli pomiar jest dostępny.
-3. Zmień **jeden** element informacji zwrotnej, np. kolor celu albo podświetlenie poprawnego miejsca.
-4. Powtórz trzy próby. Porównaj, czy po zmianie łatwiej rozpoznać prawidłową akcję.
-5. Napisz jeden wniosek o użyteczności i jedną propozycję ulepszenia.
+## Co będziesz badać
 
-**Co oddać:** jeden raport **Lab 02** z indeksem, grupą, krótkim opisem zmiany, wynikami **3 prób przed i 3 po zmianie**, jeśli można je zaobserwować lub zmierzyć, oraz jednym wnioskiem. Raport eksportuj lokalnie i prześlij kanałem wskazanym przez prowadzącego. Nie wysyłaj całego projektu Unity.
+Direct oznacza interakcję w bezpośrednim zasięgu interaktora, a Ray wskazanie promieniem. Socket jest gniazdem potwierdzającym poprawne umieszczenie obiektu. Porównujemy czas ukończenia razem z błędami: szybsza, lecz zawodna technika nie musi być lepsza. Na PC ruch myszy lub symulatora opisuje tę metodę wejścia, a nie naturalny chwyt dłoni w goglach.
 
-**Zaliczenie podstawowe:** działająca albo przedstawiona w scenie demonstracyjnej interakcja, porównanie przed i po zmianie oraz uzasadniony wniosek. Konfiguracja XRI, Quest 3, teleportacja i SSQ nie są obowiązkowe w tej ścieżce.
+## Jedno doświadczenie, trzy działania
 
-**Gdy nie działa XRI lub nie ma gogli:** wykonaj ćwiczenie na demonstratorze PC dostępnym na stanowisku. Jeżeli demonstrator nie pozwala na interakcję, opisz projekt i wykonaj obserwację udostępnionego pokazu, wyraźnie zaznaczając brak własnych pomiarów. Sposób zaliczenia potwierdza prowadzący.
+Zacznij od 3.0. Kolejne poziomy rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie i przejść do drugiego laboratorium bloku. Pracuj solo lub w parze; w parze zamieniajcie role operatora i obserwatora.
 
-Dalsze sekcje dokumentują rozbudowane warianty techniczne. **Nie są obowiązkową listą zadań laboratoryjnych.**
+### 1. Wykonaj chwyt bezpośredni (3.0)
 
+Otwórz przygotowaną scenę manipulacji. Wykonaj jedną próbę treningową: chwyć obiekt metodą Direct i umieść go w oznaczonym gnieździe. Następnie wykonaj pięć rejestrowanych prób Direct. Po każdej próbie użyj przygotowanego resetu położenia. Sprawdź zapis czasu, powodzeń i błędów. Nie usuwaj nieudanych prób.
 
-## Spis treści
+### 2. Porównaj promień i wyjaśnij (3.5–4.0)
 
-- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
-- [Przygotowanie](#przygotowanie)
-- [Zadania krok po kroku](#zadania-krok-po-kroku)
-  - [3.0: Chwyt, socket i ray](#30-chwyt-socket-i-ray)
-  - [3.5: UI i feedback](#35-ui-i-feedback)
-  - [4.0: Lokomocja](#40-lokomocja)
-  - [4.5: Scenariusz i diagnostyka](#45-scenariusz-i-diagnostyka)
-  - [5.0: Quest 3 i SSQ](#50-quest-3-i-ssq)
-- [Zakończenie laboratorium](#zakończenie-laboratorium)
-- [Materiały dydaktyczne](#materiały-dydaktyczne)
-- [Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia](#dodatkowe-dobrowolne-doświadczenie-komfort-vr-i-głębia)
-- [Wyzwanie dodatkowe: operator potrafi bezpiecznie przerwać](#wyzwanie-dodatkowe-operator-potrafi-bezpiecznie-przerwać)
+Przełącz technikę na Ray. Wykonaj pięć prób z tym samym obiektem, gniazdem i dystansem. Porównaj czas oraz błędy Direct/Ray (3.5). W jednym polu wniosku wskaż technikę lepszą w tym zadaniu i uzasadnij wybór wynikami (4.0). Po pomiarze wypróbuj przygotowaną teleportację; jej wyniku nie dopisuj do serii Direct/Ray.
 
-## Szybki wybór ścieżki
-- **Nie mam gotowej sceny Lab 01:** [wróć do pierwszej sceny](../Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
-- **Mam działający projekt:** [od razu przejdź do interakcji](#zadania-krok-po-kroku).
-- **Brakuje XRI:** zainstaluj XR Interaction Toolkit i wymagane próbki, zobacz [warunki startu](../../Documentation~/Reference/OS_SETUP.md#pakiety-xr-tylko-gdy-potrzebne).
-- **Chcę przejść do rzeczywistego sprzętu:** najpierw [uruchomienie urządzeń](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr), potem [Quest 3 i SSQ](#50-quest-3-i-ssq).
-- **Chcę poznać ograniczenia percepcji:** [Komfort XR](../../Documentation~/Reference/COMFORT_STUDIES.md).
+### 3. Ulepsz i sprawdź drugi dystans (4.5–5.0)
 
+Zmień wyłącznie podświetlenie gniazda: wybierz ustawienie, które według ciebie ułatwi rozpoznanie celu. Powtórz próbę tą samą techniką i porównaj wynik przed/po (4.5). Następnie przełącz cel na drugi przygotowany dystans, pozostawiając podświetlenie i technikę bez zmian. Dopisz do tego samego wniosku, czy poprawka nadal pomaga (5.0).
 
-Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 2. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Misje i odkrycia`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
+## Co zrobić na ocenę
 
-## Przygotowanie
+| Poziom | Dowód z tego samego doświadczenia |
+|---|---|
+| 3.0 | Umieść obiekt w gnieździe metodą Direct |
+| 3.5 | Powtórz tę samą czynność metodą Ray |
+| 4.0 | Wyjaśnij różnicę czasu i błędów |
+| 4.5 | Wybierz ustawienie interakcji lub HUD, poprawiające skuteczność |
+| 5.0 | Przetestuj przy innym dystansie celu; wskaż ergonomiczny kompromis |
 
-1. Po imporcie pakietu poczekaj na zakończenie kompilacji. W **Profilu WiRR** wpisz numer indeksu, wybierz grupę z planu i kliknij **Zapisz profil i przypisz grupę**. Dla grupy 2 wybierz **G2**. Profil można też otworzyć przez **WiRR → Student → Profil i grupa**.
-2. W **WiRR → Misje i odkrycia** wybierz blok I i **Start: Lab 02**. Ten przycisk przygotowuje scenę PC; nie oznacza ukończenia konfiguracji XRI.
-3. Do obowiązkowego chwytu, gniazda i promienia zainstaluj zależności XRI oraz zaimportuj **Starter Assets**, **XR Interaction Simulator** i próbkę WiRR Lab 02. Użyj panelu zaawansowanego, potem **Sprawdź konfigurację laboratorium**.
-4. Zachowaj działającą scenę Lab 01. W Lab 02 zapisz scenę interakcji w `Assets/WiRR/Lab02/Scenes`. Narzędzie tworzy `Lab02.unity`; własną kopię możesz zapisać jako `Lab02_Interaction.unity`. Zweryfikuj jeden XR Origin, jedną kamerę i XR Interaction Manager.
-5. Kliknij **Otwórz raport: Lab 02**. Sprawdź numer laboratorium, indeks, grupę i wyliczone warianty v1–v5. Przygotuj stanowisko z obiektem chwytalnym, gniazdem, promieniem, UI i obszarem teleportacji.
+Interpretację i ocenę końcową zatwierdza prowadzący.
 
-## Zadania krok po kroku
+## Co sprawdzić w zapisanym wyniku
 
-### 3.0: Chwyt, socket i ray
+| Wielkość | Jednostka | Kontrola |
+|---|---|---|
+| Czas cyklu | s | Od rozpoczęcia działania do poprawnego osadzenia. |
+| Udane osadzenia i pomyłki | liczba | Błąd pozostaje zapisany po resecie. |
+| Technika, dystans, ustawienie | opis / m | Rozdziel wpływ techniki i geometrii zadania. |
 
-1. Skonfiguruj XR Grab Interactable na obiekcie chwytalnym.
-2. Dodaj XR Socket Interactor i ogranicz go do właściwego obiektu/warstwy.
-3. Skonfiguruj XR Ray Interactor i potwierdź niezależne działanie chwytu, socketu i ray.
-4. Wykonaj po pięć prób w każdym warunku własnego wariantu (A/B, a C tylko gdy występuje w tabeli instrukcji); zapisuj czas i liczbę błędów.
+**Warunki porównania:** Ten sam obiekt, rozmiar i pozycja celu, dystans oraz sposób rozpoczęcia próby. Trening oddziel od pomiaru.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+**Nieważna próba:** Nie porównuj serii, jeśli zmienił się cel, pomiar obejmuje pauzę albo licznik resetuje błędy. Oznacz taką serię i powtórz.
 
-### 3.5: UI i feedback
+## Jeden wniosek
 
-1. Utwórz panel World Space i skonfiguruj obsługę UI dla XR.
-2. Dodaj co najmniej dwa rodzaje feedbacku: wizualny, dźwiękowy lub haptyczny.
-3. Sprawdź stany `Hover`/`Select` oraz zakończenie interakcji; usuń wielokrotne aktywacje jednego działania.
-4. Wykonaj po pięć prób w każdym warunku własnego wariantu (A/B, a C tylko gdy występuje w tabeli instrukcji) i zapisz czas oraz błędne aktywacje.
+Technika ___ pomaga przy ___; koszt lub ograniczenie tej decyzji to ___.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Oddanie całego bloku
 
-### 4.0: Lokomocja
+1. Blok 01: Lab 01 i Lab 02. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Na końcu bloku wyeksportuj lab01.json i lab02.json. Zaznacz oba pliki w menedżerze plików i utwórz ZIP WiRR-blok-01-G1-INDEKS.zip. Wstaw własną grupę i indeks. W parze wpisz oba indeksy rozdzielone łącznikiem. Nie zmieniaj tylko rozszerzenia.
+3. Wyślij ZIP na m.pomianek@prz.edu.pl; temat: WiRR blok 01, grupa, indeksy. W parze wysyła jedna osoba za obie. Nie dołączaj projektu Unity, slajdów ani sprawozdania.
+4. Brak eksportu: uzupełnij WiRR-blok-01-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP, na ten sam adres i z tym samym tematem. Bez Internetu zachowaj plik i wyślij po odzyskaniu połączenia. Zachowaj kopię zgłoszenia.
 
-1. Skonfiguruj teleportację wyłącznie na dozwolone powierzchnie.
-2. Sprawdź reticle, orientację po teleportacji i kolizję użytkownika z otoczeniem.
-3. Wykonaj po pięć prób w każdym warunku własnego wariantu (A/B, a C tylko gdy występuje w tabeli instrukcji), zapisując czas oraz błędy/korekty.
-4. Zapisz, które elementy konfiguracji najbardziej wpływają na przewidywalność i komfort.
+## Gdy stanowisko nie działa
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+Po 5 minutach bez możliwości rozpoczęcia zgłoś prowadzącemu pierwszy błąd. Przejdź z jego pomocą do przygotowanego stanowiska desktop. Nie instaluj SDK, nie buduj APK ani nie pisz brakującego modułu. Zapisz rzeczywisty tryb i wykonane etapy; brakującej liczby nie zastępuj zerem.
 
-### 4.5: Scenariusz i diagnostyka
+Telefon i gogle nie są wymagane do żadnego progu. Nie zmieniaj komputera ani konfiguracji w trakcie porównania.
 
-1. Połącz lokomocję, wskazanie, chwyt, socket i UI w jeden scenariusz.
-2. Wykonaj pięć prób i rejestruj czas, upuszczenia, błędne aktywacje i nieudane teleportacje.
-3. Wprowadź kontrolowany problem v4, zapisz H1/H2 i wykonaj test rozstrzygający.
-4. Zastosuj minimalną poprawkę i powtórz scenariusz, sprawdzając regresje.
+## Jak czytać schemat
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+**To samo zadanie:** Obiekt, gniazdo i dystans muszą być takie same w serii Direct/Ray. Zmiana techniki nie może zmieniać trudności celu.
 
-### 5.0: Quest 3 i SSQ
+**Osobno trening:** Zachowaj kolejność serii i oddziel rozgrzewkę. Poprawa z czasem może wynikać także z uczenia się.
 
-1. Wypełnij własny SSQ PRE przed ekspozycją.
-2. Uruchom scenariusz samodzielnej aplikacji na Quest 3 i zweryfikuj interakcję oraz lokomocję.
-3. Wykonaj dla własnego wariantu v5 po trzy próby w każdym wymaganym warunku, zapisując czas, błędy i komfort 0–10.
-4. Wypełnij SSQ POST i sformułuj wniosek ograniczony do tej sesji.
+**Bez uogólnienia na HMD:** Sterowanie PC ilustruje technikę wejścia. Nie mierzy naturalnego chwytu ręki ani komfortu w goglach.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
-
-## Zakończenie laboratorium
-
-1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego**, wybierz **Lab 02** i sprawdź najwyższy kompletny punkt kontrolny.
-2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
-4. Kliknij **Eksportuj raport lokalnie** dopiero po przejściu walidacji. Otworzy się folder z JSON w `Library/WiRRReports/exports`. Przekaż ten plik kanałem wskazanym przez prowadzącego. Eksport nie oznacza oddania pracy. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
-
-## Materiały dydaktyczne
-Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
-
-1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
-2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab02/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
-3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
-
-Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
-
-`report-template.md` służy do awaryjnego raportu Markdown. Wypełnij formularz Unity albo szablon, zgodnie z kanałem wskazanym przez prowadzącego. Nie przepisuj wyników do obu formatów.
-
-**Postęp:** panel pokazuje zapisaną scenę i lokalny eksport. Stan jest aktualizowany po eksporcie i co około minutę. Opcjonalne menu **WiRR → Student → Włącz automatyczne wysyłanie na GitHub** synchronizuje techniczny postęp, a nie pełny raport ani ocenę.
-
-
-## Dodatkowe, dobrowolne doświadczenie: komfort VR i głębia
-
-Wybierz **WiRR → Komfort XR → Utwórz 3 prefaby: obserwacja i watchdog**. Powstaną prawdziwe prefaby Unity z łagodnym ruchem wskazówek wizualnych (maks. 8 s) i krótkim porównaniem wirtualnej głębi (maks. 10 s). Ich zadaniem nie jest wywoływanie nudności, lecz nauka projektowania komfortowych scen.
-
-Instrukcja pełna: **Documentation~/Reference/COMFORT_STUDIES.md**. Przy pracy w goglach potrzebny jest świadomy ochotnik, osoba obserwująca i możliwość natychmiastowego przerwania. Reszta grupy może wykonać równoważną analizę na monitorze. **Nie przyznaje się punktów za fizjologiczną odporność ani wystąpienie objawów.**
-
-## Wyzwanie dodatkowe: operator potrafi bezpiecznie przerwać
-
-Po zrealizowaniu podstawowego doświadczenia sprawdź [automatyczną detekcję zdjęcia gogli, utraty śledzenia i skoku danych](../../Documentation~/Reference/XR_SAFETY_WATCHDOG.md). Możesz wykonać do 10 krótkich prób technicznych, także wyłącznie na PC. **Nie wykonuj nagłych ruchów głową dla punktów.** Punktuje się poprawność prototypu i interpretacji, a nie podatność na objawy.
-
+[Pobierz szablon awaryjny całego bloku](../../Documentation~/WiRR2/WiRR-blok-01-raport-awaryjny.md)
