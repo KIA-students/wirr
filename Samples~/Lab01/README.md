@@ -1,177 +1,77 @@
-# Lab 01 — Środowisko XR i audyt urządzeń
+# Lab 01: Rzeczywistość ma jednostki, a GPU ograniczenia
 
-## Obowiązkowe laboratorium: jedna ścieżka (około 35 minut)
+**Blok 01, część 1 z 2** · 90 minut · DESKTOP_SIM · 2.0.0-draft.3
 
-**Pytanie:** czy zmiana skali i złożoności sceny wpływa na to, co widzisz i jak płynnie działa środowisko?
+**Pytanie:** Czy większa liczba obiektów zawsze oznacza mniej płynny obraz?
 
-1. Otwórz działający projekt Unity i scenę Lab 01 przez **WiRR → Misje i odkrycia → Start: Lab 01**. Nie instaluj teraz XR, Android Studio ani ROS 2.
-2. Ustaw jeden sześcian przed kamerą. Porównaj jego skalę **0,5**, **1** i **2** przy tej samej pozycji kamery. Opisz jedną zauważoną różnicę.
-3. Włącz Play i zaobserwuj ruch sześcianu z Rigidbody. Wskaż, co spowodowało ruch i zatrzymanie.
-4. W **Window → Analysis → Profiler** porównaj czas klatki przed dodaniem i po dodaniu około 20 sześcianów. Zapisz po **trzy odczyty** z każdego stanu, w milisekundach, jeśli narzędzie je udostępnia.
-5. Zapisz scenę i jeden wniosek: która zmiana miała największy efekt i dlaczego?
+## Co będziesz badać
 
-**Co oddać:** jeden raport **Lab 01** z numerem indeksu, grupą, obserwacją skali, sześcioma rzeczywiście zmierzonymi odczytami (lub oznaczeniem „nie zmierzono” wraz z przyczyną) i jednym wnioskiem. Wyeksportuj raport lokalnie z panelu WiRR i przekaż kanałem wskazanym przez prowadzącego. Zapis sceny pozostaje w projekcie i nie musi być osobno wysyłany.
+Skala określa rozmiar obiektu w świecie, a nie liczbę pikseli na ekranie. Obrót kamery zmienia kierunek patrzenia (3DoF); translacja dodaje zmianę położenia (6DoF) i paralaksę. Czas klatki podajemy w ms. Większy czas oznacza wolniejsze odświeżanie. Mediana opisuje typową klatkę, a p95 pozwala zauważyć wolniejsze klatki. Sam spadek FPS nie rozstrzyga, czy ograniczeniem jest CPU, GPU czy synchronizacja.
 
-**Zaliczenie podstawowe:** wykonane trzy eksperymenty, poprawnie zapisane obserwacje i sensowny wniosek. **Gogle, Quest, zaawansowane profile GPU i dodatkowe etapy ocen 3.5–5.0 nie są wymagane** w tej ścieżce.
+## Jedno doświadczenie, trzy działania
 
-**Gdy sprzęt nie działa:** użyj działającej sceny na PC. Nie wpisuj wymyślonych liczb. Jeżeli nie działa także Profiler, zapisz obserwację jakościową i przyczynę. Taki przypadek rozstrzyga prowadzący.
+Zacznij od 3.0. Kolejne poziomy rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie i przejść do drugiego laboratorium bloku. Pracuj solo lub w parze; w parze zamieniajcie role operatora i obserwatora.
 
-Pozostała część pliku opisuje materiały rozszerzające i starszą, bardziej rozbudowaną procedurę. **Nie jest listą obowiązkowych zadań ani warunkiem zaliczenia podstawowego.**
+### 1. Uruchom scenę i pomiar (3.0)
 
+Otwórz przygotowaną Stację XR. Obejrzyj obiekty 0,1 m, 1 m i 10 m. Obróć kamerę bez przesuwania, a następnie przesuń ją w bok. Ustaw 10 obiektów, uruchom pomiar i poczekaj na koniec rozgrzewki oraz zapisu. Sprawdź, czy wynik zawiera medianę i p95 czasu klatki w ms. Na tym etapie możesz zakończyć pracę na 3.0.
 
-## Spis treści
+### 2. Porównaj i wyjaśnij (3.5–4.0)
 
-- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
-- [Konto Unity: nie potrzebujesz wspólnego loginu](#konto-unity-nie-potrzebujesz-wspólnego-loginu)
-- [Pierwsze 10 minut: eksperyment zamiast instalatora](#pierwsze-10-minut-eksperyment-zamiast-instalatora)
-- [Przygotowanie dalszych eksperymentów](#przygotowanie-dalszych-eksperymentów)
-- [Graf zależności i diagnostyka scen](#graf-zależności-i-diagnostyka-scen)
-- [Zadania krok po kroku](#zadania-krok-po-kroku)
-  - [3.0: Pomiar bazowy PC](#30-pomiar-bazowy-pc)
-  - [3.5: Obciążenie CPU i GC](#35-obciążenie-cpu-i-gc)
-  - [4.0: Koszt renderowania](#40-koszt-renderowania)
-  - [4.5: Koszt fizyki](#45-koszt-fizyki)
-  - [5.0: Meta Quest 3](#50-meta-quest-3)
-- [Zakończenie laboratorium](#zakończenie-laboratorium)
-- [Materiały dydaktyczne](#materiały-dydaktyczne)
+Zmień liczbę obiektów z 10 na 100 i uruchom drugi pomiar. Zachowaj tę samą trasę kamery, rozdzielczość, cienie i długość pomiaru. Porównaj medianę i p95 obu zapisów (3.5). W jednym polu wniosku napisz, jak zmienił się czas klatki w twoich danych (4.0). Brak zauważalnej różnicy także jest wynikiem.
 
+### 3. Ulepsz i sprawdź ograniczenie (4.5–5.0)
 
-## Szybki wybór ścieżki
-- **Nie mam Unity Hub lub edytora:** przejdź do [instalacji Unity](../../Documentation~/Reference/OS_SETUP.md#unity-nie-jest-zainstalowane), a następnie wróć do [pierwszego eksperymentu](#pierwsze-10-minut-eksperyment-zamiast-instalatora).
-- **Unity jest już zainstalowane:** od razu wykonaj [pierwsze 10 minut](#pierwsze-10-minut-eksperyment-zamiast-instalatora). Nie reinstaluj.
-- **Nie mam konta/licencji Unity:** wybierz [odpowiedni wariant licencji](../../Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md#wybierz-jedną-z-trzech-ścieżek).
-- **Mam działające konto i licencję:** pomiń formalności i przejdź do [pierwszych 10 minut](#pierwsze-10-minut-eksperyment-zamiast-instalatora).
-- **Ubuntu:** [instrukcja instalacji i diagnostyka Ubuntu](../../Documentation~/Reference/OS_SETUP.md#ubuntu).
-- **Windows:** [instrukcja instalacji i diagnostyka Windows](../../Documentation~/Reference/OS_SETUP.md#windows).
-- **Projekt działa, chcę więcej:** [zaawansowane eksperymenty](#zadania-krok-po-kroku) albo [komfort XR](../../Documentation~/Reference/COMFORT_STUDIES.md).
+Dobierz liczbę obiektów do budżetu klatki wyświetlonego na stanowisku. Zmieniaj najpierw samą liczbę obiektów, a ustawienie cieni sprawdź w osobnej próbie. Zachowaj wynik przed i po zmianie (4.5). W wybranej konfiguracji włącz przygotowane obciążenie fizyki, ponów pomiar i dopisz do tego samego wniosku, kiedy konfiguracja przestaje spełniać budżet (5.0).
 
+## Co zrobić na ocenę
 
-## Konto Unity: nie potrzebujesz wspólnego loginu
+| Poziom | Dowód z tego samego doświadczenia |
+|---|---|
+| 3.0 | Włącz pomiar sceny bazowej i obserwuj 3 skale |
+| 3.5 | Zmierz 10 i 100 obiektów |
+| 4.0 | Wyjaśnij związek liczby obiektów z frame time w swoich danych |
+| 4.5 | Dobierz obciążenie i cienie, aby utrzymać budżet klatki |
+| 5.0 | Sprawdź dodatkowy warunek fizyki i wskaż ograniczenie porównania |
 
-Na komputerze uczelnianym z **aktywną Unity Education Grant License** student może pracować bez indywidualnego logowania. Stanowisko musi wcześniej skonfigurować administrator. **Nie udostępniamy loginu i hasła wspólnego konta Unity.** Na własnym komputerze użyj swojego Unity ID i bezpłatnej licencji Personal; darmowy Student Plan jest rozszerzeniem opcjonalnym.
+Interpretację i ocenę końcową zatwierdza prowadzący.
 
-Przewodnik z krokami i korzyściami dla studentów: [Lab 01: Unity ID i licencje](https://github.com/KIA-students/wirr/blob/main/Documentation~/Reference/UNITY_ACCESS_AND_LICENSES.md). Jego aktualizacja jest przygotowywana w pakiecie roboczym i będzie dostępna publicznie po wydaniu.
+## Co sprawdzić w zapisanym wyniku
 
-
-Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 1. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
-
-## Pierwsze 10 minut: eksperyment zamiast instalatora
-
-**Cel pierwszego doświadczenia:** sprawdzić, jak powstaje obraz sceny 3D, co oznacza 1 metr w Unity i jak zmiana jednego parametru wpływa na wynik.
-
-1. Otwórz gotowy projekt URP z pracowni albo samodzielnie utworzony projekt Unity. **Do pierwszego testu nie instaluj AR Foundation, ROS 2, Meta SDK ani Android Studio.**
-2. Otwórz **WiRR → Misje i odkrycia (4 bloki) → Start: Lab 01**. Jeżeli nie ma jeszcze tej wersji, otwórz zwykłą scenę 3D.
-3. Dodaj sześcian do sceny w odległości około dwóch metrów od kamery i sprawdź w Play, jak wygląda przy skali 0,5 m, 1 m i 2 m.
-4. Porównaj to ze swoją intuicją dotyczącą odległości. Zastanów się, dlaczego błędna skala w VR utrudnia pracę operatora urządzenia.
-5. Otwórz **Window → Analysis → Profiler**. Wykonaj trzy krótkie odczyty czasu klatki przed i po dodaniu np. 20 identycznych sześcianów. Wymień tylko jeden czynnik.
-6. Zapisz scenę. To już jest wartościowy punkt kontrolny. Nie przechodź do instalacji XR przed zakończeniem pierwszego testu.
-
-**Dla zainteresowanych:** kolejne rozdziały zawierają rozbudowane, oryginalne badania CPU, GPU, GC, fizyki i Quest 3. Są rozszerzeniem po opanowaniu podstaw, a nie listą instalacji wymaganych przed pierwszym Play.
-
-## Przygotowanie dalszych eksperymentów
-
-1. Gdy podstawowy eksperyment działa, otwórz panel zaawansowany `WiRR → Narzędzia kursu` i wybierz Lab 01.
-2. Użyj **Zainstaluj / napraw zależności** dopiero jeśli wybierasz interakcje XR lub rzeczywiste gogle.
-3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
-4. Użyj **Utwórz / napraw aktywną scenę**.
-5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Utwórz lub napraw scenę Lab01, dodaj sondę metryk i uruchom walidator.
-7. Przed pomiarem wyłącz zbędne aplikacje i nie zmieniaj kilku parametrów eksperymentu jednocześnie.
-
-## Graf zależności i diagnostyka scen
-
-**Nie instaluj wszystkiego od razu.** Pierwsze Play w Lab 01 działa w zwykłej scenie URP. Pakiet WiRR deklaruje w `package.json` zależność od `com.unity.inputsystem`, natomiast XRI, OpenXR i AR Foundation zależą od wybranego eksperymentu.
-
-```mermaid
-flowchart TD
-    A["Unity Hub + Unity 6000.6.x"] --> B["Projekt Universal 3D (URP)"]
-    G["Git (import z repozytorium)"] --> C["Pakiet WiRR przez UPM"]
-    B --> C
-    C --> D["Input System (manifest WiRR)"]
-    D --> E["Lab 01: scena PC, Play, Profiler"]
-    E --> F["XRI + Starter Assets + XR Interaction Simulator"]
-    F --> H["Lab 02: grab, ray, socket, teleportacja"]
-    H --> I["OpenXR dla Android + Android Build Support"]
-    I --> J["SDK / NDK / OpenJDK + ADB + Quest 3"]
-    E --> K["AR Foundation + ARCore XR Plugin"]
-    K --> L["Telefon ARCore + autoryzacja ADB"]
-```
-
-Strzałki pokazują **kolejność konfiguracji**, nie wszystkie bezpośrednie zależności UPM. Meta Horizon Link to osobny wariant PC VR na Windows, nie warunek buildu standalone Quest. Edytor kodu jest przydatny do skryptów, ale nie jest warunkiem pierwszego Play.
-
-| Co uruchamiasz | Niezbędne dodatki | Jak potwierdzić |
+| Wielkość | Jednostka | Kontrola |
 |---|---|---|
-| Lab 01, prosta scena PC | URP i import WiRR (Input System z manifestu) | Play bez błędów, Profiler pokazuje klatki |
-| Lab 02, chwyt i teleportacja | XR Interaction Toolkit, Starter Assets, XR Interaction Simulator | XR Origin, XR Interaction Manager, akcje i interaktory działają |
-| Quest 3 standalone | OpenXR dla Android, Android Build Support, SDK/NDK/OpenJDK, ADB | `adb devices -l`, poprawny Build Profile i uruchomienie APK |
-| Lab 03–04 na telefonie | AR Foundation + zgodny ARCore XR Plugin, kompatybilny telefon | Brak błędów Project Validation, działające śledzenie |
+| Czas klatki: mediana, p95 | ms | Porównuj tę samą trasę i tryb Editor/build. |
+| Liczba aktywnych obiektów | liczba | Sprawdź rzeczywisty stan A/B. |
+| Warunki próby | opis | Cienie, fizyka, rozdzielczość i czas zapisu. |
 
-**Gdy scena nie działa:** sprawdź pierwszy błąd w Unity Console → brakujące pakiety w Package Manager → poprawność wersji Unity i importu próbek → `WiRR → Narzędzia kursu → Sprawdź konfigurację laboratorium` → dopiero potem ustawienia OpenXR/ADB urządzenia. Nie naprawiaj wszystkiego naraz; po każdej zmianie wykonaj Play.
+**Warunki porównania:** Ta sama kamera, trasa, rozdzielczość, oświetlenie, czas rozgrzewki i okno pomiaru. VSync i limit FPS muszą pozostać takie same.
 
-Pełna procedura: [Instalacja i diagnostyka Windows/Ubuntu](../../Documentation~/Reference/OS_SETUP.md).
+**Nieważna próba:** Próba jest nieważna, jeśli zmieniła się trasa lub okno pomiaru, scena nie zakończyła rozgrzewki albo zapis nie zawiera poprawnych próbek.
 
-## Zadania krok po kroku
+## Jeden wniosek
 
-### 3.0: Pomiar bazowy PC
+Przy zmianie ___ czas klatki zmienił się ___; porównanie ogranicza ___.
 
-1. Uruchom scenę bez dodatkowego obciążenia i sprawdź stabilność FPS oraz czasu klatki.
-2. Wykonaj trzy próby wariantu bazowego i zapisuj FPS oraz ms/klatkę; do porównań użyj mediany.
-3. Wykonaj wariant v1 z formularza, zmieniając tylko wskazany czynnik.
-4. Porównaj warunek kontrolny z eksperymentalnym i zapisz wniosek.
+## Oddanie całego bloku
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+1. Blok 01: Lab 01 i Lab 02. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Po każdym laboratorium otwórz WiRR > Raporty > Formularz raportu laboratoryjnego. Sprawdź numer labu i kompletność. Kliknij „Zapisz raport lokalnie (bez logowania)”. Unity zapisze JSON i rozpocznie wysyłkę. System automatycznie przekaże zgłoszenie do KIA-students/wirr. Nie zakładaj forka, nie używaj Git ani nie wysyłaj e-maila przy poprawnej wysyłce.
+3. Na końcu bloku sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. Sam zapis lokalny nie oznacza oddania. Przyjęcie przez serwer oznacza oczekiwanie na automatyczne przekazanie do repozytorium, a nie zatwierdzoną ocenę. W parze wystarczą dwa wyniki ze wspólnego stanowiska z oboma indeksami.
+4. Brak potwierdzenia: zachowaj pliki i użyj „Wyślij ponownie zapisany raport”. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś błąd prowadzącemu i awaryjnie wyślij lab01.json i lab02.json w ZIP WiRR-blok-01-G1-INDEKS.zip na m.pomianek@prz.edu.pl; temat: WiRR blok 01, grupa, indeksy. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
+5. Tylko gdy nie działa także eksport JSON, uzupełnij WiRR-blok-01-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP na ten sam adres. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowego sprawozdania.
 
-### 3.5: Obciążenie CPU i GC
+## Gdy stanowisko nie działa
 
-1. Wykonaj CPU-A dla iterationsPerFrame: 0, 10000, 25000, 50000, 100000, 200000, 400000.
-2. Wykonaj CPU-B dla blocksPerFrame: 1, 2, 4, 8, 16, 32; po trzy próby na punkt.
-3. Wykonaj CPU-C dla allocationBytesPerFrame: 0, 1024, 4096, 16384, 65536, 262144; obserwuj GC Alloc.
-4. Zapisz reprezentatywny Main Thread ms i wskaż, kiedy ograniczeniem staje się CPU lub GC.
+Po 5 minutach bez możliwości rozpoczęcia zgłoś prowadzącemu pierwszy błąd. Przejdź z jego pomocą do przygotowanego stanowiska desktop. Nie instaluj SDK, nie buduj APK ani nie pisz brakującego modułu. Zapisz rzeczywisty tryb i wykonane etapy; brakującej liczby nie zastępuj zerem.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+Telefon i gogle nie są wymagane do żadnego progu. Nie zmieniaj komputera ani konfiguracji w trakcie porównania.
 
-### 4.0: Koszt renderowania
+## Jak czytać schemat
 
-1. Wykonaj GPU-A dla 0, 100, 250, 500, 1000, 2000 i 4000 widocznych obiektów.
-2. Wykonaj GPU-B dla 1, 2, 4, 8, 16 i 32 materiałów.
-3. Wykonaj serię Render Scale: 0.60, 0.70, 0.80, 0.90, 1.00, 1.20.
-4. Porównaj FPS z Batches, SetPass i Triangles i wskaż dominujące wąskie gardło.
+**Obrót i translacja:** Zmiana pozycji kamery daje inne przesunięcia obiektów bliskich i dalekich. Nie myl tego z powiększeniem modelu.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+**Budżet jest warunkiem:** Dobierz częstotliwość docelową dla stanowiska. Obliczony czas na klatkę nie jest zmierzonym czasem renderowania.
 
-### 4.5: Koszt fizyki
+**Kontrola porównania:** Porównuj te same fragmenty trasy, tę samą rozdzielczość i okno pomiaru; nie rozstrzygaj CPU/GPU na podstawie samego FPS.
 
-1. Wykonaj PHY-A dla 0, 25, 50, 100, 200, 400 i 800 dynamicznych Rigidbody.
-2. Zapisuj FPS, ms/klatkę i Physics.Processing, nie zmieniając ustawień renderowania.
-3. Wykonaj PHY-C dla Fixed Timestep: 0.0333, 0.0250, 0.0200, 0.0167, 0.0133, 0.0111 s.
-4. Wyjaśnij kompromis między częstotliwością symulacji a kosztem obliczeń.
-
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
-
-### 5.0: Meta Quest 3
-
-1. Sprawdź przez Meta Horizon Link obrót/translację głowy, kontrolery i Select; Link traktuj tylko funkcjonalnie.
-2. Zbuduj samodzielną aplikację na Quest 3 i uruchom ją bez Link.
-3. Wykonaj trzy pomiary samodzielnej aplikacji i zapisz FPS oraz ms/klatkę; zweryfikuj 6DoF.
-4. W tych samych możliwie zbliżonych warunkach wykonaj trzy pomiary na PC, policz mediany dla obu platform i porównaj kierunek oraz skalę efektu.
-
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
-
-## Zakończenie laboratorium
-
-1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
-2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
-4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
-
-## Materiały dydaktyczne
-Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
-
-1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
-2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab01/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
-3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
-
-Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
-
-`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
-
+[Szablon tylko przy awarii eksportu JSON](../../Documentation~/WiRR2/WiRR-blok-01-raport-awaryjny.md).

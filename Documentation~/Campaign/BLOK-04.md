@@ -1,43 +1,17 @@
-# Blok IV: Wynalazca XR. Lab 07 + Lab 08
+# Blok 04: Lab 07 i Lab 08
 
-**Spotkanie 4 z 4.** Sprawdź, czy wcześniejsze demonstratory są wiarygodne, a następnie zaprojektuj własny przypadek użycia XR poza grami.
+Jedna sesja, dwa wyniki, automatyczna wysyłka z Unity. Pracuj solo lub w parze; w parze zamieniajcie role.
 
-## Spis treści
-- [Wybierz wariant](#wybierz-wariant)
-- [Lab 07: testuj, zanim zaufasz](#lab-07-testuj-zanim-zaufasz)
-- [Lab 08: własny demonstrator](#lab-08-własny-demonstrator)
-- [Finał bez zbędnego raportowania](#finał-bez-zbędnego-raportowania)
+1. [Wykonaj Lab 07](../../Samples~/Lab07/README.md) i zapisz raport w Unity.
+2. [Wykonaj Lab 08](../../Samples~/Lab08/README.md) w tym samym projekcie i zapisz drugi raport.
+3. Sprawdź potwierdzenia przyjęcia obu wyników przez serwer.
 
-## Wybierz wariant
+## Przekazanie wyników
 
-- **Masz dowolną działającą scenę z Lab 01–06:** przejdź do [testów Lab 07](../../Samples~/Lab07/README.md#30-kryteria-i-smoke-test).
-- **Nie masz urządzenia XR:** wykonaj [Lab 08 na PC](../../Samples~/Lab08/README.md#pierwsze-pięć-minut-gotowa-scena), z rzeczywistymi wynikami w Unity Editor.
-- **Masz Quest / AR / VITURE:** użyj jednej z [dróg Lab 08](../../Samples~/Lab08/README.md#wybierz-ścieżkę-bez-powtórnej-instalacji), nie wszystkich naraz.
-- **Nie działa import laboratorium:** wróć do [systemu operacyjnego i diagnostyki](../Reference/OS_SETUP.md#najczęstsze-błędy).
+1. Blok 04: Lab 07 i Lab 08. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Po każdym laboratorium otwórz WiRR > Raporty > Formularz raportu laboratoryjnego. Sprawdź numer labu i kompletność. Kliknij „Zapisz raport lokalnie (bez logowania)”. Unity zapisze JSON i rozpocznie wysyłkę. System automatycznie przekaże zgłoszenie do KIA-students/wirr. Nie zakładaj forka, nie używaj Git ani nie wysyłaj e-maila przy poprawnej wysyłce.
+3. Na końcu bloku sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. Sam zapis lokalny nie oznacza oddania. Przyjęcie przez serwer oznacza oczekiwanie na automatyczne przekazanie do repozytorium, a nie zatwierdzoną ocenę. W parze wystarczą dwa wyniki ze wspólnego stanowiska z oboma indeksami.
+4. Brak potwierdzenia: zachowaj pliki i użyj „Wyślij ponownie zapisany raport”. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś błąd prowadzącemu i awaryjnie wyślij lab07.json i lab08.json w ZIP WiRR-blok-04-G1-INDEKS.zip na m.pomianek@prz.edu.pl; temat: WiRR blok 04, grupa, indeksy. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
+5. Tylko gdy nie działa także eksport JSON, uzupełnij WiRR-blok-04-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP na ten sam adres. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowego sprawozdania.
 
-## Lab 07: testuj, zanim zaufasz
-
-1. Zdefiniuj prostą listę: scena uruchamia się, interakcja działa, wartości są aktualne, użytkownik widzi awarię.
-2. Wykonaj krótki smoke test i oznacz każde sprawdzenie jako PASS/FAIL/NV. Brak testu to **NV**, nie PASS.
-3. Zmień jeden element na wadliwy. Czy umiesz wskazać przyczynę i wykonać test regresyjny?
-4. Rozważ wydajność na słabszym sprzęcie, dostępność UI oraz możliwość przerwania działania w VR.
-5. Zapisz jeden zdiagnozowany błąd. To może być ważniejsze niż dodatkowa grafika.
-
-[Pełne Lab 07](../../Samples~/Lab07/README.md#zadania-krok-po-kroku).
-
-## Lab 08: własny demonstrator
-
-1. Otwórz **Start: Lab 08** oraz **WiRR → Lab 08 → Dodaj demonstrator inspekcji**.
-2. Wybierz jeden cel użytkownika i trzy próby bazowe (lub rozwiń własną scenę AR/VR/ROS/VITURE).
-3. Zmień jeden parametr interfejsu, bezpieczeństwa lub geometrii.
-4. Wykonaj trzy porównywalne próby po poprawce, zapisane automatycznie do JSON.
-5. Zaimportuj rzeczywisty JSON do **WiRR Reports (Lab 08)**. Dodaj krótkie uzasadnienie zastosowania.
-6. Zaprezentuj 60–90 sekund działania bez osobnej prezentacji PowerPoint.
-
-[Pełne Lab 08](../../Samples~/Lab08/README.md#pierwsze-pięć-minut-gotowa-scena) oraz [gotowy szablon raportu](../../Samples~/Lab08/report-template.md).
-
-## Finał bez zbędnego raportowania
-
-Jedna karta **blok IV** + scena Lab 07 + prototyp Lab 08 i realne lokalne wyniki. **Ciekawostka:** najbardziej wpływowy wynalazek XR może być prostym wizualnym ostrzeżeniem serwisanta, które ratuje przed kosztownym błędem, zamiast efektownym światem wirtualnym.
-
-Drużynowa Liga XR pozostaje dobrowolna i niezależna od ocen. Pomysły można rozwijać po zajęciach, bez obowiązkowej rejestracji aplikacji w sklepie czy kompilowania ciężkich workflow GitHub Actions.
+[Szablon tylko przy awarii eksportu JSON](../WiRR2/WiRR-blok-04-raport-awaryjny.md).
