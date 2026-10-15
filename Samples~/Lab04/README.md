@@ -1,119 +1,77 @@
-# Lab 04 — Rozumienie sceny i mieszanie rzeczywistości
+# Lab 04: Za ścianą rzeczywistość też obowiązuje
 
-## Obowiązkowe laboratorium: jedna ścieżka (około 35 minut)
+**Blok 02, część 2 z 2** · 90 minut · SIM_AR · 2.0.0-draft.3
 
-**Pytanie badawcze:** Dlaczego obiekt wirtualny czasem wygląda, jakby przenikał przez prawdziwą przeszkodę?
+**Pytanie:** Dlaczego poprawnie narysowany obiekt może być widoczny w złym miejscu?
 
-1. Otwórz gotową scenę Lab 04 lub udostępnioną demonstrację głębi i okluzji.
-2. Obserwuj wirtualny obiekt przed rzeczywistą przeszkodą i za nią. Rozpoznaj, kiedy przeszkoda powinna zasłaniać obiekt.
-3. Porównaj trzy sytuacje: poprawne zasłanianie, brak zasłaniania i przypadek niejednoznaczny.
-4. Zmień jeden warunek demonstracji, jeśli scena to umożliwia (np. okluzję włącz/wyłącz), i opisz zmianę obrazu.
-5. Wyjaśnij jednym zdaniem, dlaczego sama poprawna geometria obiektu nie wystarcza do wiarygodnego AR.
+## Co będziesz badać
 
-**Co oddać:** Jeden raport Lab 04: trzy sytuacje, wskazanie błędu okluzji, opis jednej zmiany i wniosek. Uzupełnij numer indeksu i grupę, wyeksportuj raport lokalnie w panelu WiRR i przekaż go kanałem wskazanym przez prowadzącego. Nie wysyłaj całego projektu Unity.
+Okluzja oznacza zasłanianie obiektu przez bliższą powierzchnię. Test głębi porównuje odległości, a raycast szuka przecięcia promienia z geometrią. Poprawne trafienie promienia nie gwarantuje poprawnej okluzji obrazu. Oświetlenie wpływa na wygląd, lecz nie naprawia błędnej kolejności zasłaniania. W tym doświadczeniu PC korzysta z geometrii i głębi syntetycznej.
 
-**Zaliczenie podstawowe:** wykonanie lub rzetelna analiza doświadczenia, udokumentowane obserwacje i merytoryczny wniosek. Dodatkowe poziomy 3.5–5.0, instalowanie całego stosu XR/ROS i praca z urządzeniem fizycznym nie są obowiązkowe w tej ścieżce.
+## Jedno doświadczenie, trzy działania
 
-**Gdy stanowisko nie działa:** Jeżeli stanowisko nie udostępnia danych głębi, porównaj przygotowane ujęcia lub symulację. Nie deklaruj pomiaru Depth API. Sposób dokumentowania niedostępnej funkcji potwierdza prowadzący.
+Zacznij od 3.0. Kolejne poziomy rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie i przejść do drugiego laboratorium bloku. Pracuj solo lub w parze; w parze zamieniajcie role operatora i obserwatora.
 
-**Dalsze rozdziały** zachowano jako dokumentację rozszerzoną; nie są dodatkową listą obowiązkowych zadań.
+### 1. Znajdź błąd zasłaniania (3.0)
 
+Uruchom przygotowaną scenę SIM_AR z przeszkodą i modelem. Z pierwszego oznaczonego miejsca wskaż obiekt widoczny przez przeszkodę. Następnie obejrzyj przygotowaną etykietę i odpowiedź promienia; wskaż, które z nich są niezgodne z geometrią. Zapisz własne odpowiedzi przed wyświetleniem rozwiązania.
 
-## Spis treści
+### 2. Porównaj okluzję i wyjaśnij (3.5–4.0)
 
-- [Szybki wybór ścieżki](#szybki-wybór-ścieżki)
-- [Przygotowanie](#przygotowanie)
-- [Zadania krok po kroku](#zadania-krok-po-kroku)
-  - [3.0: API głębi (Depth API)](#30-api-głębi-depth-api)
-  - [3.5: Okluzja](#35-okluzja)
-  - [4.0: Rzutowanie promienia z użyciem danych głębi](#40-rzutowanie-promienia-z-użyciem-danych-głębi)
-  - [4.5: Estymacja oświetlenia](#45-estymacja-oświetlenia)
-  - [5.0: Kontrolowany błąd](#50-kontrolowany-błąd)
-- [Zakończenie laboratorium](#zakończenie-laboratorium)
-- [Materiały dydaktyczne](#materiały-dydaktyczne)
+W tym samym widoku przełącz przygotowaną okluzję z niepoprawnej na zgodną z geometrią odniesienia. Powtórz wskazania i porównaj poprawne odpowiedzi, błędy widoczności i fałszywe alarmy (3.5). W jednym wniosku wyjaśnij, dlaczego trafienie promienia nie gwarantuje poprawnego zasłaniania obrazu (4.0).
 
+### 3. Popraw ustawienie i sprawdź widok (4.5–5.0)
 
-## Szybki wybór ścieżki
-- **Mam działającą scenę AR z Lab 03:** przejdź wprost do [Depth API i okluzji](#30-api-głębi-depth-api).
-- **Nie mam działającego AR:** [wróć do śledzenia i płaszczyzn w Lab 03](../Lab03/README.md#30-śledzenie-i-płaszczyzny), zamiast reinstalować całość.
-- **Telefon nie wspiera Depth API:** użyj wariantu symulacyjnego i [przejdź do eksperymentu okluzji](#35-okluzja), jasno oznaczając brak pomiaru sprzętowego.
+Zmień wyłącznie parametr głębi udostępniony w scenie tak, aby ograniczyć wykryty błąd; oświetlenie pozostaw bez zmian. Porównaj wynik przed/po (4.5). Przenieś kamerę do drugiego oznaczonego miejsca. Dopisz do tego samego wniosku, czy poprawka nadal działa i jaki ma limit (5.0).
 
+## Co zrobić na ocenę
 
-Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 4. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
+| Poziom | Dowód z tego samego doświadczenia |
+|---|---|
+| 3.0 | Znajdź błędnie zasłaniany obiekt |
+| 3.5 | Porównaj okluzję błędną/poprawną |
+| 4.0 | Wyjaśnij anomalię używając pojęcia głębi/raycast |
+| 4.5 | Dobierz depth/lighting poprawiające zgodność sceny |
+| 5.0 | Sprawdź z innego punktu widzenia i wskaż ograniczenie rozwiązania |
 
-## Przygotowanie
+Interpretację i ocenę końcową zatwierdza prowadzący.
 
-1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 04.
-2. Użyj **Zainstaluj / napraw zależności**.
-3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
-4. Użyj **Utwórz / napraw aktywną scenę**.
-5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Zainstaluj AR Foundation/ARCore oraz AR Starter Assets.
-7. Utwórz scenę Lab04 i skonfiguruj AR Occlusion Manager.
-8. Przygotuj realne przeszkody, powierzchnię referencyjną i kilka kontrolowanych warunków oświetlenia.
+## Co sprawdzić w zapisanym wyniku
 
-## Zadania krok po kroku
+| Wielkość | Jednostka | Kontrola |
+|---|---|---|
+| Poprawne wskazania i fałszywe alarmy | liczba | Wynik odnosi się do znanego zestawu obiektów. |
+| Błędy widoczności | liczba | Oddziel je od liczby kliknięć. |
+| Źródło głębi, widok i ustawienie | opis | Zachowaj rozdzielenie danych syntetycznych i urządzeniowych. |
 
-### 3.0: API głębi (Depth API)
+**Warunki porównania:** Ta sama geometria, obiekty, punkt obserwacji i zadanie wskazywania. Zmieniaj tylko jeden parametr naraz.
 
-1. Sprawdź dostępność danych głębi, bieżący tryb i rozdzielczość ramki.
-2. Zdefiniuj mierzalny warunek sukcesu dla danych głębi.
-3. Wykonaj v1 w A/B/C po trzy powtórzenia i zapisz successRate.
-4. Brak danych głębi oznacz jako niedostępność, a nie jako wartość zero.
+**Nieważna próba:** Nie przypisuj pomiaru głębi urządzeniu, jeśli provider go nie udostępnia. Brak trafienia lub danych nie jest zerowym błędem.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Jeden wniosek
 
-### 3.5: Okluzja
+Anomalia wynikała z ___; poprawka ___ działała dla ___, ale ___.
 
-1. Umieść obiekt wirtualny częściowo za rzeczywistą przeszkodą.
-2. Porównaj Off, Raw i Smoothed po 10 obserwacji.
-3. Klasyfikuj przeciek, nadmierne wycięcie, migotanie i opóźnienie.
-4. Wykonaj v2 A/B/C i porównaj błędy /10 oraz dominującą sygnaturę.
+## Oddanie całego bloku
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+1. Blok 02: Lab 03 i Lab 04. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Po każdym laboratorium otwórz WiRR > Raporty > Formularz raportu laboratoryjnego. Sprawdź numer labu i kompletność. Kliknij „Zapisz raport lokalnie (bez logowania)”. Unity zapisze JSON i rozpocznie wysyłkę. System automatycznie przekaże zgłoszenie do KIA-students/wirr. Nie zakładaj forka, nie używaj Git ani nie wysyłaj e-maila przy poprawnej wysyłce.
+3. Na końcu bloku sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. Sam zapis lokalny nie oznacza oddania. Przyjęcie przez serwer oznacza oczekiwanie na automatyczne przekazanie do repozytorium, a nie zatwierdzoną ocenę. W parze wystarczą dwa wyniki ze wspólnego stanowiska z oboma indeksami.
+4. Brak potwierdzenia: zachowaj pliki i użyj „Wyślij ponownie zapisany raport”. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś błąd prowadzącemu i awaryjnie wyślij lab03.json i lab04.json w ZIP WiRR-blok-02-G1-INDEKS.zip na m.pomianek@prz.edu.pl; temat: WiRR blok 02, grupa, indeksy. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
+5. Tylko gdy nie działa także eksport JSON, uzupełnij WiRR-blok-02-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP na ten sam adres. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowego sprawozdania.
 
-### 4.0: Rzutowanie promienia z użyciem danych głębi
+## Gdy stanowisko nie działa
 
-1. Ustaw powierzchnię kolejno w 0.50, 1.00 i 1.50 m.
-2. Wykonaj po pięć prób na odległość i oznacz HIT/MISS.
-3. Dla HIT policz błąd odległości; MISS pozostaw jako brak wyniku.
-4. Wykonaj v3 A/B/C i porównaj HIT/MISS oraz medianę błędu.
+Po 5 minutach bez możliwości rozpoczęcia zgłoś prowadzącemu pierwszy błąd. Przejdź z jego pomocą do przygotowanego stanowiska desktop. Nie instaluj SDK, nie buduj APK ani nie pisz brakującego modułu. Zapisz rzeczywisty tryb i wykonane etapy; brakującej liczby nie zastępuj zerem.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+Telefon i gogle nie są wymagane do żadnego progu. Nie zmieniaj komputera ani konfiguracji w trakcie porównania.
 
-### 4.5: Estymacja oświetlenia
+## Jak czytać schemat
 
-1. Sprawdź dostępność brightness, color temperature i main light direction.
-2. Zmierz pięć warunków: jasne rozproszone, słabsze rozproszone, boczne, przednie i mieszane.
-3. Zapisz mediany, tryb API i ocenę zgodności wizualnej 1–5.
-4. Niedostępne pola zapisz jako NA i wyjaśnij ograniczenie.
+**Ten sam promień:** Porównanie odległości dotyczy tego samego promienia kamery. Inna pozycja obserwacji może zmienić kolejność przesłaniania.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+**Dwa mechanizmy:** Raycast pyta o przecięcie promienia z geometrią; okluzja określa widoczność fragmentów obrazu. Jedna poprawna odpowiedź nie zastępuje drugiej.
 
-### 5.0: Kontrolowany błąd
+**Drugi widok:** Korekta sprawdzona z jednej kamery może zawieść po zmianie widoku. Nie naprawiaj błędu głębi samą zmianą oświetlenia.
 
-1. Wykonaj pomiar wariantu bazowego dla wybranej mierzalnej cechy.
-2. Wprowadź v5 i zapisz H1/H2.
-3. Wykonaj test rozstrzygający oraz trzy powtórzenia.
-4. Zastosuj minimalną poprawkę i wykonaj trzy pomiary po naprawie.
-
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
-
-## Zakończenie laboratorium
-
-1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
-2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź kompletność raportu** i popraw wskazane braki.
-4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
-
-## Materiały dydaktyczne
-Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
-
-1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
-2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab04/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
-3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
-
-Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
-
-`report-template.md` pozostaje formatem referencyjnym i awaryjnym.
-
+[Szablon tylko przy awarii eksportu JSON](../../Documentation~/WiRR2/WiRR-blok-02-raport-awaryjny.md).

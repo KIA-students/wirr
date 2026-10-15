@@ -1,35 +1,17 @@
-# WiRR | Zacznij tutaj
+# WiRR: rozpoczęcie i oddanie pracy
 
-## Minimalny przebieg zajęć (obowiązujący)
+1. Otwórz przygotowany projekt Unity i bieżący blok. Pracuj solo lub w parze.
+2. Wpisz indeksy i grupę G1/G2 raz na blok.
+3. Wykonaj pierwsze laboratorium. Otwórz **WiRR > Raporty > Formularz raportu laboratoryjnego**, sprawdź numer labu i kompletność, kliknij **Zapisz raport lokalnie (bez logowania)**. Unity zapisze JSON i rozpocznie wysyłkę.
+4. W tym samym projekcie wykonaj drugie laboratorium i zapisz jego raport tym samym przyciskiem.
+5. Na koniec bloku sprawdź osobne potwierdzenie przyjęcia przez serwer dla obu laboratoriów. System automatycznie przekazuje zgłoszenia do **KIA-students/wirr**. Przy poprawnej wysyłce niczego nie pakuj ani nie wysyłaj e-mailem. W parze wystarczą dwa raporty z oboma indeksami.
 
-1. Otwórz działający projekt Unity 6.6 na stanowisku albo własny projekt URP z pakietem WiRR. Nie konfiguruj niepotrzebnych SDK.
-2. Wpisz **numer indeksu i grupę** w **WiRR → Student → Profil i grupa**.
-3. W **WiRR → Misje i odkrycia** uruchom aktualne laboratorium. Wykonaj krótki eksperyment wskazany na początku jego instrukcji.
-4. Zapisz własną obserwację i wniosek. Otwórz **Otwórz raport: Lab NN**, wyeksportuj **jeden raport** i przekaż go kanałem wskazanym przez prowadzącego.
-5. Po drugim laboratorium bloku zachowaj lokalną kartę sesji jako pomoc w podsumowaniu. Nie musisz osobno jej przesyłać, chyba że prowadzący wyraźnie o to poprosi.
+Sam zapis lokalny nie oznacza oddania. Potwierdzenie serwera oznacza przyjęcie do kolejki; automatyczne utworzenie zgłoszenia w repozytorium następuje osobno. Przyjęcie raportu nie oznacza zatwierdzenia oceny. Nie potrzebujesz Git, GitHub CLI ani własnego forka.
 
-**Jedno laboratorium = jeden raport.** Wszystkie laboratoria 01–08 rozpoczynają się od krótkiej obowiązkowej ścieżki. Dalsze rozdziały instrukcji są materiałem rozszerzającym. Sam zapis lokalny ani eksport nie są automatycznym oddaniem pracy. Nie ma obowiązku używania Quest 3, instalowania Android Studio czy wykonywania rozszerzonych wariantów na ocenę 5.0.
+**Brak potwierdzenia:** zachowaj pliki i kliknij **Wyślij ponownie zapisany raport**. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś problem prowadzącemu i użyj awaryjnego e-maila opisanego w karcie bloku: jeden ZIP z dwoma JSON na **m.pomianek@prz.edu.pl**, temat **WiRR blok NN, grupa, indeksy**. ZIP: `WiRR-blok-NN-G1-INDEKS.zip`, np. `lab01.json` i `lab02.json` dla bloku 01. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
 
-**Gdy środowisko nie działa:** korzystaj z dostępnego demonstratora PC, opisz ograniczenie i nie uzupełniaj brakujących danych zmyślonymi pomiarami. Prowadzący rozstrzyga, jak udokumentować niedostępną funkcję.
+**Gdy także eksport JSON nie działa:** uzupełnij podlinkowany w karcie bloku szablon dla obu laboratoriów i wyślij go zamiast ZIP. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowej karty sesji.
 
+[Wybierz jeden z czterech bloków](../Campaign/README.md)
 
-**Obowiązkowa ścieżka: profil → scena → eksperyment → raport.** Każdy student pracuje we własnym projekcie Unity 6.6 (6000.6.x). Nie instaluj wszystkich SDK na początku.
-
-1. Utwórz projekt **Universal 3D (URP)** i dodaj pakiet przez Unity Package Manager: `https://github.com/KIA-students/wirr.git#upm`.
-2. Otwórz **WiRR → Student → Profil i grupa**. Wpisz numer indeksu i grupę z planu zajęć. Grupa zostanie przypisana lokalnie na cały cykl; nazwa drużyny jest osobna i może się zmieniać.
-3. Otwórz **WiRR → Misje i odkrycia**. Wybierz aktualny blok i rozpocznij właściwe laboratorium.
-4. Wykonaj doświadczenie, zachowaj scenę i rzeczywiste wyniki. Następnie otwórz **Otwórz raport: Lab NN**, wybierając numer wykonywanego ćwiczenia.
-5. Powtórz dla drugiego laboratorium bloku, a na koniec zapisz lokalną kartę sesji.
-
-| Blok | Laboratoria | Obowiązkowy temat |
-|---|---|---|
-| I | 01–02 | Scena, fizyka i interakcja |
-| II | 03–04 | Śledzenie AR, głębia i okluzja |
-| III | 05–06 | CAD, wydajność i cyfrowy bliźniak |
-| IV | 07–08 | Walidacja i własny demonstrator |
-
-**Postęp:** Unity zapisuje lokalnie, raz na około minutę, informację o istnieniu scen i wyeksportowanych raportów w `Library/WiRRProgress/progress.json`. Nie potwierdza to poprawnego wykonania eksperymentu. Numer indeksu oraz indywidualne wyniki nie są automatycznie wysyłane na publiczny GitHub. Automatyczna synchronizacja z prywatnym repozytorium wymaga zatwierdzonej usługi odbierającej dane, uwierzytelniania i zasad dostępu; nie jest jeszcze aktywna.
-
-**Więcej informacji, tylko gdy potrzebne:** [instalacja i systemy](OS_SETUP.md), [pełna ścieżka](UNITY_COURSE_JOURNEY.md), [instrukcje czterech bloków](../Campaign/README.md), [opcjonalne HDRI/PBR](LIGHTWEIGHT_UPM.md), [bezpieczeństwo i komfort XR](COMFORT_STUDIES.md), [Liga XR](../../competition/README.md).
-
-Jeżeli urządzenie nie działa, wykonaj dopuszczony w instrukcji wariant PC i opisz jego ograniczenia. Nie wpisuj wyników, których nie zmierzono.
+WiRR 2.0 pozostaje wersją redakcyjną do odbioru scen, pomiarów i pełnego przepływu raportów.

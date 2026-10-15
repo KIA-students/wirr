@@ -2,29 +2,22 @@
 
 Pakiet laboratoryjny dla **Unity 6.6**. Osiem laboratoriów realizowanych w czterech blokach. Każdy student wykonuje własny eksperyment i raport.
 
-## Zacznij tutaj
+## Laboratoria: cztery bloki po dwa ćwiczenia
 
-**[Krótka instrukcja, krok po kroku](Documentation~/Reference/QUICK_START.md)**
+Nowe instrukcje WiRR 2.0 są w wersji redakcyjnej **2.0.0-draft.3**. Gotowość scen i eksportu wymaga osobnego odbioru.
 
-1. Utwórz własny projekt **Universal 3D (URP)** w Unity 6.6.
-2. W **Window → Package Manager → + → Install package from git URL** dodaj:
+[Start i dokładny sposób oddania](Documentation~/Reference/QUICK_START.md) · [Cztery bloki](Documentation~/Campaign/README.md)
 
-   ```text
-   https://github.com/KIA-students/wirr.git#upm
-   ```
+Otwórz przygotowany projekt, zapisz indeksy solo/para i grupę raz na blok, wykonaj oba laboratoria i zapisz ich raporty w Unity. Zapis uruchamia wysyłkę; system automatycznie przekazuje zgłoszenia do **KIA-students/wirr**. Sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. E-mail na **m.pomianek@prz.edu.pl** jest wyłącznie awaryjną alternatywą przy nieskutecznej wysyłce. [Dokładne kroki i awaria](Documentation~/Reference/QUICK_START.md). Nie oddawaj dodatkowej karty sesji.
 
-3. W menu **WiRR → Student → Profil i grupa** podaj numer indeksu i grupę z planu.
-4. Otwórz **WiRR → Misje i odkrycia**, wybierz aktualny blok, uruchom odpowiednią scenę, wykonaj pomiary i przygotuj raport.
-5. Po dwóch laboratoriach zapisz kartę sesji.
+| Blok | Laboratoria |
+|---|---|
+| I | 01 + 02 |
+| II | 03 + 04 |
+| III | 05 + 06 |
+| IV | 07 + 08 |
 
-| Blok | Laboratoria | Temat |
-|---|---|---|
-| I | 01, 02 | Scena, fizyka i interakcja |
-| II | 03, 04 | Rejestracja i zrozumienie sceny AR |
-| III | 05, 06 | CAD i cyfrowy bliźniak |
-| IV | 07, 08 | Walidacja i demonstrator |
-
-**Postęp jest śledzony lokalnie.** Sam fakt przygotowania sceny lub wygenerowania raportu nie oznacza zaliczenia. Automatyczna wysyłka numerów indeksów i wyników do publicznego GitHub nie jest wykonywana. Grupa jest blokowana lokalnie po rejestracji, a zmianę po stronie uczelni zatwierdza prowadzący.
+Stanowiska przygotowuje prowadzący. Adres instalacyjny pakietu dla przygotowania pracowni: `https://github.com/KIA-students/wirr.git#upm`.
 
 ## Wykłady: prezentacje PDF
 
@@ -52,3 +45,4 @@ Pakiet opcjonalnych HDRI/PBR jest instalowany osobno: `https://github.com/KIA-st
 [Repozytorium dla studentów](https://github.com/KIA-students/wirr) · [Strona kursu](https://kia-students.github.io/wirr/) · [Licencja](LICENSE)
 
 **Uwaga dla prowadzących:** dokumentacja szczegółowa, narzędzia deweloperskie, architektura, release i materiały rozszerzające pozostają w katalogu `Documentation~/Reference/`. Nie trzeba ich przeglądać, aby rozpocząć laboratorium.
+
