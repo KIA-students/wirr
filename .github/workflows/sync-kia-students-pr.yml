@@ -80,6 +80,71 @@ jobs:
             echo "available=true" >> "${GITHUB_OUTPUT}"
           fi
 
+
+      # Narrow, idempotent publication for issue 148. Uses the existing
+      # student-sync credential; never exports private source history or notes.
+      - name: Publish isolated canonical lecture materials
+        if: steps.auth.outputs.available == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+          PREPARED_SHA: dbfc017f2033d36dd49237aeffad26070da0c62b
+        run: |
+          set -euo pipefail
+          branch='publish/wirr-canonical-pdfs-148'
+          git fetch --no-tags origin "refs/heads/${branch}"
+          actual="$(git rev-parse FETCH_HEAD)"
+          if [ "${actual}" != "${PREPARED_SHA}" ]; then
+            echo "::error::Prepared lecture commit changed; refusing publication."
+            exit 1
+          fi
+          count=0
+          while IFS= read -r path; do
+            case "${path}" in
+              README.md|WebSim~/site/index.html) ;;
+              WebSim~/site/lectures/WiRR-w0[1-7].pdf) ;;
+              *) echo "::error::Unexpected path in isolated lecture publication"; exit 1 ;;
+            esac
+            count=$((count + 1))
+          done < <(git diff --name-only "upstream/${UPSTREAM_BRANCH}" "${PREPARED_SHA}")
+          if [ "${count}" = 0 ]; then
+            echo "Canonical lecture materials are already published."
+            exit 0
+          fi
+          if [ "${count}" != 9 ]; then
+            echo "::error::Expected exactly seven PDFs and two indexes."
+            exit 1
+          fi
+          for path in README.md WebSim~/site/index.html; do
+            if git show "${PREPARED_SHA}:${path}" | grep -Eq 'MatPomGit|instructor/|-notes.pdf'; then
+              echo "::error::Non-student reference in publication index"
+              exit 1
+            fi
+          done
+          pr_number="$(gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls" -f state=open -f base=main -f "head=MatPomGit:${branch}" --jq '.[0].number // ""')"
+          if [ -z "${pr_number}" ]; then
+            gh pr create --repo "${UPSTREAM_REPOSITORY}" --base main --head "MatPomGit:${branch}" \
+              --title 'Wykłady WiRR: siedem kanonicznych PDF i indeks pobierania' \
+              --body 'Siedem prezentacji PDF oraz indeksy w README i na stronie kursu. Poprawiono wyłącznie odsyłacze PDF; 289 stron zachowuje identyczny tekst i obraz przy 72 dpi. Bez wersji prowadzącego i zmian automatyzacji.'
+            pr_number="$(gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls" -f state=open -f base=main -f "head=MatPomGit:${branch}" --jq '.[0].number')"
+          fi
+          echo "Lecture publication: https://github.com/${UPSTREAM_REPOSITORY}/pull/${pr_number}" >> "${GITHUB_STEP_SUMMARY}"
+          checks_seen=false
+          for attempt in {1..24}; do
+            check_count="$(gh api "repos/${UPSTREAM_REPOSITORY}/commits/${PREPARED_SHA}/check-runs" --jq '.total_count')"
+            if [ "${check_count}" -gt 0 ]; then
+              checks_seen=true
+              break
+            fi
+            sleep 5
+          done
+          if [ "${checks_seen}" != true ]; then
+            echo "::warning::Lecture PR awaits checks or maintainer approval; not merged."
+            exit 0
+          fi
+          gh pr checks "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --watch --interval 10
+          gh pr merge "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" --squash --match-head-commit "${PREPARED_SHA}"
+
       - name: Opublikuj lekką gałąź UPM
         shell: bash
         env:
