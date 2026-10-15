@@ -6,8 +6,8 @@ obsługiwana przez ten sam `scripts~/wirr_grade_report.py`.
 
 Nową ścieżkę uruchamia wyłącznie jawne `schemaVersion: wirr-report/2.0-draft.1`.
 Nie konwertujemy automatycznie dawnych pól `cp30.*` na dowody WiRR 2.0.
-Podstawa wymagań: [projekt progów v0.1](https://github.com/MatPomGit/prz/blob/bc637edce835e8226190339f83a280e9b5e0f296/courses/wirtualna-i-rozszerzona-rzeczywistosc/wirr-2.0/07-PROGI-OCEN.md),
-[nowe instrukcje i ilustracje](https://github.com/MatPomGit/prz/pull/155).
+Podstawa wymagań: roboczy projekt progów v0.1 oraz nowych instrukcji WiRR 2.0.
+Obowiązują materiały zatwierdzone i udostępnione przez prowadzącego.
 Nie kopiujemy opisów 40 kryteriów do niezależnej rubryki.
 
 ```mermaid
