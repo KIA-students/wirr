@@ -1,18 +1,6 @@
 name: Wydanie WiRR
 
 on:
-  pull_request:
-    paths:
-      - 'package.json'
-      - 'Editor/WiRRLab*Catalog.cs'
-      - 'Editor/WiRRReport*Catalog.cs'
-      - 'Samples~/Lab*/README.md'
-      - '.github/workflows/release.yml'
-  push:
-    branches: [main]
-    paths:
-      - 'package.json'
-      - '.github/workflows/release.yml'
   workflow_dispatch:
 
 permissions:
@@ -20,6 +8,7 @@ permissions:
 
 jobs:
   release:
+    if: ${{ github.ref == 'refs/heads/main' }}
     name: Walidacja i publikacja wydania
     runs-on: ubuntu-latest
     timeout-minutes: 15

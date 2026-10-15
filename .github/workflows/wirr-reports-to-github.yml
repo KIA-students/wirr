@@ -3,6 +3,7 @@ on:
   schedule:
     - cron: '*/15 * * * *'
   workflow_dispatch:
+
 permissions:
   contents: read
 concurrency:
@@ -10,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   publish:
-    if: github.repository == 'MatPomGit/wirr'
+    if: ${{ (github.repository == 'MatPomGit/wirr') && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

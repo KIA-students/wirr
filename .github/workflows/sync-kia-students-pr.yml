@@ -20,7 +20,7 @@ env:
 
 jobs:
   sync-pr:
-    if: github.repository == 'MatPomGit/wirr'
+    if: ${{ (github.repository == 'MatPomGit/wirr') && github.ref == 'refs/heads/main' }}
     name: Przygotuj bezpieczny eksport i Pull Request
     runs-on: ubuntu-latest
     timeout-minutes: 10

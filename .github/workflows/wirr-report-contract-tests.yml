@@ -1,15 +1,12 @@
 name: Validate WiRR report contract
 on:
-  pull_request:
-    paths:
-      - 'scripts~/wirr_grade_report.py'
-      - 'scripts~/test_wirr_grade_report.py'
-      - '.github/workflows/wirr-report-contract-tests.yml'
   workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
   test:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

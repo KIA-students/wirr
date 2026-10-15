@@ -1,12 +1,21 @@
 name: Validate student progress PR
 on:
-  pull_request:
-    paths:
-      - 'students/progress/**'
+  workflow_dispatch:
+    inputs:
+      base_sha:
+        description: 'Commit bazowy do oceny postępu'
+        required: true
+        type: string
+      head_sha:
+        description: 'Commit zgłoszenia studenta'
+        required: true
+        type: string
+
 permissions:
   contents: read
 jobs:
   validate:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,8 +24,8 @@ jobs:
           fetch-depth: 0
       - name: Validate changed paths and progress schemas
         env:
-          BASE: ${{ github.event.pull_request.base.sha }}
-          HEAD: ${{ github.event.pull_request.head.sha }}
+          BASE: ${{ inputs.base_sha }}
+          HEAD: ${{ inputs.head_sha }}
         shell: bash
         run: |
           set -euo pipefail

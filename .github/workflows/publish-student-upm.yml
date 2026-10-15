@@ -12,6 +12,7 @@ on:
       - 'Editor/WiRRHdriTools.cs'
       - '.github/workflows/publish-student-upm.yml'
       - 'Documentation~/Reference/LIGHTWEIGHT_UPM.md'
+
 permissions:
   contents: read
 concurrency:
@@ -19,6 +20,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   publish:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     environment: student-package-publishing
     steps:
