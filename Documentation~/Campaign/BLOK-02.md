@@ -1,41 +1,17 @@
-# Blok II: Świat się miesza. Lab 03 + Lab 04
+# Blok 02: Lab 03 i Lab 04
 
-**Spotkanie 2 z 4.** Pokaż, że telefon potrafi nie tylko wyświetlić wirtualny obiekt, ale powiązać go z prawdziwą powierzchnią i innymi przedmiotami.
+Jedna sesja, dwa wyniki, automatyczna wysyłka z Unity. Pracuj solo lub w parze; w parze zamieniajcie role.
 
-## Spis treści
-- [Wybierz wariant](#wybierz-wariant)
-- [Lab 03: powierzchnie i kotwice](#lab-03-powierzchnie-i-kotwice)
-- [Lab 04: głębia i okluzja](#lab-04-głębia-i-okluzja)
-- [Raport i samodzielny pomysł](#raport-i-samodzielny-pomysł)
+1. [Wykonaj Lab 03](../../Samples~/Lab03/README.md) i zapisz raport w Unity.
+2. [Wykonaj Lab 04](../../Samples~/Lab04/README.md) w tym samym projekcie i zapisz drugi raport.
+3. Sprawdź potwierdzenia przyjęcia obu wyników przez serwer.
 
-## Wybierz wariant
-- **Telefon zgodny z ARCore:** [przygotuj Android i ADB](../Reference/OS_SETUP.md#urzadzenia-xr).
-- **Android/ARCore już działa:** przejdź od razu do [Lab 03](../../Samples~/Lab03/README.md#30-śledzenie-i-płaszczyzny).
-- **Ubuntu:** sprawdź udev i ADB w [instrukcji Ubuntu](../Reference/OS_SETUP.md#ubuntu).
-- **Windows:** [wersja Windows](../Reference/OS_SETUP.md#windows).
-- **Telefon bez Depth API:** wykonaj Lab 03 i część Lab 04 bez obsługi głębi; opisz brak API, nie fabrykuj wyniku.
-- **Brak telefonu:** zbuduj scenę referencyjną i przeanalizuj obraz/log testowy przygotowany przez prowadzącego.
+## Przekazanie wyników
 
-## Lab 03: powierzchnie i kotwice
+1. Blok 02: Lab 03 i Lab 04. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Po każdym laboratorium otwórz WiRR > Raporty > Formularz raportu laboratoryjnego. Sprawdź numer labu i kompletność. Kliknij „Zapisz raport lokalnie (bez logowania)”. Unity zapisze JSON i rozpocznie wysyłkę. System automatycznie przekaże zgłoszenie do KIA-students/wirr. Nie zakładaj forka, nie używaj Git ani nie wysyłaj e-maila przy poprawnej wysyłce.
+3. Na końcu bloku sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. Sam zapis lokalny nie oznacza oddania. Przyjęcie przez serwer oznacza oczekiwanie na automatyczne przekazanie do repozytorium, a nie zatwierdzoną ocenę. W parze wystarczą dwa wyniki ze wspólnego stanowiska z oboma indeksami.
+4. Brak potwierdzenia: zachowaj pliki i użyj „Wyślij ponownie zapisany raport”. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś błąd prowadzącemu i awaryjnie wyślij lab03.json i lab04.json w ZIP WiRR-blok-02-G1-INDEKS.zip na m.pomianek@prz.edu.pl; temat: WiRR blok 02, grupa, indeksy. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
+5. Tylko gdy nie działa także eksport JSON, uzupełnij WiRR-blok-02-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP na ten sam adres. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowego sprawozdania.
 
-1. Zamiast instalować wszystko od nowa otwórz **Start: Lab 03** i powiąż scenę z AR Foundation/ARCore tylko w wariancie Android.
-2. W realnym otoczeniu porównaj **powierzchnię bogatą w detale** i jednolitą, gładką. Czy tracking i wykrywanie płaszczyzn działają równie dobrze?
-3. Umieść obiekt wirtualny na stole i sprawdź, czy ma skalę zbliżoną do realnej. Wykonaj trzy próby.
-4. Dodaj kotwicę i powróć do tego samego położenia, rejestrując zauważony dryf lub brak danych.
-5. W raporcie oddziel **pomiar telefonu** od **symulowanego pozycjonowania na PC**.
-
-[Pełny opis eksperymentu Lab 03](../../Samples~/Lab03/README.md#zadania-krok-po-kroku).
-
-## Lab 04: głębia i okluzja
-
-1. Otwórz istniejącą scenę Lab 03, a potem **Start: Lab 04**. Nie powtarzaj instalacji, jeśli wszystko działa.
-2. Przy zgodnym urządzeniu porównaj zasłanianie wirtualnej bryły przez realny kubek. Testuj w trzech pozycjach i zaznacz błędne zasłonięcia.
-3. Zmień światło w rzeczywistym pokoju. Sprawdź, czy dane light estimation są dostępne i jak wpływają na wiarygodność sceny.
-4. Porównaj wynik z trybem bez okluzji; jeśli Depth API jest niedostępne, opisz to jako ograniczenie kompatybilności.
-5. Zaproponuj AR do naprawy urządzenia, wystawy muzealnej lub edukacji przyrodniczej.
-
-[Pełny opis Lab 04](../../Samples~/Lab04/README.md#zadania-krok-po-kroku).
-
-## Raport i samodzielny pomysł
-
-Zapisz obie sceny i lokalną kartę **blok II**. Zmierz tylko dane faktycznie udostępniane przez dane urządzenie. **Ciekawostka:** aby hologram „wyglądał na prawdziwy”, często ważniejsze jest, czy prawdziwy przedmiot go zasłania, niż sama liczba trójkątów.
+[Szablon tylko przy awarii eksportu JSON](../WiRR2/WiRR-blok-02-raport-awaryjny.md).

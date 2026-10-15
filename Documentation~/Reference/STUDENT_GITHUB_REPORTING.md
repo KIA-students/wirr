@@ -1,7 +1,13 @@
-# Automatyczne raportowanie WiRR do GitHub
+# Automatyczne przekazywanie raportów WiRR
 
-Dla studenta: zainstaluj Git i GitHub CLI (`gh`). Jednorazowo wykonaj `gh auth login` w terminalu, następnie w Unity 6.6 wybierz **WiRR → Student → Włącz automatyczne wysyłanie na GitHub**. Student musi mieć konto GitHub, ale nie loguje się ponownie przy każdym raporcie. Program co około pięć minut próbuje wysłać bieżący techniczny stan do własnego forka, a następnie otwiera lub aktualizuje PR do `KIA-students/wirr:main`. PR dotyczy wyłącznie `students/progress/<losowy-identyfikator>.json`, bez numeru indeksu i surowych pomiarów. Wysłanie PR nie oznacza jego automatycznego scalenia ani zaliczenia.
+Domyślnie raport laboratoryjny zapisany w formularzu Unity jest wysyłany do serwera, a następnie automatycznie przekazywany jako zgłoszenie do **KIA-students/wirr**. Student nie instaluje Git ani GitHub CLI i nie tworzy własnego forka. [Kroki dla studenta i awaria](QUICK_START.md).
 
-Dla prowadzącego: indywidualne punkty zatwierdza się w `competition/approved_individual_scores.json` (na początku pusta lista). Każdy wpis: `{"studentId":"<32-znakowy-identyfikator>","group":"G1","task":"lab01","approvedPoints":8,"status":"approved"}`. Używaj wyłącznie niejawnych identyfikatorów, bez indeksu ani nazwiska. Po zatwierdzeniu zmian w `main`, GitHub Actions uruchamia `competition/aggregate_student_scores.py` i zapisuje `competition/approved_student_totals.json`. Kluczem jest para student–laboratorium; identyczne zgłoszenia nie sumują się dwukrotnie, a sprzeczne oceny blokują agregację. Zatwierdzone punkty indywidualne nie są automatycznie doliczane do Ligi XR. Grupowa Liga XR nadal jest liczona z zatwierdzonego `competition/scoreboard.json`, wraz z dodatkowymi zadaniami. Ocena z PR studenta nie jest akceptowana jako zatwierdzona.
+Przycisk **Zapisz raport lokalnie (bez logowania)** uruchamia zapis JSON i transport. Potwierdzenie serwera oznacza przyjęcie do kolejki. Dopiero URL zgłoszenia i SHA potwierdzają przekazanie do repozytorium. Publikacja i zatwierdzenie oceny są osobnymi etapami. Po każdym z dwóch laboratoriów zapisuje się osobny raport; na końcu bloku sprawdza się oba potwierdzenia. E-mail jest tylko awaryjną alternatywą po nieudanej próbie ponowienia wysyłki.
 
-**Warunki produkcyjne:** synchronizacja wymaga instalacji `gh`, dostępu do GitHuba, możliwości tworzenia forków i PR w repozytorium kursu. Zgłoszenia są publiczne i ujawniają nazwę konta GitHub autora; student otrzymuje o tym informację przy włączaniu. Testy w Unity 6.6 oraz test pełnego przepływu PR i workflow na koncie studenckim pozostają wymagane przed uznaniem systemu za produkcyjny. Automatyczne scalanie PR studenckich nie jest włączone, aby nie przenosić niezweryfikowanych danych do `main`.
+## Techniczny postęp a raport
+
+Synchronizacja `students/progress` służy do śledzenia technicznego postępu i nie zastępuje raportu laboratoryjnego. Nie jest dodatkowym zadaniem do oddania. Oceny zatwierdza prowadzący.
+
+## Warunek wydania WiRR 2.0
+
+Pełny przepływ wymaga sprawdzenia na stanowisku: zapis dwóch raportów, przyjęcie przez serwer, utworzenie zgłoszeń w repozytorium i ponowienie po awarii bez duplikacji. Sam opis funkcji i poprawny zapis lokalny nie potwierdzają działania całej usługi.
