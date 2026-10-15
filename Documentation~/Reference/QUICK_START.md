@@ -1,19 +1,17 @@
-# WiRR: jeden start i jedno oddanie na blok
+# WiRR: rozpoczęcie i oddanie pracy
 
-Bloki: **01+02, 03+04, 05+06, 07+08**, po 2 × 90 minut. Korzystaj z przygotowanego projektu na Ubuntu lub Windows. Nie twórz nowego projektu na każde laboratorium.
+1. Otwórz przygotowany projekt Unity i bieżący blok. Pracuj solo lub w parze.
+2. Wpisz indeksy i grupę G1/G2 raz na blok.
+3. Wykonaj pierwsze laboratorium. Otwórz **WiRR > Raporty > Formularz raportu laboratoryjnego**, sprawdź numer labu i kompletność, kliknij **Zapisz raport lokalnie (bez logowania)**. Unity zapisze JSON i rozpocznie wysyłkę.
+4. W tym samym projekcie wykonaj drugie laboratorium i zapisz jego raport tym samym przyciskiem.
+5. Na koniec bloku sprawdź osobne potwierdzenie przyjęcia przez serwer dla obu laboratoriów. System automatycznie przekazuje zgłoszenia do **KIA-students/wirr**. Przy poprawnej wysyłce niczego nie pakuj ani nie wysyłaj e-mailem. W parze wystarczą dwa raporty z oboma indeksami.
 
-1. Podaj numer indeksu i grupę G1/G2. W parze zapiszcie oba indeksy i zamieniajcie role operatora i obserwatora
-2. Wykonaj pierwsze laboratorium bloku i zachowaj jego wynik
-3. W tym samym projekcie wykonaj drugie laboratorium i zachowaj drugi wynik
-4. Wyeksportuj dwa wyniki do JSON i spakuj je do jednego ZIP według karty bieżącego bloku
-5. Wyślij jeden e-mail na **m.pomianek@prz.edu.pl**, z tematem **WiRR blok NN, grupa, indeksy**. W parze wysyła jedna osoba za obie
+Sam zapis lokalny nie oznacza oddania. Potwierdzenie serwera oznacza przyjęcie do kolejki; automatyczne utworzenie zgłoszenia w repozytorium następuje osobno. Przyjęcie raportu nie oznacza zatwierdzenia oceny. Nie potrzebujesz Git, GitHub CLI ani własnego forka.
 
-ZIP nazywa się `WiRR-blok-NN-G1-INDEKS.zip`; wstaw numer bloku, własną grupę i indeks. W parze wpisz dwa indeksy rozdzielone łącznikiem. W ZIP umieść dwa eksporty odpowiadających laboratoriów, np. `lab01.json` i `lab02.json` w bloku 01.
+**Brak potwierdzenia:** zachowaj pliki i kliknij **Wyślij ponownie zapisany raport**. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś problem prowadzącemu i użyj awaryjnego e-maila opisanego w karcie bloku: jeden ZIP z dwoma JSON na **m.pomianek@prz.edu.pl**, temat **WiRR blok NN, grupa, indeksy**. ZIP: `WiRR-blok-NN-G1-INDEKS.zip`, np. `lab01.json` i `lab02.json` dla bloku 01. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
 
-**Brak eksportu:** użyj krótkiego szablonu awaryjnego podlinkowanego w karcie bloku. Uzupełnij w nim oba laboratoria i wyślij jeden plik Markdown zamiast ZIP. Bez sieci zachowaj plik i wyślij po odzyskaniu połączenia. Zachowaj kopię zgłoszenia.
+**Gdy także eksport JSON nie działa:** uzupełnij podlinkowany w karcie bloku szablon dla obu laboratoriów i wyślij go zamiast ZIP. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowej karty sesji.
 
-Nie oddawaj dodatkowej karty sesji, projektu Unity, slajdów ani długiego sprawozdania. Od 4.0 uzupełniaj jedno krótkie pole wniosku w każdym laboratorium.
+[Wybierz jeden z czterech bloków](../Campaign/README.md)
 
-**Problem trwa 5 minut:** zgłoś prowadzącemu pierwszy błąd i przejdź z jego pomocą do działającego stanowiska desktop. Nie instaluj SDK, nie buduj APK i nie pisz brakującego modułu na zajęciach. Gogle i telefon nie są warunkiem żadnej oceny.
-
-[Wybierz bieżący blok](../Campaign/README.md)
+WiRR 2.0 pozostaje wersją redakcyjną do odbioru scen, pomiarów i pełnego przepływu raportów.

@@ -9,4 +9,4 @@ Instrukcje WiRR 2.0, wersja redakcyjna 2.0.0-draft.3. Wydanie stanowiskowe wymag
 | [Blok 03](BLOK-03.md) | 05 + 06 |
 | [Blok 04](BLOK-04.md) | 07 + 08 |
 
-Jeden start projektu na blok, dwa niezależne wyniki i jeden e-mail na koniec bloku. Instrukcje mają trzy działania, a progi 3.0–5.0 rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie; nie musisz uzyskać 5.0, aby rozpocząć drugie laboratorium.
+Jeden start projektu na blok i dwa niezależne wyniki przesyłane z Unity. Na końcu sprawdź potwierdzenia przyjęcia obu raportów. System automatycznie przekazuje je do KIA-students/wirr; e-mail służy wyłącznie awarii. Instrukcje mają trzy działania, a progi 3.0–5.0 rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie; nie musisz uzyskać 5.0, aby rozpocząć drugie laboratorium.

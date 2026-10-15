@@ -8,7 +8,7 @@ Nowe instrukcje WiRR 2.0 są w wersji redakcyjnej **2.0.0-draft.3**. Gotowość 
 
 [Start i dokładny sposób oddania](Documentation~/Reference/QUICK_START.md) · [Cztery bloki](Documentation~/Campaign/README.md)
 
-Otwórz przygotowany projekt, zapisz indeksy solo/para i grupę raz na blok, wykonaj oba laboratoria i zachowaj dwa oddzielne wyniki. Na końcu bloku wyślij jeden ZIP z dwoma JSON na **m.pomianek@prz.edu.pl**. Przy braku eksportu wyślij jeden krótki szablon awaryjny z oboma wynikami zamiast ZIP. Nie oddawaj dodatkowej karty sesji.
+Otwórz przygotowany projekt, zapisz indeksy solo/para i grupę raz na blok, wykonaj oba laboratoria i zapisz ich raporty w Unity. Zapis uruchamia wysyłkę; system automatycznie przekazuje zgłoszenia do **KIA-students/wirr**. Sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. E-mail na **m.pomianek@prz.edu.pl** jest wyłącznie awaryjną alternatywą przy nieskutecznej wysyłce. [Dokładne kroki i awaria](Documentation~/Reference/QUICK_START.md). Nie oddawaj dodatkowej karty sesji.
 
 | Blok | Laboratoria |
 |---|---|
