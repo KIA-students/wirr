@@ -223,6 +223,13 @@ jobs:
             echo "Zachowano aktualny ranking studentów z KIA-students/wirr."
           fi
 
+          # Submitted student work belongs to the course repository.
+          # A teaching-material export must never delete independent submissions.
+          if git ls-tree -r --name-only "upstream/${UPSTREAM_BRANCH}" -- student-work \
+               | grep -q '^student-work/'; then
+            git checkout "upstream/${UPSTREAM_BRANCH}" -- student-work
+          fi
+
           for path in "${private_paths[@]}"; do
             git rm -f --ignore-unmatch -- "${path}"
           done
