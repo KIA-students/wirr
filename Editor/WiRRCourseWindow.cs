@@ -73,7 +73,7 @@ namespace KIA.WiRR.Editor
         private void OnEnable()
         {
             openWindow = this;
-            selectedLab = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 7);
+            selectedLab = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 8);
             titleContent = WiRRBranding.Title("WiRR Course Toolkit");
             WiRRActivityLogger.Record("course_toolkit_opened", selectedLab, "ok");
         }

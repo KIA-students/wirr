@@ -1,149 +1,17 @@
-# Szybki start — WiRR Lab 1–7
+# WiRR: rozpoczęcie i oddanie pracy
 
-## Co Pobrać na początku
+1. Otwórz przygotowany projekt Unity i bieżący blok. Pracuj solo lub w parze.
+2. Wpisz indeksy i grupę G1/G2 raz na blok.
+3. Wykonaj pierwsze laboratorium. Otwórz **WiRR > Raporty > Formularz raportu laboratoryjnego**, sprawdź numer labu i kompletność, kliknij **Zapisz raport lokalnie (bez logowania)**. Unity zapisze JSON i rozpocznie wysyłkę.
+4. W tym samym projekcie wykonaj drugie laboratorium i zapisz jego raport tym samym przyciskiem.
+5. Na koniec bloku sprawdź osobne potwierdzenie przyjęcia przez serwer dla obu laboratoriów. System automatycznie przekazuje zgłoszenia do **KIA-students/wirr**. Przy poprawnej wysyłce niczego nie pakuj ani nie wysyłaj e-mailem. W parze wystarczą dwa raporty z oboma indeksami.
 
-Wszystkie pliki znajdują się w: `/starter-files/`
+Sam zapis lokalny nie oznacza oddania. Potwierdzenie serwera oznacza przyjęcie do kolejki; automatyczne utworzenie zgłoszenia w repozytorium następuje osobno. Przyjęcie raportu nie oznacza zatwierdzenia oceny. Nie potrzebujesz Git, GitHub CLI ani własnego forka.
 
-### Dla Każdego Studenta
+**Brak potwierdzenia:** zachowaj pliki i kliknij **Wyślij ponownie zapisany raport**. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś problem prowadzącemu i użyj awaryjnego e-maila opisanego w karcie bloku: jeden ZIP z dwoma JSON na **m.pomianek@prz.edu.pl**, temat **WiRR blok NN, grupa, indeksy**. ZIP: `WiRR-blok-NN-G1-INDEKS.zip`, np. `lab01.json` i `lab02.json` dla bloku 01. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
 
-1. **README dla Labu** (przed zajęciami)
-   ```
-   LAB1_STARTER_README.md    (instrukcja, checklist, czas)
-   LAB2_STARTER_README.md    (... itp.)
-   ...
-   LAB7_STARTER_README.md
-   ```
+**Gdy także eksport JSON nie działa:** uzupełnij podlinkowany w karcie bloku szablon dla obu laboratoriów i wyślij go zamiast ZIP. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowej karty sesji.
 
-2. **Template Raportu** (do wklejenia w repozytorium)
-   ```
-   evidence_template_lab01.md (struktura evidence/lab01.md)
-   evidence_template_lab02.md (... itp.)
-   ...
-   evidence_template_lab07.md
-   ```
+[Wybierz jeden z czterech bloków](../Campaign/README.md)
 
-3. **Instrukcje techniczne** (przed Lab 1)
-   ```
-   REPOSITORY_SETUP.md        (git workflow, struktura)
-   BUILD_AND_DEPLOY.md         (PC, Android, Quest 3)
-   XR_SHOWCASE.md              (gotowe efekty 6DoF, gaze, distant interaction i skala)
-   MIXED_REALITY_SHOWCASE.md    (kamera, dłonie, ludzie, depth/spatial mesh i ściany)
-   MIXED_REALITY_IMPLEMENTATION.md (adaptery, walidacja i dalsza rozbudowa MR)
-   MOBILE_AR_SHOWCASE.md         (tap, image tracking, ruler, light estimation, painter)
-   EXTRA_ASSETS.md             (dodatkowe modele, prefaby, HDRI)
-   ```
-
----
-
-## Dla Prowadzącego
-
-1. **Instrukcja** (przygotowanie do zajęć)
-   ```
-   INSTRUCTOR_GUIDE.md        (jak oceniać, troubleshooting)
-   ```
-
-2. **Instrukcje Laboratoriów** (w formacie .docx)
-   ```
-   Laboratorium_1_XR_Pełna_Instrukcja.docx
-   Laboratorium_2_XR_Pełna_Instrukcja.docx
-   ...
-   Laboratorium_7_XR_Pełna_Instrukcja.docx
-   ```
-
----
-
-## Kroków na początku kursu
-
-### Dla Studentów (1. dzień)
-
-1. **Przygotowanie techniki:**
-   - [ ] System: **Windows 11 64-bit** albo **Ubuntu 22.04 / 24.04 LTS 64-bit**
-   - [ ] Unity Hub zainstalowany
-   - [ ] Najnowsza dostępna wersja **Unity 6 (6000.x)** zainstalowana
-   - [ ] Moduł **Android Build Support**
-   - [ ] **Android SDK & NDK Tools**
-   - [ ] **OpenJDK**
-   - [ ] IDE C#: Visual Studio 2022 Community z workloadem **Game development with Unity** na Windows albo Rider / VS Code z integracją Unity na Ubuntu
-   - [ ] Git
-   - [ ] Android Studio, zalecane do diagnostyki Android/ADB, ale niewymagane do samego buildu Unity
-   - [ ] Docker Desktop na Windows albo Docker Engine + Compose plugin na Ubuntu przed Laboratorium 06
-   - [ ] Projekt **Universal 3D (URP)** otwarty
-
-   W Unity Hub moduły Androida można doinstalować także później przez **Installs → ustawienia używanej wersji Unity → Add modules**.
-
-   Pełna procedura dla Windows i Ubuntu: **ENVIRONMENT_SETUP.md**.
-
-   **Nie uruchamiaj `dotnet new` wewnątrz katalogu `Assets`.** Jeśli Console zgłasza błąd CS8773 dotyczący `global using` i C# 10, sprawdź, czy ścieżka prowadzi do `Assets/.../obj/...GlobalUsings.g.cs`. Usuń taki dodatkowy projekt .NET lub jego katalogi `bin/obj`; nie wymuszaj C# 10 przez `csc.rsp`.
-
-2. **Konfiguracja Gita:**
-   ```bash
-   # Przeczytaj REPOSITORY_SETUP.md
-   git clone <URL_REPO> xr-lab
-   cd xr-lab
-   git switch -c team-<NR>/lab01-<NAZWISKA>
-   ```
-
-3. **Przed Lab 1:**
-   - Skopis LAB1_STARTER_README.md
-   - Przygotuj obszar roboczy
-   - Poczekaj na prowadzącego
-
-### Dla Prowadzącego (1. dzień)
-
-1. **Przeczytaj INSTRUCTOR_GUIDE.md**
-   - Poznaj system punktów kontrolnych
-   - Przygotuj checklist oceny
-   - Zanotuj typowe problemy
-
-2. **Otwórz Lab 1 instrukcję** (Laboratorium_1_XR_Pełna_Instrukcja.docx)
-   - Przeczytaj całą instrukcję
-   - Upewnij się, że rozumiesz diagnozy
-   - Przygotuj demo
-
-3. **Sprawdzenie techniki**
-   - Quest 3 / Android / Symulator uruchomiony
-   - Unity project kompiluje
-   - Repozytorium dostępne
-
----
-
-## ⏱️ Harmonogram (2–3 tygodnie)
-
-| Tydzień | Lab | Czas | Pobranie |
-|---------|-----|------|----------|
-| 1 | 1–2 | ~4h | LAB1_ & LAB2_README, evidence_template_lab0[12] |
-| 2 | 3–4 | ~3.5h | LAB3_ & LAB4_README, evidence_template_lab0[34] |
-| 3 | 5–6 | ~3.5h | LAB5_ & LAB6_README, evidence_template_lab0[56] |
-| 4 | 7 | ~2h | LAB7_README, evidence_template_lab07 |
-
----
-
-## Cel: Co Student Musi Zrobić
-
-Na koniec kursu (Lab 7):
-
-1. ✓ 7 gałęzi Gita (team-NR/lab0X-...)
-2. ✓ 7 raportów (`evidence/lab0[1-7].md`)
-3. ✓ 7 commitów "fix(...)" z diagnozą błędu
-4. ✓ Punkt kontrolny 3.0 na każdym laboratorium (mogą być wyższe oceny)
-
-**Rezultat:** Zaliczenie kursu + portfolio 7 projektów XR
-
----
-
-## Dokumentacja
-
-- **Dla studentów:** Każdy LAB_README.md zawiera linki
-- **Dla prowadzącego:** INSTRUCTOR_GUIDE.md
-- **Dla zaawansowanych:** evidence_template zawiera wskazówki
-
----
-
-## Pytania?
-
-- **Techniczne:** Przeczytaj REPOSITORY_SETUP.md + LAB_README
-- **Ocenianie:** Przeczytaj INSTRUCTOR_GUIDE.md
-- **Wątpliwości:** Skontaktuj się z prowadzącym
-
----
-
+WiRR 2.0 pozostaje wersją redakcyjną do odbioru scen, pomiarów i pełnego przepływu raportów.

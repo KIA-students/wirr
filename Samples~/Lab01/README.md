@@ -1,79 +1,77 @@
-# Lab 01 — Środowisko XR i audyt urządzeń
+# Lab 01: Rzeczywistość ma jednostki, a GPU ograniczenia
 
-Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 1. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
+**Blok 01, część 1 z 2** · 90 minut · DESKTOP_SIM · 2.0.0-draft.3
 
-## Przygotowanie
+**Pytanie:** Czy większa liczba obiektów zawsze oznacza mniej płynny obraz?
 
-1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 01.
-2. Użyj **Zainstaluj / napraw zależności**.
-3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
-4. Użyj **Utwórz / napraw aktywną scenę**.
-5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Zainstaluj zależności oraz zaimportuj Starter Assets i XR Interaction Simulator.
-7. Utwórz lub napraw scenę Lab01, dodaj sondę metryk i uruchom walidator.
-8. Przed pomiarem wyłącz zbędne aplikacje i nie zmieniaj kilku parametrów eksperymentu jednocześnie.
+## Co będziesz badać
 
-## Zadania krok po kroku
+Skala określa rozmiar obiektu w świecie, a nie liczbę pikseli na ekranie. Obrót kamery zmienia kierunek patrzenia (3DoF); translacja dodaje zmianę położenia (6DoF) i paralaksę. Czas klatki podajemy w ms. Większy czas oznacza wolniejsze odświeżanie. Mediana opisuje typową klatkę, a p95 pozwala zauważyć wolniejsze klatki. Sam spadek FPS nie rozstrzyga, czy ograniczeniem jest CPU, GPU czy synchronizacja.
 
-### 3.0: Pomiar bazowy PC
+## Jedno doświadczenie, trzy działania
 
-1. Uruchom scenę bez dodatkowego obciążenia i sprawdź stabilność FPS oraz czasu klatki.
-2. Wykonaj trzy próby wariantu bazowego i zapisuj FPS oraz ms/klatkę; do porównań użyj mediany.
-3. Wykonaj wariant v1 z formularza, zmieniając tylko wskazany czynnik.
-4. Porównaj warunek kontrolny z eksperymentalnym i zapisz wniosek.
+Zacznij od 3.0. Kolejne poziomy rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie i przejść do drugiego laboratorium bloku. Pracuj solo lub w parze; w parze zamieniajcie role operatora i obserwatora.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+### 1. Uruchom scenę i pomiar (3.0)
 
-### 3.5: Obciążenie CPU i GC
+Otwórz przygotowaną Stację XR. Obejrzyj obiekty 0,1 m, 1 m i 10 m. Obróć kamerę bez przesuwania, a następnie przesuń ją w bok. Ustaw 10 obiektów, uruchom pomiar i poczekaj na koniec rozgrzewki oraz zapisu. Sprawdź, czy wynik zawiera medianę i p95 czasu klatki w ms. Na tym etapie możesz zakończyć pracę na 3.0.
 
-1. Wykonaj CPU-A dla iterationsPerFrame: 0, 10000, 25000, 50000, 100000, 200000, 400000.
-2. Wykonaj CPU-B dla blocksPerFrame: 1, 2, 4, 8, 16, 32; po trzy próby na punkt.
-3. Wykonaj CPU-C dla allocationBytesPerFrame: 0, 1024, 4096, 16384, 65536, 262144; obserwuj GC Alloc.
-4. Zapisz reprezentatywny Main Thread ms i wskaż, kiedy ograniczeniem staje się CPU lub GC.
+### 2. Porównaj i wyjaśnij (3.5–4.0)
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+Zmień liczbę obiektów z 10 na 100 i uruchom drugi pomiar. Zachowaj tę samą trasę kamery, rozdzielczość, cienie i długość pomiaru. Porównaj medianę i p95 obu zapisów (3.5). W jednym polu wniosku napisz, jak zmienił się czas klatki w twoich danych (4.0). Brak zauważalnej różnicy także jest wynikiem.
 
-### 4.0: Koszt renderowania
+### 3. Ulepsz i sprawdź ograniczenie (4.5–5.0)
 
-1. Wykonaj GPU-A dla 0, 100, 250, 500, 1000, 2000 i 4000 widocznych obiektów.
-2. Wykonaj GPU-B dla 1, 2, 4, 8, 16 i 32 materiałów.
-3. Wykonaj serię Render Scale: 0.60, 0.70, 0.80, 0.90, 1.00, 1.20.
-4. Porównaj FPS z Batches, SetPass i Triangles i wskaż dominujące wąskie gardło.
+Dobierz liczbę obiektów do budżetu klatki wyświetlonego na stanowisku. Zmieniaj najpierw samą liczbę obiektów, a ustawienie cieni sprawdź w osobnej próbie. Zachowaj wynik przed i po zmianie (4.5). W wybranej konfiguracji włącz przygotowane obciążenie fizyki, ponów pomiar i dopisz do tego samego wniosku, kiedy konfiguracja przestaje spełniać budżet (5.0).
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Co zrobić na ocenę
 
-### 4.5: Koszt fizyki
+| Poziom | Dowód z tego samego doświadczenia |
+|---|---|
+| 3.0 | Włącz pomiar sceny bazowej i obserwuj 3 skale |
+| 3.5 | Zmierz 10 i 100 obiektów |
+| 4.0 | Wyjaśnij związek liczby obiektów z frame time w swoich danych |
+| 4.5 | Dobierz obciążenie i cienie, aby utrzymać budżet klatki |
+| 5.0 | Sprawdź dodatkowy warunek fizyki i wskaż ograniczenie porównania |
 
-1. Wykonaj PHY-A dla 0, 25, 50, 100, 200, 400 i 800 dynamicznych Rigidbody.
-2. Zapisuj FPS, ms/klatkę i Physics.Processing, nie zmieniając ustawień renderowania.
-3. Wykonaj PHY-C dla Fixed Timestep: 0.0333, 0.0250, 0.0200, 0.0167, 0.0133, 0.0111 s.
-4. Wyjaśnij kompromis między częstotliwością symulacji a kosztem obliczeń.
+Interpretację i ocenę końcową zatwierdza prowadzący.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Co sprawdzić w zapisanym wyniku
 
-### 5.0: Meta Quest 3
+| Wielkość | Jednostka | Kontrola |
+|---|---|---|
+| Czas klatki: mediana, p95 | ms | Porównuj tę samą trasę i tryb Editor/build. |
+| Liczba aktywnych obiektów | liczba | Sprawdź rzeczywisty stan A/B. |
+| Warunki próby | opis | Cienie, fizyka, rozdzielczość i czas zapisu. |
 
-1. Sprawdź przez Meta Horizon Link obrót/translację głowy, kontrolery i Select; Link traktuj tylko funkcjonalnie.
-2. Zbuduj samodzielną aplikację na Quest 3 i uruchom ją bez Link.
-3. Wykonaj trzy pomiary samodzielnej aplikacji i zapisz FPS oraz ms/klatkę; zweryfikuj 6DoF.
-4. W tych samych możliwie zbliżonych warunkach wykonaj trzy pomiary na PC, policz mediany dla obu platform i porównaj kierunek oraz skalę efektu.
+**Warunki porównania:** Ta sama kamera, trasa, rozdzielczość, oświetlenie, czas rozgrzewki i okno pomiaru. VSync i limit FPS muszą pozostać takie same.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+**Nieważna próba:** Próba jest nieważna, jeśli zmieniła się trasa lub okno pomiaru, scena nie zakończyła rozgrzewki albo zapis nie zawiera poprawnych próbek.
 
-## Zakończenie laboratorium
+## Jeden wniosek
 
-1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
-2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź raport** i popraw wskazane braki.
-4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
+Przy zmianie ___ czas klatki zmienił się ___; porównanie ogranicza ___.
 
-## Materiały dydaktyczne
-Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
+## Oddanie całego bloku
 
-1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
-2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab01/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
-3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
+1. Blok 01: Lab 01 i Lab 02. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Po każdym laboratorium otwórz WiRR > Raporty > Formularz raportu laboratoryjnego. Sprawdź numer labu i kompletność. Kliknij „Zapisz raport lokalnie (bez logowania)”. Unity zapisze JSON i rozpocznie wysyłkę. System automatycznie przekaże zgłoszenie do KIA-students/wirr. Nie zakładaj forka, nie używaj Git ani nie wysyłaj e-maila przy poprawnej wysyłce.
+3. Na końcu bloku sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. Sam zapis lokalny nie oznacza oddania. Przyjęcie przez serwer oznacza oczekiwanie na automatyczne przekazanie do repozytorium, a nie zatwierdzoną ocenę. W parze wystarczą dwa wyniki ze wspólnego stanowiska z oboma indeksami.
+4. Brak potwierdzenia: zachowaj pliki i użyj „Wyślij ponownie zapisany raport”. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś błąd prowadzącemu i awaryjnie wyślij lab01.json i lab02.json w ZIP WiRR-blok-01-G1-INDEKS.zip na m.pomianek@prz.edu.pl; temat: WiRR blok 01, grupa, indeksy. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
+5. Tylko gdy nie działa także eksport JSON, uzupełnij WiRR-blok-01-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP na ten sam adres. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowego sprawozdania.
 
-Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
+## Gdy stanowisko nie działa
 
-`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+Po 5 minutach bez możliwości rozpoczęcia zgłoś prowadzącemu pierwszy błąd. Przejdź z jego pomocą do przygotowanego stanowiska desktop. Nie instaluj SDK, nie buduj APK ani nie pisz brakującego modułu. Zapisz rzeczywisty tryb i wykonane etapy; brakującej liczby nie zastępuj zerem.
+
+Telefon i gogle nie są wymagane do żadnego progu. Nie zmieniaj komputera ani konfiguracji w trakcie porównania.
+
+## Jak czytać schemat
+
+**Obrót i translacja:** Zmiana pozycji kamery daje inne przesunięcia obiektów bliskich i dalekich. Nie myl tego z powiększeniem modelu.
+
+**Budżet jest warunkiem:** Dobierz częstotliwość docelową dla stanowiska. Obliczony czas na klatkę nie jest zmierzonym czasem renderowania.
+
+**Kontrola porównania:** Porównuj te same fragmenty trasy, tę samą rozdzielczość i okno pomiaru; nie rozstrzygaj CPU/GPU na podstawie samego FPS.
+
+[Szablon tylko przy awarii eksportu JSON](../../Documentation~/WiRR2/WiRR-blok-01-raport-awaryjny.md).

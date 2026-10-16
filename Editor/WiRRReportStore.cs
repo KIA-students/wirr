@@ -24,6 +24,7 @@ namespace KIA.WiRR.Editor
                     if (loaded != null && loaded.labNumber == lab)
                     {
                         loaded = EnsureCollections(loaded);
+                        ApplyStudentProfile(loaded);
                         UpdateVariants(loaded);
                         WiRRReportCalculator.Recalculate(loaded);
                         return loaded;
@@ -41,6 +42,7 @@ namespace KIA.WiRR.Editor
         public static void Save(WiRRReportDocument document)
         {
             EnsureCollections(document);
+            ApplyStudentProfile(document);
             document.updatedAtUtc = DateTime.UtcNow.ToString("O");
             UpdateVariants(document);
             WiRRReportCalculator.Recalculate(document);
@@ -62,12 +64,12 @@ namespace KIA.WiRR.Editor
             var errors = new List<string>();
             if (document == null) { errors.Add("Brak dokumentu raportu."); return errors; }
             if (document.schemaVersion != "wirr-report/1.0") errors.Add("Nieobsługiwana wersja raportu.");
-            if (document.labNumber < 1 || document.labNumber > 7) errors.Add("Nieprawidłowy numer laboratorium.");
+            if (document.labNumber < 1 || document.labNumber > 8) errors.Add("Nieprawidłowy numer laboratorium.");
             if (string.IsNullOrWhiteSpace(document.submissionId)) errors.Add("Brak identyfikatora raportu.");
             if (string.IsNullOrWhiteSpace(document.teamId)) errors.Add("Wpisz identyfikator studenta.");
             var indices = (document.studentIndices ?? new List<string>()).Where(v => !string.IsNullOrWhiteSpace(v)).Select(v => v.Trim()).ToArray();
-            if (indices.Length != 1) errors.Add("Podaj dokładnie jeden numer indeksu.");
-            if (indices.Any(v => !long.TryParse(v, out _))) errors.Add("Numery indeksów mogą zawierać tylko cyfry.");
+            if (indices.Length < 1 || indices.Length > 2) errors.Add("Podaj jeden numer indeksu (samodzielnie) lub dwa (praca w parze).");
+            if (indices.Any(v => !long.TryParse(v, out _) || v.Length < 5 || v.Length > 12)) errors.Add("Każdy numer indeksu musi mieć od 5 do 12 cyfr.");
             if (indices.Distinct().Count() != indices.Length) errors.Add("Numery indeksów nie mogą się powtarzać.");
             return errors;
         }
@@ -75,7 +77,7 @@ namespace KIA.WiRR.Editor
         public static IReadOnlyList<string> Validate(WiRRReportDocument document, string throughCheckpoint = null)
         {
             var errors = new List<string>(ValidateIdentity(document));
-            if (document == null || document.labNumber < 1 || document.labNumber > 7) return errors;
+            if (document == null || document.labNumber < 1 || document.labNumber > 8) return errors;
 
             foreach (var section in WiRRReportSchemaCatalog.Get(document.labNumber))
             {
@@ -107,7 +109,35 @@ namespace KIA.WiRR.Editor
             return path;
         }
 
+        public static WiRRReportDocument ImportJson(int expectedLab, string path)
+        {
+            if (!File.Exists(path) || new FileInfo(path).Length > 512 * 1024)
+                throw new IOException("Plik nie istnieje lub przekracza 512 KB.");
+            var imported = JsonUtility.FromJson<WiRRReportDocument>(File.ReadAllText(path));
+            if (imported == null || imported.labNumber != expectedLab || imported.schemaVersion != "wirr-report/1.0")
+                throw new InvalidDataException("Plik nie jest raportem wybranego laboratorium.");
+            imported = EnsureCollections(imported);
+            if (WiRRStudentProfile.IsRegistered &&
+                imported.studentIndices.Count > 0 &&
+                imported.studentIndices[0] != WiRRStudentProfile.Index)
+                throw new InvalidDataException("Raport należy do innego indeksu niż aktywny profil.");
+            if (imported.studentIndices.Count > 2)
+                throw new InvalidDataException("Raport może zawierać maksymalnie dwa indeksy.");
+            Save(imported);
+            return imported;
+        }
+
         public static string ToJson(WiRRReportDocument document) { Save(document); return JsonUtility.ToJson(document, true); }
+
+        private static void ApplyStudentProfile(WiRRReportDocument document)
+        {
+            if (!WiRRStudentProfile.IsRegistered) return;
+            document.teamId = "S" + WiRRStudentProfile.Identifier;
+            if (document.studentIndices.Count == 0) document.studentIndices.Add(WiRRStudentProfile.Index);
+            else document.studentIndices[0] = WiRRStudentProfile.Index;
+            while (document.studentIndices.Count > 2) document.studentIndices.RemoveAt(document.studentIndices.Count - 1);
+            document.group = WiRRStudentProfile.GroupLabel;
+        }
 
         private static void UpdateVariants(WiRRReportDocument document)
         {

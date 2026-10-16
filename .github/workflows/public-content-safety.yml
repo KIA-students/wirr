@@ -1,7 +1,6 @@
 name: Kontrola publicznej zawartości
 
 on:
-  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -9,7 +8,7 @@ permissions:
 
 jobs:
   public-safety:
-    if: github.repository == 'KIA-students/wirr'
+    if: ${{ (github.repository == 'KIA-students/wirr') && github.ref == 'refs/heads/main' }}
     name: Sprawdź zawartość repozytorium kursu
     runs-on: ubuntu-latest
     timeout-minutes: 5

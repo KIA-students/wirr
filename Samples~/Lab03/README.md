@@ -1,79 +1,77 @@
-# Lab 03 — Rejestracja i kotwice AR
+# Lab 03: Kotwica to nie gwarancja stałości
 
-Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 3. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
+**Blok 02, część 1 z 2** · 90 minut · SIM_AR · 2.0.0-draft.3
 
-## Przygotowanie
+**Pytanie:** Czy stabilny hologram znajduje się w poprawnym miejscu?
 
-1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 03.
-2. Użyj **Zainstaluj / napraw zależności**.
-3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
-4. Użyj **Utwórz / napraw aktywną scenę**.
-5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Zainstaluj AR Foundation/ARCore oraz wymagane próbki.
-7. Utwórz scenę Lab03 i zweryfikuj AR Session, XR Origin i wykrywanie płaszczyzn.
-8. Przygotuj fizyczne punkty odniesienia oraz model o znanych wymiarach.
+## Co będziesz badać
 
-## Zadania krok po kroku
+Wykrycie płaszczyzny, trafienie promienia i utworzenie kotwicy to różne operacje. Błąd położenia oznacza różnicę względem znanej referencji; stabilność dotyczy zmian położenia w czasie. Stabilny model może mieć stałe przesunięcie. W SIM_AR referencja i błędy pochodzą z modelu. Rzeczywiste AR bez niezależnego odniesienia nie pozwala automatycznie zmierzyć bezwzględnej dokładności.
 
-### 3.0: Śledzenie i płaszczyzny
+## Jedno doświadczenie, trzy działania
 
-1. Uruchom aplikację na urządzeniu i zmierz czas do SessionTracking.
-2. Zmierz osobno czas do pierwszej użytecznej płaszczyzny.
-3. Dla każdego warunku A/B/C wykonaj trzy próby i zapisz oba czasy dla każdej próby; zapisuj też notTrackingReason.
-4. Opisz warunki otoczenia i ograniczenia pomiaru.
+Zacznij od 3.0. Kolejne poziomy rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie i przejść do drugiego laboratorium bloku. Pracuj solo lub w parze; w parze zamieniajcie role operatora i obserwatora.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+### 1. Umieść model w symulacji AR (3.0)
 
-### 3.5: Rzutowanie promienia i skala 1:1
+Uruchom przygotowaną Galerię kotwic w trybie SIM_AR. Znajdź oznaczony punkt odniesienia i odcinek 0,30 m. Umieść przy nim model w skali 1:1. Sprawdź stan śledzenia i odczytaj błąd położenia w cm. Korzystasz z symulacji na komputerze; nie instaluj aplikacji na telefonie.
 
-1. Ustaw model w jednostkach metrycznych i zachowaj skalę 1:1.
-2. Umieszczaj model wyłącznie po poprawnym rzucie promienia do płaszczyzny.
-3. Dla A/B/C wykonaj po 10 prób i policz poprawne trafienia.
-4. Zmierz medianę błędu pozycjonowania bez korygowania go skalą modelu.
+### 2. Porównaj warunki i wyjaśnij (3.5–4.0)
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+Uruchom kolejno przygotowane warunki: powierzchnia z wieloma cechami i powierzchnia z małą liczbą cech. W obu zachowaj ten sam punkt odniesienia, tor kamery i model. Zbierz po trzy odczyty błędu w cm i porównaj ich rozrzut (3.5). W jednym wniosku wyjaśnij różnicę między stałym przesunięciem a niestabilnością modelu (4.0).
 
-### 4.0: Kotwica i dryf
+### 3. Dobierz warunek i sprawdź powrót (4.5–5.0)
 
-1. Utwórz kotwicę przy fizycznym punkcie referencyjnym.
-2. Przejdź zadaną ścieżkę, wróć i zmierz odchylenie od znacznika.
-3. Wykonaj trzy powtórzenia wariantu bazowego oraz serię A/B/C, zapisując stan śledzenia.
-4. Policz medianę dryfu i określ charakter błędu.
+Wybierz warunek śledzenia, który lepiej utrzymuje model przy referencji, i potwierdź wybór ponowną próbą (4.5). Uruchom przygotowaną utratę śledzenia i wznowienie. Sprawdź położenie po powrocie oraz czas odzyskania. Dopisz do tego samego wniosku, czego symulacja nie mówi o dokładności rzeczywistego telefonu (5.0).
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Co zrobić na ocenę
 
-### 4.5: Rejestracja dwupunktowa
+| Poziom | Dowód z tego samego doświadczenia |
+|---|---|
+| 3.0 | Umieść model przy referencji w REAL/SIM |
+| 3.5 | Porównaj dwa warunki obserwacji/trackingu |
+| 4.0 | Wyjaśnij różnicę błędu pozycji |
+| 4.5 | Dobierz położenie lub warunki śledzenia zmniejszające błąd |
+| 5.0 | Ponów próbę po utracie/relocalizacji i wskaż niepewność; nie mieszaj SIM z REAL |
 
-1. Wyznacz fizyczne punkty O i X oraz niezależnie zmierz OX.
-2. Zarejestruj układ na O i X i zmierz e1, e2, e3.
-3. Powtórz pełną rejestrację trzy razy; policz e_med i e_max.
-4. Wskaż główne źródło niepewności i sposób jego ograniczenia.
+Interpretację i ocenę końcową zatwierdza prowadzący.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Co sprawdzić w zapisanym wyniku
 
-### 5.0: Kontrolowany błąd
+| Wielkość | Jednostka | Kontrola |
+|---|---|---|
+| Błąd translacji względem referencji | cm | Tylko przy znanym punkcie odniesienia. |
+| Rozrzut odczytów i utraty śledzenia | cm / liczba | Rozdziel błąd systematyczny i zmienność. |
+| Czas ponownej lokalizacji | s | Brak odzyskania to nie zero sekund. |
 
-1. Wykonaj trzy pomiary wariantu bazowego.
-2. Wprowadź błąd v5 i zapisz H1/H2.
-3. Wykonaj test rozstrzygający i trzy pomiary ze stanem błędnym.
-4. Napraw minimalnie, wykonaj trzy pomiary i sprawdź powrót e_med do poziomu wariantu bazowego.
+**Warunki porównania:** Ta sama referencja, model, skala, tor obserwacji i liczba odczytów. W symulacji zachowaj profil i seed.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+**Nieważna próba:** Oznacz próbę jako nieważną przy braku referencji lub śledzenia. Nie mieszaj SIM_AR z REAL_AR w jednej serii.
 
-## Zakończenie laboratorium
+## Jeden wniosek
 
-1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
-2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź raport** i popraw wskazane braki.
-4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
+Warunek ___ zmienił ___; po utracie śledzenia ___, a wynik nie dowodzi ___.
 
-## Materiały dydaktyczne
-Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
+## Oddanie całego bloku
 
-1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
-2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab03/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
-3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
+1. Blok 02: Lab 03 i Lab 04. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Po każdym laboratorium otwórz WiRR > Raporty > Formularz raportu laboratoryjnego. Sprawdź numer labu i kompletność. Kliknij „Zapisz raport lokalnie (bez logowania)”. Unity zapisze JSON i rozpocznie wysyłkę. System automatycznie przekaże zgłoszenie do KIA-students/wirr. Nie zakładaj forka, nie używaj Git ani nie wysyłaj e-maila przy poprawnej wysyłce.
+3. Na końcu bloku sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. Sam zapis lokalny nie oznacza oddania. Przyjęcie przez serwer oznacza oczekiwanie na automatyczne przekazanie do repozytorium, a nie zatwierdzoną ocenę. W parze wystarczą dwa wyniki ze wspólnego stanowiska z oboma indeksami.
+4. Brak potwierdzenia: zachowaj pliki i użyj „Wyślij ponownie zapisany raport”. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś błąd prowadzącemu i awaryjnie wyślij lab03.json i lab04.json w ZIP WiRR-blok-02-G1-INDEKS.zip na m.pomianek@prz.edu.pl; temat: WiRR blok 02, grupa, indeksy. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
+5. Tylko gdy nie działa także eksport JSON, uzupełnij WiRR-blok-02-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP na ten sam adres. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowego sprawozdania.
 
-Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
+## Gdy stanowisko nie działa
 
-`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+Po 5 minutach bez możliwości rozpoczęcia zgłoś prowadzącemu pierwszy błąd. Przejdź z jego pomocą do przygotowanego stanowiska desktop. Nie instaluj SDK, nie buduj APK ani nie pisz brakującego modułu. Zapisz rzeczywisty tryb i wykonane etapy; brakującej liczby nie zastępuj zerem.
+
+Telefon i gogle nie są wymagane do żadnego progu. Nie zmieniaj komputera ani konfiguracji w trakcie porównania.
+
+## Jak czytać schemat
+
+**Błąd i stabilność:** Mały rozrzut oznacza powtarzalność odczytów; nie wyklucza stałego przesunięcia względem referencji.
+
+**Znane odniesienie:** W symulacji pozycja referencyjna jest znana. W realnym AR bez niezależnej referencji oceniaj stabilność, nie deklaruj bezwzględnej dokładności.
+
+**Utrata śledzenia:** Po ponownej lokalizacji sprawdź zarówno zmianę położenia, jak i rozrzut. Brak odczytu nie jest zerowym błędem.
+
+[Szablon tylko przy awarii eksportu JSON](../../Documentation~/WiRR2/WiRR-blok-02-raport-awaryjny.md).

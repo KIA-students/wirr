@@ -1,104 +1,77 @@
-# Lab 05 — Optymalizacja modeli CAD
+# Lab 05: Geometria kosztuje, ale otwór montażowy musi zostać
 
-Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 5. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
+**Blok 03, część 1 z 2** · 90 minut · DESKTOP_SIM · 2.0.0-draft.3
 
-## Przygotowanie
+**Pytanie:** Który najlżejszy model nadal spełnia funkcję części?
 
-1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 05.
-2. Użyj **Zainstaluj / napraw zależności**.
-3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
-4. Użyj **Utwórz / napraw aktywną scenę**.
-5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Użyj obowiązkowego modelu referencyjnego **makerbeam_bracket_90degree.stp**. Po przygotowaniu workspace plik powinien znajdować się w **Assets/WiRR/Lab05/Models/Source/** razem z plikiem **ATTRIBUTION.md**.
-7. Otwórz **Assets/WiRR/Lab05/Documentation/MODEL_FORMATS_AND_CONVERSION.md**. Dokument wyjaśnia różnice między URDF, MJCF, USD, STEP, STL, OBJ i FBX oraz podaje bezpieczne ścieżki konwersji.
-8. Zachowaj STEP bez zmian. W katalogu roboczym przygotuj co najmniej dwa warianty po tessellacji lub konwersji, np. FBX, OBJ i celowo stratny STL.
-9. Opcjonalnie w sekcji **Scena i pomiary → Dodatkowe modele 3D** zaimportuj model **Unitree G1 EDU + animacje** jako bardziej złożony zasób porównawczy. Nie zastępuje on obowiązkowego źródła STEP.
-10. Utwórz scenę Lab05 i geometrię referencyjną do kontroli skali.
-11. Wszystkie pomiary porównawcze wykonuj w tych samych warunkach Edytor/kompilacja i na tej samej kamerze.
+## Co będziesz badać
 
-## Model referencyjny i pochodzenie
+Model CAD opisuje geometrię konstrukcyjną; siatka renderingu przybliża jej powierzchnię trójkątami. Redukcja siatki może usunąć ważną cechę, np. otwór. LOD wybiera szczegółowość zależnie od widoku. Collider opisuje kolizję i nie musi odpowiadać widocznej siatce. Liczba trójkątów jest jedną z przyczyn kosztu, a nie pełną miarą wydajności.
 
-Obowiązkowym źródłem jest **makerbeam_bracket_90degree.stp**, wspornik MakerBeam zapisany jako STEP AP214/B-Rep. Model pochodzi z FreeCAD Parts Library, autor: Benjamin Aigner, licencja zasobu: **CC-BY-3.0**. Pakiet nie zmienia licencji modelu. Szczegóły atrybucji znajdują się w **Models/Source/ATTRIBUTION.md**.
+## Jedno doświadczenie, trzy działania
 
-Wspólny model źródłowy jest celowy: wszystkie pary rozpoczynają od tej samej geometrii, dzięki czemu można porównywać wpływ tessellacji, formatu pośredniego, topologii i LOD zamiast mieszać te czynniki z różnicami pomiędzy modelami.
+Zacznij od 3.0. Kolejne poziomy rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie i przejść do drugiego laboratorium bloku. Pracuj solo lub w parze; w parze zamieniajcie role operatora i obserwatora.
 
-Nie próbuj otwierać pliku STEP bezpośrednio standardowym Model Importerem Unity. Najpierw wykonaj tessellację w narzędziu CAD lub konwerterze, a do Unity zaimportuj np. FBX lub OBJ. STL wykorzystuj świadomie jako przykład reprezentacji o mniejszej ilości informacji.
+### 1. Sprawdź geometrię modelu (3.0)
 
-## Szybki wybór formatu
+Otwórz przygotowany Warsztat CAD. Obejrzyj High, Medium i Low tej samej części, bez zmiany skali. Znajdź wskazany otwór montażowy i krawędź dopasowania. Dla każdej siatki sprawdź, czy te cechy pozostały. Korzystaj z gotowych modeli; nie konwertuj plików STEP.
 
-- **STEP/STP**: źródło prawdy dla geometrii CAD i wymiarów.
-- **STL**: sama triangulowana powierzchnia; użyteczny jako świadomie stratny wariant.
-- **OBJ + MTL**: statyczny mesh z UV, normalnymi i podstawowymi materiałami; dobry do inspekcji i wymiany.
-- **FBX**: bogatszy asset DCC do Unity, z hierarchią, transformacjami, materiałami, riggingiem i animacją.
-- **URDF**: opis robota dla ROS; linki, jointy, visual/collision, limity i dane inertial, zwykle z osobnymi plikami mesh.
-- **MJCF**: opis modelu MuJoCo, w tym elementy symulacyjne, np. actuators, tendons, sensors i contact.
-- **USD**: kompozycja sceny z primów, warstw, referencji, wariantów i instancji; dobry dla złożonych scen i digital twins.
+### 2. Porównaj koszt i wyjaśnij (3.5–4.0)
 
-Nie konwertuj „w ciemno”. Najpierw zapisz, które informacje są wymagane w kolejnym etapie pipeline'u. Jeżeli format docelowy nie potrafi ich przechować, utrata danych jest cechą konwersji, a nie błędem narzędzia.
+Uruchom przygotowany benchmark kolejno dla High, Medium i Low, przy tej samej trasie kamery i rozgrzewce. Porównaj trójkąty, materiały i czas klatki w ms (3.5). Zbliż i oddal kamerę, obserwując zmianę LOD. W jednym wniosku wskaż najlżejszy wariant zachowujący wymaganą cechę (4.0).
 
-## Zadania krok po kroku
+### 3. Dobierz LOD i sprawdź granicę (4.5–5.0)
 
-### 3.0: Import i audyt CAD
+Zmień tylko próg przełączania LOD. Dobierz go tak, aby wymagany otwór pozostał rozpoznawalny przy mniejszym koszcie; sprawdź wynik przed/po (4.5). Powtórz kontrolę przy drugim przygotowanym dystansie kamery. Dopisz do tego samego wniosku, kiedy uproszczenie przestaje nadawać się do instruktażu tej części (5.0).
 
-1. Zapisz format źródłowy, łańcuch konwersji i utracone/zachowane informacje.
-2. Sprawdź jednostki, skalę i wymiary po imporcie do Unity.
-3. Zmierz vertices, triangles, submeshes, materiały, boundary, non-manifold, degenerate, q05/qMedian.
-4. Porównaj eksporty A/B/C pod względem rozmiaru, UV, hierarchii, materiałów i wymiarów.
+## Co zrobić na ocenę
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+| Poziom | Dowód z tego samego doświadczenia |
+|---|---|
+| 3.0 | Obejrzyj przygotowane High/Low i ich cechy |
+| 3.5 | Porównaj geometrię i koszt w benchmarku |
+| 4.0 | Wyjaśnij kompromis redukcji siatki |
+| 4.5 | Dobierz LOD zachowujący wymagane otwory przy mniejszym koszcie |
+| 5.0 | Sprawdź przy innej odległości lub liczbie materiałów, wskaż granicę uproszczenia |
 
-### 3.5: Triangulacja i LOD
+Interpretację i ocenę końcową zatwierdza prowadzący.
 
-1. Przygotuj trzy warianty triangulacji/redukcji A/B/C.
-2. Zmierz topologię i jakość każdego wariantu.
-3. Sprawdź zachowanie cech geometrycznych ważnych dla interakcji.
-4. Wybierz kandydatów LOD0/LOD1/LOD2 i zapisz ich liczbę trójkątów.
+## Co sprawdzić w zapisanym wyniku
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+| Wielkość | Jednostka | Kontrola |
+|---|---|---|
+| Trójkąty i materiały | liczba | Sprawdź aktywny wariant, nie tylko nazwę pliku. |
+| Czas klatki | ms | Ta sama trasa, rozgrzewka i okno pomiaru. |
+| Zachowanie cechy i dystans LOD | tak/nie / m | Więcej FPS nie kompensuje brakującego otworu. |
 
-### 4.0: LOD i pomiar wydajności
+**Warunki porównania:** Ta sama część, skala, orientacja, oświetlenie, trasa kamery i stanowisko. Oddziel zmianę siatki od zmiany materiałów.
 
-1. Skonfiguruj LOD Group i sprawdź przejścia między poziomami.
-2. Zmierz czas importu wybranego wariantu zasobu.
-3. Wykonaj po trzy próby benchmarku dla A/B/C.
-4. Zapisz czas importu, mean/median/p95, FPS, triangles, renderers, material slots, CPU/GPU ms, batches i pamięć.
-5. Wskaż punkt, w którym dalsza redukcja geometrii nie daje proporcjonalnego zysku.
+**Nieważna próba:** Brak siatki referencyjnej, błędna skala albo nieznana cecha wymiarowa uniemożliwia ocenę zachowania geometrii. Nie zastępuj jej oceną wizualnej atrakcyjności.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Jeden wniosek
 
-### 4.5: Materiały, draw calls i kolizje
+Wariant ___ zachowuje ___ przy koszcie ___; jego granicą jest ___.
 
-1. Porównaj A/B/C pod względem materiałów, draw calls, CPU/GPU i pamięci.
-2. Wykonaj co najmniej 20 prób kolizji i policz błędy funkcjonalne.
-3. Zidentyfikuj mierzalny problem geometrii/importu i zapisz wynik przed poprawką.
-4. Zastosuj minimalną naprawę i potwierdź wynik po poprawce.
+## Oddanie całego bloku
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+1. Blok 03: Lab 05 i Lab 06. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Po każdym laboratorium otwórz WiRR > Raporty > Formularz raportu laboratoryjnego. Sprawdź numer labu i kompletność. Kliknij „Zapisz raport lokalnie (bez logowania)”. Unity zapisze JSON i rozpocznie wysyłkę. System automatycznie przekaże zgłoszenie do KIA-students/wirr. Nie zakładaj forka, nie używaj Git ani nie wysyłaj e-maila przy poprawnej wysyłce.
+3. Na końcu bloku sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. Sam zapis lokalny nie oznacza oddania. Przyjęcie przez serwer oznacza oczekiwanie na automatyczne przekazanie do repozytorium, a nie zatwierdzoną ocenę. W parze wystarczą dwa wyniki ze wspólnego stanowiska z oboma indeksami.
+4. Brak potwierdzenia: zachowaj pliki i użyj „Wyślij ponownie zapisany raport”. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś błąd prowadzącemu i awaryjnie wyślij lab05.json i lab06.json w ZIP WiRR-blok-03-G1-INDEKS.zip na m.pomianek@prz.edu.pl; temat: WiRR blok 03, grupa, indeksy. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
+5. Tylko gdy nie działa także eksport JSON, uzupełnij WiRR-blok-03-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP na ten sam adres. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowego sprawozdania.
 
-### 5.0: Pipeline finalny
+## Gdy stanowisko nie działa
 
-1. Wykonaj stany `baseline` (wariant bazowy), `fault` (usterka) i `repaired` (po naprawie) dla błędu v5.
-2. Porównaj STEP→DCC→FBX/glTF, USD, bezpośrednią siatkę lub inny uzasadniony pipeline.
-3. Wskaż najważniejsze ryzyko wybranego pipeline.
-4. Wybierz finalny model XR i podsumuj kompromis jakość–wydajność–pamięć.
+Po 5 minutach bez możliwości rozpoczęcia zgłoś prowadzącemu pierwszy błąd. Przejdź z jego pomocą do przygotowanego stanowiska desktop. Nie instaluj SDK, nie buduj APK ani nie pisz brakującego modułu. Zapisz rzeczywisty tryb i wykonane etapy; brakującej liczby nie zastępuj zerem.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+Telefon i gogle nie są wymagane do żadnego progu. Nie zmieniaj komputera ani konfiguracji w trakcie porównania.
 
-## Zakończenie laboratorium
+## Jak czytać schemat
 
-1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
-2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź raport** i popraw wskazane braki.
-4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
+**Cecha przed kosztem:** Najmniejsza siatka nie musi zachować funkcji części. Sprawdź otwór, krawędź lub wymiar wskazany w scenie.
 
-## Materiały dydaktyczne
-Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
+**LOD i collider:** Zmiana widocznej siatki nie dowodzi zmiany geometrii kolizyjnej. Sprawdzaj te reprezentacje niezależnie.
 
-1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
-2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab05/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
-3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
-4. **Importuj Unitree G1 EDU + animacje** — otwiera `RoboAnimation.unitypackage`; model może być dodatkowym przypadkiem porównawczym, ale nie zastępuje obowiązkowego zasobu CAD ani jego pipeline'u.
+**Przypadek użycia:** Wymagana dokładność zależy od zadania i dystansu. Próg LOD odczytaj z przygotowanej konfiguracji, nie z tej ilustracji.
 
-Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
-
-`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+[Szablon tylko przy awarii eksportu JSON](../../Documentation~/WiRR2/WiRR-blok-03-raport-awaryjny.md).

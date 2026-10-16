@@ -1,0 +1,15 @@
+name: Validate WiRR report contract
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+jobs:
+  test:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test single, pair and basic report validation
+        run: python3 -m unittest discover -s scripts~ -p 'test_wirr_grade_report.py' -v

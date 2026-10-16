@@ -1,9 +1,6 @@
 name: WiRR report validation
 
 on:
-  pull_request:
-    paths:
-      - 'students/reports/**/*.json'
   workflow_dispatch:
 
 permissions:
@@ -11,6 +8,7 @@ permissions:
 
 jobs:
   validate-report:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout trusted validator

@@ -8,7 +8,7 @@ namespace KIA.WiRR
     [DisallowMultipleComponent]
     public sealed class WiRRSceneMarker : MonoBehaviour
     {
-        [Range(1, 7)]
+        [Range(1, 8)]
         [InspectorName("Numer laboratorium")]
         [Tooltip("Numer laboratorium, do którego należy ta scena.")]
         [SerializeField] private int labNumber = 1;
@@ -20,7 +20,7 @@ namespace KIA.WiRR
         public int LabNumber
         {
             get => labNumber;
-            set => labNumber = Mathf.Clamp(value, 1, 7);
+            set => labNumber = Mathf.Clamp(value, 1, 8);
         }
 
         public string TeamId

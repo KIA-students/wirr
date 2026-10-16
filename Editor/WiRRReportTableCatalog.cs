@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using KIA.WiRR;
 
 namespace KIA.WiRR.Editor
 {
@@ -26,12 +28,12 @@ namespace KIA.WiRR.Editor
 
     internal static class WiRRReportTableCatalog
     {
-        public static IReadOnlyList<WiRRReportTable> Get(int lab, string checkpoint)
+        public static IReadOnlyList<WiRRReportTable> Get(int lab, string checkpoint, WiRRReportDocument document = null)
         {
             return lab switch
             {
-                1 => Lab01(checkpoint), 2 => Lab02(checkpoint), 3 => Lab03(checkpoint), 4 => Lab04(checkpoint),
-                5 => Lab05(checkpoint), 6 => Lab06(checkpoint), 7 => Lab07(checkpoint),
+                1 => Lab01(checkpoint), 2 => Lab02(checkpoint, document), 3 => Lab03(checkpoint), 4 => Lab04(checkpoint),
+                5 => Lab05(checkpoint), 6 => Lab06(checkpoint), 7 => Lab07(checkpoint), 8 => Lab08(checkpoint),
                 _ => Array.Empty<WiRRReportTable>()
             };
         }
@@ -243,15 +245,27 @@ namespace KIA.WiRR.Editor
             _ => Array.Empty<WiRRReportTable>()
         };
 
-        private static IReadOnlyList<WiRRReportTable> Lab02(string cp) => cp switch
+        private static string[] Lab02Conditions(string cp, WiRRReportDocument document)
         {
-            "3.0" => new[] { T("lab02_cp30_conditions", "Chwyt / socket / ray: pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy"}) },
-            "3.5" => new[] { T("lab02_cp35_conditions", "UI i feedback: pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędne aktywacje"}) },
-            "4.0" => new[] { T("lab02_cp40_conditions", "Lokomocja: pomiary", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy/korekty"}) },
+            var index = document?.studentIndices?.FirstOrDefault();
+            if (!long.TryParse(index, out var sum)) return new[] { "A", "B", "C" };
+            var k = cp == "3.0" ? 1 : cp == "3.5" ? 2 : cp == "4.0" ? 3 : 5;
+            var variant = 1 + ((sum + 2L * (k - 1)) % 5L);
+            var three = cp == "3.0" ? variant == 2 || variant == 3 || variant == 4
+                : cp == "3.5" ? variant == 1 || variant == 2 || variant == 4
+                : cp == "4.0" ? variant == 1 || variant == 5 : false;
+            return three ? new[] { "A", "B", "C" } : new[] { "A", "B" };
+        }
+
+        private static IReadOnlyList<WiRRReportTable> Lab02(string cp, WiRRReportDocument document) => cp switch
+        {
+            "3.0" => new[] { T("lab02_cp30_conditions", "Chwyt / socket / ray: pomiary", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy"}) },
+            "3.5" => new[] { T("lab02_cp35_conditions", "UI i feedback: pomiary", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędne aktywacje"}) },
+            "4.0" => new[] { T("lab02_cp40_conditions", "Lokomocja: pomiary", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy/korekty"}) },
             "4.5" => new[] { T("lab02_scenario", "Scenariusz bazowy", new[]{"1","2","3","4","5"}, new[]{"Czas s","Upuszczenia","Błędne aktywacje","Nieudane teleportacje","Błędy osadzenia/reset","Uwagi"}) },
             "5.0" => new[] {
-                T("lab02_ssq", "SSQ: wyniki liczbowe", new[]{"Osoba A PRE","Osoba A POST","Osoba B PRE","Osoba B POST"}, new[]{"N","O","D","TS"}),
-                T("lab02_quest_experiment", "Eksperyment Quest 3", new[]{"A","B","C"}, new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Mediana s","Błędy/korekty","Komfort 0–10"}) },
+                T("lab02_ssq", "SSQ: wyniki liczbowe", new[]{"Osoba A PRE","Osoba A POST"}, new[]{"N","O","D","TS"}),
+                T("lab02_quest_experiment", "Eksperyment Quest 3", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Mediana s","Błędy/korekty","Komfort 0–10"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
 
@@ -307,12 +321,12 @@ namespace KIA.WiRR.Editor
                 T("lab06_mapping_check", "Trzy pozycje kontrolne przegubów", new[]{"Pozycja 1","Pozycja 2","Pozycja 3"}, new[]{"joint1 źródło deg","joint1 Unity deg","joint1 błąd deg","joint2 źródło deg","joint2 Unity deg","joint2 błąd deg","joint3 źródło deg","joint3 Unity deg","joint3 błąd deg"}) },
             "4.0" => new[] {
                 T("lab06_interarrival", "Inter-arrival: pierwsze 30 próbek", new[]{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"}, new[]{"inter-arrival ms"}),
-                T("lab06_buffer", "Buforowanie i interpolacja: wariant v3", new[]{"A","B","C"}, new[]{"Źródło","Hz","Delay ms","Buffer","T średnie ms","sT ms","Płynność"}),
-                T("lab06_rtt", "RTT: próbki", new[]{"1","2","3","4","5","6","7","8","9","10"}, new[]{"RTT ms"}) },
+                T("lab06_buffer", "Buforowanie i interpolacja: wariant v3", new[]{"A","B","C"}, new[]{"Źródło","Hz","Delay ms","Buffer","T średnie ms","sT ms","Płynność"}) },
             "4.5" => new[] {
-                T("lab06_rtt_compare", "RTT: wariant v4", new[]{"A","B"}, new[]{"N","mean ms","min ms","max ms","Warunki"}),
-                T("lab06_stale", "LIVE / STALE", new[]{"Pomiar"}, new[]{"próg STALE ms","joint_states Hz","pauza Gazebo s","detekcja STALE ms","odzyskanie LIVE ms"}) },
-            "5.0" => new[] { T("lab06_fault", "Eksperyment diagnostyczny", new[]{"baseline","kontrolowany błąd","po naprawie"}, new[]{"Stan / wynik","joint1","joint2","Hz","RTT ms","Uwagi"}) },
+                T("lab06_rtt", "RTT: próbki", new[]{"1","2","3","4","5","6","7","8","9","10"}, new[]{"RTT ms"}),
+                T("lab06_rtt_compare", "RTT: wariant v4", new[]{"A","B"}, new[]{"N","mean ms","min ms","max ms","Warunki"}) },
+            "5.0" => new[] {
+                T("lab06_stale", "LIVE / STALE", new[]{"Pomiar"}, new[]{"próg STALE ms","joint_states Hz","pauza Gazebo s","detekcja STALE ms","odzyskanie LIVE ms"}), T("lab06_fault", "Eksperyment diagnostyczny", new[]{"baseline","kontrolowany błąd","po naprawie"}, new[]{"Stan / wynik","joint1","joint2","Hz","RTT ms","Uwagi"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
 
@@ -326,6 +340,21 @@ namespace KIA.WiRR.Editor
             "4.0" => new[] { T("lab07_usability", "Użyteczność i dostępność", new[]{"U1","U2","U3"}, new[]{"Cel użytkownika","Sukces?","Czas/próby","Błędne aktywacje","Pomoc","Problem dostępności"}) },
             "4.5" => new[] { T("lab07_regression", "Test regresji", new[]{"REG-01","REG-02"}, new[]{"Test","Przed poprawką","Po poprawce","Status końcowy","Dowód"}) },
             "5.0" => new[] { T("lab07_risk", "Macierz ryzyka", new[]{"R-01","R-02","R-03"}, new[]{"Ryzyko","P","S","R","Dowód","Działanie ograniczające","Ryzyko resztkowe"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+ 
+        private static IReadOnlyList<WiRRReportTable> Lab08(string cp) => cp switch
+        {
+            "3.0" => Array.Empty<WiRRReportTable>(),
+            "3.5" => Array.Empty<WiRRReportTable>(),
+            "5.0" => Array.Empty<WiRRReportTable>(),
+            "4.0" => new[] { T("lab08_trials", "Sześć prób A/B (z pliku JSON)",
+                        new[]{"Próba 1", "Próba 2", "Próba 3", "Próba 4", "Próba 5", "Próba 6"},
+                        new[]{"Czas [s]", "Sukces", "Tryb danych", "Wariant"},
+                        "Próby 1–3 = A, 4–6 = B. Niepowodzenia zachowaj; brak pomiaru oznacz NV, nie zerem.") },
+            "4.5" => new[] { T("lab08_comparison", "Wariant bazowy i poprawiony",
+                        new[]{"Przed zmianą", "Po zmianie"},
+                        new[]{"Mediana czasu [s]", "Sukcesy", "Uwagi"}) },
             _ => Array.Empty<WiRRReportTable>()
         };
     }

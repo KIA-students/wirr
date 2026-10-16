@@ -1,81 +1,77 @@
-# Lab 07 — Walidacja i testy akceptacyjne
+# Lab 07: Projektant kontra percepcja
 
-Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 7. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
+**Blok 04, część 1 z 2** · 90 minut · DESKTOP_SIM · 2.0.0-draft.3
 
-## Przygotowanie
+**Pytanie:** Czy sprawny program może utrudniać wykonanie prostego zadania?
 
-1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 07.
-2. Użyj **Zainstaluj / napraw zależności**.
-3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
-4. Użyj **Utwórz / napraw aktywną scenę**.
-5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Przygotuj wersję systemu przeznaczoną do testów i nie zmieniaj kryteriów po zobaczeniu wyniku.
-7. Otwórz Unity Test Framework i formularz raportu Lab07.
-8. Ustal sposób przechowywania dowodów: zrzuty, logi, wyniki pomiarów i identyfikatory testów.
-9. Opcjonalnie zaimportuj **Unitree G1 EDU + animacje** jako realistyczny dodatkowy obiekt obciążający scenę; jeśli go używasz, zachowaj identyczny stan modelu i animacji we wszystkich porównywanych warunkach.
+## Co będziesz badać
 
-## Zadania krok po kroku
+Użyteczność oceniamy względem celu i kontekstu użytkownika. Liczy się ukończenie, błędy i czas rozpatrywane łącznie. Porównanie przed/po na tej samej osobie zawiera również efekt uczenia się. Jedna poprawa dla jednego zadania nie dowodzi, że interfejs pomaga wszystkim użytkownikom.
 
-### 3.0: Kryteria i smoke test
+## Jedno doświadczenie, trzy działania
 
-1. Przed testami zapisz AC-01…AC-06 i oznacz kryteria blokujące.
-2. Wykonaj SM-01…SM-05 z wynikiem oczekiwanym, rzeczywistym, PASS/FAIL/NV i dowodem.
-3. Uzupełnij macierz funkcjonalną dla Lab 1–6.
-4. Niewykonany test oznacz NV, nigdy PASS.
+Zacznij od 3.0. Kolejne poziomy rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie i przejść do drugiego laboratorium bloku. Pracuj solo lub w parze; w parze zamieniajcie role operatora i obserwatora.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+### 1. Wykonaj jedno wyzwanie (3.0)
 
-### 3.5: Wydajność i stabilność
+Otwórz Ekspedycję XR. Obejrzyj strefy manipulacji, nawigacji i odczytu stanu, a do pomiaru wybierz wyzwanie manipulacyjne. Wykonaj je w ustawieniu A: przenieś obiekt do oznaczonego celu. Sprawdź zapis ukończenia, pomyłek i czasu. Zachowaj również wynik nieudany.
 
-1. Zdefiniuj stany: bezczynność, nominalny i obciążeniowy.
-2. W każdym zmierz FPS, ms/klatkę, CPU ms, GPU ms i pamięć.
-3. Zanotuj warunki transportu sieciowego, jeśli występuje.
-4. Porównaj wyniki z wcześniej zapisanymi kryteriami akceptacji.
+### 2. Porównaj czytelność i wyjaśnij (3.5–4.0)
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+W tym samym zadaniu włącz ustawienie B: podświetlenie celu. Nie zmieniaj jego rozmiaru, dystansu ani sposobu sterowania. Powtórz zadanie i porównaj ukończenie, błędy i czas (3.5). W jednym wniosku oceń zmianę, uwzględniając również uczenie się przy kolejnej próbie (4.0).
 
-### 4.0: Użyteczność i dostępność
+### 3. Ulepsz i sprawdź inne tło (4.5–5.0)
 
-1. Zdefiniuj U1, U2 i U3 z jawnym kryterium sukcesu.
-2. Zapisuj sukces, czas/próby, błędne aktywacje i liczbę podpowiedzi.
-3. Zidentyfikuj co najmniej jeden problem dostępności/interfejsu.
-4. Policz skuteczność bez zamiany brakujących danych na wynik pozytywny.
+Dobierz własne ustawienie podświetlenia celu i powtórz to samo zadanie. Porównaj wynik z poprzednimi ustawieniami (4.5). Przełącz przygotowane tło sceny na drugie i sprawdź tę samą konfigurację ponownie. Dopisz do tego samego wniosku, kiedy podświetlenie może przestać pomagać (5.0).
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Co zrobić na ocenę
 
-### 4.5: Awaria i regresja
+| Poziom | Dowód z tego samego doświadczenia |
+|---|---|
+| 3.0 | Ukończ jedno z gotowych mikrowyzwań |
+| 3.5 | Powtórz je z innym ustawieniem interakcji |
+| 4.0 | Wyjaśnij przyczynę różnicy skuteczności |
+| 4.5 | Ulepsz jedno utrudnienie i zweryfikuj efekt |
+| 5.0 | Sprawdź rozwiązanie w drugiej sytuacji/u gościa i wskaż, komu może nie pomóc |
 
-1. Wprowadź kontrolowaną awarię v4 i zmierz stan przed poprawką.
-2. Zapisz H1/H2, test rozstrzygający i minimalną poprawkę.
-3. Wykonaj REG-01 dla naprawionej usterki i REG-02 dla potencjalnej regresji.
-4. Zapisz statusy przed/po i dowody.
+Interpretację i ocenę końcową zatwierdza prowadzący.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Co sprawdzić w zapisanym wyniku
 
-### 5.0: Automatyzacja i ryzyko
+| Wielkość | Jednostka | Kontrola |
+|---|---|---|
+| Ukończenie zadania | tak/nie | Rozpatruj razem z liczbą błędów. |
+| Pomyłki i czas | liczba / s | Zachowaj kolejność powtórzeń. |
+| Ustawienie i kontekst | opis | Druga sytuacja rzeczywiście zmienia warunek. |
 
-1. Zautomatyzuj co najmniej jeden test i pokaż PASS oraz kontrolowany FAIL.
-2. Utwórz R-01…R-03, określ P i S oraz policz R=P×S.
-3. Zapisz działanie ograniczające i ryzyko resztkowe.
-4. Wybierz ACCEPT / ACCEPT WITH CONDITIONS / REJECT wyłącznie na podstawie kryteriów i danych.
+**Warunki porównania:** Ten sam cel, zadanie, dystans i sposób wejścia w serii przed/po. Trening i kolejność powtórzeń pozostają widoczne.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+**Nieważna próba:** Nie przypisuj całej zmiany interfejsowi, jeśli zmieniła się trudność zadania albo uczestnik otrzymał dodatkowe instrukcje. Nie kasuj błędnych prób.
 
-## Zakończenie laboratorium
+## Jeden wniosek
 
-1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
-2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź raport** i popraw wskazane braki.
-4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
+Zmiana ___ wpłynęła na ___; w warunku ___ może nie pomóc, ponieważ ___.
 
-## Materiały dydaktyczne
-Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
+## Oddanie całego bloku
 
-1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
-2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab07/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
-3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
-4. **Importuj Unitree G1 EDU + animacje** — pozwala użyć humanoidalnego modelu jako stałego obciążenia sceny w testach wydajności, stabilności i regresji.
+1. Blok 04: Lab 07 i Lab 08. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Po każdym laboratorium otwórz WiRR > Raporty > Formularz raportu laboratoryjnego. Sprawdź numer labu i kompletność. Kliknij „Zapisz raport lokalnie (bez logowania)”. Unity zapisze JSON i rozpocznie wysyłkę. System automatycznie przekaże zgłoszenie do KIA-students/wirr. Nie zakładaj forka, nie używaj Git ani nie wysyłaj e-maila przy poprawnej wysyłce.
+3. Na końcu bloku sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. Sam zapis lokalny nie oznacza oddania. Przyjęcie przez serwer oznacza oczekiwanie na automatyczne przekazanie do repozytorium, a nie zatwierdzoną ocenę. W parze wystarczą dwa wyniki ze wspólnego stanowiska z oboma indeksami.
+4. Brak potwierdzenia: zachowaj pliki i użyj „Wyślij ponownie zapisany raport”. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś błąd prowadzącemu i awaryjnie wyślij lab07.json i lab08.json w ZIP WiRR-blok-04-G1-INDEKS.zip na m.pomianek@prz.edu.pl; temat: WiRR blok 04, grupa, indeksy. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
+5. Tylko gdy nie działa także eksport JSON, uzupełnij WiRR-blok-04-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP na ten sam adres. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowego sprawozdania.
 
-Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
+## Gdy stanowisko nie działa
 
-`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+Po 5 minutach bez możliwości rozpoczęcia zgłoś prowadzącemu pierwszy błąd. Przejdź z jego pomocą do przygotowanego stanowiska desktop. Nie instaluj SDK, nie buduj APK ani nie pisz brakującego modułu. Zapisz rzeczywisty tryb i wykonane etapy; brakującej liczby nie zastępuj zerem.
+
+Telefon i gogle nie są wymagane do żadnego progu. Nie zmieniaj komputera ani konfiguracji w trakcie porównania.
+
+## Jak czytać schemat
+
+**Tylko jedna zmiana:** W ilustracji wyróżniono cel bez zmiany jego geometrii. Jeżeli zmieniasz rozmiar, potraktuj to jako osobny czynnik.
+
+**Trzy wskaźniki razem:** Nie uznawaj krótszego czasu za poprawę, jeśli zadanie częściej kończy się błędem. Zachowaj także nieudane próby.
+
+**Transfer z zastrzeżeniem:** Sprawdź inne tło, dystans lub kontekst. Jedna osoba i jedno zadanie nie uzasadniają wniosku o wszystkich użytkownikach.
+
+[Szablon tylko przy awarii eksportu JSON](../../Documentation~/WiRR2/WiRR-blok-04-raport-awaryjny.md).

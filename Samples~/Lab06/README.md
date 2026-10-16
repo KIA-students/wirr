@@ -1,81 +1,77 @@
-# Lab 06 — Bliźniak cyfrowy ROS 2 + Gazebo
+# Lab 06: Bliźniak cyfrowy powinien wiedzieć, kiedy nie wie
 
-Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 6. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
+**Blok 03, część 2 z 2** · 90 minut · ROS_REPLAY · 2.0.0-draft.3
 
-## Przygotowanie
+**Pytanie:** Czy płynny ruch robota oznacza, że jego stan jest aktualny?
 
-1. Otwórz `WiRR → Narzędzia kursu` i wybierz Lab 06.
-2. Użyj **Zainstaluj / napraw zależności**.
-3. Zaimportuj próbkę WiRR oraz wymagane oficjalne próbki Unity.
-4. Użyj **Utwórz / napraw aktywną scenę**.
-5. Uruchom **Sprawdź konfigurację laboratorium** i usuń błędy blokujące.
-6. Wybierz jedną topologię: LOCAL, LAN albo WEBSIM.
-7. Dla WebSim uruchom `docker compose up --build`, ustaw adres WebSocket, kod sesji i model; dla LOCAL/LAN uruchom ROS 2 i Gazebo.
-8. Utwórz model w Unity, uruchom Play Mode i uzyskaj stan LIVE przed pomiarami.
-9. Opcjonalnie zaimportuj **Unitree G1 EDU + animacje** z sekcji **Scena i pomiary → Dodatkowe modele 3D** jako dodatkową reprezentację wizualną. Klipy animacji nie zastępują `JointState` i nie są źródłem danych pomiarowych.
+## Co będziesz badać
 
-## Zadania krok po kroku
+JointState przypisuje położenia przegubom przez ich nazwy, nie przez przypadkową kolejność w tablicy. REPLAY odtwarza zapis; ROS_LIVE wymaga rzeczywistego źródła. STALE oznacza przekroczenie przyjętego wieku danych. Odstęp między wiadomościami i opóźnienie wykrycia STALE nie są RTT. RTT wymaga pomiaru drogi żądanie–odpowiedź.
 
-### 3.0: Źródło stanu
+## Jedno doświadczenie, trzy działania
 
-1. Zapisz topologię, wersje komponentów, adres/port i transport.
-2. Uruchom źródło joint_states: Gazebo/ROS 2 albo WebSim.
-3. Wyślij co najmniej trzy polecenia ruchu i potwierdź zgodność źródła z Unity.
-4. Zmierz częstotliwość JointState i narysuj/opisz przepływ źródło→ROS/rosbridge→Unity.
+Zacznij od 3.0. Kolejne poziomy rozwijają to samo doświadczenie. Możesz zakończyć na osiągniętym etapie i przejść do drugiego laboratorium bloku. Pracuj solo lub w parze; w parze zamieniajcie role operatora i obserwatora.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+### 1. Uruchom odtwarzanie danych (3.0)
 
-### 3.5: Mapowanie przegubów
+Otwórz przygotowaną stację ROS_REPLAY. Sprawdź nazwę zapisu, nazwy przegubów i jednostki. Uruchom odtwarzanie. Obserwuj ruch jednego przegubu, numer kolejnej wiadomości i wiek danych. Przez całe laboratorium źródłem jest zapis; nie uruchamiaj ROS_LIVE ani serwera ROS 2.
 
-1. Dla każdego joint zapisz obiekt Unity, oś, sign, offset i jednostkę.
-2. Mapuj po nazwie joint, nie po indeksie tablicy position.
-3. Ustaw trzy znane pozycje i dla każdej zapisz joint1/joint2/joint3 osobno w źródle oraz w Unity.
-4. Dla każdej pozycji policz błąd każdego przegubu w stopniach i wyjaśnij różnice konwencji.
+### 2. Zatrzymaj dane i wyjaśnij (3.5–4.0)
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+Wstrzymaj dostarczanie nowych wiadomości przygotowanym przełącznikiem. Obserwuj obraz przez 5 s, następnie wznów dane. Odczytaj czas od ostatniej wiadomości do STALE i czas odzyskania (3.5). W jednym wniosku wyjaśnij, dlaczego płynne odświeżanie obrazu nie dowodzi aktualności danych (4.0). STALE jest stanem aktualności, nie innym źródłem danych.
 
-### 4.0: Transport i bufor
+### 3. Dobierz watchdog i sprawdź profil (4.5–5.0)
 
-1. Zarejestruj 30 wartości inter-arrival JointState.
-2. Wykonaj warianty bufora A/B/C i zapisz Hz, opóźnienie, drgania czasowe (jitter) oraz płynność.
-3. Wykonaj co najmniej 10 pomiarów RTT.
-4. Wybierz kompromis bufora ograniczający drgania czasowe (jitter) bez nadmiernego opóźnienia.
+Zmień wyłącznie próg watchdoga. Dobierz wartość, która wykrywa przygotowaną przerwę bez ciągłych fałszywych alertów. Powtórz pauzę i wznowienie, zachowując ten sam zapis (4.5). Włącz drugi przygotowany profil przerw, bez zmiany progu. Dopisz do tego samego wniosku, kiedy twoje ustawienie zawodzi (5.0). Nie opisuj odstępów wiadomości ani czasu alertu jako RTT.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Co zrobić na ocenę
 
-### 4.5: LIVE/STALE
+| Poziom | Dowód z tego samego doświadczenia |
+|---|---|
+| 3.0 | Uruchom przygotowany REPLAY i odczytaj stan |
+| 3.5 | Wstrzymaj strumień i zmierz przejście STALE |
+| 4.0 | Wyjaśnij różnicę płynności obrazu i aktualności danych |
+| 4.5 | Dobierz watchdog/reakcję na STALE i sprawdź przywrócenie |
+| 5.0 | Sprawdź drugi profil opóźnienia i uzasadnij bezpieczną strategię; wyraźnie rozróżnij LIVE/REPLAY |
 
-1. Zapisz próg STALE i nominalne joint_states Hz.
-2. Zatrzymaj źródło danych i zmierz czas do STALE.
-3. Wznow źródło i zmierz czas powrotu do LIVE; porównaj warunki A/B.
-4. Zapisz H1/H2 dla źródła opóźnień i wykonaj test rozstrzygający.
+Interpretację i ocenę końcową zatwierdza prowadzący.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+## Co sprawdzić w zapisanym wyniku
 
-### 5.0: Kontrolowany błąd bliźniaka
+| Wielkość | Jednostka | Kontrola |
+|---|---|---|
+| Odstęp wiadomości i próg STALE | ms | To inne wielkości niż RTT. |
+| Czas od ostatniej wiadomości do alertu | ms | Porównaj z rzeczywistym progiem watchdoga. |
+| Czas odzyskania i źródło | s / opis | Powrót do REPLAY nie oznacza przejścia do ROS_LIVE. |
 
-1. Zapisz wariant bazowy: przeguby, Hz i RTT.
-2. Wprowadź kontrolowany błąd v5 i zanotuj objaw.
-3. Wykonaj H1/H2, test diagnostyczny i minimalną poprawkę.
-4. Po naprawie wyznacz maksymalny błąd synchronizacji i potwierdź STALE→LIVE.
+**Warunki porównania:** Ten sam zapis, mapowanie przegubów i profil przerw w porównaniu przed/po. Zmianę progu odróżnij od zmiany bufora.
 
-Po zakończeniu tego punktu uzupełnij odpowiadającą mu sekcję formularza **WiRR Reports**. Nie przechodź do kolejnego eksperymentu, dopóki nie zapiszesz warunków pomiaru i wyniku.
+**Nieważna próba:** Zegar źródła i odbiornika muszą mieć określoną relację. Oznacz nieznane opóźnienia jako brak danych. Nie odtwarzaj ruchu jako aktualnego po utracie źródła.
 
-## Zakończenie laboratorium
+## Jeden wniosek
 
-1. Otwórz **WiRR → Raporty → Formularz raportu laboratoryjnego** i wybierz najwyższy kompletny punkt kontrolny.
-2. Sprawdź, czy każda tabela zawiera warunki pomiaru, wyniki surowe i krótki wniosek.
-3. Użyj **Sprawdź raport** i popraw wskazane braki.
-4. Wyślij raport dopiero po przejściu walidacji. Checkboxy z panelu zadań są lokalną pomocą i nie są częścią oceny ani raportu.
+Mimo płynnego obrazu dane były ___; strategia ___ pomaga, lecz ___.
 
-## Materiały dydaktyczne
-Po przygotowaniu sceny możesz użyć sekcji **Scena i pomiary → Materiały dydaktyczne**:
+## Oddanie całego bloku
 
-1. **Dodaj środowisko** — tworzy wspólne stanowisko WiRR; w Lab 03–04 zamiast wirtualnego pokoju używany jest lekki zestaw odniesienia AR.
-2. **Dodaj zestaw eksperymentalny** — tworzy prefaby właściwe dla bieżącego laboratorium w `Assets/WiRR/Lab06/Prefabs/Generated` i umieszcza ich instancje pod `WiRR_TeachingAssets`.
-3. **Usuń obiekty dydaktyczne ze sceny** — usuwa wyłącznie gałąź `WiRR_TeachingAssets`; nie usuwa pracy studenta ani wygenerowanych prefabów.
-4. **Importuj Unitree G1 EDU + animacje** — dodatkowy model humanoidalny do wizualizacji i prób sceny. W obowiązkowych pomiarach mapowania używaj danych ze źródła ROS 2/WebSim; animacja modelu nie jest referencją JointState.
+1. Blok 03: Lab 05 i Lab 06. Zachowaj dwa osobne wyniki: numer labu, indeksy, grupę G1/G2, tryb danych, próby i osiągnięty etap. Od 4.0 dopisz jeden krótki wniosek na laboratorium.
+2. Po każdym laboratorium otwórz WiRR > Raporty > Formularz raportu laboratoryjnego. Sprawdź numer labu i kompletność. Kliknij „Zapisz raport lokalnie (bez logowania)”. Unity zapisze JSON i rozpocznie wysyłkę. System automatycznie przekaże zgłoszenie do KIA-students/wirr. Nie zakładaj forka, nie używaj Git ani nie wysyłaj e-maila przy poprawnej wysyłce.
+3. Na końcu bloku sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. Sam zapis lokalny nie oznacza oddania. Przyjęcie przez serwer oznacza oczekiwanie na automatyczne przekazanie do repozytorium, a nie zatwierdzoną ocenę. W parze wystarczą dwa wyniki ze wspólnego stanowiska z oboma indeksami.
+4. Brak potwierdzenia: zachowaj pliki i użyj „Wyślij ponownie zapisany raport”. Bez Internetu ponów po odzyskaniu połączenia. Jeśli nadal się nie udaje, zgłoś błąd prowadzącemu i awaryjnie wyślij lab05.json i lab06.json w ZIP WiRR-blok-03-G1-INDEKS.zip na m.pomianek@prz.edu.pl; temat: WiRR blok 03, grupa, indeksy. Wstaw własną grupę i indeksy; w parze wysyła jedna osoba.
+5. Tylko gdy nie działa także eksport JSON, uzupełnij WiRR-blok-03-raport-awaryjny.md dla obu laboratoriów i wyślij ten jeden plik zamiast ZIP na ten sam adres. Zachowaj kopię. Nie dołączaj projektu Unity, slajdów ani dodatkowego sprawozdania.
 
-Materiały są opcjonalne i służą jako kontekst eksperymentu. Nie konfigurują za studenta komponentów stanowiących cel ćwiczenia. Folder `Prefabs/Generated` jest odtwarzalny — własne rozwiązania zapisuj poza nim.
+## Gdy stanowisko nie działa
 
-`report-template.md` jest synchronizowany z aktualnym szablonem instrukcji laboratorium.
+Po 5 minutach bez możliwości rozpoczęcia zgłoś prowadzącemu pierwszy błąd. Przejdź z jego pomocą do przygotowanego stanowiska desktop. Nie instaluj SDK, nie buduj APK ani nie pisz brakującego modułu. Zapisz rzeczywisty tryb i wykonane etapy; brakującej liczby nie zastępuj zerem.
+
+Telefon i gogle nie są wymagane do żadnego progu. Nie zmieniaj komputera ani konfiguracji w trakcie porównania.
+
+## Jak czytać schemat
+
+**Mapuj po nazwie:** Kolejność elementów wiadomości może się zmieniać. Przypisz nazwę do właściwej osi, zachowując jednostki i znak.
+
+**Dwa zegary jakości:** Częstotliwość renderowania i wiek danych są niezależne. Płynny obraz może przez dłuższy czas przedstawiać nieaktualny stan.
+
+**Właściwa metryka:** Odstęp wiadomości i czas wykrycia STALE nie są RTT. Po wznowieniu replay źródłem nadal pozostaje zapis.
+
+[Szablon tylko przy awarii eksportu JSON](../../Documentation~/WiRR2/WiRR-blok-03-raport-awaryjny.md).

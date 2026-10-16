@@ -17,7 +17,7 @@ namespace KIA.WiRR.Editor
             if (Application.isBatchMode || EditorApplication.isPlayingOrWillChangePlaymode || EditorApplication.isCompiling)
                 return;
 
-            var packageInfo = PackageInfo.FindForPackageName("pl.prz.kia.wirr");
+            var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForPackageName("pl.prz.kia.wirr");
             if (packageInfo == null || string.IsNullOrWhiteSpace(packageInfo.version))
                 return;
 
@@ -27,8 +27,8 @@ namespace KIA.WiRR.Editor
                 return;
 
             EditorPrefs.SetBool(key, true);
-            WiRRCourseWindow.Open();
-            Debug.Log($"[WiRR] Pierwsze uruchomienie WiRR {packageInfo.version}: otwarto panel Narzędzia kursu.");
+            WiRRMissionBoardWindow.Open();
+            Debug.Log($"[WiRR] Pierwsze uruchomienie WiRR {packageInfo.version}: otwarto prosty pulpit Misje i odkrycia.");
         }
     }
 }

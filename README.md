@@ -1,342 +1,48 @@
-<p align="center">
-  <img src="icon.png" alt="WiRR" width="128">
-</p>
+# WiRR | Wirtualna i rozszerzona rzeczywistość
 
-# WiRR Course Toolkit
+Pakiet laboratoryjny dla **Unity 6.6**. Osiem laboratoriów realizowanych w czterech blokach. Każdy student wykonuje własny eksperyment i raport.
 
-Pakiet Unity Package Manager (UPM) dla przedmiotu **Wirtualna i Rozszerzona Rzeczywistość**. WiRR przygotowuje środowisko laboratoriów 1–7, pomaga sprawdzić konfigurację, udostępnia potrzebne narzędzia pomiarowe i prowadzi studenta do złożenia raportu.
+## Laboratoria: cztery bloki po dwa ćwiczenia
 
-## Repozytorium kursu
+Nowe instrukcje WiRR 2.0 są w wersji redakcyjnej **2.0.0-draft.3**. Gotowość scen i eksportu wymaga osobnego odbioru.
 
-Publiczne repozytorium kursu znajduje się pod adresem [KIA-students/wirr](https://github.com/KIA-students/wirr). To z niego studenci instalują pakiet przez Unity Package Manager i do niego odnoszą się materiały kursowe.
+[Start i dokładny sposób oddania](Documentation~/Reference/QUICK_START.md) · [Cztery bloki](Documentation~/Campaign/README.md)
 
-Strona kursu jest dostępna pod adresem [kia-students.github.io/wirr](https://kia-students.github.io/wirr/). Zawiera instrukcję instalacji pakietu, opis WebSim oraz interaktywny kwestionariusz SSQ.
+Otwórz przygotowany projekt, zapisz indeksy solo/para i grupę raz na blok, wykonaj oba laboratoria i zapisz ich raporty w Unity. Zapis uruchamia wysyłkę; system automatycznie przekazuje zgłoszenia do **KIA-students/wirr**. Sprawdź potwierdzenie przyjęcia przez serwer dla obu laboratoriów. E-mail na **m.pomianek@prz.edu.pl** jest wyłącznie awaryjną alternatywą przy nieskutecznej wysyłce. [Dokładne kroki i awaria](Documentation~/Reference/QUICK_START.md). Nie oddawaj dodatkowej karty sesji.
 
-## Zasada działania
-
-WiRR automatyzuje infrastrukturę, a nie wykonanie ćwiczenia. Student nadal sam implementuje rozwiązanie, wykonuje pomiary i interpretuje wyniki zgodnie z instrukcją laboratoryjną.
-
-Pakiet zawiera:
-
-- **WiRR Course Toolkit**: główny panel prowadzący przez przygotowanie laboratorium;
-- **Dependency Installer**: instalację wymaganych pakietów Unity;
-- **Samples Manager**: import materiałów dla wybranego laboratorium;
-- **Scene Tools / Validator**: przygotowanie i kontrolę sceny;
-- **Narzędzia warstwy Runtime**: lekkie komponenty pomiarowe;
-- **Checklisty zadań Lab 01–07**: krok po kroku prowadzą przez punkty kontrolne 3.0–5.0 i wskazują wymagany dowód pomiarowy;
-- **WebSim**: połączenie Unity ze środowiskiem ROS 2/Gazebo przez rosbridge;
-- **Raporty WiRR**: formularz, automatyczny zapis, tabele pomiarowe i raport JSON;
-- **Wysyłanie przez Git**: wysłanie raportu do repozytorium;
-- **Walidacja raportu w CI**: techniczną kontrolę integralności raportu;
-- **Unitree G1 EDU**: dodatkowy model humanoidalnego robota z przykładowymi animacjami, importowany z `RoboAnimation.unitypackage`;
-- **Lab 05: referencyjny STEP**: wspólny model CAD MakerBeam 90° do tessellacji, konwersji, audytu topologii i LOD oraz przewodnik po URDF, MJCF, USD, STEP, STL, OBJ i FBX;
-- **HDRI i skybox**: dziewięć środowisk HDR dostępnych po instalacji UPM, z automatycznym tworzeniem materiału `Skybox/Panoramic`;
-- **XR Showcase**: pięć gotowych efektów przestrzennych z własną logiką Runtime: portal paralaksy 6DoF, Gaze Bloom, Telekinesis Orb, Diegetic HUD i World Scale Totem;
-- **Mixed Reality Showcase**: pięć prefabów łączących warstwę wirtualną z kamerą, dłońmi, ludźmi, danymi głębi, siatką przestrzenną i wykrytymi ścianami;
-- **Mobile AR Showcase**: pięć demonstratorów na smartfon: Tap Placement, Image Marker Portal, World Ruler, Light Match Object i Surface Painter;
-- **Budowanie i instalacja**: instrukcja wewnątrz Unity dla Windows PC, smartfona z Androidem i Meta Quest 3, razem z ADB i profilami budowania (`Build Profiles`).
-
-## Instalacja
-
-W Unity wybierz:
-
-`Window → Package Manager → + → Install package from git URL...`
-
-Repozytorium studenckie:
-
-```text
-https://github.com/KIA-students/wirr.git#main
-```
-
-Pakiet znajduje się w katalogu głównym repozytorium. Adres z `#main` wskazuje bieżącą publiczną wersję pakietu w repozytorium kursu. Repozytorium pakietu: [KIA-students/wirr](https://github.com/KIA-students/wirr). Po pierwszej instalacji w projekcie panel **WiRR Course Toolkit** otworzy się automatycznie jeden raz i wskaże kolejny krok. Później można go otworzyć ręcznie przez **WiRR → Narzędzia kursu**. Wymagana wersja to najnowszą dostępną wersję **Unity 6 (6000.x)** lub nowsza zgodna wersja 6000.6.
-
-### Zalecane środowisko przed pierwszym laboratorium
-
-Środowisko referencyjne kursu to **Windows 11 64-bit**. W Unity Hub dla najnowszą dostępną wersję **Unity 6 (6000.x)** należy doinstalować:
-- **Android Build Support**;
-- **Android SDK & NDK Tools**;
-- **OpenJDK**.
-
-Te moduły są wymagane do budowania na Androida i Meta Quest 3. Do pracy z C# zalecane jest **Visual Studio 2022 Community** z workloadem **Game development with Unity** albo równoważne IDE. **Android Studio** jest zalecane do diagnostyki Androida, ADB, SDK Manager i Logcat, ale nie jest wymagane do samego buildu Unity, jeśli używane są narzędzia Android dostarczone przez Unity Hub. Przed Laboratorium 06 należy również zainstalować **Docker Desktop**.
-
-## Struktura repozytorium
-
-Katalog główny repozytorium jest czystym pakietem UPM. Kod pakietu znajduje się w `Editor/` i `Runtime/`, a materiały importowane przez Package Manager w `Samples~/`.
-
-Pełny projekt Unity używany do rozwoju i testowania pakietu znajduje się w `Project~/`. Sufiks `~` powoduje, że Unity Package Manager nie importuje tego katalogu do projektu studenta, dzięki czemu `Assets`, `Packages` i `ProjectSettings` projektu testowego nie powodują konfliktów GUID z projektem użytkownika. Osoby rozwijające pakiet powinny otwierać w Unity katalog `Project~`, a nie katalog główny repozytorium.
-
-Dodatkowa dokumentacja techniczna znajduje się w `Documentation~/`, a skrypt walidatora CI w `scripts~/`; katalogi te również są celowo pomijane przez Asset Database.
-
-## Laboratoria i zależności
-
-| Lab | Dodatkowe pakiety |
+| Blok | Laboratoria |
 |---|---|
-| 1 | XR Management, OpenXR, XRI, XR Hands |
-| 2 | XR Management, OpenXR, XRI |
-| 3 | XR Management, XRI, AR Foundation, ARCore |
-| 4 | XR Management, XRI, AR Foundation, ARCore |
-| 5 | brak dodatkowych |
-| 6 | ROS-TCP-Connector v0.7.1 z Git |
-| 7 | Unity Test Framework |
+| I | 01 + 02 |
+| II | 03 + 04 |
+| III | 05 + 06 |
+| IV | 07 + 08 |
 
-Materiały startowe znajdują się w `Samples~/Lab01`–`Samples~/Lab07`. Po imporcie próbki WiRR: z panelu WiRR albo bezpośrednio z Unity Package Manager: pakiet automatycznie przygotowuje folder roboczy `Assets/WiRR/LabXX` z folderami `Scenes`, `Scripts`, `Materials`, `Models`, `Prefabs`, `Textures`, `Data`, `Evidence` i `Documentation`. Przy pierwszym imporcie tworzona jest również scena `Scenes/LabXX.unity`.
+Stanowiska przygotowuje prowadzący. Adres instalacyjny pakietu dla przygotowania pracowni: `https://github.com/KIA-students/wirr.git#upm`.
 
-Dla Lab 05 przygotowanie workspace dodatkowo kopiuje obowiązkowy model `makerbeam_bracket_90degree.stp`, jego atrybucję oraz `MODEL_FORMATS_AND_CONVERSION.md` do `Assets/WiRR/Lab05`. Dzięki temu student nie musi samodzielnie wyszukiwać modelu wejściowego.
+## Wykłady: prezentacje PDF
 
-## Prefaby dydaktyczne
+- [W01: Wprowadzenie do technologii XR](WebSim~/site/lectures/WiRR-w01.pdf)
+- [W02: Percepcja, optyka i ergonomia](WebSim~/site/lectures/WiRR-w02.pdf)
+- [W03: Geometria, kalibracja i rejestracja](WebSim~/site/lectures/WiRR-w03.pdf)
+- [W04: Śledzenie i rozumienie sceny](WebSim~/site/lectures/WiRR-w04.pdf)
+- [W05: Interakcja człowiek–system w XR](WebSim~/site/lectures/WiRR-w05.pdf)
+- [W06: Renderowanie i wydajność](WebSim~/site/lectures/WiRR-w06.pdf)
+- [W07: Cyfrowy bliźniak, ROS 2 i teleoperacja](WebSim~/site/lectures/WiRR-w07.pdf)
 
-W sekcji **Scena i pomiary → Materiały dydaktyczne** można opcjonalnie wygenerować:
+## Potrzebujesz dodatkowej pomocy?
 
-- wspólne środowisko laboratorium albo lekki zestaw odniesienia AR;
-- zestaw rozpoznawalnych obiektów eksperymentalnych właściwy dla Lab 01–07;
-- zwykłe prefaby Unity zapisane w `Assets/WiRR/LabXX/Prefabs/Generated`.
+[Instalacja i problemy techniczne](Documentation~/Reference/OS_SETUP.md) ·
+[Quest 3, Android AR i VITURE: podłączenie, budowanie i instalacja aplikacji](Documentation~/Reference/DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md) ·
+[Instrukcje czterech bloków](Documentation~/Campaign/README.md) ·
+[Pełny przewodnik pracy](Documentation~/Reference/UNITY_COURSE_JOURNEY.md) ·
+[Raporty i kryteria](Documentation~/Reference/GRADING_MATRIX.md) ·
+[Indeks dokumentacji](Documentation~/Reference/INDEX.md)
 
-Generator tworzy stylizowane, lekkie obiekty low-poly: stanowisko pomiarowe, moduł zasilania i gniazdo, artefakt AR i ramę kalibracyjną, robota do okluzji, warianty chwytaka do LOD, ramię robota z osiami przegubów oraz stanowisko QA z panelem usterek.
+Materiały rozszerzające, **niewymagane na początku**: [HDRI/PBR](Documentation~/Reference/LIGHTWEIGHT_UPM.md), [komfort XR](Documentation~/Reference/COMFORT_STUDIES.md), [VITURE XR](Documentation~/Reference/VITURE_XR.md), [Liga XR](competition/README.md).
 
-Materiały **nie rozwiązują ćwiczenia za studenta**. Nie konfigurują automatycznie komponentów XRI, kotwic AR, rzutów promieni, mapowania ROS ani procedury testowej, jeżeli właśnie te elementy są celem laboratorium. Folder `Prefabs/Generated` jest odtwarzalny; własne rozwiązania studenta powinny znajdować się poza nim.
+Pakiet opcjonalnych HDRI/PBR jest instalowany osobno: `https://github.com/KIA-students/wirr.git#assets`, a następnie importowany w Unity Package Manager przez zakładkę **Samples**. Nie jest częścią lekkiej instalacji.
 
-### Teksturowane prefaby Grid
+[Repozytorium dla studentów](https://github.com/KIA-students/wirr) · [Strona kursu](https://kia-students.github.io/wirr/) · [Licencja](LICENSE)
 
-Drugi generator, `WiRRPrefabTools`, tworzy dodatkowe obiekty o bardziej charakterystycznej warstwie wizualnej. Korzysta z map PBR dostarczonych w projekcie deweloperskim w `Assets/Textures`:
-
-- `grid_1_*` → `Grid1`; bieżące pliki `grid-1_*` są obsługiwane jako tryb zastępczy;
-- `grid_2_*` → `Grid2`;
-- `grid_3_*` → `Grid3`; bieżące pliki `grid-4_*` są obsługiwane jako tryb zastępczy.
-
-Przy instalacji UPM te same mapy są dostępne w `Textures/Grid`. Narzędzie kopiuje je do `Assets/WiRR/Common/Textures/Generated`, ustawia właściwości importera oraz buduje materiały URP w `Assets/WiRR/Common/Materials/Generated/Grid`. Prefaby trafiają do `Assets/WiRR/LabXX/Prefabs/GridGenerated`.
-
-Dla każdego laboratorium generowane są dwa dodatkowe stanowiska kontekstowe. Są one przeznaczone do obserwacji, pomiarów i własnej rozbudowy, a nie jako gotowe rozwiązania zadań.
-
-## Opcjonalne laboratorium materiałów
-
-WiRR 0.7.0 zawiera dodatkową bibliotekę powierzchni PBR i zestaw demonstratorów przeznaczonych przede wszystkim do Laboratorium 01 oraz Laboratorium 05. Są dostępne w każdej scenie z sekcji **Scena i pomiary → Opcjonalne laboratorium materiałów**.
-
-Biblioteka obejmuje 12 rodzin: piankę akustyczną, beton, blachę ryflowaną, dwie tkaniny, dwa metale, malowane drewno, materiał znaku, trawę i dwie odmiany drewnianej podłogi. Generator korzysta z wielu map: Color, NormalGL, Roughness, Ambient Occlusion, Metalness, Displacement oraz Opacity, jeśli są dostępne.
-
-Dostępne demonstratory:
-
-- **Galeria materiałów** — dwanaście powierzchni na identycznych próbkach geometrycznych;
-- **Rozdzielczość 128–1024** — cztery wersje tej samej tekstury przy tej samej geometrii i UV;
-- **Normal map: porównanie** — albedo bez normal mapy, albedo z normal mapą oraz pełny PBR; lokalne źródło światła można przesuwać;
-- **Kanały PBR** — osobne panele Color, Normal, Roughness, AO, Metalness i Displacement tego samego materiału;
-- **Tiling i mipmapy** — ta sama drewniana powierzchnia z różną gęstością UV, przeznaczona do obserwacji powtarzalności wzoru i zachowania mipmap pod małym kątem.
-
-Źródłowe mapy są kopiowane do `Assets/WiRR/Common/Textures/Generated/Surfaces`. Materiały powstają w `Assets/WiRR/Common/Materials/Generated/Surfaces`, natomiast robocze warianty porównawcze w katalogach `Generated/Quality`. Pełny materiał PBR generuje mapę Metallic/Smoothness: metalness trafia do kanału R, a smoothness jest wyznaczane jako `1 - roughness` i trafia do kanału A.
-
-Do standardowych materiałów używany jest `NormalGL`, ponieważ Unity oczekuje map normalnych w konwencji Y+ (OpenGL). Materiały źródłowe pochodzą z biblioteki ambientCG i są udostępniane przez ambientCG na licencji CC0.
-
-## Ruch, fizyka i dźwięk
-
-WiRR 0.8.0 dodaje opcjonalne demonstratory działające w **Play Mode**. Są dostępne z sekcji **Scena i pomiary → Ruch, fizyka i dźwięk**.
-
-Komponenty warstwy Runtime:
-
-- `WiRRLoopMotion` — ruch PingPong, Bob, Orbit i Rotate; może używać zwykłego Transform albo `Rigidbody.MovePosition/MoveRotation` dla obiektu kinematycznego;
-- `WiRRPhysicsImpulsePad` — trigger nadający dynamicznym Rigidbody impuls i opcjonalny moment obrotowy;
-- `WiRRProceduralAudio` — generuje profile Hum, Beacon, Engine i Wind bez plików WAV/OGG;
-- `WiRRVehicleController` — pojazd Rigidbody z przyspieszaniem, jazdą wstecz, skrętem, przyczepnością boczną, hamowaniem i limitem prędkości.
-
-Gotowe prefaby:
-
-- **DYN_FloatingTeleportPlatform** — platforma okresowo unosząca się w pionie, z przestrzennym niskim humem i `TeleportAreaPlaceholder`;
-- **DYN_ShuttlePlatform** — platforma odjeżdżająca między dwoma położeniami, z dźwiękiem ruchu i miejscem na XRI Teleportation Area;
-- **DYN_DriveableCart** — fizyczny wózek sterowany klawiaturą lub gamepadem; `WASD`/strzałki sterują, spacja hamuje;
-- **DYN_PhysicsImpulseLauncher** — pole triggera wyrzucające kule i kostki o różnych masach;
-- **DYN_KineticAudioBeacon** — obracająca się konstrukcja z orbitującą sondą i proceduralnym beaconem audio.
-
-Pojazd udostępnia metodę `SetExternalInput(Vector2 steeringAndThrottle, float brake)`, dlatego student może zastąpić wejście z klawiatury własnym panelem UI, kontrolerem XR albo innym źródłem sygnału bez modyfikacji fizyki pojazdu.
-
-Ruchome platformy **nie mają automatycznie skonfigurowanego XRI Teleportation Area**. W prefabie znajduje się jedynie `TeleportAreaPlaceholder`, aby student sam wykonał część ćwiczenia dotyczącą teleportacji i warstw interakcji.
-
-## XR Showcase — efekty charakterystyczne dla XR
-
-W sekcji **Scena i pomiary → Efekty charakterystyczne dla XR** dostępnych jest pięć samodzielnych demonstratorów. Każdy prefab ma już przypisany komponent Runtime i działa po wejściu w Play Mode bez zależności od XRI:
-
-- **XR_ParallaxPortal** + `WiRRHeadParallax` — wielowarstwowa paralaksa sterowana translacją głowy; pokazuje różnicę 3DoF/6DoF i head-coupled perspective;
-- **XR_GazeBloom** + `WiRRGazeBloom` — obiekt przestrzenny reagujący na kierunek patrzenia, z publicznym `SetExternalActivation()` do śledzenia wzroku lub XRI;
-- **XR_TelekinesisOrb** + `WiRRTelekinesisOrb` — utrzymanie spojrzenia (gaze dwell) i zdalne przyciąganie (force grab); `BeginHold()`, `Release()` i `ToggleHold()` można przypisać do zdarzeń XRI;
-- **XR_DiegeticHUD** + `WiRRHeadFollower` — miękko podążający panel; `Pin()`/`Unpin()` pozwala porównać interfejs odnoszony do ciała/głowy z interfejsem zakotwiczonym w świecie;
-- **XR_WorldScaleTotem** + `WiRRProximityScale` — przejście miniatura → skala pomieszczenia (room-scale) w funkcji odległości; `SetExternalFactor()` umożliwia sterowanie gestem, suwakiem lub kontrolerem.
-
-Zestaw jest przeznaczony do obserwacji zjawisk typowych dla XR, eksperymentów HCI i rozbudowy przez studentów. Nie zastępuje ocenianych zadań XRI. Szczegóły: `Documentation~/Reference/XR_SHOWCASE.md`.
-
-## Mixed Reality Showcase — rzeczywistość jako część sceny
-
-W sekcji **Scena i pomiary → Mixed Reality: świat rzeczywisty + wirtualny** znajduje się pięć kolejnych prefabów. Ich logika jest niezależna od dostawcy danych: mogą działać z trybem zastępczym w Editorze, ale mają jawne API wejściowe dla realnych sensorów i SDK.
-
-- **MR_CameraWindow** + `WiRRCameraFeedMixer` — obraz z `WebCamTexture` albo zewnętrznej `Texture` z wirtualnym reticle; użyteczne do nakładania grafiki na obraz rzeczywisty;
-- **MR_HandAura** + `WiRRHandAura` — holograficzne markery nadgarstka i pięciu opuszków, linie palców oraz `Pinch01`; prawdziwy hand tracker przekazuje dane przez `SetHandPose(...)`;
-- **MR_PeopleAwareness** + `WiRRPeopleAwareness` — anonimowe markery i strefy wokół wykrytych osób; komponent potrzebuje tylko pozycji w świecie, bez identyfikacji twarzy;
-- **MR_SpatialSurfaceScanner** + `WiRRSpatialSurfaceScanner` — dynamiczna wizualizacja próbek danych głębi / siatki przestrzennej; bez zewnętrznego API danych głębi skanuje collidery za pomocą rzutowania promieni (raycastów);
-- **MR_WallPortal** + `WiRRWallAnchor` — wirtualny portal dopasowywany do wykrytej ściany przez `SetWallPlane(center, normal, size)`; zawartość za ścianą ma dodatkowo head-coupled parallax.
-
-Pełny opis API, trybów zastępczych, prywatności i scenariuszy integracji znajduje się w `Documentation~/Reference/MIXED_REALITY_SHOWCASE.md`.
-
-## Mobile AR Showcase — AR na smartfonie
-
-W sekcji **Scena i pomiary → Mobile AR: rozszerzona rzeczywistość na telefonie** dostępnych jest pięć prefabów przeznaczonych pod dotyk, tylną kamerę i AR Foundation/ARCore:
-
-- **AR_TapPlacement** + `WiRRMobileARTapPlacement` — wskaźnik położenia śledzący wykrytą płaszczyznę lub dane głębi i umieszczanie obiektu przez tap;
-- **AR_ImageMarkerPortal** + `WiRRMobileARImageAnchor` — wirtualna zawartość kotwiona do rozpoznanego obrazu;
-- **AR_WorldRuler** + `WiRRMobileARRuler` — dwupunktowy pomiar dystansu z wynikiem `DistanceMeters`;
-- **AR_LightMatchObject** + `WiRRMobileARLightMatch` — adaptacja wirtualnego światła i materiałów do estymacji oświetlenia kamery;
-- **AR_SurfacePainter** + `WiRRMobileARSurfacePainter` — rysowanie po realnych powierzchniach podczas przeciągania palcem.
-
-Każdy komponent działa w Editorze z trybem zastępczym opartym na colliderach lub symulacji, ale dokładność AR należy testować na fizycznym telefonie. Generator starterów tworzy pięć plików integracyjnych w `Assets/WiRR/LabXX/Scripts/MobileARAdapters`, przeznaczonych do podłączenia `ARRaycastManager`, `ARTrackedImageManager` i `ARCameraManager`.
-
-Instrukcja w Unity: **WiRR → Pomoc → Mobile AR: telefon**. Dokumentacja: `Documentation~/Reference/MOBILE_AR_SHOWCASE.md`.
-
-
-Dla studentów dostępna jest również szczegółowa ścieżka implementacyjna **WiRR → Pomoc → Mixed Reality: implementacja i rozbudowa**. Okno prowadzi przez architekturę `dostawca danych → adapter → komponent WiRR → wizualizacja`, konwersję współrzędnych i cykl życia śledzenia, walidację i proponowane rozszerzenia.
-
-Przycisk **Utwórz startery adapterów MR** generuje w `Assets/WiRR/LabXX/Scripts/MixedRealityAdapters` pięć kompilowalnych plików startowych. Są one własnym kodem studenta i nie są automatycznie nadpisywane. Dzięki nim zależność od Meta SDK, AR Foundation, XR Hands lub własnego modułu CV albo modułu danych głębi pozostaje w projekcie studenta, a nie w warstwie Runtime WiRR niezależnej od dostawcy danych.
-
-Dokument `Documentation~/Reference/MIXED_REALITY_IMPLEMENTATION.md` zawiera pełną procedurę dla każdego elementu oraz propozycje rozbudowy w poziomach łatwy / średni / zaawansowany z przykładowymi metrykami.
-
-
-## Dodatkowy model Unitree G1 EDU
-
-W katalogu głównym pakietu znajduje się `RoboAnimation.unitypackage`. Zawiera model 3D humanoidalnego robota **Unitree G1 EDU** oraz przykładowe klipy animacji. W panelu **Scena i pomiary → Dodatkowe modele 3D** można otworzyć standardowy import Unity przyciskiem **Importuj Unitree G1 EDU + animacje**. Import odbywa się przez standardowe okno Unity, dzięki czemu przed zatwierdzeniem student widzi listę dodawanych zasobów. Po imporcie model i animacje stają się zwykłymi zasobami projektu studenta i mogą być używane w scenach oraz pomiarach tak jak pozostałe modele.
-
-Model jest opcjonalnym zasobem uzupełniającym:
-- w **Lab 05** może służyć jako złożony, wieloczęściowy model porównawczy do audytu kosztu renderowania, pamięci, materiałów i LOD;
-- w **Lab 06** może służyć jako dodatkowa reprezentacja wizualna robota podczas pracy z architekturą bliźniaka cyfrowego;
-- w **Lab 07** może być użyty jako realistyczne obciążenie sceny w testach wydajności, stabilności i regresji.
-
-Przykładowe animacje z pakietu służą do demonstracji ruchu. Nie są źródłem `JointState`, nie zastępują pomiarów ROS 2/WebSim i nie stanowią referencji poprawności mapowania przegubów. Import modelu jest opcjonalny i nie zmienia kryteriów zaliczenia żadnego laboratorium. Jeżeli model nie jest potrzebny w danym ćwiczeniu, można pominąć jego import i nie zwiększać niepotrzebnie rozmiaru projektu studenta.
-
-## HDRI i skybox
-
-Od WiRR 1.0.0 pakiet udostępnia dziewięć środowisk HDRI: Amsterdam, Clean Horizon, Day Sky, Evening Environment, Forrest, Indoor Environment, Near Lake, Night Sky i Tower.
-
-W panelu **Scena i pomiary → HDRI i skybox** student wybiera panoramę, widzi jej proponowane zastosowanie i może użyć **Ustaw wybrane HDRI jako Skybox**. Narzędzie tworzy edytowalny materiał `Skybox/Panoramic` w `Assets/WiRR/Common/Skyboxes`, przypisuje plik EXR i ustawia materiał jako skybox aktywnej sceny.
-
-Przykładowe zastosowania:
-- **Clean Horizon** — neutralne benchmarki i porównania materiałów;
-- **Amsterdam** — szkło, metal i złożone tło miejskie;
-- **Indoor Environment** — odbicia i materiały we wnętrzu;
-- **Night Sky** — emisja, sztuczne światła i czytelność UI w ciemności;
-- **Day Sky / Tower** — ekspozycja, sylwetka i otwarte środowisko;
-- **Forrest / Near Lake / Evening Environment** — warunki bardziej złożone percepcyjnie.
-
-Do oświetlenia używane są pliki `*_HDR.exr`; odpowiadające im pliki `*_TONEMAPPED.jpg` służą głównie jako podgląd LDR. Ręczna procedura znajduje się w `Textures/HDRI/README.md`: materiał `Skybox/Panoramic` → EXR → `Window → Rendering → Lighting` → `Environment → Skybox Material`.
-
-## VITURE XR: Full SBS i Immersive 3D
-
-WiRR 1.0.5 dodaje obsługę okularów VITURE XR oraz trzy gotowe sceny demonstracyjne do prezentacji stereoskopii Full SBS i porównania z Immersive 3D.
-
-W Unity dostępne są:
-- `WiRR → VITURE XR → Utwórz przykład Full SBS 3840x1080`;
-- `WiRR → VITURE XR → Instrukcja VITURE XR`;
-- `WiRR → VITURE XR → Wygeneruj 3 sceny demonstracyjne`;
-- sample `VITURE XR: Full SBS i Immersive 3D` w Package Managerze;
-- sceny `VITURE_01_StereoDepthLayers`, `VITURE_02_StereoComfort` i `VITURE_03_Immersive2D_Source`;
-- komponenty runtime `WiRRVitureSbsRig` i `WiRRVitureDemoBootstrap`.
-
-Przykład tworzy dwie równoległe kamery i dzieli framebuffer na lewą oraz prawą połowę. Dla pełnej jakości VITURE użyj 3840×1080, czyli 1920×1080 na oko. Dokumentacja rozdziela natywne stereo SBS od funkcji Immersive 3D, która programowo konwertuje zwykłą treść 2D do obrazu stereoskopowego.
-
-Pełna instrukcja: `Documentation~/Reference/VITURE_XR.md`.
-
-## Budowanie aplikacji na PC, Android i Quest 3
-
-W Unity dostępne jest okno **WiRR → Pomoc → Budowanie i instalacja**, a skrócony przycisk znajduje się także w sekcji **Scena i pomiary**. Instrukcja rozdziela trzy przypadki:
-
-- **Windows PC** — `Build Profiles`, lista scen (`Scene List`), profil samodzielnej aplikacji (`Standalone`), `Build` / `Build And Run`, wynik `.exe + *_Data`;
-- **smartfon z Androidem** — Android Build Support, SDK/NDK/OpenJDK, debugowanie USB, `adb devices`, profil Android, ARCore w laboratoriach AR oraz instalacja przez `Build And Run` lub `adb install -r`;
-- **Meta Quest 3 — aplikacja samodzielna** — tryb programisty (`Developer Mode`), ADB, profil Meta Quest/Android, OpenXR dla Android/Meta Quest, Meta Quest Support, ARM64 i instalacja APK na goglach.
-
-Pakiet wyjaśnia również, dlaczego aplikacja PC i APK nie są tym samym buildem oraz dlaczego APK dla smartfona AR i Quest 3 może wymagać różnych modułów obsługi XR/AR, wejścia, uprawnień i ustawień renderowania. Meta Horizon Link jest opisany jako szybka ścieżka PC VR, a nie zamiennik pomiarów samodzielnej wersji aplikacji uruchamianej na Quest 3.
-
-Pełne materiały referencyjne: `Documentation~/Reference/EXTRA_ASSETS.md` oraz `Documentation~/Reference/BUILD_AND_DEPLOY.md`.
-
-## Strona kursu (GitHub Pages)
-
-[Strona WiRR](https://kia-students.github.io/wirr/) zawiera trzy zakładki:
-
-- [Import do Unity](https://kia-students.github.io/wirr/#unity): instalacja UPM, zależności, próbki i walidacja sceny.
-- [WebSim / Gazebo](https://kia-students.github.io/wirr/#websim): istniejąca instrukcja backendu ROS 2, lokalnie lub w LAN; WebSim jest alternatywą dla symulacji dynamiki w Gazebo.
-- [SSQ](https://kia-students.github.io/wirr/#ssq): 16 objawów, pomiar przed/po, N/O/D/TS, różnica i eksport JSON. Braki odpowiedzi nie są zerami. Polskie tłumaczenie robocze nie jest zwalidowaną adaptacją. Dane nie opuszczają przeglądarki i nie są utrwalane po odświeżeniu.
-
-Źródła strony: `WebSim~/site/`. Testy punktacji: `node --test WebSim~/tests/*.test.mjs`.
-Proces GitHub Pages uruchamia testy przed publikacją. Bieżący zakres strony jest kompletny;
-pozostało 0 dodatkowych PR dla trzech zakładek. Walidacja polskiej adaptacji SSQ
-pozostaje osobnym zadaniem badawczym, poza zakresem wersji dydaktycznej.
-
-## WebSim
-
-WebSim jest prostym klientem rosbridge używanym w ćwiczeniach robotycznych. Student podaje adres backendu, identyfikator sesji i model robota, tworzy model w scenie, uruchamia Play Mode i łączy się z backendem. Panel pokazuje jedynie stan potrzebny do wykonania ćwiczenia, m.in. `LIVE` lub `STALE`, oraz podstawowe polecenia ruchu, Home i Reset.
-
-Gotowy backend Docker znajduje się w `WebSim~/`. Uruchamia lokalny generator ROS 2/rosbridge bez instalacji ROS 2 po stronie Unity. Dla tego samego komputera użyj `ws://127.0.0.1:9090`; dla serwera w LAN: `ws://<IP-serwera>:9090`. Szczegółowa instrukcja: [`WebSim~/README.md`](WebSim~/README.md).
-
-Kontrakt komunikacyjny:
-
-```text
-/wirr/control
-/wirr/<SESSION>/command
-/wirr/<SESSION>/joint_states
-/wirr/<SESSION>/tf
-/wirr/<SESSION>/status
-/clock
-```
-
-W Lab 6 możliwy jest również klasyczny wariant ROS 2/Gazebo z ROS-TCP-Endpoint.
-
-## Raportowanie
-
-Podstawową ścieżką jest `WiRR → Raporty → Formularz raportu laboratoryjnego`. Każde laboratorium ma formularz odpowiadający etapom:
-
-`3.0 → 3.5 → 4.0 → 4.5 → 5.0`.
-
-Formularz zawiera pola opisowe oraz tabele wyników wymagane przez dane ćwiczenie. Szkic jest automatycznie zapisywany lokalnie w `Library/WiRRReports`.
-
-Każdy student pracuje samodzielnie. Student podaje identyfikator studenta i dokładnie jeden numer indeksu. Warianty zadania są wyliczane automatycznie z tego numeru. Do wysłania raportu wymagany jest kompletny etap 3.0. Etapy 3.5–5.0 są opcjonalne; student może zakończyć raport na dowolnym kompletnym etapie, a wyższy etap wymaga ukończenia poprzednich. Wartości jednoznacznie wynikające z danych surowych: m.in. mediany, wybrane sumy, R=P×S i statystyki RTT: formularz oblicza automatycznie i pokazuje jako pola tylko do odczytu.
-
-Finalny raport ma schemat `wirr-report/1.0`. Zawiera identyfikację zgłoszenia, laboratorium, identyfikator studenta, numer indeksu, daty, odpowiedzi i wyniki oraz automatyczny log zdarzeń wysokiego poziomu związanych z realizacją laboratorium. Timeline zapisuje m.in. uruchomienie narzędzi WiRR, wybór laboratorium, instalację zależności, import materiałów, przygotowanie sceny, walidację, zmiany checklisty, wejścia do Play Mode i operacje raportu wraz z czasem UTC. Nie zapisuje treści kodu, naciśnięć klawiszy, zrzutów ekranu ani aktywności poza Unity.
-
-Markdown `report-template.md` w materiałach laboratoryjnych pozostaje formatem referencyjnym i awaryjnym.
-
-Standardowa ścieżka:
-
-`Raport → Sprawdź → Wyślij → GitHub → walidacja CI → prowadzący`.
-
-## Wysyłanie raportu
-
-Przycisk **Wyślij raport** zapisuje finalny JSON w strukturze:
-
-```text
-students/reports/<student>/lab-XX/<submissionId>.json
-```
-
-i przygotowuje dedykowaną gałąź raportową. Pakiet korzysta z lokalnej konfiguracji `git`; nie przechowuje tokenu GitHub. Jeśli dostępny jest zalogowany GitHub CLI (`gh`), może utworzyć Pull Request automatycznie. W przeciwnym razie student tworzy PR z wypchniętej gałęzi. Wysyłka wymaga konta GitHub z prawem zapisu do repozytorium kursu.
-
-## Walidacja CI
-
-Proces CI `.github/workflows/wirr-report-grade.yml` wykonuje wyłącznie kontrolę techniczną raportu. Sprawdza m.in. wersję schematu, numer laboratorium, identyfikator raportu, identyfikator studenta, dokładnie jeden poprawny numer indeksu oraz obecność i podstawową spójność automatycznego timeline'u aktywności.
-
-CI nie wystawia oceny merytorycznej i nie analizuje sposobu pracy studenta. Ocenę raportu wykonuje prowadzący.
-
-Walidator uruchamiany w Pull Request jest pobierany z zaufanej gałęzi bazowej, natomiast raport pochodzi z gałęzi studenta.
-
-## Zalecany przebieg pracy studenta
-
-1. Utwórz projekt **Universal 3D (URP)** w wersji Unity 6000.6.x wskazanej przez prowadzącego.
-2. Zainstaluj WiRR z `KIA-students/wirr`.
-3. Otwórz `WiRR → Narzędzia kursu` i wybierz laboratorium.
-4. Zainstaluj wymagane zależności i zaimportuj próbkę. WiRR automatycznie utworzy folder roboczy `Assets/WiRR/LabXX` i scenę bazową.
-5. Otwórz przygotowaną scenę, w razie potrzeby użyj funkcji naprawy sceny i uruchom walidację.
-6. W sekcji **Zadania laboratoryjne** wykonuj checklistę punkt po punkcie; po każdym punkcie kontrolnym zapisz wymagany dowód w formularzu raportu.
-7. Uzupełnij formularz raportu do osiągniętego etapu; pola pochodne zostaną obliczone automatycznie.
-8. Wybierz **Sprawdź raport**, popraw wskazane braki i użyj **Wyślij raport**.
-
-## Identyfikacja wizualna
-
-`icon.png` jest podstawowym logo pakietu i jest używany w dokumentacji oraz w oknach Unity **WiRR Course Toolkit** i **WiRR Raport**. `.icon.png` jest ikoną wyświetlaną przez Unity Package Manager. `icon.ico` pozostaje zasobem ikony aplikacyjnej dla środowisk wymagających formatu ICO. Zestaw faviconów jest przechowywany jako `favicon_io.zip`.
-
-## Log aktywności i prywatność
-
-WiRR automatycznie prowadzi lokalny log zdarzeń wysokiego poziomu związanych z realizacją laboratorium i dołącza go do wysyłanego raportu. Log zawiera nazwy technicznych zdarzeń, ich czas UTC, numer laboratorium, ogólny wynik operacji oraz wybrane czasy trwania, np. sesji Play Mode. Nie obejmuje treści kodu, naciśnięć klawiszy, zrzutów ekranu, zawartości innych aplikacji ani aktywności poza Unity. Pole `activitySummary.elapsedSeconds` oznacza odstęp czasu pomiędzy pierwszym i ostatnim zapisanym zdarzeniem, a nie ciągły czas aktywnej pracy.
-
-## Licencja
-
-Szczegóły znajdują się w pliku `LICENSE`.
+**Uwaga dla prowadzących:** dokumentacja szczegółowa, narzędzia deweloperskie, architektura, release i materiały rozszerzające pozostają w katalogu `Documentation~/Reference/`. Nie trzeba ich przeglądać, aby rozpocząć laboratorium.
 

@@ -1,12 +1,6 @@
 name: Wydanie WiRR
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'package.json'
-      - 'CHANGELOG.md'
-      - '.github/workflows/release.yml'
   workflow_dispatch:
 
 permissions:
@@ -14,6 +8,7 @@ permissions:
 
 jobs:
   release:
+    if: ${{ github.ref == 'refs/heads/main' }}
     name: Walidacja i publikacja wydania
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -44,11 +39,12 @@ jobs:
           package = json.loads((root / "package.json").read_text(encoding="utf-8"))
           version = package["version"].strip()
 
-          if not re.fullmatch(r"\d+\.\d+\.\d+", version):
-              raise SystemExit(f"Nieprawidłowa stabilna wersja SemVer: {version}")
+          stable = bool(re.fullmatch(r"\d+\.\d+\.\d+", version))
+          if not re.fullmatch(r"\d+\.\d+\.\d+(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?", version):
+              raise SystemExit(f"Nieprawidłowa wersja SemVer: {version}")
 
           changelog = (root / "CHANGELOG.md").read_text(encoding="utf-8")
-          if f"## {version} (" not in changelog:
+          if stable and f"## {version} (" not in changelog:
               raise SystemExit(f"Brak sekcji {version} w CHANGELOG.md")
 
           required = [
@@ -368,9 +364,9 @@ jobs:
               sample for sample in samples
               if sample not in lab_samples
           ]
-          if len(lab_samples) != 7:
+          if len(lab_samples) != 8:
               raise SystemExit(
-                  f"Oczekiwano 7 próbek laboratoriów, znaleziono: {len(lab_samples)} "
+                  f"Oczekiwano 8 próbek laboratoriów, znaleziono: {len(lab_samples)} "
                   f"(łącznie wszystkich próbek: {len(samples)})"
               )
 
@@ -386,15 +382,15 @@ jobs:
           table_source = (root / "Editor" / "WiRRReportTableCatalog.cs").read_text(encoding="utf-8")
           schema_source = (root / "Editor" / "WiRRReportSchemaCatalog.cs").read_text(encoding="utf-8")
 
-          if task_source.count("new WiRRLabTask(") != 35:
-              raise SystemExit("Katalog zadań nie zawiera dokładnie 7 × 5 checkpointów.")
+          if task_source.count("new WiRRLabTask(") != 40:
+              raise SystemExit("Katalog zadań nie zawiera dokładnie 8 × 5 checkpointów.")
 
           for checkpoint in checkpoints:
-              if task_source.count(f'new WiRRLabTask("{checkpoint}"') != 7:
+              if task_source.count(f'new WiRRLabTask("{checkpoint}"') != 8:
                   raise SystemExit(f"Niespójny katalog zadań dla checkpointu {checkpoint}.")
-              if table_source.count(f'"{checkpoint}" =>') != 7:
+              if table_source.count(f'"{checkpoint}" =>') != 8:
                   raise SystemExit(f"Niespójny katalog tabel pomiarowych dla checkpointu {checkpoint}.")
-              if schema_source.count(f', "{checkpoint}",') != 7:
+              if schema_source.count(f', "{checkpoint}",') != 8:
                   raise SystemExit(f"Niespójny schemat raportów dla checkpointu {checkpoint}.")
 
           for number, sample in enumerate(lab_samples, 1):
@@ -408,7 +404,7 @@ jobs:
                   raise SystemExit(f"Brak katalogu próbki: {path}")
               guide = (sample_root / "README.md").read_text(encoding="utf-8")
               for checkpoint in checkpoints:
-                  if f"### {checkpoint}" not in guide:
+                  if f"### {checkpoint}" not in guide and f"| {checkpoint} |" not in guide:
                       raise SystemExit(f"Brak checkpointu {checkpoint} w instrukcji próbki Lab {number:02d}.")
 
           viture_sample = viture_samples[0]
@@ -427,6 +423,7 @@ jobs:
 
           Path("release-version.txt").write_text(version, encoding="utf-8")
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"stable={str(stable).lower()}\n")
               output.write(f"version={version}\n")
               output.write(f"tag=v{version}\n")
           print(f"Pakiet WiRR {version}: metadane poprawne.")
@@ -446,6 +443,7 @@ jobs:
           node --check WebSim~/site/app.mjs
 
       - name: Przygotuj informacje o wydaniu
+        if: ${{ github.event_name != 'pull_request' && steps.metadata.outputs.stable == 'true' }}
         shell: bash
         env:
           VERSION: ${{ steps.metadata.outputs.version }}
@@ -492,7 +490,7 @@ jobs:
 
           Przed publikacją automatycznie sprawdzono:
           - spójność `package.json` i `CHANGELOG.md`;
-          - obecność wszystkich siedmiu próbek laboratoriów oraz dodatkowych próbek opcjonalnych;
+          - obecność wszystkich ośmiu próbek laboratoriów oraz dodatkowych próbek opcjonalnych;
           - składnię walidatora raportów;
           - testy punktacji SSQ;
           - składnię aplikacji WebSim;
@@ -513,6 +511,7 @@ jobs:
           PY
 
       - name: Zbuduj archiwa wydania
+        if: ${{ github.event_name != 'pull_request' && steps.metadata.outputs.stable == 'true' }}
         shell: bash
         env:
           VERSION: ${{ steps.metadata.outputs.version }}
@@ -563,6 +562,7 @@ jobs:
           sha256sum "$DIST/wirr-$VERSION.tgz" "$DIST/wirr-$VERSION.zip" > "$DIST/SHA256SUMS.txt"
 
       - name: Zachowaj artefakty CI
+        if: ${{ github.event_name != 'pull_request' && steps.metadata.outputs.stable == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: wirr-${{ steps.metadata.outputs.version }}
@@ -574,6 +574,7 @@ jobs:
           if-no-files-found: error
 
       - name: Opublikuj GitHub Release
+        if: ${{ github.event_name != 'pull_request' && steps.metadata.outputs.stable == 'true' }}
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}

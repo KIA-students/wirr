@@ -228,15 +228,15 @@ namespace KIA.WiRR.Editor
                         "Porównaj FBX, OBJ i kontrolowany wariant STL pochodzące z tego samego źródła; wskaż różnice w rozmiarze, hierarchii, UV, materiałach oraz wymiarach."
                     },
                     "Dowód: audyt baseline i porównanie formatów/eksportu w sekcji 3.0."),
-                new WiRRLabTask("3.5", "Triangulacja i kandydaci LOD", "Zredukuj złożoność bez utraty cech istotnych funkcjonalnie.",
+                new WiRRLabTask("3.5", "Triangulacja i jakość siatki", "Zredukuj złożoność bez utraty cech istotnych funkcjonalnie.",
                     new[]
                     {
                         "Przygotuj trzy warianty triangulacji lub redukcji A/B/C, zmieniając jeden główny parametr procesu.",
                         "Dla każdego wariantu zmierz vertices, triangles, boundary, non-manifold, degenerate, q05 i qMedian.",
                         "Oceń wizualnie, czy zachowano krawędzie, otwory i powierzchnie istotne dla rozpoznania lub interakcji.",
-                        "Na podstawie wyników wybierz geometrie przeznaczone na LOD0, LOD1 i LOD2 oraz zapisz ich liczbę trójkątów."
+                        "Wybierz metodę redukcji zachowującą cechy funkcjonalne; przygotowanie LOD0/1/2 wykonasz w etapie 4.0."
                     },
-                    "Dowód: porównanie A/B/C i uzasadniony zestaw LOD0/1/2."),
+                    "Dowód: porównanie triangulacji A/B/C, jakość topologii i cechy zachowane."),
                 new WiRRLabTask("4.0", "LOD i benchmark", "Zmierz, czy redukcja geometrii rzeczywiście poprawia koszt renderowania zasobu.",
                     new[]
                     {
@@ -251,8 +251,8 @@ namespace KIA.WiRR.Editor
                     {
                         "Porównaj warianty A/B/C pod względem liczby materiałów, draw calls/batches, kosztu CPU/GPU, pamięci oraz jakości wizualnej.",
                         "Sprawdź kolizje w co najmniej 20 próbach funkcjonalnych i zanotuj błędy kontaktu lub przenikania.",
-                        "Zidentyfikuj jeden problem geometrii lub importu, określ mierzalną miarę błędu przed naprawą i zastosuj minimalną poprawkę.",
-                        "Powtórz pomiar po naprawie i potwierdź, że poprawa nie zwiększyła niepotrzebnie kosztu renderowania."
+                        "Zmieniaj jeden parametr materiału, tekstury lub kolizji i oddziel jego koszt od liczby trójkątów.",
+                        "Porównaj czas CPU/GPU, pamięć, jakość wizualną i błędy kolizji w tych samych warunkach."
                     },
                     "Dowód: porównanie materiałów/draw calls, testy kolizji oraz miara błędu przed i po naprawie."),
                 new WiRRLabTask("5.0", "Potok finalny i kontrolowany błąd", "Wybierz powtarzalny pipeline przygotowania modelu do XR i uzasadnij jego ryzyka.",
@@ -281,7 +281,7 @@ namespace KIA.WiRR.Editor
                     {
                         "Dla każdego przegubu zapisz obiekt Unity, typ ruchu, oś lokalną, sign, offset i jednostkę.",
                         "Mapuj po polu name wiadomości JointState i sprawdź odporność na inną kolejność elementów w tablicy position.",
-                        "Ustaw trzy znane pozycje robota i dla każdej zapisz kąty joint1, joint2 i joint3 zarówno w źródle, jak i w Unity.",
+                        "Ustaw trzy znane pozycje robota i zapisz kąty rzeczywistych przegubów w źródle i Unity. Dla RRBot joint3 oznacz N/A, nie 0.",
                         "Dla każdej z trzech pozycji policz błąd w stopniach dla każdego przegubu, a następnie wyjaśnij ewentualny znak, offset lub różnicę konwencji osi."
                     },
                     "Dowód: tabela mapowania i błędy przegubów w sekcji 3.5."),
@@ -290,23 +290,23 @@ namespace KIA.WiRR.Editor
                     {
                         "Zarejestruj pierwsze 30 odstępów inter-arrival między kolejnymi wiadomościami JointState i policz ich zmienność.",
                         "Wykonaj warianty bufora A/B/C, zapisując częstotliwość źródła, delay, parametry bufora, średni odstęp i jego odchylenie oraz subiektywną płynność.",
-                        "Wykonaj co najmniej 10 pomiarów RTT Unity ↔ backend i wyznacz medianę opóźnienia.",
+                        "Dla WebSim przygotuj własny bufor albo wykonaj etap w LOCAL/LAN; sam odbiór JointState nie dowodzi interpolacji.",
                         "Wybierz ustawienie bufora, które ogranicza jitter bez wprowadzania nieuzasadnionego opóźnienia, i uzasadnij wybór danymi."
                     },
-                    "Dowód: 30 inter-arrival, warianty bufora, 10 próbek RTT i wniosek transportowy."),
-                new WiRRLabTask("4.5", "LIVE, STALE i odzyskanie danych", "Sprawdź, czy system jawnie sygnalizuje utratę aktualnego stanu robota.",
+                    "Dowód: 30 inter-arrival, warianty bufora A/B/C i wniosek o interpolacji."),
+                new WiRRLabTask("4.5", "Pomiar RTT", "Zmierz czas żądanie/odpowiedź jednym zegarem, bez mylenia go z opóźnieniem jednostronnym.",
                     new[]
                     {
-                        "Zapisz próg STALE i częstotliwość joint_states podczas normalnej pracy.",
-                        "Zatrzymaj źródło danych na kontrolowany czas i zmierz opóźnienie od ostatniej wiadomości do wykrycia STALE.",
-                        "Wznow źródło danych i zmierz czas powrotu do LIVE; powtórz test dla wariantu sieciowego v4 lub dwóch warunków A/B.",
-                        "Sformułuj H1 i H2 dla dominującego źródła opóźnienia lub utraty danych i wykonaj test, który pozwala je rozróżnić."
+                        "Uruchom jawny tor echo i zapisz transport. WebSim wymaga własnego próbnika RTT albo przejścia na LOCAL/LAN.",
+                        "Wykonaj co najmniej 50 próbek dla każdego z dwóch warunków wariantu v4; zachowaj log, N, średnią, minimum i maksimum.",
+                        "Wpisz pierwsze 10 bazowych próbek do tabeli RTT; komplet logów dołącz jako dowód.",
+                        "Sformułuj H1/H2, porównaj warunki i wyjaśnij ograniczenia pomiaru."
                     },
-                    "Dowód: czasy STALE/LIVE, porównanie RTT i diagnoza H1/H2."),
+                    "Dowód: log co najmniej 50 próbek na warunek, porównanie A/B i interpretacja RTT."),
                 new WiRRLabTask("5.0", "Kontrolowany błąd bliźniaka", "Potwierdź, że system wykrywa błąd synchronizacji i wraca do wiarygodnego stanu.",
                     new[]
                     {
-                        "Zapisz baseline: stan robota, wartości przegubów, częstotliwość danych i RTT.",
+                        "Zapisz baseline, próg STALE i częstotliwość źródła. Zatrzymaj dopływ danych i zmierz czasy STALE oraz odzyskania LIVE.",
                         "Wprowadź kontrolowany błąd v5, np. błędne mapowanie, zatrzymanie danych albo zmianę parametru transportu, zgodnie z wariantem.",
                         "Zapisz objaw, H1, H2, test diagnostyczny i minimalną poprawkę; po naprawie wykonaj ponowny pomiar.",
                         "Wyznacz maksymalny błąd synchronizacji i potwierdź, że przejście STALE → LIVE działa poprawnie po przywróceniu danych."
@@ -360,6 +360,24 @@ namespace KIA.WiRR.Editor
                         "Wybierz ACCEPT, ACCEPT WITH CONDITIONS albo REJECT wyłącznie na podstawie wcześniej zapisanych kryteriów blokujących, wyników testów i ryzyka; uzasadnij decyzję dowodami."
                     },
                     "Dowód: test automatyczny z PASS/FAIL, macierz ryzyka i uzasadniona decyzja akceptacyjna.")
+            },
+            new[]
+            {
+                new WiRRLabTask("3.0", "Problem i działająca scena", "Zdefiniuj użytkownika i mierzalne kryterium akceptacji.",
+                    new[] { "Wybierz jeden wariant PC/Quest, AR, ROS albo VITURE i oznacz rzeczywisty tryb.", "Zapisz kopię sceny; uruchom kontrolę trzech różnych elementów i zachowaj dowód działania." },
+                    "Dowód: problem, kryterium, scena i rzeczywisty tryb platformy."),
+                new WiRRLabTask("3.5", "Logika i test negatywny", "Sprawdź sukces, anulowanie i powtórne wskazanie.",
+                    new[] { "Trzykrotne wskazanie jednego celu nie może zakończyć próby sukcesem.", "Sprawdź, że anulowanie zapisuje niepowodzenie; wynik treningowy wyłącz z analizy." },
+                    "Dowód: test negatywny, przerwanie i zachowane logi."),
+                new WiRRLabTask("4.0", "Sześć prób A/B", "Zachowaj pełne dane surowe porównania.",
+                    new[] { "Zapisz hipotezę, wykonaj A1–A3, zmień jeden parametr i wykonaj B1–B3.", "Wyeksportuj JSON i zaimportuj sześć prób do raportu. Zachowaj niepowodzenia; braki oznacz NV.", "Medianę czasu licz tylko z udanych prób, skuteczność i niepowodzenia porównuj osobno." },
+                    "Dowód: sześć wierszy A/B, log i poprawne obliczenia."),
+                new WiRRLabTask("4.5", "Poprawka i regresja", "Oceń zmianę na podstawie danych i testów.",
+                    new[] { "Udokumentuj jeden parametr przed i po; zinterpretuj czas i skuteczność.", "Wykonaj test negatywny i regresyjny, wskaż ograniczenia porównania." },
+                    "Dowód: wynik A/B, jedna poprawka i test regresyjny."),
+                new WiRRLabTask("5.0", "Demonstrator integracyjny", "Uzasadnij wartość rozwiązania dla użytkownika.",
+                    new[] { "Połącz dwie umiejętności kursowe, oceń ryzyka i kryterium akceptacji.", "Zapisz commit i dowody odtworzenia; pokaż działanie w 60–90 sekund.", "Wyjaśnij wartość względem 2D i ograniczenia rozwiązania." },
+                    "Dowód: integracja, decyzja akceptacyjna i odtwarzalny demonstrator.")
             }
         };
 
@@ -372,3 +390,4 @@ namespace KIA.WiRR.Editor
         }
     }
 }
+

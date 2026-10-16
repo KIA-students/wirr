@@ -1,8 +1,8 @@
 {
   "name": "pl.prz.kia.wirr",
-  "version": "1.0.6",
+  "version": "1.1.4",
   "displayName": "WiRR Course Toolkit",
-  "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i rozszerzona rzeczywistość. Wspiera przygotowanie i walidację siedmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera interaktywne listy zadań dla punktów kontrolnych 3.0–5.0, generowane prefaby dydaktyczne, teksturowane zestawy Grid, bibliotekę materiałów PBR, dziewięć środowisk HDRI z narzędziem skybox, pięć demonstratorów XR, pięć demonstratorów Mixed Reality z adapterami niezależnymi od dostawcy danych oraz pięć demonstratorów Mobile AR na smartfon z integracją AR Foundation. Pakiet zawiera także obsługę okularów VITURE XR z demonstratorem Full SBS 3840×1080, instrukcją filmów 3D SBS i Immersive 3D 2D-to-3D, a także model Unitree G1 EDU z animacjami, demonstratory ruchu, fizyki i dźwięku oraz wbudowane instrukcje budowania i instalowania aplikacji na PC, smartfonie z Androidem i Meta Quest 3. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu.",
+  "description": "Pakiet dydaktyczny do przedmiotu Wirtualna i rozszerzona rzeczywistość. Wspiera przygotowanie i walidację ośmiu laboratoriów, konfigurację zależności i scen XR, pomiary wydajności i interakcji, ćwiczenia AR/MR, optymalizację modeli CAD, integrację ROS 2 + Gazebo oraz WebSim w Laboratorium 6. Zawiera interaktywne listy zadań dla punktów kontrolnych 3.0–5.0, generowane prefaby dydaktyczne, teksturowane zestawy Grid, narzędzie skybox współpracujące z opcjonalnym pakietem HDRI/PBR, pięć demonstratorów XR, pięć demonstratorów Mixed Reality z adapterami niezależnymi od dostawcy danych oraz pięć demonstratorów Mobile AR na smartfon z integracją AR Foundation. Pakiet zawiera także obsługę okularów VITURE XR z demonstratorem Full SBS 3840×1080, instrukcją filmów 3D SBS i Immersive 3D 2D-to-3D, a także model Unitree G1 EDU z animacjami, demonstratory ruchu, fizyki i dźwięku oraz wbudowane instrukcje budowania i instalowania aplikacji na PC, smartfonie z Androidem i Meta Quest 3. Próbki laboratoriów zawierają materiały startowe i szablony raportów zsynchronizowane z instrukcjami kursu. Kampania 4 bloki po 2 laboratoria, w tym nowy demonstrator integracyjny Lab 08.",
   "unity": "6000.0",
   "documentationUrl": "https://kia-students.github.io/wirr/",
   "changelogUrl": "https://github.com/KIA-students/wirr/blob/main/CHANGELOG.md",
@@ -36,18 +36,23 @@
     },
     {
       "displayName": "Laboratorium 05: Optymalizacja modeli CAD",
-      "description": "Przygotowanie modeli inżynierskich do wydajnego użycia w XR. Etapy kluczowe: 3.0: audyt modelu CAD i topologii; 3.5: poziomy LOD; 4.0: czas importu, pamięć i koszt klatki; 4.5: diagnostyka oraz naprawa geometrii; 5.0: wybór potoku przetwarzania STEP→DCC→FBX/glTF, USD lub bezpośredniej siatki i ocena ryzyka.",
+      "description": "Przygotowanie CAD do XR. 3.0: audyt; 3.5: triangulacja; 4.0: LOD i pomiary; 4.5: materiały i koszt klatki; 5.0: kontrolowany błąd, hipotezy H1/H2 i minimalna poprawka.",
       "path": "Samples~/Lab05"
     },
     {
       "displayName": "Laboratorium 06: Bliźniak cyfrowy ROS 2 + Gazebo",
-      "description": "Budowa i walidacja prostego bliźniaka cyfrowego robota. Etapy kluczowe: 3.0: źródło symulacji LOCAL/LAN/WEBSIM i przepływ Gazebo→ROS 2→Unity; 3.5: zgodność stanu przegubów; 4.0: opóźnienie, zmienność opóźnienia transmisji (jitter) i bufor interpolacji; 4.5: utrata danych, stan STALE i przywracanie połączenia; 5.0: błąd synchronizacji oraz poprawny powrót STALE→LIVE.",
+      "description": "Bliźniak cyfrowy LOCAL/LAN/WEBSIM. 3.0: źródło i transmisja stanu; 3.5: zgodność przegubów; 4.0: jitter i bufor interpolacji; 4.5: RTT, co najmniej 50 próbek na warunek; 5.0: kontrolowany błąd i STALE→LIVE.",
       "path": "Samples~/Lab06"
     },
     {
       "displayName": "Laboratorium 07: Walidacja i testy akceptacyjne XR",
       "description": "Końcowa walidacja jakości rozwiązania XR. Etapy kluczowe: 3.0: test podstawowy (smoke test) i kryteria akceptacji; 3.5: wydajność CPU/GPU, pamięć i transport; 4.0: użyteczność, skuteczność i błędne aktywacje; 4.5: kontrolowany błąd, przywracanie działania i test regresyjny; 5.0: automatyzacja testów, analiza ryzyka R=P×S i decyzja AKCEPTUJ / AKCEPTUJ WARUNKOWO / ODRZUĆ.",
       "path": "Samples~/Lab07"
+    },
+    {
+      "displayName": "Laboratorium 08: Wynalazca XR i demonstrator integracyjny",
+      "description": "Demonstrator integracyjny XR/AR. 3.0: problem i scena; 3.5: testy negatywne i anulowanie; 4.0: sześć prób A1–A3/B1–B3; 4.5: poprawka i regresja; 5.0: integracja dwóch umiejętności i odtworzenie. Wariant PC bez dodatkowego XR SDK.",
+      "path": "Samples~/Lab08"
     },
     {
       "displayName": "VITURE XR: Full SBS i Immersive 3D",

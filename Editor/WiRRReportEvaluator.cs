@@ -14,12 +14,14 @@ namespace KIA.WiRR.Editor
     internal sealed class WiRRReportEvaluation
     {
         public string SuggestedGrade;
+        public bool BasicMode;
+        public bool BasicComplete;
         public readonly List<string> BlockingIssues = new List<string>();
         public readonly List<WiRRCheckpointEvaluation> Checkpoints = new List<WiRRCheckpointEvaluation>();
 
         public bool CanSubmit =>
             BlockingIssues.Count == 0 &&
-            Checkpoints.Any(cp => cp.Checkpoint == "3.0" && cp.Complete);
+            (BasicMode ? BasicComplete : Checkpoints.Any(cp => cp.Checkpoint == "3.0" && cp.Complete));
     }
 
     internal static class WiRRReportEvaluator
@@ -31,7 +33,18 @@ namespace KIA.WiRR.Editor
             WiRRReportCalculator.Recalculate(document);
             var result = new WiRRReportEvaluation();
             result.BlockingIssues.AddRange(WiRRReportStore.ValidateIdentity(document));
-            if (document == null || document.labNumber < 1 || document.labNumber > 7) return result;
+            if (document == null || document.labNumber < 1 || document.labNumber > 8) return result;
+            result.BasicMode = WiRRReportStore.GetValue(document, "basic.mode") == "true";
+            if (result.BasicMode)
+            {
+                foreach (var key in new[] { "basic.source", "basic.observation", "basic.change", "basic.conclusion" })
+                {
+                    if (string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(document, key)))
+                        result.BlockingIssues.Add("Uzupełnij pole raportu: " + key.Replace("basic.", "") + ".");
+                }
+                result.BasicComplete = result.BlockingIssues.Count == 0;
+                return result;
+            }
 
             var chainOpen = result.BlockingIssues.Count == 0;
             foreach (var grade in Grades)
@@ -58,7 +71,7 @@ namespace KIA.WiRR.Editor
                         cp.Reasons.Add("Uzupełnij pole „" + field.Label + "”.");
                 }
 
-                foreach (var table in WiRRReportTableCatalog.Get(document.labNumber, grade))
+                foreach (var table in WiRRReportTableCatalog.Get(document.labNumber, grade, document))
                 {
                     var emptyRows = table.Rows
                         .Where(row => !table.Columns.Any(column =>

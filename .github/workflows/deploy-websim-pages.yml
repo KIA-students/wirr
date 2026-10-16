@@ -1,16 +1,12 @@
 name: Deploy WebSim Pages
 
 on:
-  pull_request:
-    paths:
-      - 'WebSim~/site/**'
-      - 'WebSim~/tests/**'
-      - '.github/workflows/deploy-websim-pages.yml'
   push:
     branches: [main]
     paths:
       - 'WebSim~/site/**'
       - 'WebSim~/tests/**'
+      - 'competition/scoreboard.json'
       - '.github/workflows/deploy-websim-pages.yml'
   workflow_dispatch:
 
@@ -25,12 +21,17 @@ concurrency:
 
 jobs:
   build:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Stage approved public scores
+        run: |
+          mkdir -p WebSim~/site/competition
+          cp competition/scoreboard.json WebSim~/site/competition/scoreboard.json
       - name: Test SSQ scoring
         run: node --test WebSim~/tests/*.test.mjs
       - name: Validate static site
@@ -40,11 +41,12 @@ jobs:
           node --check WebSim~/site/app.mjs
           test -s WebSim~/site/styles.css
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
         with:
           path: WebSim~/site
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: ${{ (github.event_name != 'pull_request') && github.ref == 'refs/heads/main' }}
     needs: build
     runs-on: ubuntu-latest
     environment:

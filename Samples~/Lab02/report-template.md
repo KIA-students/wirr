@@ -1,10 +1,13 @@
-# Laboratorium 2 — raport: interakcja, lokomocja i komfort użytkownika w VR
+# Laboratorium 2: raport: interakcja, lokomocja i komfort użytkownika w VR
 
-> Uzupełniaj raport na bieżąco. Nie wpisuj nazwisk ani nie dołączaj skanów wypełnionego SSQ.
+> Uzupełniaj wyniki na bieżąco. Sekcję Quest 3 i SSQ wypełnij tylko po rzeczywistym teście w goglach.
+
+Wersja 1.0.0
 
 ## Identyfikacja i warianty
 
 - Numer indeksu `i`: __________
+- Grupa laboratoryjna: G1 / G2
 - `S = i`: __________
 - `v1` (3.0): ___
 - `v2` (3.5): ___
@@ -25,8 +28,8 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - OpenXR: __________
 - Input System: __________
 - Tryb PC: XR Interaction Simulator / inne: __________
-- Scena: `Assets/Scenes/Lab02_Interaction.unity`
-- samodzielna aplikacja na Quest 3: tak / nie / niezweryfikowano
+- Scena: `Assets/WiRR/Lab02/Scenes/Lab02_Interaction.unity`
+- Quest 3 standalone build: tak / nie / niezweryfikowano
 
 ---
 
@@ -51,7 +54,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 3.0 — chwyt, socket, ray
+# Punkt kontrolny 3.0: chwyt, socket, ray
 
 ## Kontrola podstawowa
 
@@ -71,7 +74,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 - Wariant `v1`: ___
 - Pytanie badawcze: __________
 - Przewidywanie przed pomiarem: __________
-- Warunki / poziomy moderatora: __________
+- Warunki / wartości badanego parametru: __________
 
 | Warunek | Próba 1 [s] | 2 | 3 | 4 | 5 | Mediana [s] | Błędy łącznie |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -83,7 +86,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 3.5 — UI i feedback
+# Punkt kontrolny 3.5: UI i feedback
 
 ## Panel World Space
 
@@ -93,7 +96,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 | Reset | działa / nie działa |
 | Potwierdź alarm | działa / nie działa |
 | stan: gotowy → montaż → alarm → ukończono | działa / nie działa |
-| Stan `Hover` różni się od `Select` | tak / nie |
+| Hover różni się od Select | tak / nie |
 | osobny dźwięk sukcesu i błędu | tak / nie |
 | żądanie haptyki jest generowane | tak / nie |
 
@@ -113,7 +116,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 4.0 — lokomocja
+# Punkt kontrolny 4.0: lokomocja
 
 ## Konfiguracja
 
@@ -147,7 +150,7 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Punkt kontrolny 4.5 — scenariusz i diagnostyka
+# Punkt kontrolny 4.5: scenariusz i diagnostyka
 
 ## Scenariusz bazowy
 
@@ -176,21 +179,21 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 
 ---
 
-# Meta Quest 3 i SSQ — obowiązkowe
+# Meta Quest 3 i SSQ: etap 5.0
 
 ## Kontrola Quest 3
 
 | Test | Wynik |
 |---|---|
-| samodzielna aplikacja uruchamia się | działa / nie działa |
-| śledzenie 6DoF | działa / nie działa |
+| build standalone uruchamia się | działa / nie działa |
+| tracking 6DoF | działa / nie działa |
 | Direct Grab | działa / nie działa |
 | Ray/UI | działa / nie działa |
 | teleportacja | działa / nie działa |
 | Snap Turn | działa / nie działa |
 | fizyczna haptyka | działa / nie działa / niezweryfikowano |
 
-## SSQ — student
+## SSQ: student
 
 > Do raportu wpisuj wyłącznie wyniki liczbowe. Formularz źródłowy znajduje się w `resources/SSQ-Lab.pdf` / Załącznik nr 1 instrukcji.
 
@@ -207,24 +210,24 @@ Wzór: `S = i`, `v_k = 1 + ((S + 2(k - 1)) mod 5)`.
 ## Interpretacja SSQ
 
 - Która podskala zmieniła się najbardziej? __________
-- Czy zmiana ma znaczenie dla interpretacji tej sesji? __________
+- Czy objawy nasiliły się, pozostały bez zmian czy zmalały? __________
 - Wniosek ograniczony do danych z tej sesji: __________
 
 Nie używaj SSQ jako diagnozy medycznej i nie wnioskuj o trwałej podatności danej osoby.
 
 ---
 
-# Punkt kontrolny 5.0 — eksperyment na Quest 3
+# Punkt kontrolny 5.0: eksperyment na Quest 3
+
+W tym etapie wszystkie warianty mają dwa warunki A/B, po 3 próby na warunek.
 
 - Wariant `v5`: ___
-- Osoba wykonująca eksperyment: A / B
 - Pytanie badawcze: __________
 
 | Warunek | Próba 1 [s] | 2 | 3 | Mediana [s] | Błędy / korekty | Komfort 0–10 |
 |---|---:|---:|---:|---:|---:|---:|
 | A | | | | | | |
 | B | | | | | | |
-| C (jeśli dotyczy) | | | | | | |
 
 **Odpowiedź na pytanie badawcze:** __________
 
@@ -234,8 +237,8 @@ Nie używaj SSQ jako diagnozy medycznej i nie wnioskuj o trwałej podatności da
 
 1. **Interakcja:** __________
 2. **Lokomocja i komfort:** __________
-3. **Quest 3 / różnica względem symulatora:** __________
-4. **SSQ — wyłącznie wniosek z tej sesji:** __________
+3. **Quest 3 / różnica względem symulatora (jeśli wykonano):** __________
+4. **SSQ: wniosek z tej sesji (jeśli wykonano):** __________
 
 # Git
 

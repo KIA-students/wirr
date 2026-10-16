@@ -1,0 +1,39 @@
+name: Sum instructor-approved WiRR points
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'competition/approved_individual_scores.json'
+      - 'competition/aggregate_student_scores.py'
+      - '.github/workflows/wirr-approved-points.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+concurrency:
+  group: wirr-approved-point-totals
+  cancel-in-progress: false
+jobs:
+  aggregate:
+    if: ${{ (github.repository == 'MatPomGit/wirr') && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Recalculate approved totals
+        run: |
+          python3 competition/aggregate_student_scores.py \
+            --approvals competition/approved_individual_scores.json \
+            --output competition/approved_student_totals.json
+          python3 competition/update_score.py
+      - name: Publish changed totals only
+        run: |
+          set -euo pipefail
+          git add competition/approved_student_totals.json
+          git diff --cached --quiet && exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add competition/approved_student_totals.json
+          git commit -m 'league: recalculate approved individual totals [skip ci]'
+          git push origin HEAD:main

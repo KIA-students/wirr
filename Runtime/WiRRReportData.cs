@@ -11,6 +11,7 @@ namespace KIA.WiRR
         public int labNumber;
         public string course = "Wirtualna i rozszerzona rzeczywistość";
         public string teamId;
+        public string group;
         public List<string> studentIndices = new List<string>();
         public string createdAtUtc;
         public string updatedAtUtc;

@@ -1,4 +1,4 @@
-# Laboratorium 6 — Bliźniak cyfrowy z ROS 2 i Gazebo
+# Laboratorium 6 — Bliźniak cyfrowy z ROS 2, Gazebo lub WebSim
 
 ## Dane studenta
 
@@ -13,6 +13,7 @@
 
 | Element | Wartość |
 |---|---|
+| Tryb laboratorium | LOCAL / LAN / WEBSIM |
 | Unity | |
 | System operacyjny Unity | |
 | ROS 2 / dystrybucja | |
@@ -26,24 +27,31 @@
 | ROS-TCP-Endpoint | |
 | Adres IPv4 hosta ROS | |
 | Port | |
-| Transport Unity ↔ ROS | localhost / LAN / Wi-Fi / inne |
+| Transport Unity ↔ źródło | ROS-TCP / rosbridge WebSocket / inne |
+| Backend WebSim | N/A lub `ws://host:9090` |
+| Kod sesji WebSim | N/A lub kod 3–12 znaków |
+| Model WebSim | N/A / `rrbot` / `wirr-arm3` |
 
 ### Topologia stanowiska i sieć
 
+Dla WEBSIM wpisz N/A w polach dotyczących `ROS-TCP-Endpoint` i portu 10000, a zamiast nich zapisz adres WebSocket, kod sesji i port 9090.
+
 | Element | Wartość |
 |---|---|
-| Komputer A — ROS 2 + Gazebo + Endpoint | osoba / system: |
+| Komputer A — ROS 2 + Gazebo + Endpoint | system / rola: |
 | IPv4 komputera A | |
-| Komputer B — Unity | osoba / system: |
+| Komputer B — Unity | system / rola: |
 | IPv4 komputera B | |
-| Komputer C — diagnostyka (opcjonalny) | osoba / system: |
+| Komputer C — diagnostyka (opcjonalny) | system / rola: |
 | Tryb | dwa komputery / jeden komputer |
 | `ping` B → A | PASS / FAIL |
 | Test TCP B → A:10000 | PASS / FAIL |
 | `ss -ltn` na A pokazuje port 10000 | TAK / NIE |
 | UFW / inna zapora | stan / zastosowana reguła: |
 
-### Weryfikacja instalacji bazowej
+### Weryfikacja instalacji bazowej (LOCAL/LAN)
+
+W trybie WEBSIM ta tabela nie jest obowiązkowa. Zamiast niej zapisz wersję backendu, wynik `docker compose ps` oraz potwierdzenie komunikatu `READY`.
 
 | Kontrola | Wynik / wersja |
 |---|---|
@@ -59,7 +67,9 @@
 | `ign gazebo --versions` | |
 | `ign gazebo --force-version 6 shapes.sdf` | PASS / FAIL |
 
-### ROS Settings w Unity
+### ROS Settings w Unity (LOCAL/LAN)
+
+Dla WEBSIM zapisz konfigurację `WebSimStateSource`: adres WebSocket, kod sesji, robot, próg STALE i ustawienie automatycznego ponawiania połączenia.
 
 | Ustawienie | Wartość |
 |---|---|
@@ -71,7 +81,9 @@
 | Network timeout | |
 | Listen for TF Messages | |
 
-## 2. Uruchomienie robota w Gazebo
+## 2. Uruchomienie źródła stanu
+
+Dla LOCAL/LAN wykonaj poniższe kontrole Gazebo i `ros2_control`. Dla WEBSIM uruchom backend z `WebSim~`, utwórz model przez panel WiRR, uzyskaj stan LIVE i wykonaj trzy polecenia Ruch A/B/C. Pola dotyczące Gazebo oznacz wtedy jako N/A.
 
 ### Kontrolery
 
@@ -99,7 +111,9 @@ Wklej istotny wynik `ros2 control list_hardware_interfaces`:
 
 Dodaj zrzut ekranu, na którym jednocześnie widać robota w Gazebo oraz jego bliźniaka w Unity.
 
-## 3. Audyt grafu ROS 2
+## 3. Audyt grafu ROS 2 / WebSim
+
+Dla WEBSIM udokumentuj co najmniej `/wirr/SESSION/joint_states`, `/wirr/SESSION/command`, `/wirr/SESSION/status`, `/wirr/status` i `/clock`. Nie opisuj połączenia Unity z backendem jako ROS-TCP.
 
 ### Węzły
 
@@ -142,7 +156,7 @@ ROS-TCP-Connector / Unity
 
 ................................................................................
 
-## 4. Eksperyment 1 — Gazebo → ROS 2 → Unity, wariant `v1 = ...`
+## 4. Eksperyment 1 — źródło stanu → Unity, wariant `v1 = ...`
 
 **Hipoteza / oczekiwanie:**
 
@@ -194,7 +208,7 @@ Dla każdej pozycji zapisz wartość w źródle, wartość odczytaną/zaobserwow
 
 ................................................................................
 
-**Objaw w Gazebo / ROS / Unity:**
+**Objaw w źródle / ROS / Unity:**
 
 ................................................................................
 
@@ -243,9 +257,9 @@ Wpisz co najmniej 30 wartości albo dołącz CSV i podaj jego ścieżkę.
 
 ................................................................................
 
-## 9. Pomiar RTT Unity ↔ ROS 2
+## 9. Pomiar RTT Unity ↔ źródło
 
-Opisz, dlaczego RTT nie wymaga synchronizacji zegarów oraz dlaczego nie jest równy jednostronnemu opóźnieniu. Zaznacz, że RTT mierzy tor Unity → ROS-TCP → węzeł echo → ROS-TCP → Unity, a nie czas rozwiązania fizyki Gazebo.
+Opisz, dlaczego RTT nie wymaga synchronizacji zegarów oraz dlaczego nie jest równy jednostronnemu opóźnieniu. Dla LOCAL/LAN RTT obejmuje tor Unity → ROS-TCP → węzeł echo → ROS-TCP → Unity. Dla WEBSIM raportuj RTT tylko wtedy, gdy zaimplementowano jawny pomiar żądanie/odpowiedź przez rosbridge/WebSocket; nie zastępuj go czasem renderowania ani okresem publikacji `JointState`.
 
 ................................................................................
 
@@ -274,23 +288,23 @@ Opisz, dlaczego RTT nie wymaga synchronizacji zegarów oraz dlaczego nie jest r�
 
 ................................................................................
 
-## 11. Stan LIVE / STALE przy zatrzymaniu symulacji
+## 11. Stan LIVE / STALE przy zatrzymaniu źródła danych
 
 | Parametr | Wartość |
 |---|---:|
 | próg STALE | ms |
 | częstotliwość `/joint_states` przed pauzą | Hz |
-| czas pauzy Gazebo | s |
+| czas przerwania źródła danych | s |
 | zmierzony czas detekcji STALE | ms |
 | zmierzony czas odzyskania LIVE | ms |
 
-Opisz, co działo się równocześnie z `/clock`, `/joint_states` i modelem Unity podczas pauzy Gazebo:
+Opisz, co działo się równocześnie z `/clock`, strumieniem `JointState` i modelem Unity podczas przerwania źródła:
 
 ................................................................................
 
 ## 12. Eksperyment 5 — wariant `v5 = ...`
 
-### Wariant bazowy
+### Baseline
 
 ................................................................................
 
@@ -309,7 +323,7 @@ Opisz, co działo się równocześnie z `/clock`, `/joint_states` i modelem Unit
 ### Test diagnostyczny
 
 ```text
-Wpisz użyte polecenia ROS 2 / ustawienia Gazebo / ustawienia Unity i kluczowy wynik.
+Wpisz użyte polecenia ROS 2 lub WebSim, ustawienia źródła i Unity oraz kluczowy wynik.
 ```
 
 ### Poprawka
@@ -336,9 +350,9 @@ Wymień co najmniej trzy ograniczenia, np. uproszczona geometria RRBot, brak pe�
 
 Odpowiedz krótko:
 
-1. Który element oblicza fizykę robota: Gazebo, ROS-TCP-Endpoint czy Unity?
-2. Jak stan przegubów przechodzi z Gazebo do Unity?
-3. Dlaczego `joint_state_broadcaster` jest kluczowy dla tej instrukcji?
+1. Który komponent generuje stan robota w użytym trybie: Gazebo czy WebSim?
+2. Jak stan przegubów przechodzi z wybranego źródła do Unity?
+3. Jaka warstwa transportowa łączy Unity ze źródłem: ROS-TCP czy rosbridge/WebSocket?
 4. Dlaczego mapowanie po nazwach przegubów jest ważne?
 5. Jaki kompromis wprowadza bufor interpolacyjny?
 6. Co dokładnie mierzy RTT?

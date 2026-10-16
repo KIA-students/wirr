@@ -1,0 +1,52 @@
+name: Validate student progress PR
+on:
+  workflow_dispatch:
+    inputs:
+      base_sha:
+        description: 'Commit bazowy do oceny postępu'
+        required: true
+        type: string
+      head_sha:
+        description: 'Commit zgłoszenia studenta'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+jobs:
+  validate:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Validate changed paths and progress schemas
+        env:
+          BASE: ${{ inputs.base_sha }}
+          HEAD: ${{ inputs.head_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "$HEAD"
+          mapfile -t paths < <(git diff --name-only "$BASE" "$HEAD")
+          test "${#paths[@]}" -eq 1
+          [[ "${paths[0]}" =~ ^students/progress/[0-9a-f]{32}\.json$ ]]
+          git show "$HEAD:${paths[0]}" > /tmp/wirr-progress.json
+          python3 - "${paths[0]}" <<'PY'
+          import json,re,sys
+          obj=json.load(open('/tmp/wirr-progress.json',encoding='utf-8'))
+          sid=sys.argv[1].split('/')[-1][:-5]
+          assert obj.get('pseudonymousId')==sid and re.fullmatch('[0-9a-f]{32}',sid)
+          assert obj.get('schema')=='wirr-local-progress/1'
+          assert obj.get('group') in ('G1','G2')
+          assert obj.get('gradingStatus')=='not_assessed'
+          assert obj.get('submissionStatus')=='local_only'
+          assert set(obj)=={'schema','pseudonymousId','group','updatedAtUtc','gradingStatus','submissionStatus','unityVersion','labs'}
+          labs=obj.get('labs')
+          assert isinstance(labs,list) and len(labs)==8
+          assert all(x.get('lab')==i and type(x.get('scenePrepared')) is bool
+                     and type(x.get('reportExported')) is bool for i,x in enumerate(labs,1))
+          assert len(open('/tmp/wirr-progress.json','rb').read())<=8192
+          PY

@@ -3,8 +3,7 @@ name: Synchronizacja do KIA-students
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: '17 */6 * * *'
+  # Changes are exported after an actual main update; no periodic polling.
   workflow_dispatch:
 
 permissions:
@@ -21,7 +20,7 @@ env:
 
 jobs:
   sync-pr:
-    if: github.repository == 'MatPomGit/wirr'
+    if: ${{ (github.repository == 'MatPomGit/wirr') && github.ref == 'refs/heads/main' }}
     name: Przygotuj bezpieczny eksport i Pull Request
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -53,6 +52,20 @@ jobs:
             fi
           done
 
+          # PR #45 was merged. Delete only the exact historical branch head,
+          # never delete a branch with new student work added after the merge.
+          merged_pr_sha="66b5003e43f66a998117c9ebbffeb33b9a7e48fd"
+          branch="feat/student-guided-progress-identity"
+          actual_sha="$(git ls-remote --heads origin "refs/heads/${branch}" | awk '{print $1}')"
+          if [ "${actual_sha}" = "${merged_pr_sha}" ]; then
+            echo "Usuwam scaloną gałąź PR #45: ${branch}"
+            git push origin --delete "${branch}"
+          elif [ -n "${actual_sha}" ]; then
+            echo "::warning::Gałąź ${branch} ma nowe zmiany; pozostawiono ją do oceny."
+          fi
+          # upm and sync/public-main are intentionally maintained distribution
+          # branches; archive/course-league-v1-20261011 preserves historical data.
+
       - name: Sprawdź gotowość uwierzytelnienia
         id: auth
         shell: bash
@@ -66,6 +79,7 @@ jobs:
           else
             echo "available=true" >> "${GITHUB_OUTPUT}"
           fi
+
 
       - name: Opublikuj lekką gałąź UPM
         shell: bash
@@ -112,8 +126,8 @@ jobs:
               item for item in package.get("samples", [])
               if str(item.get("displayName", "")).startswith("Laboratorium ")
           ]
-          if len(labs) != 7:
-              raise SystemExit(f"UPM: oczekiwano 7 laboratoriów, znaleziono {len(labs)}")
+          if len(labs) != 8:
+              raise SystemExit(f"UPM: oczekiwano 8 laboratoriów, znaleziono {len(labs)}")
           if not any(item.get("displayName") == "VITURE XR: Full SBS i Immersive 3D"
                      for item in package.get("samples", [])):
               raise SystemExit("UPM: brak sample VITURE XR")
@@ -187,12 +201,35 @@ jobs:
 
           private_paths=(
             ".github/workflows/sync-kia-students-pr.yml"
+            ".github/workflows/wirr-reports-to-github.yml"
+            ".github/workflows/wirr-report-contract-tests.yml"
+            "scripts/export_wirr_reports.py"
+            ".github/workflows/publish-student-upm.yml"
+            ".github/workflows/wirr-approved-points.yml"
             ".github/workflows/sync-from-kia-students.yml"
             ".github/workflows/branch-hygiene.yml"
+            ".github/workflows/finalize-student-pr40.yml"
+            ".github/workflows/cleanup-course-league.yml"
           )
 
           git checkout -B "${EXPORT_BRANCH}" "upstream/${UPSTREAM_BRANCH}"
           git read-tree --reset -u "${source_sha}"
+
+          # The competition scoreboard belongs to the COURSE repository, not
+          # to this development snapshot. Keep all already approved scores.
+          # An initial scoreboard is exported only if the course has none yet.
+          if git ls-tree -r --name-only "upstream/${UPSTREAM_BRANCH}" -- competition \
+               | grep -q '^competition/'; then
+            git checkout "upstream/${UPSTREAM_BRANCH}" -- competition
+            echo "Zachowano aktualny ranking studentów z KIA-students/wirr."
+          fi
+
+          # Submitted student work belongs to the course repository.
+          # A teaching-material export must never delete independent submissions.
+          if git ls-tree -r --name-only "upstream/${UPSTREAM_BRANCH}" -- student-work \
+               | grep -q '^student-work/'; then
+            git checkout "upstream/${UPSTREAM_BRANCH}" -- student-work
+          fi
 
           for path in "${private_paths[@]}"; do
             git rm -f --ignore-unmatch -- "${path}"
@@ -233,6 +270,26 @@ jobs:
             exit 0
           fi
 
+          # Nie zmieniaj SHA otwartego PR, jeśli sanitizowana treść jest identyczna.
+          # Dzięki temu prywatne zmiany workflow w repozytorium źródłowym nie
+          # resetują już zatwierdzonych kontroli publicznego snapshotu.
+          if git ls-remote --exit-code --heads origin "refs/heads/${EXPORT_BRANCH}" >/dev/null 2>&1; then
+            git fetch --no-tags origin \
+              "refs/heads/${EXPORT_BRANCH}:refs/remotes/origin/${EXPORT_BRANCH}"
+            prospective_tree="$(git write-tree)"
+            existing_export_sha="$(git rev-parse "refs/remotes/origin/${EXPORT_BRANCH}")"
+            existing_tree="$(git rev-parse "${existing_export_sha}^{tree}")"
+
+            if [ "${prospective_tree}" = "${existing_tree}" ]; then
+              {
+                echo "needs_pr=true"
+                echo "export_sha=${existing_export_sha}"
+              } >> "${GITHUB_OUTPUT}"
+              echo "Sanitizowany snapshot jest identyczny; zachowano istniejący SHA ${existing_export_sha:0:12}."
+              exit 0
+            fi
+          fi
+
           git commit -m "sync: aktualizacja publicznego pakietu WiRR"
           export_sha="$(git rev-parse HEAD)"
 
@@ -264,55 +321,9 @@ jobs:
             git push origin --delete "${EXPORT_BRANCH}"
           fi
 
-      - name: Wyrównaj historię forka po opublikowaniu zmian
-        if: steps.export.outputs.needs_pr != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          source_sha="${{ steps.export.outputs.source_sha }}"
-          upstream_sha="${{ steps.export.outputs.upstream_sha }}"
-
-          # Nie twórz kolejnego commita, jeśli main jest już bezpośrednio
-          # zakotwiczony na bieżącym KIA-students/wirr:main.
-          first_parent="$(git rev-parse "${source_sha}^" 2>/dev/null || true)"
-          if [ "${first_parent}" = "${upstream_sha}" ]; then
-            echo "Historia forka jest już wyrównana."
-            exit 0
-          fi
-
-          private_paths=(
-            ".github/workflows/sync-kia-students-pr.yml"
-          )
-
-          git checkout -B reconcile-source "${upstream_sha}"
-
-          for path in "${private_paths[@]}"; do
-            if git cat-file -e "${source_sha}:${path}" 2>/dev/null; then
-              mkdir -p "$(dirname "${path}")"
-              git show "${source_sha}:${path}" > "${path}"
-              git add -- "${path}"
-            fi
-          done
-
-          if git diff --cached --quiet HEAD --; then
-            target_sha="${upstream_sha}"
-          else
-            git commit -m "chore: reconcile fork ancestry [skip ci]"
-            target_sha="$(git rev-parse HEAD)"
-          fi
-
-          git push \
-            --force-with-lease="refs/heads/main:${source_sha}" \
-            origin "${target_sha}:refs/heads/main"
-
-          {
-            echo "## Historia forka wyrównana"
-            echo
-            echo "Publiczna zawartość jest zgodna z KIA-students/wirr."
-            echo "Gałąź main została ponownie zakotwiczona na bieżącym upstreamie,"
-            echo "z zachowaniem wyłącznie źródłowej automatyzacji synchronizacji."
-          } >> "${GITHUB_STEP_SUMMARY}"
+      # Do not rebase or force-push source main to the public repository.
+      # Ahead/behind includes intentionally private CI and independent export history.
+      # The source remains authoritative; public changes flow through reviewed PRs.
 
       - name: Oczyść metadane starszych Pull Requestów
         if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
@@ -392,7 +403,16 @@ jobs:
           set -euo pipefail
 
           inherited=false
-          for path in             ".github/workflows/sync-kia-students-pr.yml"             ".github/workflows/sync-from-kia-students.yml"             ".github/workflows/branch-hygiene.yml"; do
+          private_checks=(
+            ".github/workflows/sync-kia-students-pr.yml"
+            ".github/workflows/publish-student-upm.yml"
+            ".github/workflows/wirr-approved-points.yml"
+            ".github/workflows/sync-from-kia-students.yml"
+            ".github/workflows/branch-hygiene.yml"
+            ".github/workflows/finalize-student-pr40.yml"
+            ".github/workflows/cleanup-course-league.yml"
+          )
+          for path in "${private_checks[@]}"; do
             if gh api "repos/${UPSTREAM_REPOSITORY}/contents/${path}" >/dev/null 2>&1; then
               inherited=true
               break
@@ -411,3 +431,119 @@ jobs:
             echo "Repozytorium kursu nie zawiera prywatnej automatyzacji."
           fi
 
+      - name: Scal sanitizowany Pull Request po pomyślnych kontrolach
+        if: steps.export.outputs.needs_pr == 'true' && steps.auth.outputs.available == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.KIA_STUDENTS_SYNC_TOKEN }}
+          REVIEWED_EXPORT_SHA: ${{ steps.export.outputs.export_sha }}
+        run: |
+          set -euo pipefail
+
+          pr_number="$(
+            gh api --method GET "repos/${UPSTREAM_REPOSITORY}/pulls" \
+              -f state=open \
+              -f base="${UPSTREAM_BRANCH}" \
+              -f head="MatPomGit:${EXPORT_BRANCH}" \
+              --jq '.[0].number // ""'
+          )"
+
+          if [ -z "${pr_number}" ]; then
+            echo "::error::Nie znaleziono sanitizowanego Pull Requestu do scalenia."
+            exit 1
+          fi
+
+          checks_seen=false
+          for attempt in {1..12}; do
+            set +e
+            checks_output="$(gh pr checks "${pr_number}" --repo "${UPSTREAM_REPOSITORY}" 2>&1)"
+            set -e
+
+            if printf '%s\n' "${checks_output}" | grep -qi 'no checks reported'; then
+              sleep 5
+              continue
+            fi
+
+            checks_seen=true
+            break
+          done
+
+          if [ "${checks_seen}" != true ]; then
+            # PR workflows are manual-first. Validate the trusted source snapshot
+            # here instead of treating absent check-runs as a successful test.
+            public_head="$(gh api "repos/${UPSTREAM_REPOSITORY}/pulls/${pr_number}" --jq '.head.sha')"
+            if [ "${public_head}" != "${REVIEWED_EXPORT_SHA}" ] || [ "$(git write-tree)" != "$(git rev-parse "${REVIEWED_EXPORT_SHA}^{tree}")" ]; then
+              echo "::error::Public PR head differs from the sanitized snapshot; refusing merge."
+              exit 1
+            fi
+            # Pin our own prepared export, never an arbitrary student branch.
+            # The index tree was safety-checked from source main above.
+            git checkout --detach "${REVIEWED_EXPORT_SHA}"
+            python3 -m unittest discover -s scripts~ -p 'test_wirr*.py' -v
+            if [ "$(git status --porcelain --untracked-files=no)" != "" ]; then
+              echo "::error::Tracked snapshot files changed during validation."
+              exit 1
+            fi
+            pr_url="https://github.com/${UPSTREAM_REPOSITORY}/pull/${pr_number}"
+            set +e
+            merge_output="$(gh api --method PUT "repos/${UPSTREAM_REPOSITORY}/pulls/${pr_number}/merge" \
+              -f sha="${public_head}" -f merge_method=merge 2>&1)"
+            merge_status=$?
+            set -e
+            if [ "${merge_status}" -ne 0 ]; then
+              printf '%s\\n' "${merge_output}" >&2
+              echo "::warning::Validated snapshot awaits GitHub merge permission or branch protection."
+              echo "Validated ${public_head}; merge blocked for ${pr_url}." >> "${GITHUB_STEP_SUMMARY}"
+              exit 0
+            fi
+            if [ "$(printf '%s' "${merge_output}" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("merged", False))')" != "True" ]; then
+              echo "::error::GitHub did not confirm merge."
+              exit 1
+            fi
+            echo "Merged ${pr_url} at reviewed head ${public_head} after local report tests and snapshot safety validation." >> "${GITHUB_STEP_SUMMARY}"
+            exit 0
+          fi
+
+          # Nonzero means pending/failed checks or an API error: do not merge.
+          gh pr checks "${pr_number}" \
+            --repo "${UPSTREAM_REPOSITORY}" \
+            --watch \
+            --interval 10
+
+          set +e
+          merge_output="$(
+            gh pr merge "${pr_number}" \
+              --repo "${UPSTREAM_REPOSITORY}" \
+              --squash \
+              --delete-branch 2>&1
+          )"
+          merge_status=$?
+          set -e
+
+          if [ "${merge_status}" -ne 0 ]; then
+            if printf '%s\n' "${merge_output}" | grep -qi 'Resource not accessible'; then
+              echo "::warning::Token synchronizacji nie ma uprawnienia do scalenia PR #${pr_number}; PR pozostaje gotowy i zweryfikowany."
+              {
+                echo "## PR gotowy do scalenia"
+                echo
+                echo "Kontrole PR #${pr_number} przeszły, ale token synchronizacji nie ma uprawnienia `mergePullRequest`."
+              } >> "${GITHUB_STEP_SUMMARY}"
+              exit 0
+            fi
+
+            if printf '%s\n' "${merge_output}" | grep -qi 'base branch policy prohibits the merge'; then
+              echo "::notice::PR #${pr_number}: wymagania ochrony gałęzi nie pozwalają na natychmiastowe scalenie. Włączam auto-merge."
+              gh pr merge "${pr_number}" \
+                --repo "${UPSTREAM_REPOSITORY}" \
+                --squash \
+                --auto
+              echo "## PR oczekuje na warunki ochrony gałęzi" >> "${GITHUB_STEP_SUMMARY}"
+              echo "Włączono auto-merge dla PR #${pr_number}. Nie deklaruję scalenia przed potwierdzeniem GitHub." >> "${GITHUB_STEP_SUMMARY}"
+              exit 0
+            fi
+
+            printf '%s\n' "${merge_output}" >&2
+            exit "${merge_status}"
+          fi
+
+          echo "Scalono sanitizowany PR #${pr_number} po zielonych kontrolach." >> "${GITHUB_STEP_SUMMARY}"
