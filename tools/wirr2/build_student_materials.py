@@ -157,7 +157,7 @@ def build(course: Path) -> None:
         profile["jitter_m"] = [profile["jitter_m"][index] for index in order]
     (resources / "anchor-tracking.json").write_text(json.dumps(anchor, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     manifest = ROOT / "tools/wirr2/instruction-inputs.json"
-    manifest.write_text(json.dumps({"version": "student-kit/0.1.8", "inputs_sha256": sources}, indent=2) + "\n", encoding="utf-8")
+    manifest.write_text(json.dumps({"version": "student-kit/0.1.9", "inputs_sha256": sources}, indent=2) + "\n", encoding="utf-8")
     # Only assets introduced by this kit. Never modify unrelated package metadata.
     for folder in [ROOT / "Runtime/WiRR2", resources, ROOT / "Editor/WiRR2", ROOT / "Tests"]:
         for path in folder.rglob("*"):

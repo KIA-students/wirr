@@ -106,7 +106,7 @@ namespace KIA.WiRR
     /// <summary>Local session storage and an explicit adapter to the existing draft evidence grader.</summary>
     public static class WiRRStudentEvidence
     {
-        public const string ExperimentVersion = "student-kit/0.1.8";
+        public const string ExperimentVersion = "student-kit/0.1.9";
 
         public static string IdentityKey(IEnumerable<string> indices, string group, int block)
         {
@@ -131,6 +131,7 @@ namespace KIA.WiRR
         public static Dictionary<string, object> Report(WiRRStudentSession session, int labNumber, string unityVersion)
         {
             if (session.pendingTrial != null) throw new InvalidOperationException("Przed eksportem zamknij lub odzyskaj rozpoczętą próbę.");
+            WiRRStudentStorage.Validate(session);
             var lab = session.Lab(labNumber);
             var trials = new List<object>();
             foreach (var trial in lab.trials)

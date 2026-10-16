@@ -1,6 +1,6 @@
 # Materiały Unity do nowych instrukcji
 
-Wersja `student-kit/0.1.8`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
+Wersja `student-kit/0.1.9`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
 Nie jest jeszcze pełnym wdrożeniem wszystkich 40 checkpointów ani zatwierdzonym
 wydaniem na stanowiska studentów. Sceny i źródła są częścią istniejącego pakietu,
 bez drugiej wtyczki i bez dodatkowych zależności runtime.
@@ -60,7 +60,7 @@ laboratoriami zamiast powielać osiem odrębnych eksporterów.
   wynik ma status FAILED, a niezmierzony czas zakończenia pozostaje `null`.
   Odzyskanie nie powiela próby i nie odtwarza fikcyjnych pomiarów cząstkowych.
 - Eksport tworzy dwa `WiRR-labNN.json` i indeks `block.json` w
-  `Application.persistentDataPath/WiRR/exports/<sessionId>`.
+  `Application.persistentDataPath/WiRR/exports/<sessionId>/<exportId>`.
   Wynik ma schemat `wirr-report/2.0-draft.1` opisany w
   [kontrakcie integralności](EVIDENCE-CONTRACT.md), z jawnym źródłem,
   jednostkami, warunkami, wersjami, brakami `null` i czasem UTC.
@@ -82,7 +82,7 @@ zgodność dziewięciu źródeł instrukcji/rubryki z przypiętą wersją źród
 **Nie wykonano kompilacji C#, importu Unity, renderowania Game View, testów
 EditMode/PlayMode ani odbioru Windows/Ubuntu**. Analiza składni nie zastępuje tych testów.
 
-Dołączone testy Unity: 70 przypadków EditMode (m.in. JSON, zapis z kopią,
+Dołączone testy Unity: 78 przypadków EditMode (m.in. JSON, zapis z kopią,
 rozdzielenie wyników, percentyle, nazwane mapowanie replay, geometria siatek
 i import wszystkich scen, granice progów LOD i odzyskanie próby po serializacji)
 oraz osiem testów PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
@@ -357,3 +357,35 @@ pokazu. Prowadzący zatwierdza ocenę; żaden licznik nie nadaje checkpointu.
 Dołączono testy modelu granic 60/90 s, nieosiągniętego celu, zwykłej próby,
 oddzielenia GUEST_SIM, odzyskania podpowiedzi i błędnego zegara. Nie uruchomiono
 ich w Unity; obsługa przycisków, wygląd oraz rzeczywisty pokaz wymagają odbioru.
+
+
+## Odzyskiwanie sesji i spójny eksport bloku
+
+Wersja 0.1.9 sprawdza profil, blok, listy laboratoriów/prób, unikalność identyfikatorów
+prób i nazw metryk, obecność wymaganych pól oraz skończoność dostępnych wartości.
+Sprawdzenie działa przy otwarciu, zapisie i eksporcie, zanim dane trafią do raportu.
+
+Jeśli plik główny jest nieczytelny lub niezgodny, odczyt próbuje jego `.bak`.
+Kopia musi przejść kontrolę tego samego profilu i bloku przed zmianą plików.
+Uszkodzony plik pozostaje pod nazwą `.corrupt.<id>`. Poprawna kopia jest odtwarzana
+jako sesja; otwarta próba jest odzyskiwana jako FAILED. Komunikat ostrzega, że kopia
+może nie zawierać ostatnich zmian. Gdy oba pliki są błędne, żaden nie jest nadpisywany.
+Brak pliku głównego i kopii tworzy nową sesję; brak samego głównego korzysta z kopii.
+
+Każdy eksport ma własny `<exportId>` i nie nadpisuje poprzednich eksportów.
+Najpierw przygotowywane są dwa raporty, potem zapisywane i odczytywane kontrolnie.
+Na końcu powstaje `block.json` z nazwami obu plików, ich SHA-256, identyfikatorem
+sesji/eksportu i statusem LOCAL_ONLY. Przerwana operacja może pozostawić katalog
+częściowy; kompletny zestaw wymaga poprawnego manifestu i zgodnych sum obu raportów.
+Błędny manifest jest zachowywany jako `.incomplete`. Sumy wykrywają zmianę plików,
+nie potwierdzają autentyczności pomiarów ani wysłania wyników.
+
+Po błędzie zapisu nowa próba jest zablokowana do skutecznego ponowienia zapisu.
+Zamknięta próba pozostaje w pamięci sesji, a przycisk „Ponów zapis sesji” pozwala
+ją utrwalić. Nie zamykaj aplikacji przed rozwiązaniem błędu zapisu. Wniosek można
+edytować poza trwającym pomiarem, aby zapis tekstu nie zakłócał benchmarku.
+
+Osiem nowych testów EditMode obejmuje odzyskanie poprawnej kopii i zachowanie
+uszkodzonych bajtów, brak zapisu przy błędnej kopii/profilu, walidację metryk,
+odrębność eksportów, sumy SHA-256, błąd drugiego raportu oraz błędny manifest.
+Są dołączone do odbioru Unity; nie zostały wykonane w tym środowisku.

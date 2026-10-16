@@ -27,6 +27,7 @@ namespace KIA.WiRR
         private WiRRStudentSession session;
         private string index1 = "", index2 = "", group = "G1", savePath, feedback = "", participant = "SOLO";
         private Vector2 scroll;
+        private bool unsavedChanges;
         private int stage, detail, view, count = 10, technique, template;
         private bool highlight, largeTargets, demonstration, physicsLoad, shadows = true, active, practice, grabbed, paused;
         private WiRRMicroMission mission;
@@ -124,13 +125,11 @@ namespace KIA.WiRR
                 WiRRStudentEvidence.IdentityKey(indices, group, block) + ".json");
             try
             {
-                session = File.Exists(savePath) ? ReadSession(savePath, indices, block) :
-                    File.Exists(savePath + ".bak") ? ReadSession(savePath + ".bak", indices, block) :
-                    new WiRRStudentSession { block = block, studentIndices = indices, group = group };
+                session = WiRRStudentStorage.Load(savePath, indices, group, block, out var usedBackup);
                 session.Lab(block * 2 - 1); session.Lab(block * 2);
                 var recovered = session.RecoverInterruptedTrial();
-                if (Save()) feedback = recovered ? "Odzyskano rozpoczętą próbę jako nieudaną, bez wymyślonych pomiarów." :
-                    "Sesja bloku otwarta. Zachowujemy wszystkie wcześniejsze próby.";
+                if (Save()) feedback = usedBackup ? "Odtworzono poprawną kopię zapasową. Najnowsze zmiany mogą nie być obecne; uszkodzony plik zachowano, jeśli istniał." :
+                    recovered ? "Odzyskano rozpoczętą próbę jako nieudaną, bez wymyślonych pomiarów." : "Sesja bloku otwarta. Zachowujemy wszystkie wcześniejsze próby.";
             }
             catch (Exception error) when (error is IOException || error is UnauthorizedAccessException || error is ArgumentException)
             {
@@ -139,29 +138,21 @@ namespace KIA.WiRR
             }
         }
 
-        private WiRRStudentSession ReadSession(string path, string[] indices, int block)
-        {
-            var loaded = JsonUtility.FromJson<WiRRStudentSession>(File.ReadAllText(path));
-            if (loaded == null || loaded.schema != "wirr-block-session/2.0-draft.1" || loaded.block != block || loaded.group != group
-                || loaded.studentIndices == null || !loaded.studentIndices.OrderBy(x => x).SequenceEqual(indices.OrderBy(x => x))
-                || loaded.labs == null || loaded.labs.Any(x => x == null || x.labNumber < 1 || x.labNumber > 8
-                    || (x.labNumber + 1) / 2 != block || x.trials == null || x.trials.Any(t => t == null))
-                || loaded.labs.Select(x => x.labNumber).Distinct().Count() != loaded.labs.Count)
-                throw new ArgumentException("Plik nie odpowiada profilowi i blokowi");
-            return loaded;
-        }
-
         private bool Save()
         {
             if (session == null) return false;
-            try { WiRRStudentEvidence.AtomicWrite(savePath, JsonUtility.ToJson(session, true)); return true; }
-            catch (Exception error) when (error is IOException || error is UnauthorizedAccessException || error is NotSupportedException)
-            { feedback = "Błąd zapisu: " + error.Message; Debug.LogError(feedback); return false; }
+            try
+            {
+                WiRRStudentStorage.Validate(session);
+                WiRRStudentEvidence.AtomicWrite(savePath, JsonUtility.ToJson(session, true)); unsavedChanges = false; return true;
+            }
+            catch (Exception error) when (error is IOException || error is UnauthorizedAccessException || error is NotSupportedException || error is ArgumentException)
+            { unsavedChanges = true; feedback = "Błąd zapisu: " + error.Message; Debug.LogError(feedback); return false; }
         }
 
         public void BeginTrial()
         {
-            if (active || session == null) return;
+            if (active || session == null || unsavedChanges) return;
             Rebuild();
             anchorExperiment = labNumber == 3 ? new WiRRAnchorExperiment(anchorData, detail, anchorRelocalize, anchorFailRecovery) : null;
             depthExperiment = labNumber == 4 ? new WiRRDepthExperiment(depthObservations) : null;
@@ -282,22 +273,12 @@ namespace KIA.WiRR
             if (!Save()) return;
             try
             {
-                var folder = Path.Combine(Application.persistentDataPath, "WiRR", "exports", session.id);
-                var names = new List<string>();
-                foreach (var lab in session.labs.OrderBy(x => x.labNumber))
-                {
-                    var name = "WiRR-lab" + lab.labNumber.ToString("00") + ".json";
-                    WiRRStudentEvidence.AtomicWrite(Path.Combine(folder, name),
-                        WiRRStudentEvidence.Json(WiRRStudentEvidence.Report(session, lab.labNumber, Application.unityVersion)));
-                    names.Add(name);
-                }
-                WiRRStudentEvidence.AtomicWrite(Path.Combine(folder, "block.json"), WiRRStudentEvidence.Json(new Dictionary<string, object> {
-                    { "schemaVersion", "wirr-block-export/2.0-draft.1" }, { "sessionId", session.id },
-                    { "reports", names }, { "deliveryStatus", "LOCAL_ONLY" } }));
+                var folder = WiRRStudentStorage.ExportBlock(session,
+                    Path.Combine(Application.persistentDataPath, "WiRR", "exports"), Application.unityVersion);
                 feedback = "Zapisano dwa wyniki lokalnie: " + folder + ". Przekaż folder kanałem wskazanym przez prowadzącego.";
                 Debug.Log("[WiRR] Eksport lokalny: " + folder);
             }
-            catch (Exception error) when (error is IOException || error is UnauthorizedAccessException || error is NotSupportedException)
+            catch (Exception error) when (error is IOException || error is UnauthorizedAccessException || error is NotSupportedException || error is ArgumentException || error is InvalidOperationException)
             { feedback = "Eksport nieukończony: " + error.Message; }
         }
 
@@ -340,6 +321,8 @@ namespace KIA.WiRR
             DrawControls();
             practice = GUILayout.Toggle(practice, "Trening (bez zapisu do porównania)");
             GUI.enabled = session != null && !active;
+            if (unsavedChanges && GUILayout.Button("Ponów zapis sesji")) Save();
+            GUI.enabled = session != null && !active && !unsavedChanges;
             if (GUILayout.Button("Rozpocznij próbę")) BeginTrial();
             GUI.enabled = true;
             if (active && GUILayout.Button("Przerwij i zachowaj próbę nieudaną")) CancelTrial();
@@ -356,8 +339,9 @@ namespace KIA.WiRR
                 }
                 GUILayout.Label("Twój wniosek (jeden na laboratorium)");
                 var result = session.Lab(labNumber);
+                GUI.enabled = !active;
                 var text = GUILayout.TextArea(result.conclusion ?? "", GUILayout.MinHeight(50));
-                if (text != result.conclusion) { result.conclusion = text; Save(); }
+                if (!active && text != result.conclusion) { result.conclusion = text; Save(); }
                 GUI.enabled = !active;
                 if (GUILayout.Button("Eksportuj dwa wyniki bloku")) Export();
                 GUI.enabled = true;
