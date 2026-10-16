@@ -129,13 +129,13 @@ namespace KIA.WiRR
             if (labNumber == 7 || labNumber == 8)
             {
                 var next = GUILayout.Toolbar(template, labNumber == 7 ? new[] { "Wybór celów PC", "Przejścia punktowe PC", "Odczyt stanu" } :
-                    new[] { "Trenażer", "Inspekcja", "Stan bliźniaka SIM" });
+                    new[] { "Trenażer wyboru PC", "Inspekcja punktów PC", "Odczyt stanu SIM" });
                 changed |= template != next; template = next;
                 var mode = GUILayout.Toolbar(participant == "SOLO" ? 0 : participant == "HUMAN" ? 1 : 2,
                     new[] { "SOLO", "GUEST_HUMAN", "GUEST_SIM" });
                 participant = mode == 0 ? "SOLO" : mode == 1 ? "HUMAN" : "GUEST_SIM";
                 GUILayout.Label(participant == "GUEST_SIM" ? "GUEST_SIM: jawny scenariusz testowy, nie obserwacja człowieka." :
-                    labNumber == 7 && template == 2 ? "Oceń trzy stany danych. Jedna odpowiedź na stan; błędna odpowiedź pozostaje zapisana." :
+                    (labNumber == 7 || labNumber == 8) && template == 2 ? "Oceń trzy stany danych. Jedna odpowiedź na stan; błędna odpowiedź pozostaje zapisana." :
                     "Klikaj cele w kolejności 1–2–3. Błąd pozostaje zapisany. Nie podpowiadaj gościowi w trakcie próby.");
                 if (labNumber == 7) GUILayout.Label("Limit 90 s. W porównaniu przed/po zachowaj ten sam dystans i strefę. Drugi dystans służy kontrpróbie.");
                 if (labNumber == 7 || labNumber == 8)
@@ -144,6 +144,17 @@ namespace KIA.WiRR
                     changed |= bigger != largeTargets; largeTargets = bigger;
                     if (labNumber == 8) demonstration = GUILayout.Toggle(demonstration, "Pokaz 60–90 s (zakończ ręcznie po osiągnięciu celu)");
                 }
+            }
+            if (labNumber == 8)
+            {
+                GUILayout.Label("Odbiorca"); studioAudience = GUILayout.TextField(studioAudience, 120);
+                GUILayout.Label("Cel zastosowania"); studioPurpose = GUILayout.TextField(studioPurpose, 160);
+                GUILayout.Label("Hipoteza ograniczenia do sprawdzenia kontrpróbą"); studioLimit = GUILayout.TextField(studioLimit, 160);
+                if (participant == "GUEST_SIM")
+                    studioGuestProfile = GUILayout.Toolbar(studioGuestProfile, new[] { "Skrypt bez błędów", "Skrypt: pomyłka + podpowiedź" });
+                if (session != null && session.Lab(8).trials.Count > 0 && GUILayout.Button("Powiąż następną próbę z ostatnią zapisaną"))
+                    studioReference = session.Lab(8).trials.Last().id;
+                GUILayout.Label("Próba odniesienia: " + studioReference);
             }
             if (labNumber == 2 || labNumber == 7 || labNumber == 8)
             {
@@ -193,17 +204,28 @@ namespace KIA.WiRR
                 UpdateAnchor();
             else if (labNumber == 7 || labNumber == 8)
             {
-                if (labNumber == 7)
+                if (labNumber == 7 || labNumber == 8)
                 {
                     mission.Tick(Time.unscaledTime);
                     if (mission.TimedOut) { Finish(false, "Przekroczono limit 90 s mikromisji."); return; }
+                }
+                if (labNumber == 8)
+                {
+                    studio.Observe(Time.unscaledTime, mission.IsComplete && mission.Successes == 3);
+                    if (studio.Overdue) { Finish(false, "Przekroczono 90 s demonstratora."); return; }
                 }
                 if (participant == "GUEST_SIM")
                 {
                     // A deterministic functional scenario, never a model of human reaction time.
                     if (Time.unscaledTime - lastSample > 1)
                     {
-                        TaskSelection(selected.Count); lastSample = Time.unscaledTime;
+                        if (labNumber == 8 && !mission.IsComplete && studioGuestProfile == 1 && studioScriptStep == 0)
+                        {
+                            studio.Hint(Time.unscaledTime); studioScriptStep++;
+                            if (template == 2) AnswerMissionState(false); else TaskSelection(2);
+                        }
+                        else if (!mission.IsComplete) TaskSelection(selected.Count);
+                        lastSample = Time.unscaledTime;
                     }
                 }
                 else if ((labNumber == 7 && template != 2) || (labNumber == 8 && template != 2))
@@ -214,9 +236,9 @@ namespace KIA.WiRR
                         if (Physics.Raycast(world.camera.ScreenPointToRay(mouse.position.ReadValue()), out var hit, 100))
                         {
                             var index = world.targets.FindIndex(x => x.transform == hit.transform);
-                            if (index >= 0 || labNumber == 7) TaskSelection(index); else errors++;
+                            TaskSelection(index);
                         }
-                        else if (labNumber == 7) TaskSelection(-1); else errors++;
+                        else TaskSelection(-1);
                     }
                 }
             }
@@ -256,22 +278,15 @@ namespace KIA.WiRR
 
         private void TaskSelection(int index)
         {
-            if (!active) return;
-            if (labNumber == 7)
-            {
-                if (template == 2) mission.Classify(mission.Step != 1, Time.unscaledTime);
-                else mission.Select(index, Time.unscaledTime);
-                RecordMissionProgress(); return;
-            }
-            if (index < 0 || index > 2) return;
-            if (index != selected.Count) { errors++; return; }
-            selected.Add(index); successes++;
-            if (selected.Count == 3 && !demonstration) Finish(true);
+            if (!active || (labNumber != 7 && labNumber != 8)) return;
+            if (template == 2) mission.Classify(mission.Step != 1, Time.unscaledTime);
+            else mission.Select(index, Time.unscaledTime);
+            RecordMissionProgress();
         }
 
         private void AnswerMissionState(bool fresh)
         {
-            if (!active || labNumber != 7 || template != 2) return;
+            if (!active || (labNumber != 7 && labNumber != 8) || template != 2) return;
             mission.Classify(fresh, Time.unscaledTime); RecordMissionProgress();
         }
 
@@ -280,15 +295,17 @@ namespace KIA.WiRR
             selected.Clear(); for (var i = 0; i < mission.Step; i++) selected.Add(i);
             errors = mission.Errors; successes = mission.Successes;
             world.HighlightMissionTarget(mission.Step, highlight);
-            if (template == 1 && mission.Step > 0)
+            if (template == 1 && labNumber == 7 && mission.Step > 0)
             {
                 world.camera.transform.position = world.targets[mission.Step - 1].transform.position + new Vector3(0, 1, -2 - view * 4);
                 world.camera.transform.LookAt(world.targets[Mathf.Min(2, mission.Step)].transform);
             }
-            if (mission.IsComplete) { Finish(true); return; }
+            if (labNumber == 8) studio.Observe(Time.unscaledTime, mission.IsComplete && mission.Successes == 3);
+            if (mission.IsComplete && !demonstration) { Finish(true); return; }
             if (!practice)
             {
                 session.pendingTrial.trial.metrics = mission.Metrics();
+                if (labNumber == 8) session.pendingTrial.trial.metrics.AddRange(studio.Metrics());
                 if (!Save()) Finish(false, "Nie zapisano kroku misji.");
             }
         }
@@ -467,15 +484,30 @@ namespace KIA.WiRR
                     GUILayout.Label("Stan testowy " + (selected.Count + 1) + ": wiek danych " + age + " s; próg 0,5 s");
                     using (new GUILayout.HorizontalScope())
                     {
-                        if (GUILayout.Button("ŚWIEŻE")) { if (labNumber == 7) AnswerMissionState(true); else if (age <= 0.5) TaskSelection(selected.Count); else errors++; }
-                        if (GUILayout.Button("STALE")) { if (labNumber == 7) AnswerMissionState(false); else if (age > 0.5) TaskSelection(selected.Count); else errors++; }
+                        if (GUILayout.Button("ŚWIEŻE")) AnswerMissionState(true);
+                        if (GUILayout.Button("STALE")) AnswerMissionState(false);
                     }
                 }
             }
-            if (labNumber == 8 && demonstration && selected.Count == 3 && GUILayout.Button("Zakończ pokaz"))
+            if (labNumber == 8)
             {
-                var duration = Time.unscaledTime - start;
-                Finish(duration >= 60 && duration <= 90, duration < 60 || duration > 90 ? "Pokaz poza zakresem 60–90 sekund." : null);
+                GUILayout.Label("Kroki: " + mission.Step + "/3 | poprawne: " + mission.Successes + " | błędy: " + mission.Errors);
+                GUILayout.Label("Podpowiedzi zgłoszone przez autora: " + studio.ReportedHints + "; skryptowe: " + studio.SimulatedHints);
+                if (participant != "GUEST_SIM" && GUILayout.Button("Zgłoś udzieloną podpowiedź"))
+                {
+                    studio.Hint(Time.unscaledTime);
+                    if (!practice)
+                    {
+                        session.pendingTrial.trial.metrics = mission.Metrics();
+                        session.pendingTrial.trial.metrics.AddRange(studio.Metrics());
+                        if (!Save()) Finish(false, "Nie zapisano zgłoszenia podpowiedzi.");
+                    }
+                }
+                if (demonstration)
+                {
+                    GUILayout.Label(studio.GoalReached ? "Cel osiągnięty. Zakończ pokaz w przedziale 60–90 s." : "Cel nie został osiągnięty. Sam czas pokazu nie potwierdza ukończenia.");
+                    if (GUILayout.Button("Zakończ pokaz")) Finish(studio.CanFinish, studio.CanFinish ? null : "Nie osiągnięto celu lub pokaz poza zakresem 60–90 s.");
+                }
             }
         }
 

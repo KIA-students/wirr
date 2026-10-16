@@ -106,7 +106,7 @@ namespace KIA.WiRR
     /// <summary>Local session storage and an explicit adapter to the existing draft evidence grader.</summary>
     public static class WiRRStudentEvidence
     {
-        public const string ExperimentVersion = "student-kit/0.1.7";
+        public const string ExperimentVersion = "student-kit/0.1.8";
 
         public static string IdentityKey(IEnumerable<string> indices, string group, int block)
         {

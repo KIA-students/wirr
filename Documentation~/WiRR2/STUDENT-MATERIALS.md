@@ -1,6 +1,6 @@
 # Materiały Unity do nowych instrukcji
 
-Wersja `student-kit/0.1.7`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
+Wersja `student-kit/0.1.8`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
 Nie jest jeszcze pełnym wdrożeniem wszystkich 40 checkpointów ani zatwierdzonym
 wydaniem na stanowiska studentów. Sceny i źródła są częścią istniejącego pakietu,
 bez drugiej wtyczki i bez dodatkowych zależności runtime.
@@ -33,7 +33,7 @@ Nie wykonano tutaj buildów Player/APK ani przygotowania lockfile nowego wydania
 | 05 `Lab05_CADWorkshop` | Proceduralne siatki High/Medium z rzeczywistym otworem i Low bez otworu; wariant stały lub automatyczny według odległości, dwa regulowane progi w metrach, wspólna radialna trasa benchmarku, 1/4 identycznych materiałów, widok kontrolny, statystyki geometrii z całego pomiaru | Collidery, osobne gotowe modele konwersji CAD i odbiór renderowania; obecny pierścień jest modelem dydaktycznym |
 | 06 `Lab06_DigitalTwin` | Model dwóch przegubów, nazwane kolumny JointState w radianach, syntetyczny replay 30 s, przerwy 1,5/3 s, watchdog 0,25/0,5/1 s, wiek odbiornika, odstępy wiadomości, osobne zdarzenia STALE/powrotu, zamrożenie albo ukrycie modelu | Bufor, jitter transportu, opcjonalny ROS_LIVE; brak pomiaru RTT |
 | 07 `Lab07_Expedition` | Wybór celów PC, przejścia punktowe PC, jednokrotna klasyfikacja świeżości; rozmiar celu, podświetlenie następnego kroku, kontrolowany drugi dystans, błędy/czas każdego kroku i limit 90 s | Rzeczywiste chwytanie, swobodna nawigacja XR i testy użyteczności z uczestnikami |
-| 08 `Lab08_ExperienceStudio` | Trenażer sekwencji, inspekcja trzech celów, test stanu SIM; moduły podświetlenia i rozmiaru celu, osoba/gość symulowany, ręczne zakończenie pokazu 60–90 s | Bogatsze demonstratory AR/REPLAY i scenariusze ograniczeń, testy z użytkownikami |
+| 08 `Lab08_ExperienceStudio` | Trenażer wyboru PC, inspekcja punktów PC i odczyt stanu SIM; moduły podświetlenia/rozmiaru, kroki i błędy, dwa skrypty gościa, zgłoszenia podpowiedzi, kontrola celu i okna 60–90 s, odbiorca/cel/hipoteza ograniczenia i odnośnik do próby | Rzeczywiste demonstratory AR/REPLAY, automatyczne porównywanie konfiguracji, obserwacje z użytkownikami i odbiór Unity |
 
 Lab08 rozwija sprawdzony w repo wzorzec istniejącego `WiRRLab08Experiment`:
 lokalne działania, raycast desktop, czas i błędy. Starego demonstratora i jego
@@ -82,7 +82,7 @@ zgodność dziewięciu źródeł instrukcji/rubryki z przypiętą wersją źród
 **Nie wykonano kompilacji C#, importu Unity, renderowania Game View, testów
 EditMode/PlayMode ani odbioru Windows/Ubuntu**. Analiza składni nie zastępuje tych testów.
 
-Dołączone testy Unity: 63 przypadki EditMode (m.in. JSON, zapis z kopią,
+Dołączone testy Unity: 70 przypadków EditMode (m.in. JSON, zapis z kopią,
 rozdzielenie wyników, percentyle, nazwane mapowanie replay, geometria siatek
 i import wszystkich scen, granice progów LOD i odzyskanie próby po serializacji)
 oraz osiem testów PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
@@ -318,3 +318,42 @@ GUEST_SIM jest skryptem funkcjonalnym. Czasy kroków są w nim null z wyjaśnien
 a czas całej próby opisuje tylko wykonanie skryptu. SOLO/HUMAN nie są mieszane
 z GUEST_SIM przy interpretacji. Testy z rzeczywistymi uczestnikami, dostępność
 wskaźników i odbiór Unity na stanowiskach pozostają do wykonania.
+
+
+## Lab08: cel, podpowiedzi i pokaz 60–90 s
+
+Protokół `desktop-studio/1` wykorzystuje trzy kroki znane z Lab07. Dostępne
+szablony to trenażer wyboru PC, inspekcja punktów PC i klasyfikacja świeżości
+jawnych stanów SIM. Inspekcja oznacza wybór oznaczonych punktów; nie bada jeszcze
+geometrii CAD. Stan SIM nie jest działającym połączeniem bliźniaka z robotem.
+
+1. Wybierz odbiorcę i cel zastosowania, zapisz bazę, następnie zmień jeden moduł:
+   podświetlenie następnego kroku albo wielkość celów. Drugi moduł dołącz w kolejnej
+   próbie. Przycisk powiązania zapisuje identyfikator ostatniej próby w warunkach
+   następnego pomiaru. Nie sprawdza automatycznie porównywalności: zachowaj szablon,
+   uczestnika/tryb, dystans i profil gościa. Zmiana kilku czynników ogranicza wniosek.
+2. Dla SOLO/HUMAN autor rejestruje każdą udzieloną podpowiedź przyciskiem. Jest to
+   zgłoszenie autora, nie automatyczna detekcja pomocy. Zero zgłoszeń nie dowodzi
+   samodzielności. Potrzebę pomocy, błędy i ukończenie interpretuj łącznie.
+3. GUEST_SIM ma dwa jawne skrypty: bez błędu oraz pomyłka i podpowiedź na początku.
+   W wyborze celów skrypt następnie poprawnie wykonuje zadanie z zachowanym błędem.
+   W klasyfikacji pierwsza błędna odpowiedź pozostaje ostateczna, więc cel nie jest
+   osiągnięty. Skrypt nie reaguje modelem człowieka na rozmiar/podświetlenie.
+   Zmiana skryptu nie dowodzi skuteczności modułu. Jego czasy człowieka i zgłoszenia
+   podpowiedzi autora pozostają null, a podpowiedź skryptowa ma odrębny licznik.
+
+W trybie pokazu wymagane jest osiągnięcie celu i ręczne zakończenie w oknie
+60–90 s, liczonym od początku próby. Osiągnięcie celu wcześniej pozwala kontynuować
+pokaz. Sam upływ 60 s nie wystarcza; zakończenie przed 60 s, po 90 s albo bez celu
+zapisuje FAILED. Przekroczenie 90 s automatycznie kończy próbę. W zwykłym teście
+osiągnięcie celu kończy próbę od razu; trzy odpowiedzi nie gwarantują sukcesu.
+Hipoteza ograniczenia w konfiguracji jest założeniem do sprawdzenia kontrpróbą,
+nie potwierdzonym wynikiem. Użyj drugiego dystansu z niezmienionymi celami.
+
+Każdy krok i zgłoszenie podpowiedzi utrwala metryki. Przerwanie zachowuje częściowe
+wyniki jako FAILED, a nieznane czasy pozostają null. Raport obejmuje osiągnięcie celu,
+czas do niego (dla SOLO/HUMAN), zgłoszone/skryptowe podpowiedzi i spełnienie okna
+pokazu. Prowadzący zatwierdza ocenę; żaden licznik nie nadaje checkpointu.
+Dołączono testy modelu granic 60/90 s, nieosiągniętego celu, zwykłej próby,
+oddzielenia GUEST_SIM, odzyskania podpowiedzi i błędnego zegara. Nie uruchomiono
+ich w Unity; obsługa przycisków, wygląd oraz rzeczywisty pokaz wymagają odbioru.
