@@ -1,0 +1,8 @@
+{
+  "name": "KIA.WiRR.StudentKit.EditorTests",
+  "references": ["KIA.WiRR.Runtime", "KIA.WiRR.Editor"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+  "autoReferenced": false
+}

@@ -1,0 +1,33 @@
+{
+  "id": 3,
+  "title": "Kotwica to nie gwarancja stałości",
+  "question": "Czy stabilny hologram znajduje się w poprawnym miejscu?",
+  "mode": "SIM_AR",
+  "concept": "Wykrycie płaszczyzny, trafienie promienia i utworzenie kotwicy to różne operacje. Błąd położenia oznacza różnicę względem znanej referencji; stabilność dotyczy zmian położenia w czasie. Stabilny model może mieć stałe przesunięcie. W SIM_AR referencja i błędy pochodzą z modelu. Rzeczywiste AR bez niezależnego odniesienia nie pozwala automatycznie zmierzyć bezwzględnej dokładności.",
+  "controls": "Ta sama referencja, model, skala, tor obserwacji i liczba odczytów. W symulacji zachowaj profil i seed.",
+  "invalid": "Oznacz próbę jako nieważną przy braku referencji lub śledzenia. Nie mieszaj SIM_AR z REAL_AR w jednej serii.",
+  "conclusion": "Warunek ___ zmienił ___; po utracie śledzenia ___, a wynik nie dowodzi ___.",
+  "actions": [
+    {
+      "title": "Umieść model przy referencji",
+      "body": "Otwórz Galerię kotwic w trybie SIM_AR. Rozpoznaj trzy punkty odniesienia i odcinek 0,30 m. Umieść przygotowany model przy wskazanej referencji. Sprawdź skalę 1:1 i stan śledzenia. Obejrzyj wektor różnicy położenia; brak poprawnego odczytu pozostaw jako brak danych."
+    },
+    {
+      "title": "Porównaj dwa warunki śledzenia",
+      "body": "Uruchom A: powierzchnia z wieloma cechami oraz B: powierzchnia z małą liczbą cech. Zachowaj referencję i tor kamery. W każdym warunku obejrzyj trzy zapisane odczyty oraz ich rozrzut. Zmień pozycję obserwacji zgodnie z trasą. Wynik symulacji opisuje zastosowany model, nie jakość konkretnego telefonu."
+    },
+    {
+      "title": "Wybierz warunek i sprawdź powrót",
+      "body": "Wybierz konfigurację ograniczającą błąd i ponów próbę. W gotowym scenariuszu wywołaj utratę śledzenia, następnie ponowne zlokalizowanie sceny. Sprawdź, czy model wraca do referencji. Zaktualizuj jeden wniosek o niepewność i ograniczenie wybranego warunku."
+    }
+  ],
+  "rubric": [
+    "Umieść model przy referencji w REAL/SIM",
+    "Porównaj dwa warunki obserwacji/trackingu",
+    "Wyjaśnij różnicę błędu pozycji",
+    "Dobierz położenie lub warunki śledzenia zmniejszające błąd",
+    "Ponów próbę po utracie/relocalizacji i wskaż niepewność; nie mieszaj SIM z REAL"
+  ],
+  "instruction_version": "2.0.0-draft.2",
+  "source_sha256": "4d4a8287a92ad1427250042c24e9e3379a55411cf8e0267e0fb7a2415c646343"
+}
