@@ -1,6 +1,6 @@
 # Materiały Unity do nowych instrukcji
 
-Wersja `student-kit/0.1.6`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
+Wersja `student-kit/0.1.7`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
 Nie jest jeszcze pełnym wdrożeniem wszystkich 40 checkpointów ani zatwierdzonym
 wydaniem na stanowiska studentów. Sceny i źródła są częścią istniejącego pakietu,
 bez drugiej wtyczki i bez dodatkowych zależności runtime.
@@ -32,7 +32,7 @@ Nie wykonano tutaj buildów Player/APK ani przygotowania lockfile nowego wydania
 | 04 `Lab04_DepthRoom` | Trzy obiekty i przeszkoda, niezależna referencja geometrii, błędna/poprawna okluzja, regulowana tolerancja głębi, jasne/ciemne światło, mylące etykiety, błędny komunikat promienia, dwa widoki i osobne fałszywe alarmy/pominięcia | Odbiór PlayMode/renderowania na stanowiskach, opcjonalne dane z providerów urządzeniowych |
 | 05 `Lab05_CADWorkshop` | Proceduralne siatki High/Medium z rzeczywistym otworem i Low bez otworu; wariant stały lub automatyczny według odległości, dwa regulowane progi w metrach, wspólna radialna trasa benchmarku, 1/4 identycznych materiałów, widok kontrolny, statystyki geometrii z całego pomiaru | Collidery, osobne gotowe modele konwersji CAD i odbiór renderowania; obecny pierścień jest modelem dydaktycznym |
 | 06 `Lab06_DigitalTwin` | Model dwóch przegubów, nazwane kolumny JointState w radianach, syntetyczny replay 30 s, przerwy 1,5/3 s, watchdog 0,25/0,5/1 s, wiek odbiornika, odstępy wiadomości, osobne zdarzenia STALE/powrotu, zamrożenie albo ukrycie modelu | Bufor, jitter transportu, opcjonalny ROS_LIVE; brak pomiaru RTT |
-| 07 `Lab07_Expedition` | Sekwencja celów, nawigacja punktowa, klasyfikacja świeżości danych testowych; podświetlenie, kontekst, czas/błędy/sukcesy | Pełne mikromisje, kontrola transferu i testy użyteczności z uczestnikami |
+| 07 `Lab07_Expedition` | Wybór celów PC, przejścia punktowe PC, jednokrotna klasyfikacja świeżości; rozmiar celu, podświetlenie następnego kroku, kontrolowany drugi dystans, błędy/czas każdego kroku i limit 90 s | Rzeczywiste chwytanie, swobodna nawigacja XR i testy użyteczności z uczestnikami |
 | 08 `Lab08_ExperienceStudio` | Trenażer sekwencji, inspekcja trzech celów, test stanu SIM; moduły podświetlenia i rozmiaru celu, osoba/gość symulowany, ręczne zakończenie pokazu 60–90 s | Bogatsze demonstratory AR/REPLAY i scenariusze ograniczeń, testy z użytkownikami |
 
 Lab08 rozwija sprawdzony w repo wzorzec istniejącego `WiRRLab08Experiment`:
@@ -82,11 +82,11 @@ zgodność dziewięciu źródeł instrukcji/rubryki z przypiętą wersją źród
 **Nie wykonano kompilacji C#, importu Unity, renderowania Game View, testów
 EditMode/PlayMode ani odbioru Windows/Ubuntu**. Analiza składni nie zastępuje tych testów.
 
-Dołączone testy Unity: 56 przypadków EditMode (m.in. JSON, zapis z kopią,
+Dołączone testy Unity: 63 przypadki EditMode (m.in. JSON, zapis z kopią,
 rozdzielenie wyników, percentyle, nazwane mapowanie replay, geometria siatek
 i import wszystkich scen, granice progów LOD i odzyskanie próby po serializacji)
-oraz siedem testów PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
-teleportacja PC, kotwica oraz geometria głębi z dwóch widoków, niezależna od światła i etykiet, oraz niezmienność geometrii przy zmianie materiałów CAD i reakcja modelu REPLAY na brak danych/STALE/powrót.
+oraz osiem testów PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
+teleportacja PC, kotwica oraz geometria głębi z dwóch widoków, niezależna od światła i etykiet, oraz niezmienność geometrii przy zmianie materiałów CAD i reakcja modelu REPLAY na brak danych/STALE/powrót oraz stałość celów w kontrpróbie Lab07.
 W projekcie testowym dodaj `pl.prz.kia.wirr` do `testables` w `Packages/manifest.json`.
 Testy uruchamiaj lokalnie albo w zatwierdzonym workflow na `main`, zgodnie
 z polityką repozytorium. Nie dodano automatycznych runów na PR.
@@ -286,3 +286,35 @@ zdarzeń. Lokalne opóźnienia Update, renderowania i zapisu mogą wpływać na
 obserwowane odstępy; nie są przypisywane transportowi ROS. Brak wiadomości
 uniemożliwia ważną próbę. Niezweryfikowane pozostają kompilacja, PlayMode,
 wygląd wskaźników, odbiór na Windows/Ubuntu, bufor i adapter ROS_LIVE.
+
+
+## Lab07: trzy kroki i kontrola transferu
+
+Wersja zadania `desktop-three-steps/1` ma trzy strefy desktopowe: wybór celów
+1–2–3, przejścia kamery między punktami po wyborze celu oraz trzy klasyfikacje
+świeżości na podstawie jawnych wieków danych 0,1/1,2/0,1 s przy progu 0,5 s.
+Wybór celów nie jest chwytaniem, a przejścia punktowe nie są lokomocją XRI.
+Klasyfikacja korzysta z fixture, nie z pomiaru transportu.
+
+1. Wybierz strefę i wykonaj trzy kroki. Błędny wybór lub kliknięcie poza celem
+   zwiększa liczbę błędów bez przechodzenia dalej. W klasyfikacji błędna odpowiedź
+   kończy dany krok i zostaje zapisana; nie można poprawiać jej aż do trafienia.
+2. Zmień tylko rozmiar celu albo podświetlenie następnego kroku. Powtórz zadanie
+   przy tym samym dystansie i wejściu. Zachowaj pierwszą próbę. Raport zapisuje
+   liczbę prób, błędów i czas ukończenia każdego kroku od początku misji oraz
+   powodzenie całego celu, zamiast uznawać trzy odpowiedzi za trzy sukcesy.
+3. W kontrpróbie wybierz drugi dystans: start kamery jest odsunięty o 4 m,
+   pozycje celów i ich skala nie zmieniają się. W przejściach punktowych ten sam
+   offset 4 m dotyczy kolejnych stanowisk. Zachowaj tę samą zmianę interfejsu.
+
+Limit wynosi 90 s. Przerwanie albo limit zapisują FAILED i dostępne kroki;
+nieukończone czasy i odpowiedzi pozostają null. Stan częściowy jest utrwalany
+po każdej odpowiedzi, także błędnej. Zakończona próba klasyfikacji może być VALID
+jako pomiar, mimo nieosiągnięcia celu; `mission_goal_achieved` pozostaje wtedy 0.
+To nie automatyczne zaliczenie. `trial_ordinal` zapisuje kolejność pomiarów;
+trening nie tworzy próby porównawczej, a efekt uczenia nadal wymaga interpretacji.
+
+GUEST_SIM jest skryptem funkcjonalnym. Czasy kroków są w nim null z wyjaśnieniem,
+a czas całej próby opisuje tylko wykonanie skryptu. SOLO/HUMAN nie są mieszane
+z GUEST_SIM przy interpretacji. Testy z rzeczywistymi uczestnikami, dostępność
+wskaźników i odbiór Unity na stanowiskach pozostają do wykonania.

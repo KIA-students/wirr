@@ -178,6 +178,25 @@ namespace KIA.WiRR
             lod.ForceLOD(level);
         }
 
+        public void ConfigureMission(int distanceCondition, int nextTarget, bool highlight)
+        {
+            if (targets.Count != 3 || distanceCondition < 0 || distanceCondition > 1)
+                throw new ArgumentOutOfRangeException(nameof(distanceCondition));
+            for (var i = 0; i < targets.Count; i++)
+            {
+                targets[i].transform.position = new Vector3((i - 1) * 1.3f, 1, 1);
+                targets[i].GetComponent<Renderer>().sharedMaterial.color = highlight && i == nextTarget ? Color.yellow : new Color(0.35f, 0.4f, 0.45f);
+            }
+            camera.transform.position = new Vector3(0, 1.6f, -6 - 4 * distanceCondition);
+            camera.transform.LookAt(new Vector3(0, 1, 1));
+        }
+
+        public void HighlightMissionTarget(int next, bool highlight)
+        {
+            for (var i = 0; i < targets.Count; i++)
+                targets[i].GetComponent<Renderer>().sharedMaterial.color = highlight && i == next ? Color.yellow : new Color(0.35f, 0.4f, 0.45f);
+        }
+
         public void SetReplayStatus(bool hasSource, bool stale, bool hide)
         {
             if (robotJoint1 == null) throw new InvalidOperationException("Brak modelu REPLAY.");

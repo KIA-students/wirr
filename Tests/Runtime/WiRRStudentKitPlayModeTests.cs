@@ -169,4 +169,27 @@ public sealed class WiRRStudentKitPlayModeTests
         yield return null;
     }
 
+    [UnityTest] public IEnumerator MissionTransferChangesDistanceWithoutMovingGoals()
+    {
+        var parent = new GameObject("Mission transfer test");
+        var world = new WiRRStudentWorld(parent.transform, 7, 10, 0, true, false, false, 0);
+        try
+        {
+            world.ConfigureMission(0, 0, true);
+            var positions = world.targets.Select(t => t.transform.position).ToArray();
+            var camera = world.camera.transform.position;
+            world.targets[0].transform.localScale *= 1.5f;
+            var scale = world.targets[0].transform.localScale;
+            world.ConfigureMission(1, 0, true); yield return null;
+            CollectionAssert.AreEqual(positions, world.targets.Select(t => t.transform.position).ToArray());
+            Assert.AreEqual(4, camera.z - world.camera.transform.position.z, 1e-6);
+            Assert.AreEqual(scale, world.targets[0].transform.localScale);
+            world.HighlightMissionTarget(1, true);
+            Assert.AreEqual(Color.yellow, world.targets[1].GetComponent<Renderer>().sharedMaterial.color);
+            Assert.AreNotEqual(Color.yellow, world.targets[0].GetComponent<Renderer>().sharedMaterial.color);
+        }
+        finally { world.Dispose(); Object.Destroy(parent); }
+        yield return null;
+    }
+
 }

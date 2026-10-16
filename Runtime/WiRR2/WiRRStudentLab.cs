@@ -29,6 +29,7 @@ namespace KIA.WiRR
         private Vector2 scroll;
         private int stage, detail, view, count = 10, technique, template;
         private bool highlight, largeTargets, demonstration, physicsLoad, shadows = true, active, practice, grabbed, paused;
+        private WiRRMicroMission mission;
         private WiRRReplayHealth replayHealth;
         private bool hideStale;
         private float start, lastSample, pauseStart, watchdog = 0.5f, gap = 1.5f;
@@ -92,6 +93,7 @@ namespace KIA.WiRR
                 handObject = world.Shape("Ręka symulatora PC", PrimitiveType.Sphere, hand, Vector3.one * 0.12f, Color.magenta);
                 handObject.SetActive(technique == 0);
             }
+            if (labNumber == 7) world.ConfigureMission(view, 0, highlight);
             if (labNumber == 5) world.camera.transform.position += Vector3.back * view * 4;
             if (labNumber == 5) { world.ConfigureCad(cadMaterials, cadInspection); ApplyCadLod(); }
             if (labNumber == 3)
@@ -168,6 +170,7 @@ namespace KIA.WiRR
                 if (!Save()) { session.pendingTrial = null; return; }
             }
             active = true; start = lastSample = Time.unscaledTime; errors = successes = 0;
+            mission = labNumber == 7 ? new WiRRMicroMission(start, template == 2, participant == "GUEST_SIM") : null;
             selected.Clear(); frames.Clear(); lodSamples.Clear();
             grabbed = paused = false;
             interactionSeries = labNumber == 2 ? new WiRRInteractionSeries(start) : null;
@@ -181,13 +184,13 @@ namespace KIA.WiRR
         }
 
         private string Configuration() => string.Format(CultureInfo.InvariantCulture,
-            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}; input_technique={22}; cycles_required={23}; cycle_timeout_s={24}; anchor_relocalize={25}; anchor_fail_recovery={26}; anchor_model={27}; depth_tolerance_m={28}; dim_light={29}; label_fault={30}; ray_claim_fault={31}; depth_source={32}; cad_materials={33}; cad_source=procedural-ring/v1; stale_visualization={34}; replay_clock=paused-source/1",
+            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}; input_technique={22}; cycles_required={23}; cycle_timeout_s={24}; anchor_relocalize={25}; anchor_fail_recovery={26}; anchor_model={27}; depth_tolerance_m={28}; dim_light={29}; label_fault={30}; ray_claim_fault={31}; depth_source={32}; cad_materials={33}; cad_source=procedural-ring/v1; stale_visualization={34}; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal={35}",
             detail, view, count, shadows, physicsLoad, highlight, technique, template, watchdog, gap, practice,
             Screen.width, Screen.height, QualitySettings.vSyncCount, Application.targetFrameRate, Application.isEditor ? "Editor" : "Player", largeTargets, demonstration,
             automaticLod, lodNear, lodFar, labNumber == 5 ? "radial3-15/v1" : labNumber == 3 ? "anchor-three-points/v1" : labNumber == 4 ? "depth-two-views/v1" : "baseline/v1",
             labNumber == 2 ? (technique == 0 ? "Direct_PC" : "Ray_PC") : "not_applicable", labNumber == 2 ? 5 : 0, labNumber == 2 ? 30 : 0,
             anchorRelocalize, anchorFailRecovery, labNumber == 3 ? anchorData.version : "not_applicable",
-            depthTolerance, depthDimLight, depthLabelFault, depthRayFault, labNumber == 4 ? "SYNTHETIC_GEOMETRY_CENTER_RAY" : "not_applicable", cadMaterials, hideStale ? "HIDE" : "FREEZE");
+            depthTolerance, depthDimLight, depthLabelFault, depthRayFault, labNumber == 4 ? "SYNTHETIC_GEOMETRY_CENTER_RAY" : "not_applicable", cadMaterials, hideStale ? "HIDE" : "FREEZE", session == null ? 0 : session.Lab(labNumber).trials.Count + 1);
 
         private void Finish(bool valid, string reason = null)
         {
@@ -208,12 +211,18 @@ namespace KIA.WiRR
                 if (valid && (!depthExperiment.IsComplete || depthExperiment.HasMissingSource))
                 { valid = false; reason = "Brak odpowiedzi lub poprawnego trafienia referencyjnego SIM_AR."; }
             }
+            if (labNumber == 7 && mission != null)
+            {
+                mission.Tick(Time.unscaledTime); errors = mission.Errors; successes = mission.Successes;
+                if (valid && !mission.IsComplete) { valid = false; reason = "Nie ukończono trzech kroków misji."; }
+            }
             active = false;
             var trial = new WiRRStudentTrial { deviceMode = lesson.mode, condition = Configuration(),
                 participantMode = participant, validity = valid ? "VALID" : "FAILED", reason = reason };
             trial.metrics.Add(WiRRStudentMetric.Measured("elapsed", Time.unscaledTime - start, "s"));
             trial.metrics.Add(WiRRStudentMetric.Measured("errors", errors, "count"));
             trial.metrics.Add(WiRRStudentMetric.Measured("successes", successes, "count"));
+            if (labNumber == 7 && mission != null) trial.metrics.AddRange(mission.Metrics());
             if (labNumber == 2 && interactionSeries != null) trial.metrics.AddRange(interactionSeries.Metrics());
             if (labNumber == 1 || labNumber == 5)
             {
