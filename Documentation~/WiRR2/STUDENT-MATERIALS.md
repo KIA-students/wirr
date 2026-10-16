@@ -1,6 +1,6 @@
 # Materiały Unity do nowych instrukcji
 
-Wersja `student-kit/0.1.4`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
+Wersja `student-kit/0.1.5`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
 Nie jest jeszcze pełnym wdrożeniem wszystkich 40 checkpointów ani zatwierdzonym
 wydaniem na stanowiska studentów. Sceny i źródła są częścią istniejącego pakietu,
 bez drugiej wtyczki i bez dodatkowych zależności runtime.
@@ -30,7 +30,7 @@ Nie wykonano tutaj buildów Player/APK ani przygotowania lockfile nowego wydania
 | 02 `Lab02_Interaction` | Obiekt i gniazdo, Direct PC klawiaturą i Ray PC myszą, serie pięciu cykli z czasami i błędami, trening oddzielony od danych, podgląd teleportacji PC poza pomiarem | Pełne XRI Direct/Ray/Socket i teleportacja XRI/HMD; obecny PC to własny symulator dydaktyczny |
 | 03 `Lab03_AnchorGallery` | Referencje co 0,30 m, umieszczenie 1:1, dwa profile SIM_AR, wspólna trasa trzech punktów, wektor błędu, trzy odczyty przed i trzy po relokalizacji, wariant braku odzyskania | Odbiór UI/PlayMode na Ubuntu i Windows oraz opcjonalny adapter REAL_AR |
 | 04 `Lab04_DepthRoom` | Trzy obiekty i przeszkoda, niezależna referencja geometrii, błędna/poprawna okluzja, regulowana tolerancja głębi, jasne/ciemne światło, mylące etykiety, błędny komunikat promienia, dwa widoki i osobne fałszywe alarmy/pominięcia | Odbiór PlayMode/renderowania na stanowiskach, opcjonalne dane z providerów urządzeniowych |
-| 05 `Lab05_CADWorkshop` | Proceduralne siatki High/Medium z rzeczywistym otworem i Low bez otworu; wariant stały lub automatyczny według odległości, dwa regulowane progi w metrach, wspólna radialna trasa benchmarku | Materiały/collidery, osobne gotowe modele konwersji CAD i odbiór renderowania; obecny pierścień jest modelem dydaktycznym |
+| 05 `Lab05_CADWorkshop` | Proceduralne siatki High/Medium z rzeczywistym otworem i Low bez otworu; wariant stały lub automatyczny według odległości, dwa regulowane progi w metrach, wspólna radialna trasa benchmarku, 1/4 identycznych materiałów, widok kontrolny, statystyki geometrii z całego pomiaru | Collidery, osobne gotowe modele konwersji CAD i odbiór renderowania; obecny pierścień jest modelem dydaktycznym |
 | 06 `Lab06_DigitalTwin` | Model dwóch przegubów, nazwane kolumny JointState w radianach, syntetyczny replay 30 s, przerwy 1,5/3 s, watchdog 0,25/0,5/1 s, wiek i odstępy wiadomości | Bufor, kolejne strategie reakcji, opcjonalny ROS_LIVE; brak pomiaru RTT |
 | 07 `Lab07_Expedition` | Sekwencja celów, nawigacja punktowa, klasyfikacja świeżości danych testowych; podświetlenie, kontekst, czas/błędy/sukcesy | Pełne mikromisje, kontrola transferu i testy użyteczności z uczestnikami |
 | 08 `Lab08_ExperienceStudio` | Trenażer sekwencji, inspekcja trzech celów, test stanu SIM; moduły podświetlenia i rozmiaru celu, osoba/gość symulowany, ręczne zakończenie pokazu 60–90 s | Bogatsze demonstratory AR/REPLAY i scenariusze ograniczeń, testy z użytkownikami |
@@ -82,11 +82,11 @@ zgodność dziewięciu źródeł instrukcji/rubryki z przypiętą wersją źród
 **Nie wykonano kompilacji C#, importu Unity, renderowania Game View, testów
 EditMode/PlayMode ani odbioru Windows/Ubuntu**. Analiza składni nie zastępuje tych testów.
 
-Dołączone testy Unity: 43 przypadki EditMode (m.in. JSON, zapis z kopią,
+Dołączone testy Unity: 48 przypadków EditMode (m.in. JSON, zapis z kopią,
 rozdzielenie wyników, percentyle, nazwane mapowanie replay, geometria siatek
 i import wszystkich scen, granice progów LOD i odzyskanie próby po serializacji)
-oraz pięć testów PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
-teleportacja PC, kotwica oraz geometria głębi z dwóch widoków, niezależna od światła i etykiet.
+oraz sześć testów PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
+teleportacja PC, kotwica oraz geometria głębi z dwóch widoków, niezależna od światła i etykiet, oraz niezmienność geometrii przy zmianie materiałów CAD.
 W projekcie testowym dodaj `pl.prz.kia.wirr` do `testables` w `Packages/manifest.json`.
 Testy uruchamiaj lokalnie albo w zatwierdzonym workflow na `main`, zgodnie
 z polityką repozytorium. Nie dodano automatycznych runów na PR.
@@ -221,3 +221,29 @@ liczbę błędów modelu okluzji i błędnych komunikatów promienia. Nie ocenia
 liczby kliknięć. Odpowiedzi są zapisywane pojedynczo; restart zachowuje je jako
 przerwaną próbę bez dopisywania pozostałych odpowiedzi. Zmiana geometrii lub
 brak trafienia podczas próby kończy ją jako FAILED z jawnym brakiem referencji.
+
+
+## Lab05: materiały, widok kontrolny i pełne okno pomiaru
+
+1. Poza pomiarem włącz widok kontrolny i porównaj High/Medium/Low w tej samej
+   skali. Kamera patrzy wzdłuż osi otworu z odległości 2 m. To inspekcja wizualna,
+   nie sprawdzian przejścia trzpienia ani pomiar collidera.
+2. Porównaj warianty przy tej samej trasie i odległości. Pomiar zawsze uruchamia
+   trasę radialną po rozgrzewce, niezależnie od widoku kontrolnego. Ustawienie
+   drugiego dystansu nadal przesuwa całą trasę o 4 m i należy je zachować w A/B.
+3. Zmień wyłącznie 1/4 materiałów lub jeden próg LOD. W wariancie 4 materiałów
+   trójkąty tej samej siatki są dzielone na cztery submeshe z osobnymi materiałami
+   o identycznym kolorze/shaderze. Skala, pozycje wierzchołków i trójkąty pozostają
+   takie same. Sloty materiałów nie są licznikiem draw calls; batching i renderer
+   mogą zmienić rzeczywistą liczbę wywołań. `gpu_draw_calls` pozostaje null.
+
+Raport zawiera min/max/medianę liczby trójkątów, min/max slotów, liczbę próbek,
+medianę/p95 klatki, czas obserwowany bez otworu i jego udział w sumie czasów
+próbek. Udział jest ważony czasem klatek, a nie liczbą próbek. Stan otworu wynika
+z jawnej definicji wariantu proceduralnego; nie jest pomiarem percepcji ani testem
+kolizji. Te koszty opisują cały obserwowany fragment trasy, nie tylko ostatni LOD.
+Brak próbek daje null. Anulowanie, utrata fokusu lub zamknięcie sceny zapisują
+częściowe statystyki jako FAILED. W mierzonym oknie nie wykonuje się zapisów na dysk,
+aby ich opóźnienia nie zanieczyszczały porównania. Twarda awaria odzyskuje początek
+próby jako FAILED bez statystyk z pamięci; nie odtwarza nieutrwalonych klatek.
+Liczba draw calls i odbiór renderowania nadal wymagają Unity oraz narzędzi profilera.

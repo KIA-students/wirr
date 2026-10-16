@@ -25,6 +25,7 @@ namespace KIA.WiRR
         private readonly Material[] depthMaterials = new Material[3], depthThroughWall = new Material[3];
         private readonly TextMesh[] depthLabels = new TextMesh[3];
         private int depthVariant;
+        public int CadMaterialCount { get; private set; } = 1;
         private readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
 
         public WiRRStudentWorld(Transform parent, int lab, int count, int detail, bool shadows, bool physics, bool highlight, int view)
@@ -175,6 +176,32 @@ namespace KIA.WiRR
             ActiveLod = level;
             activeMesh = lodMeshes[level];
             lod.ForceLOD(level);
+        }
+
+        public void ConfigureCad(int materialCount, bool inspection)
+        {
+            if (lod == null || (materialCount != 1 && materialCount != 4))
+                throw new ArgumentOutOfRangeException(nameof(materialCount));
+            CadMaterialCount = materialCount;
+            var materials = Enumerable.Range(0, materialCount).Select(_ => Material(Color.cyan)).ToArray();
+            for (var level = 0; level < 3; level++)
+            {
+                var mesh = lodMeshes[level];
+                var triangles = mesh.triangles;
+                mesh.subMeshCount = materialCount;
+                for (var part = 0; part < materialCount; part++)
+                {
+                    var first = triangles.Length / 3 * part / materialCount;
+                    var last = triangles.Length / 3 * (part + 1) / materialCount;
+                    mesh.SetTriangles(triangles.Skip(first * 3).Take((last - first) * 3).ToArray(), part);
+                }
+                lod.GetLODs()[level].renderers[0].sharedMaterials = materials;
+            }
+            if (inspection)
+            {
+                camera.transform.position = lod.transform.position + Vector3.back * 2;
+                camera.transform.LookAt(lod.transform.position);
+            }
         }
 
         public void TeleportPreview(int station)

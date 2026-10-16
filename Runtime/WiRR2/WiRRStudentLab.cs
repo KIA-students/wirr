@@ -42,6 +42,9 @@ namespace KIA.WiRR
         private readonly List<double> frames = new List<double>();
         private readonly List<double> intervals = new List<double>();
         private readonly List<int> lodSamples = new List<int>();
+        private WiRRCadBenchmark cadBenchmark;
+        private bool cadInspection;
+        private int cadMaterials = 1;
         private bool automaticLod;
         private float lodNear = 6, lodFar = 10;
         private readonly HashSet<int> selected = new HashSet<int>();
@@ -72,7 +75,7 @@ namespace KIA.WiRR
             highlight = largeTargets = demonstration = physicsLoad = false; shadows = true; count = 10; paused = false;
             anchorRelocalize = anchorFailRecovery = false; anchorExperiment = null;
             depthTolerance = 0; depthDimLight = false; depthLabelFault = depthRayFault = true; depthExperiment = null;
-            automaticLod = false; lodNear = 6; lodFar = 10;
+            automaticLod = false; cadInspection = false; cadMaterials = 1; cadBenchmark = null; lodNear = 6; lodFar = 10;
             if (session != null) session.Lab(number);
             Rebuild();
         }
@@ -89,7 +92,7 @@ namespace KIA.WiRR
                 handObject.SetActive(technique == 0);
             }
             if (labNumber == 5) world.camera.transform.position += Vector3.back * view * 4;
-            if (labNumber == 5) ApplyCadLod();
+            if (labNumber == 5) { world.ConfigureCad(cadMaterials, cadInspection); ApplyCadLod(); }
             if (labNumber == 3)
             {
                 var asset = Resources.Load<TextAsset>("WiRR2/anchor-tracking");
@@ -156,6 +159,7 @@ namespace KIA.WiRR
             Rebuild();
             anchorExperiment = labNumber == 3 ? new WiRRAnchorExperiment(anchorData, detail, anchorRelocalize, anchorFailRecovery) : null;
             depthExperiment = labNumber == 4 ? new WiRRDepthExperiment(depthObservations) : null;
+            cadBenchmark = labNumber == 5 ? new WiRRCadBenchmark() : null;
             initialConfiguration = Configuration();
             if (!practice)
             {
@@ -176,13 +180,13 @@ namespace KIA.WiRR
         }
 
         private string Configuration() => string.Format(CultureInfo.InvariantCulture,
-            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}; input_technique={22}; cycles_required={23}; cycle_timeout_s={24}; anchor_relocalize={25}; anchor_fail_recovery={26}; anchor_model={27}; depth_tolerance_m={28}; dim_light={29}; label_fault={30}; ray_claim_fault={31}; depth_source={32}",
+            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}; input_technique={22}; cycles_required={23}; cycle_timeout_s={24}; anchor_relocalize={25}; anchor_fail_recovery={26}; anchor_model={27}; depth_tolerance_m={28}; dim_light={29}; label_fault={30}; ray_claim_fault={31}; depth_source={32}; cad_materials={33}; cad_source=procedural-ring/v1",
             detail, view, count, shadows, physicsLoad, highlight, technique, template, watchdog, gap, practice,
             Screen.width, Screen.height, QualitySettings.vSyncCount, Application.targetFrameRate, Application.isEditor ? "Editor" : "Player", largeTargets, demonstration,
             automaticLod, lodNear, lodFar, labNumber == 5 ? "radial3-15/v1" : labNumber == 3 ? "anchor-three-points/v1" : labNumber == 4 ? "depth-two-views/v1" : "baseline/v1",
             labNumber == 2 ? (technique == 0 ? "Direct_PC" : "Ray_PC") : "not_applicable", labNumber == 2 ? 5 : 0, labNumber == 2 ? 30 : 0,
             anchorRelocalize, anchorFailRecovery, labNumber == 3 ? anchorData.version : "not_applicable",
-            depthTolerance, depthDimLight, depthLabelFault, depthRayFault, labNumber == 4 ? "SYNTHETIC_GEOMETRY_CENTER_RAY" : "not_applicable");
+            depthTolerance, depthDimLight, depthLabelFault, depthRayFault, labNumber == 4 ? "SYNTHETIC_GEOMETRY_CENTER_RAY" : "not_applicable", cadMaterials);
 
         private void Finish(bool valid, string reason = null)
         {
@@ -221,6 +225,7 @@ namespace KIA.WiRR
                 }
                 if (labNumber == 5)
                 {
+                    trial.metrics.AddRange(cadBenchmark.Metrics());
                     if (lodSamples.Count > 0)
                     {
                         trial.metrics.Add(WiRRStudentMetric.Measured("lod_level_min", lodSamples.Min(), "index"));

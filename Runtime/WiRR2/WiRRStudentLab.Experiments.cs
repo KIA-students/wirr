@@ -107,6 +107,12 @@ namespace KIA.WiRR
                     threshold = GUILayout.HorizontalSlider(lodFar, 9, 14);
                     changed |= threshold != lodFar; lodFar = threshold;
                 }
+                var materialOption = GUILayout.Toolbar(cadMaterials == 1 ? 0 : 1, new[] { "1 materiał", "4 materiały" });
+                var materialCount = materialOption == 0 ? 1 : 4;
+                changed |= materialCount != cadMaterials; cadMaterials = materialCount;
+                var inspection = GUILayout.Toggle(cadInspection, "Widok kontrolny otworu (poza benchmarkiem)");
+                changed |= inspection != cadInspection; cadInspection = inspection;
+                GUILayout.Label("Materiały mają ten sam kolor i shader. Liczba slotów nie jest pomiarem draw calls; batching może łączyć wywołania.");
                 GUILayout.Label("Próg dotyczy metrów od kamery do środka części. Trasa benchmarku jest jednakowa dla stałego i automatycznego LOD.");
                 GUILayout.Label("Siatka dydaktyczna, nie konwersja pliku STEP. High/Medium zachowują otwór, Low go wypełnia.");
             }
@@ -164,7 +170,12 @@ namespace KIA.WiRR
                 if (elapsed >= 2 && Time.unscaledDeltaTime > 0)
                 {
                     frames.Add(Time.unscaledDeltaTime * 1000.0);
-                    if (labNumber == 5) lodSamples.Add(world.ActiveLod);
+                    if (labNumber == 5)
+                    {
+                        lodSamples.Add(world.ActiveLod);
+                        cadBenchmark.Sample(Time.unscaledDeltaTime * 1000.0, world.ActiveTriangleCount, world.CadMaterialCount, world.ActiveLod < 2);
+
+                    }
                 }
                 world.camera.transform.position = labNumber == 5 ?
                     new Vector3(0, 1.2f, 1 - (3 + Mathf.PingPong(phase * 3, 12) + view * 4)) :
@@ -350,7 +361,7 @@ namespace KIA.WiRR
                 if (GUILayout.Button("Zakończ bieżący cykl jako nieudany")) CompleteManipulationCycle(false);
             }
             if (labNumber == 5)
-                GUILayout.Label("LOD " + world.ActiveLod + " | " + world.ActiveTriangleCount + " trójkątów | otwór " +
+                GUILayout.Label("LOD " + world.ActiveLod + " | " + world.ActiveTriangleCount + " trójkątów | materiały " + world.CadMaterialCount + " | otwór " +
                     (world.ActiveLod < 2 ? "zachowany" : "utracony"));
             if (labNumber == 3 && anchorExperiment != null)
             {

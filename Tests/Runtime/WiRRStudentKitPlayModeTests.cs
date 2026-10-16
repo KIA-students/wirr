@@ -118,4 +118,32 @@ public sealed class WiRRStudentKitPlayModeTests
             yield return null;
         }
     }
+    [UnityTest] public IEnumerator CadMaterialsPreserveMeshAndReferenceScale()
+    {
+        var parent = new GameObject("CAD material test");
+        var world = new WiRRStudentWorld(parent.transform, 5, 10, 0, true, false, false, 0);
+        try
+        {
+            var vertices = world.activeMesh.vertices;
+            var triangles = world.activeMesh.triangles.OrderBy(x => x).ToArray();
+            var bounds = world.activeMesh.bounds;
+            world.ConfigureCad(4, true);
+            yield return null;
+            Assert.AreEqual(4, world.CadMaterialCount);
+            Assert.AreEqual(4, world.activeMesh.subMeshCount);
+            CollectionAssert.AreEqual(vertices, world.activeMesh.vertices);
+            CollectionAssert.AreEqual(triangles, world.activeMesh.triangles.OrderBy(x => x).ToArray());
+            Assert.AreEqual(bounds, world.activeMesh.bounds);
+            Assert.AreEqual(2, Vector3.Distance(world.camera.transform.position, world.lod.transform.position), 1e-5);
+            world.SetLod(2); Assert.AreEqual(4, world.activeMesh.subMeshCount);
+            world.ConfigureCad(1, false); world.SetLod(0);
+            Assert.AreEqual(1, world.activeMesh.subMeshCount);
+            CollectionAssert.AreEqual(triangles, world.activeMesh.triangles.OrderBy(x => x).ToArray());
+            foreach (var level in world.lod.GetLODs())
+                Assert.AreEqual(1, level.renderers[0].sharedMaterials.Length);
+        }
+        finally { world.Dispose(); Object.Destroy(parent); }
+        yield return null;
+    }
+
 }
