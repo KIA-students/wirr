@@ -29,7 +29,9 @@ namespace KIA.WiRR
         private Vector2 scroll;
         private int stage, detail, view, count = 10, technique, template;
         private bool highlight, largeTargets, demonstration, physicsLoad, shadows = true, active, practice, grabbed, paused;
-        private float start, lastSample, lastMessage, staleAt = -1, pauseStart, watchdog = 0.5f, gap = 1.5f;
+        private WiRRReplayHealth replayHealth;
+        private bool hideStale;
+        private float start, lastSample, pauseStart, watchdog = 0.5f, gap = 1.5f;
         private int errors, successes, messageIndex;
         private WiRRAnchorDataset anchorData;
         private WiRRAnchorExperiment anchorExperiment;
@@ -40,7 +42,6 @@ namespace KIA.WiRR
         private bool depthDimLight, depthLabelFault = true, depthRayFault = true;
         private WiRRInteractionSeries interactionSeries;
         private readonly List<double> frames = new List<double>();
-        private readonly List<double> intervals = new List<double>();
         private readonly List<int> lodSamples = new List<int>();
         private WiRRCadBenchmark cadBenchmark;
         private bool cadInspection;
@@ -72,7 +73,7 @@ namespace KIA.WiRR
             lesson = JsonUtility.FromJson<WiRRStudentLesson>(asset.text);
             stage = detail = view = template = technique = 0;
             participant = "SOLO";
-            highlight = largeTargets = demonstration = physicsLoad = false; shadows = true; count = 10; paused = false;
+            highlight = largeTargets = demonstration = physicsLoad = false; shadows = true; count = 10; paused = hideStale = false;
             anchorRelocalize = anchorFailRecovery = false; anchorExperiment = null;
             depthTolerance = 0; depthDimLight = false; depthLabelFault = depthRayFault = true; depthExperiment = null;
             automaticLod = false; cadInspection = false; cadMaterials = 1; cadBenchmark = null; lodNear = 6; lodFar = 10;
@@ -105,7 +106,7 @@ namespace KIA.WiRR
             {
                 var asset = Resources.Load<TextAsset>("WiRR2/jointstate-replay");
                 replay = ReadReplay(asset.text); replayStart = Time.unscaledTime; messageIndex = 0;
-                lastMessage = Time.unscaledTime; staleAt = -1;
+                replayHealth = new WiRRReplayHealth(watchdog);
             }
         }
 
@@ -167,10 +168,10 @@ namespace KIA.WiRR
                 if (!Save()) { session.pendingTrial = null; return; }
             }
             active = true; start = lastSample = Time.unscaledTime; errors = successes = 0;
-            selected.Clear(); frames.Clear(); intervals.Clear(); lodSamples.Clear();
-            grabbed = paused = false; staleDelay = recoveryDelay = -1;
+            selected.Clear(); frames.Clear(); lodSamples.Clear();
+            grabbed = paused = false;
             interactionSeries = labNumber == 2 ? new WiRRInteractionSeries(start) : null;
-            if (labNumber == 6) { messageIndex = 0; replayStart = lastMessage = start; staleAt = -1; }
+            if (labNumber == 6) { messageIndex = 0; replayStart = start; replayHealth = new WiRRReplayHealth(watchdog); }
             feedback = "Próba trwa. Zmiany konfiguracji są zablokowane do zakończenia.";
         }
 
@@ -180,13 +181,13 @@ namespace KIA.WiRR
         }
 
         private string Configuration() => string.Format(CultureInfo.InvariantCulture,
-            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}; input_technique={22}; cycles_required={23}; cycle_timeout_s={24}; anchor_relocalize={25}; anchor_fail_recovery={26}; anchor_model={27}; depth_tolerance_m={28}; dim_light={29}; label_fault={30}; ray_claim_fault={31}; depth_source={32}; cad_materials={33}; cad_source=procedural-ring/v1",
+            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}; input_technique={22}; cycles_required={23}; cycle_timeout_s={24}; anchor_relocalize={25}; anchor_fail_recovery={26}; anchor_model={27}; depth_tolerance_m={28}; dim_light={29}; label_fault={30}; ray_claim_fault={31}; depth_source={32}; cad_materials={33}; cad_source=procedural-ring/v1; stale_visualization={34}; replay_clock=paused-source/1",
             detail, view, count, shadows, physicsLoad, highlight, technique, template, watchdog, gap, practice,
             Screen.width, Screen.height, QualitySettings.vSyncCount, Application.targetFrameRate, Application.isEditor ? "Editor" : "Player", largeTargets, demonstration,
             automaticLod, lodNear, lodFar, labNumber == 5 ? "radial3-15/v1" : labNumber == 3 ? "anchor-three-points/v1" : labNumber == 4 ? "depth-two-views/v1" : "baseline/v1",
             labNumber == 2 ? (technique == 0 ? "Direct_PC" : "Ray_PC") : "not_applicable", labNumber == 2 ? 5 : 0, labNumber == 2 ? 30 : 0,
             anchorRelocalize, anchorFailRecovery, labNumber == 3 ? anchorData.version : "not_applicable",
-            depthTolerance, depthDimLight, depthLabelFault, depthRayFault, labNumber == 4 ? "SYNTHETIC_GEOMETRY_CENTER_RAY" : "not_applicable", cadMaterials);
+            depthTolerance, depthDimLight, depthLabelFault, depthRayFault, labNumber == 4 ? "SYNTHETIC_GEOMETRY_CENTER_RAY" : "not_applicable", cadMaterials, hideStale ? "HIDE" : "FREEZE");
 
         private void Finish(bool valid, string reason = null)
         {
@@ -241,14 +242,14 @@ namespace KIA.WiRR
             if (labNumber == 4 && depthExperiment != null) trial.metrics.AddRange(depthExperiment.Metrics());
             if (labNumber == 6)
             {
-                if (intervals.Count > 0) trial.metrics.Add(WiRRStudentMetric.Measured("interarrival_median", WiRRStudentEvidence.Percentile(intervals, 0.5), "ms"));
-                trial.metrics.Add(staleDelay >= 0 ? WiRRStudentMetric.Measured("last_message_to_stale", staleDelay, "s") :
-                    new WiRRStudentMetric { name = "last_message_to_stale", unit = "s", unavailableReason = "Nie zaobserwowano STALE" });
-                trial.metrics.Add(new WiRRStudentMetric { name = "rtt", unit = "ms", unavailableReason = "Jednokierunkowy REPLAY nie mierzy RTT" });
+                trial.metrics.AddRange(replayHealth.Metrics());
+                if (!replayHealth.HasSource) { trial.validity = "FAILED"; trial.reason = "Brak odebranej wiadomości REPLAY."; }
+                if (frames.Count > 0)
+                {
+                    trial.metrics.Add(WiRRStudentMetric.Measured("display_frame_median", WiRRStudentEvidence.Percentile(frames, 0.5), "ms"));
+                    trial.metrics.Add(WiRRStudentMetric.Measured("display_frame_p95", WiRRStudentEvidence.Percentile(frames, 0.95), "ms"));
+                }
             }
-            if (labNumber == 6)
-                trial.metrics.Add(recoveryDelay >= 0 ? WiRRStudentMetric.Measured("simulated_gap_duration", recoveryDelay, "s") :
-                    new WiRRStudentMetric { name = "simulated_gap_duration", unit = "s", unavailableReason = "Brak zakończonej przerwy w próbie" });
             if (!practice) { session.CompleteTrial(labNumber, trial); if (!Save()) return; }
             feedback = practice ? "Trening zakończony. Nie wchodzi do porównania." :
                 "Zapisano próbę " + trial.validity + ". To dowód do przeglądu, nie automatyczna ocena.";

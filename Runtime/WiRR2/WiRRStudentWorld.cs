@@ -178,6 +178,12 @@ namespace KIA.WiRR
             lod.ForceLOD(level);
         }
 
+        public void SetReplayStatus(bool hasSource, bool stale, bool hide)
+        {
+            if (robotJoint1 == null) throw new InvalidOperationException("Brak modelu REPLAY.");
+            robotJoint1.gameObject.SetActive(hasSource && !(stale && hide));
+        }
+
         public void ConfigureCad(int materialCount, bool inspection)
         {
             if (lod == null || (materialCount != 1 && materialCount != 4))

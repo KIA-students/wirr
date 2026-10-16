@@ -10,7 +10,6 @@ namespace KIA.WiRR
     public sealed partial class WiRRStudentLab
     {
         private string initialConfiguration;
-        private float staleDelay = -1, recoveryDelay = -1;
 
         public struct ReplayFrame
         {
@@ -119,9 +118,12 @@ namespace KIA.WiRR
             if (labNumber == 6)
             {
                 var next = GUILayout.Toolbar(watchdog < 0.4f ? 0 : watchdog < 0.8f ? 1 : 2, new[] { "STALE 0,25 s", "0,5 s", "1 s" });
-                watchdog = next == 0 ? 0.25f : next == 1 ? 0.5f : 1;
+                var threshold = next == 0 ? 0.25f : next == 1 ? 0.5f : 1;
+                changed |= threshold != watchdog; watchdog = threshold;
                 next = GUILayout.Toolbar(gap < 2 ? 0 : 1, new[] { "Przerwa 1,5 s", "Przerwa 3 s" });
                 gap = next == 0 ? 1.5f : 3;
+                var hide = GUILayout.Toggle(hideStale, "Ukryj model przy STALE (zamiast zamrażać)");
+                changed |= hide != hideStale; hideStale = hide;
                 GUILayout.Label("Źródło: syntetyczny plik JointState. Nazwy kolumn są mapowane jawnie; plik nie pochodzi z robota.");
             }
             if (labNumber == 7 || labNumber == 8)
@@ -331,23 +333,43 @@ namespace KIA.WiRR
         private void UpdateReplay()
         {
             var now = Time.unscaledTime;
+            if (active && Time.unscaledDeltaTime > 0) frames.Add(Time.unscaledDeltaTime * 1000.0);
+            var hadSource = replayHealth.HasSource;
+            var previousStale = replayHealth.IsStale;
+            var previousRecoveries = replayHealth.Recoveries;
+            replayHealth.Observe(now);
+            var endedGap = false;
             if (paused && now - pauseStart >= gap)
             {
-                paused = false;
-                recoveryDelay = now - pauseStart;
-                // Freeze source time during a simulated delivery gap; do not flood old frames.
+                paused = false; endedGap = true; replayHealth.EndGap(now);
+                // Explicit virtual-source pause; no queued historical states become current.
                 replayStart += now - pauseStart;
             }
             if (!paused && replay != null && messageIndex < replay.Length && now - replayStart >= replay[messageIndex].time)
             {
-                var frame = replay[messageIndex++];
-                if (messageIndex > 1 && active) intervals.Add((now - lastMessage) * 1000.0);
-                lastMessage = now;
+                var frame = replay[messageIndex++]; replayHealth.Receive(now);
                 world.robotJoint1.localRotation = Quaternion.Euler(0, 0, frame.joint1 * Mathf.Rad2Deg);
                 world.robotJoint2.localRotation = Quaternion.Euler(0, 0, frame.joint2 * Mathf.Rad2Deg);
             }
             if (!paused && replay != null && messageIndex == replay.Length) { messageIndex = 0; replayStart = now; }
-            if (now - lastMessage > watchdog && staleAt < 0) { staleAt = now; staleDelay = now - lastMessage; }
+            world.SetReplayStatus(replayHealth.HasSource, replayHealth.IsStale, hideStale);
+            if (active && !practice && (endedGap || hadSource != replayHealth.HasSource || previousStale != replayHealth.IsStale || previousRecoveries != replayHealth.Recoveries))
+            {
+                session.pendingTrial.trial.metrics = replayHealth.Metrics();
+                if (!Save()) Finish(false, "Przerwano REPLAY po błędzie zapisu zdarzenia.");
+            }
+        }
+
+        public bool PauseReplay()
+        {
+            if (!active || labNumber != 6 || replayHealth.HasGap || !replayHealth.HasSource) return false;
+            pauseStart = Time.unscaledTime; replayHealth.BeginGap(pauseStart); paused = true;
+            if (!practice)
+            {
+                session.pendingTrial.trial.metrics = replayHealth.Metrics();
+                if (!Save()) { Finish(false, "Nie zapisano początku przerwy REPLAY."); return false; }
+            }
+            return true;
         }
 
         private void DrawLiveTask()
@@ -393,10 +415,13 @@ namespace KIA.WiRR
             }
             if (labNumber == 6)
             {
-                GUILayout.Label("ROS_REPLAY | wiadomość " + messageIndex + " | wiek " + (Time.unscaledTime - lastMessage).ToString("F2") +
-                    " s | " + (Time.unscaledTime - lastMessage > watchdog ? "STALE (stan zamrożony)" : "ŚWIEŻE dane replay"));
-                if (!paused && GUILayout.Button("Wstrzymaj strumień i przywróć"))
-                { paused = true; pauseStart = Time.unscaledTime; staleAt = -1; staleDelay = -1; }
+                GUILayout.Label("ROS_REPLAY | wiadomość " + replayHealth.Received + " | wiek odbiornika " +
+                    (replayHealth.Age.HasValue ? replayHealth.Age.Value.ToString("F2") + " s" : "brak danych") +
+                    " | " + (!replayHealth.HasSource ? "BRAK ŹRÓDŁA" : replayHealth.IsStale ? "STALE" : "ŚWIEŻE dane replay"));
+                GUILayout.Label("Odświeżanie obrazu: " + (Time.unscaledDeltaTime > 0 ? (1 / Time.unscaledDeltaTime).ToString("F0") + " kl./s" : "brak próbki"));
+                GUILayout.Label("joint1 → przegub 1; joint2 → przegub 2; radiany. Wirtualny czas pliku zatrzymuje się podczas przerwy.");
+                GUILayout.Label("Przejścia STALE: " + replayHealth.StaleEpisodes + "; powroty świeżych danych: " + replayHealth.Recoveries);
+                if (!replayHealth.HasGap && replayHealth.HasSource && GUILayout.Button("Wstrzymaj strumień i przywróć")) PauseReplay();
                 if (GUILayout.Button("Zapisz obserwację")) Finish(true);
             }
             if ((labNumber == 7 || labNumber == 8) && template == 2 && participant != "GUEST_SIM")

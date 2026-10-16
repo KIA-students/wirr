@@ -146,4 +146,27 @@ public sealed class WiRRStudentKitPlayModeTests
         yield return null;
     }
 
+    [UnityTest] public IEnumerator ReplayStaleReactionPreservesPoseAndRestoresVisibility()
+    {
+        var parent = new GameObject("REPLAY status test");
+        var world = new WiRRStudentWorld(parent.transform, 6, 10, 0, true, false, false, 0);
+        try
+        {
+            world.robotJoint1.localRotation = Quaternion.Euler(0, 0, 35);
+            var pose = world.robotJoint1.localRotation;
+            world.SetReplayStatus(false, false, false); yield return null;
+            Assert.IsFalse(world.robotJoint1.gameObject.activeSelf);
+            world.SetReplayStatus(true, true, false); yield return null;
+            Assert.IsTrue(world.robotJoint1.gameObject.activeSelf);
+            Assert.AreEqual(pose, world.robotJoint1.localRotation);
+            world.SetReplayStatus(true, true, true); yield return null;
+            Assert.IsFalse(world.robotJoint1.gameObject.activeSelf);
+            world.SetReplayStatus(true, false, true); yield return null;
+            Assert.IsTrue(world.robotJoint1.gameObject.activeSelf);
+            Assert.AreEqual(pose, world.robotJoint1.localRotation);
+        }
+        finally { world.Dispose(); Object.Destroy(parent); }
+        yield return null;
+    }
+
 }

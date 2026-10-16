@@ -1,6 +1,6 @@
 # Materiały Unity do nowych instrukcji
 
-Wersja `student-kit/0.1.5`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
+Wersja `student-kit/0.1.6`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
 Nie jest jeszcze pełnym wdrożeniem wszystkich 40 checkpointów ani zatwierdzonym
 wydaniem na stanowiska studentów. Sceny i źródła są częścią istniejącego pakietu,
 bez drugiej wtyczki i bez dodatkowych zależności runtime.
@@ -31,7 +31,7 @@ Nie wykonano tutaj buildów Player/APK ani przygotowania lockfile nowego wydania
 | 03 `Lab03_AnchorGallery` | Referencje co 0,30 m, umieszczenie 1:1, dwa profile SIM_AR, wspólna trasa trzech punktów, wektor błędu, trzy odczyty przed i trzy po relokalizacji, wariant braku odzyskania | Odbiór UI/PlayMode na Ubuntu i Windows oraz opcjonalny adapter REAL_AR |
 | 04 `Lab04_DepthRoom` | Trzy obiekty i przeszkoda, niezależna referencja geometrii, błędna/poprawna okluzja, regulowana tolerancja głębi, jasne/ciemne światło, mylące etykiety, błędny komunikat promienia, dwa widoki i osobne fałszywe alarmy/pominięcia | Odbiór PlayMode/renderowania na stanowiskach, opcjonalne dane z providerów urządzeniowych |
 | 05 `Lab05_CADWorkshop` | Proceduralne siatki High/Medium z rzeczywistym otworem i Low bez otworu; wariant stały lub automatyczny według odległości, dwa regulowane progi w metrach, wspólna radialna trasa benchmarku, 1/4 identycznych materiałów, widok kontrolny, statystyki geometrii z całego pomiaru | Collidery, osobne gotowe modele konwersji CAD i odbiór renderowania; obecny pierścień jest modelem dydaktycznym |
-| 06 `Lab06_DigitalTwin` | Model dwóch przegubów, nazwane kolumny JointState w radianach, syntetyczny replay 30 s, przerwy 1,5/3 s, watchdog 0,25/0,5/1 s, wiek i odstępy wiadomości | Bufor, kolejne strategie reakcji, opcjonalny ROS_LIVE; brak pomiaru RTT |
+| 06 `Lab06_DigitalTwin` | Model dwóch przegubów, nazwane kolumny JointState w radianach, syntetyczny replay 30 s, przerwy 1,5/3 s, watchdog 0,25/0,5/1 s, wiek odbiornika, odstępy wiadomości, osobne zdarzenia STALE/powrotu, zamrożenie albo ukrycie modelu | Bufor, jitter transportu, opcjonalny ROS_LIVE; brak pomiaru RTT |
 | 07 `Lab07_Expedition` | Sekwencja celów, nawigacja punktowa, klasyfikacja świeżości danych testowych; podświetlenie, kontekst, czas/błędy/sukcesy | Pełne mikromisje, kontrola transferu i testy użyteczności z uczestnikami |
 | 08 `Lab08_ExperienceStudio` | Trenażer sekwencji, inspekcja trzech celów, test stanu SIM; moduły podświetlenia i rozmiaru celu, osoba/gość symulowany, ręczne zakończenie pokazu 60–90 s | Bogatsze demonstratory AR/REPLAY i scenariusze ograniczeń, testy z użytkownikami |
 
@@ -82,11 +82,11 @@ zgodność dziewięciu źródeł instrukcji/rubryki z przypiętą wersją źród
 **Nie wykonano kompilacji C#, importu Unity, renderowania Game View, testów
 EditMode/PlayMode ani odbioru Windows/Ubuntu**. Analiza składni nie zastępuje tych testów.
 
-Dołączone testy Unity: 48 przypadków EditMode (m.in. JSON, zapis z kopią,
+Dołączone testy Unity: 56 przypadków EditMode (m.in. JSON, zapis z kopią,
 rozdzielenie wyników, percentyle, nazwane mapowanie replay, geometria siatek
 i import wszystkich scen, granice progów LOD i odzyskanie próby po serializacji)
-oraz sześć testów PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
-teleportacja PC, kotwica oraz geometria głębi z dwóch widoków, niezależna od światła i etykiet, oraz niezmienność geometrii przy zmianie materiałów CAD.
+oraz siedem testów PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
+teleportacja PC, kotwica oraz geometria głębi z dwóch widoków, niezależna od światła i etykiet, oraz niezmienność geometrii przy zmianie materiałów CAD i reakcja modelu REPLAY na brak danych/STALE/powrót.
 W projekcie testowym dodaj `pl.prz.kia.wirr` do `testables` w `Packages/manifest.json`.
 Testy uruchamiaj lokalnie albo w zatwierdzonym workflow na `main`, zgodnie
 z polityką repozytorium. Nie dodano automatycznych runów na PR.
@@ -247,3 +247,42 @@ częściowe statystyki jako FAILED. W mierzonym oknie nie wykonuje się zapisów
 aby ich opóźnienia nie zanieczyszczały porównania. Twarda awaria odzyskuje początek
 próby jako FAILED bez statystyk z pamięci; nie odtwarza nieutrwalonych klatek.
 Liczba draw calls i odbiór renderowania nadal wymagają Unity oraz narzędzi profilera.
+
+
+## Lab06: aktualność, przerwa i odzyskanie
+
+Źródło `jointstate-replay.csv` jest syntetycznym plikiem z nazwanymi kolumnami
+`joint1_rad` i `joint2_rad`. Ich kolejność w pliku jest celowo odwrócona;
+mapowanie odbywa się po nazwach. To nie ROS_LIVE ani zapis fizycznego robota.
+Wersja relacji zegarów: `paused-source/1`. Zegar odbiornika jest monotonicznym
+czasem Unity bez skalowania, a wirtualny czas pliku zatrzymuje się podczas
+kontrolowanej przerwy. Odtwarzanie nie nadrabia przerwy kolejką historycznych póz.
+
+1. Rozpocznij próbę z tym samym plikiem i progiem 0,25/0,5/1 s. Obserwuj numer
+   wiadomości, wiek od ostatniego odbioru oraz niezależny wskaźnik odświeżania obrazu.
+   Przed pierwszą wiadomością stan jest nieznany, a model ukryty.
+2. Wywołaj jedną przerwę na próbę. Profil 1,5/3 s określa żądany czas pauzy.
+   STALE zachodzi przy wieku większym od progu; wykrycie jest próbkowane w Update.
+   Po upływie pauzy źródło może być wznowione przed nadejściem następnej wiadomości.
+   Dopiero jej rzeczywisty odbiór przywraca stan świeży i widoczność modelu.
+3. Porównaj zamrożenie z ukryciem przy STALE albo zmień watchdog. W kontrpróbie
+   wybierz drugi czas przerwy, utrzymując pozostałe warunki. Zakończ obserwację
+   przyciskiem zapisu; nie trzeba czekać na koniec 30-sekundowego pliku.
+
+Raport rozróżnia `simulated_gap_duration` (początek do wznowienia źródła),
+`resume_to_first_message` (wznowienie do pierwszego odbioru),
+`last_message_to_stale` (ostatni odbiór do pierwszego wykrycia) i
+`first_stale_duration` (pierwsze wykrycie do odbioru przywracającego świeżość).
+`stale_detection_overshoot` opisuje przekroczenie progu w chwili wykrycia,
+a nie opóźnienie sieci. Pierwsze zdarzenia nie są nadpisywane przez kolejne;
+liczniki obejmują wszystkie zaobserwowane epizody. Odstępy wiadomości obejmują
+przerwy oraz granicę pętli pliku. Osobno zapisywane są czasy klatek obrazu.
+Wiek dotyczy odbiornika, nie wieku fizycznego pomiaru w zdalnym źródle.
+RTT i opóźnienie źródło–odbiornik pozostają null z powodem braku pomiaru.
+
+Zapis zdarzeń pierwszej wiadomości, STALE, końca pauzy i odzyskania zachowuje
+częściowe metryki do odzyskania po awarii jako FAILED. Nie odtwarza brakujących
+zdarzeń. Lokalne opóźnienia Update, renderowania i zapisu mogą wpływać na
+obserwowane odstępy; nie są przypisywane transportowi ROS. Brak wiadomości
+uniemożliwia ważną próbę. Niezweryfikowane pozostają kompilacja, PlayMode,
+wygląd wskaźników, odbiór na Windows/Ubuntu, bufor i adapter ROS_LIVE.
