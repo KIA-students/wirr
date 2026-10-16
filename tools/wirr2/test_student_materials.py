@@ -5,6 +5,7 @@ import csv
 import importlib.util
 import io
 import json
+import math
 import re
 import unittest
 from itertools import pairwise
@@ -90,6 +91,22 @@ class TestStudentMaterials(unittest.TestCase):
         self.assertEqual(result["status"], "PROVISIONAL")
         self.assertEqual(result["achieved_checkpoints"], [])
         self.assertIsNone(result["proposed_grade"])
+
+    def test_anchor_fixture_distinguishes_bias_scatter_and_relocalization(self):
+        data = json.loads((ROOT / "Runtime/Resources/WiRR2/anchor-tracking.json").read_text())
+        self.assertEqual(data["source"], "SYNTHETIC_MODEL_NOT_DEVICE")
+        self.assertEqual(data["seed"], 2718)
+        self.assertGreater(data["recovery_timeout_s"], data["recovery_delay_s"])
+        dispersions = []
+        for profile in data["profiles"]:
+            self.assertEqual(len(profile["jitter_m"]), 3)
+            for axis in "xyz":
+                self.assertAlmostEqual(sum(v[axis] for v in profile["jitter_m"]), 0)
+                self.assertTrue(all(math.isfinite(v[axis]) for v in profile["jitter_m"]))
+            dispersions.append(math.sqrt(sum(sum(v[a] ** 2 for a in "xyz") for v in profile["jitter_m"]) / 3))
+            self.assertGreater(profile["bias_m"]["x"], 0)
+            self.assertGreater(profile["relocalization_shift_m"]["x"], 0)
+        self.assertGreater(dispersions[1], dispersions[0])
 
 
 if __name__ == "__main__":

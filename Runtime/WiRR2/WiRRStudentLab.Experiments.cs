@@ -72,7 +72,9 @@ namespace KIA.WiRR
             {
                 var next = GUILayout.Toolbar(detail, new[] { "A: wiele cech", "B: mało cech" });
                 changed |= next != detail; detail = next;
-                GUILayout.Label("SIM_AR: znana referencja, stały seed 2718, trzy odczyty położenia co sekundę. Bez pomiaru telefonu.");
+                anchorRelocalize = GUILayout.Toggle(anchorRelocalize, "Kontrpróba: utrata śledzenia i ponowna lokalizacja");
+                if (anchorRelocalize) anchorFailRecovery = GUILayout.Toggle(anchorFailRecovery, "Scenariusz graniczny: brak odzyskania śledzenia");
+                GUILayout.Label("SIM_AR: model syntetyczny, znana referencja i stała trasa trzech punktów. Trzy odczyty co sekundę; w kontrpróbie także trzy po powrocie. Nie mierzymy telefonu.");
             }
             if (labNumber == 4)
             {
@@ -127,7 +129,7 @@ namespace KIA.WiRR
             {
                 var next = GUILayout.Toggle(highlight, "Moduł 1: podświetlenie celu"); changed |= next != highlight; highlight = next;
             }
-            if (labNumber != 6)
+            if (labNumber != 6 && labNumber != 3)
             {
                 var next = GUILayout.Toolbar(view, new[] { "Warunek bazowy", "Drugi widok / dystans" });
                 changed |= next != view; view = next;
@@ -163,25 +165,7 @@ namespace KIA.WiRR
             }
             else if (labNumber == 2) UpdateManipulation();
             else if (labNumber == 3)
-            {
-                if (!placed) return;
-                if (!tracking)
-                {
-                    if (Time.unscaledTime >= recovery) { tracking = true; recoveryDelay = Time.unscaledTime - pauseStart; }
-                    else return;
-                }
-                if (Time.unscaledTime - lastSample >= 1 && sampleIndex < 3)
-                {
-                    var random = new System.Random(2718 + sampleIndex);
-                    var spread = detail == 0 ? 0.005f : 0.04f;
-                    var offset = new Vector3((float)random.NextDouble() * spread, detail == 0 ? 0.005f : 0.04f,
-                        (float)random.NextDouble() * spread);
-                    world.targets[0].transform.position = world.anchorReference.position + offset;
-                    positions.Add(world.targets[0].transform.position);
-                    sampleIndex++; lastSample = Time.unscaledTime;
-                }
-                if (sampleIndex == 3) Finish(true);
-            }
+                UpdateAnchor();
             else if (labNumber == 7 || labNumber == 8)
             {
                 if (participant == "GUEST_SIM")
@@ -206,6 +190,32 @@ namespace KIA.WiRR
                     }
                 }
             }
+        }
+
+        private void UpdateAnchor()
+        {
+            if (world.anchorReference == null || world.targets.Count == 0 || world.targets[0] == null)
+            { Finish(false, "Brak referencji lub modelu kotwicy SIM_AR."); return; }
+            if (anchorExperiment == null || !anchorExperiment.Tick(Time.unscaledTime)) return;
+            var phase = anchorExperiment.Phase;
+            var available = anchorExperiment.Latest != null;
+            world.SetAnchorPose(anchorExperiment.Latest == null ? Vector3.zero : anchorExperiment.Latest.offset_m, available);
+            world.SetAnchorObservation(Mathf.Min(2, anchorExperiment.Observation));
+            if (phase == WiRRAnchorPhase.Complete) { Finish(true); return; }
+            if (phase == WiRRAnchorPhase.Failed) { Finish(false, "Nie odzyskano śledzenia w limicie obserwacji SIM_AR."); return; }
+            if (!practice)
+            {
+                session.pendingTrial.trial.metrics = anchorExperiment.Metrics();
+                if (!Save()) Finish(false, "Przerwano obserwację SIM_AR po błędzie zapisu.");
+            }
+        }
+
+        public bool PlaceAnchor()
+        {
+            if (labNumber != 3 || !active || anchorExperiment == null || anchorExperiment.Phase != WiRRAnchorPhase.WaitingForPlacement) return false;
+            anchorExperiment.Place(Time.unscaledTime);
+            world.SetAnchorObservation(0); world.SetAnchorPose(Vector3.zero, true);
+            return true;
         }
 
         private void ApplyCadLod()
@@ -332,10 +342,17 @@ namespace KIA.WiRR
             if (labNumber == 5)
                 GUILayout.Label("LOD " + world.ActiveLod + " | " + world.ActiveTriangleCount + " trójkątów | otwór " +
                     (world.ActiveLod < 2 ? "zachowany" : "utracony"));
-            if (labNumber == 3 && !placed && GUILayout.Button("Umieść model przy referencji"))
-            { world.targets[0].transform.position = world.anchorReference.position; placed = true; lastSample = Time.unscaledTime; }
-            if (labNumber == 3 && recovery < 0 && GUILayout.Button("Wywołaj utratę śledzenia SIM"))
-            { tracking = false; pauseStart = Time.unscaledTime; recovery = pauseStart + 1.5f; }
+            if (labNumber == 3 && anchorExperiment != null)
+            {
+                if (anchorExperiment.Phase == WiRRAnchorPhase.WaitingForPlacement)
+                { if (GUILayout.Button("Umieść model przy referencji")) PlaceAnchor(); }
+                else if (anchorExperiment.Phase == WiRRAnchorPhase.TrackingLost)
+                    GUILayout.Label("Śledzenie utracone. Brak poprawnego odczytu; oczekiwanie na powrót.");
+                else
+                    GUILayout.Label("Odczyty przed: " + anchorExperiment.Before.Count + "/3; po powrocie: " + anchorExperiment.After.Count + "/3.");
+                if (anchorExperiment.Latest != null && anchorExperiment.Phase != WiRRAnchorPhase.TrackingLost)
+                    GUILayout.Label("Wektor różnicy SIM_AR [cm]: " + (anchorExperiment.Latest.offset_m * 100).ToString("F2"));
+            }
             if (labNumber == 4)
             {
                 for (var i = 0; i < 3; i++)

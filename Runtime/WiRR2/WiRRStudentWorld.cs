@@ -19,6 +19,7 @@ namespace KIA.WiRR
         private readonly Mesh[] lodMeshes = new Mesh[3];
         private readonly int[] lodTriangleCounts = new int[3];
         private Vector3 homeCameraPosition;
+        private LineRenderer anchorDifference;
         private readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
 
         public WiRRStudentWorld(Transform parent, int lab, int count, int detail, bool shadows, bool physics, bool highlight, int view)
@@ -79,6 +80,11 @@ namespace KIA.WiRR
                 }
                 targets.Add(Shape("Kotwica SIM_AR", PrimitiveType.Sphere, anchorReference.position,
                     Vector3.one * 0.12f, Color.yellow));
+                var vector = new GameObject("Różnica pozycji SIM_AR"); vector.transform.SetParent(root.transform);
+                anchorDifference = vector.AddComponent<LineRenderer>();
+                anchorDifference.useWorldSpace = true; anchorDifference.positionCount = 2;
+                anchorDifference.startWidth = anchorDifference.endWidth = 0.004f;
+                anchorDifference.sharedMaterial = Material(Color.magenta);
                 Label(anchorReference, "Odcinki 0,30 m; SIM_AR", new Vector3(0, 1, 0));
             }
             else if (lab == 4)
@@ -164,6 +170,23 @@ namespace KIA.WiRR
             if (socket == null || station < 0 || station > 2) throw new ArgumentOutOfRangeException(nameof(station));
             camera.transform.position = station == 2 ? homeCameraPosition : new Vector3(station == 0 ? -2.5f : 2.5f, 1.6f, -2);
             camera.transform.LookAt(station == 2 ? new Vector3(0, 1, 1) : socket.position);
+        }
+
+        public void SetAnchorObservation(int index)
+        {
+            if (anchorReference == null || index < 0 || index > 2) throw new ArgumentOutOfRangeException(nameof(index));
+            camera.transform.position = anchorReference.position + new Vector3((index - 1) * 0.6f, 0.6f, -1.5f);
+            camera.transform.LookAt(anchorReference.position);
+        }
+
+        public void SetAnchorPose(Vector3 offset, bool available)
+        {
+            if (anchorReference == null || anchorDifference == null) throw new InvalidOperationException("Brak referencji SIM_AR.");
+            targets[0].SetActive(available); anchorDifference.enabled = available;
+            if (!available) return;
+            targets[0].transform.position = anchorReference.position + offset;
+            anchorDifference.SetPosition(0, anchorReference.position);
+            anchorDifference.SetPosition(1, targets[0].transform.position);
         }
 
         public GameObject Shape(string name, PrimitiveType type, Vector3 position, Vector3 scale, Color color)

@@ -9,6 +9,7 @@ import argparse
 import hashlib
 import json
 import math
+import random
 import re
 import uuid
 from pathlib import Path
@@ -135,8 +136,28 @@ def build(course: Path) -> None:
     replay = ["time_s,joint2_rad,joint1_rad"]
     replay.extend(f"{i / 10:.1f},{0.4 * math.cos(i / 10):.6f},{0.6 * math.sin(i / 10):.6f}" for i in range(301))
     (resources / "jointstate-replay.csv").write_text("\n".join(replay) + "\n", encoding="utf-8")
+    def vector(x: float, y: float, z: float) -> dict:
+        return {"x": x, "y": y, "z": z}
+
+    anchor = {
+        "version": "anchor-model/1", "source": "SYNTHETIC_MODEL_NOT_DEVICE", "seed": 2718,
+        "cadence_s": 1, "recovery_delay_s": 1.5, "recovery_timeout_s": 5,
+        "profiles": [
+            {"name": "A_many_features", "bias_m": vector(0.005, 0, 0),
+             "relocalization_shift_m": vector(0.01, 0, 0),
+             "jitter_m": [vector(-0.002, 0.001, 0), vector(0.002, -0.001, 0.001), vector(0, 0, -0.001)]},
+            {"name": "B_few_features", "bias_m": vector(0.025, 0, 0),
+             "relocalization_shift_m": vector(0.03, 0.01, 0),
+             "jitter_m": [vector(-0.014, 0.007, 0), vector(0.014, -0.007, 0.007), vector(0, 0, -0.007)]},
+        ],
+    }
+    order = [0, 1, 2]
+    random.Random(anchor["seed"]).shuffle(order)
+    for profile in anchor["profiles"]:
+        profile["jitter_m"] = [profile["jitter_m"][index] for index in order]
+    (resources / "anchor-tracking.json").write_text(json.dumps(anchor, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     manifest = ROOT / "tools/wirr2/instruction-inputs.json"
-    manifest.write_text(json.dumps({"version": "student-kit/0.1.2", "inputs_sha256": sources}, indent=2) + "\n", encoding="utf-8")
+    manifest.write_text(json.dumps({"version": "student-kit/0.1.3", "inputs_sha256": sources}, indent=2) + "\n", encoding="utf-8")
     # Only assets introduced by this kit. Never modify unrelated package metadata.
     for folder in [ROOT / "Runtime/WiRR2", resources, ROOT / "Editor/WiRR2", ROOT / "Tests"]:
         for path in folder.rglob("*"):

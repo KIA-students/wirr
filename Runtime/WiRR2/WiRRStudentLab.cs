@@ -28,12 +28,14 @@ namespace KIA.WiRR
         private string index1 = "", index2 = "", group = "G1", savePath, feedback = "", participant = "SOLO";
         private Vector2 scroll;
         private int stage, detail, view, count = 10, technique, template;
-        private bool highlight, largeTargets, demonstration, placed, physicsLoad, shadows = true, active, practice, grabbed, paused, tracking = true;
-        private float start, lastSample, lastMessage, staleAt = -1, pauseStart, recovery = -1, watchdog = 0.5f, gap = 1.5f;
-        private int errors, successes, messageIndex, sampleIndex;
+        private bool highlight, largeTargets, demonstration, physicsLoad, shadows = true, active, practice, grabbed, paused;
+        private float start, lastSample, lastMessage, staleAt = -1, pauseStart, watchdog = 0.5f, gap = 1.5f;
+        private int errors, successes, messageIndex;
+        private WiRRAnchorDataset anchorData;
+        private WiRRAnchorExperiment anchorExperiment;
+        private bool anchorRelocalize, anchorFailRecovery;
         private WiRRInteractionSeries interactionSeries;
         private readonly List<double> frames = new List<double>();
-        private readonly List<Vector3> positions = new List<Vector3>();
         private readonly List<double> intervals = new List<double>();
         private readonly List<int> lodSamples = new List<int>();
         private bool automaticLod;
@@ -63,7 +65,8 @@ namespace KIA.WiRR
             lesson = JsonUtility.FromJson<WiRRStudentLesson>(asset.text);
             stage = detail = view = template = technique = 0;
             participant = "SOLO";
-            highlight = largeTargets = demonstration = physicsLoad = false; shadows = true; count = 10; paused = false; tracking = true;
+            highlight = largeTargets = demonstration = physicsLoad = false; shadows = true; count = 10; paused = false;
+            anchorRelocalize = anchorFailRecovery = false; anchorExperiment = null;
             automaticLod = false; lodNear = 6; lodFar = 10;
             if (session != null) session.Lab(number);
             Rebuild();
@@ -82,6 +85,13 @@ namespace KIA.WiRR
             }
             if (labNumber == 5) world.camera.transform.position += Vector3.back * view * 4;
             if (labNumber == 5) ApplyCadLod();
+            if (labNumber == 3)
+            {
+                var asset = Resources.Load<TextAsset>("WiRR2/anchor-tracking");
+                if (asset == null) throw new InvalidOperationException("Brak modelu SIM_AR.");
+                anchorData = JsonUtility.FromJson<WiRRAnchorDataset>(asset.text);
+                world.SetAnchorObservation(0); world.SetAnchorPose(Vector3.zero, false);
+            }
             if (labNumber == 6)
             {
                 var asset = Resources.Load<TextAsset>("WiRR2/jointstate-replay");
@@ -138,16 +148,16 @@ namespace KIA.WiRR
         {
             if (active || session == null) return;
             Rebuild();
+            anchorExperiment = labNumber == 3 ? new WiRRAnchorExperiment(anchorData, detail, anchorRelocalize, anchorFailRecovery) : null;
             initialConfiguration = Configuration();
             if (!practice)
             {
                 session.BeginTrial(labNumber, lesson.mode, participant, initialConfiguration);
                 if (!Save()) { session.pendingTrial = null; return; }
             }
-            active = true; start = lastSample = Time.unscaledTime; errors = successes = sampleIndex = 0;
-            selected.Clear(); frames.Clear(); positions.Clear(); intervals.Clear(); lodSamples.Clear();
-            grabbed = paused = false; tracking = true; recovery = staleDelay = recoveryDelay = -1;
-            placed = false;
+            active = true; start = lastSample = Time.unscaledTime; errors = successes = 0;
+            selected.Clear(); frames.Clear(); intervals.Clear(); lodSamples.Clear();
+            grabbed = paused = false; staleDelay = recoveryDelay = -1;
             interactionSeries = labNumber == 2 ? new WiRRInteractionSeries(start) : null;
             if (labNumber == 6) { messageIndex = 0; replayStart = lastMessage = start; staleAt = -1; }
             feedback = "Próba trwa. Zmiany konfiguracji są zablokowane do zakończenia.";
@@ -159,11 +169,12 @@ namespace KIA.WiRR
         }
 
         private string Configuration() => string.Format(CultureInfo.InvariantCulture,
-            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}; input_technique={22}; cycles_required={23}; cycle_timeout_s={24}",
+            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}; input_technique={22}; cycles_required={23}; cycle_timeout_s={24}; anchor_relocalize={25}; anchor_fail_recovery={26}; anchor_model={27}",
             detail, view, count, shadows, physicsLoad, highlight, technique, template, watchdog, gap, practice,
             Screen.width, Screen.height, QualitySettings.vSyncCount, Application.targetFrameRate, Application.isEditor ? "Editor" : "Player", largeTargets, demonstration,
-            automaticLod, lodNear, lodFar, labNumber == 5 ? "radial3-15/v1" : "baseline/v1",
-            labNumber == 2 ? (technique == 0 ? "Direct_PC" : "Ray_PC") : "not_applicable", labNumber == 2 ? 5 : 0, labNumber == 2 ? 30 : 0);
+            automaticLod, lodNear, lodFar, labNumber == 5 ? "radial3-15/v1" : labNumber == 3 ? "anchor-three-points/v1" : "baseline/v1",
+            labNumber == 2 ? (technique == 0 ? "Direct_PC" : "Ray_PC") : "not_applicable", labNumber == 2 ? 5 : 0, labNumber == 2 ? 30 : 0,
+            anchorRelocalize, anchorFailRecovery, labNumber == 3 ? anchorData.version : "not_applicable");
 
         private void Finish(bool valid, string reason = null)
         {
@@ -173,7 +184,11 @@ namespace KIA.WiRR
                 if (!interactionSeries.IsComplete) interactionSeries.Abort(Time.unscaledTime);
                 errors = interactionSeries.TotalErrors; successes = interactionSeries.Successes;
             }
-            if (labNumber == 3 && !tracking) { valid = false; reason = "Brak śledzenia SIM_AR."; }
+            if (labNumber == 3 && anchorExperiment != null)
+            {
+                successes = anchorExperiment.Phase == WiRRAnchorPhase.Complete ? 1 : 0;
+                if (valid && successes == 0) { valid = false; reason = "Nie ukończono poprawnych odczytów SIM_AR."; }
+            }
             active = false;
             var trial = new WiRRStudentTrial { deviceMode = lesson.mode, condition = Configuration(),
                 participantMode = participant, validity = valid ? "VALID" : "FAILED", reason = reason };
@@ -203,15 +218,7 @@ namespace KIA.WiRR
                     trial.metrics.Add(WiRRStudentMetric.Measured("hole_preserved_final", world.ActiveLod < 2 ? 1 : 0, "boolean"));
                 }
             }
-            if (labNumber == 3 && positions.Count > 0)
-            {
-                var reference = world.anchorReference.position;
-                var mean = positions.Aggregate(Vector3.zero, (sum, p) => sum + p) / positions.Count;
-                trial.metrics.Add(WiRRStudentMetric.Measured("position_error", positions.Average(p => Vector3.Distance(p, reference)) * 100, "cm"));
-                trial.metrics.Add(WiRRStudentMetric.Measured("position_scatter_rms", Math.Sqrt(positions.Average(p => (p - mean).sqrMagnitude)) * 100, "cm"));
-                for (var i = 0; i < positions.Count; i++)
-                    trial.metrics.Add(WiRRStudentMetric.Measured("sample_" + (i + 1) + "_error", Vector3.Distance(positions[i], reference) * 100, "cm"));
-            }
+            if (labNumber == 3 && anchorExperiment != null) trial.metrics.AddRange(anchorExperiment.Metrics());
             if (labNumber == 6)
             {
                 if (intervals.Count > 0) trial.metrics.Add(WiRRStudentMetric.Measured("interarrival_median", WiRRStudentEvidence.Percentile(intervals, 0.5), "ms"));
@@ -219,7 +226,7 @@ namespace KIA.WiRR
                     new WiRRStudentMetric { name = "last_message_to_stale", unit = "s", unavailableReason = "Nie zaobserwowano STALE" });
                 trial.metrics.Add(new WiRRStudentMetric { name = "rtt", unit = "ms", unavailableReason = "Jednokierunkowy REPLAY nie mierzy RTT" });
             }
-            if (labNumber == 3 || labNumber == 6)
+            if (labNumber == 6)
                 trial.metrics.Add(recoveryDelay >= 0 ? WiRRStudentMetric.Measured("simulated_gap_duration", recoveryDelay, "s") :
                     new WiRRStudentMetric { name = "simulated_gap_duration", unit = "s", unavailableReason = "Brak zakończonej przerwy w próbie" });
             if (!practice) { session.CompleteTrial(labNumber, trial); if (!Save()) return; }

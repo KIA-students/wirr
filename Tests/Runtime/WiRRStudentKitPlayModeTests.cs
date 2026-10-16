@@ -63,4 +63,26 @@ public sealed class WiRRStudentKitPlayModeTests
         finally { world.Dispose(); Object.Destroy(parent); }
         yield return null;
     }
+
+    [UnityTest] public IEnumerator AnchorViewChangesPreserveReferenceAndHideMissingPose()
+    {
+        var parent = new GameObject("SIM_AR reference test");
+        var world = new WiRRStudentWorld(parent.transform, 3, 10, 0, true, false, false, 0);
+        try
+        {
+            var reference = world.anchorReference.position;
+            world.SetAnchorObservation(0); var firstView = world.camera.transform.position;
+            world.SetAnchorPose(new Vector3(0.02f, 0, 0), true); yield return null;
+            Assert.Less(Vector3.Distance(reference + new Vector3(0.02f, 0, 0), world.targets[0].transform.position), 1e-6f);
+            world.SetAnchorObservation(2); world.SetAnchorPose(Vector3.zero, false); yield return null;
+            Assert.AreNotEqual(firstView, world.camera.transform.position);
+            Assert.AreEqual(reference, world.anchorReference.position);
+            Assert.IsFalse(world.targets[0].activeSelf, "Nie rysujemy nieaktualnej kotwicy jako poprawnej pozycji.");
+            world.SetAnchorPose(new Vector3(0.03f, 0, 0), true); yield return null;
+            Assert.IsTrue(world.targets[0].activeSelf);
+            Assert.AreEqual(reference, world.anchorReference.position);
+        }
+        finally { world.Dispose(); Object.Destroy(parent); }
+        yield return null;
+    }
 }

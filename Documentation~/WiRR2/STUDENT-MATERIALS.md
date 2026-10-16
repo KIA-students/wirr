@@ -1,6 +1,6 @@
 # Materiały Unity do nowych instrukcji
 
-Wersja `student-kit/0.1.2`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
+Wersja `student-kit/0.1.3`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
 Nie jest jeszcze pełnym wdrożeniem wszystkich 40 checkpointów ani zatwierdzonym
 wydaniem na stanowiska studentów. Sceny i źródła są częścią istniejącego pakietu,
 bez drugiej wtyczki i bez dodatkowych zależności runtime.
@@ -28,7 +28,7 @@ Nie wykonano tutaj buildów Player/APK ani przygotowania lockfile nowego wydania
 |---|---|---|
 | 01 `Lab01_Station` | Referencje 0,1/1/10 m, 10/100/300 brył, cienie, fizyka, stała trasa, 2 s rozgrzewki i 8 s próby, mediana/p95 rzeczywistych czasów klatki | Odbiór budżetu stanowiska, kontrolowane profile CPU/GPU, pilotaż |
 | 02 `Lab02_Interaction` | Obiekt i gniazdo, Direct PC klawiaturą i Ray PC myszą, serie pięciu cykli z czasami i błędami, trening oddzielony od danych, podgląd teleportacji PC poza pomiarem | Pełne XRI Direct/Ray/Socket i teleportacja XRI/HMD; obecny PC to własny symulator dydaktyczny |
-| 03 `Lab03_AnchorGallery` | Referencje co 0,30 m, umieszczenie, dwa profile syntetycznego błędu, trzy odczyty, średni błąd i rozrzut RMS, jawna przerwa śledzenia SIM | Tor obserwacji, pełny scenariusz relokalizacji i opcjonalny adapter REAL_AR |
+| 03 `Lab03_AnchorGallery` | Referencje co 0,30 m, umieszczenie 1:1, dwa profile SIM_AR, wspólna trasa trzech punktów, wektor błędu, trzy odczyty przed i trzy po relokalizacji, wariant braku odzyskania | Odbiór UI/PlayMode na Ubuntu i Windows oraz opcjonalny adapter REAL_AR |
 | 04 `Lab04_DepthRoom` | Trzy obiekty, przeszkoda, shader błędnej okluzji, wariant zgodny z głębią, odpowiedzi widoczny/niewidoczny sprawdzane raycastem, drugi widok | Próg głębi, warianty oświetlenia, osobne anomalie etykiety i błędnego raycastu, pomiary urządzeniowe |
 | 05 `Lab05_CADWorkshop` | Proceduralne siatki High/Medium z rzeczywistym otworem i Low bez otworu; wariant stały lub automatyczny według odległości, dwa regulowane progi w metrach, wspólna radialna trasa benchmarku | Materiały/collidery, osobne gotowe modele konwersji CAD i odbiór renderowania; obecny pierścień jest modelem dydaktycznym |
 | 06 `Lab06_DigitalTwin` | Model dwóch przegubów, nazwane kolumny JointState w radianach, syntetyczny replay 30 s, przerwy 1,5/3 s, watchdog 0,25/0,5/1 s, wiek i odstępy wiadomości | Bufor, kolejne strategie reakcji, opcjonalny ROS_LIVE; brak pomiaru RTT |
@@ -76,17 +76,17 @@ laboratoriami zamiast powielać osiem odrębnych eksporterów.
 
 ## Weryfikacja techniczna
 
-W tym środowisku wykonano: 7 kontroli pakowania/danych i składni C# tree-sitter,
+W tym środowisku wykonano: 8 kontroli pakowania/danych i składni C# tree-sitter,
 14 regresji istniejącego gradera oraz Ruff narzędzi Python. Zweryfikowano też
 zgodność dziewięciu źródeł instrukcji/rubryki z przypiętą wersją źródłową.
 **Nie wykonano kompilacji C#, importu Unity, renderowania Game View, testów
 EditMode/PlayMode ani odbioru Windows/Ubuntu**. Analiza składni nie zastępuje tych testów.
 
-Dołączone testy Unity: 24 przypadki EditMode (m.in. JSON, zapis z kopią,
+Dołączone testy Unity: 33 przypadki EditMode (m.in. JSON, zapis z kopią,
 rozdzielenie wyników, percentyle, nazwane mapowanie replay, geometria siatek
 i import wszystkich scen, granice progów LOD i odzyskanie próby po serializacji)
-oraz trzy testy PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High
-i teleportacja PC bez przesuwania obiektu i gniazda.
+oraz cztery testy PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
+teleportacja PC i zachowanie referencji oraz ukrywanie nieważnej pozycji kotwicy.
 W projekcie testowym dodaj `pl.prz.kia.wirr` do `testables` w `Packages/manifest.json`.
 Testy uruchamiaj lokalnie albo w zatwierdzonym workflow na `main`, zgodnie
 z polityką repozytorium. Nie dodano automatycznych runów na PR.
@@ -155,3 +155,35 @@ Dwa punkty teleportacji PC i powrót do widoku bazowego są dostępne poza
 aktywną serią. Rozpoczęcie serii odtwarza scenę, aby wcześniejsza eksploracja
 nie zmieniała dystansu A/B. To zmiana pozycji kamery w symulatorze, nie
 potwierdzenie działania TeleportationProvider ani interaktorów XRI.
+
+## Lab03: galeria kotwic SIM_AR
+
+1. Wybierz profil A (wiele cech) i rozpocznij próbę. Umieść model przy referencji.
+   Scena wykonuje trzy odczyty na tej samej trasie trzech punktów obserwacji.
+2. Wybierz profil B (mało cech), pozostaw pozostałe warunki i powtórz. Porównaj
+   średnią długość błędu, normę średniego przesunięcia i rozrzut RMS wokół średniej.
+   Mały rozrzut nie oznacza braku stałego przesunięcia.
+3. Wybierz lepszy warunek i zaznacz kontrpróbę relokalizacji. Po trzech odczytach
+   źródło traci śledzenie; model i wektor różnicy znikają. Po powrocie scena
+   wykonuje trzy nowe odczyty na tej samej trasie. Zapisuje rzeczywiście
+   zaobserwowany czas powrotu w zegarze aplikacji, nie opóźnienie urządzenia AR.
+4. Scenariusz graniczny „brak odzyskania” kończy się FAILED po 5 s obserwacji
+   utraty. Czas relokalizacji i odczyty po powrocie pozostają `null`.
+
+Model `anchor-model/1` jest jawnie syntetyczny. W pliku `anchor-tracking.json`
+są stałe przesunięcia, trzy składowe zmienności i zmiana po relokalizacji.
+Seed 2718 wyznacza kolejność odczytów, taką samą dla A/B. Dane nie pochodzą
+z telefonu ani gogli. Model używa jawnej referencji; nie wykonuje pomiaru
+bezwzględnej dokładności rzeczywistego systemu AR.
+
+Raport zachowuje oddzielne fazy `before` i `after`: liczbę odczytów, składowe
+wektora [cm], czasy obserwacji [s], średnią długość błędu, normę średniego
+wektora oraz RMS rozrzutu. Dla jednego odczytu nie wyznacza rozrzutu. Podczas
+utraty nie tworzy poprawnych odczytów; po opóźnionej klatce nie dopisuje kilku
+próbek wstecz. Przekroczenie limitu powrotu nie staje się sukcesem.
+
+Każdy odczyt i zmiana fazy są zapisywane w rozpoczętej próbie. Restart zachowuje
+dotychczasowe metryki, oznacza przerwanie i nie uzupełnia brakujących odczytów.
+Nadal nie ma automatycznego zaliczania pięciu progów ani potwierdzenia testów
+rzeczywistego AR. Instrukcje sterowania i uruchomienia pozostają takie same dla
+solo i pary.
