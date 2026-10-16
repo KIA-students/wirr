@@ -22,4 +22,24 @@ public sealed class WiRRStudentKitPlayModeTests
             yield return null;
         }
     }
+
+    [UnityTest] public IEnumerator CadLodSwitchesActualMeshAndReturnsToHigh()
+    {
+        var parent = new GameObject("LOD test root");
+        var world = new WiRRStudentWorld(parent.transform, 5, 10, 0, true, false, false, 0);
+        try
+        {
+            foreach (var distance in new[] { 3f, 7f, 12f, 3f })
+            {
+                world.SetLod(WiRRStudentWorld.DistanceLod(distance, 6, 10));
+                yield return null;
+                var expected = distance < 6 ? 0 : distance < 10 ? 1 : 2;
+                Assert.AreEqual(expected, world.ActiveLod);
+                Assert.AreEqual(expected == 0 ? 96 * 8 : expected == 1 ? 24 * 8 : 6 * 4, world.activeMesh.triangles.Length / 3);
+                Assert.AreEqual(world.activeMesh.triangles.Length / 3, world.ActiveTriangleCount);
+            }
+        }
+        finally { world.Dispose(); Object.Destroy(parent); }
+        yield return null;
+    }
 }

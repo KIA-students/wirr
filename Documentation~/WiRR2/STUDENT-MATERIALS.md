@@ -1,6 +1,6 @@
 # Materiały Unity do nowych instrukcji
 
-Wersja `student-kit/0.1.0`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
+Wersja `student-kit/0.1.1`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
 Nie jest jeszcze pełnym wdrożeniem wszystkich 40 checkpointów ani zatwierdzonym
 wydaniem na stanowiska studentów. Sceny i źródła są częścią istniejącego pakietu,
 bez drugiej wtyczki i bez dodatkowych zależności runtime.
@@ -30,7 +30,7 @@ Nie wykonano tutaj buildów Player/APK ani przygotowania lockfile nowego wydania
 | 02 `Lab02_Interaction` | Obiekt, gniazdo, ręka sterowana klawiaturą, chwyt w zasięgu, wskazanie myszy, czas i błędne upuszczenia, trening oddzielony od danych | Pełne XRI Direct/Ray/Socket, teleportacja i wejście HMD; obecny PC to własny symulator dydaktyczny |
 | 03 `Lab03_AnchorGallery` | Referencje co 0,30 m, umieszczenie, dwa profile syntetycznego błędu, trzy odczyty, średni błąd i rozrzut RMS, jawna przerwa śledzenia SIM | Tor obserwacji, pełny scenariusz relokalizacji i opcjonalny adapter REAL_AR |
 | 04 `Lab04_DepthRoom` | Trzy obiekty, przeszkoda, shader błędnej okluzji, wariant zgodny z głębią, odpowiedzi widoczny/niewidoczny sprawdzane raycastem, drugi widok | Próg głębi, warianty oświetlenia, osobne anomalie etykiety i błędnego raycastu, pomiary urządzeniowe |
-| 05 `Lab05_CADWorkshop` | Proceduralne siatki High/Medium z rzeczywistym otworem i Low bez otworu, LODGroup z wymuszonym wariantem, liczby trójkątów i benchmark | Automatyczne przełączanie/progi LOD, materiały/collidery, osobne gotowe modele konwersji CAD; obecny pierścień jest modelem dydaktycznym |
+| 05 `Lab05_CADWorkshop` | Proceduralne siatki High/Medium z rzeczywistym otworem i Low bez otworu; wariant stały lub automatyczny według odległości, dwa regulowane progi w metrach, wspólna radialna trasa benchmarku | Materiały/collidery, osobne gotowe modele konwersji CAD i odbiór renderowania; obecny pierścień jest modelem dydaktycznym |
 | 06 `Lab06_DigitalTwin` | Model dwóch przegubów, nazwane kolumny JointState w radianach, syntetyczny replay 30 s, przerwy 1,5/3 s, watchdog 0,25/0,5/1 s, wiek i odstępy wiadomości | Bufor, kolejne strategie reakcji, opcjonalny ROS_LIVE; brak pomiaru RTT |
 | 07 `Lab07_Expedition` | Sekwencja celów, nawigacja punktowa, klasyfikacja świeżości danych testowych; podświetlenie, kontekst, czas/błędy/sukcesy | Pełne mikromisje, kontrola transferu i testy użyteczności z uczestnikami |
 | 08 `Lab08_ExperienceStudio` | Trenażer sekwencji, inspekcja trzech celów, test stanu SIM; moduły podświetlenia i rozmiaru celu, osoba/gość symulowany, ręczne zakończenie pokazu 60–90 s | Bogatsze demonstratory AR/REPLAY i scenariusze ograniczeń, testy z użytkownikami |
@@ -55,7 +55,10 @@ laboratoriami zamiast powielać osiem odrębnych eksporterów.
   konfiguracji stanowiska; skrót nazwy pliku nie jest szyfrowaniem.
 - Zakończona albo przerwana próba pozostaje w historii. Trening jest jawnie
   oddzielony od porównania. Utrata fokusu/pauza przerywa próbę jako nieudaną.
-  Niezakończona próba przy awarii procesu nie jest jeszcze odzyskiwana.
+  Rozpoczęcie próby jest zapisywane przed uruchomieniem pomiaru. Po awarii
+  procesu wznowienie zachowuje jej identyfikator, konfigurację i czas startu;
+  wynik ma status FAILED, a niezmierzony czas zakończenia pozostaje `null`.
+  Odzyskanie nie powiela próby i nie odtwarza fikcyjnych pomiarów cząstkowych.
 - Eksport tworzy dwa `WiRR-labNN.json` i indeks `block.json` w
   `Application.persistentDataPath/WiRR/exports/<sessionId>`.
   Wynik ma schemat `wirr-report/2.0-draft.1` opisany w
@@ -79,9 +82,10 @@ zgodność dziewięciu źródeł instrukcji/rubryki z przypiętą wersją źród
 **Nie wykonano kompilacji C#, importu Unity, renderowania Game View, testów
 EditMode/PlayMode ani odbioru Windows/Ubuntu**. Analiza składni nie zastępuje tych testów.
 
-Dołączone testy Unity: 10 przypadków EditMode (m.in. JSON, zapis z kopią,
+Dołączone testy Unity: 19 przypadków EditMode (m.in. JSON, zapis z kopią,
 rozdzielenie wyników, percentyle, nazwane mapowanie replay, geometria siatek
-i import wszystkich scen) i jeden test PlayMode startujący osiem doświadczeń.
+i import wszystkich scen, granice progów LOD i odzyskanie próby po serializacji)
+oraz dwa testy PlayMode: start ośmiu doświadczeń i zmiana siatki LOD z powrotem do High.
 W projekcie testowym dodaj `pl.prz.kia.wirr` do `testables` w `Packages/manifest.json`.
 Testy uruchamiaj lokalnie albo w zatwierdzonym workflow na `main`, zgodnie
 z polityką repozytorium. Nie dodano automatycznych runów na PR.
@@ -116,3 +120,17 @@ Edytowalne źródła siatek są w `WiRRStudentWorld.RingMesh`.
 Źródła API: [LODGroup.ForceLOD](https://docs.unity.com/en-us/engine/6000.5/script-reference/unityengine/lodgroup/forcelod),
 [font domyślny uGUI](https://github.com/Unity-Technologies/uGUI/blob/main/com.unity.ugui/Runtime/UGUI/UI/Core/Text.cs).
 Sprawdzenie dokumentacji API nie potwierdza kompatybilności całego zestawu.
+
+## Automatyczny LOD w tej wersji
+
+Sterowanie używa jawnej polityki odległości od kamery do środka części:
+poniżej pierwszego progu High, od pierwszego do drugiego Medium, od drugiego
+Low. Wybrany poziom jest przekazywany do `LODGroup.ForceLOD`. To demonstrator
+progów w **metrach**, a nie odtwarzanie wewnętrznego algorytmu Unity opartego na
+względnej wysokości obrazu. Nie należy utożsamiać tych dwóch polityk.
+
+Stały i automatyczny wariant mają tę samą trasę radialną 3–15 m i powrót,
+z opcjonalnym przesunięciem dystansu o 4 m w kontrpróbie. Wynik obejmuje min/max
+poziomu, liczbę przełączeń i zachowanie otworu we wszystkich próbkach okna
+pomiarowego, a także liczbę trójkątów ostatnio wybranej siatki. Utrata otworu
+choćby w części porównania nie jest ukrywana przez powrót do High na końcu.

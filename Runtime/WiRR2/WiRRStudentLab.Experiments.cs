@@ -76,6 +76,18 @@ namespace KIA.WiRR
             {
                 var next = GUILayout.Toolbar(detail, new[] { "High", "Medium", "Low" });
                 changed |= next != detail; detail = next;
+                var automatic = GUILayout.Toggle(automaticLod, "Automatyczny LOD według odległości");
+                changed |= automatic != automaticLod; automaticLod = automatic;
+                if (automaticLod)
+                {
+                    GUILayout.Label("High → Medium: " + lodNear.ToString("F1") + " m");
+                    var threshold = GUILayout.HorizontalSlider(lodNear, 3, 8);
+                    changed |= threshold != lodNear; lodNear = threshold;
+                    GUILayout.Label("Medium → Low: " + lodFar.ToString("F1") + " m");
+                    threshold = GUILayout.HorizontalSlider(lodFar, 9, 14);
+                    changed |= threshold != lodFar; lodFar = threshold;
+                }
+                GUILayout.Label("Próg dotyczy metrów od kamery do środka części. Trasa benchmarku jest jednakowa dla stałego i automatycznego LOD.");
                 GUILayout.Label("Siatka dydaktyczna, nie konwersja pliku STEP. High/Medium zachowują otwór, Low go wypełnia.");
             }
             if (labNumber == 6)
@@ -120,6 +132,7 @@ namespace KIA.WiRR
             if (world == null || lesson == null) return;
             world.camera.rect = new Rect(PanelWidth / Screen.width, 0, 1 - PanelWidth / Screen.width, 1);
             if (labNumber == 6) UpdateReplay();
+            if (labNumber == 5 && !active) ApplyCadLod();
             if (!active) return;
             if (initialConfiguration != Configuration()) { Finish(false, "Zmieniły się warunki lub rozdzielczość w trakcie pomiaru."); return; }
             var elapsed = Time.unscaledTime - start;
@@ -127,9 +140,17 @@ namespace KIA.WiRR
             {
                 // Restart the camera phase at the beginning of the measured window.
                 var phase = Mathf.Max(0, elapsed - 2);
-                world.camera.transform.position = new Vector3(Mathf.Sin(phase * 0.4f) * 1.5f, 2.2f, -6 - view * 4);
+                // Delta time describes the previous rendered frame, before changing LOD.
+                if (elapsed >= 2 && Time.unscaledDeltaTime > 0)
+                {
+                    frames.Add(Time.unscaledDeltaTime * 1000.0);
+                    if (labNumber == 5) lodSamples.Add(world.ActiveLod);
+                }
+                world.camera.transform.position = labNumber == 5 ?
+                    new Vector3(0, 1.2f, 1 - (3 + Mathf.PingPong(phase * 3, 12) + view * 4)) :
+                    new Vector3(Mathf.Sin(phase * 0.4f) * 1.5f, 2.2f, -6 - view * 4);
                 world.camera.transform.LookAt(new Vector3(0, 1, 1));
-                if (elapsed >= 2 && Time.unscaledDeltaTime > 0) frames.Add(Time.unscaledDeltaTime * 1000.0);
+                if (labNumber == 5) ApplyCadLod();
                 if (elapsed >= 10) Finish(true);
             }
             else if (labNumber == 2) UpdateManipulation();
@@ -177,6 +198,12 @@ namespace KIA.WiRR
                     }
                 }
             }
+        }
+
+        private void ApplyCadLod()
+        {
+            var distance = Vector3.Distance(world.camera.transform.position, world.lod.transform.position);
+            world.SetLod(automaticLod ? WiRRStudentWorld.DistanceLod(distance, lodNear, lodFar) : detail);
         }
 
         private void TaskSelection(int index)
@@ -257,6 +284,9 @@ namespace KIA.WiRR
         {
             if (!active) return;
             GUILayout.Label("Czas próby: " + (Time.unscaledTime - start).ToString("F1") + " s");
+            if (labNumber == 5)
+                GUILayout.Label("LOD " + world.ActiveLod + " | " + world.ActiveTriangleCount + " trójkątów | otwór " +
+                    (world.ActiveLod < 2 ? "zachowany" : "utracony"));
             if (labNumber == 3 && !placed && GUILayout.Button("Umieść model przy referencji"))
             { world.targets[0].transform.position = world.anchorReference.position; placed = true; lastSample = Time.unscaledTime; }
             if (labNumber == 3 && recovery < 0 && GUILayout.Button("Wywołaj utratę śledzenia SIM"))

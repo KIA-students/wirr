@@ -14,6 +14,10 @@ namespace KIA.WiRR
         public Transform socket, anchorReference, robotJoint1, robotJoint2;
         public Mesh activeMesh;
         public LODGroup lod;
+        public int ActiveLod { get; private set; }
+        public int ActiveTriangleCount => lodTriangleCounts[ActiveLod];
+        private readonly Mesh[] lodMeshes = new Mesh[3];
+        private readonly int[] lodTriangleCounts = new int[3];
         private readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
 
         public WiRRStudentWorld(Transform parent, int lab, int count, int detail, bool shadows, bool physics, bool highlight, int view)
@@ -94,13 +98,15 @@ namespace KIA.WiRR
                 {
                     var mesh = RingMesh(level == 0 ? 96 : level == 1 ? 24 : 6, level != 2);
                     owned.Add(mesh);
+                    lodMeshes[level] = mesh;
+                    lodTriangleCounts[level] = mesh.triangles.Length / 3;
                     var part = new GameObject("Siatka " + level); part.transform.SetParent(group.transform, false);
                     part.AddComponent<MeshFilter>().sharedMesh = mesh;
                     var renderer = part.AddComponent<MeshRenderer>(); renderer.sharedMaterial = Material(Color.cyan);
                     levels[level] = new LOD(level == 0 ? 0.35f : level == 1 ? 0.12f : 0.01f, new Renderer[] { renderer });
                     if (level == detail) activeMesh = mesh;
                 }
-                lod.SetLODs(levels); lod.RecalculateBounds(); lod.ForceLOD(detail);
+                lod.SetLODs(levels); lod.RecalculateBounds(); SetLod(detail);
                 Label(group.transform, "Część proceduralna; Low traci otwór", new Vector3(0, 1.2f, 0));
             }
             else if (lab == 6)
@@ -125,6 +131,24 @@ namespace KIA.WiRR
                     Label(target.transform, (i + 1).ToString(), Vector3.up * 0.8f); targets.Add(target);
                 }
             }
+        }
+
+        /// <summary>Explicit teaching policy in metres, independent of Unity's screen-height LOD thresholds.</summary>
+        public static int DistanceLod(float distance, float highToMedium, float mediumToLow)
+        {
+            if (float.IsNaN(distance) || float.IsInfinity(distance) || distance < 0
+                || float.IsNaN(highToMedium) || float.IsInfinity(highToMedium) || highToMedium <= 0
+                || float.IsNaN(mediumToLow) || float.IsInfinity(mediumToLow) || mediumToLow <= highToMedium)
+                throw new ArgumentOutOfRangeException(nameof(distance), "Wymagane skończone odległości i progi 0 < pierwszy < drugi.");
+            return distance < highToMedium ? 0 : distance < mediumToLow ? 1 : 2;
+        }
+
+        public void SetLod(int level)
+        {
+            if (lod == null || level < 0 || level > 2) throw new ArgumentOutOfRangeException(nameof(level));
+            ActiveLod = level;
+            activeMesh = lodMeshes[level];
+            lod.ForceLOD(level);
         }
 
         public GameObject Shape(string name, PrimitiveType type, Vector3 position, Vector3 scale, Color color)

@@ -34,6 +34,9 @@ namespace KIA.WiRR
         private readonly List<double> frames = new List<double>();
         private readonly List<Vector3> positions = new List<Vector3>();
         private readonly List<double> intervals = new List<double>();
+        private readonly List<int> lodSamples = new List<int>();
+        private bool automaticLod;
+        private float lodNear = 6, lodFar = 10;
         private readonly HashSet<int> selected = new HashSet<int>();
         private Vector3 hand = new Vector3(-1, 1, 1);
         private GameObject handObject;
@@ -60,6 +63,7 @@ namespace KIA.WiRR
             stage = detail = view = template = technique = 0;
             participant = "SOLO";
             highlight = largeTargets = demonstration = physicsLoad = false; shadows = true; count = 10; paused = false; tracking = true;
+            automaticLod = false; lodNear = 6; lodFar = 10;
             if (session != null) session.Lab(number);
             Rebuild();
         }
@@ -76,6 +80,7 @@ namespace KIA.WiRR
                 handObject.SetActive(technique == 0);
             }
             if (labNumber == 5) world.camera.transform.position += Vector3.back * view * 4;
+            if (labNumber == 5) ApplyCadLod();
             if (labNumber == 6)
             {
                 var asset = Resources.Load<TextAsset>("WiRR2/jointstate-replay");
@@ -97,7 +102,9 @@ namespace KIA.WiRR
                     File.Exists(savePath + ".bak") ? ReadSession(savePath + ".bak", indices, block) :
                     new WiRRStudentSession { block = block, studentIndices = indices, group = group };
                 session.Lab(block * 2 - 1); session.Lab(block * 2);
-                if (Save()) feedback = "Sesja bloku otwarta. Zachowujemy wszystkie wcześniejsze próby.";
+                var recovered = session.RecoverInterruptedTrial();
+                if (Save()) feedback = recovered ? "Odzyskano rozpoczętą próbę jako nieudaną, bez wymyślonych pomiarów." :
+                    "Sesja bloku otwarta. Zachowujemy wszystkie wcześniejsze próby.";
             }
             catch (Exception error) when (error is IOException || error is UnauthorizedAccessException || error is ArgumentException)
             {
@@ -111,7 +118,9 @@ namespace KIA.WiRR
             var loaded = JsonUtility.FromJson<WiRRStudentSession>(File.ReadAllText(path));
             if (loaded == null || loaded.schema != "wirr-block-session/2.0-draft.1" || loaded.block != block || loaded.group != group
                 || loaded.studentIndices == null || !loaded.studentIndices.OrderBy(x => x).SequenceEqual(indices.OrderBy(x => x))
-                || loaded.labs == null || loaded.labs.Any(x => x == null || (x.labNumber + 1) / 2 != block || x.trials == null))
+                || loaded.labs == null || loaded.labs.Any(x => x == null || x.labNumber < 1 || x.labNumber > 8
+                    || (x.labNumber + 1) / 2 != block || x.trials == null || x.trials.Any(t => t == null))
+                || loaded.labs.Select(x => x.labNumber).Distinct().Count() != loaded.labs.Count)
                 throw new ArgumentException("Plik nie odpowiada profilowi i blokowi");
             return loaded;
         }
@@ -128,11 +137,16 @@ namespace KIA.WiRR
         {
             if (active || session == null) return;
             Rebuild();
+            initialConfiguration = Configuration();
+            if (!practice)
+            {
+                session.BeginTrial(labNumber, lesson.mode, participant, initialConfiguration);
+                if (!Save()) { session.pendingTrial = null; return; }
+            }
             active = true; start = lastSample = Time.unscaledTime; errors = successes = sampleIndex = 0;
-            selected.Clear(); frames.Clear(); positions.Clear(); intervals.Clear();
+            selected.Clear(); frames.Clear(); positions.Clear(); intervals.Clear(); lodSamples.Clear();
             grabbed = paused = false; tracking = true; recovery = staleDelay = recoveryDelay = -1;
             placed = false;
-            initialConfiguration = Configuration();
             if (labNumber == 6) { messageIndex = 0; replayStart = lastMessage = start; staleAt = -1; }
             feedback = "Próba trwa. Zmiany konfiguracji są zablokowane do zakończenia.";
         }
@@ -143,9 +157,10 @@ namespace KIA.WiRR
         }
 
         private string Configuration() => string.Format(CultureInfo.InvariantCulture,
-            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}",
+            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}",
             detail, view, count, shadows, physicsLoad, highlight, technique, template, watchdog, gap, practice,
-            Screen.width, Screen.height, QualitySettings.vSyncCount, Application.targetFrameRate, Application.isEditor ? "Editor" : "Player", largeTargets, demonstration);
+            Screen.width, Screen.height, QualitySettings.vSyncCount, Application.targetFrameRate, Application.isEditor ? "Editor" : "Player", largeTargets, demonstration,
+            automaticLod, lodNear, lodFar, labNumber == 5 ? "radial3-15/v1" : "baseline/v1");
 
         private void Finish(bool valid, string reason = null)
         {
@@ -168,8 +183,15 @@ namespace KIA.WiRR
                 }
                 if (labNumber == 5)
                 {
-                    trial.metrics.Add(WiRRStudentMetric.Measured("triangles", world.activeMesh.triangles.Length / 3, "count"));
-                    trial.metrics.Add(WiRRStudentMetric.Measured("hole_preserved", detail < 2 ? 1 : 0, "boolean"));
+                    if (lodSamples.Count > 0)
+                    {
+                        trial.metrics.Add(WiRRStudentMetric.Measured("lod_level_min", lodSamples.Min(), "index"));
+                        trial.metrics.Add(WiRRStudentMetric.Measured("lod_level_max", lodSamples.Max(), "index"));
+                        trial.metrics.Add(WiRRStudentMetric.Measured("lod_transitions", lodSamples.Skip(1).Where((level, i) => level != lodSamples[i]).Count(), "count"));
+                        trial.metrics.Add(WiRRStudentMetric.Measured("hole_preserved_all_samples", lodSamples.All(level => level < 2) ? 1 : 0, "boolean"));
+                    }
+                    trial.metrics.Add(WiRRStudentMetric.Measured("triangles_final", world.ActiveTriangleCount, "count"));
+                    trial.metrics.Add(WiRRStudentMetric.Measured("hole_preserved_final", world.ActiveLod < 2 ? 1 : 0, "boolean"));
                 }
             }
             if (labNumber == 3 && positions.Count > 0)
@@ -191,7 +213,7 @@ namespace KIA.WiRR
             if (labNumber == 3 || labNumber == 6)
                 trial.metrics.Add(recoveryDelay >= 0 ? WiRRStudentMetric.Measured("simulated_gap_duration", recoveryDelay, "s") :
                     new WiRRStudentMetric { name = "simulated_gap_duration", unit = "s", unavailableReason = "Brak zakończonej przerwy w próbie" });
-            if (!practice) { session.Lab(labNumber).trials.Add(trial); if (!Save()) return; }
+            if (!practice) { session.CompleteTrial(labNumber, trial); if (!Save()) return; }
             feedback = practice ? "Trening zakończony. Nie wchodzi do porównania." :
                 "Zapisano próbę " + trial.validity + ". To dowód do przeglądu, nie automatyczna ocena.";
         }
@@ -232,7 +254,7 @@ namespace KIA.WiRR
             GUILayout.BeginArea(new Rect(8, 8, PanelWidth - 16, Screen.height - 16), GUI.skin.box);
             scroll = GUILayout.BeginScrollView(scroll);
             GUILayout.Label("WiRR | " + lesson.title);
-            GUILayout.Label(lesson.mode + " | materiały pilotażowe 0.1 | brak automatycznej oceny");
+            GUILayout.Label(lesson.mode + " | " + WiRRStudentEvidence.ExperimentVersion + " | brak automatycznej oceny");
             GUILayout.Label(lesson.question);
             GUI.enabled = !active;
             if (session == null)

@@ -76,6 +76,57 @@ public sealed class WiRRStudentKitTests
         Assert.Throws<ArgumentException>(() => WiRRStudentLab.ReadReplay("time_s,joint2_rad,joint1_rad\n0,0,0\n0,0,0"));
     }
 
+    [TestCase(0f, 0)] [TestCase(5.99f, 0)] [TestCase(6f, 1)]
+    [TestCase(9.99f, 1)] [TestCase(10f, 2)] [TestCase(50f, 2)]
+    public void DistanceLodUsesExplicitMetreThresholds(float distance, int expected)
+    {
+        Assert.AreEqual(expected, WiRRStudentWorld.DistanceLod(distance, 6, 10));
+    }
+
+    [Test] public void DistanceLodRejectsUnknownOrReversedDistances()
+    {
+        foreach (var distance in new[] { -1f, float.NaN, float.PositiveInfinity })
+            Assert.Throws<ArgumentOutOfRangeException>(() => WiRRStudentWorld.DistanceLod(distance, 6, 10));
+        Assert.Throws<ArgumentOutOfRangeException>(() => WiRRStudentWorld.DistanceLod(4, 10, 6));
+        Assert.Throws<ArgumentOutOfRangeException>(() => WiRRStudentWorld.DistanceLod(4, 0, 6));
+        Assert.Throws<ArgumentOutOfRangeException>(() => WiRRStudentWorld.DistanceLod(4, 3, float.NaN));
+    }
+
+    [Test] public void InterruptedTrialSurvivesSerializationWithoutInventingTime()
+    {
+        var session = new WiRRStudentSession { block = 1, studentIndices = new[] { "999991" }, group = "G1" };
+        session.BeginTrial(1, "DESKTOP_SIM", "SOLO", "baseline");
+        var id = session.pendingTrial.trial.id;
+        var loaded = JsonUtility.FromJson<WiRRStudentSession>(JsonUtility.ToJson(session));
+        Assert.IsTrue(loaded.RecoverInterruptedTrial());
+        var trial = loaded.Lab(1).trials.Single();
+        Assert.AreEqual(id, trial.id);
+        Assert.AreEqual("FAILED", trial.validity);
+        Assert.IsFalse(trial.metrics.Single().available);
+        Assert.IsFalse(loaded.RecoverInterruptedTrial());
+        Assert.AreEqual(1, loaded.Lab(1).trials.Count);
+        Assert.AreEqual(0, loaded.Lab(2).trials.Count);
+        var json = WiRRStudentEvidence.Json(WiRRStudentEvidence.Report(loaded, 1, Application.unityVersion));
+        StringAssert.Contains("\"value\":null", json);
+    }
+
+    [Test] public void CompletedTrialKeepsStartIdentityAndCannotBeCompletedTwice()
+    {
+        var session = new WiRRStudentSession { block = 1 };
+        session.BeginTrial(1, "DESKTOP_SIM", "SOLO", "baseline");
+        var started = session.pendingTrial.trial;
+        Assert.Throws<InvalidOperationException>(() => session.BeginTrial(2, "DESKTOP_SIM", "SOLO", "baseline"));
+        Assert.Throws<InvalidOperationException>(() => WiRRStudentEvidence.Report(session, 1, Application.unityVersion));
+        var result = new WiRRStudentTrial();
+        session.CompleteTrial(1, result);
+        Assert.AreEqual(started.id, result.id);
+        Assert.AreEqual(started.timestampUtc, result.timestampUtc);
+        Assert.AreEqual("baseline", result.condition);
+        Assert.IsNull(session.pendingTrial);
+        Assert.Throws<InvalidOperationException>(() => session.CompleteTrial(1, result));
+        Assert.IsFalse(session.RecoverInterruptedTrial());
+    }
+
     [TestCase(96, true)] [TestCase(24, true)] [TestCase(6, false)]
     public void PreparedMeshesHaveValidNondegenerateTriangles(int segments, bool hole)
     {

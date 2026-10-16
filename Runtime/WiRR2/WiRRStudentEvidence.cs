@@ -35,6 +35,12 @@ namespace KIA.WiRR
         public List<WiRRStudentTrial> trials = new List<WiRRStudentTrial>();
     }
 
+    [Serializable] public sealed class WiRRStudentPendingTrial
+    {
+        public int labNumber;
+        public WiRRStudentTrial trial;
+    }
+
     [Serializable] public sealed class WiRRStudentSession
     {
         public string schema = "wirr-block-session/2.0-draft.1";
@@ -44,20 +50,61 @@ namespace KIA.WiRR
         public string group;
         public int block;
         public List<WiRRStudentLabResult> labs = new List<WiRRStudentLabResult>();
+        public WiRRStudentPendingTrial pendingTrial;
 
         public WiRRStudentLabResult Lab(int number)
         {
-            if ((number + 1) / 2 != block) throw new ArgumentOutOfRangeException(nameof(number));
+            if (number < 1 || number > 8 || (number + 1) / 2 != block) throw new ArgumentOutOfRangeException(nameof(number));
             var lab = labs.Find(x => x.labNumber == number);
             if (lab == null) { lab = new WiRRStudentLabResult { labNumber = number }; labs.Add(lab); }
             return lab;
+        }
+
+        public void BeginTrial(int number, string mode, string participant, string configuration)
+        {
+            Lab(number);
+            if (pendingTrial != null) throw new InvalidOperationException("Poprzednia próba nie została zamknięta.");
+            pendingTrial = new WiRRStudentPendingTrial { labNumber = number, trial = new WiRRStudentTrial {
+                deviceMode = mode, participantMode = participant, condition = configuration,
+                validity = "FAILED", reason = "Nie zarejestrowano zakończenia próby." } };
+        }
+
+        public void CompleteTrial(int number, WiRRStudentTrial result)
+        {
+            if (pendingTrial == null || pendingTrial.labNumber != number || result == null)
+                throw new InvalidOperationException("Brak pasującej rozpoczętej próby.");
+            result.id = pendingTrial.trial.id;
+            result.timestampUtc = pendingTrial.trial.timestampUtc;
+            result.condition = pendingTrial.trial.condition;
+            var lab = Lab(number);
+            if (lab.trials.Any(t => t.id == result.id)) throw new InvalidOperationException("Powtórzony identyfikator próby.");
+            lab.trials.Add(result);
+            pendingTrial = null;
+        }
+
+        public bool RecoverInterruptedTrial()
+        {
+            if (pendingTrial == null) return false;
+            var trial = pendingTrial.trial;
+            if (trial == null || string.IsNullOrWhiteSpace(trial.id)) throw new ArgumentException("Niepoprawny zapis rozpoczętej próby.");
+            var lab = Lab(pendingTrial.labNumber);
+            if (!lab.trials.Any(t => t.id == trial.id))
+            {
+                trial.validity = "FAILED";
+                trial.reason = "Przerwana sesja: zachowano rozpoczęcie, brak potwierdzonego zakończenia.";
+                trial.metrics = new List<WiRRStudentMetric> { new WiRRStudentMetric {
+                    name = "elapsed", unit = "s", unavailableReason = "Brak końcowego pomiaru czasu przed restartem." } };
+                lab.trials.Add(trial);
+            }
+            pendingTrial = null;
+            return true;
         }
     }
 
     /// <summary>Local session storage and an explicit adapter to the existing draft evidence grader.</summary>
     public static class WiRRStudentEvidence
     {
-        public const string ExperimentVersion = "student-kit/0.1.0";
+        public const string ExperimentVersion = "student-kit/0.1.1";
 
         public static string IdentityKey(IEnumerable<string> indices, string group, int block)
         {
@@ -81,6 +128,7 @@ namespace KIA.WiRR
 
         public static Dictionary<string, object> Report(WiRRStudentSession session, int labNumber, string unityVersion)
         {
+            if (session.pendingTrial != null) throw new InvalidOperationException("Przed eksportem zamknij lub odzyskaj rozpoczętą próbę.");
             var lab = session.Lab(labNumber);
             var trials = new List<object>();
             foreach (var trial in lab.trials)
