@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using KIA.WiRR;
 using NUnit.Framework;
 using UnityEngine;
@@ -84,5 +85,37 @@ public sealed class WiRRStudentKitPlayModeTests
         }
         finally { world.Dispose(); Object.Destroy(parent); }
         yield return null;
+    }
+
+    [UnityTest] public IEnumerator DepthReferenceIsIndependentOfRenderingLabelsAndLight()
+    {
+        for (var view = 0; view < 2; view++)
+        for (var variant = 0; variant < 2; variant++)
+        {
+            var parent = new GameObject("Depth geometry test");
+            var world = new WiRRStudentWorld(parent.transform, 4, 10, variant, true, false, false, view);
+            try
+            {
+                var baseline = world.ConfigureDepth(0, false, true, true);
+                yield return null;
+                Assert.IsTrue(baseline.All(o => o.available));
+                CollectionAssert.AreEqual(new[] { view == 1, true, true }, baseline.Select(o => o.referenceVisible));
+                Assert.IsFalse(baseline[2].reportedFirstHit, "Błędny komunikat nie jest referencją geometrii.");
+                Assert.AreEqual("3", world.targets[1].GetComponentInChildren<TextMesh>().text);
+                Assert.AreEqual(variant == 0 || view == 1, baseline[0].modelVisible);
+                var dimmed = world.ConfigureDepth(0, true, false, false);
+                CollectionAssert.AreEqual(baseline.Select(o => o.referenceVisible), dimmed.Select(o => o.referenceVisible));
+                Assert.AreEqual("2", world.targets[1].GetComponentInChildren<TextMesh>().text);
+                Assert.IsTrue(dimmed[2].reportedFirstHit);
+                var loose = world.ConfigureDepth(2, true, false, false);
+                Assert.IsTrue(loose[0].modelVisible);
+                Assert.AreEqual(view == 1, loose[0].referenceVisible);
+                world.targets[0].GetComponent<Collider>().enabled = false;
+                Physics.SyncTransforms();
+                Assert.IsFalse(world.ProbeDepth(0).available);
+            }
+            finally { world.Dispose(); Object.Destroy(parent); }
+            yield return null;
+        }
     }
 }

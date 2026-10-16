@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -20,6 +21,10 @@ namespace KIA.WiRR
         private readonly int[] lodTriangleCounts = new int[3];
         private Vector3 homeCameraPosition;
         private LineRenderer anchorDifference;
+        private Light sceneLight;
+        private readonly Material[] depthMaterials = new Material[3], depthThroughWall = new Material[3];
+        private readonly TextMesh[] depthLabels = new TextMesh[3];
+        private int depthVariant;
         private readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
 
         public WiRRStudentWorld(Transform parent, int lab, int count, int detail, bool shadows, bool physics, bool highlight, int view)
@@ -37,6 +42,7 @@ namespace KIA.WiRR
             var lamp = new GameObject("Światło");
             lamp.transform.SetParent(root.transform);
             var light = lamp.AddComponent<Light>();
+            sceneLight = light;
             light.type = LightType.Directional;
             light.intensity = 1.5f;
             light.shadows = shadows ? LightShadows.Soft : LightShadows.None;
@@ -89,17 +95,23 @@ namespace KIA.WiRR
             }
             else if (lab == 4)
             {
+                depthVariant = detail;
+                camera.transform.position = new Vector3(view == 0 ? 0 : 6, 1.6f, -4);
+                camera.transform.LookAt(new Vector3(0, 1, 1));
                 Shape("Przeszkoda", PrimitiveType.Cube, new Vector3(0, 1, 1), new Vector3(1.3f, 2, 0.15f), Color.gray);
                 targets.Add(Shape("Obiekt 1 za przeszkodą", PrimitiveType.Sphere, new Vector3(0, 1, 2), Vector3.one * 0.4f, Color.red));
                 targets.Add(Shape("Obiekt 2 przed przeszkodą", PrimitiveType.Sphere, new Vector3(0.4f, 1.5f, 0), Vector3.one * 0.4f, Color.green));
                 targets.Add(Shape("Obiekt 3 z boku", PrimitiveType.Sphere, new Vector3(2, 1, 2), Vector3.one * 0.4f, Color.cyan));
-                if (detail == 0)
+                var colors = new[] { Color.red, Color.green, Color.cyan };
+                for (var i = 0; i < 3; i++)
                 {
                     var shader = Shader.Find("WiRR/TeachingThroughWall");
                     if (shader == null) throw new InvalidOperationException("Brak shadera demonstracji okluzji.");
                     var material = new Material(shader); owned.Add(material);
-                    material.SetColor("_Color", Color.red);
-                    targets[0].GetComponent<Renderer>().sharedMaterial = material;
+                    material.SetColor("_Color", colors[i]);
+                    depthThroughWall[i] = material;
+                    depthMaterials[i] = targets[i].GetComponent<Renderer>().sharedMaterial;
+                    depthLabels[i] = Label(targets[i].transform, (i + 1).ToString(), Vector3.up * 0.8f);
                 }
             }
             else if (lab == 5)
@@ -204,21 +216,53 @@ namespace KIA.WiRR
             var material = new Material(shader); owned.Add(material); material.color = color; return material;
         }
 
-        private void Label(Transform parent, string text, Vector3 offset)
+        private TextMesh Label(Transform parent, string text, Vector3 offset)
         {
             var label = new GameObject("Opis"); label.transform.SetParent(parent, false); label.transform.localPosition = offset;
             var mesh = label.AddComponent<TextMesh>(); mesh.text = text; mesh.characterSize = 0.06f; mesh.fontSize = 36;
             mesh.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             label.GetComponent<Renderer>().sharedMaterial = mesh.font.material;
             mesh.anchor = TextAnchor.MiddleCenter;
+            return mesh;
         }
 
-        public bool Occluded(int target)
+        public WiRRDepthObservation[] ConfigureDepth(float tolerance, bool dimLight, bool wrongLabels, bool wrongRay)
         {
-            var position = targets[target].transform.position;
-            var ray = new Ray(camera.transform.position, position - camera.transform.position);
-            return Physics.Raycast(ray, out var hit, Vector3.Distance(position, ray.origin) + 0.3f)
-                && hit.transform != targets[target].transform;
+            if (depthMaterials[0] == null) throw new InvalidOperationException("Brak stanowiska głębi.");
+            sceneLight.intensity = dimLight ? 0.3f : 1.5f;
+            Physics.SyncTransforms();
+            var observations = new WiRRDepthObservation[3];
+            for (var i = 0; i < 3; i++)
+            {
+                depthLabels[i].text = (wrongLabels && i > 0 ? 4 - i : i + 1).ToString();
+                var observation = ProbeDepth(i);
+                if (observation.available)
+                {
+                    observation.modelVisible = (depthVariant == 0 && i == 0) ||
+                        WiRRDepthExperiment.PredictVisible(observation.targetDistance, observation.otherSurfaceDistance, tolerance);
+                    observation.reportedFirstHit = wrongRay && i == 2 ? !observation.referenceVisible : observation.referenceVisible;
+                }
+                targets[i].GetComponent<Renderer>().sharedMaterial = observation.available && observation.modelVisible && !observation.referenceVisible ?
+                    depthThroughWall[i] : depthMaterials[i];
+                observations[i] = observation;
+            }
+            return observations;
+        }
+
+        public WiRRDepthObservation ProbeDepth(int index)
+        {
+            if (index < 0 || index >= targets.Count) throw new ArgumentOutOfRangeException(nameof(index));
+            if (targets[index] == null) return new WiRRDepthObservation();
+            var position = targets[index].transform.position;
+            var ray = new Ray(camera.transform.position, (position - camera.transform.position).normalized);
+            var hits = Physics.RaycastAll(ray, Vector3.Distance(position, ray.origin) + 0.5f, ~0, QueryTriggerInteraction.Ignore);
+            var targetHits = hits.Where(h => h.transform == targets[index].transform).ToArray();
+            if (targetHits.Length == 0) return new WiRRDepthObservation();
+            var targetDistance = targetHits.Min(h => h.distance);
+            var others = hits.Where(h => h.transform != targets[index].transform).Select(h => (double)h.distance).ToArray();
+            double? other = others.Length == 0 ? (double?)null : others.Min();
+            return new WiRRDepthObservation { available = true, targetDistance = targetDistance, otherSurfaceDistance = other,
+                referenceVisible = WiRRDepthExperiment.PredictVisible(targetDistance, other, 0) };
         }
 
         public static Mesh RingMesh(int segments, bool hole)

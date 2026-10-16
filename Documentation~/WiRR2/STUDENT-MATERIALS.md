@@ -1,6 +1,6 @@
 # Materiały Unity do nowych instrukcji
 
-Wersja `student-kit/0.1.3`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
+Wersja `student-kit/0.1.4`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
 Nie jest jeszcze pełnym wdrożeniem wszystkich 40 checkpointów ani zatwierdzonym
 wydaniem na stanowiska studentów. Sceny i źródła są częścią istniejącego pakietu,
 bez drugiej wtyczki i bez dodatkowych zależności runtime.
@@ -29,7 +29,7 @@ Nie wykonano tutaj buildów Player/APK ani przygotowania lockfile nowego wydania
 | 01 `Lab01_Station` | Referencje 0,1/1/10 m, 10/100/300 brył, cienie, fizyka, stała trasa, 2 s rozgrzewki i 8 s próby, mediana/p95 rzeczywistych czasów klatki | Odbiór budżetu stanowiska, kontrolowane profile CPU/GPU, pilotaż |
 | 02 `Lab02_Interaction` | Obiekt i gniazdo, Direct PC klawiaturą i Ray PC myszą, serie pięciu cykli z czasami i błędami, trening oddzielony od danych, podgląd teleportacji PC poza pomiarem | Pełne XRI Direct/Ray/Socket i teleportacja XRI/HMD; obecny PC to własny symulator dydaktyczny |
 | 03 `Lab03_AnchorGallery` | Referencje co 0,30 m, umieszczenie 1:1, dwa profile SIM_AR, wspólna trasa trzech punktów, wektor błędu, trzy odczyty przed i trzy po relokalizacji, wariant braku odzyskania | Odbiór UI/PlayMode na Ubuntu i Windows oraz opcjonalny adapter REAL_AR |
-| 04 `Lab04_DepthRoom` | Trzy obiekty, przeszkoda, shader błędnej okluzji, wariant zgodny z głębią, odpowiedzi widoczny/niewidoczny sprawdzane raycastem, drugi widok | Próg głębi, warianty oświetlenia, osobne anomalie etykiety i błędnego raycastu, pomiary urządzeniowe |
+| 04 `Lab04_DepthRoom` | Trzy obiekty i przeszkoda, niezależna referencja geometrii, błędna/poprawna okluzja, regulowana tolerancja głębi, jasne/ciemne światło, mylące etykiety, błędny komunikat promienia, dwa widoki i osobne fałszywe alarmy/pominięcia | Odbiór PlayMode/renderowania na stanowiskach, opcjonalne dane z providerów urządzeniowych |
 | 05 `Lab05_CADWorkshop` | Proceduralne siatki High/Medium z rzeczywistym otworem i Low bez otworu; wariant stały lub automatyczny według odległości, dwa regulowane progi w metrach, wspólna radialna trasa benchmarku | Materiały/collidery, osobne gotowe modele konwersji CAD i odbiór renderowania; obecny pierścień jest modelem dydaktycznym |
 | 06 `Lab06_DigitalTwin` | Model dwóch przegubów, nazwane kolumny JointState w radianach, syntetyczny replay 30 s, przerwy 1,5/3 s, watchdog 0,25/0,5/1 s, wiek i odstępy wiadomości | Bufor, kolejne strategie reakcji, opcjonalny ROS_LIVE; brak pomiaru RTT |
 | 07 `Lab07_Expedition` | Sekwencja celów, nawigacja punktowa, klasyfikacja świeżości danych testowych; podświetlenie, kontekst, czas/błędy/sukcesy | Pełne mikromisje, kontrola transferu i testy użyteczności z uczestnikami |
@@ -82,11 +82,11 @@ zgodność dziewięciu źródeł instrukcji/rubryki z przypiętą wersją źród
 **Nie wykonano kompilacji C#, importu Unity, renderowania Game View, testów
 EditMode/PlayMode ani odbioru Windows/Ubuntu**. Analiza składni nie zastępuje tych testów.
 
-Dołączone testy Unity: 33 przypadki EditMode (m.in. JSON, zapis z kopią,
+Dołączone testy Unity: 43 przypadki EditMode (m.in. JSON, zapis z kopią,
 rozdzielenie wyników, percentyle, nazwane mapowanie replay, geometria siatek
 i import wszystkich scen, granice progów LOD i odzyskanie próby po serializacji)
-oraz cztery testy PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
-teleportacja PC i zachowanie referencji oraz ukrywanie nieważnej pozycji kotwicy.
+oraz pięć testów PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High,
+teleportacja PC, kotwica oraz geometria głębi z dwóch widoków, niezależna od światła i etykiet.
 W projekcie testowym dodaj `pl.prz.kia.wirr` do `testables` w `Packages/manifest.json`.
 Testy uruchamiaj lokalnie albo w zatwierdzonym workflow na `main`, zgodnie
 z polityką repozytorium. Nie dodano automatycznych runów na PR.
@@ -187,3 +187,37 @@ dotychczasowe metryki, oznacza przerwanie i nie uzupełnia brakujących odczytó
 Nadal nie ma automatycznego zaliczania pięciu progów ani potwierdzenia testów
 rzeczywistego AR. Instrukcje sterowania i uruchomienia pozostają takie same dla
 solo i pary.
+
+## Lab04: pomieszczenie głębi SIM_AR
+
+1. W widoku bazowym zacznij od wariantu A. Rozpoznawaj obiekty po trwałej
+   tożsamości: 1 czerwony, 2 zielony, 3 turkusowy. Napisy 2/3 i komunikat
+   promienia mogą być celowo błędne. Odpowiedz dla wszystkich trzech obiektów,
+   czy ich **środek** powinien być widoczny z tego punktu według geometrii.
+2. Powtórz z wariantem B, pozostawiając widok i pozostałe ustawienia. Zmieniaj
+   osobno tolerancję głębi albo oświetlenie. Tolerancja [m] dopuszcza widoczność,
+   gdy inna powierzchnia jest bliższa od obiektu o nie więcej niż ustawiony próg.
+   Duża tolerancja może zatem błędnie pokazać obiekt przez przeszkodę.
+3. Sprawdź ustawienie z drugiego punktu. Przygotowany układ ma zasłaniać środek
+   czerwonego obiektu z widoku bazowego, a odsłaniać go z bocznego. To wymaga
+   potwierdzenia w dołączonym teście Unity. Nie wybieraj poprawki wyłącznie na
+   podstawie jaśniejszego obrazu.
+
+Referencja używa `Physics.RaycastAll` do środka obiektu. Brak trafienia w sam
+obiekt oznacza brak referencji; brak innej powierzchni na tym promieniu jest
+innym stanem i nie jest zastępowany odległością zero. To syntetyczna geometria,
+nie ARCore Depth ani pomiar kamery. Kryterium dotyczy środka, nie widoczności
+wszystkich pikseli i krawędzi częściowo przesłoniętej bryły.
+
+Stan referencyjny, model renderowania, komunikat promienia i odpowiedź studenta
+są odrębne. Wariant A wymusza widoczność czerwonego obiektu mimo bliższej
+przeszkody; B i tolerancja korzystają z testu odległości. Napisy i komunikaty
+nie zmieniają referencji. Oświetlenie zmienia wygląd, nie wynik testu geometrii.
+Model widoczności w raporcie jest decyzją algorytmu, nie pomiarem pikseli GPU.
+
+Po trzech odpowiedziach wynik zawiera poprawne wskazania, fałszywe alarmy
+(„widoczny” przy referencji „zasłonięty”), pominięcia widocznych obiektów,
+liczbę błędów modelu okluzji i błędnych komunikatów promienia. Nie oceniamy
+liczby kliknięć. Odpowiedzi są zapisywane pojedynczo; restart zachowuje je jako
+przerwaną próbę bez dopisywania pozostałych odpowiedzi. Zmiana geometrii lub
+brak trafienia podczas próby kończy ją jako FAILED z jawnym brakiem referencji.

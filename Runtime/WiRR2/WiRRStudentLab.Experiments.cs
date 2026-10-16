@@ -80,6 +80,16 @@ namespace KIA.WiRR
             {
                 var next = GUILayout.Toolbar(detail, new[] { "A: zła okluzja", "B: głębia zgodna" });
                 changed |= next != detail; detail = next;
+                GUILayout.Label("Tolerancja testu głębi: " + depthTolerance.ToString("F2") + " m");
+                var tolerance = GUILayout.HorizontalSlider(depthTolerance, 0, 2);
+                changed |= tolerance != depthTolerance; depthTolerance = tolerance;
+                var toggle = GUILayout.Toggle(depthDimLight, "Przyciemnione oświetlenie");
+                changed |= toggle != depthDimLight; depthDimLight = toggle;
+                toggle = GUILayout.Toggle(depthLabelFault, "Scenariusz mylących etykiet 2/3");
+                changed |= toggle != depthLabelFault; depthLabelFault = toggle;
+                toggle = GUILayout.Toggle(depthRayFault, "Scenariusz błędnego komunikatu promienia");
+                changed |= toggle != depthRayFault; depthRayFault = toggle;
+                GUILayout.Label("Referencja dotyczy promienia do środka obiektu. Geometria jest syntetyczna; nie używamy czujnika głębi.");
                 GUILayout.Label("Wskaż dla każdego numeru, czy obiekt powinien być widoczny według geometrii. Podsumowanie pojawi się po trzech odpowiedziach.");
             }
             if (labNumber == 5)
@@ -355,9 +365,13 @@ namespace KIA.WiRR
             }
             if (labNumber == 4)
             {
+                GUILayout.Label("Tożsamość obiektów: 1 czerwony, 2 zielony, 3 turkusowy. Etykieta w scenie może być błędna.");
                 for (var i = 0; i < 3; i++)
                 {
-                    if (selected.Contains(i)) continue;
+                    if (depthExperiment.HasAnswer(i)) continue;
+                    var observation = depthObservations[i];
+                    GUILayout.Label("Komunikat promienia SIM, obiekt " + (i + 1) + ": " +
+                        (observation.available ? (observation.reportedFirstHit ? "pierwsze trafienie w obiekt" : "brak pierwszego trafienia w obiekt") : "brak danych"));
                     GUILayout.Label("Obiekt " + (i + 1) + ": czy powinien być widoczny?");
                     using (new GUILayout.HorizontalScope())
                     {
@@ -397,10 +411,29 @@ namespace KIA.WiRR
 
         private void ClassifyVisibility(int index, bool visible)
         {
-            if (!active || selected.Contains(index)) return;
-            if (visible == !world.Occluded(index)) successes++; else errors++;
-            selected.Add(index);
-            if (selected.Count == 3) Finish(true);
+            if (!active || depthExperiment == null || depthExperiment.HasAnswer(index)) return;
+            Physics.SyncTransforms();
+            for (var i = 0; i < depthObservations.Length; i++)
+            {
+                var current = world.ProbeDepth(i); var initial = depthObservations[i];
+                if (!current.available || !initial.available || current.referenceVisible != initial.referenceVisible
+                    || Math.Abs(current.targetDistance - initial.targetDistance) > 0.0001
+                    || current.otherSurfaceDistance.HasValue != initial.otherSurfaceDistance.HasValue
+                    || (current.otherSurfaceDistance.HasValue && Math.Abs(current.otherSurfaceDistance.Value - initial.otherSurfaceDistance.Value) > 0.0001))
+                {
+                    depthExperiment.InvalidateReference(i);
+                    Finish(false, "Brak danych lub zmiana geometrii referencyjnej w trakcie porównania.");
+                    return;
+                }
+            }
+            depthExperiment.Answer(index, visible);
+            if (depthExperiment.IsComplete) { Finish(true); return; }
+            if (!practice)
+            {
+                session.pendingTrial.trial.metrics = depthExperiment.Metrics();
+                if (!Save()) { Finish(false, "Przerwano test widoczności po błędzie zapisu."); return; }
+            }
+            feedback = "Zapisano odpowiedź " + depthExperiment.Answered + "/3. Podsumowanie po ostatniej odpowiedzi.";
         }
     }
 }
