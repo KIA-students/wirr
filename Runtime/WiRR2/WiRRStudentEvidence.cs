@@ -92,8 +92,10 @@ namespace KIA.WiRR
             {
                 trial.validity = "FAILED";
                 trial.reason = "Przerwana sesja: zachowano rozpoczęcie, brak potwierdzonego zakończenia.";
-                trial.metrics = new List<WiRRStudentMetric> { new WiRRStudentMetric {
-                    name = "elapsed", unit = "s", unavailableReason = "Brak końcowego pomiaru czasu przed restartem." } };
+                if (trial.metrics == null) trial.metrics = new List<WiRRStudentMetric>();
+                if (!trial.metrics.Any(m => m.name == "elapsed"))
+                    trial.metrics.Add(new WiRRStudentMetric {
+                        name = "elapsed", unit = "s", unavailableReason = "Brak końcowego pomiaru czasu przed restartem." });
                 lab.trials.Add(trial);
             }
             pendingTrial = null;
@@ -104,7 +106,7 @@ namespace KIA.WiRR
     /// <summary>Local session storage and an explicit adapter to the existing draft evidence grader.</summary>
     public static class WiRRStudentEvidence
     {
-        public const string ExperimentVersion = "student-kit/0.1.1";
+        public const string ExperimentVersion = "student-kit/0.1.2";
 
         public static string IdentityKey(IEnumerable<string> indices, string group, int block)
         {

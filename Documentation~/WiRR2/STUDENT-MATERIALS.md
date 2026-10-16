@@ -1,6 +1,6 @@
 # Materiały Unity do nowych instrukcji
 
-Wersja `student-kit/0.1.1`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
+Wersja `student-kit/0.1.2`, 2026-10-16. **Zestaw pilotażowy do odbioru w Unity**.
 Nie jest jeszcze pełnym wdrożeniem wszystkich 40 checkpointów ani zatwierdzonym
 wydaniem na stanowiska studentów. Sceny i źródła są częścią istniejącego pakietu,
 bez drugiej wtyczki i bez dodatkowych zależności runtime.
@@ -27,7 +27,7 @@ Nie wykonano tutaj buildów Player/APK ani przygotowania lockfile nowego wydania
 | Lab / scena | Dostarczone materiały i mechanika | Pozostały zakres odbioru/rozbudowy |
 |---|---|---|
 | 01 `Lab01_Station` | Referencje 0,1/1/10 m, 10/100/300 brył, cienie, fizyka, stała trasa, 2 s rozgrzewki i 8 s próby, mediana/p95 rzeczywistych czasów klatki | Odbiór budżetu stanowiska, kontrolowane profile CPU/GPU, pilotaż |
-| 02 `Lab02_Interaction` | Obiekt, gniazdo, ręka sterowana klawiaturą, chwyt w zasięgu, wskazanie myszy, czas i błędne upuszczenia, trening oddzielony od danych | Pełne XRI Direct/Ray/Socket, teleportacja i wejście HMD; obecny PC to własny symulator dydaktyczny |
+| 02 `Lab02_Interaction` | Obiekt i gniazdo, Direct PC klawiaturą i Ray PC myszą, serie pięciu cykli z czasami i błędami, trening oddzielony od danych, podgląd teleportacji PC poza pomiarem | Pełne XRI Direct/Ray/Socket i teleportacja XRI/HMD; obecny PC to własny symulator dydaktyczny |
 | 03 `Lab03_AnchorGallery` | Referencje co 0,30 m, umieszczenie, dwa profile syntetycznego błędu, trzy odczyty, średni błąd i rozrzut RMS, jawna przerwa śledzenia SIM | Tor obserwacji, pełny scenariusz relokalizacji i opcjonalny adapter REAL_AR |
 | 04 `Lab04_DepthRoom` | Trzy obiekty, przeszkoda, shader błędnej okluzji, wariant zgodny z głębią, odpowiedzi widoczny/niewidoczny sprawdzane raycastem, drugi widok | Próg głębi, warianty oświetlenia, osobne anomalie etykiety i błędnego raycastu, pomiary urządzeniowe |
 | 05 `Lab05_CADWorkshop` | Proceduralne siatki High/Medium z rzeczywistym otworem i Low bez otworu; wariant stały lub automatyczny według odległości, dwa regulowane progi w metrach, wspólna radialna trasa benchmarku | Materiały/collidery, osobne gotowe modele konwersji CAD i odbiór renderowania; obecny pierścień jest modelem dydaktycznym |
@@ -82,10 +82,11 @@ zgodność dziewięciu źródeł instrukcji/rubryki z przypiętą wersją źród
 **Nie wykonano kompilacji C#, importu Unity, renderowania Game View, testów
 EditMode/PlayMode ani odbioru Windows/Ubuntu**. Analiza składni nie zastępuje tych testów.
 
-Dołączone testy Unity: 19 przypadków EditMode (m.in. JSON, zapis z kopią,
+Dołączone testy Unity: 24 przypadki EditMode (m.in. JSON, zapis z kopią,
 rozdzielenie wyników, percentyle, nazwane mapowanie replay, geometria siatek
 i import wszystkich scen, granice progów LOD i odzyskanie próby po serializacji)
-oraz dwa testy PlayMode: start ośmiu doświadczeń i zmiana siatki LOD z powrotem do High.
+oraz trzy testy PlayMode: start ośmiu doświadczeń, zmiana siatki LOD z powrotem do High
+i teleportacja PC bez przesuwania obiektu i gniazda.
 W projekcie testowym dodaj `pl.prz.kia.wirr` do `testables` w `Packages/manifest.json`.
 Testy uruchamiaj lokalnie albo w zatwierdzonym workflow na `main`, zgodnie
 z polityką repozytorium. Nie dodano automatycznych runów na PR.
@@ -134,3 +135,23 @@ z opcjonalnym przesunięciem dystansu o 4 m w kontrpróbie. Wynik obejmuje min/m
 poziomu, liczbę przełączeń i zachowanie otworu we wszystkich próbkach okna
 pomiarowego, a także liczbę trójkątów ostatnio wybranej siatki. Utrata otworu
 choćby w części porównania nie jest ukrywana przez powrót do High na końcu.
+
+## Pięć cykli Lab02
+
+Rozpoczęcie próby uruchamia serię pięciu cykli wybranej techniki. Czas cyklu
+będzie liczony od startu serii albo resetu po poprzednim cyklu. Błędny chwyt
+lub upuszczenie zwiększa licznik pomyłek; poprawne osadzenie zamyka cykl.
+Cykl można również zakończyć jawnie jako nieudany; limit 30 s automatycznie
+kończy cykl niepowodzeniem. Każdy kolejny cykl ma ten sam stan startowy.
+
+Raport zachowuje czas, liczbę błędów i wynik każdego cyklu. Mediana udanych
+cykli jest pokazywana osobno od liczby niepowodzeń; brak sukcesu daje brak
+mediany, a nie zerowy czas. Przerwanie serii nie tworzy pięciu sztucznych prób.
+Zakończone cykle są zapisywane na bieżąco w sesji i pozostają po restarcie;
+niezakończony cykl ma nieznane metryki. Cała odzyskana seria pozostaje FAILED.
+Trening ma takie samo sterowanie i pozostaje poza zapisanym porównaniem.
+
+Dwa punkty teleportacji PC i powrót do widoku bazowego są dostępne poza
+aktywną serią. Rozpoczęcie serii odtwarza scenę, aby wcześniejsza eksploracja
+nie zmieniała dystansu A/B. To zmiana pozycji kamery w symulatorze, nie
+potwierdzenie działania TeleportationProvider ani interaktorów XRI.

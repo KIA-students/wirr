@@ -18,6 +18,7 @@ namespace KIA.WiRR
         public int ActiveTriangleCount => lodTriangleCounts[ActiveLod];
         private readonly Mesh[] lodMeshes = new Mesh[3];
         private readonly int[] lodTriangleCounts = new int[3];
+        private Vector3 homeCameraPosition;
         private readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
 
         public WiRRStudentWorld(Transform parent, int lab, int count, int detail, bool shadows, bool physics, bool highlight, int view)
@@ -31,6 +32,7 @@ namespace KIA.WiRR
             camera.backgroundColor = new Color(0.08f, 0.11f, 0.16f);
             camera.transform.position = new Vector3(view == 0 ? 0 : 2.8f, 2.2f, -6f);
             camera.transform.LookAt(new Vector3(0, 1, 1));
+            homeCameraPosition = camera.transform.position;
             var lamp = new GameObject("Światło");
             lamp.transform.SetParent(root.transform);
             var light = lamp.AddComponent<Light>();
@@ -60,6 +62,12 @@ namespace KIA.WiRR
                 socket = Shape("Gniazdo", PrimitiveType.Cube, new Vector3(1, 1, 1),
                     Vector3.one * 0.5f, highlight ? Color.green : Color.gray).transform;
                 Label(socket, "GNIAZDO", new Vector3(0, 0.8f, 0));
+                for (var station = 0; station < 2; station++)
+                {
+                    var pad = Shape("Punkt teleportacji PC " + (station + 1), PrimitiveType.Cylinder,
+                        new Vector3(station == 0 ? -2.5f : 2.5f, 0, -2), new Vector3(0.5f, 0.02f, 0.5f), Color.blue);
+                    Label(pad.transform, "Punkt " + (station + 1), Vector3.up * 3);
+                }
             }
             else if (lab == 3)
             {
@@ -149,6 +157,13 @@ namespace KIA.WiRR
             ActiveLod = level;
             activeMesh = lodMeshes[level];
             lod.ForceLOD(level);
+        }
+
+        public void TeleportPreview(int station)
+        {
+            if (socket == null || station < 0 || station > 2) throw new ArgumentOutOfRangeException(nameof(station));
+            camera.transform.position = station == 2 ? homeCameraPosition : new Vector3(station == 0 ? -2.5f : 2.5f, 1.6f, -2);
+            camera.transform.LookAt(station == 2 ? new Vector3(0, 1, 1) : socket.position);
         }
 
         public GameObject Shape(string name, PrimitiveType type, Vector3 position, Vector3 scale, Color color)

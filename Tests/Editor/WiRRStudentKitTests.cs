@@ -146,6 +146,78 @@ public sealed class WiRRStudentKitTests
         finally { UnityEngine.Object.DestroyImmediate(mesh); }
     }
 
+    [Test] public void InteractionSeriesRecordsFiveCyclesAndRetainsErrors()
+    {
+        var series = new WiRRInteractionSeries(100);
+        for (var cycle = 1; cycle <= 5; cycle++)
+        {
+            series.Error();
+            series.CompleteCycle(100 + cycle * 2, cycle != 3);
+        }
+        Assert.IsTrue(series.IsComplete);
+        Assert.AreEqual(4, series.Successes);
+        Assert.AreEqual(5, series.TotalErrors);
+        CollectionAssert.AreEqual(new[] { 1, 2, 3, 4, 5 }, series.Cycles.Select(c => c.number));
+        Assert.IsTrue(series.Cycles.All(c => c.seconds == 2 && c.errors == 1));
+        Assert.Throws<InvalidOperationException>(() => series.Error());
+        Assert.Throws<InvalidOperationException>(() => series.CompleteCycle(112, true));
+    }
+
+    [Test] public void AbortedSeriesDoesNotFabricateTheRemainingCycles()
+    {
+        var series = new WiRRInteractionSeries(0);
+        series.CompleteCycle(2, true);
+        series.Error();
+        series.Abort(5);
+        series.Abort(6);
+        Assert.IsTrue(series.IsAborted);
+        Assert.IsFalse(series.IsComplete);
+        Assert.AreEqual(2, series.Cycles.Count);
+        Assert.AreEqual(3, series.Cycles[1].seconds);
+        Assert.IsFalse(series.Cycles[1].success);
+        var metrics = series.Metrics();
+        Assert.IsFalse(metrics.Single(m => m.name == "cycle_3_time").available);
+        Assert.IsFalse(metrics.Single(m => m.name == "cycle_5_success").available);
+        Assert.AreEqual(1, series.TotalErrors);
+    }
+
+    [Test] public void InteractionSeriesRejectsNonmonotonicAndUnknownClocks()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => new WiRRInteractionSeries(double.NaN));
+        Assert.Throws<ArgumentOutOfRangeException>(() => new WiRRInteractionSeries(0, 0));
+        var series = new WiRRInteractionSeries(10);
+        Assert.Throws<ArgumentOutOfRangeException>(() => series.CompleteCycle(9, true));
+        Assert.Throws<ArgumentOutOfRangeException>(() => series.CurrentSeconds(double.PositiveInfinity));
+        Assert.AreEqual(0, series.Cycles.Count);
+    }
+
+    [Test] public void FailedCyclesDoNotBecomeFastSuccessfulCycles()
+    {
+        var series = new WiRRInteractionSeries(0);
+        series.CompleteCycle(1, false);
+        Assert.IsFalse(series.Metrics().Single(m => m.name == "cycle_time_median_successful").available);
+        series.CompleteCycle(6, true);
+        Assert.AreEqual(5, series.Metrics().Single(m => m.name == "cycle_time_median_successful").value);
+        Assert.AreEqual(1, series.Successes);
+    }
+
+    [Test] public void RecoveryRetainsCompletedCyclesFromAnInterruptedSeries()
+    {
+        var session = new WiRRStudentSession { block = 1 };
+        session.BeginTrial(2, "DESKTOP_SIM", "SOLO", "Direct_PC");
+        var series = new WiRRInteractionSeries(0);
+        series.Error(); series.CompleteCycle(2, false);
+        session.pendingTrial.trial.metrics = series.Metrics();
+        var restored = JsonUtility.FromJson<WiRRStudentSession>(JsonUtility.ToJson(session));
+        restored.RecoverInterruptedTrial();
+        var metrics = restored.Lab(2).trials.Single().metrics;
+        Assert.AreEqual(2, metrics.Single(m => m.name == "cycle_1_time").value);
+        Assert.AreEqual(1, metrics.Single(m => m.name == "cycle_1_errors").value);
+        Assert.AreEqual(0, metrics.Single(m => m.name == "cycle_1_success").value);
+        Assert.IsFalse(metrics.Single(m => m.name == "cycle_2_time").available);
+        Assert.IsFalse(metrics.Single(m => m.name == "elapsed").available);
+    }
+
     [Test] public void AllEightScenesImportWithTheCorrectRuntimeScript()
     {
         var package = PackageInfo.FindForPackageName("pl.prz.kia.wirr");

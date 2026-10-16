@@ -31,6 +31,7 @@ namespace KIA.WiRR
         private bool highlight, largeTargets, demonstration, placed, physicsLoad, shadows = true, active, practice, grabbed, paused, tracking = true;
         private float start, lastSample, lastMessage, staleAt = -1, pauseStart, recovery = -1, watchdog = 0.5f, gap = 1.5f;
         private int errors, successes, messageIndex, sampleIndex;
+        private WiRRInteractionSeries interactionSeries;
         private readonly List<double> frames = new List<double>();
         private readonly List<Vector3> positions = new List<Vector3>();
         private readonly List<double> intervals = new List<double>();
@@ -147,6 +148,7 @@ namespace KIA.WiRR
             selected.Clear(); frames.Clear(); positions.Clear(); intervals.Clear(); lodSamples.Clear();
             grabbed = paused = false; tracking = true; recovery = staleDelay = recoveryDelay = -1;
             placed = false;
+            interactionSeries = labNumber == 2 ? new WiRRInteractionSeries(start) : null;
             if (labNumber == 6) { messageIndex = 0; replayStart = lastMessage = start; staleAt = -1; }
             feedback = "Próba trwa. Zmiany konfiguracji są zablokowane do zakończenia.";
         }
@@ -157,14 +159,20 @@ namespace KIA.WiRR
         }
 
         private string Configuration() => string.Format(CultureInfo.InvariantCulture,
-            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}",
+            "variant={0}; view={1}; objects={2}; shadows={3}; physics={4}; highlight={5}; technique={6}; template={7}; watchdog_s={8}; gap_s={9}; training={10}; resolution={11}x{12}; vsync={13}; fps_limit={14}; seed=2718; environment={15}; large_targets={16}; demonstration={17}; auto_distance_lod={18}; lod_near_m={19}; lod_far_m={20}; camera_path={21}; input_technique={22}; cycles_required={23}; cycle_timeout_s={24}",
             detail, view, count, shadows, physicsLoad, highlight, technique, template, watchdog, gap, practice,
             Screen.width, Screen.height, QualitySettings.vSyncCount, Application.targetFrameRate, Application.isEditor ? "Editor" : "Player", largeTargets, demonstration,
-            automaticLod, lodNear, lodFar, labNumber == 5 ? "radial3-15/v1" : "baseline/v1");
+            automaticLod, lodNear, lodFar, labNumber == 5 ? "radial3-15/v1" : "baseline/v1",
+            labNumber == 2 ? (technique == 0 ? "Direct_PC" : "Ray_PC") : "not_applicable", labNumber == 2 ? 5 : 0, labNumber == 2 ? 30 : 0);
 
         private void Finish(bool valid, string reason = null)
         {
             if (!active) return;
+            if (labNumber == 2 && interactionSeries != null)
+            {
+                if (!interactionSeries.IsComplete) interactionSeries.Abort(Time.unscaledTime);
+                errors = interactionSeries.TotalErrors; successes = interactionSeries.Successes;
+            }
             if (labNumber == 3 && !tracking) { valid = false; reason = "Brak śledzenia SIM_AR."; }
             active = false;
             var trial = new WiRRStudentTrial { deviceMode = lesson.mode, condition = Configuration(),
@@ -172,6 +180,7 @@ namespace KIA.WiRR
             trial.metrics.Add(WiRRStudentMetric.Measured("elapsed", Time.unscaledTime - start, "s"));
             trial.metrics.Add(WiRRStudentMetric.Measured("errors", errors, "count"));
             trial.metrics.Add(WiRRStudentMetric.Measured("successes", successes, "count"));
+            if (labNumber == 2 && interactionSeries != null) trial.metrics.AddRange(interactionSeries.Metrics());
             if (labNumber == 1 || labNumber == 5)
             {
                 if (frames.Count < 30) { trial.validity = "FAILED"; trial.reason = "Za mało próbek czasu klatki (minimum 30)."; }

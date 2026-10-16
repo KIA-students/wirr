@@ -136,7 +136,7 @@ def build(course: Path) -> None:
     replay.extend(f"{i / 10:.1f},{0.4 * math.cos(i / 10):.6f},{0.6 * math.sin(i / 10):.6f}" for i in range(301))
     (resources / "jointstate-replay.csv").write_text("\n".join(replay) + "\n", encoding="utf-8")
     manifest = ROOT / "tools/wirr2/instruction-inputs.json"
-    manifest.write_text(json.dumps({"version": "student-kit/0.1.1", "inputs_sha256": sources}, indent=2) + "\n", encoding="utf-8")
+    manifest.write_text(json.dumps({"version": "student-kit/0.1.2", "inputs_sha256": sources}, indent=2) + "\n", encoding="utf-8")
     # Only assets introduced by this kit. Never modify unrelated package metadata.
     for folder in [ROOT / "Runtime/WiRR2", resources, ROOT / "Editor/WiRR2", ROOT / "Tests"]:
         for path in folder.rglob("*"):

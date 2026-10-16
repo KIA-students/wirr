@@ -58,7 +58,15 @@ namespace KIA.WiRR
                 var next = GUILayout.Toolbar(technique, new[] { "Direct PC", "Ray PC" });
                 changed |= next != technique; technique = next;
                 GUILayout.Label("Direct PC: strzałki poruszają ręką, E chwyta w zasięgu, Q puszcza. Ray PC: kliknij obiekt, przeciągnij, puść w gnieździe.");
-                GUILayout.Label("To symulacja desktopowa; interaktory XRI i teleportacja wymagają osobnego odbioru.");
+                GUILayout.Label("To symulacja desktopowa; interaktory i teleportacja XRI/HMD pozostają do integracji.");
+                GUILayout.Label("Seria obejmuje pięć cykli; każdy ma limit 30 s. Błędne chwyty i upuszczenia pozostają zapisane.");
+                using (new GUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Podejdź do lewego punktu")) PreviewTeleport(0);
+                    if (GUILayout.Button("Do prawego punktu")) PreviewTeleport(1);
+                    if (GUILayout.Button("Widok bazowy")) PreviewTeleport(2);
+                }
+                GUILayout.Label("Teleportacja PC jest eksploracją poza pomiarem. Rozpoczęcie serii przywraca kontrolowany widok.");
             }
             if (labNumber == 3)
             {
@@ -222,6 +230,9 @@ namespace KIA.WiRR
         private void UpdateManipulation()
         {
             var keyboard = Keyboard.current; var mouse = Mouse.current;
+            if ((technique == 0 && keyboard == null) || (technique == 1 && mouse == null))
+            { Finish(false, "Brak urządzenia wejściowego wybranej techniki PC."); return; }
+            if (interactionSeries.CurrentSeconds(Time.unscaledTime) >= 30) { CompleteManipulationCycle(false); return; }
             var target = world.targets[0].transform;
             if (technique == 0 && keyboard != null)
             {
@@ -231,7 +242,7 @@ namespace KIA.WiRR
                 handObject.transform.position = hand;
                 if (keyboard.eKey.wasPressedThisFrame)
                 {
-                    if (Vector3.Distance(hand, target.position) < 0.35f) grabbed = true; else errors++;
+                    if (Vector3.Distance(hand, target.position) < 0.35f) grabbed = true; else interactionSeries.Error();
                 }
                 if (grabbed) target.position = hand;
                 if (keyboard.qKey.wasPressedThisFrame && grabbed) ReleaseObject();
@@ -242,7 +253,7 @@ namespace KIA.WiRR
                 if (mouse.leftButton.wasPressedThisFrame && mouse.position.ReadValue().x > PanelWidth)
                 {
                     if (Physics.Raycast(ray, out var hit, 100) && hit.transform == target) grabbed = true;
-                    else errors++;
+                    else interactionSeries.Error();
                 }
                 if (grabbed && new Plane(Vector3.back, new Vector3(0, 0, 1)).Raycast(ray, out var distance))
                     target.position = ray.GetPoint(distance);
@@ -254,8 +265,36 @@ namespace KIA.WiRR
         {
             grabbed = false;
             if (Vector3.Distance(world.targets[0].transform.position, world.socket.position) <= 0.45f)
-            { successes = 1; Finish(true); }
-            else { errors++; world.targets[0].transform.position = new Vector3(-1, 1, 1); }
+                CompleteManipulationCycle(true);
+            else { interactionSeries.Error(); world.targets[0].transform.position = new Vector3(-1, 1, 1); }
+        }
+
+        private void CompleteManipulationCycle(bool success)
+        {
+            if (!active || interactionSeries == null) return;
+            interactionSeries.CompleteCycle(Time.unscaledTime, success);
+            errors = interactionSeries.TotalErrors; successes = interactionSeries.Successes;
+            grabbed = false;
+            hand = new Vector3(-1, 1, 1); handObject.transform.position = hand;
+            world.targets[0].transform.position = hand;
+            if (interactionSeries.IsComplete) Finish(true);
+            else
+            {
+                if (!practice)
+                {
+                    session.pendingTrial.trial.metrics = interactionSeries.Metrics();
+                    if (!Save()) { Finish(false, "Przerwano serię po błędzie zapisu cyklu."); return; }
+                }
+                feedback = "Cykl zapisany. Rozpocznij cykl " + interactionSeries.CurrentNumber + "/5; położenie startowe przywrócone.";
+            }
+        }
+
+        public bool PreviewTeleport(int station)
+        {
+            if (labNumber != 2 || world == null || active) return false;
+            world.TeleportPreview(station);
+            feedback = "Teleportacja PC: eksploracja, nie część porównania Direct/Ray.";
+            return true;
         }
 
         private void UpdateReplay()
@@ -284,6 +323,12 @@ namespace KIA.WiRR
         {
             if (!active) return;
             GUILayout.Label("Czas próby: " + (Time.unscaledTime - start).ToString("F1") + " s");
+            if (labNumber == 2 && interactionSeries != null)
+            {
+                GUILayout.Label("Cykl " + interactionSeries.CurrentNumber + "/5 | sukcesy " + interactionSeries.Successes +
+                    " | pomyłki " + interactionSeries.TotalErrors + " | czas cyklu " + interactionSeries.CurrentSeconds(Time.unscaledTime).ToString("F1") + " s");
+                if (GUILayout.Button("Zakończ bieżący cykl jako nieudany")) CompleteManipulationCycle(false);
+            }
             if (labNumber == 5)
                 GUILayout.Label("LOD " + world.ActiveLod + " | " + world.ActiveTriangleCount + " trójkątów | otwór " +
                     (world.ActiveLod < 2 ? "zachowany" : "utracony"));

@@ -42,4 +42,25 @@ public sealed class WiRRStudentKitPlayModeTests
         finally { world.Dispose(); Object.Destroy(parent); }
         yield return null;
     }
+
+    [UnityTest] public IEnumerator InteractionTeleportHasStableHomeAndDoesNotMoveTheTask()
+    {
+        var parent = new GameObject("Teleport preview test");
+        var world = new WiRRStudentWorld(parent.transform, 2, 10, 0, true, false, false, 0);
+        try
+        {
+            var home = world.camera.transform.position;
+            var target = world.targets[0].transform.position;
+            var socket = world.socket.position;
+            world.TeleportPreview(0); yield return null;
+            Assert.AreNotEqual(home, world.camera.transform.position);
+            world.TeleportPreview(1); yield return null;
+            Assert.AreEqual(target, world.targets[0].transform.position);
+            Assert.AreEqual(socket, world.socket.position);
+            world.TeleportPreview(2); yield return null;
+            Assert.AreEqual(home, world.camera.transform.position);
+        }
+        finally { world.Dispose(); Object.Destroy(parent); }
+        yield return null;
+    }
 }
