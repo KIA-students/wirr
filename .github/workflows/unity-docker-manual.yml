@@ -1,0 +1,44 @@
+name: Unity Docker validation (manual, self-hosted)
+on:
+  workflow_dispatch:
+    inputs:
+      unity_version:
+        description: "Unity editor version (must match available GameCI image)"
+        required: true
+        default: "6000.3.24f1"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: unity-docker-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  unity-tests:
+    # Manual only. Never start billable GitHub-hosted runners.
+    runs-on: [self-hosted, Linux, X64]
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify local Unity license path
+        env:
+          UNITY_LICENSE_FILE: ${{ vars.UNITY_LICENSE_FILE }}
+        run: |
+          test -n "$UNITY_LICENSE_FILE"
+          test -f "$UNITY_LICENSE_FILE"
+      - name: Execute Unity Test Runner in Docker
+        env:
+          UNITY_LICENSE_FILE: ${{ vars.UNITY_LICENSE_FILE }}
+          UNITY_VERSION: ${{ inputs.unity_version }}
+          OUTPUT_DIR: ${{ github.workspace }}/artifacts/unity-ci
+        run: bash tools/unity-ci/run-docker.sh
+      - name: Preserve logs and NUnit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unity-docker-results
+          path: artifacts/unity-ci/
+          if-no-files-found: warn
+          retention-days: 7
