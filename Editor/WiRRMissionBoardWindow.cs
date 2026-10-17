@@ -90,6 +90,7 @@ namespace KIA.WiRR.Editor
         {
             scroll = EditorGUILayout.BeginScrollView(scroll);
             EditorGUILayout.LabelField("WiRR | Obowiązkowa ścieżka", EditorStyles.boldLabel);
+            if (GUILayout.Button("Materiały do nowych instrukcji WiRR 2.0")) WiRRStudentMaterialsWindow.Open();
             if (!WiRRStudentProfile.IsRegistered)
             {
                 EditorGUILayout.HelpBox("Najpierw podaj numer indeksu i potwierdź grupę laboratoryjną.", MessageType.Warning);
