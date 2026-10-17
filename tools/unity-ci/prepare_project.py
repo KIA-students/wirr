@@ -19,7 +19,7 @@ def prepare(root: Path, output: Path, editor_version: str) -> None:
     # Both paths reside on /workspace; the local package requires no registry release.
     manifest = {
         "dependencies": {
-            "pl.prz.kia.wirr": "file:" + root.as_posix().replace("\\", "/") if False else "file:" + __import__("os").path.relpath(root, packages).replace("\\", "/"),
+            "pl.prz.kia.wirr": "file:../../package",
             "com.unity.test-framework": "1.5.1",
             "com.unity.render-pipelines.universal": "17.0.3",
             "com.unity.inputsystem": package["dependencies"].get("com.unity.inputsystem", "1.20.0"),
