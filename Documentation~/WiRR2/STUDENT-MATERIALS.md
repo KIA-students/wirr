@@ -74,6 +74,31 @@ laboratoriami zamiast powielać osiem odrębnych eksporterów.
   z istniejącym systemem odbioru i rzeczywistego potwierdzenia. Obecny moduł
   nigdy nie deklaruje `SENT`. Nie podłącza się sam do sieci.
 
+## Wersjonowanie raportu i odbiór trwałości zapisu
+
+Pole `versions.package` pobierane jest w czasie wykonania z
+`Runtime/Resources/WiRR2/package-version.json`, a nie ze stałej w kodzie raportu.
+Plik ten jest częścią pakietu i działa również w buildzie Player. Przy każdej
+zmianie `package.json` należy zaktualizować zasób wersji; test hosta
+`test_runtime_package_version_matches_manifest` blokuje rozbieżność.
+Brak zasobu lub niepoprawna wersja powoduje jawny błąd eksportu zamiast
+wpisania niezweryfikowanej wartości.
+
+Bramka odbioru na **Windows i Ubuntu** (ten sam projekt Unity 6 URP):
+1. Uruchom test `ReportUsesVersionFromEmbeddedPackageMetadata` i porównaj wynik
+   raportu z wersją w `package.json`.
+2. Uruchom `AtomicWriteCreatesOverwritesAndPreservesPreviousBackup`, test
+   `CorruptPrimaryRestoresValidBackupAndPreservesOriginalBytes` i
+   `InvalidBackupCannotMoveOrOverwriteEitherFile` na lokalnym systemie plików.
+3. Sprawdź odtworzenie po przerwanym zapisie `.tmp`, istniejący `.bak`,
+   uszkodzony plik główny, dwukrotny eksport i zgodność SHA-256 manifestu.
+4. Zapisz wersję Unity, system, rodzaj dysku/system plików, status testów,
+   log konsoli i ewentualne wyjątki w protokole odbioru. Nie traktuj
+   kontroli Python/tree-sitter jako zastępstwa uruchomionego Unity Test Runner.
+
+Zmiany w tym PR nie stanowią potwierdzenia wykonania powyższej bramki
+na rzeczywistych stanowiskach.
+
 ## Weryfikacja techniczna
 
 W tym środowisku wykonano: 8 kontroli pakowania/danych i składni C# tree-sitter,
