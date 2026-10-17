@@ -54,7 +54,7 @@ try {
     )
     & docker @dockerArgs
     if ($LASTEXITCODE -ne 0 -or -not (Test-Path $xml)) {
-      Write-Warning "$mode: Unity failed or NUnit XML missing"
+      Write-Warning "${mode}: Unity failed or NUnit XML missing"
       $failed = $true
       continue
     }
