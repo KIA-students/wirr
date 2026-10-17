@@ -61,6 +61,14 @@ class TestStudentMaterials(unittest.TestCase):
                     guids.append(value)
         self.assertEqual(len(guids), len(set(guids)))
 
+    def test_runtime_package_version_matches_manifest(self):
+        canonical = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))["version"]
+        embedded = json.loads((ROOT / "Runtime/Resources/WiRR2/package-version.json").read_text(encoding="utf-8"))["version"]
+        self.assertEqual(embedded, canonical, "Update packaged version metadata with package.json")
+        evidence = (ROOT / "Runtime/WiRR2/WiRRStudentEvidence.cs").read_text(encoding="utf-8")
+        self.assertIn('{ "package", PackageVersion() }', evidence)
+        self.assertNotIn('{ "package", "1.1.4" }', evidence)
+
     def test_csharp_syntax(self):
         import tree_sitter
         import tree_sitter_c_sharp
