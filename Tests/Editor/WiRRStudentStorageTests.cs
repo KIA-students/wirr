@@ -16,6 +16,27 @@ public sealed class WiRRStudentStorageTests
         var folder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N")); Directory.CreateDirectory(folder);
         try { action(folder); } finally { Directory.Delete(folder, true); }
     }
+    [Test] public void ReportUsesVersionFromEmbeddedPackageMetadata()
+    {
+        var version = WiRRStudentEvidence.PackageVersion();
+        Assert.IsFalse(string.IsNullOrWhiteSpace(version));
+        var report = WiRRStudentEvidence.Report(Session(), 1, Application.unityVersion);
+        var versions = (Dictionary<string, object>)report["versions"];
+        Assert.AreEqual(version, versions["package"]);
+    }
+    [Test] public void AtomicWriteCreatesOverwritesAndPreservesPreviousBackup()
+    {
+        InFolder(folder => {
+            var path = Path.Combine(folder, "nested", "session.json");
+            WiRRStudentEvidence.AtomicWrite(path, "first");
+            Assert.AreEqual("first", File.ReadAllText(path));
+            Assert.IsFalse(File.Exists(path + ".bak"));
+            WiRRStudentEvidence.AtomicWrite(path, "second");
+            Assert.AreEqual("second", File.ReadAllText(path));
+            Assert.AreEqual("first", File.ReadAllText(path + ".bak"));
+            Assert.IsFalse(File.Exists(path + ".tmp"));
+        });
+    }
     [Test] public void MissingSessionCreatesOnlyTheRequestedProfile()
     {
         InFolder(folder => {
