@@ -14,6 +14,7 @@ def prepare(root: Path, output: Path, editor_version: str) -> None:
         raise ValueError("Test project must be outside the package checkout")
     packages = output / "Packages"
     settings = output / "ProjectSettings"
+    (output / "Assets").mkdir(parents=True, exist_ok=True)
     packages.mkdir(parents=True, exist_ok=True)
     settings.mkdir(parents=True, exist_ok=True)
     # Both paths reside on /workspace; the local package requires no registry release.
