@@ -39,3 +39,7 @@ Review `EditMode.xml`, `PlayMode.xml`, both logs and the editor version,
 then perform a separate workstation smoke test before merging PR #87.
 
 The test harness itself has not yet been executed in a Unity container.
+
+## Andromeda (Windows PowerShell + Docker Desktop)
+
+Docker Desktop Linux containers work directly from PowerShell. WSL distro integration is **not required**. Use `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\tools\\unity-ci\\run-andromeda.ps1 -PreflightOnly` to verify Docker. Then run the same command without `-PreflightOnly`; a Unity `.ulf` license is required, optionally via `-LicenseFile`. Results appear under `artifacts/unity-ci`. The Windows launcher uses Docker bind mounts and bypasses the Linux-only Bash runner. This configuration has not yet been exercised against a Unity editor image.
