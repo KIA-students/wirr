@@ -23,7 +23,7 @@ python3 "${ROOT}/tools/unity-ci/prepare_project.py" --package "$ROOT" --project 
 LICENSE_ARGS=()
 if [[ -n "${UNITY_LICENSE_FILE:-}" ]]; then
   [[ -f "$UNITY_LICENSE_FILE" ]] || { echo "UNITY_LICENSE_FILE not found" >&2; exit 2; }
-  LICENSE_ARGS=(-v "${UNITY_LICENSE_FILE}:/run/secrets/Unity_lic.ulf:ro")
+  LICENSE_ARGS=(-v "${UNITY_LICENSE_FILE}:/root/.local/share/unity3d/Unity/Unity_lic.ulf:ro")
 elif [[ -n "${UNITY_LICENSE:-}" ]]; then
   echo "Use UNITY_LICENSE_FILE instead of an environment literal to avoid accidental disclosure." >&2
   exit 2
@@ -41,7 +41,6 @@ for mode in EditMode PlayMode; do
     --mount "type=bind,src=${PROJECT},dst=/workspace/project" \
     --mount "type=bind,src=${OUTPUT_DIR},dst=/workspace/results" \
     "${LICENSE_ARGS[@]}" \
-    --env "UNITY_LICENSE_FILE=/run/secrets/Unity_lic.ulf" \
     "$UNITY_IMAGE" unity-editor \
       -batchmode -nographics -projectPath /workspace/project \
       -runTests -testPlatform "$mode" \
@@ -52,6 +51,19 @@ for mode in EditMode PlayMode; do
   if [[ $code -ne 0 || ! -s "${OUTPUT_DIR}/${mode}.xml" ]]; then
     echo "Unity $mode failed: exit=$code or missing NUnit XML" >&2
     STATUS=1
+  else
+    if ! python3 - "$OUTPUT_DIR/$mode.xml" <<'PY'
+import sys
+import xml.etree.ElementTree as ET
+root = ET.parse(sys.argv[1]).getroot()
+assert root.tag in ("test-run", "test-results"), root.tag
+assert int(root.attrib.get("total", root.attrib.get("totalCount", "0"))) > 0, "No tests executed"
+assert int(root.attrib.get("failed", root.attrib.get("failures", "0"))) == 0, "NUnit failures"
+assert root.attrib.get("result", "Passed") not in ("Failed", "Inconclusive"), "NUnit result failed"
+PY
+    then
+      STATUS=1
+    fi
   fi
 done
 exit "$STATUS"
