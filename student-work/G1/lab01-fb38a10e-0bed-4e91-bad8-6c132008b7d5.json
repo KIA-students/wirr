@@ -1,0 +1,1474 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S58df0f5e28c14b95a87aeb6a4302989d",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173371"
+    },
+    {
+      "key": "variant.v1",
+      "value": "2"
+    },
+    {
+      "key": "variant.v2",
+      "value": "4"
+    },
+    {
+      "key": "variant.v3",
+      "value": "1"
+    },
+    {
+      "key": "variant.v4",
+      "value": "3"
+    },
+    {
+      "key": "variant.v5",
+      "value": "5"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.mediana_fps",
+      "value": "121.6"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.mediana_ms",
+      "value": "8.23"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.mediana_fps",
+      "value": "195.9"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.mediana_ms",
+      "value": "5.1"
+    },
+    {
+      "key": "table.lab01_cpu_a.0.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.0.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.0.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.10000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.10000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.10000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.25000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.25000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.25000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.50000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.50000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.50000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.100000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.100000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.100000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.200000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.200000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.200000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.400000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.400000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.400000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.1.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.1.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.1.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.2.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.2.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.2.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.4.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.4.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.4.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.8.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.8.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.8.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.16.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.16.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.16.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.32.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.32.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.32.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.0.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.0.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.1024.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.1024.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.4096.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.4096.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.16384.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.16384.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.65536.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.65536.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.262144.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.262144.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.0.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.0.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.0.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.100.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.100.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.100.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.250.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.250.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.250.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.500.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.500.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.500.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.1000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.1000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.1000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.2000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.2000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.2000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.4000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.4000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.4000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.1.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.1.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.2.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.2.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.4.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.4.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.8.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.8.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.16.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.16.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.32.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.32.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_60.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_60.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_60.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_70.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_70.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_70.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_80.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_80.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_80.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_90.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_90.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_90.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_00.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_00.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_00.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_20.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_20.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_20.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.0.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.0.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.0.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.25.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.25.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.25.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.50.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.50.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.50.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.100.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.100.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.100.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.200.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.200.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.200.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.400.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.400.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.400.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.800.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.800.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.800.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0333.kroki_s",
+      "value": "30"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0333.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0333.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0250.kroki_s",
+      "value": "40"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0250.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0250.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0200.kroki_s",
+      "value": "50"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0200.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0200.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0167.kroki_s",
+      "value": "60"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0167.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0167.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0133.kroki_s",
+      "value": "75"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0133.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0133.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0111.kroki_s",
+      "value": "90"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0111.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0111.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_quest_performance.pc.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_quest_performance.pc.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_quest_performance.quest_standalone.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_quest_performance.quest_standalone.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "cp30.baseline_fps",
+      "value": "211.6"
+    },
+    {
+      "key": "cp30.baseline_frame_ms",
+      "value": "4.73"
+    },
+    {
+      "key": "basic.mode",
+      "value": "false"
+    },
+    {
+      "key": "environment.station",
+      "value": "własny laptop"
+    },
+    {
+      "key": "environment.device",
+      "value": "brak"
+    },
+    {
+      "key": "environment.notes",
+      "value": "Unity: 6000.6.6f1, WiRR: 1.0.8, GPU:Intel Iris Xe Graphics, Gałąź: lab01-work, Data: 17.10.2026"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_1.fps",
+      "value": "231.9"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_1.ms_klatka",
+      "value": "4.31"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_2.fps",
+      "value": "177.4"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_2.ms_klatka",
+      "value": "5.64"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_3.fps",
+      "value": "211.6"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_3.ms_klatka",
+      "value": "4.73"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.fps_1",
+      "value": "84.7"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.fps_2",
+      "value": "121.6"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.fps_3",
+      "value": "122.6"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.ms_1",
+      "value": "11.81"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.ms_2",
+      "value": "8.23"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.ms_3",
+      "value": "8.15"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.fps_1",
+      "value": "197.8"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.ms_1",
+      "value": "5.06"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.fps_2",
+      "value": "131.8"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.ms_2",
+      "value": "7.59"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.fps_3",
+      "value": "195.9"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.ms_3",
+      "value": "5.10"
+    },
+    {
+      "key": "cp30.answer",
+      "value": "Dla rozdzielczości 1920x1080 (warunek A) mediana czasu klatki wyniosła 8,23 ms, a po obniżeniu rozdzielczości do 1280x720 (warunek B) spadła do 5,10 ms, co oznacza skrócenie czasu klatki o około 38%."
+    }
+  ],
+  "labNumber": 1,
+  "createdAtUtc": "2026-10-17T16:01:54.4922712Z",
+  "submissionId": "7704d7d60c2d4068997b04d551288c59",
+  "updatedAtUtc": "2026-10-17T17:51:00.2888787Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173371"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 104,
+    "elapsedSeconds": 13334.613,
+    "lastEventAtUtc": "2026-10-17T17:45:10.1811938Z",
+    "firstEventAtUtc": "2026-10-17T14:02:55.5683679Z",
+    "playModeSeconds": 240.278,
+    "playModeSessions": 19
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:02:55.5683679Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:04:12.4277900Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:06:44.6694349Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:07:11.7331116Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:07:30.6525727Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:07:32.6320708Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:08:39.6286172Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:08:41.6739411Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:11:36.0987258Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:13:07.5788279Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "official_samples_imported",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:13:07.5788279Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:13:14.8588507Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:13:17.5228786Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:19:05.5109732Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:19:34.3648899Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:19:34.3653960Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:19:34.3729914Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:20:29.3419490Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:20:32.9362696Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:20:34.1861085Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:20:34.8661198Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:23:17.2295653Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:23:17.2305734Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:23:17.2474326Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:23:17.8639756Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:23:17.8649761Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:23:17.8751189Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:42:53.1296743Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:42:53.8379002Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:42:54.3005941Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:42:54.4873639Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:42:54.7168642Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:42:54.9403863Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T14:42:55.1696349Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T15:28:50.2795088Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=2;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T15:29:57.9030669Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=1;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T15:34:06.1456746Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T15:34:34.3169446Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T15:57:26.7710608Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T16:01:54.5086480Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "incomplete",
+      "eventName": "report_checked",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T16:02:36.2196580Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T16:10:29.5278677Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T16:41:17.3820649Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T16:41:17.8204755Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T16:41:19.8778448Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T16:58:01.7271060Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T16:58:42.1226595Z",
+      "durationSeconds": 40.397
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T16:59:07.5854019Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T16:59:19.8255144Z",
+      "durationSeconds": 12.239
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:00:17.9586799Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:00:23.3769826Z",
+      "durationSeconds": 5.418
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:01:19.6791711Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:20:02.5718212Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:20:02.6259834Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:20:04.7079840Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:20:19.3459434Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:21:53.9769907Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:21:54.0301573Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:21:56.3449045Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:22:19.9078750Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:22:19.9640322Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:22:22.2679762Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:23:01.0757963Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:23:01.1313468Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:23:04.1486793Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:24:07.2849701Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:24:07.3485096Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:24:09.2638931Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:24:29.1937962Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:24:29.2432133Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:24:32.2962837Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:25:47.4049326Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:25:47.4426120Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:25:49.4577994Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:29:00.6716251Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:30:01.8901684Z",
+      "durationSeconds": 61.22
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:30:05.4429451Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:30:18.8415216Z",
+      "durationSeconds": 13.398
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:30:39.8638867Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:31:04.1717391Z",
+      "durationSeconds": 24.308
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:31:19.6493648Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:31:37.1189233Z",
+      "durationSeconds": 17.471
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:37:44.1998726Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:37:50.2920635Z",
+      "durationSeconds": 6.093
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:38:33.3646540Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:38:38.8271526Z",
+      "durationSeconds": 5.463
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:38:57.0969113Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:39:02.0187023Z",
+      "durationSeconds": 4.921
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:42:43.2870103Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:42:53.6092478Z",
+      "durationSeconds": 10.321
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:43:09.6147592Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:43:12.2481261Z",
+      "durationSeconds": 2.633
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:43:14.2862414Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:43:19.4924562Z",
+      "durationSeconds": 5.207
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:43:21.2022149Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:43:29.3402838Z",
+      "durationSeconds": 8.138
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:43:50.3757879Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:43:56.7113109Z",
+      "durationSeconds": 6.336
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:44:29.7483096Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:44:34.9914620Z",
+      "durationSeconds": 5.243
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:44:45.8102898Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:44:51.8250062Z",
+      "durationSeconds": 6.016
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:45:04.7252388Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 1,
+      "timestampUtc": "2026-10-17T17:45:10.1811938Z",
+      "durationSeconds": 5.456
+    }
+  ]
+}
