@@ -108,6 +108,21 @@ namespace KIA.WiRR
     {
         public const string ExperimentVersion = "student-kit/0.1.9";
 
+        [Serializable]
+        private sealed class PackageVersionManifest { public string version; }
+
+        public static string PackageVersion()
+        {
+            // Bundled metadata also works in Player; host tests check package.json parity.
+            var resource = Resources.Load<TextAsset>("WiRR2/package-version");
+            if (resource == null)
+                throw new InvalidOperationException("Brak metadanych wersji pakietu WiRR2.");
+            var manifest = JsonUtility.FromJson<PackageVersionManifest>(resource.text);
+            if (manifest == null || string.IsNullOrWhiteSpace(manifest.version))
+                throw new InvalidOperationException("Niepoprawne metadane wersji pakietu WiRR2.");
+            return manifest.version;
+        }
+
         public static string IdentityKey(IEnumerable<string> indices, string group, int block)
         {
             var text = group + ":" + block + ":" + string.Join(",", indices.OrderBy(x => x, StringComparer.Ordinal));
@@ -121,7 +136,8 @@ namespace KIA.WiRR
 
         public static void AtomicWrite(string path, string content)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            var directory = Path.GetDirectoryName(Path.GetFullPath(path));
+            Directory.CreateDirectory(directory);
             var temporary = path + ".tmp";
             File.WriteAllText(temporary, content, new UTF8Encoding(false));
             if (File.Exists(path)) File.Replace(temporary, path, path + ".bak");
@@ -154,7 +170,7 @@ namespace KIA.WiRR
                 { "teamId", session.id }, { "studentIndices", session.studentIndices }, { "group", session.group },
                 { "labNumber", labNumber }, { "createdAtUtc", session.createdAtUtc },
                 { "versions", new Dictionary<string, object> { { "unity", unityVersion },
-                    { "package", "1.1.4" }, { "experiment", ExperimentVersion } } },
+                    { "package", PackageVersion() }, { "experiment", ExperimentVersion } } },
                 { "activityTimeline", new object[] { new Dictionary<string, object> {
                     { "eventName", "local_evidence_exported" }, { "timestampUtc", now },
                     { "labNumber", labNumber }, { "durationSeconds", 0 } } } },
