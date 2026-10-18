@@ -36,7 +36,7 @@ Tests in this Docker configuration do not prove Windows `File.Replace`
 behavior, GPU rendering accuracy, HMD interactions or real AR/MR support.
 A Linux container is **not** a replacement for Windows + hardware acceptance.
 Review `EditMode.xml`, `PlayMode.xml`, both logs and the editor version,
-then perform a separate workstation smoke test before merging PR #87.
+then perform a separate workstation smoke test before claiming Unity validation is complete.
 
 The test harness itself has not yet been executed in a Unity container.
 
