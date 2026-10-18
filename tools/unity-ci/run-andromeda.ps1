@@ -58,7 +58,7 @@ try {
       $failed = $true
       continue
     }
-    & py -3 -c 'import sys,xml.etree.ElementTree as e; r=e.parse(sys.argv[1]).getroot(); total=int(r.get("total",r.get("totalCount","0"))); failed=int(r.get("failed",r.get("failures","0"))); print("NUnit:",total,"tests,",failed,"failed"); sys.exit(0 if total>0 and failed==0 and r.get("result","Passed") not in ("Failed","Inconclusive") else 1)' $xml
+    & py -3 -c 'import sys,xml.etree.ElementTree as e; r=e.parse(sys.argv[1]).getroot(); total=int(r.get("total",r.get("totalCount","0"))); failed=int(r.get("failed",r.get("failures","0"))); skipped=int(r.get("skipped",r.get("ignored","0"))); print("NUnit:",total,"tests,",failed,"failed,",skipped,"skipped"); sys.exit(0 if total>0 and failed==0 and skipped==0 and r.get("result","Passed") not in ("Failed","Inconclusive") else 1)' $xml
     if ($LASTEXITCODE -ne 0) { $failed = $true }
   }
   if ($failed) { throw "Unity tests failed; see $results" }
