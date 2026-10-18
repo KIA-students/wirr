@@ -1,0 +1,1160 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Sad61ba497c73445ba9d721e85abe6a7c",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173356"
+    },
+    {
+      "key": "variant.v1",
+      "value": "2"
+    },
+    {
+      "key": "variant.v2",
+      "value": "4"
+    },
+    {
+      "key": "variant.v3",
+      "value": "1"
+    },
+    {
+      "key": "variant.v4",
+      "value": "3"
+    },
+    {
+      "key": "variant.v5",
+      "value": "5"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.mediana_s",
+      "value": "4.5"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.mediana_s",
+      "value": "3.5"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.mediana_s",
+      "value": "2.9"
+    },
+    {
+      "key": "table.lab02_cp35_conditions.a.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_cp35_conditions.b.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_cp35_conditions.c.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_cp40_conditions.a.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_cp40_conditions.b.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_cp40_conditions.c.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_quest_experiment.a.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_quest_experiment.b.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "cp30.errors",
+      "value": "4"
+    },
+    {
+      "key": "cp35.false_activations",
+      "value": ""
+    },
+    {
+      "key": "cp40.corrections",
+      "value": ""
+    },
+    {
+      "key": "cp45.scenario_median_s",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "false"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.próba_1_s",
+      "value": "5.5"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.próba_2_s",
+      "value": "4.5"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.próba_3_s",
+      "value": "7.1"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.próba_4_s",
+      "value": "3.7"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.próba_5_s",
+      "value": "3.5"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.błędy",
+      "value": "3"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.próba_1_s",
+      "value": "3.3"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.próba_2_s",
+      "value": "4.5"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.próba_3_s",
+      "value": "3.5"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.próba_4_s",
+      "value": "3.7"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.próba_5_s",
+      "value": "2.6"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.błędy",
+      "value": "1"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.próba_1_s",
+      "value": "3"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.błędy",
+      "value": "0"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.próba_2_s",
+      "value": "2.8"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.próba_3_s",
+      "value": "2.9"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.próba_4_s",
+      "value": "3.1"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.próba_5_s",
+      "value": "1.8"
+    },
+    {
+      "key": "cp30.answer",
+      "value": "Wraz ze wzrostem przesunięcia punktu chwytu mediana czasu poprawnego osadzenia zmniejszyła się z 4.5s przy\n0 cm do 3.5s przy 3cm i 2.9s przy 6cm. Przy przesunięciu 6cm osadzenie było o 1.6s szybsze niż przy 0cm.\nLiczba błędów spadłą z 3 do 1, a następnie do 0. Najlepszy wynik uzyskano przy przesunięciu o 6cm."
+    },
+    {
+      "key": "cp30.task_median_s",
+      "value": "3.5"
+    }
+  ],
+  "labNumber": 2,
+  "createdAtUtc": "2026-10-18T12:08:19.2022991Z",
+  "submissionId": "4236e4c901104c1195e0383eb108bc3c",
+  "updatedAtUtc": "2026-10-18T16:14:44.6724945Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173356"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 138,
+    "elapsedSeconds": 14623.404,
+    "lastEventAtUtc": "2026-10-18T16:14:39.9308279Z",
+    "firstEventAtUtc": "2026-10-18T12:10:56.5265352Z",
+    "playModeSeconds": 2858.069,
+    "playModeSessions": 58
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T12:10:56.5265352Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=3",
+      "eventName": "dependency_install_started",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T12:12:37.4552629Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T12:13:23.4369719Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T12:13:23.4395018Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T12:13:23.4475556Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T12:13:40.7781373Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T12:13:48.2861194Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T12:15:29.2629851Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T12:15:47.9981067Z",
+      "durationSeconds": 18.735
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T13:57:54.6765947Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:01:06.1591264Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:02:54.0208430Z",
+      "durationSeconds": 107.861
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:02:55.1928374Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:04:08.9534519Z",
+      "durationSeconds": 73.759
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:05:14.3994413Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:07:43.7335576Z",
+      "durationSeconds": 149.336
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:08:00.0144465Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:09:45.9055213Z",
+      "durationSeconds": 105.892
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:10:06.7916761Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:10:32.1495287Z",
+      "durationSeconds": 25.357
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:13:56.6935118Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:14:43.1556987Z",
+      "durationSeconds": 46.462
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:14:58.2151038Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:18:10.0371133Z",
+      "durationSeconds": 191.821
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:19:27.3422428Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:20:17.9051805Z",
+      "durationSeconds": 50.564
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:21:29.2407543Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:21:37.9411248Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:22:48.6579074Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:23:49.1394845Z",
+      "durationSeconds": 60.482
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:27:37.2301866Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:29:37.1239825Z",
+      "durationSeconds": 119.895
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:30:25.5226063Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:32:14.7822154Z",
+      "durationSeconds": 109.26
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:32:58.8247850Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:38:35.6532397Z",
+      "durationSeconds": 336.828
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:40:37.7373263Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:43:30.4728341Z",
+      "durationSeconds": 172.734
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:43:37.8517551Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:44:39.2737109Z",
+      "durationSeconds": 61.421
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:45:10.0100409Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:45:49.7832781Z",
+      "durationSeconds": 39.773
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:54:43.8218305Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_quitting",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:56:04.1001432Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:57:06.8309126Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T14:57:41.1495428Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_quitting",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:00:01.7821844Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:06:25.1806825Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:06:30.8169706Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:11:48.0039823Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:11:49.6637137Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:12:38.7784928Z",
+      "durationSeconds": 49.115
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:13:44.6529821Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:16:09.8064682Z",
+      "durationSeconds": 145.152
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:20:28.1455784Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:21:32.8451144Z",
+      "durationSeconds": 64.703
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:22:13.6549579Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:22:26.5575325Z",
+      "durationSeconds": 12.902
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:22:40.9168043Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:23:06.0623767Z",
+      "durationSeconds": 25.145
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:23:07.5649525Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:23:57.7401360Z",
+      "durationSeconds": 50.175
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:29:30.2223846Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:33:42.6518581Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:35:12.0900656Z",
+      "durationSeconds": 89.438
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:36:24.4053951Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:39:03.3820427Z",
+      "durationSeconds": 158.976
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:44:08.8507263Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:44:35.0127834Z",
+      "durationSeconds": 26.165
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:44:35.8623538Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:45:46.3152527Z",
+      "durationSeconds": 70.453
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:45:47.1223701Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:46:17.6883170Z",
+      "durationSeconds": 30.562
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:46:20.1397184Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:46:42.1869773Z",
+      "durationSeconds": 22.046
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:46:42.7899544Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:46:58.2816655Z",
+      "durationSeconds": 15.492
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:46:59.0681730Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:47:03.3303232Z",
+      "durationSeconds": 4.263
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:47:04.7399794Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:47:30.9004359Z",
+      "durationSeconds": 26.161
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:47:31.8048166Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:48:44.0560197Z",
+      "durationSeconds": 72.251
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:48:45.9922134Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:49:08.5795217Z",
+      "durationSeconds": 22.587
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:54:13.7119593Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:54:34.0319524Z",
+      "durationSeconds": 20.321
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:55:04.7797317Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:55:14.0241611Z",
+      "durationSeconds": 9.244
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:55:14.9892746Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:55:21.5098048Z",
+      "durationSeconds": 6.521
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:55:22.9783771Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:55:47.8514025Z",
+      "durationSeconds": 24.872
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T15:56:04.5938956Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:01:43.1167903Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:01:49.0248878Z",
+      "durationSeconds": 5.91
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:01:52.2623254Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:01:55.8125028Z",
+      "durationSeconds": 3.549
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:01:56.8476866Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:02:05.0764046Z",
+      "durationSeconds": 8.229
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:02:20.4629294Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:02:31.2221932Z",
+      "durationSeconds": 10.759
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:02:31.9999821Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:02:40.1033508Z",
+      "durationSeconds": 8.104
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:02:49.5395144Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:03:08.2872931Z",
+      "durationSeconds": 18.748
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:03:10.4074074Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:03:22.4977462Z",
+      "durationSeconds": 12.091
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:03:25.0077250Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:03:35.4597599Z",
+      "durationSeconds": 10.452
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:03:48.5335429Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:04:00.3438164Z",
+      "durationSeconds": 11.81
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:04:02.0160115Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:04:23.8568872Z",
+      "durationSeconds": 21.841
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:04:34.8981286Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:04:41.1842556Z",
+      "durationSeconds": 6.286
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:04:43.3404810Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:04:56.8064502Z",
+      "durationSeconds": 13.465
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:04:58.4283605Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:05:14.8645915Z",
+      "durationSeconds": 16.437
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:05:23.8917410Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:05:37.0687329Z",
+      "durationSeconds": 13.177
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:05:39.8094058Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:05:50.8655066Z",
+      "durationSeconds": 11.056
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:05:55.4744985Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:06:09.2395898Z",
+      "durationSeconds": 13.766
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:06:14.6871353Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:06:27.0567942Z",
+      "durationSeconds": 12.369
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:06:28.3875352Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:06:39.9966172Z",
+      "durationSeconds": 11.608
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:06:41.4482743Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:06:52.7564658Z",
+      "durationSeconds": 11.307
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:06:53.9349835Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:07:04.2393167Z",
+      "durationSeconds": 10.303
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:07:05.2111162Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:07:15.2890374Z",
+      "durationSeconds": 10.078
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:07:28.8276003Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-18T16:14:39.9308279Z",
+      "durationSeconds": 0
+    }
+  ]
+}
