@@ -1,4 +1,4 @@
-param(
+﻿param(
   [string]$Editor = "D:\Unity\UnityEditors\6000.6.0f1\Editor\Unity.exe",
   [switch]$PreflightOnly
 )
@@ -12,7 +12,7 @@ if (-not $matchVersion.Success) { throw "Editor version not found in path" }
 $version = $matchVersion.Value
 Write-Host "Unity Windows: $Editor; version: $version"
 if ($PreflightOnly) { Write-Host "Preflight PASS; no tests executed."; exit 0 }
-$project = Join-Path $env:TEMP ("wirr-native-" + [guid]::NewGuid().ToString("N"))
+$project = Join-Path "D:\Unity\cli" ("wirr-native-" + [guid]::NewGuid().ToString("N"))
 $results = Join-Path $repo "artifacts\unity-native"
 New-Item -ItemType Directory -Force -Path $results,$project | Out-Null
 try {
@@ -47,3 +47,4 @@ try {
 } finally {
   Remove-Item -LiteralPath $project -Recurse -Force -ErrorAction SilentlyContinue
 }
+
