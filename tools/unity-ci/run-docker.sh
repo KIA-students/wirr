@@ -34,6 +34,7 @@ fi
 STATUS=0
 for mode in EditMode PlayMode; do
   echo "Running Unity $mode suite"
+  rm -f "${OUTPUT_DIR}/${mode}.xml" "${OUTPUT_DIR}/${mode}.log"
   set +e
   docker run --rm --init --platform linux/amd64 \
     --network bridge \
@@ -41,7 +42,7 @@ for mode in EditMode PlayMode; do
     --mount "type=bind,src=${PROJECT},dst=/workspace/project" \
     --mount "type=bind,src=${OUTPUT_DIR},dst=/workspace/results" \
     "${LICENSE_ARGS[@]}" \
-    "$UNITY_IMAGE" unity-editor \
+    --entrypoint /opt/unity/Editor/Unity "$UNITY_IMAGE" \
       -batchmode -nographics -projectPath /workspace/project \
       -runTests -testPlatform "$mode" \
       -testResults "/workspace/results/${mode}.xml" \
@@ -59,6 +60,7 @@ root = ET.parse(sys.argv[1]).getroot()
 assert root.tag in ("test-run", "test-results"), root.tag
 assert int(root.attrib.get("total", root.attrib.get("totalCount", "0"))) > 0, "No tests executed"
 assert int(root.attrib.get("failed", root.attrib.get("failures", "0"))) == 0, "NUnit failures"
+assert int(root.attrib.get("skipped", root.attrib.get("ignored", "0"))) == 0, "Skipped NUnit tests"
 assert root.attrib.get("result", "Passed") not in ("Failed", "Inconclusive"), "NUnit result failed"
 PY
     then
