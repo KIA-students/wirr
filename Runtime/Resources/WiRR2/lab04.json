@@ -1,0 +1,33 @@
+{
+  "id": 4,
+  "title": "Za ścianą rzeczywistość też obowiązuje",
+  "question": "Dlaczego poprawnie narysowany obiekt może być widoczny w złym miejscu?",
+  "mode": "SIM_AR",
+  "concept": "Okluzja oznacza zasłanianie obiektu przez bliższą powierzchnię. Test głębi porównuje odległości, a raycast szuka przecięcia promienia z geometrią. Poprawne trafienie promienia nie gwarantuje poprawnej okluzji obrazu. Oświetlenie wpływa na wygląd, lecz nie naprawia błędnej kolejności zasłaniania. W tym doświadczeniu PC korzysta z geometrii i głębi syntetycznej.",
+  "controls": "Ta sama geometria, obiekty, punkt obserwacji i zadanie wskazywania. Zmieniaj tylko jeden parametr naraz.",
+  "invalid": "Nie przypisuj pomiaru głębi urządzeniu, jeśli provider go nie udostępnia. Brak trafienia lub danych nie jest zerowym błędem.",
+  "conclusion": "Anomalia wynikała z ___; poprawka ___ działała dla ___, ale ___.",
+  "actions": [
+    {
+      "title": "Rozpoznaj anomalię",
+      "body": "W przygotowanym pomieszczeniu znajdź trzy sytuacje: obiekt widoczny przez przeszkodę, mylącą etykietę i błędną odpowiedź promienia. Obejrzyj je z dwóch oznaczonych miejsc. Wskaż, co powinno być widoczne. Oddziel własną odpowiedź od późniejszego podświetlenia rozwiązania."
+    },
+    {
+      "title": "Porównaj okluzję A/B",
+      "body": "W tym samym widoku porównaj A: okluzja niepoprawna oraz B: okluzja zgodna z geometrią odniesienia. Obejrzyj liczbę poprawnych wskazań i fałszywych alarmów. Zmień osobno próg głębi albo oświetlenie. Nie traktuj ładniejszego obrazu jako dowodu lepszego testu widoczności."
+    },
+    {
+      "title": "Napraw i sprawdź drugi widok",
+      "body": "Dobierz jedno ustawienie poprawiające zgodność sceny i porównaj przed/po. Przenieś kamerę do drugiego punktu obserwacji. Sprawdź, czy poprawka nadal działa. Jednym zdaniem powiąż wykryty błąd z głębią lub raycastem i wskaż granicę rozwiązania."
+    }
+  ],
+  "rubric": [
+    "Znajdź błędnie zasłaniany obiekt",
+    "Porównaj okluzję błędną/poprawną",
+    "Wyjaśnij anomalię używając pojęcia głębi/raycast",
+    "Dobierz depth/lighting poprawiające zgodność sceny",
+    "Sprawdź z innego punktu widzenia i wskaż ograniczenie rozwiązania"
+  ],
+  "instruction_version": "2.0.0-draft.2",
+  "source_sha256": "bf6016d814110a6a4a6cd740b590f8991d0591a20f88747a82eb88e883956320"
+}

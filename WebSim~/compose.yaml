@@ -1,0 +1,17 @@
+services:
+  websim:
+    build:
+      context: .
+    image: wirr-websim:local
+    ports:
+      - "9090:9090"
+    environment:
+      RMW_IMPLEMENTATION: rmw_fastrtps_cpp
+      WIRR_PUBLISH_HZ: "30"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "ros2 topic list | grep -qx /wirr/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s

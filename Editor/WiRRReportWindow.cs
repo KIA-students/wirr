@@ -1,0 +1,739 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using KIA.WiRR;
+using UnityEditor;
+using UnityEngine;
+
+namespace KIA.WiRR.Editor
+{
+    public sealed class WiRRReportWindow : EditorWindow
+    {
+        private const string LabPrefKey = "KIA.WiRR.SelectedLab";
+
+        private int labNumber;
+        private WiRRReportDocument document;
+        private Vector2 scroll;
+        private readonly Dictionary<string, bool> tableFoldouts = new Dictionary<string, bool>();
+        private readonly Dictionary<string, bool> sectionFoldouts = new Dictionary<string, bool>();
+        private WiRRReportEvaluation evaluation;
+        private string submissionStatus = string.Empty;
+
+        [MenuItem("WiRR/Raporty/Formularz raportu laboratoryjnego", priority = 10)]
+        public static void Open()
+        {
+            var window = GetWindow<WiRRReportWindow>();
+            window.titleContent = WiRRBranding.Title("WiRR Raport");
+            window.minSize = new Vector2(680, 720);
+            window.Show();
+        }
+
+        /// <summary>Open an exact laboratory, even if an older report window is already visible.</summary>
+        public static void OpenForLab(int number)
+        {
+            number = Mathf.Clamp(number, 1, 8);
+            EditorPrefs.SetInt(LabPrefKey, number);
+            var window = GetWindow<WiRRReportWindow>();
+            if (window.document != null && window.labNumber != number)
+                WiRRReportStore.Save(window.document);
+            window.labNumber = number;
+            window.document = WiRRReportStore.LoadOrCreate(number);
+            window.evaluation = null;
+            window.submissionStatus = string.Empty;
+            window.tableFoldouts.Clear();
+            window.sectionFoldouts.Clear();
+            window.InitializeSectionFoldouts();
+            window.titleContent = WiRRBranding.Title("WiRR Raport");
+            window.minSize = new Vector2(680, 720);
+            window.Show();
+        }
+
+        private void OnEnable()
+        {
+            titleContent = WiRRBranding.Title("WiRR Raport");
+            labNumber = Mathf.Clamp(EditorPrefs.GetInt(LabPrefKey, 1), 1, 8);
+            document = WiRRReportStore.LoadOrCreate(labNumber);
+            WiRRActivityLogger.Record("report_opened", labNumber, "ok");
+            InitializeSectionFoldouts();
+        }
+
+        private void OnDisable()
+        {
+            if (document != null)
+                WiRRReportStore.Save(document);
+        }
+
+        private void OnGUI()
+        {
+            if (document == null)
+                document = WiRRReportStore.LoadOrCreate(labNumber);
+
+            if (!WiRRStudentProfile.IsRegistered)
+            {
+                EditorGUILayout.HelpBox("Przed raportem zapisz numer indeksu i grupę w profilu WiRR.", MessageType.Warning);
+                if (GUILayout.Button("Otwórz profil studenta")) WiRRStudentProfileWindow.Open();
+                return;
+            }
+            scroll = EditorGUILayout.BeginScrollView(scroll);
+            DrawHeader();
+            DrawIdentity();
+            DrawReportMode();
+            if (IsBasicMode()) DrawBasicReport();
+            else DrawForm();
+            DrawActions();
+            EditorGUILayout.Space(12);
+            EditorGUILayout.EndScrollView();
+        }
+
+        private void DrawHeader()
+        {
+            EditorGUILayout.Space(8);
+            EditorGUILayout.LabelField("Raport laboratoryjny WiRR", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox(
+                "Wybierz krótki raport z obserwacją i wnioskiem albo dotychczasowy szczegółowy raport pomiarowy. Nie wpisuj fikcyjnych danych.",
+                MessageType.Info);
+            EditorGUILayout.HelpBox(
+                "WiRR zapisuje techniczny log zdarzeń wysokiego poziomu związanych z realizacją laboratorium wraz z czasem ich wystąpienia. Log jest automatycznie dołączany do wysyłanego raportu; nie obejmuje treści kodu, klawiatury, zrzutów ekranu ani aktywności poza Unity.",
+                MessageType.None);
+
+            var labels = WiRRLabCatalog.GetPopupLabels();
+            var newLab = EditorGUILayout.Popup("Laboratorium", labNumber - 1, labels) + 1;
+            if (newLab == labNumber)
+                return;
+
+            WiRRReportStore.Save(document);
+            labNumber = newLab;
+            EditorPrefs.SetInt(LabPrefKey, labNumber);
+            document = WiRRReportStore.LoadOrCreate(labNumber);
+            evaluation = null;
+            submissionStatus = string.Empty;
+            tableFoldouts.Clear();
+            sectionFoldouts.Clear();
+            InitializeSectionFoldouts();
+            GUI.FocusControl(null);
+        }
+
+        private void DrawIdentity()
+        {
+            EditorGUILayout.Space(10);
+            using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                EditorGUILayout.LabelField("Dane studenta", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Samodzielnie: jeden indeks. W parze: dwa różne indeksy. Pierwszy indeks pochodzi z profilu WiRR.", EditorStyles.wordWrappedMiniLabel);
+
+                if (WiRRStudentProfile.IsRegistered)
+                {
+                    document.teamId = "S" + WiRRStudentProfile.Identifier;
+                    if (document.studentIndices == null) document.studentIndices = new System.Collections.Generic.List<string>();
+                }
+                EditorGUI.BeginChangeCheck();
+                if (WiRRStudentProfile.IsRegistered)
+                    EditorGUILayout.LabelField("Identyfikator raportu", document.teamId ?? "");
+                else
+                    document.teamId = EditorGUILayout.TextField("Identyfikator studenta", document.teamId ?? string.Empty);
+
+                while (document.studentIndices.Count < 1)
+                    document.studentIndices.Add(string.Empty);
+
+                if (WiRRStudentProfile.IsRegistered)
+                {
+                    document.studentIndices[0] = WiRRStudentProfile.Index;
+                    if (string.IsNullOrWhiteSpace(document.teamId))
+                        document.teamId = "S" + WiRRStudentProfile.Identifier;
+                    EditorGUILayout.LabelField("Numer indeksu", WiRRStudentProfile.Index);
+                    EditorGUILayout.LabelField("Grupa", WiRRStudentProfile.GroupLabel);
+                }
+                else
+                    document.studentIndices[0] = EditorGUILayout.TextField("Numer indeksu", document.studentIndices[0]);
+                if (document.studentIndices.Count > 2) document.studentIndices.RemoveRange(2, document.studentIndices.Count - 2);
+                bool pair = document.studentIndices.Count == 2;
+                bool requestedPair = EditorGUILayout.ToggleLeft("Pracujemy w parze (drugi numer indeksu)", pair);
+                if (requestedPair && !pair) document.studentIndices.Add(string.Empty);
+                else if (!requestedPair && pair) document.studentIndices.RemoveAt(1);
+                if (requestedPair)
+                    document.studentIndices[1] = EditorGUILayout.TextField("Indeks drugiej osoby", document.studentIndices[1]);
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    WiRRReportStore.Save(document);
+                    evaluation = null;
+                }
+
+                EditorGUILayout.Space(4);
+                var sum = WiRRReportStore.GetValue(document, "variant.sum");
+                EditorGUILayout.LabelField(
+                    string.IsNullOrWhiteSpace(sum) ? "Wartość S: brak" : $"Wartość S (suma indeksów): {sum}",
+                    EditorStyles.miniBoldLabel);
+
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    EditorGUILayout.LabelField("Warianty:", GUILayout.Width(65));
+                    for (var k = 1; k <= 5; k++)
+                    {
+                        var value = WiRRReportStore.GetValue(document, $"variant.v{k}");
+                        EditorGUILayout.LabelField($"v{k} = {(string.IsNullOrWhiteSpace(value) ? "brak" : value)}", GUILayout.Width(72));
+                    }
+                }
+                EditorGUILayout.LabelField(
+                    "S = suma podanych indeksów (dla jednej osoby: jej indeks). Warianty v1–v5 są obliczane automatycznie.",
+                    EditorStyles.wordWrappedMiniLabel);
+            }
+        }
+
+        private bool IsBasicMode()
+        {
+            var mode = WiRRReportStore.GetValue(document, "basic.mode");
+            if (mode == "true") return true;
+            if (mode == "false") return false;
+            // Historical reports have measurement keys and remain in advanced mode.
+            return document.answers == null || !document.answers.Any(a =>
+                a.key != null && a.key.StartsWith("cp", StringComparison.Ordinal) &&
+                !string.IsNullOrWhiteSpace(a.value));
+        }
+
+        private void DrawReportMode()
+        {
+            var basic = IsBasicMode();
+            var next = EditorGUILayout.ToggleLeft("Krótki raport (zalecany)", basic);
+            if (next != basic)
+            {
+                WiRRReportStore.SetValue(document, "basic.mode", next ? "true" : "false");
+                evaluation = null;
+            }
+        }
+
+        private void DrawBasicReport()
+        {
+            if (WiRRReportStore.GetValue(document, "basic.mode") != "true")
+                WiRRReportStore.SetValue(document, "basic.mode", "true");
+            EditorGUILayout.HelpBox(
+                "Jeden raport z obserwacjami i wnioskiem. Nie wpisuj pomiarów, których nie wykonano. " +
+                "Zaznacz, czy korzystano z rzeczywistego sprzętu, Unity PC czy nagrania.",
+                MessageType.Info);
+            DrawBasicField("basic.source", "Źródło obserwacji / tryb (np. Unity PC, XR, nagranie)");
+            DrawBasicField("basic.observation", "Co zaobserwowano? (uwzględnij rzeczywiste próby)");
+            DrawBasicField("basic.change", "Co zmieniono lub porównano?");
+            DrawBasicField("basic.conclusion", "Wniosek z doświadczenia");
+            DrawBasicField("basic.limits", "Ograniczenia / brak pomiarów (opcjonalnie)");
+        }
+
+        private void DrawBasicField(string key, string label)
+        {
+            EditorGUILayout.LabelField(label);
+            var oldValue = WiRRReportStore.GetValue(document, key);
+            var newValue = EditorGUILayout.TextArea(oldValue, GUILayout.MinHeight(56));
+            if (newValue != oldValue)
+            {
+                WiRRReportStore.SetValue(document, key, newValue);
+                evaluation = null;
+            }
+        }
+
+        private void DrawForm()
+        {
+            foreach (var section in WiRRReportSchemaCatalog.Get(labNumber))
+                DrawSection(section);
+        }
+
+        private void DrawSection(WiRRReportSection section)
+        {
+            var key = $"{labNumber}:{section.Checkpoint}";
+            if (!sectionFoldouts.ContainsKey(key))
+                sectionFoldouts[key] = section.Checkpoint == "3.0";
+
+            EditorGUILayout.Space(8);
+            using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                var required = section.Checkpoint == "3.0";
+                var optional = section.Checkpoint != "3.0" && section.Checkpoint != "COMMON";
+                var status = required ? ": wymagany do eksportu" : optional ? ": opcjonalny" : ": opcjonalne informacje";
+                var title = section.Checkpoint == "COMMON"
+                    ? section.Title + status
+                    : $"Etap {section.Title}" + status;
+
+                sectionFoldouts[key] = EditorGUILayout.Foldout(sectionFoldouts[key], title, true, EditorStyles.foldoutHeader);
+
+                DrawSectionProgress(section, required);
+
+                if (!sectionFoldouts[key])
+                    return;
+
+                EditorGUILayout.HelpBox(SectionGuidance(section), required ? MessageType.Info : MessageType.None);
+
+                var tables = WiRRReportTableCatalog.Get(labNumber, section.Checkpoint, document);
+                foreach (var table in tables)
+                    DrawTable(section.Checkpoint, table);
+
+                if (section.Fields.Count > 0)
+                {
+                    EditorGUILayout.Space(8);
+                    EditorGUILayout.LabelField(
+                        section.Checkpoint == "COMMON" ? "Informacje dodatkowe" : "Podsumowanie etapu i wnioski",
+                        EditorStyles.miniBoldLabel);
+                }
+
+                foreach (var field in section.Fields)
+                    DrawField(field);
+            }
+        }
+
+        private void DrawSectionProgress(WiRRReportSection section, bool requiredForSubmission)
+        {
+            var requiredFields = section.Fields.Where(f => f.Required).ToArray();
+            var filled = requiredFields.Count(f => !string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(document, f.Id)));
+            var suffix = requiredForSubmission ? " · wymagane do eksportu" : string.Empty;
+            if (requiredFields.Length > 0)
+            {
+                EditorGUILayout.LabelField(
+                    $"Pola wymagane: {filled}/{requiredFields.Length}{suffix}",
+                    EditorStyles.miniLabel);
+            }
+
+            var tables = WiRRReportTableCatalog.Get(labNumber, section.Checkpoint, document);
+            if (tables.Count == 0)
+                return;
+
+            var totalRows = 0;
+            var rowsWithData = 0;
+            foreach (var table in tables)
+            {
+                foreach (var row in table.Rows)
+                {
+                    totalRows++;
+                    var hasData = table.Columns.Any(column =>
+                        !string.IsNullOrWhiteSpace(WiRRReportStore.GetValue(
+                            document,
+                            WiRRReportTableCatalog.CellKey(table, row, column))));
+                    if (hasData)
+                        rowsWithData++;
+                }
+            }
+
+            EditorGUILayout.LabelField(
+                $"Wiersze pomiarowe z danymi: {rowsWithData}/{totalRows}{suffix}",
+                EditorStyles.miniLabel);
+        }
+
+        private string SectionGuidance(WiRRReportSection section)
+        {
+            if (section.Checkpoint == "COMMON")
+                return "Te informacje pomagają odtworzyć warunki eksperymentu. Wypełnij je, jeśli mają znaczenie dla interpretacji wyników.";
+
+            if (section.Checkpoint == "3.0")
+                return "Najpierw wpisz surowe wyniki pomiarów w tabelach. Wartości pochodne, takie jak mediana, są obliczane automatycznie. Następnie uzupełnij wymagane pola opisowe i sformułuj wniosek oparty na danych.";
+
+            return "Ten etap jest opcjonalny. Jeśli go realizujesz, uzupełnij dane pomiarowe i pola wymagane w tym etapie. Nieukończony etap powyżej 3.0 nie blokuje wysłania raportu.";
+        }
+
+        private void DrawField(WiRRReportField field)
+        {
+            EditorGUILayout.Space(4);
+
+            var oldValue = WiRRReportStore.GetValue(document, field.Id);
+            var requiredMark = field.Required ? " *" : string.Empty;
+            var unit = string.IsNullOrEmpty(field.Unit) ? string.Empty : $" [{field.Unit}]";
+            var automatic = WiRRReportCalculator.IsDerivedField(field.Id);
+            var labelText = field.Label + unit + requiredMark + (automatic ? ": automatycznie" : string.Empty);
+            var automaticDescription = automatic ? WiRRReportCalculator.DerivedFieldDescription(field.Id) : string.Empty;
+            var label = new GUIContent(labelText, automatic ? automaticDescription : field.Help);
+
+            string newValue;
+
+            using (new EditorGUI.DisabledScope(automatic))
+            {
+                switch (field.Kind)
+                {
+                    case WiRRReportFieldKind.Multiline:
+                        EditorGUILayout.LabelField(label);
+                        newValue = EditorGUILayout.TextArea(oldValue, GUILayout.MinHeight(58));
+                        break;
+
+                    case WiRRReportFieldKind.Boolean:
+                        var booleanOptions = new[] { "Wybierz...", "tak", "nie" };
+                        var booleanIndex = oldValue == "true" ? 1 : oldValue == "false" ? 2 : 0;
+                        var selectedBoolean = EditorGUILayout.Popup(label, booleanIndex, booleanOptions);
+                        newValue = selectedBoolean == 1 ? "true" : selectedBoolean == 2 ? "false" : string.Empty;
+                        break;
+
+                    case WiRRReportFieldKind.Choice:
+                        var choices = new string[field.Choices.Length + 1];
+                        choices[0] = "Wybierz...";
+                        for (var i = 0; i < field.Choices.Length; i++)
+                            choices[i + 1] = ChoiceDisplayName(field.Choices[i]);
+                        var oldChoice = Array.IndexOf(field.Choices, oldValue);
+                        var selected = EditorGUILayout.Popup(label, oldChoice >= 0 ? oldChoice + 1 : 0, choices);
+                        newValue = selected > 0 ? field.Choices[selected - 1] : string.Empty;
+                        break;
+
+                    default:
+                        newValue = EditorGUILayout.TextField(label, oldValue);
+                        break;
+                }
+            }
+
+            if (automatic)
+            {
+                EditorGUILayout.LabelField(
+                    automaticDescription + " Pole zostanie uzupełnione po wpisaniu kompletu wymaganych danych źródłowych.",
+                    EditorStyles.wordWrappedMiniLabel);
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(field.Help))
+                EditorGUILayout.LabelField(field.Help, EditorStyles.wordWrappedMiniLabel);
+
+            if (!string.IsNullOrWhiteSpace(newValue))
+            {
+                if (field.Kind == WiRRReportFieldKind.Number &&
+                    !double.TryParse(newValue.Replace(',', '.'), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out _))
+                    EditorGUILayout.HelpBox("W tym polu wpisz liczbę. Możesz użyć przecinka albo kropki jako separatora dziesiętnego.", MessageType.Warning);
+                else if (field.Kind == WiRRReportFieldKind.Integer && !long.TryParse(newValue, out _))
+                    EditorGUILayout.HelpBox("W tym polu wpisz liczbę całkowitą bez jednostki ani dodatkowego tekstu.", MessageType.Warning);
+            }
+
+            if (oldValue == newValue)
+                return;
+
+            WiRRReportStore.SetValue(document, field.Id, newValue);
+            WiRRReportStore.Save(document);
+            evaluation = null;
+        }
+
+        private void DrawTable(string checkpoint, WiRRReportTable table)
+        {
+            var key = $"{labNumber}:{checkpoint}:{table.Id}";
+            if (!tableFoldouts.ContainsKey(key))
+                tableFoldouts[key] = checkpoint == "3.0";
+
+            EditorGUILayout.Space(8);
+            tableFoldouts[key] = EditorGUILayout.Foldout(
+                tableFoldouts[key],
+                "Dane pomiarowe: " + table.Label,
+                true);
+
+            if (!tableFoldouts[key])
+                return;
+
+            EditorGUILayout.LabelField(
+                "Wpisz wyłącznie wartości zmierzone lub zaobserwowane. Pola oznaczone „automatycznie” są wyliczane przez formularz.",
+                EditorStyles.wordWrappedMiniLabel);
+
+            if (!string.IsNullOrWhiteSpace(table.Help))
+                EditorGUILayout.HelpBox(table.Help, MessageType.None);
+
+            foreach (var row in table.Rows)
+            {
+                using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+                {
+                    EditorGUILayout.LabelField($"Warunek / próba: {row.Label}", EditorStyles.miniBoldLabel);
+
+                    foreach (var column in table.Columns)
+                    {
+                        var cell = WiRRReportTableCatalog.CellKey(table, row, column);
+                        var oldValue = WiRRReportStore.GetValue(document, cell);
+                        var automatic = WiRRReportCalculator.IsDerivedCell(table, column);
+                        var displayLabel = automatic ? column.Label + " (automatycznie)" : column.Label;
+                        var content = new GUIContent(
+                            displayLabel,
+                            automatic
+                                ? WiRRReportCalculator.DerivedDescription(table, column)
+                                : TableColumnHelp(column));
+
+                        string newValue;
+                        using (new EditorGUI.DisabledScope(automatic))
+                            newValue = automatic
+                                ? EditorGUILayout.TextField(content, oldValue)
+                                : DrawEditableTableCell(content, column, oldValue);
+
+                        if (automatic || oldValue == newValue)
+                            continue;
+
+                        WiRRReportStore.SetValue(document, cell, newValue);
+                        WiRRReportStore.Save(document);
+                        evaluation = null;
+                    }
+                }
+            }
+        }
+
+        private static string TableColumnHelp(WiRRTableAxis column)
+        {
+            var id = column.Id;
+
+            if (id.StartsWith("fps", StringComparison.OrdinalIgnoreCase) || id.Contains("fps", StringComparison.OrdinalIgnoreCase))
+                return "Liczba klatek renderowanych w ciągu sekundy. Wpisz wartość pomiarową bez jednostki.";
+            if (id.Contains("ms", StringComparison.OrdinalIgnoreCase))
+                return "Wartość czasu w milisekundach. Wpisz samą liczbę.";
+            if (id.Contains("błę", StringComparison.OrdinalIgnoreCase) || id.Contains("error", StringComparison.OrdinalIgnoreCase))
+                return "Wpisz liczbę zaobserwowanych błędów albo wartość błędu zgodnie z jednostką podaną w etykiecie.";
+            if (id == "batches")
+                return "Liczba partii renderowania odczytana z narzędzi profilujących Unity.";
+            if (id == "setpass")
+                return "Liczba zmian stanu renderowania SetPass odczytana z narzędzi profilujących Unity.";
+            if (id == "triangles")
+                return "Liczba renderowanych trójkątów dla badanego wariantu.";
+            if (id.Contains("pamięć", StringComparison.OrdinalIgnoreCase))
+                return "Zużycie pamięci dla badanego wariantu, zgodnie z jednostką podaną w etykiecie.";
+            if (id == "q05")
+                return "5. percentyl wybranej miary jakości siatki; niższe wartości wskazują najgorszą część rozkładu.";
+            if (id == "qmedian")
+                return "Mediana wybranej miary jakości siatki.";
+            if (id == "dowód")
+                return "Podaj nazwę artefaktu, zrzutu, logu lub innego dowodu pozwalającego zweryfikować wynik.";
+            if (id == "uwagi")
+                return "Dopisz tylko obserwacje potrzebne do interpretacji pomiaru.";
+            if (id == "p")
+                return "Oceń prawdopodobieństwo w skali 1–5 zgodnie z instrukcją.";
+            if (id == "s")
+                return "Oceń skutek w skali 1–5 zgodnie z instrukcją.";
+            if (id == "warunek")
+                return "Opisz warunek, który jest sprawdzany w tym teście.";
+            if (id == "oczekiwany")
+                return "Wpisz oczekiwany rezultat przed wykonaniem testu.";
+            if (id == "rzeczywisty")
+                return "Wpisz rzeczywiście zaobserwowany rezultat testu.";
+            if (id.Contains("status", StringComparison.OrdinalIgnoreCase))
+                return "Wybierz lub wpisz status zgodny z wynikiem wykonanego testu.";
+
+            return "Wpisz wartość uzyskaną dla tego warunku lub próby. Jeżeli etykieta zawiera jednostkę, nie dopisuj jej do wartości.";
+        }
+
+        private static string ChoiceDisplayName(string value)
+        {
+            return value switch
+            {
+                "ACCEPT" => "AKCEPTUJ",
+                "ACCEPT WITH CONDITIONS" => "AKCEPTUJ WARUNKOWO",
+                "REJECT" => "ODRZUĆ",
+                "LOCAL" => "Lokalnie (LOCAL)",
+                "LAN" => "Sieć lokalna (LAN)",
+                "WEBSIM" => "WebSim",
+                "STEP→DCC→FBX/glTF" => "STEP → DCC → FBX/glTF",
+                "bezpośrednia siatka" => "Bezpośrednia siatka",
+                "inna" => "Inna",
+                _ => value
+            };
+        }
+
+        private static string DrawEditableTableCell(GUIContent label, WiRRTableAxis column, string oldValue)
+        {
+            if (column.Id == "status_pass_fail_nv")
+            {
+                var values = new[] { "Wybierz...", "PASS: zaliczony", "FAIL: niezaliczony", "NV: niezweryfikowany" };
+                var index = oldValue.StartsWith("PASS", StringComparison.OrdinalIgnoreCase) ? 1
+                    : oldValue.StartsWith("FAIL", StringComparison.OrdinalIgnoreCase) ? 2
+                    : oldValue.StartsWith("NV", StringComparison.OrdinalIgnoreCase) ? 3
+                    : 0;
+                var selected = EditorGUILayout.Popup(label, index, values);
+                return selected == 1 ? "PASS" : selected == 2 ? "FAIL" : selected == 3 ? "NV" : string.Empty;
+            }
+
+            if (column.Id == "p" || column.Id == "s" || column.Id == "ocena_1_5" || column.Id == "jakość_1_5")
+                return DrawNumericChoice(label, oldValue, 1, 5);
+
+            if (column.Id == "komfort_0_10")
+                return DrawNumericChoice(label, oldValue, 0, 10);
+
+            if (column.Id == "hit_miss")
+            {
+                var values = new[] { "Wybierz...", "HIT: trafienie", "MISS: brak trafienia" };
+                var index = oldValue.Equals("HIT", StringComparison.OrdinalIgnoreCase) ? 1
+                    : oldValue.Equals("MISS", StringComparison.OrdinalIgnoreCase) ? 2
+                    : 0;
+                var selected = EditorGUILayout.Popup(label, index, values);
+                return selected == 1 ? "HIT" : selected == 2 ? "MISS" : string.Empty;
+            }
+
+            if (IsBooleanLikeColumn(column.Id))
+            {
+                var values = new[] { "Wybierz...", "tak", "nie" };
+                var index = oldValue.Equals("tak", StringComparison.OrdinalIgnoreCase) || oldValue.Equals("true", StringComparison.OrdinalIgnoreCase) ? 1
+                    : oldValue.Equals("nie", StringComparison.OrdinalIgnoreCase) || oldValue.Equals("false", StringComparison.OrdinalIgnoreCase) ? 2
+                    : 0;
+                var selected = EditorGUILayout.Popup(label, index, values);
+                return selected == 1 ? "tak" : selected == 2 ? "nie" : string.Empty;
+            }
+
+            return EditorGUILayout.TextField(label, oldValue);
+        }
+
+        private static string DrawNumericChoice(GUIContent label, string oldValue, int minimum, int maximum)
+        {
+            var values = new string[maximum - minimum + 2];
+            values[0] = "Wybierz...";
+            for (var value = minimum; value <= maximum; value++)
+                values[value - minimum + 1] = value.ToString();
+
+            var selected = 0;
+            if (int.TryParse(oldValue, out var current) && current >= minimum && current <= maximum)
+                selected = current - minimum + 1;
+
+            var next = EditorGUILayout.Popup(label, selected, values);
+            return next == 0 ? string.Empty : (minimum + next - 1).ToString();
+        }
+
+        private static bool IsBooleanLikeColumn(string columnId)
+        {
+            return columnId == "blokujące" ||
+                   columnId == "sukces" ||
+                   columnId == "gazebo_unity_zgodne" ||
+                   columnId == "model_zasłaniany" ||
+                   columnId == "wymiary_ok" ||
+                   columnId == "cechy_zachowane" ||
+                   columnId == "hierarchia_ok" ||
+                   columnId == "gc_zaobserwowane";
+        }
+
+        private void DrawActions()
+        {
+            EditorGUILayout.Space(14);
+            using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                EditorGUILayout.LabelField("Sprawdzenie i przekazanie raportu", EditorStyles.boldLabel);
+
+                var liveEvaluation = WiRRReportEvaluator.Evaluate(document);
+                if (liveEvaluation.CanSubmit)
+                {
+                    EditorGUILayout.HelpBox(
+                        liveEvaluation.BasicMode ? "Krótki raport kompletny. Można go zapisać i przesłać." : "Etap 3.0 jest kompletny. Raport można wyeksportować lokalnie. Etapy 3.5–5.0 nie są wymagane.",
+                        MessageType.Info);
+                }
+                else
+                {
+                    EditorGUILayout.HelpBox(
+                        liveEvaluation.BasicMode ? "Uzupełnij tryb, obserwację, porównanie i wniosek oraz dane studenta." : "Uzupełnij dane studenta i wymagane pola oraz pomiary etapu 3.0.",
+                        MessageType.Warning);
+                }
+
+                if (GUILayout.Button("Sprawdź kompletność raportu", GUILayout.Height(32)))
+                {
+                    evaluation = liveEvaluation;
+                    WiRRActivityLogger.Record("report_checked", labNumber, liveEvaluation.CanSubmit ? "ready" : "incomplete");
+                }
+
+                if (evaluation != null)
+                    DrawEvaluation();
+
+                using (new EditorGUI.DisabledScope(EditorApplication.isCompiling || !liveEvaluation.CanSubmit))
+                {
+                    if (GUILayout.Button("Zapisz raport lokalnie (bez logowania)", GUILayout.Height(38)))
+                    {
+                        evaluation = WiRRReportEvaluator.Evaluate(document);
+                        try
+                        {
+                            var path = WiRRReportStore.ExportFinal(document, false);
+                            WiRRActivityLogger.Record("report_exported", labNumber, "local");
+                            WiRRProgressTracker.Refresh();
+                            submissionStatus = "Raport zapisany lokalnie: " + path + "\nRozpoczęto wysyłkę. Raport jest oddany dopiero po osobnym potwierdzeniu przyjęcia przez serwer.";
+                            WiRRPublicReportSubmission.SubmitFile(path, labNumber);
+                        }
+                        catch (System.IO.IOException exception)
+                        {
+                            submissionStatus = "Nie udało się zapisać raportu: " + exception.Message;
+                        }
+                        catch (UnauthorizedAccessException exception)
+                        {
+                            submissionStatus = "Brak uprawnień do zapisu raportu: " + exception.Message;
+                        }
+                    }
+                }
+
+                EditorGUILayout.HelpBox(
+                    "Raporty robocze: <projekt Unity>/Library/WiRRReports. Wyeksportowane JSON: <projekt Unity>/Library/WiRRReports/exports. " +
+                    "Eksport oznacza zapis lokalny. Serwer osobno potwierdza przyjęcie, zapisując potwierdzenie obok pliku raportu.",
+                    MessageType.Info);
+                if (GUILayout.Button("Otwórz zapisany raport JSON do edycji", GUILayout.Height(28)))
+                {
+                    var exportDir = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath, "../Library/WiRRReports/exports"));
+                    var selected = EditorUtility.OpenFilePanel("Wybierz raport Lab " + labNumber.ToString("00"), exportDir, "json");
+                    if (!string.IsNullOrEmpty(selected))
+                    {
+                        try
+                        {
+                            document = WiRRReportStore.ImportJson(labNumber, selected);
+                            evaluation = null;
+                            InitializeSectionFoldouts();
+                            submissionStatus = "Wczytano raport do formularza. Po edycji zapisz go ponownie przyciskiem eksportu.";
+                        }
+                        catch (System.Exception ex)
+                        {
+                            submissionStatus = "Nie można otworzyć raportu: " + ex.Message;
+                        }
+                    }
+                }
+
+                if (GUILayout.Button("Otwórz folder wyeksportowanych raportów", GUILayout.Height(27)))
+                {
+                    var exportDir = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath, "../Library/WiRRReports/exports"));
+                    System.IO.Directory.CreateDirectory(exportDir);
+                    EditorUtility.RevealInFinder(exportDir);
+                }
+
+                if (GUILayout.Button("Wyślij ponownie zapisany raport", GUILayout.Height(28)))
+                {
+                    EditorApplication.ExecuteMenuItem("WiRR/Student/Wyślij raport bez logowania");
+                    submissionStatus = "Wysyłanie jest niezależne od lokalnego zapisu. Potwierdzenie serwera pojawi się osobno.";
+                }
+
+                if (!liveEvaluation.CanSubmit)
+                    EditorGUILayout.LabelField(
+                        liveEvaluation.BasicMode ? "Eksport wymaga uzupełnienia czterech pól krótkiego raportu." : "Przycisk eksportu uaktywni się po ukończeniu etapu 3.0.",
+                        EditorStyles.wordWrappedMiniLabel);
+
+                if (!string.IsNullOrWhiteSpace(submissionStatus))
+                    EditorGUILayout.HelpBox(submissionStatus, MessageType.Info);
+            }
+        }
+
+        private void DrawEvaluation()
+        {
+            foreach (var issue in evaluation.BlockingIssues)
+                EditorGUILayout.HelpBox(issue, MessageType.Error);
+
+            if (evaluation.BasicMode)
+            {
+                EditorGUILayout.LabelField(
+                    evaluation.BasicComplete ? "Krótki raport: kompletny" : "Krótki raport: niekompletny",
+                    EditorStyles.boldLabel);
+                return;
+            }
+
+            foreach (var cp in evaluation.Checkpoints)
+            {
+                var requiredForSubmission = cp.Checkpoint == "3.0";
+                var status = cp.Complete
+                    ? "kompletny"
+                    : requiredForSubmission
+                        ? "niekompletny: wymagany do eksportu"
+                        : "niekompletny: etap opcjonalny";
+
+                var text = $"Etap {cp.Checkpoint}: {status}";
+                if (cp.Reasons.Count > 0)
+                    text += ": " + string.Join("; ", cp.Reasons);
+
+                var type = cp.Complete
+                    ? MessageType.Info
+                    : requiredForSubmission
+                        ? MessageType.Error
+                        : MessageType.None;
+
+                EditorGUILayout.HelpBox(text, type);
+            }
+
+            var completed = string.IsNullOrWhiteSpace(evaluation.SuggestedGrade)
+                ? "brak kompletnego etapu 3.0"
+                : $"najwyższy kompletny etap: {evaluation.SuggestedGrade}";
+
+            EditorGUILayout.LabelField("Wynik kontroli: " + completed, EditorStyles.boldLabel);
+        }
+
+        private void InitializeSectionFoldouts()
+        {
+            foreach (var section in WiRRReportSchemaCatalog.Get(labNumber))
+            {
+                var key = $"{labNumber}:{section.Checkpoint}";
+                sectionFoldouts[key] = section.Checkpoint == "3.0";
+            }
+        }
+    }
+}

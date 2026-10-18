@@ -1,0 +1,138 @@
+# Budowanie i instalacja aplikacji WiRR
+
+> **Pełna i aktualna procedura dla prowadzącego:** [podłączenie i wdrażanie Meta Quest 3, telefonu Android AR oraz VITURE XR Luma Ultra](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md). Ten plik zawiera skrót historycznego procesu budowania, a nie dowód gotowego APK WiRR 2.0. Gogle Quest otrzymują APK; **VITURE jest ekranem źródłowego komputera/telefonu i nie instaluje się na nich zwykłego APK**.
+
+## Spis treści
+
+- [Wybierz docelową platformę](#wybierz-docelową-platformę)
+- [Środowisko referencyjne](#środowisko-referencyjne)
+- [Najważniejsza zasada](#najważniejsza-zasada)
+- [PC — Windows](#pc--windows)
+- [Android — smartfon](#android--smartfon)
+  - [Przygotowanie Unity](#przygotowanie-unity)
+  - [Przygotowanie telefonu](#przygotowanie-telefonu)
+  - [Budowanie](#budowanie)
+- [Meta Quest 3 — aplikacja samodzielna](#meta-quest-3--aplikacja-samodzielna)
+- [Smartfon a Quest 3](#smartfon-a-quest-3)
+- [Dokumentacja producentów](#dokumentacja-producentów)
+- [Błąd C# 10 / CS8773](#błąd-c-10--cs8773)
+
+## Wybierz docelową platformę
+
+- **Chcesz tylko uruchomić Play w Editorze?** Przejdź do [Lab 01](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora), bez budowania instalatora.
+- **Windows PC:** [PC — Windows](#pc--windows).
+- **Telefon Android:** [Przygotowanie Unity](#przygotowanie-unity), a potem [telefonu](#przygotowanie-telefonu).
+- **Quest 3 bez PC Link:** [Meta Quest 3](#meta-quest-3--aplikacja-samodzielna).
+- **Ubuntu zamiast Windows:** [instrukcja Ubuntu](OS_SETUP.md#ubuntu) i profil Android; nie wymagaj Meta Quest Link Windows.
+
+## Środowisko referencyjne
+
+Na stanowiskach laboratoryjnych **Ubuntu i Windows są równorzędnymi systemami** obowiązkowej ścieżki desktopowej WiRR 2.0. Do *budowania* aplikacji pomocniczych Quest/Android używa się jednego zweryfikowanego stanowiska developerskiego Ubuntu lub Windows. Meta Horizon Link jest oddzielną funkcją PC VR dla zgodnego Windows, a nie warunkiem użycia Quest standalone. Pełna procedura instalacyjna znajduje się w `ENVIRONMENT_SETUP.md`.
+
+Do pracy z kodem C# zalecane jest **Visual Studio 2022 Community** z workloadem **Game development with Unity** na Windows albo Rider / VS Code z integracją Unity na Ubuntu. **Android Studio** jest zalecane jako narzędzie pomocnicze do ADB, SDK Manager, Logcat i diagnostyki Androida. Nie jest wymagane do samego buildu, jeśli Unity korzysta z SDK, NDK i OpenJDK zainstalowanych przez Unity Hub.
+
+## Najważniejsza zasada
+
+PC, smartfon z Androidem i Meta Quest 3 są osobnymi platformami docelowymi kompilacji. Ten sam projekt może obsługiwać wszystkie trzy, ale nie oznacza to identycznych ustawień. Zmiana platformy może wymagać innego modułu obsługi XR, interfejsu graficznego (`Graphics API`), architektury procesora, uprawnień, systemu wejścia (`Input System`) i profilu renderowania.
+
+## PC — Windows
+
+1. Otwórz `File → Build Profiles`.
+2. Dodaj właściwą scenę do listy scen (`Scene List`).
+3. Wybierz profil Windows/Standalone i wykonaj `Switch Platform`.
+4. Dla zwykłej aplikacji desktopowej XR nie jest wymagane. Dla PC VR skonfiguruj OpenXR w grupie Standalone.
+5. Ustaw rozdzielczość, Graphics API i pozostałe ustawienia eksperymentu.
+6. Użyj `Build` albo `Build And Run`.
+7. Wynikiem jest zwykle plik `.exe` i katalog `*_Data`; należy przenosić je razem.
+
+## Android — smartfon
+
+**Przed użyciem:** sprawdź model na [liście ARCore](https://developers.google.com/ar/devices) i osobno obsługę Depth API; zbuduj profil **Android ARCore**, nie Quest OpenXR. Podstawowa droga dla chętnego studenta to instalacja podpisanego APK z zatwierdzonego źródła; **ADB/debugowanie USB nie są wymagane na jego telefonie**. Pełna instrukcja: [Android AR](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md#2-telefon-android-opcjonalne-rzeczywiste-ar).
+
+### Przygotowanie Unity
+W Unity Hub dla używanej wersji edytora doinstaluj:
+- Android Build Support;
+- Android SDK & NDK Tools;
+- OpenJDK.
+
+### Przygotowanie telefonu
+1. Włącz Opcje programistyczne.
+2. Włącz Debugowanie USB.
+3. Podłącz telefon przewodem obsługującym transmisję danych.
+4. Zaakceptuj klucz RSA / zgodę na debugowanie.
+5. Sprawdź: `adb devices`.
+
+Status powinien być `device`, nie `unauthorized`.
+
+### Budowanie
+1. `File → Build Profiles`.
+2. Wybierz Android i `Switch Platform`.
+3. Ustaw unikalną nazwę pakietu (`Package Name`).
+4. Dla ćwiczeń AR skonfiguruj AR Foundation/ARCore zgodnie z instrukcją laboratorium.
+5. Dodaj sceny do listy scen (`Scene List`).
+6. W polu `Run Device` wybierz telefon.
+7. Użyj `Build And Run`.
+
+Unity zbuduje APK, zainstaluje go przez ADB i uruchomi.
+
+Gotowy APK można również zainstalować ręcznie: `adb install -r nazwa.apk`.
+
+## Meta Quest 3 — aplikacja samodzielna
+
+**Przed pierwszym użyciem:** konto w zweryfikowanym zespole deweloperskim Meta, Developer Mode w aplikacji Meta Horizon, kabel USB-C DATA, autoryzacja USB debugging. Dokładne ekrany i diagnostyka: [Quest 3](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md#1-meta-quest-3-od-pierwszego-podłączenia-do-działającego-apk). Wystarczy jeden skonfigurowany egzemplarz prowadzącego; nie wymagać kont Meta od studentów.
+
+Quest 3 jest urządzeniem Android/Meta Horizon OS, ale wymaga konfiguracji XR właściwej dla gogli.
+
+1. W Unity Hub zainstaluj Android Build Support, SDK/NDK i OpenJDK.
+2. Włącz tryb programisty (`Developer Mode`) dla Quest 3.
+3. Podłącz gogle przewodem USB-C z transmisją danych.
+4. W goglach zaakceptuj zgodę na debugowanie USB (`USB debugging`).
+5. Sprawdź: `adb devices`.
+6. Otwórz `File → Build Profiles`.
+7. Jeżeli Unity oferuje profil Meta Quest, włącz go i użyj `Switch Platform`. W przeciwnym razie użyj Android.
+8. W `Project Settings → XR Plug-in Management` włącz OpenXR dla Android/Meta Quest oraz wymagane funkcje Meta Quest Support.
+9. Używaj ARM64.
+10. W polu `Run Device` wybierz Quest 3.
+11. Kliknij `Build And Run` i wskaż miejsce zapisu APK.
+
+Ręczna instalacja: `adb install -r nazwa.apk`.
+
+Do diagnostyki: `adb logcat`.
+
+Meta Horizon Link uruchamia aplikację PC VR strumieniowaną do gogli. Nie jest równoważny samodzielnej wersji aplikacji i nie powinien zastępować pomiaru wydajności APK uruchomionego bez Link.
+
+## Smartfon a Quest 3
+
+**Trzeci przypadek:** okulary [VITURE XR Luma Ultra](DEVICE_DEPLOYMENT_QUEST_ANDROID_VITURE.md#3-viture-xr-luma-ultra-fizyczne-podłączenie-2d-full-sbs-i-spacewalker) są ekranem, a nie kolejnym telefonem Android: do zwykłego 2D/Full SBS **nie** wgrywa się do nich APK.
+
+Oba urządzenia mogą otrzymać APK przez ADB, ale ten sam plik APK nie musi być poprawny dla obu konfiguracji.
+
+Smartfon AR może wymagać:
+- ARCore;
+- dostępu do kamery;
+- interfejsu dotykowego;
+- innej orientacji ekranu.
+
+Quest 3 wymaga:
+- konfiguracji OpenXR/Meta Quest;
+- stereoskopowego renderowania;
+- kontrolerów lub śledzenia dłoni;
+- mobilnego budżetu GPU odpowiedniego dla dwóch widoków oka.
+
+Przed każdym pomiarem porównawczym zapisz platformę, urządzenie, profil kompilacji i istotne ustawienia renderowania.
+
+Jeżeli zmieniasz platformę między PC i Androidem, po `Switch Platform` ponownie sprawdź XR Plug-in Management oraz aktywny profil renderowania przed wykonaniem pomiarów.
+
+## Dokumentacja producentów
+
+- Unity — profile i konfiguracja budowania (`Build Profiles` / `Build Configuration`): https://docs.unity3d.com/
+- Meta — konfiguracja projektu Unity dla Meta Quest: https://developers.meta.com/horizon/documentation/unity/unity-project-setup/
+- Meta — przygotowanie gogli do programowania i ADB: https://developers.meta.com/horizon/documentation/unity/unity-env-device-setup/
+- Meta — przegląd konfiguracji budowania aplikacji: https://developers.meta.com/horizon/documentation/unity/unity-build/
+
+
+## Błąd C# 10 / CS8773
+
+Jeżeli Unity zgłasza `Feature 'global using directive' is not available in C# 9.0. Please use language version 10.0 or greater`, nie traktuj tego jako polecenia aktualizacji C#. Najpierw sprawdź ścieżkę pliku błędu. Typowy przypadek to `Assets/.../obj/...GlobalUsings.g.cs` wygenerowany przez dodatkowy projekt .NET utworzony wewnątrz `Assets`.
+
+Usuń dodatkowy projekt .NET lub jego katalogi `bin` i `obj`, nie używaj `dotnet new` wewnątrz `Assets` i nie wymuszaj `-langversion:10` w `csc.rsp`. W razie potrzeby po zamknięciu Unity usuń `Library`, `Temp` i główny `obj`, a następnie otwórz projekt ponownie.
