@@ -43,3 +43,15 @@ The test harness itself has not yet been executed in a Unity container.
 ## Andromeda (Windows PowerShell + Docker Desktop)
 
 Docker Desktop Linux containers work directly from PowerShell. WSL distro integration is **not required**. Use `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\tools\\unity-ci\\run-andromeda.ps1 -PreflightOnly` to verify Docker. Then run the same command without `-PreflightOnly`; a Unity `.ulf` license is required, optionally via `-LicenseFile`. Results appear under `artifacts/unity-ci`. The Windows launcher uses Docker bind mounts and bypasses the Linux-only Bash runner. This configuration has not yet been exercised against a Unity editor image.
+
+## Native Unity Editor on Andromeda (Unity Personal)
+
+Preferred test path for the existing Windows license, requiring no Docker or Linux activation:
+
+```powershell
+cd C:\Users\matpo\repo\wirr
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\unity-ci\run-windows.ps1 -PreflightOnly
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\unity-ci\run-windows.ps1
+```
+
+The runner uses `D:\Unity\UnityEditors\6000.6.0f1\Editor\Unity.exe`, creates an isolated temporary UPM project and runs EditMode then PlayMode. Output: `artifacts/unity-native/{EditMode.xml,PlayMode.xml,EditMode.log,PlayMode.log,summary.json}`. The package is read through a local `file:` dependency without changing the existing project `D:\Unity\UnityProjects\WiRR`. No extra license purchase or secret copying. The Docker backend remains optional. **This Windows runner is implemented but has not yet been executed on Andromeda.**
