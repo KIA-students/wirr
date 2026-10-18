@@ -2,6 +2,7 @@
 """Create a disposable Unity test project for this UPM package."""
 import argparse
 import json
+import os
 from pathlib import Path
 
 def prepare(root: Path, output: Path, editor_version: str) -> None:
@@ -17,10 +18,10 @@ def prepare(root: Path, output: Path, editor_version: str) -> None:
     (output / "Assets").mkdir(parents=True, exist_ok=True)
     packages.mkdir(parents=True, exist_ok=True)
     settings.mkdir(parents=True, exist_ok=True)
-    # Both paths reside on /workspace; the local package requires no registry release.
+    # Compute the path relative to Packages for Docker and native Windows alike.
     manifest = {
         "dependencies": {
-            "pl.prz.kia.wirr": "file:../../package",
+            "pl.prz.kia.wirr": "file:" + os.path.relpath(root, packages).replace(chr(92), "/"),
             "com.unity.test-framework": "1.5.1",
             "com.unity.render-pipelines.universal": "17.0.3",
             "com.unity.inputsystem": package["dependencies"].get("com.unity.inputsystem", "1.20.0"),
