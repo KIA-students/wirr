@@ -1,6 +1,6 @@
 # Laboratorium 08: Wynalazca XR, demonstrator integracyjny
 
-Instrukcja kursowa: WiRR Lab 08 v1.2.1. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.x.
+Instrukcja kursowa: WiRR Lab 08 v1.2.1. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.5f1.
 
 **Kampania WiRR, blok IV, laboratorium 8/8.** Po Lab 07 wybierz jeden problem spoza gier VR i pokaż rozwiązanie, które łączy co najmniej dwie umiejętności z kursu. Pracujesz w istniejącym projekcie Unity; nie instaluj niczego, czego nie wymaga wybrany demonstrator.
 
@@ -22,12 +22,12 @@ Instrukcja kursowa: WiRR Lab 08 v1.2.1. Unity 6000.6.5f1 lub nowsza zgodna popra
 
 ## Wybierz ścieżkę bez powtórnej instalacji
 
-- **Nie masz projektu ani Unity:** wróć do [instalacji Windows/Ubuntu](../../Documentation~/Reference/OS_SETUP.md#wybierz-aktualną-sytuację), a następnie [Lab 01](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Nie masz projektu ani Unity:** wróć do [instalacji Windows/Ubuntu](../../Documentation~/Reference/OS_SETUP.md#wybierz-aktualną-sytuację), a następnie [Lab 01](../../Samples~/Lab01/README.md#1-uruchom-scenę-i-pomiar-30).
 - **Masz Unity, ale nie scenę Lab 08:** wybierz w Unity **WiRR → Misje i odkrycia (4 bloki) → IV. Wynalazca XR → Start: Lab 08**. Jeżeli masz starszy pakiet, otwórz gotową scenę Lab 07 i zapisz kopię w nowym folderze.
 - **Nie masz gogli ani telefonu:** wybierz [ścieżkę A](#ścieżka-a-instruktor-serwisowy-xr), wykonaj prawdziwy eksperyment na ekranie PC, a w raporcie oznacz **UNITY_EDITOR**.
-- **Masz Quest z działającymi kontrolerami:** wybierz [ścieżkę A](#ścieżka-a-instruktor-serwisowy-xr) i rozszerz ją o interakcję z [Lab 02](../../Samples~/Lab02/README.md#30-chwyt-socket-i-ray).
-- **Masz telefon AR:** wybierz [ścieżkę B](#ścieżka-b-stanowisko-ar-i-okluzja). Gdy ARCore nie działa, skorzystaj ze wspólnej diagnostyki [Lab 03](../../Samples~/Lab03/README.md#przygotowanie).
-- **Masz ROS 2 albo log JointState:** wybierz [ścieżkę C](#ścieżka-c-bliźniak-robota-live-i-stale), z odwołaniem do [Lab 06](../../Samples~/Lab06/README.md#30-źródło-stanu).
+- **Masz Quest z działającymi kontrolerami:** wybierz [ścieżkę A](#ścieżka-a-instruktor-serwisowy-xr) i rozszerz ją o interakcję z [Lab 02](../../Samples~/Lab02/README.md#1-wykonaj-chwyt-bezpośredni-30).
+- **Masz telefon AR:** wybierz [ścieżkę B](#ścieżka-b-stanowisko-ar-i-okluzja). Gdy ARCore nie działa, skorzystaj ze wspólnej diagnostyki [Lab 03](../../Samples~/Lab03/README.md#1-umieść-model-w-symulacji-ar-30).
+- **Masz ROS 2 albo log JointState:** wybierz [ścieżkę C](#ścieżka-c-bliźniak-robota-live-i-stale), z odwołaniem do [Lab 06](../../Samples~/Lab06/README.md#1-uruchom-odtwarzanie-danych-30).
 - **Masz VITURE:** wybierz [ścieżkę D](#ścieżka-d-viture-stereo-i-czytelność) i [instrukcję SBS](../../Samples~/VITURE%20XR/README.md#szybka-konfiguracja).
 - **Nie chcesz dodatkowej konfiguracji:** całość minimum wykonasz w [gotowym demonstratorze PC](#pierwsze-pięć-minut-gotowa-scena).
 
@@ -49,19 +49,19 @@ Ciekawostka: wirtualna kontrola inspekcyjna może być mało widowiskowa, ale zn
 
 ## Ścieżka A: instruktor serwisowy XR
 
-Zacznij od gotowego demonstratora i zmień **jeden parametr użyteczności**, np. rozmiar etykiet, kolor statusu, sposób aktywacji lub kolejność kroków. Jeśli jest dostępny Quest 3, podłącz istniejące interakcje XRI z [Lab 02](../../Samples~/Lab02/README.md#30-chwyt-socket-i-ray). Zadbaj o czytelność instrukcji i przycisk STOP.
+Zacznij od gotowego demonstratora i zmień **jeden parametr użyteczności**, np. rozmiar etykiet, kolor statusu, sposób aktywacji lub kolejność kroków. Jeśli jest dostępny Quest 3, podłącz istniejące interakcje XRI z [Lab 02](../../Samples~/Lab02/README.md#1-wykonaj-chwyt-bezpośredni-30). Zadbaj o czytelność instrukcji i przycisk STOP.
 
 **Doświadczenie:** sprawdź w trzech próbach, czy uczestnik rozumie kolejny krok bez dodatkowej ustnej podpowiedzi. Nie oceniaj jego „odporności na VR”.
 
 ## Ścieżka B: stanowisko AR i okluzja
 
-Kontynuuj działającą [scenę AR z Lab 03](../../Samples~/Lab03/README.md#30-śledzenie-i-płaszczyzny). Dodaj jeden wirtualny element, który objaśnia prawdziwy przedmiot. W [Lab 04](../../Samples~/Lab04/README.md#35-okluzja) znajdziesz sposób sprawdzenia zasłaniania obiektu.
+Kontynuuj działającą [scenę AR z Lab 03](../../Samples~/Lab03/README.md#1-umieść-model-w-symulacji-ar-30). Dodaj jeden wirtualny element, który objaśnia prawdziwy przedmiot. W [Lab 04](../../Samples~/Lab04/README.md#1-znajdź-błąd-zasłaniania-30) znajdziesz sposób sprawdzenia zasłaniania obiektu.
 
 **Doświadczenie:** porównaj poprawne i błędne osadzenie elementu w trzech próbach. Gdy telefon nie obsługuje głębi, opisz to jako ograniczenie urządzenia i pokaż wersję bez okluzji.
 
 ## Ścieżka C: bliźniak robota LIVE i STALE
 
-Użyj sceny i logu [Lab 06](../../Samples~/Lab06/README.md#30-źródło-stanu). Pokazuj pozycję przegubu oraz bardzo wyraźnie status **LIVE, STALE lub REPLAY**. Nie zastępuj trybu replay deklaracją transmisji na żywo.
+Użyj sceny i logu [Lab 06](../../Samples~/Lab06/README.md#1-uruchom-odtwarzanie-danych-30). Pokazuj pozycję przegubu oraz bardzo wyraźnie status **LIVE, STALE lub REPLAY**. Nie zastępuj trybu replay deklaracją transmisji na żywo.
 
 **Doświadczenie:** na zarejestrowanych danych wprowadź przerwę w aktualizacji i zmierz, czy użytkownik zauważył informację o utracie aktualności stanu.
 
@@ -102,7 +102,7 @@ Zademonstruj działającą scenę, trzy próby A i trzy próby B, jedną poprawk
 
 ## Jeżeli coś nie działa
 
-Jeśli Unity nie kompiluje: [Windows/Ubuntu](../../Documentation~/Reference/OS_SETUP.md#najczęstsze-błędy). Jeśli nie działa chwyt: [Lab 02](../../Samples~/Lab02/README.md#30-chwyt-socket-i-ray). Jeśli AR nie widzi powierzchni: [Lab 03](../../Samples~/Lab03/README.md#30-śledzenie-i-płaszczyzny). Jeśli ROS nie przesyła stanu: [Lab 06](../../Samples~/Lab06/README.md#30-źródło-stanu). Po 10–15 minutach trudności wykonaj wariant na monitorze, zanotuj przyczynę i kontynuuj eksperyment.
+Jeśli Unity nie kompiluje: [Windows/Ubuntu](../../Documentation~/Reference/OS_SETUP.md#najczęstsze-błędy). Jeśli nie działa chwyt: [Lab 02](../../Samples~/Lab02/README.md#1-wykonaj-chwyt-bezpośredni-30). Jeśli AR nie widzi powierzchni: [Lab 03](../../Samples~/Lab03/README.md#1-umieść-model-w-symulacji-ar-30). Jeśli ROS nie przesyła stanu: [Lab 06](../../Samples~/Lab06/README.md#1-uruchom-odtwarzanie-danych-30). Po 10–15 minutach trudności wykonaj wariant na monitorze, zanotuj przyczynę i kontynuuj eksperyment.
 
 ## Dla ambitnych
 

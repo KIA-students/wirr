@@ -1,6 +1,6 @@
 # WiRR | Wirtualna i rozszerzona rzeczywistość
 
-Pakiet laboratoryjny dla **Unity 6.6**. Osiem laboratoriów realizowanych w czterech blokach. Każdy student wykonuje własny eksperyment i raport.
+Pakiet laboratoryjny dla **Unity 6000.6.5f1**. Osiem laboratoriów realizowanych w czterech blokach. Każdy student wykonuje własny eksperyment i raport.
 
 ## Laboratoria: cztery bloki po dwa ćwiczenia
 

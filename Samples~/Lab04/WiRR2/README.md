@@ -9,3 +9,5 @@ Scena: `Lab04_DepthRoom.unity`; źródło danych: **SIM_AR**. Polecenia i progi 
 Po pracy eksportuj dwa wyniki bloku. Zapis lokalny nie oznacza wysłania ani uzyskania oceny. Pełne podłączenie nowych checkpointów i odbiór na stanowiskach pozostają otwarte.
 
 Materiały kursu: https://github.com/KIA-students/wirr
+
+Szczegółowa instrukcja krok po kroku (język polski): [laboratorium 04](../../../Documentation~/WiRR2/LAB04-STUDENT-GUIDE.md).

@@ -1,12 +1,33 @@
 # Lab 04: Za ścianą rzeczywistość też obowiązuje
 
+## Spis treści
+
+- [Co będziesz badać](#co-będziesz-badać)
+- [Przygotowanie stanowiska i otwarcie sceny](#przygotowanie-stanowiska-i-otwarcie-sceny)
+- [Jedno doświadczenie, trzy działania](#jedno-doświadczenie-trzy-działania)
+- [Co zrobić na ocenę](#co-zrobić-na-ocenę)
+- [Co sprawdzić w zapisanym wyniku](#co-sprawdzić-w-zapisanym-wyniku)
+- [Jeden wniosek](#jeden-wniosek)
+- [Oddanie całego bloku](#oddanie-całego-bloku)
+- [Gdy stanowisko nie działa](#gdy-stanowisko-nie-działa)
+- [Jak czytać schemat](#jak-czytać-schemat)
+
+
 **Blok 02, część 2 z 2** · 90 minut · SIM_AR · 2.0.0-draft.3
 
-**Pytanie:** Dlaczego poprawnie narysowany obiekt może być widoczny w złym miejscu?
+Dlaczego poprawnie narysowany obiekt może być widoczny w złym miejscu?
 
 ## Co będziesz badać
 
 Okluzja oznacza zasłanianie obiektu przez bliższą powierzchnię. Test głębi porównuje odległości, a raycast szuka przecięcia promienia z geometrią. Poprawne trafienie promienia nie gwarantuje poprawnej okluzji obrazu. Oświetlenie wpływa na wygląd, lecz nie naprawia błędnej kolejności zasłaniania. W tym doświadczeniu PC korzysta z geometrii i głębi syntetycznej.
+
+## Przygotowanie stanowiska i otwarcie sceny
+
+Użyj Unity 6000.6.5f1 i przygotowanego projektu URP. Otwórz WiRR → Nowe instrukcje → Materiały studenta i wybierz scenę laboratorium 04. Następnie naciśnij Play i w zakładce Game rozpocznij sesję z własnym indeksem i grupą. Nie używaj generatora starszej sceny bazowej do tego doświadczenia.
+
+[Pełna instrukcja krok po kroku: instalacja, scena, przyciski i pomiary](../../Documentation~/WiRR2/LAB04-STUDENT-GUIDE.md). Przygotowanie brakujących scen wykonuje prowadzący; istniejące sceny studenta są zachowywane.
+
+Po doświadczeniu wyłącz Play i [przenieś sesję do istniejącego formularza raportu](../../Documentation~/WiRR2/SUPABASE-REPORT-BRIDGE.md). Eksport z panelu sceny jest kopią lokalną i sam nie oddaje pracy.
 
 ## Jedno doświadczenie, trzy działania
 
@@ -31,7 +52,7 @@ Zmień wyłącznie parametr głębi udostępniony w scenie tak, aby ograniczyć 
 | 3.0 | Znajdź błędnie zasłaniany obiekt |
 | 3.5 | Porównaj okluzję błędną/poprawną |
 | 4.0 | Wyjaśnij anomalię używając pojęcia głębi/raycast |
-| 4.5 | Dobierz depth/lighting poprawiające zgodność sceny |
+| 4.5 | Dobierz parametr głębi poprawiający zgodność sceny; zachowaj stałe oświetlenie |
 | 5.0 | Sprawdź z innego punktu widzenia i wskaż ograniczenie rozwiązania |
 
 Interpretację i ocenę końcową zatwierdza prowadzący.
@@ -44,9 +65,9 @@ Interpretację i ocenę końcową zatwierdza prowadzący.
 | Błędy widoczności | liczba | Oddziel je od liczby kliknięć. |
 | Źródło głębi, widok i ustawienie | opis | Zachowaj rozdzielenie danych syntetycznych i urządzeniowych. |
 
-**Warunki porównania:** Ta sama geometria, obiekty, punkt obserwacji i zadanie wskazywania. Zmieniaj tylko jeden parametr naraz.
+Ta sama geometria, obiekty, punkt obserwacji i zadanie wskazywania. Zmieniaj tylko jeden parametr naraz.
 
-**Nieważna próba:** Nie przypisuj pomiaru głębi urządzeniu, jeśli provider go nie udostępnia. Brak trafienia lub danych nie jest zerowym błędem.
+Nie przypisuj pomiaru głębi urządzeniu, jeśli provider go nie udostępnia. Brak trafienia lub danych nie jest zerowym błędem.
 
 ## Jeden wniosek
 

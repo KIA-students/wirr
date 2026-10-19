@@ -19,7 +19,7 @@
 
 ## Wybierz docelową platformę
 
-- **Chcesz tylko uruchomić Play w Editorze?** Przejdź do [Lab 01](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora), bez budowania instalatora.
+- **Chcesz tylko uruchomić Play w Editorze?** Przejdź do [Lab 01](../../Samples~/Lab01/README.md#1-uruchom-scenę-i-pomiar-30), bez budowania instalatora.
 - **Windows PC:** [PC — Windows](#pc--windows).
 - **Telefon Android:** [Przygotowanie Unity](#przygotowanie-unity), a potem [telefonu](#przygotowanie-telefonu).
 - **Quest 3 bez PC Link:** [Meta Quest 3](#meta-quest-3--aplikacja-samodzielna).

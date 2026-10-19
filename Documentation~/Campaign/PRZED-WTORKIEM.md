@@ -12,7 +12,7 @@
 
 ## Przed uruchomieniem
 
-- [ ] Komputer pracowni z Windows i, jeśli planowane, Ubuntu ma wskazaną wersję **Unity 6000.6.x**, najlepiej dokładnie tę samą co projekt.
+- [ ] Komputer pracowni z Windows i, jeśli planowane, Ubuntu ma wskazaną wersję **Unity 6000.6.5f1**, najlepiej dokładnie tę samą co projekt.
 - [ ] Zatwierdzona licencja Unity aktywowana przez administratora. Nie udostępniaj studentom loginu i hasła konta funkcyjnego. W przypadku nieaktywnej licencji przygotuj alternatywne, zgodnie z zasadami licencyjnymi, stanowisko.
 - [ ] Gotowy projekt URP jest uruchamiany jednym kliknięciem z Unity Hub. Nie potrzeba rozszerzeń XR do pierwszej części Lab 01.
 - [ ] Treść pierwszego bloku jest dostępna: [BLOK-01.md](BLOK-01.md), [Lab 01](../../Samples~/Lab01/README.md), [Lab 02](../../Samples~/Lab02/README.md).

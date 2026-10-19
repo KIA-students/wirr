@@ -17,5 +17,5 @@ GitHub Actions environment `student-package-publishing` plus secret
 student `main` must never be touched by this workflow.
 
 Do not advertise the `#upm` and `#assets` URLs before publication,
-independent clean-project installs, and Unity 6000.6.x smoke tests.
+independent clean-project installs, and Unity 6000.6.5f1 smoke tests.
 No branch publication changes an existing Unity package lockfile automatically.

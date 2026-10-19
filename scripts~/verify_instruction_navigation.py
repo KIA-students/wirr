@@ -57,6 +57,9 @@ def sources(root: Path) -> list[Path]:
     campaign = root / "Documentation~" / "Campaign"
     lab += [campaign / n for n in ("README.md", "BLOK-01.md", "BLOK-02.md", "BLOK-03.md", "BLOK-04.md")]
     lab.append(root / "competition" / "OPTIONAL_MISSIONS.md")
+    lab += [root / "Documentation~" / "WiRR2" / n for n in (
+        "LAB03-STUDENT-GUIDE.md", "LAB04-STUDENT-GUIDE.md", "SUPABASE-REPORT-BRIDGE.md")
+        if (root / "Documentation~" / "WiRR2" / n).exists()]
     return lab
 
 

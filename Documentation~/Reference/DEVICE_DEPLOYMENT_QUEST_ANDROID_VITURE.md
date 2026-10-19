@@ -2,7 +2,7 @@
 
 **Wersja przewodnika:** 2026-10-14. **Adresat:** prowadzący i administrator stanowiska.  
 **Zakres:** fizyczne podłączenie, konfiguracja narzędzi, budowanie, przekazanie aplikacji na urządzenie, pierwsze uruchomienie i diagnostyka.  
-**Ważne:** opisuje **procedury**, nie potwierdza, że wszystkie sceny WiRR 2.0 ani gotowe pliki APK zostały już zbudowane. Ich dostępność trzeba sprawdzić w wydaniu. Dokładna wersja Unity 6000.6.x pozostaje do zatwierdzenia testami na Ubuntu i Windows.
+**Ważne:** opisuje **procedury**, nie potwierdza, że wszystkie sceny WiRR 2.0 ani gotowe pliki APK zostały już zbudowane. Ich dostępność trzeba sprawdzić w wydaniu. Dokładna wersja Unity 6000.6.5f1 pozostaje do zatwierdzenia testami na Ubuntu i Windows.
 
 ## Wybierz jedną z trzech ścieżek
 
@@ -16,7 +16,7 @@
 
 ## 0. Wspólna kontrola stanowiska (przed przyjściem studentów)
 
-1. Na Ubuntu i Windows ustal **jedną przetestowaną wersję Unity 6000.6.x**. Sprawdź, czy projekt i pakiety `pl.prz.kia.wirr`, URP, Input System, XRI oraz profile Android/Meta Quest otwierają się bez błędów. Nie opieraj wersji na samym README.
+1. Na Ubuntu i Windows ustal **jedną przetestowaną wersję Unity 6000.6.5f1**. Sprawdź, czy projekt i pakiety `pl.prz.kia.wirr`, URP, Input System, XRI oraz profile Android/Meta Quest otwierają się bez błędów. Nie opieraj wersji na samym README.
 2. Jeżeli **budujesz** APK, w Unity Hub → `Installs → [edytor] → Add modules` włącz **Android Build Support**, **Android SDK & NDK Tools** i **OpenJDK**. W `Edit → Preferences → External Tools` sprawdź ścieżki dostarczane przez Unity. **Android Studio nie jest niezbędne** do zbudowania przez Unity.
 3. Zapewnij kabel **USB-C z transmisją danych** dla Quest/ADB; dla VITURE kabel/port muszą obsługiwać **wyjście wideo USB-C DisplayPort Alt Mode**. Kabel służący tylko do ładowania nie zastępuje żadnego z tych połączeń.
 4. Przygotuj **oddzielne** konfiguracje/profil buildu **Quest** i **Android AR**. Różnią się providery XR, uprawnienia i zachowania wejścia; zwykły APK z telefonu nie staje się automatycznie aplikacją VR.

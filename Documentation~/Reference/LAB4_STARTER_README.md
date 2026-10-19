@@ -1,6 +1,6 @@
 # Lab 04 — Rozumienie sceny i mieszanie rzeczywistości
 
-Instrukcja kursowa: WiRR Lab 04 v1.0.3. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.x.
+Instrukcja kursowa: WiRR Lab 04 v1.0.3. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.5f1.
 
 ## Spis treści
 
@@ -18,7 +18,7 @@ Instrukcja kursowa: WiRR Lab 04 v1.0.3. Unity 6000.6.5f1 lub nowsza zgodna popra
 
 ## Szybki wybór ścieżki
 - **Mam działającą scenę AR z Lab 03:** przejdź wprost do [Depth API i okluzji](#30-api-głębi-depth-api).
-- **Nie mam działającego AR:** [wróć do śledzenia i płaszczyzn w Lab 03](../../Samples~/Lab03/README.md#30-śledzenie-i-płaszczyzny), zamiast reinstalować całość.
+- **Nie mam działającego AR:** [wróć do śledzenia i płaszczyzn w Lab 03](../../Samples~/Lab03/README.md#1-umieść-model-w-symulacji-ar-30), zamiast reinstalować całość.
 - **Telefon nie wspiera Depth API:** użyj wariantu symulacyjnego i [przejdź do eksperymentu okluzji](#35-okluzja), jasno oznaczając brak pomiaru sprzętowego.
 
 

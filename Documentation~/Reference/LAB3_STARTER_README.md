@@ -1,6 +1,6 @@
 # Lab 03 — Rejestracja i kotwice AR
 
-Instrukcja kursowa: WiRR Lab 03 v1.0.3. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.x.
+Instrukcja kursowa: WiRR Lab 03 v1.0.3. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.5f1.
 
 ## Spis treści
 
@@ -18,7 +18,7 @@ Instrukcja kursowa: WiRR Lab 03 v1.0.3. Unity 6000.6.5f1 lub nowsza zgodna popra
 
 ## Szybki wybór ścieżki
 - **Nie uruchomiłem jeszcze Unity:** [instalacja Unity](../../Documentation~/Reference/OS_SETUP.md#unity-nie-jest-zainstalowane).
-- **Mam telefon obsługujący ARCore:** [konfiguracja Android i ADB](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr), a potem [śledzenie i płaszczyzny](#30-śledzenie-i-płaszczyzny).
+- **Mam telefon obsługujący ARCore:** [konfiguracja Android i ADB](../../Documentation~/Reference/OS_SETUP.md#urządzenia-xr), a potem [śledzenie i płaszczyzny](#30-śledzenie-i-płaszczyzny).
 - **Nie mam odpowiedniego telefonu lub kabla:** rozpocznij symulację/replay i analizę ograniczeń, następnie wróć do [zadań laboratorium](#zadania-krok-po-kroku).
 - **Pracuję na Ubuntu:** [narzędzia Android i USB na Ubuntu](../../Documentation~/Reference/OS_SETUP.md#ubuntu); **na Windows:** [tutaj](../../Documentation~/Reference/OS_SETUP.md#windows).
 

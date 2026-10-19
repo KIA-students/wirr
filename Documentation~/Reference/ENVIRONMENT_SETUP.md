@@ -12,12 +12,12 @@
 
 ## Zanim pobierzesz cokolwiek
 
-Jeśli Unity jest już zainstalowane, od razu otwórz [Lab 01](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora). Jeśli nie, użyj [OS_SETUP](OS_SETUP.md#unity-nie-jest-zainstalowane). Konto i licencję opisuje osobna [instrukcja](UNITY_ACCESS_AND_LICENSES.md). ROS 2, AR Foundation, XRI i Android Studio nie są niezbędne do pierwszej sceny URP.
+Jeśli Unity jest już zainstalowane, od razu otwórz [Lab 01](../../Samples~/Lab01/README.md#1-uruchom-scenę-i-pomiar-30). Jeśli nie, użyj [OS_SETUP](OS_SETUP.md#unity-nie-jest-zainstalowane). Konto i licencję opisuje osobna [instrukcja](UNITY_ACCESS_AND_LICENSES.md). ROS 2, AR Foundation, XRI i Android Studio nie są niezbędne do pierwszej sceny URP.
 
 ## Wymagane składniki
 
 - Unity Hub;
-- **Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.x**;
+- **Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.5f1**;
 - Android Build Support;
 - Android SDK & NDK Tools;
 - OpenJDK;
@@ -32,7 +32,7 @@ Do Androida i Meta Quest 3 używaj SDK, NDK i OpenJDK zainstalowanych przez Unit
 ## Windows 11 64-bit
 
 1. Zainstaluj Unity Hub.
-2. W Unity Hub zainstaluj Unity 6 (6000.x).
+2. W Unity Hub zainstaluj Unity 6000.6.5f1.
 3. Podczas instalacji albo później przez **Installs → ustawienia wersji → Add modules** zaznacz:
    - Android Build Support;
    - Android SDK & NDK Tools;
@@ -54,7 +54,7 @@ Brak `gh` nie blokuje laboratoriów. Brak Dockera blokuje tylko wariant WebSim w
 
 ## Ubuntu 22.04 / 24.04 LTS 64-bit
 
-1. Zainstaluj Unity Hub i Unity 6 (6000.x).
+1. Zainstaluj Unity Hub i Unity 6000.6.5f1.
 2. W **Add modules** doinstaluj:
    - Android Build Support;
    - Android SDK & NDK Tools;
@@ -84,7 +84,7 @@ docker compose version
 
 ## Ważne: C# 9 a komunikat o C# 10
 
-Unity 6 (6000.x) w typowej konfiguracji kompiluje skrypty projektu jako C# 9. Komunikat:
+Unity 6000.6.5f1 w typowej konfiguracji kompiluje skrypty projektu jako C# 9. Komunikat:
 
 ```text
 Feature 'global using directive' is not available in C# 9.0.

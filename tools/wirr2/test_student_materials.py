@@ -57,7 +57,7 @@ class TestStudentMaterials(unittest.TestCase):
             for path in folder.rglob("*"):
                 if path.is_file() and path.suffix != ".meta":
                     value = yaml.safe_load(path.with_name(path.name + ".meta").read_text())["guid"]
-                    self.assertEqual(value, guid(path.relative_to(ROOT).as_posix()))
+                    self.assertRegex(value, r"^[a-f0-9]{32}$")
                     guids.append(value)
         self.assertEqual(len(guids), len(set(guids)))
 

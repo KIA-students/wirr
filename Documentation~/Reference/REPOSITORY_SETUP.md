@@ -13,7 +13,7 @@ Polecenia wykonuj w katalogu **własnego projektu Unity** z `Assets`, `Packages`
 ## Przygotowanie projektu
 
 1. Otwórz działający projekt z poprzednich zajęć. Jeżeli go nie masz, wykonaj [konfigurację środowiska](ENVIRONMENT_SETUP.md).
-2. Użyj kursowej wersji Unity 6000.6.5f1 lub zgodnej z linii 6000.6.x. Rzeczywistą wersję zapisz w raporcie.
+2. Użyj kursowej wersji Unity 6000.6.5f1 lub zgodnej z linii 6000.6.5f1. Rzeczywistą wersję zapisz w raporcie.
 3. Zachowaj `Packages/manifest.json`, `Packages/packages-lock.json`, `ProjectSettings` oraz pliki `.meta` zasobów. Zmiany zależności zatwierdzaj razem ze zmianami projektu.
 4. Nie wykonuj poleceń Git w `Library/PackageCache` ani w katalogu pobranego pakietu.
 

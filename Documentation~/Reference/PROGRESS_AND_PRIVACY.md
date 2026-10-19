@@ -2,7 +2,7 @@
 
 ## Ścieżka studenta
 
-Po zainstalowaniu pakietu Unity 6.6 student wpisuje numer indeksu i wybiera grupę G1/G2. Pakiet zapisuje numer lokalnie do wyliczania wariantów ćwiczeń. Każdemu indeksowi przypisuje losowy, stały na danym stanowisku identyfikator techniczny UUID, niezawierający indeksu, daty ani wersji Unity. Zmiana wersji Unity nie zmienia identyfikatora.
+Po zainstalowaniu pakietu Unity 6000.6.5f1 student wpisuje numer indeksu i wybiera grupę G1/G2. Pakiet zapisuje numer lokalnie do wyliczania wariantów ćwiczeń. Każdemu indeksowi przypisuje losowy, stały na danym stanowisku identyfikator techniczny UUID, niezawierający indeksu, daty ani wersji Unity. Zmiana wersji Unity nie zmienia identyfikatora.
 
 Stan techniczny ośmiu laboratoriów jest automatycznie wykrywany i zapisywany co około 60 sekund w `Library/WiRRProgress/progress.json` i `Library/WiRRProgress/outbox/progress.json`. Pola: identyfikator techniczny, grupa, wersja Unity, czas oraz flagi `scenePrepared` i `reportExported` dla Lab 01–08. `gradingStatus=not_assessed` i `submissionStatus=local_only` zapobiegają myleniu aktywności z zatwierdzoną oceną.
 
@@ -22,4 +22,4 @@ Publiczny GitHub przechowuje historię, forki i kopie zmian. Nawet niewyróżnio
 2. Walidator minimalizujący dane przed PR oraz lista dozwolonych pól.
 3. Oddzielenie wskaźnika postępu od oceny potwierdzonej przez prowadzącego.
 4. Retencja danych, sposób korekty i usunięcia, ochrona przed powieleniem wpisów.
-5. Testy pełnego scenariusza w Unity 6.6 i repozytorium testowym.
+5. Testy pełnego scenariusza w Unity 6000.6.5f1 i repozytorium testowym.

@@ -1,5 +1,17 @@
 # Lab 06: Bliźniak cyfrowy powinien wiedzieć, kiedy nie wie
 
+## Spis treści
+
+- [Co będziesz badać](#co-będziesz-badać)
+- [Jedno doświadczenie, trzy działania](#jedno-doświadczenie-trzy-działania)
+- [Co zrobić na ocenę](#co-zrobić-na-ocenę)
+- [Co sprawdzić w zapisanym wyniku](#co-sprawdzić-w-zapisanym-wyniku)
+- [Jeden wniosek](#jeden-wniosek)
+- [Oddanie całego bloku](#oddanie-całego-bloku)
+- [Gdy stanowisko nie działa](#gdy-stanowisko-nie-działa)
+- [Jak czytać schemat](#jak-czytać-schemat)
+
+
 **Blok 03, część 2 z 2** · 90 minut · ROS_REPLAY · 2.0.0-draft.3
 
 **Pytanie:** Czy płynny ruch robota oznacza, że jego stan jest aktualny?

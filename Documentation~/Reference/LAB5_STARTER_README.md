@@ -1,6 +1,6 @@
 # Lab 05 — Optymalizacja modeli CAD
 
-Instrukcja kursowa: WiRR Lab 05 v1.1.1. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.x.
+Instrukcja kursowa: WiRR Lab 05 v1.1.1. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.5f1.
 
 ## Spis treści
 
@@ -22,7 +22,7 @@ Instrukcja kursowa: WiRR Lab 05 v1.1.1. Unity 6000.6.5f1 lub nowsza zgodna popra
 - **Mam gotowy model FBX/OBJ:** [przejdź do importu i audytu](#30-import-i-audyt-cad).
 - **Mam tylko STEP:** [wybierz konwersję](#szybki-wybór-formatu), a potem [import CAD](#30-import-i-audyt-cad).
 - **Nie mam zainstalowanego programu CAD:** użyj dostarczonego modelu referencyjnego z [rozdziału o jego pochodzeniu](#model-referencyjny-i-pochodzenie).
-- **Brak działającego projektu Unity:** [powrót do pierwszej sceny](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Brak działającego projektu Unity:** [powrót do pierwszej sceny](../../Samples~/Lab01/README.md#1-uruchom-scenę-i-pomiar-30).
 
 
 Ten folder jest próbką pakietu **WiRR Course Toolkit** przeznaczoną dla Laboratorium 5. Poniższa lista prowadzi przez wykonanie ćwiczenia w tej samej kolejności, którą pokazuje panel `WiRR → Narzędzia kursu`. Instrukcja laboratoryjna rozwija teorię i sposób interpretacji, ale kolejność pracy i wymagane dowody są zebrane tutaj.
