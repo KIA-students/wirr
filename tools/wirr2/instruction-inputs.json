@@ -1,0 +1,14 @@
+{
+  "version": "student-kit/0.1.9",
+  "inputs_sha256": {
+    "07-PROGI-OCEN.md": "bfa1571561c97c701d223ae0cef5be334aeb1f6c073372cf7ed2bb5354ef2d0a",
+    "lab-01/instruction.yaml": "4f447d5e7a2fd19109bafd2f23dbd8585aa01c7833d200cbc15e459f982d410a",
+    "lab-02/instruction.yaml": "1958b92892fb556697969e2ad99411e61e143a98714da5cf7f0dbe6674c1328f",
+    "lab-03/instruction.yaml": "4d4a8287a92ad1427250042c24e9e3379a55411cf8e0267e0fb7a2415c646343",
+    "lab-04/instruction.yaml": "bf6016d814110a6a4a6cd740b590f8991d0591a20f88747a82eb88e883956320",
+    "lab-05/instruction.yaml": "abb4f616d8e4c651b250acff19a08db3b4c3013bda3f9732ac7742c71049d17f",
+    "lab-06/instruction.yaml": "46f4147b80f27a1759caa2751d733f04aa5e30ce1d092b2eff66bced0d3eb300",
+    "lab-07/instruction.yaml": "f7da8cb9c55953ba49bbf7116c19d978577bf22cc024b6b74f38c0b2d20b815e",
+    "lab-08/instruction.yaml": "9cb8f3075cfe837cb1e02a66484d2afb0711a8a86e31010335b47ca90e3dfa84"
+  }
+}
