@@ -220,7 +220,7 @@ public sealed class WiRRStudentKitTests
 
     [Test] public void AllEightScenesImportWithTheCorrectRuntimeScript()
     {
-        var package = PackageInfo.FindForPackageName("pl.prz.kia.wirr");
+        var package = UnityEditor.PackageManager.PackageInfo.FindForPackageName("pl.prz.kia.wirr");
         var folder = "Assets/WiRRStudentKitTest-" + Guid.NewGuid().ToString("N");
         Directory.CreateDirectory(folder);
         AssetDatabase.Refresh();
