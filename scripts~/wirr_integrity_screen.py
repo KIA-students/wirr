@@ -33,6 +33,12 @@ def scan(report):
                 reported_measurements += 1
             sibling = key[:-len("mediana_fps")] + "mediana_ms"
             fps, ms = number(value), number(answers.get(sibling))
+            if fps is not None and fps <= 0:
+                findings.append({"type": "nonpositive_fps", "field": key,
+                                 "detail": "FPS must be positive"})
+            if ms is not None and ms <= 0:
+                findings.append({"type": "nonpositive_frame_time", "field": sibling,
+                                 "detail": "frame duration must be positive"})
             if fps is not None and ms is not None and fps > 0 and ms > 0:
                 tested += 1
                 # Independently calculated medians and rounding need not be reciprocals.
@@ -49,6 +55,12 @@ def scan(report):
                      if k.startswith(prefix + "próba_") and k.endswith("_s")]
             times = sorted(v for v in times if v is not None)
             reported = number(value)
+            if any(v < 0 for v in times):
+                findings.append({"type": "negative_trial_duration", "field": key,
+                                 "detail": "recorded trial duration cannot be negative"})
+            if reported is not None and reported < 0:
+                findings.append({"type": "negative_median_duration", "field": key,
+                                 "detail": "median duration cannot be negative"})
             if reported is not None and len(times) < 3:
                 unchecked_measurements += 1
             if reported is not None and len(times) >= 3:

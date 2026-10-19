@@ -49,6 +49,20 @@ class TestIntegrityScreen(unittest.TestCase):
         self.assertEqual(result["unchecked_measurements"], 1)
         self.assertEqual(result["findings"], [])
 
+    def test_nonpositive_fps_and_frame_time(self):
+        result = mod.scan(report(**{"table.x.a.mediana_fps": "0",
+                                    "table.x.a.mediana_ms": "-5"}))
+        self.assertEqual({x["type"] for x in result["findings"]},
+                         {"nonpositive_fps", "nonpositive_frame_time"})
+
+    def test_negative_raw_trial_is_flagged_not_discarded(self):
+        values = {"table.x.a.mediana_s": "1"}
+        values.update({"table.x.a.próba_%s_s" % i: str(v)
+                       for i, v in enumerate((-1, 1, 2), 1)})
+        result = mod.scan(report(**values))
+        self.assertIn("negative_trial_duration",
+                      {x["type"] for x in result["findings"]})
+
     def test_missing_data_is_not_an_offense(self):
         self.assertEqual(mod.scan(report())["findings"], [])
 
