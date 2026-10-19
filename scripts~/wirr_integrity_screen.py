@@ -56,10 +56,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("paths", nargs="+", type=Path)
     args = parser.parse_args()
-    for path in args.paths:
+    for ordinal, path in enumerate(args.paths, start=1):
         report = json.loads(path.read_text(encoding="utf-8"))
         result = scan(report)
-        print(json.dumps({"file": path.name, **result}, ensure_ascii=False))
+        print(json.dumps({"report_ordinal": ordinal, **result}, ensure_ascii=False))
     return 0
 
 
