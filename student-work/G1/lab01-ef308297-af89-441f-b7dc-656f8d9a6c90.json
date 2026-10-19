@@ -1,0 +1,733 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S25a7b43dd9e34bb4bdc8a2660063d395",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173358"
+    },
+    {
+      "key": "variant.v1",
+      "value": "4"
+    },
+    {
+      "key": "variant.v2",
+      "value": "1"
+    },
+    {
+      "key": "variant.v3",
+      "value": "3"
+    },
+    {
+      "key": "variant.v4",
+      "value": "5"
+    },
+    {
+      "key": "variant.v5",
+      "value": "2"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.mediana_fps",
+      "value": "91"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.mediana_ms",
+      "value": "10.99"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.mediana_fps",
+      "value": "79"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.mediana_ms",
+      "value": "12.66"
+    },
+    {
+      "key": "table.lab01_cpu_a.0.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.0.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.0.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.10000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.10000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.10000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.25000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.25000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.25000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.50000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.50000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.50000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.100000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.100000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.100000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.200000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.200000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.200000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.400000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.400000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_a.400000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.1.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.1.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.1.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.2.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.2.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.2.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.4.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.4.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.4.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.8.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.8.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.8.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.16.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.16.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.16.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.32.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.32.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_b.32.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.0.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.0.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.1024.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.1024.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.4096.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.4096.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.16384.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.16384.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.65536.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.65536.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.262144.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_cpu_c.262144.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.0.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.0.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.0.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.100.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.100.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.100.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.250.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.250.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.250.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.500.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.500.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.500.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.1000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.1000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.1000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.2000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.2000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.2000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.4000.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.4000.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_a.4000.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.1.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.1.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.2.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.2.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.4.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.4.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.8.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.8.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.16.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.16.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.32.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_b.32.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_60.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_60.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_60.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_70.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_70.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_70.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_80.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_80.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_80.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_90.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_90.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.0_90.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_00.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_00.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_00.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_20.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_20.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_gpu_d.1_20.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.0.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.0.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.0.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.25.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.25.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.25.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.50.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.50.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.50.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.100.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.100.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.100.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.200.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.200.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.200.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.400.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.400.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.400.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.800.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.800.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_a.800.delta_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0333.kroki_s",
+      "value": "30"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0333.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0333.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0250.kroki_s",
+      "value": "40"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0250.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0250.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0200.kroki_s",
+      "value": "50"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0200.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0200.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0167.kroki_s",
+      "value": "60"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0167.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0167.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0133.kroki_s",
+      "value": "75"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0133.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0133.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0111.kroki_s",
+      "value": "90"
+    },
+    {
+      "key": "table.lab01_phy_c.0_0111.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_phy_c.0_0111.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_quest_performance.pc.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_quest_performance.pc.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_quest_performance.quest_standalone.mediana_fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab01_quest_performance.quest_standalone.mediana_ms",
+      "value": ""
+    },
+    {
+      "key": "cp30.baseline_fps",
+      "value": "119"
+    },
+    {
+      "key": "cp30.baseline_frame_ms",
+      "value": "8.4"
+    },
+    {
+      "key": "basic.mode",
+      "value": "false"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_1.fps",
+      "value": "118"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_1.ms_klatka",
+      "value": "8.47"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_2.fps",
+      "value": "121"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_2.ms_klatka",
+      "value": "8.26"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_3.fps",
+      "value": "119"
+    },
+    {
+      "key": "table.lab01_cp30_baseline.próba_3.ms_klatka",
+      "value": "8.40"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.fps_1",
+      "value": "91"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.fps_2",
+      "value": "90"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.fps_3",
+      "value": "92"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.ms_1",
+      "value": "10.99"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.ms_2",
+      "value": "11.11"
+    },
+    {
+      "key": "table.lab01_cp30_ab.a.ms_3",
+      "value": "10.87"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.fps_1",
+      "value": "78"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.fps_2",
+      "value": "80"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.fps_3",
+      "value": "79"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.ms_1",
+      "value": "12.82"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.ms_2",
+      "value": "12.50"
+    },
+    {
+      "key": "table.lab01_cp30_ab.b.ms_3",
+      "value": "12.66"
+    },
+    {
+      "key": "cp30.answer",
+      "value": "1.Tak. Mediana czasu klatki w trybie Editor była wyższa niż w buildzie standalone o ponad 10%\n2.Po zwiększeniu rozdzielczości z 1280×720 do 1920×1080 zaobserwowano wzrost czasu klatki o około 15-20%.\n3.Nie. Różnica median czasu klatki pomiędzy aktywnym i wyłączonym XR Interaction Simulator nie przekroczyła 0,5 ms.\n4.Nie. Usunięcie obiektu Cube_1m oraz osi odniesienia nie spowodowało zmiany mediany czasu klatki przekraczającej 5%.\n5.Tak. Podczas ciągłego ruchu kamery odnotowano wzrost czasu klatki przekraczający 5%."
+    }
+  ],
+  "labNumber": 1,
+  "createdAtUtc": "2026-10-19T11:33:20.8445418Z",
+  "submissionId": "98888011b27143baa56ca2f33d616875",
+  "updatedAtUtc": "2026-10-19T16:54:21.0543263Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173358"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 0,
+    "elapsedSeconds": 0,
+    "lastEventAtUtc": "",
+    "firstEventAtUtc": "",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": []
+}
