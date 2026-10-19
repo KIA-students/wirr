@@ -1,0 +1,33 @@
+{
+  "id": 2,
+  "title": "Chwycić, nie kliknąć: ergonomia manipulacji",
+  "question": "Kiedy chwyt bezpośredni ustępuje wskazywaniu promieniem?",
+  "mode": "DESKTOP_SIM",
+  "concept": "Direct oznacza interakcję w bezpośrednim zasięgu interaktora, a Ray wskazanie promieniem. Socket jest gniazdem potwierdzającym poprawne umieszczenie obiektu. Porównujemy czas ukończenia razem z błędami: szybsza, lecz zawodna technika nie musi być lepsza. Na PC ruch myszy lub symulatora opisuje tę metodę wejścia, a nie naturalny chwyt dłoni w goglach.",
+  "controls": "Ten sam obiekt, rozmiar i pozycja celu, dystans oraz sposób rozpoczęcia próby. Trening oddziel od pomiaru.",
+  "invalid": "Nie porównuj serii, jeśli zmienił się cel, pomiar obejmuje pauzę albo licznik resetuje błędy. Oznacz taką serię i powtórz.",
+  "conclusion": "Technika ___ pomaga przy ___; koszt lub ograniczenie tej decyzji to ___.",
+  "actions": [
+    {
+      "title": "Wykonaj zadanie metodą Direct",
+      "body": "W przygotowanej scenie poznaj obiekt, cel i sygnał poprawnego osadzenia. Wykonaj próbę treningową, następnie pięć rejestrowanych cykli Direct. Po każdej próbie obiekt wraca do położenia początkowego. Obejrzyj licznik ukończeń i pomyłek. Nie pomijaj prób nieudanych."
+    },
+    {
+      "title": "Powtórz to samo metodą Ray",
+      "body": "Przełącz technikę na Ray i wykonaj pięć cykli z tym samym obiektem, gniazdem i dystansem. Zachowaj kolejność metod wskazaną na stanowisku. Porównaj czas cykli oraz błędy. Wypróbuj przygotowaną teleportację, aby sprawdzić dostęp do celu; nie włączaj jej do porównania A/B bez oznaczenia zmiany warunku."
+    },
+    {
+      "title": "Ulepsz i wykonaj kontrpróbę",
+      "body": "Wybierz jedno ustawienie informacji zwrotnej lub interakcji, np. podświetlenie gniazda. Powtórz zadanie i porównaj wynik przed/po. Sprawdź drugi dystans celu. W jednym wniosku wskaż, kiedy wybrana technika pomaga i jaki kompromis ujawniła kontrpróba."
+    }
+  ],
+  "rubric": [
+    "Umieść obiekt w gnieździe metodą Direct",
+    "Powtórz tę samą czynność metodą Ray",
+    "Wyjaśnij różnicę czasu i błędów",
+    "Wybierz ustawienie interakcji lub HUD, poprawiające skuteczność",
+    "Przetestuj przy innym dystansie celu; wskaż ergonomiczny kompromis"
+  ],
+  "instruction_version": "2.0.0-draft.2",
+  "source_sha256": "1958b92892fb556697969e2ad99411e61e143a98714da5cf7f0dbe6674c1328f"
+}

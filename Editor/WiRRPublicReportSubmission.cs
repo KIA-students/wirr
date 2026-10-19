@@ -53,7 +53,7 @@ public static class WiRRPublicReportSubmission
                 using (var response = await Client.SendAsync(request))
                 {
                     var body = await response.Content.ReadAsStringAsync();
-                    if (!response.IsSuccessStatusCode || !body.Contains("\"accepted\":true"))
+                    if (!response.IsSuccessStatusCode || !IsAcceptedResponse(body, submissionId))
                         throw new IOException("Brak potwierdzenia odbioru. HTTP " + (int)response.StatusCode + ". " + body);
                     File.WriteAllText(path + ".receipt.json", body, Encoding.UTF8);
                     EditorUtility.DisplayDialog("WiRR: raport przyjęty",
@@ -108,3 +108,4 @@ public static class WiRRPublicReportSubmission
     }
 }
 #endif
+

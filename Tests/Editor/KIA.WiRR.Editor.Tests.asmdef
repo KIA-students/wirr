@@ -1,0 +1,16 @@
+{
+  "name": "KIA.WiRR.Editor.Tests",
+  "references": [
+    "KIA.WiRR.Runtime",
+    "KIA.WiRR.Editor"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
+}

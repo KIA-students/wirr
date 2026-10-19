@@ -1,0 +1,33 @@
+{
+  "id": 1,
+  "title": "Rzeczywistość ma jednostki, a GPU ograniczenia",
+  "question": "Czy większa liczba obiektów zawsze oznacza mniej płynny obraz?",
+  "mode": "DESKTOP_SIM",
+  "concept": "Skala określa rozmiar obiektu w świecie, a nie liczbę pikseli na ekranie. Obrót kamery zmienia kierunek patrzenia (3DoF); translacja dodaje zmianę położenia (6DoF) i paralaksę. Czas klatki podajemy w ms. Większy czas oznacza wolniejsze odświeżanie. Mediana opisuje typową klatkę, a p95 pozwala zauważyć wolniejsze klatki. Sam spadek FPS nie rozstrzyga, czy ograniczeniem jest CPU, GPU czy synchronizacja.",
+  "controls": "Ta sama kamera, trasa, rozdzielczość, oświetlenie, czas rozgrzewki i okno pomiaru. VSync i limit FPS muszą pozostać takie same.",
+  "invalid": "Próba jest nieważna, jeśli zmieniła się trasa lub okno pomiaru, scena nie zakończyła rozgrzewki albo zapis nie zawiera poprawnych próbek.",
+  "conclusion": "Przy zmianie ___ czas klatki zmienił się ___; porównanie ogranicza ___.",
+  "actions": [
+    {
+      "title": "Poznaj skalę i wykonaj bazę",
+      "body": "Otwórz przygotowaną Stację XR. Obejrzyj referencje 0,1 m, 1 m i 10 m z dwóch położeń kamery. Porównaj obrót bez przesunięcia z ruchem obejmującym przesunięcie. Wybierz A: 10 obiektów i uruchom pomiar. Zachowaj widoczną w scenie trasę kamery i poczekaj na zakończenie rozgrzewki oraz właściwego zapisu."
+    },
+    {
+      "title": "Porównaj tylko jeden czynnik",
+      "body": "Uruchom B: 100 obiektów. Nie zmieniaj rozdzielczości, trasy, długości zapisu ani oświetlenia. Porównaj medianę i p95 czasu klatki A/B. Wariant C ma zmieniać tylko jeden dodatkowy czynnik względem wskazanej bazy, np. cienie przy 100 obiektach. Jeżeli zmieniłaś kilka ustawień, wróć do bazy i ponów próbę."
+    },
+    {
+      "title": "Dobierz konfigurację i sprawdź granicę",
+      "body": "Zachowując skalę, dobierz liczbę obiektów i ustawienie cieni do budżetu klatki podanego na stanowisku. Zapisz wynik przed i po zmianie. Następnie zmień wyłącznie warunek fizyki i ponów pomiar. Uzupełnij jeden wniosek o zależność widoczną w danych i ograniczenie porównania. Nie zakładaj z góry poprawy."
+    }
+  ],
+  "rubric": [
+    "Włącz pomiar sceny bazowej i obserwuj 3 skale",
+    "Zmierz 10 i 100 obiektów",
+    "Wyjaśnij związek liczby obiektów z frame time w swoich danych",
+    "Dobierz obciążenie i cienie, aby utrzymać budżet klatki",
+    "Sprawdź dodatkowy warunek fizyki i wskaż ograniczenie porównania"
+  ],
+  "instruction_version": "2.0.0-draft.2",
+  "source_sha256": "4f447d5e7a2fd19109bafd2f23dbd8585aa01c7833d200cbc15e459f982d410a"
+}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using KIA.WiRR;
 using UnityEngine;
 
@@ -104,8 +105,17 @@ namespace KIA.WiRR.Editor
             var folder = Path.Combine(Root, "exports");
             Directory.CreateDirectory(folder);
             var team = Sanitize(document.teamId, "student");
-            var path = Path.Combine(folder, $"{team}-lab{document.labNumber:00}-{document.submissionId}.json");
-            File.WriteAllText(path, JsonUtility.ToJson(document, true));
+            return WriteExportSnapshot(folder, team, document.labNumber, JsonUtility.ToJson(document, true));
+        }
+
+        // Each export is a new immutable delivery snapshot. Retry the same file to
+        // reuse its transport ID; exporting corrections must not inherit a receipt.
+        private static string WriteExportSnapshot(string folder, string team, int lab, string json)
+        {
+            var path = Path.Combine(folder, $"{team}-lab{lab:00}-{Guid.NewGuid():N}.json");
+            using (var stream = new FileStream(path, FileMode.CreateNew, FileAccess.Write))
+            using (var writer = new StreamWriter(stream, new UTF8Encoding(false)))
+                writer.Write(json);
             return path;
         }
 
@@ -174,3 +184,4 @@ namespace KIA.WiRR.Editor
         }
     }
 }
+
