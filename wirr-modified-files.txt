@@ -1,0 +1,6 @@
+﻿Documentation~/Reference/STUDENT_GITHUB_REPORTING.md
+Editor/WiRRMissionBoardWindow.cs
+Editor/WiRRPublicReportSubmission.cs
+Editor/WiRRReportStore.cs
+Project~/Packages/manifest.json
+competition/README.md

@@ -1,0 +1,541 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace KIA.WiRR
+{
+    public sealed partial class WiRRStudentLab
+    {
+        private string initialConfiguration;
+
+        public struct ReplayFrame
+        {
+            public float time, joint1, joint2;
+        }
+
+        public static ReplayFrame[] ReadReplay(string csv)
+        {
+            var lines = csv.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            if (lines.Length < 2) throw new ArgumentException("Brak danych REPLAY.");
+            var header = lines[0].Split(',');
+            var t = Array.IndexOf(header, "time_s");
+            var j1 = Array.IndexOf(header, "joint1_rad");
+            var j2 = Array.IndexOf(header, "joint2_rad");
+            if (t < 0 || j1 < 0 || j2 < 0) throw new ArgumentException("Nieznane nazwy kolumn REPLAY.");
+            var frames = new List<ReplayFrame>();
+            foreach (var line in lines.Skip(1))
+            {
+                var fields = line.Split(',');
+                if (fields.Length != header.Length) throw new ArgumentException("Niepełna wiadomość REPLAY.");
+                var frame = new ReplayFrame { time = float.Parse(fields[t], CultureInfo.InvariantCulture),
+                    joint1 = float.Parse(fields[j1], CultureInfo.InvariantCulture), joint2 = float.Parse(fields[j2], CultureInfo.InvariantCulture) };
+                if (new[] { frame.time, frame.joint1, frame.joint2 }.Any(x => float.IsNaN(x) || float.IsInfinity(x))
+                    || frame.time < 0 || (frames.Count > 0 && frame.time <= frames[frames.Count - 1].time))
+                    throw new ArgumentException("Nieprawidłowy czas lub położenie REPLAY.");
+                frames.Add(frame);
+            }
+            return frames.ToArray();
+        }
+
+        private void DrawControls()
+        {
+            var changed = false;
+            if (labNumber == 1)
+            {
+                var next = GUILayout.Toolbar(count == 10 ? 0 : count == 100 ? 1 : 2, new[] { "10 obiektów", "100 obiektów", "300 obiektów" });
+                var number = next == 0 ? 10 : next == 1 ? 100 : 300;
+                changed |= number != count; count = number;
+                var nextShadows = GUILayout.Toggle(shadows, "Cienie"); changed |= shadows != nextShadows; shadows = nextShadows;
+                var nextPhysics = GUILayout.Toggle(physicsLoad, "Fizyka: dynamiczne bryły"); changed |= nextPhysics != physicsLoad; physicsLoad = nextPhysics;
+                GUILayout.Label("Pomiar: 2 s rozgrzewki + 8 s zapisu. Stała trasa kamery, mediana i p95 czasu klatki.");
+            }
+            if (labNumber == 2)
+            {
+                var next = GUILayout.Toolbar(technique, new[] { "Direct PC", "Ray PC" });
+                changed |= next != technique; technique = next;
+                GUILayout.Label("Direct PC: strzałki poruszają ręką, E chwyta w zasięgu, Q puszcza. Ray PC: kliknij obiekt, przeciągnij, puść w gnieździe.");
+                GUILayout.Label("To symulacja desktopowa; interaktory i teleportacja XRI/HMD pozostają do integracji.");
+                GUILayout.Label("Seria obejmuje pięć cykli; każdy ma limit 30 s. Błędne chwyty i upuszczenia pozostają zapisane.");
+                using (new GUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Podejdź do lewego punktu")) PreviewTeleport(0);
+                    if (GUILayout.Button("Do prawego punktu")) PreviewTeleport(1);
+                    if (GUILayout.Button("Widok bazowy")) PreviewTeleport(2);
+                }
+                GUILayout.Label("Teleportacja PC jest eksploracją poza pomiarem. Rozpoczęcie serii przywraca kontrolowany widok.");
+            }
+            if (labNumber == 3)
+            {
+                var next = GUILayout.Toolbar(detail, new[] { "A: wiele cech", "B: mało cech" });
+                changed |= next != detail; detail = next;
+                anchorRelocalize = GUILayout.Toggle(anchorRelocalize, "Kontrpróba: utrata śledzenia i ponowna lokalizacja");
+                if (anchorRelocalize) anchorFailRecovery = GUILayout.Toggle(anchorFailRecovery, "Scenariusz graniczny: brak odzyskania śledzenia");
+                GUILayout.Label("SIM_AR: model syntetyczny, znana referencja i stała trasa trzech punktów. Trzy odczyty co sekundę; w kontrpróbie także trzy po powrocie. Nie mierzymy telefonu.");
+            }
+            if (labNumber == 4)
+            {
+                var next = GUILayout.Toolbar(detail, new[] { "A: zła okluzja", "B: głębia zgodna" });
+                changed |= next != detail; detail = next;
+                GUILayout.Label("Tolerancja testu głębi: " + depthTolerance.ToString("F2") + " m");
+                var tolerance = GUILayout.HorizontalSlider(depthTolerance, 0, 2);
+                changed |= tolerance != depthTolerance; depthTolerance = tolerance;
+                var toggle = GUILayout.Toggle(depthDimLight, "Przyciemnione oświetlenie");
+                changed |= toggle != depthDimLight; depthDimLight = toggle;
+                toggle = GUILayout.Toggle(depthLabelFault, "Scenariusz mylących etykiet 2/3");
+                changed |= toggle != depthLabelFault; depthLabelFault = toggle;
+                toggle = GUILayout.Toggle(depthRayFault, "Scenariusz błędnego komunikatu promienia");
+                changed |= toggle != depthRayFault; depthRayFault = toggle;
+                GUILayout.Label("Referencja dotyczy promienia do środka obiektu. Geometria jest syntetyczna; nie używamy czujnika głębi.");
+                GUILayout.Label("Wskaż dla każdego numeru, czy obiekt powinien być widoczny według geometrii. Podsumowanie pojawi się po trzech odpowiedziach.");
+            }
+            if (labNumber == 5)
+            {
+                var next = GUILayout.Toolbar(detail, new[] { "High", "Medium", "Low" });
+                changed |= next != detail; detail = next;
+                var automatic = GUILayout.Toggle(automaticLod, "Automatyczny LOD według odległości");
+                changed |= automatic != automaticLod; automaticLod = automatic;
+                if (automaticLod)
+                {
+                    GUILayout.Label("High → Medium: " + lodNear.ToString("F1") + " m");
+                    var threshold = GUILayout.HorizontalSlider(lodNear, 3, 8);
+                    changed |= threshold != lodNear; lodNear = threshold;
+                    GUILayout.Label("Medium → Low: " + lodFar.ToString("F1") + " m");
+                    threshold = GUILayout.HorizontalSlider(lodFar, 9, 14);
+                    changed |= threshold != lodFar; lodFar = threshold;
+                }
+                var materialOption = GUILayout.Toolbar(cadMaterials == 1 ? 0 : 1, new[] { "1 materiał", "4 materiały" });
+                var materialCount = materialOption == 0 ? 1 : 4;
+                changed |= materialCount != cadMaterials; cadMaterials = materialCount;
+                var inspection = GUILayout.Toggle(cadInspection, "Widok kontrolny otworu (poza benchmarkiem)");
+                changed |= inspection != cadInspection; cadInspection = inspection;
+                GUILayout.Label("Materiały mają ten sam kolor i shader. Liczba slotów nie jest pomiarem draw calls; batching może łączyć wywołania.");
+                GUILayout.Label("Próg dotyczy metrów od kamery do środka części. Trasa benchmarku jest jednakowa dla stałego i automatycznego LOD.");
+                GUILayout.Label("Siatka dydaktyczna, nie konwersja pliku STEP. High/Medium zachowują otwór, Low go wypełnia.");
+            }
+            if (labNumber == 6)
+            {
+                var next = GUILayout.Toolbar(watchdog < 0.4f ? 0 : watchdog < 0.8f ? 1 : 2, new[] { "STALE 0,25 s", "0,5 s", "1 s" });
+                var threshold = next == 0 ? 0.25f : next == 1 ? 0.5f : 1;
+                changed |= threshold != watchdog; watchdog = threshold;
+                next = GUILayout.Toolbar(gap < 2 ? 0 : 1, new[] { "Przerwa 1,5 s", "Przerwa 3 s" });
+                gap = next == 0 ? 1.5f : 3;
+                var hide = GUILayout.Toggle(hideStale, "Ukryj model przy STALE (zamiast zamrażać)");
+                changed |= hide != hideStale; hideStale = hide;
+                GUILayout.Label("Źródło: syntetyczny plik JointState. Nazwy kolumn są mapowane jawnie; plik nie pochodzi z robota.");
+            }
+            if (labNumber == 7 || labNumber == 8)
+            {
+                var next = GUILayout.Toolbar(template, labNumber == 7 ? new[] { "Wybór celów PC", "Przejścia punktowe PC", "Odczyt stanu" } :
+                    new[] { "Trenażer wyboru PC", "Inspekcja punktów PC", "Odczyt stanu SIM" });
+                changed |= template != next; template = next;
+                var mode = GUILayout.Toolbar(participant == "SOLO" ? 0 : participant == "HUMAN" ? 1 : 2,
+                    new[] { "SOLO", "GUEST_HUMAN", "GUEST_SIM" });
+                participant = mode == 0 ? "SOLO" : mode == 1 ? "HUMAN" : "GUEST_SIM";
+                GUILayout.Label(participant == "GUEST_SIM" ? "GUEST_SIM: jawny scenariusz testowy, nie obserwacja człowieka." :
+                    (labNumber == 7 || labNumber == 8) && template == 2 ? "Oceń trzy stany danych. Jedna odpowiedź na stan; błędna odpowiedź pozostaje zapisana." :
+                    "Klikaj cele w kolejności 1–2–3. Błąd pozostaje zapisany. Nie podpowiadaj gościowi w trakcie próby.");
+                if (labNumber == 7) GUILayout.Label("Limit 90 s. W porównaniu przed/po zachowaj ten sam dystans i strefę. Drugi dystans służy kontrpróbie.");
+                if (labNumber == 7 || labNumber == 8)
+                {
+                    var bigger = GUILayout.Toggle(largeTargets, "Moduł 2: większe cele");
+                    changed |= bigger != largeTargets; largeTargets = bigger;
+                    if (labNumber == 8) demonstration = GUILayout.Toggle(demonstration, "Pokaz 60–90 s (zakończ ręcznie po osiągnięciu celu)");
+                }
+            }
+            if (labNumber == 8)
+            {
+                GUILayout.Label("Odbiorca"); studioAudience = GUILayout.TextField(studioAudience, 120);
+                GUILayout.Label("Cel zastosowania"); studioPurpose = GUILayout.TextField(studioPurpose, 160);
+                GUILayout.Label("Hipoteza ograniczenia do sprawdzenia kontrpróbą"); studioLimit = GUILayout.TextField(studioLimit, 160);
+                if (participant == "GUEST_SIM")
+                    studioGuestProfile = GUILayout.Toolbar(studioGuestProfile, new[] { "Skrypt bez błędów", "Skrypt: pomyłka + podpowiedź" });
+                if (session != null && session.Lab(8).trials.Count > 0 && GUILayout.Button("Powiąż następną próbę z ostatnią zapisaną"))
+                    studioReference = session.Lab(8).trials.Last().id;
+                GUILayout.Label("Próba odniesienia: " + studioReference);
+            }
+            if (labNumber == 2 || labNumber == 7 || labNumber == 8)
+            {
+                var next = GUILayout.Toggle(highlight, "Moduł 1: podświetlenie celu"); changed |= next != highlight; highlight = next;
+            }
+            if (labNumber != 6 && labNumber != 3)
+            {
+                var next = GUILayout.Toolbar(view, new[] { "Warunek bazowy", "Drugi widok / dystans" });
+                changed |= next != view; view = next;
+            }
+            if (changed) Rebuild();
+        }
+
+        private void Update()
+        {
+            if (world == null || lesson == null) return;
+            world.camera.rect = new Rect(PanelWidth / Screen.width, 0, 1 - PanelWidth / Screen.width, 1);
+            if (labNumber == 6) UpdateReplay();
+            if (labNumber == 5 && !active) ApplyCadLod();
+            if (!active) return;
+            if (initialConfiguration != Configuration()) { Finish(false, "Zmieniły się warunki lub rozdzielczość w trakcie pomiaru."); return; }
+            var elapsed = Time.unscaledTime - start;
+            if (labNumber == 1 || labNumber == 5)
+            {
+                // Restart the camera phase at the beginning of the measured window.
+                var phase = Mathf.Max(0, elapsed - 2);
+                // Delta time describes the previous rendered frame, before changing LOD.
+                if (elapsed >= 2 && Time.unscaledDeltaTime > 0)
+                {
+                    frames.Add(Time.unscaledDeltaTime * 1000.0);
+                    if (labNumber == 5)
+                    {
+                        lodSamples.Add(world.ActiveLod);
+                        cadBenchmark.Sample(Time.unscaledDeltaTime * 1000.0, world.ActiveTriangleCount, world.CadMaterialCount, world.ActiveLod < 2);
+
+                    }
+                }
+                world.camera.transform.position = labNumber == 5 ?
+                    new Vector3(0, 1.2f, 1 - (3 + Mathf.PingPong(phase * 3, 12) + view * 4)) :
+                    new Vector3(Mathf.Sin(phase * 0.4f) * 1.5f, 2.2f, -6 - view * 4);
+                world.camera.transform.LookAt(new Vector3(0, 1, 1));
+                if (labNumber == 5) ApplyCadLod();
+                if (elapsed >= 10) Finish(true);
+            }
+            else if (labNumber == 2) UpdateManipulation();
+            else if (labNumber == 3)
+                UpdateAnchor();
+            else if (labNumber == 7 || labNumber == 8)
+            {
+                if (labNumber == 7 || labNumber == 8)
+                {
+                    mission.Tick(Time.unscaledTime);
+                    if (mission.TimedOut) { Finish(false, "Przekroczono limit 90 s mikromisji."); return; }
+                }
+                if (labNumber == 8)
+                {
+                    studio.Observe(Time.unscaledTime, mission.IsComplete && mission.Successes == 3);
+                    if (studio.Overdue) { Finish(false, "Przekroczono 90 s demonstratora."); return; }
+                }
+                if (participant == "GUEST_SIM")
+                {
+                    // A deterministic functional scenario, never a model of human reaction time.
+                    if (Time.unscaledTime - lastSample > 1)
+                    {
+                        if (labNumber == 8 && !mission.IsComplete && studioGuestProfile == 1 && studioScriptStep == 0)
+                        {
+                            studio.Hint(Time.unscaledTime); studioScriptStep++;
+                            if (template == 2) AnswerMissionState(false); else TaskSelection(2);
+                        }
+                        else if (!mission.IsComplete) TaskSelection(selected.Count);
+                        lastSample = Time.unscaledTime;
+                    }
+                }
+                else if ((labNumber == 7 && template != 2) || (labNumber == 8 && template != 2))
+                {
+                    var mouse = Mouse.current;
+                    if (mouse != null && mouse.leftButton.wasPressedThisFrame && mouse.position.ReadValue().x > PanelWidth)
+                    {
+                        if (Physics.Raycast(world.camera.ScreenPointToRay(mouse.position.ReadValue()), out var hit, 100))
+                        {
+                            var index = world.targets.FindIndex(x => x.transform == hit.transform);
+                            TaskSelection(index);
+                        }
+                        else TaskSelection(-1);
+                    }
+                }
+            }
+        }
+
+        private void UpdateAnchor()
+        {
+            if (world.anchorReference == null || world.targets.Count == 0 || world.targets[0] == null)
+            { Finish(false, "Brak referencji lub modelu kotwicy SIM_AR."); return; }
+            if (anchorExperiment == null || !anchorExperiment.Tick(Time.unscaledTime)) return;
+            var phase = anchorExperiment.Phase;
+            var available = anchorExperiment.Latest != null;
+            world.SetAnchorPose(anchorExperiment.Latest == null ? Vector3.zero : anchorExperiment.Latest.offset_m, available);
+            world.SetAnchorObservation(Mathf.Min(2, anchorExperiment.Observation));
+            if (phase == WiRRAnchorPhase.Complete) { Finish(true); return; }
+            if (phase == WiRRAnchorPhase.Failed) { Finish(false, "Nie odzyskano śledzenia w limicie obserwacji SIM_AR."); return; }
+            if (!practice)
+            {
+                session.pendingTrial.trial.metrics = anchorExperiment.Metrics();
+                if (!Save()) Finish(false, "Przerwano obserwację SIM_AR po błędzie zapisu.");
+            }
+        }
+
+        public bool PlaceAnchor()
+        {
+            if (labNumber != 3 || !active || anchorExperiment == null || anchorExperiment.Phase != WiRRAnchorPhase.WaitingForPlacement) return false;
+            anchorExperiment.Place(Time.unscaledTime);
+            world.SetAnchorObservation(0); world.SetAnchorPose(Vector3.zero, true);
+            return true;
+        }
+
+        private void ApplyCadLod()
+        {
+            var distance = Vector3.Distance(world.camera.transform.position, world.lod.transform.position);
+            world.SetLod(automaticLod ? WiRRStudentWorld.DistanceLod(distance, lodNear, lodFar) : detail);
+        }
+
+        private void TaskSelection(int index)
+        {
+            if (!active || (labNumber != 7 && labNumber != 8)) return;
+            if (template == 2) mission.Classify(mission.Step != 1, Time.unscaledTime);
+            else mission.Select(index, Time.unscaledTime);
+            RecordMissionProgress();
+        }
+
+        private void AnswerMissionState(bool fresh)
+        {
+            if (!active || (labNumber != 7 && labNumber != 8) || template != 2) return;
+            mission.Classify(fresh, Time.unscaledTime); RecordMissionProgress();
+        }
+
+        private void RecordMissionProgress()
+        {
+            selected.Clear(); for (var i = 0; i < mission.Step; i++) selected.Add(i);
+            errors = mission.Errors; successes = mission.Successes;
+            world.HighlightMissionTarget(mission.Step, highlight);
+            if (template == 1 && labNumber == 7 && mission.Step > 0)
+            {
+                world.camera.transform.position = world.targets[mission.Step - 1].transform.position + new Vector3(0, 1, -2 - view * 4);
+                world.camera.transform.LookAt(world.targets[Mathf.Min(2, mission.Step)].transform);
+            }
+            if (labNumber == 8) studio.Observe(Time.unscaledTime, mission.IsComplete && mission.Successes == 3);
+            if (mission.IsComplete && !demonstration) { Finish(true); return; }
+            if (!practice)
+            {
+                session.pendingTrial.trial.metrics = mission.Metrics();
+                if (labNumber == 8) session.pendingTrial.trial.metrics.AddRange(studio.Metrics());
+                if (!Save()) Finish(false, "Nie zapisano kroku misji.");
+            }
+        }
+
+        private void UpdateManipulation()
+        {
+            var keyboard = Keyboard.current; var mouse = Mouse.current;
+            if ((technique == 0 && keyboard == null) || (technique == 1 && mouse == null))
+            { Finish(false, "Brak urządzenia wejściowego wybranej techniki PC."); return; }
+            if (interactionSeries.CurrentSeconds(Time.unscaledTime) >= 30) { CompleteManipulationCycle(false); return; }
+            var target = world.targets[0].transform;
+            if (technique == 0 && keyboard != null)
+            {
+                var dx = (keyboard.rightArrowKey.isPressed ? 1 : 0) - (keyboard.leftArrowKey.isPressed ? 1 : 0);
+                var dy = (keyboard.upArrowKey.isPressed ? 1 : 0) - (keyboard.downArrowKey.isPressed ? 1 : 0);
+                hand += new Vector3(dx, dy, 0) * Time.unscaledDeltaTime * 1.2f;
+                handObject.transform.position = hand;
+                if (keyboard.eKey.wasPressedThisFrame)
+                {
+                    if (Vector3.Distance(hand, target.position) < 0.35f) grabbed = true; else interactionSeries.Error();
+                }
+                if (grabbed) target.position = hand;
+                if (keyboard.qKey.wasPressedThisFrame && grabbed) ReleaseObject();
+            }
+            else if (technique == 1 && mouse != null)
+            {
+                var ray = world.camera.ScreenPointToRay(mouse.position.ReadValue());
+                if (mouse.leftButton.wasPressedThisFrame && mouse.position.ReadValue().x > PanelWidth)
+                {
+                    if (Physics.Raycast(ray, out var hit, 100) && hit.transform == target) grabbed = true;
+                    else interactionSeries.Error();
+                }
+                if (grabbed && new Plane(Vector3.back, new Vector3(0, 0, 1)).Raycast(ray, out var distance))
+                    target.position = ray.GetPoint(distance);
+                if (grabbed && mouse.leftButton.wasReleasedThisFrame) ReleaseObject();
+            }
+        }
+
+        private void ReleaseObject()
+        {
+            grabbed = false;
+            if (Vector3.Distance(world.targets[0].transform.position, world.socket.position) <= 0.45f)
+                CompleteManipulationCycle(true);
+            else { interactionSeries.Error(); world.targets[0].transform.position = new Vector3(-1, 1, 1); }
+        }
+
+        private void CompleteManipulationCycle(bool success)
+        {
+            if (!active || interactionSeries == null) return;
+            interactionSeries.CompleteCycle(Time.unscaledTime, success);
+            errors = interactionSeries.TotalErrors; successes = interactionSeries.Successes;
+            grabbed = false;
+            hand = new Vector3(-1, 1, 1); handObject.transform.position = hand;
+            world.targets[0].transform.position = hand;
+            if (interactionSeries.IsComplete) Finish(true);
+            else
+            {
+                if (!practice)
+                {
+                    session.pendingTrial.trial.metrics = interactionSeries.Metrics();
+                    if (!Save()) { Finish(false, "Przerwano serię po błędzie zapisu cyklu."); return; }
+                }
+                feedback = "Cykl zapisany. Rozpocznij cykl " + interactionSeries.CurrentNumber + "/5; położenie startowe przywrócone.";
+            }
+        }
+
+        public bool PreviewTeleport(int station)
+        {
+            if (labNumber != 2 || world == null || active) return false;
+            world.TeleportPreview(station);
+            feedback = "Teleportacja PC: eksploracja, nie część porównania Direct/Ray.";
+            return true;
+        }
+
+        private void UpdateReplay()
+        {
+            var now = Time.unscaledTime;
+            if (active && Time.unscaledDeltaTime > 0) frames.Add(Time.unscaledDeltaTime * 1000.0);
+            var hadSource = replayHealth.HasSource;
+            var previousStale = replayHealth.IsStale;
+            var previousRecoveries = replayHealth.Recoveries;
+            replayHealth.Observe(now);
+            var endedGap = false;
+            if (paused && now - pauseStart >= gap)
+            {
+                paused = false; endedGap = true; replayHealth.EndGap(now);
+                // Explicit virtual-source pause; no queued historical states become current.
+                replayStart += now - pauseStart;
+            }
+            if (!paused && replay != null && messageIndex < replay.Length && now - replayStart >= replay[messageIndex].time)
+            {
+                var frame = replay[messageIndex++]; replayHealth.Receive(now);
+                world.robotJoint1.localRotation = Quaternion.Euler(0, 0, frame.joint1 * Mathf.Rad2Deg);
+                world.robotJoint2.localRotation = Quaternion.Euler(0, 0, frame.joint2 * Mathf.Rad2Deg);
+            }
+            if (!paused && replay != null && messageIndex == replay.Length) { messageIndex = 0; replayStart = now; }
+            world.SetReplayStatus(replayHealth.HasSource, replayHealth.IsStale, hideStale);
+            if (active && !practice && (endedGap || hadSource != replayHealth.HasSource || previousStale != replayHealth.IsStale || previousRecoveries != replayHealth.Recoveries))
+            {
+                session.pendingTrial.trial.metrics = replayHealth.Metrics();
+                if (!Save()) Finish(false, "Przerwano REPLAY po błędzie zapisu zdarzenia.");
+            }
+        }
+
+        public bool PauseReplay()
+        {
+            if (!active || labNumber != 6 || replayHealth.HasGap || !replayHealth.HasSource) return false;
+            pauseStart = Time.unscaledTime; replayHealth.BeginGap(pauseStart); paused = true;
+            if (!practice)
+            {
+                session.pendingTrial.trial.metrics = replayHealth.Metrics();
+                if (!Save()) { Finish(false, "Nie zapisano początku przerwy REPLAY."); return false; }
+            }
+            return true;
+        }
+
+        private void DrawLiveTask()
+        {
+            if (!active) return;
+            GUILayout.Label("Czas próby: " + (Time.unscaledTime - start).ToString("F1") + " s");
+            if (labNumber == 2 && interactionSeries != null)
+            {
+                GUILayout.Label("Cykl " + interactionSeries.CurrentNumber + "/5 | sukcesy " + interactionSeries.Successes +
+                    " | pomyłki " + interactionSeries.TotalErrors + " | czas cyklu " + interactionSeries.CurrentSeconds(Time.unscaledTime).ToString("F1") + " s");
+                if (GUILayout.Button("Zakończ bieżący cykl jako nieudany")) CompleteManipulationCycle(false);
+            }
+            if (labNumber == 7) GUILayout.Label("Kroki: " + mission.Step + "/3 | poprawne: " + mission.Successes + " | błędy: " + mission.Errors + " | limit 90 s");
+            if (labNumber == 5)
+                GUILayout.Label("LOD " + world.ActiveLod + " | " + world.ActiveTriangleCount + " trójkątów | materiały " + world.CadMaterialCount + " | otwór " +
+                    (world.ActiveLod < 2 ? "zachowany" : "utracony"));
+            if (labNumber == 3 && anchorExperiment != null)
+            {
+                if (anchorExperiment.Phase == WiRRAnchorPhase.WaitingForPlacement)
+                { if (GUILayout.Button("Umieść model przy referencji")) PlaceAnchor(); }
+                else if (anchorExperiment.Phase == WiRRAnchorPhase.TrackingLost)
+                    GUILayout.Label("Śledzenie utracone. Brak poprawnego odczytu; oczekiwanie na powrót.");
+                else
+                    GUILayout.Label("Odczyty przed: " + anchorExperiment.Before.Count + "/3; po powrocie: " + anchorExperiment.After.Count + "/3.");
+                if (anchorExperiment.Latest != null && anchorExperiment.Phase != WiRRAnchorPhase.TrackingLost)
+                    GUILayout.Label("Wektor różnicy SIM_AR [cm]: " + (anchorExperiment.Latest.offset_m * 100).ToString("F2"));
+            }
+            if (labNumber == 4)
+            {
+                GUILayout.Label("Tożsamość obiektów: 1 czerwony, 2 zielony, 3 turkusowy. Etykieta w scenie może być błędna.");
+                for (var i = 0; i < 3; i++)
+                {
+                    if (depthExperiment.HasAnswer(i)) continue;
+                    var observation = depthObservations[i];
+                    GUILayout.Label("Komunikat promienia SIM, obiekt " + (i + 1) + ": " +
+                        (observation.available ? (observation.reportedFirstHit ? "pierwsze trafienie w obiekt" : "brak pierwszego trafienia w obiekt") : "brak danych"));
+                    GUILayout.Label("Obiekt " + (i + 1) + ": czy powinien być widoczny?");
+                    using (new GUILayout.HorizontalScope())
+                    {
+                        if (GUILayout.Button("Tak")) ClassifyVisibility(i, true);
+                        if (GUILayout.Button("Nie")) ClassifyVisibility(i, false);
+                    }
+                }
+            }
+            if (labNumber == 6)
+            {
+                GUILayout.Label("ROS_REPLAY | wiadomość " + replayHealth.Received + " | wiek odbiornika " +
+                    (replayHealth.Age.HasValue ? replayHealth.Age.Value.ToString("F2") + " s" : "brak danych") +
+                    " | " + (!replayHealth.HasSource ? "BRAK ŹRÓDŁA" : replayHealth.IsStale ? "STALE" : "ŚWIEŻE dane replay"));
+                GUILayout.Label("Odświeżanie obrazu: " + (Time.unscaledDeltaTime > 0 ? (1 / Time.unscaledDeltaTime).ToString("F0") + " kl./s" : "brak próbki"));
+                GUILayout.Label("joint1 → przegub 1; joint2 → przegub 2; radiany. Wirtualny czas pliku zatrzymuje się podczas przerwy.");
+                GUILayout.Label("Przejścia STALE: " + replayHealth.StaleEpisodes + "; powroty świeżych danych: " + replayHealth.Recoveries);
+                if (!replayHealth.HasGap && replayHealth.HasSource && GUILayout.Button("Wstrzymaj strumień i przywróć")) PauseReplay();
+                if (GUILayout.Button("Zapisz obserwację")) Finish(true);
+            }
+            if ((labNumber == 7 || labNumber == 8) && template == 2 && participant != "GUEST_SIM")
+            {
+                if (selected.Count < 3)
+                {
+                    // Three labeled source-age fixtures, independent of rendering frame rate.
+                    var age = selected.Count == 1 ? 1.2 : 0.1;
+                    GUILayout.Label("Stan testowy " + (selected.Count + 1) + ": wiek danych " + age + " s; próg 0,5 s");
+                    using (new GUILayout.HorizontalScope())
+                    {
+                        if (GUILayout.Button("ŚWIEŻE")) AnswerMissionState(true);
+                        if (GUILayout.Button("STALE")) AnswerMissionState(false);
+                    }
+                }
+            }
+            if (labNumber == 8)
+            {
+                GUILayout.Label("Kroki: " + mission.Step + "/3 | poprawne: " + mission.Successes + " | błędy: " + mission.Errors);
+                GUILayout.Label("Podpowiedzi zgłoszone przez autora: " + studio.ReportedHints + "; skryptowe: " + studio.SimulatedHints);
+                if (participant != "GUEST_SIM" && GUILayout.Button("Zgłoś udzieloną podpowiedź"))
+                {
+                    studio.Hint(Time.unscaledTime);
+                    if (!practice)
+                    {
+                        session.pendingTrial.trial.metrics = mission.Metrics();
+                        session.pendingTrial.trial.metrics.AddRange(studio.Metrics());
+                        if (!Save()) Finish(false, "Nie zapisano zgłoszenia podpowiedzi.");
+                    }
+                }
+                if (demonstration)
+                {
+                    GUILayout.Label(studio.GoalReached ? "Cel osiągnięty. Zakończ pokaz w przedziale 60–90 s." : "Cel nie został osiągnięty. Sam czas pokazu nie potwierdza ukończenia.");
+                    if (GUILayout.Button("Zakończ pokaz")) Finish(studio.CanFinish, studio.CanFinish ? null : "Nie osiągnięto celu lub pokaz poza zakresem 60–90 s.");
+                }
+            }
+        }
+
+        private void ClassifyVisibility(int index, bool visible)
+        {
+            if (!active || depthExperiment == null || depthExperiment.HasAnswer(index)) return;
+            Physics.SyncTransforms();
+            for (var i = 0; i < depthObservations.Length; i++)
+            {
+                var current = world.ProbeDepth(i); var initial = depthObservations[i];
+                if (!current.available || !initial.available || current.referenceVisible != initial.referenceVisible
+                    || Math.Abs(current.targetDistance - initial.targetDistance) > 0.0001
+                    || current.otherSurfaceDistance.HasValue != initial.otherSurfaceDistance.HasValue
+                    || (current.otherSurfaceDistance.HasValue && Math.Abs(current.otherSurfaceDistance.Value - initial.otherSurfaceDistance.Value) > 0.0001))
+                {
+                    depthExperiment.InvalidateReference(i);
+                    Finish(false, "Brak danych lub zmiana geometrii referencyjnej w trakcie porównania.");
+                    return;
+                }
+            }
+            depthExperiment.Answer(index, visible);
+            if (depthExperiment.IsComplete) { Finish(true); return; }
+            if (!practice)
+            {
+                session.pendingTrial.trial.metrics = depthExperiment.Metrics();
+                if (!Save()) { Finish(false, "Przerwano test widoczności po błędzie zapisu."); return; }
+            }
+            feedback = "Zapisano odpowiedź " + depthExperiment.Answered + "/3. Podsumowanie po ostatniej odpowiedzi.";
+        }
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "id": 7,
+  "title": "Projektant kontra percepcja",
+  "question": "Czy sprawny program może utrudniać wykonanie prostego zadania?",
+  "mode": "DESKTOP_SIM",
+  "concept": "Użyteczność oceniamy względem celu i kontekstu użytkownika. Liczy się ukończenie, błędy i czas rozpatrywane łącznie. Porównanie przed/po na tej samej osobie zawiera również efekt uczenia się. Jedna poprawa dla jednego zadania nie dowodzi, że interfejs pomaga wszystkim użytkownikom.",
+  "controls": "Ten sam cel, zadanie, dystans i sposób wejścia w serii przed/po. Trening i kolejność powtórzeń pozostają widoczne.",
+  "invalid": "Nie przypisuj całej zmiany interfejsowi, jeśli zmieniła się trudność zadania albo uczestnik otrzymał dodatkowe instrukcje. Nie kasuj błędnych prób.",
+  "conclusion": "Zmiana ___ wpłynęła na ___; w warunku ___ może nie pomóc, ponieważ ___.",
+  "actions": [
+    {
+      "title": "Poznaj Ekspedycję XR",
+      "body": "Odwiedź strefy manipulacji, nawigacji i odczytu stanu. Rozpocznij od jednego krótkiego wyzwania i sprawdź, co oznacza sukces oraz błąd. Pozostałe strefy pomagają wybrać problem do dalszego badania. Zachowaj zapis pierwszego wykonania, również gdy zadanie się nie powiodło."
+    },
+    {
+      "title": "Porównaj ustawienie",
+      "body": "Wybierz jedną strefę i powtórz to samo zadanie po zmianie jednego ustawienia, np. rozmiaru celu, podświetlenia albo symbolu STALE. Zachowaj dystans, trasę i cel. Obejrzyj skuteczność, pomyłki i czas przed/po. Wynik szybszy, ale mniej poprawny, wymaga osobnej interpretacji."
+    },
+    {
+      "title": "Ulepsz i sprawdź transfer",
+      "body": "Dobierz własne ustawienie odpowiadające wykrytemu problemowi i zweryfikuj skutek. Przenieś je do drugiej sytuacji, np. innego dystansu lub tła. W jednym zdaniu wyjaśnij, komu i w jakich warunkach zmiana może nie pomóc. Poprawna diagnoza braku poprawy jest wartościowym wynikiem."
+    }
+  ],
+  "rubric": [
+    "Ukończ jedno z gotowych mikrowyzwań",
+    "Powtórz je z innym ustawieniem interakcji",
+    "Wyjaśnij przyczynę różnicy skuteczności",
+    "Ulepsz jedno utrudnienie i zweryfikuj efekt",
+    "Sprawdź rozwiązanie w drugiej sytuacji/u gościa i wskaż, komu może nie pomóc"
+  ],
+  "instruction_version": "2.0.0-draft.2",
+  "source_sha256": "f7da8cb9c55953ba49bbf7116c19d978577bf22cc024b6b74f38c0b2d20b815e"
+}

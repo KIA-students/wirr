@@ -1,0 +1,70 @@
+{
+  "version": "anchor-model/1",
+  "source": "SYNTHETIC_MODEL_NOT_DEVICE",
+  "seed": 2718,
+  "cadence_s": 1,
+  "recovery_delay_s": 1.5,
+  "recovery_timeout_s": 5,
+  "profiles": [
+    {
+      "name": "A_many_features",
+      "bias_m": {
+        "x": 0.005,
+        "y": 0,
+        "z": 0
+      },
+      "relocalization_shift_m": {
+        "x": 0.01,
+        "y": 0,
+        "z": 0
+      },
+      "jitter_m": [
+        {
+          "x": 0.002,
+          "y": -0.001,
+          "z": 0.001
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "z": -0.001
+        },
+        {
+          "x": -0.002,
+          "y": 0.001,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "name": "B_few_features",
+      "bias_m": {
+        "x": 0.025,
+        "y": 0,
+        "z": 0
+      },
+      "relocalization_shift_m": {
+        "x": 0.03,
+        "y": 0.01,
+        "z": 0
+      },
+      "jitter_m": [
+        {
+          "x": 0.014,
+          "y": -0.007,
+          "z": 0.007
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "z": -0.007
+        },
+        {
+          "x": -0.014,
+          "y": 0.007,
+          "z": 0
+        }
+      ]
+    }
+  ]
+}
