@@ -27,7 +27,7 @@ namespace KIA.WiRR.Editor
         public static void PrepareAll()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode || EditorApplication.isCompiling) return;
-            var package = PackageInfo.FindForPackageName("pl.prz.kia.wirr");
+            var package = UnityEditor.PackageManager.PackageInfo.FindForPackageName("pl.prz.kia.wirr");
             if (package == null) throw new InvalidOperationException("Nie odnaleziono pakietu WiRR.");
             Directory.CreateDirectory(Root);
             for (var lab = 1; lab <= 8; lab++)
