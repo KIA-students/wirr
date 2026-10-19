@@ -24,5 +24,5 @@
 
 ## Weryfikacja tożsamości
 
-Numery indeksów znajdują się wewnątrz raportów, ale nie są publikowane w tym zestawieniu. W repozytorium `MatPomGit/prz` odszukano specyfikację oceniania WiRR (`config/06-KARTY-STUDENTA.md`, `config/16-ZADANIA-I-OCENIANIE.md`), **nie potwierdzono jednak imiennego wykazu studentów**. Powiązanie indeksów z osobami oraz uprawnieniami do zaliczenia należy sprawdzić w autorytatywnej ewidencji PRz.
+Numery indeksów znajdują się wewnątrz raportów, ale nie są publikowane w tym zestawieniu. W prywatnym repozytorium PRz potwierdzono oficjalną ewidencję WiRR na rok 2026/2027 oraz zasady oceniania. Weryfikacja wykazała jedną niezgodność identyfikatora wewnątrz archiwalnej paczki z danymi ewidencji: wymaga ona osobnego wyjaśnienia, a nie automatycznego przepisania wyniku. Szczegóły identyfikujące studentów i oceny pozostają wyłącznie w repozytorium prywatnym.
 
