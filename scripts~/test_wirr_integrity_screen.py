@@ -36,6 +36,19 @@ class TestIntegrityScreen(unittest.TestCase):
                        for i, v in enumerate((1, 2, 3), 1)})
         self.assertEqual(mod.scan(report(**values))["findings"][0]["type"], "median_check")
 
+    def test_no_raw_trials_is_unverified_not_fraud(self):
+        result = mod.scan(report(**{"table.x.a.mediana_s": "2.1"}))
+        self.assertEqual(result["checks_performed"], 0)
+        self.assertEqual(result["reported_measurements"], 1)
+        self.assertEqual(result["unchecked_measurements"], 1)
+        self.assertEqual(result["findings"], [])
+
+    def test_no_frame_time_is_unverified(self):
+        result = mod.scan(report(**{"table.x.a.mediana_fps": "60"}))
+        self.assertEqual(result["reported_measurements"], 1)
+        self.assertEqual(result["unchecked_measurements"], 1)
+        self.assertEqual(result["findings"], [])
+
     def test_missing_data_is_not_an_offense(self):
         self.assertEqual(mod.scan(report())["findings"], [])
 

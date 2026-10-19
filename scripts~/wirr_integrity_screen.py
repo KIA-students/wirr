@@ -25,8 +25,12 @@ def scan(report):
                if isinstance(item, dict) and isinstance(item.get("key"), str)}
     findings = []
     tested = 0
+    reported_measurements = 0
+    unchecked_measurements = 0
     for key, value in answers.items():
         if key.endswith(".mediana_fps"):
+            if number(value) is not None:
+                reported_measurements += 1
             sibling = key[:-len("mediana_fps")] + "mediana_ms"
             fps, ms = number(value), number(answers.get(sibling))
             if fps is not None and ms is not None and fps > 0 and ms > 0:
@@ -35,12 +39,18 @@ def scan(report):
                 if abs(fps * ms - 1000) > 35:
                     findings.append({"type": "fps_ms_check", "field": key,
                                      "detail": "FPS*ms differs from 1000 by more than 35"})
+            elif number(value) is not None:
+                unchecked_measurements += 1
         if key.endswith(".mediana_s"):
+            if number(value) is not None:
+                reported_measurements += 1
             prefix = key[:-len("mediana_s")]
             times = [number(v) for k, v in answers.items()
                      if k.startswith(prefix + "próba_") and k.endswith("_s")]
             times = sorted(v for v in times if v is not None)
             reported = number(value)
+            if reported is not None and len(times) < 3:
+                unchecked_measurements += 1
             if reported is not None and len(times) >= 3:
                 tested += 1
                 count = len(times)
@@ -48,7 +58,8 @@ def scan(report):
                 if abs(reported - median) > 0.051:
                     findings.append({"type": "median_check", "field": key,
                                      "detail": "reported median does not match raw trials"})
-    return {"checks_performed": tested, "findings": findings,
+    return {"checks_performed": tested, "reported_measurements": reported_measurements,
+            "unchecked_measurements": unchecked_measurements, "findings": findings,
             "evidence_status": "screening_only_not_authenticity_proof"}
 
 
