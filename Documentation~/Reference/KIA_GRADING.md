@@ -11,7 +11,7 @@ Prowadzący: otwórz lokalnie `tools/grading/kia-dashboard.html`, zaloguj się n
 ## Warunki włączenia do produkcji
 
 - Import prawdziwej listy studentów do `enrollments`, z przypisaniem kont `students` do kursu WiRR. Bez tego nie da się znaleźć wszystkich studentów z brakującymi ocenami.
-- Zbudowanie i uruchomienie kodu na Unity 6000.6.x, test logowania konta studenta, zgłoszenia, idempotentnej ponownej wysyłki, widoku prowadzącego i zatwierdzenia oceny.
+- Zbudowanie i uruchomienie kodu na Unity 6000.6.5f1, test logowania konta studenta, zgłoszenia, idempotentnej ponownej wysyłki, widoku prowadzącego i zatwierdzenia oceny.
 - Formularz jest połączony z klientem przesyłania; numer laboratorium pochodzi z formularza. Nadal wymagany test end-to-end na kontach KIA.
 - Potwierdzenie, że połączenie z KIA działa dla istniejących kont studentów. Token przechowywany jest wyłącznie w pamięci edytora i wygasa zgodnie z polityką Supabase Auth; po wygaśnięciu należy zalogować się ponownie.
 - Przed publikacją trzeba sprawdzić, czy lokalna kolejka zawierająca raporty jest odpowiednio chroniona na współdzielonych stanowiskach komputerowych.

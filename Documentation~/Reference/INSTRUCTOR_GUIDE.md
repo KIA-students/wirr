@@ -38,6 +38,6 @@ Pakiet: `https://github.com/KIA-students/wirr.git#upm`. Student podaje indeks i 
 
 ## Diagnostyka
 
-Dla problemu z importem sprawdź wersję Unity 6000.6.x, adres `#upm` i pierwszy błąd kompilacji. Dla chwytu lub UI sprawdź kolejno akcję wejścia, interaktor, warstwy interakcji i obiekt. Brak pomiaru pozostaje brakiem danych.
+Dla problemu z importem sprawdź wersję Unity 6000.6.5f1, adres `#upm` i pierwszy błąd kompilacji. Dla chwytu lub UI sprawdź kolejno akcję wejścia, interaktor, warstwy interakcji i obiekt. Brak pomiaru pozostaje brakiem danych.
 
 Test interfejsu w Unity oraz urządzenia Quest 3 wykonuje się na rzeczywistym stanowisku. Testy Markdown i agregacji punktów nie potwierdzają działania sprzętu.

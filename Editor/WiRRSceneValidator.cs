@@ -54,10 +54,10 @@ namespace KIA.WiRR.Editor
 
         private static void ValidateUnity(List<WiRRValidationResult> results)
         {
-            if (Application.unityVersion.StartsWith("6000.6.", StringComparison.Ordinal))
-                Pass(results, $"Unity {Application.unityVersion}: wersja referencyjna 6000.6.x.");
+            if (string.Equals(Application.unityVersion, "6000.6.5f1", StringComparison.Ordinal))
+                Pass(results, $"Unity {Application.unityVersion}: wersja referencyjna 6000.6.5f1.");
             else
-                Warn(results, $"Unity {Application.unityVersion}; kurs referencyjnie używa 6000.6.x.");
+                Warn(results, $"Unity {Application.unityVersion}; kurs referencyjnie używa 6000.6.5f1.");
 
             if (GraphicsSettings.defaultRenderPipeline != null)
                 Pass(results, "Aktywny potok renderowania SRP: projekt nie korzysta z trybu Built-in.");

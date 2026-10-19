@@ -1,5 +1,10 @@
 # WiRR: rozpoczęcie i oddanie pracy
 
+## Spis treści
+
+
+
+
 1. Otwórz przygotowany projekt Unity i bieżący blok. Pracuj solo lub w parze.
 2. Wpisz indeksy i grupę G1/G2 raz na blok.
 3. Wykonaj pierwsze laboratorium. Otwórz **WiRR > Raporty > Formularz raportu laboratoryjnego**, sprawdź numer labu i kompletność, kliknij **Zapisz raport lokalnie (bez logowania)**. Unity zapisze JSON i rozpocznie wysyłkę.

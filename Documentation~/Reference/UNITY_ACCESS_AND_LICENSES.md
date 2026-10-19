@@ -13,9 +13,9 @@
 
 
 ## Nawigacja warunkowa
-- **Jestem na uczelnianym PC i licencja już działa:** nie loguj się na wspólne konto; wróć do [pierwszego doświadczenia](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Jestem na uczelnianym PC i licencja już działa:** nie loguj się na wspólne konto; wróć do [pierwszego doświadczenia](../../Samples~/Lab01/README.md#1-uruchom-scenę-i-pomiar-30).
 - **Komputer uczelniany nie ma jeszcze aktywnej licencji:** [Wariant A](#wariant-a-komputer-uczelniany-licencja-grant); zgłoś to administratorowi.
-- **Mam Unity ID i Personal:** pomiń rejestrację i przejdź do [pracy w Unity](../../Samples~/Lab01/README.md#pierwsze-10-minut-eksperyment-zamiast-instalatora).
+- **Mam Unity ID i Personal:** pomiń rejestrację i przejdź do [pracy w Unity](../../Samples~/Lab01/README.md#1-uruchom-scenę-i-pomiar-30).
 - **Nie mam Unity ID, pracuję na własnym komputerze:** [Wariant B](#wariant-b-własny-komputer-bezpłatne-unity-personal).
 - **Chcę skorzystać z darmowego planu studenckiego:** [Wariant C](#wariant-c-darmowy-unity-student-plan-opcjonalnie).
 - **Nie mam Unity Hub:** [instalacja zależna od systemu](OS_SETUP.md#unity-nie-jest-zainstalowane).

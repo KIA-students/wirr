@@ -1,6 +1,6 @@
 # Lab 07 — Walidacja i testy akceptacyjne
 
-Instrukcja kursowa: WiRR Lab 07 v1.0.2. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.x.
+Instrukcja kursowa: WiRR Lab 07 v1.0.2. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.5f1.
 
 ## Spis treści
 

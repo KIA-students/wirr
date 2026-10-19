@@ -1,12 +1,33 @@
 # Lab 03: Kotwica to nie gwarancja stałości
 
+## Spis treści
+
+- [Co będziesz badać](#co-będziesz-badać)
+- [Przygotowanie stanowiska i otwarcie sceny](#przygotowanie-stanowiska-i-otwarcie-sceny)
+- [Jedno doświadczenie, trzy działania](#jedno-doświadczenie-trzy-działania)
+- [Co zrobić na ocenę](#co-zrobić-na-ocenę)
+- [Co sprawdzić w zapisanym wyniku](#co-sprawdzić-w-zapisanym-wyniku)
+- [Jeden wniosek](#jeden-wniosek)
+- [Oddanie całego bloku](#oddanie-całego-bloku)
+- [Gdy stanowisko nie działa](#gdy-stanowisko-nie-działa)
+- [Jak czytać schemat](#jak-czytać-schemat)
+
+
 **Blok 02, część 1 z 2** · 90 minut · SIM_AR · 2.0.0-draft.3
 
-**Pytanie:** Czy stabilny hologram znajduje się w poprawnym miejscu?
+Czy stabilny hologram znajduje się w poprawnym miejscu?
 
 ## Co będziesz badać
 
 Wykrycie płaszczyzny, trafienie promienia i utworzenie kotwicy to różne operacje. Błąd położenia oznacza różnicę względem znanej referencji; stabilność dotyczy zmian położenia w czasie. Stabilny model może mieć stałe przesunięcie. W SIM_AR referencja i błędy pochodzą z modelu. Rzeczywiste AR bez niezależnego odniesienia nie pozwala automatycznie zmierzyć bezwzględnej dokładności.
+
+## Przygotowanie stanowiska i otwarcie sceny
+
+1. Uruchom Unity Hub i otwórz przygotowany projekt Universal 3D (URP) w Unity 6000.6.5f1. Jeśli nie masz projektu, wykonaj [instalację i przygotowanie](../../Documentation~/Reference/UNITY_COURSE_JOURNEY.md#pierwsze-uruchomienie-w-unity).
+2. W edytorze otwórz menu WiRR → Narzędzia kursu i wybierz laboratorium 03. Materiały próbki znajdziesz w Window → Package Manager → WiRR Course Toolkit → Samples. Zaimportuj próbkę odpowiadającą temu laboratorium; zawiera instrukcję i szablon, a scenę przygotowują narzędzia WiRR.
+3. Na przygotowanym stanowisku otwórz scenę wskazaną przez prowadzącego. W swoim nowym projekcie użyj przycisku „Utwórz / napraw aktywną scenę” i zapisz ją w Assets/WiRR/Lab03. Nie uruchamiaj naprawy na scenie z własnymi zmianami bez zapisania kopii.
+4. Kliknij „Sprawdź konfigurację laboratorium”. Następnie uruchom scenę przyciskiem Play u góry edytora i przejdź do zakładki Game. Pomiary przepisuj do WiRR → Raporty → Formularz raportu laboratoryjnego, wybierając Lab 03.
+5. Do doświadczenia potrzebny jest przygotowany wariant SIM_AR opisany poniżej. Jeżeli scena nie zawiera wskazanych przełączników, punktów odniesienia lub odczytów, zgłoś brak prowadzącemu i skorzystaj z przygotowanego stanowiska. Samo wygenerowanie sceny bazowej nie potwierdza gotowości demonstratora.
 
 ## Jedno doświadczenie, trzy działania
 
@@ -44,9 +65,9 @@ Interpretację i ocenę końcową zatwierdza prowadzący.
 | Rozrzut odczytów i utraty śledzenia | cm / liczba | Rozdziel błąd systematyczny i zmienność. |
 | Czas ponownej lokalizacji | s | Brak odzyskania to nie zero sekund. |
 
-**Warunki porównania:** Ta sama referencja, model, skala, tor obserwacji i liczba odczytów. W symulacji zachowaj profil i seed.
+Ta sama referencja, model, skala, tor obserwacji i liczba odczytów. W symulacji zachowaj profil i seed.
 
-**Nieważna próba:** Oznacz próbę jako nieważną przy braku referencji lub śledzenia. Nie mieszaj SIM_AR z REAL_AR w jednej serii.
+Oznacz próbę jako nieważną przy braku referencji lub śledzenia. Nie mieszaj SIM_AR z REAL_AR w jednej serii.
 
 ## Jeden wniosek
 

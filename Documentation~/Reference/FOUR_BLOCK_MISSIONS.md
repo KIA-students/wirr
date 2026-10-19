@@ -44,4 +44,4 @@ Nie udostępnia się studentom wspólnego hasła Unity, nie wymaga prywatnego sp
 
 ## Stan wydania
 
-**Zawartość i stan wydania trzeba potwierdzić testem w Unity przed kolejną publikacją.** Kod nowych prefabów i integrację Lab 08 trzeba przetestować w Unity 6000.6.x Windows i Ubuntu przed scaleniem z wydaniem produkcyjnym. Komplet dokumentów Markdown można czytać na GitHubie bez instalowania Unity. Po weryfikacji aktualizacja może zostać przeniesiona do KIA-students/wirr z zachowaniem dotychczasowych wyników ligi.
+**Zawartość i stan wydania trzeba potwierdzić testem w Unity przed kolejną publikacją.** Kod nowych prefabów i integrację Lab 08 trzeba przetestować w Unity 6000.6.5f1 Windows i Ubuntu przed scaleniem z wydaniem produkcyjnym. Komplet dokumentów Markdown można czytać na GitHubie bez instalowania Unity. Po weryfikacji aktualizacja może zostać przeniesiona do KIA-students/wirr z zachowaniem dotychczasowych wyników ligi.

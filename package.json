@@ -31,7 +31,7 @@
     },
     {
       "displayName": "Laboratorium 04: Rozumienie sceny i mieszanie rzeczywistości",
-      "description": "Praca z informacją o głębi i łączeniem obiektów rzeczywistych z wirtualnymi. Etapy kluczowe: 3.0: API głębi (Depth API) i diagnostyka; 3.5: okluzja środowiskowa; 4.0: rzutowanie promienia z użyciem danych głębi i błąd odległości; 4.5: estymacja oświetlenia; 5.0: kontrolowany błąd, test rozstrzygający, minimalna poprawka i diagnoza.",
+      "description": "Praca z informacją o głębi i łączeniem obiektów rzeczywistych z wirtualnymi. Etapy kluczowe: 3.0: API głębi (Depth API) i diagnostyka; 3.5: okluzja środowiskowa; 4.0: rzutowanie promienia z użyciem danych głębi i błąd odległości; 4.5: korekta parametru głębi przy stałym oświetleniu; 5.0: kontrolowany błąd, test rozstrzygający, minimalna poprawka i diagnoza.",
       "path": "Samples~/Lab04"
     },
     {
