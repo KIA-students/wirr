@@ -43,3 +43,6 @@ __pycache__/
 /Assets/Samples.meta
 /Project~/Assets/Samples/
 /Project~/Assets/Samples.meta
+
+# Local validation evidence must not enter packages or public snapshots.
+/artifacts/

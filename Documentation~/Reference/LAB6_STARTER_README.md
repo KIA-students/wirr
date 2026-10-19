@@ -1,6 +1,6 @@
 # Lab 06 — Bliźniak cyfrowy ROS 2 + Gazebo
 
-Instrukcja kursowa: WiRR Lab 06 v1.0.2. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.x.
+Instrukcja kursowa: WiRR Lab 06 v1.0.2. Unity 6000.6.5f1 lub nowsza zgodna poprawka z linii 6000.6.5f1.
 
 ## Spis treści
 
@@ -19,7 +19,7 @@ Instrukcja kursowa: WiRR Lab 06 v1.0.2. Unity 6000.6.5f1 lub nowsza zgodna popra
 ## Szybki wybór ścieżki
 - **Mam działające stanowisko ROS 2 i /joint_states:** przejdź do [źródła stanu](#30-źródło-stanu) i potem [LIVE/STALE](#45-pomiar-rtt).
 - **Nie mam ROS 2 / Gazebo:** użyj przygotowanego logu i wariantu replay. Rozpoznaj ograniczenia w [źródle stanu](#30-źródło-stanu).
-- **Pracuję na Windows:** połącz się ze stanowiskiem Ubuntu przez sieć. Nie instaluj ROS 2 bez konieczności. [Systemy i urządzenia](../../Documentation~/Reference/OS_SETUP.md#urzadzenia-xr).
+- **Pracuję na Windows:** połącz się ze stanowiskiem Ubuntu przez sieć. Nie instaluj ROS 2 bez konieczności. [Systemy i urządzenia](../../Documentation~/Reference/OS_SETUP.md#urządzenia-xr).
 - **Pracuję na Ubuntu:** [ścieżka Ubuntu](../../Documentation~/Reference/OS_SETUP.md#ubuntu).
 
 

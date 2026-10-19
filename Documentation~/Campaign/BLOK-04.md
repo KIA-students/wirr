@@ -1,5 +1,10 @@
 # Blok 04: Lab 07 i Lab 08
 
+## Spis treści
+
+- [Przekazanie wyników](#przekazanie-wyników)
+
+
 Jedna sesja, dwa wyniki, automatyczna wysyłka z Unity. Pracuj solo lub w parze; w parze zamieniajcie role.
 
 1. [Wykonaj Lab 07](../../Samples~/Lab07/README.md) i zapisz raport w Unity.

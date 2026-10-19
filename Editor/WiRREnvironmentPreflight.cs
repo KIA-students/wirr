@@ -91,13 +91,13 @@ namespace KIA.WiRR.Editor
                         ? $"{osText} · obsługiwany wariant Ubuntu LTS."
                         : $"{osText}. Zalecany Windows 11 64-bit; alternatywnie Ubuntu 22.04 lub 24.04 LTS 64-bit."));
 
-            var unity6 = Application.unityVersion.StartsWith("6000.", StringComparison.Ordinal);
+            var unity6 = string.Equals(Application.unityVersion, "6000.6.5f1", StringComparison.Ordinal);
             items.Add(new WiRREnvironmentItem(
                 "Unity",
                 unity6 ? WiRREnvironmentState.Ready : WiRREnvironmentState.Warning,
                 unity6
-                    ? $"{Application.unityVersion} · obsługiwana linia Unity 6; wersja kursowa: 6000.6.5f1; zgodność stanowiska potwierdź walidacją i uruchomieniem sceny."
-                    : $"{Application.unityVersion} · pakiet jest projektowany dla Unity 6 (6000.x). Nowsza główna generacja wymaga ponownej walidacji kompatybilności."));
+                    ? $"{Application.unityVersion} · wersja referencyjna kursu: 6000.6.5f1; zgodność stanowiska potwierdź walidacją i uruchomieniem sceny."
+                    : $"{Application.unityVersion} · pakiet jest projektowany dla Unity 6000.6.5f1. Inna wersja wymaga osobnej walidacji kompatybilności."));
 
             var missingPackages = WiRRPackageInstaller.GetMissingPackagesForLab(labNumber);
             items.Add(new WiRREnvironmentItem(
@@ -193,7 +193,7 @@ namespace KIA.WiRR.Editor
                 moduleState,
                 androidSupport
                     ? "Moduł platformy Android jest dostępny."
-                    : "Brak modułu. Unity Hub → Installs → 6000.6.x → Add modules → Android Build Support."));
+                    : "Brak modułu. Unity Hub → Installs → 6000.6.5f1 → Add modules → Android Build Support."));
 
             var contents = EditorApplication.applicationContentsPath;
             var androidPlayer = Path.Combine(contents, "PlaybackEngines", "AndroidPlayer");
@@ -203,11 +203,11 @@ namespace KIA.WiRR.Editor
                       Directory.Exists(Path.Combine(androidPlayer, "JDK"));
 
             AddHubTool(items, "Android SDK", sdk, androidRelevant,
-                "Unity Hub → Installs → 6000.6.x → Add modules → Android SDK & NDK Tools.");
+                "Unity Hub → Installs → 6000.6.5f1 → Add modules → Android SDK & NDK Tools.");
             AddHubTool(items, "Android NDK", ndk, androidRelevant,
-                "Unity Hub → Installs → 6000.6.x → Add modules → Android SDK & NDK Tools.");
+                "Unity Hub → Installs → 6000.6.5f1 → Add modules → Android SDK & NDK Tools.");
             AddHubTool(items, "OpenJDK", jdk, androidRelevant,
-                "Unity Hub → Installs → 6000.6.x → Add modules → OpenJDK.");
+                "Unity Hub → Installs → 6000.6.5f1 → Add modules → OpenJDK.");
         }
 
         private static void AddHubTool(

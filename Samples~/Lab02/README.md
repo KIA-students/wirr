@@ -1,5 +1,17 @@
 # Lab 02: Chwycić, nie kliknąć: ergonomia manipulacji
 
+## Spis treści
+
+- [Co będziesz badać](#co-będziesz-badać)
+- [Jedno doświadczenie, trzy działania](#jedno-doświadczenie-trzy-działania)
+- [Co zrobić na ocenę](#co-zrobić-na-ocenę)
+- [Co sprawdzić w zapisanym wyniku](#co-sprawdzić-w-zapisanym-wyniku)
+- [Jeden wniosek](#jeden-wniosek)
+- [Oddanie całego bloku](#oddanie-całego-bloku)
+- [Gdy stanowisko nie działa](#gdy-stanowisko-nie-działa)
+- [Jak czytać schemat](#jak-czytać-schemat)
+
+
 **Blok 01, część 2 z 2** · 90 minut · DESKTOP_SIM · 2.0.0-draft.3
 
 **Pytanie:** Kiedy chwyt bezpośredni ustępuje wskazywaniu promieniem?

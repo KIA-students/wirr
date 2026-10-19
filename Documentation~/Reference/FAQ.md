@@ -26,7 +26,7 @@
 ## Technika & Unity
 
 ### P5: Jaka wersja Unity?
-**Odpowiedź:** Kursowa wersja to Unity 6000.6.5f1 lub nowsza zgodna wersja z linii 6000.6.x. Zapisz rzeczywistą wersję w raporcie.
+**Odpowiedź:** Kursowa wersja to Unity 6000.6.5f1 lub nowsza zgodna wersja z linii 6000.6.5f1. Zapisz rzeczywistą wersję w raporcie.
 
 ### P6: Czy mogę używać Unity 2023/2024?
 **Odpowiedź:** Użyj wersji kursowej z P5. Przed migracją istniejącego projektu zachowaj jego kopię i sprawdź zgodność pakietów.

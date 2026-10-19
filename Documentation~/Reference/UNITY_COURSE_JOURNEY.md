@@ -8,7 +8,7 @@ Każde z ośmiu laboratoriów prowadzi od **pytania badawczego**, przez **własn
 
 ## Pierwsze uruchomienie w Unity
 
-1. Uruchom Unity Hub i otwórz **własny projekt Universal 3D (URP)** w wersji Unity 6000.6.x zatwierdzonej dla grupy. Na komputerze uczelnianym korzystaj z licencji skonfigurowanej przez administratora; na prywatnym z własnego konta i odpowiedniej licencji.
+1. Uruchom Unity Hub i otwórz **własny projekt Universal 3D (URP)** w wersji Unity 6000.6.5f1 zatwierdzonej dla grupy. Na komputerze uczelnianym korzystaj z licencji skonfigurowanej przez administratora; na prywatnym z własnego konta i odpowiedniej licencji.
 2. Sprawdź Git: `git --version`. W Unity otwórz **Window → Package Manager → + → Install package from git URL** i zainstaluj:
 
    ```text
@@ -39,9 +39,9 @@ Następnie w Package Manager otwórz **WiRR Optional HDRI and PBR Assets → Sam
 | 4. Pomiar | Uruchamia próbę kontrolną, rejestruje wartości i warunki; powtarza pomiar zgodnie z instrukcją | Rzeczywiste pomiary, wariant, liczba prób |
 | 5. Interpretacja | Porównuje warianty, identyfikuje niepewność, wyjaśnia przyczynę wyniku | Wniosek i ograniczenia obserwacji |
 | 6. Raport | Otwiera **WiRR → Raporty**, importuje istniejące dane, sprawdza kompletność i zapisuje/wysyła | Indywidualny raport z dowodami |
-| 7. Domknięcie bloku | Po obu laboratoriach otwiera **WiRR → Misje i odkrycia** i zapisuje kartę sesji | Jedno odkrycie, jedna diagnoza, jeden pomysł |
+| 7. Domknięcie bloku | Sprawdza osobne potwierdzenie oddania obu raportów zgodnie z [szybkim startem](QUICK_START.md) | Dwa raporty; bez dodatkowej karty sesji |
 
-**Ważne:** zapis karty sesji nie zastępuje dwóch raportów laboratoryjnych. Brak pomiaru oznacza brak danych, a nie zero. Ćwiczenia wykonywane bez urządzenia należy oznaczyć jako wariant PC/symulacyjny, bez podszywania się pod wynik sprzętowy.
+Nie oddawaj dodatkowej karty sesji. Sposób oddania i postępowanie przy awarii opisuje [szybki start](QUICK_START.md). Brak pomiaru oznacza brak danych, a nie zero. Ćwiczenia wykonywane bez urządzenia należy oznaczyć jako wariant PC/symulacyjny, bez podszywania się pod wynik sprzętowy.
 
 ## Cztery bloki, osiem doświadczeń
 

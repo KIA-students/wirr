@@ -13,7 +13,7 @@ namespace KIA.WiRR.Editor
     {
         private static readonly string Root = Path.GetFullPath(Path.Combine(Application.dataPath, "../Library/WiRRReports"));
 
-        public static WiRRReportDocument LoadOrCreate(int lab)
+        public static WiRRReportDocument LoadOrCreate(int lab, bool applyStudentProfile = true)
         {
             Directory.CreateDirectory(Root);
             var path = DraftPath(lab);
@@ -25,13 +25,14 @@ namespace KIA.WiRR.Editor
                     if (loaded != null && loaded.labNumber == lab)
                     {
                         loaded = EnsureCollections(loaded);
-                        ApplyStudentProfile(loaded);
+                        if (applyStudentProfile) ApplyStudentProfile(loaded);
                         UpdateVariants(loaded);
                         WiRRReportCalculator.Recalculate(loaded);
                         return loaded;
                     }
+                    if (!applyStudentProfile) throw new InvalidDataException("Istniejący szkic jest niepoprawny. Zachowaj jego kopię przed importem.");
                 }
-                catch (Exception exception) { Debug.LogWarning("[WiRR Raporty] Nie udało się wczytać szkicu raportu: " + exception.Message); }
+                catch (Exception exception) { if (!applyStudentProfile) throw; Debug.LogWarning("[WiRR Raporty] Nie udało się wczytać szkicu raportu: " + exception.Message); }
             }
             var now = DateTime.UtcNow.ToString("O");
             var document = new WiRRReportDocument { submissionId = Guid.NewGuid().ToString("N"), labNumber = lab, createdAtUtc = now, updatedAtUtc = now };

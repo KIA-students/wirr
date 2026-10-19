@@ -9,7 +9,7 @@ import shutil
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 def included(path, channel):
     parts = path.parts
-    if any(part in {".git", "Library", "Temp", "Logs", "Build", "Builds"} for part in parts):
+    if any(part in {".git", "Library", "Temp", "Logs", "Build", "Builds", "artifacts", "__pycache__", ".pytest_cache"} for part in parts):
         return False
     if channel == "upm":
         return not (parts[0] in {".github", "Project~", "competition", "scripts", "tests"} or
@@ -41,7 +41,8 @@ def build(channel, dest):
             "version": "1.0.0",
             "displayName": "WiRR Optional HDRI and PBR Assets",
             "description": "Optional large visual assets for WiRR; not required for laboratories.",
-            "unity": "6000.0",
+            "unity": "6000.6",
+            "unityRelease": "5f1",
             "author": {"name": "Katedra Informatyki i Automatyki, PRz"},
             "samples": [{"displayName": "HDRI PBR", "description": "Opcjonalne biblioteki HDRI i PBR, importowane na żądanie.", "path": "Samples~/HDRI-PBR"}]
         }

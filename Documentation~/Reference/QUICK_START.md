@@ -1,6 +1,11 @@
 # WiRR: rozpoczęcie i oddanie pracy
 
-1. Otwórz przygotowany projekt Unity i bieżący blok. Pracuj solo lub w parze.
+## Spis treści
+
+
+
+
+1. Otwórz przygotowany projekt Unity 6000.6.5f1 i bieżący blok. Pracuj solo lub w parze. W scenach SIM_AR Lab03–04 po zakończeniu Play [przenieś zapisaną sesję do formularza](../WiRR2/SUPABASE-REPORT-BRIDGE.md); lokalny eksport dwóch wyników sam nie oddaje pracy.
 2. Wpisz indeksy i grupę G1/G2 raz na blok.
 3. Wykonaj pierwsze laboratorium. Otwórz **WiRR > Raporty > Formularz raportu laboratoryjnego**, sprawdź numer labu i kompletność, kliknij **Zapisz raport lokalnie (bez logowania)**. Unity zapisze JSON i rozpocznie wysyłkę.
 4. W tym samym projekcie wykonaj drugie laboratorium i zapisz jego raport tym samym przyciskiem.
