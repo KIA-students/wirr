@@ -11,7 +11,7 @@
 ## G2
 
 - Lab 02: jeden **wspólny raport pary** (dwa numery indeksów zapisane w `studentIndices`), obejmujący pięć prób w każdym z trzech warunków chwytu, błędy i krótki wniosek. **Nie liczyć jako jednego studenta i nie obniżać wyniku za pracę w parze**.
-- Brak opublikowanego raportu Lab 01 w bieżącym drzewie `student-work/`. Nie jest to dowodem niewykonania laboratorium; należy sprawdzić kanały zgłoszeń i termin oddania.
+- W bieżącym drzewie `student-work/` brak raportu Lab 01 grupy G2, ale w prywatnej ewidencji PRz odnaleziono dodatkowe cztery archiwa ZIP z wcześniejszego kanału oddawania prac: trzy obejmują Lab 01 i Lab 02, jedno tylko Lab 01. Tych prac nie wolno pomijać przy ocenie rundy. Archiwa i dane identyfikujące autorów pozostają wyłącznie w repozytorium prywatnym.
 
 ## Zasady porównania
 
