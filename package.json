@@ -1,0 +1,18 @@
+{
+  "name": "pl.prz.kia.wirr.assets",
+  "version": "1.0.0",
+  "displayName": "WiRR Optional HDRI and PBR Assets",
+  "description": "Optional large visual assets for WiRR; not required for laboratories.",
+  "unity": "6000.6",
+  "unityRelease": "5f1",
+  "author": {
+    "name": "Katedra Informatyki i Automatyki, PRz"
+  },
+  "samples": [
+    {
+      "displayName": "HDRI PBR",
+      "description": "Opcjonalne biblioteki HDRI i PBR, importowane na żądanie.",
+      "path": "Samples~/HDRI-PBR"
+    }
+  ]
+}
