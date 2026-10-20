@@ -1,5 +1,8 @@
 # Laboratorium 6 — Bliźniak cyfrowy z ROS 2, Gazebo lub WebSim
 
+> **Uwaga dotycząca wariantu WiRR 2.0:** ten rozbudowany szablon dotyczy ćwiczeń ze stanowiskiem ROS 2/Gazebo oraz rzeczywistym transportem i pomiarem RTT. W podstawowej scenie `Lab06_DigitalTwin` (`ROS_REPLAY`) nie ma pomiaru sieciowego RTT ani działającego `ROS_LIVE`. Korzystaj z [aktualnej instrukcji Lab 06](../../Documentation~/WiRR2/LAB06-STUDENT-GUIDE.md) i wyślij oddzielny raport standardowym formularzem WiRR/Supabase. Nie wpisuj fikcyjnych pomiarów sieciowych do tego szablonu.
+
+
 ## Dane studenta
 
 - Identyfikator studenta: .................................................

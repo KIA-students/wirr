@@ -1,5 +1,8 @@
 # Laboratorium 5 — raport: od modelu CAD do siatki czasu rzeczywistego
 
+> **Uwaga dotycząca wariantu WiRR 2.0:** poniższy rozbudowany szablon dotyczy zaawansowanego zadania CAD/STEP z osobnymi narzędziami i nie opisuje kompletności sceny `Lab05_CADWorkshop` (`DESKTOP_SIM`). Do podstawowego 90-minutowego laboratorium korzystaj z [aktualnej instrukcji Lab 05](../../Documentation~/WiRR2/LAB05-STUDENT-GUIDE.md), a wyniki przekazuj w istniejącym formularzu WiRR/Supabase. Tego pliku nie trzeba uzupełniać ani wysyłać, jeśli prowadzący nie zlecił wersji rozszerzonej.
+
+
 > Uzupełniaj raport na bieżąco. Nie nadpisuj modelu źródłowego. Wszystkie porównania wykonuj przy jednej zmiennej niezależnej.
 
 ## Identyfikacja i warianty

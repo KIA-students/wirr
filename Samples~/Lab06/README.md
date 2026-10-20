@@ -1,5 +1,7 @@
 # Lab 06: Bliźniak cyfrowy powinien wiedzieć, kiedy nie wie
 
+**Instrukcja krok po kroku (90 minut):** [Laboratorium 06: ROS_REPLAY, STALE i watchdog](../../Documentation~/WiRR2/LAB06-STUDENT-GUIDE.md). Zawiera szczegółowe przyciski Unity, scenariusze przerw, opis metryk i procedurę oddania raportu przez istniejący formularz WiRR/Supabase. Nie trzeba uruchamiać ROS_LIVE ani Dockera.
+
 ## Spis treści
 
 - [Co będziesz badać](#co-będziesz-badać)

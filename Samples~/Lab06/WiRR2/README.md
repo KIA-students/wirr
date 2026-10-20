@@ -1,5 +1,7 @@
 # Bliźniak cyfrowy powinien wiedzieć, kiedy nie wie
 
+Instrukcja dla studentów: [Laboratorium 06, krok po kroku](../../../Documentation~/WiRR2/LAB06-STUDENT-GUIDE.md). Eksport bloku jest lokalny; adapter automatycznego importu obejmuje aktualnie tylko laboratoria 03–04. Wyniki 06 wpisz ręcznie do `WiRR → Raporty → Formularz raportu laboratoryjnego`, zaznacz źródło `ROS_REPLAY` i nie wpisuj fikcyjnego RTT. Raport wysyła `Zapisz raport lokalnie (bez logowania)`, a dopiero potwierdzenie serwera oznacza jego przyjęcie.
+
 Materiały pilotażowe do instrukcji 2.0.0-draft.2.
 
 Prowadzący przygotowuje projekt przez `WiRR → Nowe instrukcje → Przygotuj osiem scen`. Student otwiera gotową scenę i uruchamia Play. Nie instaluje SDK ani nie pisze kodu.
