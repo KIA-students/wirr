@@ -1,0 +1,33 @@
+{
+  "id": 6,
+  "title": "Bliźniak cyfrowy powinien wiedzieć, kiedy nie wie",
+  "question": "Czy płynny ruch robota oznacza, że jego stan jest aktualny?",
+  "mode": "ROS_REPLAY",
+  "concept": "JointState przypisuje położenia przegubom przez ich nazwy, nie przez przypadkową kolejność w tablicy. REPLAY odtwarza zapis; ROS_LIVE wymaga rzeczywistego źródła. STALE oznacza przekroczenie przyjętego wieku danych. Odstęp między wiadomościami i opóźnienie wykrycia STALE nie są RTT. RTT wymaga pomiaru drogi żądanie–odpowiedź.",
+  "controls": "Ten sam zapis, mapowanie przegubów i profil przerw w porównaniu przed/po. Zmianę progu odróżnij od zmiany bufora.",
+  "invalid": "Zegar źródła i odbiornika muszą mieć określoną relację. Oznacz nieznane opóźnienia jako brak danych. Nie odtwarzaj ruchu jako aktualnego po utracie źródła.",
+  "conclusion": "Mimo płynnego obrazu dane były ___; strategia ___ pomaga, lecz ___.",
+  "actions": [
+    {
+      "title": "Odczytaj źródło i uruchom zapis",
+      "body": "W gotowej stacji wybierz ROS_REPLAY. Obejrzyj mapowanie nazw przegubów, jednostki i wersję danych. Uruchom odtwarzanie i porównaj ruch z aktualizacją numeru wiadomości. Sprawdź osobno wskaźnik płynności oraz aktualności. Odtwarzanie pliku nie jest połączeniem z rzeczywistym robotem."
+    },
+    {
+      "title": "Wstrzymaj i przywróć dane",
+      "body": "Wywołaj przygotowaną przerwę w aktualizacjach. Obserwuj, kiedy pojawi się STALE, mimo płynnego odświeżania obrazu. Wznów zapis i sprawdź czas odzyskania. Porównaj zapisane odstępy wiadomości oraz wiek danych. Nie wpisuj RTT dla jednokierunkowego replay."
+    },
+    {
+      "title": "Dobierz reakcję i drugi profil",
+      "body": "Zmień próg watchdoga lub strategię wizualizacji przy STALE i wykonaj próbę przed/po. Następnie wybierz drugi profil przerw lub jitteru. Sprawdź, czy strategia nadal wiarygodnie sygnalizuje brak aktualnych danych. Jednym zdaniem uzasadnij decyzję i jej ograniczenie."
+    }
+  ],
+  "rubric": [
+    "Uruchom REPLAY lub przygotowany LIVE i odczytaj stan",
+    "Wstrzymaj strumień i zmierz przejście STALE",
+    "Wyjaśnij różnicę płynności obrazu i aktualności danych",
+    "Dobierz watchdog/reakcję na STALE i sprawdź przywrócenie",
+    "Sprawdź drugi profil opóźnienia i uzasadnij bezpieczną strategię; wyraźnie rozróżnij LIVE/REPLAY"
+  ],
+  "instruction_version": "2.0.0-draft.2",
+  "source_sha256": "46f4147b80f27a1759caa2751d733f04aa5e30ce1d092b2eff66bced0d3eb300"
+}

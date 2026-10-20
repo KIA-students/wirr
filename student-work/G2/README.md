@@ -1,0 +1,1 @@
+# Grupa G2\n\nRaporty laboratoriów 01–08 znajdują się bezpośrednio w tym folderze. Nazwa: `labNN-<identyfikator>.json`.\n\n[Formularz i wysyłka w Unity](../README.md) · [Ręczny PR w GitHub](../HOW_TO_UPLOAD_GITHUB.md) · [Przykłady](../examples/)\n

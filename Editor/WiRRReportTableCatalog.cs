@@ -1,0 +1,361 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using KIA.WiRR;
+
+namespace KIA.WiRR.Editor
+{
+    internal readonly struct WiRRTableAxis
+    {
+        public string Id { get; }
+        public string Label { get; }
+        public WiRRTableAxis(string id, string label) { Id = id; Label = label; }
+    }
+
+    internal sealed class WiRRReportTable
+    {
+        public string Id { get; }
+        public string Label { get; }
+        public string Help { get; }
+        public IReadOnlyList<WiRRTableAxis> Rows { get; }
+        public IReadOnlyList<WiRRTableAxis> Columns { get; }
+
+        public WiRRReportTable(string id, string label, WiRRTableAxis[] rows, WiRRTableAxis[] columns, string help = "")
+        {
+            Id = id; Label = label; Rows = rows; Columns = columns; Help = help;
+        }
+    }
+
+    internal static class WiRRReportTableCatalog
+    {
+        public static IReadOnlyList<WiRRReportTable> Get(int lab, string checkpoint, WiRRReportDocument document = null)
+        {
+            return lab switch
+            {
+                1 => Lab01(checkpoint), 2 => Lab02(checkpoint, document), 3 => Lab03(checkpoint), 4 => Lab04(checkpoint),
+                5 => Lab05(checkpoint), 6 => Lab06(checkpoint), 7 => Lab07(checkpoint), 8 => Lab08(checkpoint),
+                _ => Array.Empty<WiRRReportTable>()
+            };
+        }
+
+        public static string CellKey(WiRRReportTable table, WiRRTableAxis row, WiRRTableAxis column)
+            => $"table.{table.Id}.{row.Id}.{column.Id}";
+
+        private static WiRRTableAxis A(string id, string label) => new(id, label);
+        private static WiRRTableAxis[] Rows(params string[] labels)
+        {
+            var result = new WiRRTableAxis[labels.Length];
+            for (var i = 0; i < labels.Length; i++)
+                result[i] = A(Slug(labels[i], i), LocalizeAxisLabel(labels[i]));
+            return result;
+        }
+        private static WiRRTableAxis[] Cols(params string[] labels) => Rows(labels);
+        private static string Slug(string value, int index)
+        {
+            var chars = new List<char>();
+            foreach (var c in value.ToLowerInvariant())
+                if (char.IsLetterOrDigit(c)) chars.Add(c); else if (chars.Count > 0 && chars[^1] != '_') chars.Add('_');
+            var text = new string(chars.ToArray()).Trim('_');
+            return string.IsNullOrEmpty(text) ? $"item{index + 1}" : text;
+        }
+        private static WiRRReportTable T(string id, string label, string[] rows, string[] columns, string help = "")
+            => new(id, LocalizeTableLabel(label), Rows(rows), Cols(columns), help);
+
+        private static string LocalizeTableLabel(string label)
+        {
+            return label switch
+            {
+                "Baseline PC: trzy próby" => "Pomiar bazowy na PC: trzy próby",
+                "Chwyt / socket / ray: pomiary" => "Chwyt / gniazdo (socket) / promień (ray): pomiary",
+                "UI i feedback: pomiary" => "Interfejs i informacja zwrotna: pomiary",
+                "Tracking: warunki eksperymentalne" => "Śledzenie: warunki eksperymentalne",
+                "Raycast i placement" => "Raycast i pozycjonowanie",
+                "Baseline → błąd → naprawa" => "Pomiar bazowy → błąd → naprawa",
+                "Baseline topology audit" => "Audyt topologii: pomiar bazowy",
+                "Benchmark LOD: trzy próby" => "Pomiar wydajności LOD: trzy próby",
+                "Baseline → fault → repaired" => "Pomiar bazowy → błąd → po naprawie",
+                "Inter-arrival: pierwsze 30 próbek" => "Odstępy między wiadomościami: pierwsze 30 próbek",
+                "RTT: próbki" => "Czas RTT: próbki",
+                "RTT: wariant v4" => "Czas RTT: wariant v4",
+                "LIVE / STALE" => "Stan danych LIVE / STALE",
+                "Test dymny" => "Test podstawowy (smoke test)",
+                "Depth API: eksperyment v1" => "API głębi (Depth API): eksperyment v1",
+                "Depth-raycast: seria bazowa" => "Raycast z użyciem głębi: seria bazowa",
+                "Depth-raycast: eksperyment v3" => "Raycast z użyciem głębi: eksperyment v3",
+                "Finalne geometrie LOD" => "Geometrie końcowe LOD",
+                "Materiały, draw calls i kolizje" => "Materiały, wywołania rysowania i kolizje",
+                "Macierz funkcjonalna Lab 1–6" => "Macierz funkcjonalna laboratoriów 1–6",
+                "CPU-A: iterationsPerFrame" => "CPU-A: iteracje na klatkę (iterationsPerFrame)",
+                "CPU-B: blocksPerFrame" => "CPU-B: bloki na klatkę (blocksPerFrame)",
+                "CPU-C: allocationBytesPerFrame" => "CPU-C: alokacja pamięci na klatkę (allocationBytesPerFrame)",
+                "GPU-D: Render Scale" => "GPU-D: skala renderowania (Render Scale)",
+                "PHY-C: Fixed Timestep" => "PHY-C: stały krok symulacji (Fixed Timestep)",
+                _ => label
+            };
+        }
+
+        private static string LocalizeAxisLabel(string label)
+        {
+            var localized = label switch
+            {
+                "Baseline" => "Pomiar bazowy",
+                "baseline" => "pomiar bazowy",
+                "fault" => "błąd kontrolowany",
+                "repaired" => "po naprawie",
+                "Main Thread ms" => "Główny wątek (Main Thread) [ms]",
+                "Delta FPS %" => "Zmiana FPS [%]",
+                "Batches" => "Partie renderowania (Batches)",
+                "SetPass" => "Zmiany stanu renderowania (SetPass)",
+                "Triangles" => "Trójkąty",
+                "Render Scale" => "Skala renderowania (Render Scale)",
+                "Physics ms" => "Fizyka [ms]",
+                "Select" => "Wybór (Select)",
+                "standalone bez Link" => "tryb autonomiczny bez Link",
+                "Tracking" => "Stan śledzenia",
+                "notTrackingReason/uwagi" => "Przyczyna braku śledzenia (notTrackingReason) / uwagi",
+                "notTrackingReason" => "Przyczyna braku śledzenia (notTrackingReason)",
+                "Requested depth" => "Żądany tryb głębi",
+                "Current depth" => "Bieżący tryb głębi",
+                "Current mode" => "Bieżący tryb",
+                "Color temp K/NA" => "Temperatura barwowa [K] / brak danych",
+                "Main direction/NA" => "Główny kierunek / brak danych",
+                "MeshFilter" => "Komponent MeshFilter",
+                "Vertices" => "Wierzchołki",
+                "Submeshes" => "Podsiatki",
+                "Submesh" => "Podsiatki",
+                "Material slots" => "Gniazda materiałów",
+                "Boundary edges" => "Krawędzie brzegowe",
+                "Boundary" => "Krawędzie brzegowe",
+                "Non-manifold" => "Elementy non-manifold",
+                "Degenerate" => "Elementy zdegenerowane",
+                "World size XYZ" => "Wymiary świata XYZ",
+                "Renderers" => "Renderery",
+                "Draw calls/batches" => "Wywołania rysowania / partie",
+                "mean ms" => "Średnia [ms]",
+                "median ms" => "Mediana [ms]",
+                "p95 ms" => "95. percentyl [ms]",
+                "sign" => "Znak",
+                "offset" => "Przesunięcie",
+                "inter-arrival ms" => "Odstęp między wiadomościami [ms]",
+                "Delay ms" => "Opóźnienie [ms]",
+                "Buffer" => "Bufor",
+                "Endpoint" => "Punkt końcowy (Endpoint)",
+                "Transport" => "Sposób transmisji",
+                "T średnie ms" => "Średni odstęp T [ms]",
+                "sT ms" => "Odchylenie standardowe sT [ms]",
+                "min ms" => "Minimum [ms]",
+                "max ms" => "Maksimum [ms]",
+                "Status PASS/FAIL/NV" => "Status: PASS / FAIL / NV",
+                "Sukces?" => "Czy zadanie wykonano?",
+                "Czas/próby" => "Czas / liczba prób",
+                "Pomoc" => "Liczba podpowiedzi / pomoc",
+                "P" => "P: prawdopodobieństwo",
+                "S" => "S: skutek",
+                "R" => "R = P × S",
+                _ => label
+            };
+
+            localized = localized
+                .Replace("Mediana FPS", "Mediana liczby klatek na sekundę")
+                .Replace("FPS mediana", "Mediana liczby klatek na sekundę")
+                .Replace("ms/kl mediana", "Mediana czasu klatki [ms]")
+                .Replace("GC Alloc", "Alokacja pamięci GC")
+                .Replace("GC zaobserwowane", "Zaobserwowano pracę GC?")
+                .Replace("Błędy osadzenia/reset", "Błędy osadzenia / resetu")
+                .Replace("Poprawne trafienia /10", "Poprawne trafienia / 10")
+                .Replace("Mediana błędu mm", "Mediana błędu [mm]")
+                .Replace("Błąd końcowy mm", "Błąd końcowy [mm]")
+                .Replace("Mediana mm", "Mediana [mm]")
+                .Replace("e_med mm", "e_med [mm]")
+                .Replace("e_max mm", "e_max [mm]")
+                .Replace("Zmierzony OX m", "Zmierzony OX [m]")
+                .Replace("d_AR m", "d_AR [m]")
+                .Replace("e_d m", "e_d [m]")
+                .Replace("Mediana błędu HIT m", "Mediana błędu dla HIT [m]")
+                .Replace("Mediana brightness", "Mediana jasności")
+                .Replace("Rozmiar", "Rozmiar")
+                .Replace("Pamięć MB", "Pamięć [MB]")
+                .Replace("CPU ms", "CPU [ms]")
+                .Replace("GPU ms", "GPU [ms]")
+                .Replace("RTT ms", "RTT [ms]")
+                .Replace("Wymiar m", "Wymiar [m]")
+                .Replace("Czas s", "Czas [s]")
+                .Replace("Próba 1 s", "Próba 1 [s]")
+                .Replace("Próba 2 s", "Próba 2 [s]")
+                .Replace("Próba 3 s", "Próba 3 [s]")
+                .Replace("Próba 4 s", "Próba 4 [s]")
+                .Replace("Próba 5 s", "Próba 5 [s]")
+                .Replace("Powt. 1 s", "Powtórzenie 1 [s]")
+                .Replace("Powt. 2 s", "Powtórzenie 2 [s]")
+                .Replace("Powt. 3 s", "Powtórzenie 3 [s]")
+                .Replace("Powt. 1 mm", "Powtórzenie 1 [mm]")
+                .Replace("Powt. 2 mm", "Powtórzenie 2 [mm]")
+                .Replace("Powt. 3 mm", "Powtórzenie 3 [mm]")
+                .Replace("joint_states Hz", "/joint_states [Hz]")
+                .Replace("pauza Gazebo s", "Pauza Gazebo [s]")
+                .Replace("detekcja STALE ms", "Wykrycie STALE [ms]")
+                .Replace("odzyskanie LIVE ms", "Powrót LIVE [ms]")
+                .Replace("Błędne aktywacje", "Błędne aktywacje")
+                .Replace("Problem dostępności", "Zaobserwowany problem dostępności");
+
+            if (localized.StartsWith("Lab ", StringComparison.Ordinal))
+                localized = "Laboratorium " + localized.Substring(4);
+            if (localized.StartsWith("baseline ", StringComparison.OrdinalIgnoreCase))
+                localized = "pomiar bazowy " + localized.Substring("baseline ".Length);
+            if (localized.Equals("Off", StringComparison.OrdinalIgnoreCase))
+                localized = "Wyłączone (Off)";
+            else if (localized.Equals("Raw", StringComparison.OrdinalIgnoreCase))
+                localized = "Surowe (Raw)";
+            else if (localized.Equals("Smoothed", StringComparison.OrdinalIgnoreCase))
+                localized = "Wygładzone (Smoothed)";
+            else if (localized.Equals("Final XR", StringComparison.OrdinalIgnoreCase))
+                localized = "Końcowy wariant XR";
+
+            localized = localized
+                .Replace("successRate", "Skuteczność")
+                .Replace("Color temp", "Temperatura barwowa")
+                .Replace("Main direction", "Główny kierunek")
+                .Replace("Current mode", "Bieżący tryb")
+                .Replace("mean ", "Średnia ")
+                .Replace("median ", "Mediana ")
+                .Replace("p95 ", "95. percentyl ");
+
+            return localized;
+        }
+
+        private static IReadOnlyList<WiRRReportTable> Lab01(string cp) => cp switch
+        {
+            "3.0" => new[] {
+                T("lab01_cp30_baseline", "Baseline PC: trzy próby", new[]{"Próba 1","Próba 2","Próba 3"}, new[]{"FPS","ms/klatka"}),
+                T("lab01_cp30_ab", "Eksperyment kontrolny 3.0", new[]{"A","B"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","ms 1","ms 2","ms 3","Mediana ms"}) },
+            "3.5" => new[] {
+                T("lab01_cpu_a", "CPU-A: iterationsPerFrame", new[]{"0","10000","25000","50000","100000","200000","400000"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Main Thread ms","Delta FPS %"}),
+                T("lab01_cpu_b", "CPU-B: blocksPerFrame", new[]{"1","2","4","8","16","32"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Delta FPS %"}),
+                T("lab01_cpu_c", "CPU-C: allocationBytesPerFrame", new[]{"0","1024","4096","16384","65536","262144"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","GC Alloc","GC zaobserwowane"}) },
+            "4.0" => new[] {
+                T("lab01_gpu_a", "GPU-A: liczba widocznych obiektów", new[]{"0","100","250","500","1000","2000","4000"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Batches","SetPass","Triangles","Delta FPS %"}),
+                T("lab01_gpu_b", "GPU-B: liczba materiałów", new[]{"1","2","4","8","16","32"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Batches","SetPass"}),
+                T("lab01_gpu_d", "GPU-D: Render Scale", new[]{"0.60","0.70","0.80","0.90","1.00","1.20"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Delta FPS %"}) },
+            "4.5" => new[] {
+                T("lab01_phy_a", "PHY-A: dynamiczne Rigidbody", new[]{"0","25","50","100","200","400","800"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Physics ms","Delta FPS %"}),
+                T("lab01_phy_c", "PHY-C: Fixed Timestep", new[]{"0.0333","0.0250","0.0200","0.0167","0.0133","0.0111"}, new[]{"kroki/s","FPS 1","FPS 2","FPS 3","Mediana FPS","Mediana ms","Physics ms"}) },
+            "5.0" => new[] {
+                T("lab01_quest_tests", "Quest 3: testy funkcjonalne", new[]{"obrót głowy","translacja głowy","lewy kontroler","prawy kontroler","Select","standalone bez Link"}, new[]{"Wynik","Uwagi"}),
+                T("lab01_quest_performance", "PC i Quest standalone: pomiary porównawcze", new[]{"PC","Quest standalone"}, new[]{"FPS 1","FPS 2","FPS 3","Mediana FPS","ms 1","ms 2","ms 3","Mediana ms","Uwagi"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+
+        private static string[] Lab02Conditions(string cp, WiRRReportDocument document)
+        {
+            var index = document?.studentIndices?.FirstOrDefault();
+            if (!long.TryParse(index, out var sum)) return new[] { "A", "B", "C" };
+            var k = cp == "3.0" ? 1 : cp == "3.5" ? 2 : cp == "4.0" ? 3 : 5;
+            var variant = 1 + ((sum + 2L * (k - 1)) % 5L);
+            var three = cp == "3.0" ? variant == 2 || variant == 3 || variant == 4
+                : cp == "3.5" ? variant == 1 || variant == 2 || variant == 4
+                : cp == "4.0" ? variant == 1 || variant == 5 : false;
+            return three ? new[] { "A", "B", "C" } : new[] { "A", "B" };
+        }
+
+        private static IReadOnlyList<WiRRReportTable> Lab02(string cp, WiRRReportDocument document) => cp switch
+        {
+            "3.0" => new[] { T("lab02_cp30_conditions", "Chwyt / socket / ray: pomiary", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy"}) },
+            "3.5" => new[] { T("lab02_cp35_conditions", "UI i feedback: pomiary", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędne aktywacje"}) },
+            "4.0" => new[] { T("lab02_cp40_conditions", "Lokomocja: pomiary", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Próba 4 s","Próba 5 s","Mediana s","Błędy/korekty"}) },
+            "4.5" => new[] { T("lab02_scenario", "Scenariusz bazowy", new[]{"1","2","3","4","5"}, new[]{"Czas s","Upuszczenia","Błędne aktywacje","Nieudane teleportacje","Błędy osadzenia/reset","Uwagi"}) },
+            "5.0" => new[] {
+                T("lab02_ssq", "SSQ: wyniki liczbowe", new[]{"Osoba A PRE","Osoba A POST"}, new[]{"N","O","D","TS"}),
+                T("lab02_quest_experiment", "Eksperyment Quest 3", Lab02Conditions(cp, document), new[]{"Próba 1 s","Próba 2 s","Próba 3 s","Mediana s","Błędy/korekty","Komfort 0–10"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+
+        private static IReadOnlyList<WiRRReportTable> Lab03(string cp) => cp switch
+        {
+            "3.0" => new[] { T("lab03_tracking_conditions", "Tracking i pierwsza płaszczyzna: warunki eksperymentalne", new[]{"A","B","C"}, new[]{"Tracking 1 s","Tracking 2 s","Tracking 3 s","Mediana tracking s","Płaszczyzna 1 s","Płaszczyzna 2 s","Płaszczyzna 3 s","Mediana płaszczyzny s","notTrackingReason/uwagi"}) },
+            "3.5" => new[] { T("lab03_placement", "Raycast i placement", new[]{"A","B","C"}, new[]{"Poprawne trafienia /10","Mediana błędu mm","Uwagi"}) },
+            "4.0" => new[] {
+                T("lab03_drift", "Kotwica: pomiar po powrocie", new[]{"1","2","3"}, new[]{"Błąd końcowy mm","Tracking","notTrackingReason","Uwagi"}),
+                T("lab03_drift_conditions", "Eksperyment dryfu", new[]{"A","B","C"}, new[]{"Powt. 1 mm","Powt. 2 mm","Powt. 3 mm","Mediana mm","Uwagi"}) },
+            "4.5" => new[] { T("lab03_registration", "Bazowe rejestracje dwupunktowe", new[]{"1","2","3"}, new[]{"Zmierzony OX m","e1 mm","e2 mm","e3 mm","e_med mm","e_max mm"}) },
+            "5.0" => new[] { T("lab03_fault", "Baseline → błąd → naprawa", new[]{"baseline 1","baseline 2","baseline 3","błąd 1","błąd 2","błąd 3","naprawa 1","naprawa 2","naprawa 3"}, new[]{"e1 mm","e2 mm","e3 mm","e_med mm","e_max mm"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+
+        private static IReadOnlyList<WiRRReportTable> Lab04(string cp) => cp switch
+        {
+            "3.0" => new[] { T("lab04_depth_v1", "Depth API: eksperyment v1", new[]{"A","B","C"}, new[]{"successRate 1 %","successRate 2 %","successRate 3 %","Mediana %","Rozdzielczość","Uwagi"}) },
+            "3.5" => new[] {
+                T("lab04_occlusion_base", "Okluzja: test bazowy", new[]{"Off","Raw","Smoothed"}, new[]{"Model zasłaniany?","Błędy /10","Dominujący błąd"}),
+                T("lab04_occlusion_v2", "Okluzja: eksperyment v2", new[]{"A","B","C"}, new[]{"Tryb/jakość","Błędy /10","Requested depth","Current depth","Uwagi"}) },
+            "4.0" => new[] {
+                T("lab04_depth_raycast", "Depth-raycast: seria bazowa", new[]{"0.50 m / 1","0.50 m / 2","0.50 m / 3","0.50 m / 4","0.50 m / 5","1.00 m / 1","1.00 m / 2","1.00 m / 3","1.00 m / 4","1.00 m / 5","1.50 m / 1","1.50 m / 2","1.50 m / 3","1.50 m / 4","1.50 m / 5"}, new[]{"HIT/MISS","d_AR m","e_d m"}),
+                T("lab04_depth_v3", "Depth-raycast: eksperyment v3", new[]{"A","B","C"}, new[]{"HIT /5","MISS /5","Mediana błędu HIT m","Uwagi"}) },
+            "4.5" => new[] { T("lab04_lighting", "Estymacja oświetlenia: pięć warunków", new[]{"Jasne rozproszone","Słabsze rozproszone","Źródło boczne","Światło od przodu","Oświetlenie mieszane"}, new[]{"Mediana brightness","Color temp K/NA","Main direction/NA","Current mode","Ocena 1–5","Uwagi"}) },
+            "5.0" => new[] { T("lab04_fault", "Baseline → błąd → naprawa", new[]{"baseline","kontrolowany błąd","po naprawie"}, new[]{"Powt. 1","Powt. 2","Powt. 3","Mediana/wynik","Uwagi"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+
+        private static IReadOnlyList<WiRRReportTable> Lab05(string cp) => cp switch
+        {
+            "3.0" => new[] {
+                T("lab05_topology", "Baseline topology audit", new[]{"Baseline"}, new[]{"MeshFilter","Vertices","Triangles","Submeshes","Material slots","Boundary edges","Non-manifold","Degenerate","q05","qMedian","World size XYZ"}),
+                T("lab05_formats", "Porównanie formatów / eksportu", new[]{"A","B","C"}, new[]{"Format","Rozmiar","Obiekty","Vertices","Triangles","Submesh","Materiały","UV","Hierarchia","Wymiary OK"}) },
+            "3.5" => new[] { T("lab05_triangulation", "Triangulacja i jakość siatki", new[]{"A","B","C"}, new[]{"Metoda/parametr","Vertices","Triangles","Boundary","Non-manifold","Degenerate","q05","qMedian","Cechy zachowane"}) },
+            "4.0" => new[] {
+                T("lab05_lods", "Finalne geometrie LOD", new[]{"Baseline","LOD0","LOD1","LOD2"}, new[]{"Rozmiar pliku","Vertices","Triangles","Submesh","Materiały","q05","qMedian","Uwagi"}),
+                T("lab05_benchmark", "Benchmark LOD: trzy próby", new[]{"A1","A2","A3","B1","B2","B3","C1","C2","C3"}, new[]{"mean ms","median ms","p95 ms","FPS","Triangles","Renderers","Material slots","CPU ms","GPU ms","Batches","Pamięć"}) },
+            "4.5" => new[] { T("lab05_materials", "Materiały, draw calls i kolizje", new[]{"A","B","C"}, new[]{"Triangles","Materiały","Draw calls/batches","CPU ms","GPU ms","Pamięć","Błędy /20","Jakość 1–5"}) },
+            "5.0" => new[] {
+                T("lab05_fault", "Baseline → fault → repaired", new[]{"baseline","fault","repaired"}, new[]{"Wymiar m","Vertices","Triangles","Boundary","q05","Materiały","Hierarchia OK","median ms","p95 ms","Błąd funkcjonalny","Uwagi"}),
+                T("lab05_final", "Tabela końcowa", new[]{"Baseline","LOD0","LOD1","LOD2","Final XR"}, new[]{"Vertices","Triangles","Submesh","Materiały","median ms","p95 ms","Batches","Pamięć","Kompromis"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+
+        private static IReadOnlyList<WiRRReportTable> Lab06(string cp) => cp switch
+        {
+            "3.0" => new[] {
+                T("lab06_environment", "Konfiguracja środowiska", new[]{"ROS 2","Gazebo Sim","ros_gz","gz_ros2_control","Robot","ROS-TCP Connector","Endpoint","IPv4 hosta","Port","Transport"}, new[]{"Wartość"}),
+                T("lab06_robot_motion", "Test ruchu robota", new[]{"Próba 1","Próba 2","Próba 3"}, new[]{"Komenda joint1","Komenda joint2","JointState joint1","JointState joint2","Gazebo/Unity zgodne?"}) },
+            "3.5" => new[] {
+                T("lab06_mapping", "Mapowanie JointState → Unity", new[]{"joint1","joint2","joint3"}, new[]{"Obiekt Unity","Typ","Oś lokalna","sign","offset","Jednostka"}),
+                T("lab06_mapping_check", "Trzy pozycje kontrolne przegubów", new[]{"Pozycja 1","Pozycja 2","Pozycja 3"}, new[]{"joint1 źródło deg","joint1 Unity deg","joint1 błąd deg","joint2 źródło deg","joint2 Unity deg","joint2 błąd deg","joint3 źródło deg","joint3 Unity deg","joint3 błąd deg"}) },
+            "4.0" => new[] {
+                T("lab06_interarrival", "Inter-arrival: pierwsze 30 próbek", new[]{"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"}, new[]{"inter-arrival ms"}),
+                T("lab06_buffer", "Buforowanie i interpolacja: wariant v3", new[]{"A","B","C"}, new[]{"Źródło","Hz","Delay ms","Buffer","T średnie ms","sT ms","Płynność"}) },
+            "4.5" => new[] {
+                T("lab06_rtt", "RTT: próbki", new[]{"1","2","3","4","5","6","7","8","9","10"}, new[]{"RTT ms"}),
+                T("lab06_rtt_compare", "RTT: wariant v4", new[]{"A","B"}, new[]{"N","mean ms","min ms","max ms","Warunki"}) },
+            "5.0" => new[] {
+                T("lab06_stale", "LIVE / STALE", new[]{"Pomiar"}, new[]{"próg STALE ms","joint_states Hz","pauza Gazebo s","detekcja STALE ms","odzyskanie LIVE ms"}), T("lab06_fault", "Eksperyment diagnostyczny", new[]{"baseline","kontrolowany błąd","po naprawie"}, new[]{"Stan / wynik","joint1","joint2","Hz","RTT ms","Uwagi"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+
+        private static IReadOnlyList<WiRRReportTable> Lab07(string cp) => cp switch
+        {
+            "3.0" => new[] {
+                T("lab07_acceptance", "Kryteria akceptacji", new[]{"AC-01 uruchomienie","AC-02 funkcjonalność","AC-03 wydajność","AC-04 stabilność","AC-05 użyteczność","AC-06 bezpieczeństwo"}, new[]{"Kryterium","Źródło/uzasadnienie","Blokujące?"}),
+                T("lab07_smoke", "Test dymny", new[]{"SM-01","SM-02","SM-03","SM-04","SM-05"}, new[]{"Warunek","Oczekiwany","Rzeczywisty","Status PASS/FAIL/NV","Dowód"}),
+                T("lab07_functional", "Macierz funkcjonalna Lab 1–6", new[]{"Lab 1","Lab 2","Lab 3","Lab 4","Lab 5","Lab 6"}, new[]{"Funkcja/kontrakt","Procedura","Oczekiwany","Rzeczywisty","Status","Dowód"}) },
+            "3.5" => new[] { T("lab07_performance", "Wydajność i stabilność", new[]{"bezczynność","nominalny","obciążeniowy"}, new[]{"FPS mediana","ms/kl mediana","CPU ms","GPU ms","Pamięć MB","Uwagi"}) },
+            "4.0" => new[] { T("lab07_usability", "Użyteczność i dostępność", new[]{"U1","U2","U3"}, new[]{"Cel użytkownika","Sukces?","Czas/próby","Błędne aktywacje","Pomoc","Problem dostępności"}) },
+            "4.5" => new[] { T("lab07_regression", "Test regresji", new[]{"REG-01","REG-02"}, new[]{"Test","Przed poprawką","Po poprawce","Status końcowy","Dowód"}) },
+            "5.0" => new[] { T("lab07_risk", "Macierz ryzyka", new[]{"R-01","R-02","R-03"}, new[]{"Ryzyko","P","S","R","Dowód","Działanie ograniczające","Ryzyko resztkowe"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+ 
+        private static IReadOnlyList<WiRRReportTable> Lab08(string cp) => cp switch
+        {
+            "3.0" => Array.Empty<WiRRReportTable>(),
+            "3.5" => Array.Empty<WiRRReportTable>(),
+            "5.0" => Array.Empty<WiRRReportTable>(),
+            "4.0" => new[] { T("lab08_trials", "Sześć prób A/B (z pliku JSON)",
+                        new[]{"Próba 1", "Próba 2", "Próba 3", "Próba 4", "Próba 5", "Próba 6"},
+                        new[]{"Czas [s]", "Sukces", "Tryb danych", "Wariant"},
+                        "Próby 1–3 = A, 4–6 = B. Niepowodzenia zachowaj; brak pomiaru oznacz NV, nie zerem.") },
+            "4.5" => new[] { T("lab08_comparison", "Wariant bazowy i poprawiony",
+                        new[]{"Przed zmianą", "Po zmianie"},
+                        new[]{"Mediana czasu [s]", "Sukcesy", "Uwagi"}) },
+            _ => Array.Empty<WiRRReportTable>()
+        };
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "id": 8,
+  "title": "Wymyśl użyteczne 90 sekund XR",
+  "question": "Jak sprawdzić, czy mały demonstrator pomaga osiągnąć cel?",
+  "mode": "DESKTOP_SIM",
+  "concept": "Demonstrator ma odbiorcę, jedno zadanie i rozpoznawalne zakończenie. Zmiana modułu ma usuwać problem użytkownika, nie tylko zmieniać wygląd. GUEST_HUMAN oznacza próbę z osobą, a GUEST_SIM test wcześniej zdefiniowanego scenariusza. Symulowany gość jest alternatywą dydaktyczną, ale nie stanowi badania zachowania człowieka.",
+  "controls": "Ten sam cel i szablon w serii przed/po. Zmieniaj pojedynczy moduł przy porównaniu; drugi dodaj jako świadomą decyzję projektową.",
+  "invalid": "Test prowadzony krok po kroku przez autora nie potwierdza samodzielnego wykonania. Błąd scenariusza gościa nie jest obserwacją błędu człowieka.",
+  "conclusion": "Demonstrator pomaga ___ w ___; kontrpróba pokazała ograniczenie ___.",
+  "actions": [
+    {
+      "title": "Uruchom i zmień demonstrator",
+      "body": "W Experience Studio wybierz jeden gotowy szablon: trenażer, inspekcja części lub bliźniak cyfrowy. Uruchom bazę i sprawdź osiągnięcie celu. Zmień pierwszy moduł i porównaj wynik z bazą. Dobierz drugi znaczący element; zachowaj konfiguracje, aby było wiadomo, co się zmieniło. Nie zaczynaj od pustej sceny."
+    },
+    {
+      "title": "Sprawdź na gościu i popraw",
+      "body": "Uruchom scenariusz dla gościa bez podpowiedzi autora. Możesz użyć drugiej osoby albo GUEST_SIM przy pracy solo. Sprawdź ukończenie, pomyłki i potrzebę podpowiedzi. Wybierz jedną poprawkę po tej obserwacji i ponów próbę. Zachowaj właściwe oznaczenie źródła, również gdy zmieniasz tryb testu."
+    },
+    {
+      "title": "Pokaż działanie i jego granicę",
+      "body": "Przeprowadź pokaz w aplikacji trwający 60–90 sekund. Krótka kontrpróba ma sprawdzić inne ustawienie lub warunek użytkowania. W jednym zdaniu wskaż odbiorcę, zastosowanie i ograniczenie potwierdzone tą próbą. Nie przygotowuj filmu, slajdów ani osobnego projektu do oddania."
+    }
+  ],
+  "rubric": [
+    "Uruchom gotowy mini-demonstrator, użytkownik osiąga cel",
+    "Zmień jeden moduł i porównaj wynik",
+    "Wyjaśnij, dla jakiego użytkownika i problemu zmiana ma sens",
+    "Dobierz drugi moduł i przetestuj demonstrator u innej osoby lub w trybie gościa",
+    "Ukaż zastosowanie w 60–90 s i jego ograniczenie na podstawie krótkiej kontrpróby"
+  ],
+  "instruction_version": "2.0.0-draft.2",
+  "source_sha256": "9cb8f3075cfe837cb1e02a66484d2afb0711a8a86e31010335b47ca90e3dfa84"
+}

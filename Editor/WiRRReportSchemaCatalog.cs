@@ -1,0 +1,196 @@
+using System;
+using System.Collections.Generic;
+
+namespace KIA.WiRR.Editor
+{
+    internal enum WiRRReportFieldKind { Text, Multiline, Integer, Number, Choice, Boolean }
+
+    internal sealed class WiRRReportField
+    {
+        public string Id { get; }
+        public string Label { get; }
+        public WiRRReportFieldKind Kind { get; }
+        public bool Required { get; }
+        public string Unit { get; }
+        public string Help { get; }
+        public string[] Choices { get; }
+
+        public WiRRReportField(string id, string label, WiRRReportFieldKind kind = WiRRReportFieldKind.Text,
+            bool required = true, string unit = "", string help = "", params string[] choices)
+        {
+            Id = id;
+            Label = label;
+            Kind = kind;
+            Required = required;
+            Unit = unit;
+            Help = string.IsNullOrWhiteSpace(help) ? DefaultHelp(label, kind, unit, required) : help;
+            Choices = choices ?? Array.Empty<string>();
+        }
+
+        private static string DefaultHelp(string label, WiRRReportFieldKind kind, string unit, bool required)
+        {
+            var requirement = required ? " Pole jest wymagane dla tego etapu." : " Pole jest opcjonalne.";
+
+            if (kind == WiRRReportFieldKind.Multiline)
+            {
+                if (label == "H1" || label == "H2" || label.Contains("Hipoteza", StringComparison.OrdinalIgnoreCase) || label.Contains("H1/H2", StringComparison.OrdinalIgnoreCase))
+                    return "Zapisz hipotezę w sposób możliwy do sprawdzenia: wskaż przewidywany skutek i zmienną, na której go ocenisz." + requirement;
+                if (label.Contains("błąd", StringComparison.OrdinalIgnoreCase) && label.Contains("kontrol", StringComparison.OrdinalIgnoreCase))
+                    return "Opisz celowo wprowadzony błąd lub zakłócenie oraz element systemu, którego dotyczy." + requirement;
+                if (label.Contains("wynik", StringComparison.OrdinalIgnoreCase) && label.Contains("popraw", StringComparison.OrdinalIgnoreCase))
+                    return "Podaj wynik ponownego testu po zastosowaniu poprawki i porównaj go z pomiarem wcześniejszym." + requirement;
+                if (label.Contains("poprawk", StringComparison.OrdinalIgnoreCase) || label.Contains("napraw", StringComparison.OrdinalIgnoreCase))
+                    return "Opisz możliwie małą zmianę zastosowaną w celu usunięcia zidentyfikowanej przyczyny problemu." + requirement;
+                return "Sformułuj krótki wniosek na podstawie wykonanych pomiarów. Odwołaj się do obserwowanych danych, a nie do przypuszczeń." + requirement;
+            }
+
+            if (kind == WiRRReportFieldKind.Boolean)
+                return "Wybierz „tak” lub „nie” zgodnie z wynikiem wykonanego testu." + requirement;
+
+            if (kind == WiRRReportFieldKind.Choice)
+                return "Wybierz odpowiedź zgodną z rzeczywiście wykonanym wariantem lub uzyskanym wynikiem." + requirement;
+
+            if (kind == WiRRReportFieldKind.Number || kind == WiRRReportFieldKind.Integer)
+                return string.IsNullOrWhiteSpace(unit)
+                    ? "Wpisz wartość uzyskaną w pomiarze lub obliczeniu." + requirement
+                    : $"Wpisz wartość w jednostce: {unit}." + requirement;
+
+            return $"Wpisz informację odpowiadającą polu „{label}” na podstawie wykonanego ćwiczenia." + requirement;
+        }
+    }
+
+    internal sealed class WiRRReportSection
+    {
+        public string Title { get; }
+        public string Checkpoint { get; }
+        public IReadOnlyList<WiRRReportField> Fields { get; }
+        public WiRRReportSection(string title, string checkpoint, params WiRRReportField[] fields)
+        { Title = title; Checkpoint = checkpoint; Fields = fields; }
+    }
+
+    internal static class WiRRReportSchemaCatalog
+    {
+        public static IReadOnlyList<WiRRReportSection> Get(int lab) => lab switch
+        {
+            1 => Lab01(), 2 => Lab02(), 3 => Lab03(), 4 => Lab04(), 5 => Lab05(), 6 => Lab06(), 7 => Lab07(), 8 => Lab08(),
+            _ => throw new ArgumentOutOfRangeException(nameof(lab))
+        };
+
+        private static WiRRReportField T(string id, string label, bool req = true, string help = "") => new(id, label, WiRRReportFieldKind.Text, req, help: help);
+        private static WiRRReportField M(string id, string label, bool req = true, string help = "") => new(id, label, WiRRReportFieldKind.Multiline, req, help: help);
+        private static WiRRReportField N(string id, string label, string unit = "", bool req = true) => new(id, label, WiRRReportFieldKind.Number, req, unit);
+        private static WiRRReportField I(string id, string label, string unit = "", bool req = true) => new(id, label, WiRRReportFieldKind.Integer, req, unit);
+        private static WiRRReportField B(string id, string label, bool req = true) => new(id, label, WiRRReportFieldKind.Boolean, req);
+        private static WiRRReportField C(string id, string label, params string[] values) => new(id, label, WiRRReportFieldKind.Choice, true, choices: values);
+
+        private static WiRRReportSection CommonEnvironment() => new("Środowisko i identyfikacja", "COMMON",
+            T("environment.station", "Stanowisko / oznaczenie komputera", false, "Podaj oznaczenie stanowiska lub komputera, jeśli jest potrzebne do odtworzenia warunków pomiaru."),
+            T("environment.device", "Gogle HMD / telefon / inne urządzenie", false, "Podaj model urządzenia użytego w ćwiczeniu, np. Meta Quest 3. Informacja jest opcjonalna."),
+            T("environment.notes", "Uwagi o środowisku", false, "Zapisz tylko informacje mogące wpływać na interpretację lub powtarzalność pomiaru."));
+
+        private static IReadOnlyList<WiRRReportSection> Lab01() => new[]
+        {
+            CommonEnvironment(),
+            new WiRRReportSection("3.0: pomiar bazowy i eksperyment kontrolny", "3.0", N("cp30.baseline_fps","Mediana liczby klatek na sekundę","FPS"), N("cp30.baseline_frame_ms","Mediana czasu klatki","ms"), M("cp30.answer","Odpowiedź na pytanie badawcze")),
+            new WiRRReportSection("3.5: CPU", "3.5", N("cp35.cpu_median_fps","Mediana liczby klatek na sekundę w wybranym wariancie","FPS"), N("cp35.main_thread_ms","Czas głównego wątku (Main Thread)","ms"), N("cp35.gc_alloc","Alokacja pamięci GC","B",false), M("cp35.answer","Wniosek dotyczący obciążenia CPU")),
+            new WiRRReportSection("4.0: renderowanie", "4.0", N("cp40.gpu_median_fps","Mediana liczby klatek na sekundę","FPS"), I("cp40.batches","Partie renderowania (Batches)"), I("cp40.triangles","Liczba trójkątów"), N("cp40.render_scale","Skala renderowania (Render Scale)","",false), M("cp40.answer","Wniosek dotyczący renderowania i GPU")),
+            new WiRRReportSection("4.5: fizyka", "4.5", N("cp45.physics_median_fps","Mediana liczby klatek na sekundę","FPS"), N("cp45.physics_ms","Czas obliczeń fizyki (Physics.Processing)","ms"), N("cp45.fixed_timestep","Stały krok symulacji (Fixed Timestep)","s",false), M("cp45.answer","Wniosek dotyczący symulacji fizyki")),
+            new WiRRReportSection("5.0: test na Meta Quest 3", "5.0", C("cp50.quest_build","Kompilacja autonomiczna (standalone)","sukces","błąd","niezweryfikowano"), N("cp50.quest_fps","Mediana liczby klatek na sekundę standalone","FPS",false), B("cp50.tracking_6dof","Śledzenie 6DoF działa poprawnie"), M("cp50.answer","Wniosek końcowy"))
+        };
+
+        private static IReadOnlyList<WiRRReportSection> Lab02() => new[]
+        {
+            CommonEnvironment(),
+            new WiRRReportSection("3.0: chwyt, gniazdo (socket) i promień (ray)", "3.0", N("cp30.task_median_s","Mediana czasu zadania","s"), I("cp30.errors","Błędy łącznie"), M("cp30.answer","Odpowiedź na pytanie badawcze")),
+            new WiRRReportSection("3.5: interfejs i informacja zwrotna", "3.5", N("cp35.ui_median_s","Mediana czasu","s"), I("cp35.false_activations","Błędne / powtórzone aktywacje"), B("cp35.haptics_requested","Generowane jest żądanie haptyczne"), M("cp35.answer","Wniosek")),
+            new WiRRReportSection("4.0: lokomocja", "4.0", N("cp40.locomotion_median_s","Mediana czasu","s"), I("cp40.corrections","Błędy / korekty"), B("cp40.teleport_valid","Teleport odrzuca niedozwolone powierzchnie"), M("cp40.answer","Wniosek dotyczący komfortu i lokomocji")),
+            new WiRRReportSection("4.5: diagnostyka", "4.5", N("cp45.scenario_median_s","Mediana scenariusza","s"), M("cp45.h1","Hipoteza H1"), M("cp45.h2","Hipoteza H2"), M("cp45.fix","Minimalna poprawka"), M("cp45.post_result","Wynik po poprawce")),
+            new WiRRReportSection("5.0: test na Meta Quest 3 i SSQ", "5.0", N("cp50.ssq_pre_ts","SSQ: wynik całkowity przed ekspozycją (TS PRE)"), N("cp50.ssq_post_ts","SSQ: wynik całkowity po ekspozycji (TS POST)"), N("cp50.comfort_0_10","Komfort 0–10"), M("cp50.answer","Wniosek ograniczony do tej sesji"))
+        };
+
+        private static IReadOnlyList<WiRRReportSection> Lab03() => new[]
+        {
+            CommonEnvironment(),
+            new WiRRReportSection("3.0: śledzenie i wykrywanie płaszczyzn", "3.0", N("cp30.tracking_s","Czas do uzyskania stanu SessionTracking","s"), N("cp30.first_plane_s","Czas do pierwszej użytecznej płaszczyzny","s"), T("cp30.not_tracking_reason","Najczęstsza przyczyna braku śledzenia (notTrackingReason)"), M("cp30.answer","Wniosek i ograniczenia pomiaru")),
+            new WiRRReportSection("3.5: raycast i skala 1:1", "3.5", I("cp35.hits_10","Poprawne trafienia / 10"), N("cp35.placement_error_mm","Mediana błędu pozycjonowania","mm"), B("cp35.scale_1_1","Skala 1:1"), M("cp35.answer","Wniosek")),
+            new WiRRReportSection("4.0: kotwica i dryf", "4.0", N("cp40.path_m","Długość ścieżki","m"), N("cp40.drift_median_mm","Mediana błędu po powrocie","mm"), T("cp40.tracking_state","Stan śledzenia podczas ruchu"), M("cp40.answer","Wniosek")),
+            new WiRRReportSection("4.5: rejestracja dwupunktowa", "4.5", N("cp45.ox_m","Zmierzony OX","m"), N("cp45.e_median_mm","Mediana błędu e_med","mm"), N("cp45.e_max_mm","Maksymalny błąd","mm"), M("cp45.uncertainty","Najważniejsze źródło niepewności"), M("cp45.answer","Wniosek")),
+            new WiRRReportSection("5.0: kontrolowany błąd", "5.0", M("cp50.fault","Kontrolowany błąd"), M("cp50.h1","H1"), M("cp50.h2","H2"), N("cp50.error_after_fix_mm","Mediana błędu e_med po naprawie","mm"), M("cp50.answer","Diagnoza końcowa"))
+        };
+
+        private static IReadOnlyList<WiRRReportSection> Lab04() => new[]
+        {
+            CommonEnvironment(),
+            new WiRRReportSection("3.0: API głębi i diagnostyka", "3.0", C("cp30.depth_available","Dane głębi (Depth)","dostępna","niedostępna","niezweryfikowano"), T("cp30.depth_mode","Bieżący tryb głębi"), T("cp30.depth_resolution","Rozdzielczość ostatniej klatki głębi", false), M("cp30.answer","Wniosek i najważniejsze ograniczenie pomiaru")),
+            new WiRRReportSection("3.5: okluzja środowiskowa", "3.5", T("cp35.occlusion_mode","Dominujący tryb / jakość"), I("cp35.occlusion_errors","Błędy okluzji / 10"), T("cp35.signature","Dominująca sygnatura błędu"), M("cp35.answer","Wniosek o wygładzaniu i jakości danych głębi")),
+            new WiRRReportSection("4.0: raycast z użyciem głębi i błąd odległości", "4.0", N("cp40.depth_error_m","Mediana błędu dla poprawnych trafień (HIT)","m"), I("cp40.hits","Liczba poprawnych trafień (HIT) / 5"), I("cp40.misses","Liczba nietrafień (MISS) / 5"), M("cp40.answer","Wniosek i wyjaśnienie, dlaczego brak trafienia (MISS) nie oznacza błędu 0 m")),
+            new WiRRReportSection("4.5: estymacja oświetlenia", "4.5", N("cp45.brightness","Mediana jasności (brightness)","",false), N("cp45.color_temperature","Temperatura barwowa","K",false), T("cp45.current_mode","Bieżący tryb estymacji oświetlenia"), M("cp45.answer","Wniosek oraz opis niedostępnych danych API")),
+            new WiRRReportSection("5.0: kontrolowany błąd i diagnoza", "5.0", M("cp50.fault","Kontrolowany błąd"), M("cp50.h1","H1"), M("cp50.h2","H2"), M("cp50.test","Test rozstrzygający i wynik"), M("cp50.fix","Minimalna poprawka"), M("cp50.answer","Diagnoza końcowa"))
+        };
+
+        // Field IDs remain stable across checkpoint moves to preserve saved drafts.
+        private static IReadOnlyList<WiRRReportSection> Lab05() => new[]
+        {
+            CommonEnvironment(),
+            new WiRRReportSection("3.0: import i audyt modelu CAD", "3.0", T("cp30.source_format","Format źródłowy"), I("cp30.triangles_before","Liczba trójkątów przed"), I("cp30.triangles_after","Liczba trójkątów po"), M("cp30.answer","Ocena topologii / importu")),
+            new WiRRReportSection("3.5: triangulacja i jakość siatki", "3.5", M("cp35.answer","Porównanie wariantów A/B/C i zachowanie cech funkcjonalnych")),
+            new WiRRReportSection("4.0: LOD i pomiar wydajności", "4.0", I("cp35.lod0_triangles","LOD0: liczba trójkątów"), I("cp35.lod1_triangles","LOD1: liczba trójkątów"), I("cp35.lod2_triangles","LOD2: liczba trójkątów"), N("cp40.import_s","Czas importu","s"), N("cp40.memory_mb","Pamięć zasobu","MB"), N("cp40.frame_ms","Mediana czasu klatki","ms"), M("cp40.answer","Kompromis jakości, LOD i kosztu klatki")),
+            new WiRRReportSection("4.5: materiały, tekstury i kolizje", "4.5", M("cp45.issue","Badany koszt materiałów, tekstur albo kolizji"), M("cp45.fix","Zmieniony parametr w warunkach A/B/C"), N("cp45.error_before","Miara błędu przed", "", false), N("cp45.error_after","Miara błędu po", "", false), M("cp45.answer","Interpretacja kosztu i jakości")),
+            new WiRRReportSection("5.0: kontrolowany błąd i finalny model", "5.0", M("cp50.fault","Kontrolowany błąd"), M("cp50.h1","H1"), M("cp50.h2","H2"), M("cp50.test","Test rozstrzygający i wynik"), M("cp50.fix","Minimalna poprawka i ponowny pomiar"), C("cp50.pipeline","Wybrany potok przetwarzania","STEP→DCC→FBX/glTF","USD","bezpośrednia siatka","inna"), M("cp50.risk","Najważniejsze ryzyko potoku przetwarzania"), M("cp50.answer","Uzasadnienie finalnego modelu"))
+        };
+
+        private static IReadOnlyList<WiRRReportSection> Lab06() => new[]
+        {
+            CommonEnvironment(),
+            new WiRRReportSection("3.0: źródło stanu", "3.0", C("cp30.mode","Tryb","LOCAL","LAN","WEBSIM"), T("cp30.ros_version","ROS 2"), T("cp30.gazebo_version","Gazebo albo N/A z uzasadnieniem dla WebSim"), N("cp30.joint_rate_hz","Częstotliwość wiadomości JointState","Hz"), M("cp30.answer","Weryfikacja przepływu danych ze źródła do Unity")),
+            new WiRRReportSection("3.5: mapowanie przegubów", "3.5", N("cp35.joint1_error_deg","Błąd przegubu joint1","deg"), N("cp35.joint2_error_deg","Błąd przegubu joint2","deg"), N("cp35.joint3_error_deg","Błąd przegubu joint3","deg",false), M("cp35.answer","Mapowanie po nazwach; joint3 = N/A dla RRBot z dwoma przegubami")),
+            new WiRRReportSection("4.0: buforowanie i interpolacja", "4.0", N("cp40.jitter_ms","Zmienność odstępów między wiadomościami (jitter)","ms"), N("cp40.buffer_ms","Opóźnienie bufora interpolacji","ms"), M("cp40.answer","Porównanie wariantów bufora; WebSim wymaga własnego komponentu lub przejścia na LOCAL/LAN")),
+            new WiRRReportSection("4.5: pomiar RTT", "4.5", N("cp40.latency_ms","Mediana bazowych próbek RTT","ms"), M("cp45.h1","H1"), M("cp45.h2","H2"), M("cp45.answer","Co najmniej 50 próbek na warunek; nie utożsamiaj RTT z opóźnieniem jednostronnym")),
+            new WiRRReportSection("5.0: STALE, awaria i odzyskanie", "5.0", N("cp45.stale_ms","Czas do wykrycia stanu STALE","ms"), N("cp45.recovery_ms","Czas powrotu do stanu LIVE","ms"), N("cp50.sync_error_deg","Maksymalny błąd synchronizacji","deg"), B("cp50.recovery_pass","Powrót STALE → LIVE działa poprawnie"), M("cp50.answer","Objaw, hipoteza, test, poprawka i ponowny pomiar"))
+        };
+
+        private static IReadOnlyList<WiRRReportSection> Lab07() => new[]
+        {
+            CommonEnvironment(),
+            new WiRRReportSection("3.0: test podstawowy i kryteria akceptacji", "3.0", I("cp30.smoke_pass","Liczba testów zaliczonych (PASS)"), I("cp30.blocking_fail","Liczba błędów blokujących (FAIL)"), I("cp30.nv","Niezweryfikowane (NV)","",false), M("cp30.answer","Ocena spełnienia kryteriów")),
+            new WiRRReportSection("3.5: wydajność", "3.5", N("cp35.frame_ms","Mediana czasu klatki","ms"), N("cp35.fps","Mediana liczby klatek na sekundę","FPS"), N("cp35.memory_mb","Pamięć","MB"), M("cp35.answer","Wniosek dotyczący CPU, GPU, pamięci i transmisji")),
+            new WiRRReportSection("4.0: użyteczność", "4.0", N("cp40.success_rate","Skuteczność","%"), I("cp40.false_activations","Błędne aktywacje"), I("cp40.assistance","Liczba podpowiedzi"), M("cp40.answer","Wniosek dotyczący użyteczności i dostępności")),
+            new WiRRReportSection("4.5: kontrolowany błąd i test regresyjny", "4.5", T("cp45.fault","Kontrolowany błąd"), N("cp45.recovery_s","Czas przywracania poprawnego działania","s"), B("cp45.regression_pass","Test regresyjny zaliczony"), M("cp45.diagnosis","Hipotezy H1/H2, test rozstrzygający i poprawka")),
+            new WiRRReportSection("5.0: automatyzacja, ryzyko i decyzja", "5.0", B("cp50.automated_pass","Automatyczny test zaliczony"), B("cp50.controlled_fail","Wykazano kontrolowany wynik FAIL"), I("cp50.max_risk","Maksymalny priorytet ryzyka R = P × S"), C("cp50.acceptance","Decyzja","ACCEPT","ACCEPT WITH CONDITIONS","REJECT"), M("cp50.answer","Uzasadnienie decyzji"))
+        };
+
+        // The latest Lab 08 manuscript defines the checkpoints; saved IDs are retained.
+        private static IReadOnlyList<WiRRReportSection> Lab08() => new[]
+        {
+            CommonEnvironment(),
+            new WiRRReportSection("3.0: problem i działająca scena", "3.0",
+                T("cp30.scenario", "Problem użytkownika i cel demonstratora"),
+                T("cp30.acceptance", "Mierzalne kryterium akceptacji"),
+                T("cp35.source", "Źródło i rzeczywisty tryb danych"),
+                B("cp30.running", "Kontrola trzech różnych elementów działa"),
+                M("cp30.answer", "Konfiguracja i dowód działania")),
+            new WiRRReportSection("3.5: sukces, anulowanie i test negatywny", "3.5",
+                M("cp35.negative_test", "Wynik ponownego wskazania tego samego elementu"),
+                M("cp35.cancel_test", "Wynik przerwania próby"),
+                M("cp35.answer", "Dowód poprawnej logiki zakończenia próby")),
+            new WiRRReportSection("4.0: sześć prób A/B i obliczenia", "4.0",
+                I("cp30.attempts", "Liczba faktycznie wykonanych prób"),
+                I("cp30.successes", "Udane próby"),
+                N("cp35.median_s", "Mediana poprawnych prób A", "s", false),
+                T("cp40.hypothesis", "Hipoteza i zmienna zależna"),
+                M("cp40.diagnosis", "Wyniki A/B, niepowodzenia i ograniczenia danych")),
+            new WiRRReportSection("4.5: poprawka i regresja", "4.5",
+                T("cp45.change", "Zmieniony jeden parametr"),
+                N("cp45.before_s", "Mediana poprawnych prób A", "s", false),
+                N("cp45.after_s", "Mediana poprawnych prób B", "s", false),
+                M("cp45.regression", "Wynik testu negatywnego i regresyjnego"),
+                M("cp45.answer", "Interpretacja czasu, skuteczności i ograniczeń")),
+            new WiRRReportSection("5.0: demonstrator integracyjny", "5.0",
+                M("cp50.application", "Wartość rozwiązania dla użytkownika względem 2D"),
+                M("cp50.two_skills", "Dwie wykorzystane umiejętności kursowe"),
+                M("cp50.risk", "Ryzyka i decyzja akceptacyjna"),
+                M("cp50.reproduction", "Commit, dowody odtworzenia i demonstracja"),
+                M("cp50.limitations", "Ograniczenia rozwiązania"))
+        };
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "id": 5,
+  "title": "Geometria kosztuje, ale otwór montażowy musi zostać",
+  "question": "Który najlżejszy model nadal spełnia funkcję części?",
+  "mode": "DESKTOP_SIM",
+  "concept": "Model CAD opisuje geometrię konstrukcyjną; siatka renderingu przybliża jej powierzchnię trójkątami. Redukcja siatki może usunąć ważną cechę, np. otwór. LOD wybiera szczegółowość zależnie od widoku. Collider opisuje kolizję i nie musi odpowiadać widocznej siatce. Liczba trójkątów jest jedną z przyczyn kosztu, a nie pełną miarą wydajności.",
+  "controls": "Ta sama część, skala, orientacja, oświetlenie, trasa kamery i stanowisko. Oddziel zmianę siatki od zmiany materiałów.",
+  "invalid": "Brak siatki referencyjnej, błędna skala albo nieznana cecha wymiarowa uniemożliwia ocenę zachowania geometrii. Nie zastępuj jej oceną wizualnej atrakcyjności.",
+  "conclusion": "Wariant ___ zachowuje ___ przy koszcie ___; jego granicą jest ___.",
+  "actions": [
+    {
+      "title": "Zbadaj tę samą część",
+      "body": "W Warsztacie CAD obejrzyj przygotowane High, Medium i Low bez zmiany skali. Rozpoznaj otwory montażowe, krawędź dopasowania i obrys. Włącz widok kontrolny i sprawdź, które cechy zachował każdy wariant. Korzystaj z dostarczonych siatek; konwersja STEP nie należy do tego doświadczenia."
+    },
+    {
+      "title": "Porównaj koszt i geometrię",
+      "body": "Uruchom wspólny benchmark kamery dla wariantów. Porównaj liczbę trójkątów, materiałów i czas klatki. Zbliż i oddal kamerę, obserwując moment zmiany LOD. Nie zestawiaj wyników z innego stanowiska albo innej trasy jako jednego porównania A/B."
+    },
+    {
+      "title": "Dobierz LOD i sprawdź ograniczenie",
+      "body": "Wybierz najlżejszą konfigurację zachowującą wymaganą cechę. Zmień jeden parametr, np. próg LOD, i sprawdź koszt oraz geometrię przed/po. Wykonaj kontrpróbę przy innej odległości lub liczbie materiałów. Uzasadnij jednym zdaniem, gdzie uproszczenie przestaje być dopuszczalne."
+    }
+  ],
+  "rubric": [
+    "Obejrzyj przygotowane High/Low i ich cechy",
+    "Porównaj geometrię i koszt w benchmarku",
+    "Wyjaśnij kompromis redukcji siatki",
+    "Dobierz LOD zachowujący wymagane otwory przy mniejszym koszcie",
+    "Sprawdź przy innej odległości lub liczbie materiałów, wskaż granicę uproszczenia"
+  ],
+  "instruction_version": "2.0.0-draft.2",
+  "source_sha256": "abb4f616d8e4c651b250acff19a08db3b4c3013bda3f9732ac7742c71049d17f"
+}
