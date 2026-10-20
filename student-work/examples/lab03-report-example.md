@@ -1,6 +1,4 @@
-# Lab 03. Przykładowe sprawozdanie: Rejestracja i kotwice AR
-
-> **PRZYKŁAD DYDAKTYCZNY, DANE FIKCYJNE.** Żadna liczba nie pochodzi z pomiaru rzeczywistego studenta lub sprzętu. Pokazano jedną demonstracyjną sekcję raportu na poziomie 3.0, nie całe zaliczone laboratorium.
+# Lab 03. Przykładowe sprawozdanie dla rejestracji i kotwic AR
 
 ## Identyfikacja i środowisko
 
