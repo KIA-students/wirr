@@ -1,9 +1,16 @@
 # WiRR: rozpoczęcie i oddanie pracy
 
-## Spis treści
+## Uruchomienie krok po kroku
 
+1. Uruchom **Unity Hub**. W zakładce **Installs** sprawdź, czy dostępny jest Unity **6000.6.5f1**. Jeżeli nie, wybierz **Install Editor** i doinstaluj tę wersję.
+2. W **Projects** otwórz projekt przygotowany na stanowisku. Na własnym komputerze wybierz **New project → Universal 3D (URP) → Create project**.
+3. Jeżeli pakiet WiRR nie jest jeszcze zainstalowany, w edytorze wybierz **Window → Package Manager**, naciśnij **+ → Install package from git URL**, wklej `https://github.com/KIA-students/wirr.git#upm` i wybierz **Install**. Jeśli Package Manager zgłasza błąd Git, sprawdź `git --version` i komunikat w Console.
+4. Otwórz **WiRR → Misje i odkrycia (4 bloki) → Start: Lab 01**. Jeśli pakiet nie zadziała, użyj pustej sceny URP, utwórz sześcian przez **GameObject → 3D Object → Cube**, naciśnij **Play**, a następnie zakończ i zapisz scenę. Problem zgłoś prowadzącemu bez wielokrotnego importu pakietu.
+5. Wybierz właściwy [blok laboratoryjny](../Campaign/README.md), wykonaj eksperyment i przekaż dwa oddzielne raporty, zgodnie z dalszymi krokami.
 
+Nie instaluj Android SDK, ROS 2, Gazebo ani pakietów XR do zwykłego uruchomienia pierwszej sceny na PC.
 
+## Przekazywanie raportów
 
 1. Otwórz przygotowany projekt Unity 6000.6.5f1 i bieżący blok. Pracuj solo lub w parze. W scenach SIM_AR Lab03–04 po zakończeniu Play [przenieś zapisaną sesję do formularza](../WiRR2/SUPABASE-REPORT-BRIDGE.md). W Lab05–06 (blok 03) adapter automatycznego importu nie jest jeszcze dostępny: [przenieś rzeczywiste wyniki ręcznie do istniejącego formularza](../WiRR2/SUPABASE-REPORT-BRIDGE.md#laboratoria-05-i-06-przekazanie-wyników-bez-adaptera). Lokalny eksport dwóch wyników sam nie oddaje pracy.
 2. Wpisz indeksy i grupę G1/G2 raz na blok.
