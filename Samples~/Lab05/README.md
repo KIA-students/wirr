@@ -1,5 +1,7 @@
 # Lab 05: Geometria kosztuje, ale otwór montażowy musi zostać
 
+**Instrukcja krok po kroku (90 minut):** [Laboratorium 05: geometria CAD, LOD i benchmark](../../Documentation~/WiRR2/LAB05-STUDENT-GUIDE.md). Przed rozpoczęciem znajdziesz w niej dokładną procedurę instalacji Unity, otwarcia sceny, kolejności prób i wysłania osobnego raportu przez formularz WiRR/Supabase. Poniższy plik jest skróconą kartą doświadczenia.
+
 ## Spis treści
 
 - [Co będziesz badać](#co-będziesz-badać)
