@@ -1,4 +1,4 @@
-# WiRR WebSim — lokalny backend Lab 06
+# WiRR WebSim, czyli lokalny backend dla Lab 06
 
 Ten katalog uruchamia przez Docker pojedynczy, izolowany backend ROS 2 dla Lab 06. Zawiera `rosbridge` (WebSocket) i deterministyczny generator `sensor_msgs/msg/JointState`; nie wymaga instalacji ROS 2 ani Gazebo na komputerach studentów. Stan jest generowany przez prawdziwy węzeł ROS 2, dzięki czemu Unity obserwuje topiki identycznie jak przy zewnętrznym symulatorze.
 
