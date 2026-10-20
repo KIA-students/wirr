@@ -12,7 +12,7 @@ EXPECTED = {
     "courses": {"SELECT"},
     "enrollments": {"SELECT"},
     "wirr_submissions": {"SELECT", "INSERT"},
-    "wirr_grades": {"SELECT", "INSERT", "UPDATE"},
+    "wirr_grades": {"SELECT", "INSERT"},
     "wirr_instructor_overview": {"SELECT"},
 }
 GRANT_TABLE = re.compile(
@@ -27,7 +27,12 @@ def validate(sql: str) -> list[str]:
     """Return policy violations instead of executing the SQL."""
     clean = re.sub(r"--[^\n]*", "", sql)
     statements = [s.strip() for s in clean.split(";") if s.strip()]
-    permitted = {"BEGIN", "COMMIT", GRANT_SCHEMA}
+    required = {
+        "GRANT UPDATE (grade, graded_by, graded_at) ON TABLE public.wirr_grades TO authenticated",
+        "GRANT USAGE ON SCHEMA public TO service_role",
+        "GRANT SELECT, INSERT ON TABLE public.wirr_public_intake TO service_role",
+    }
+    permitted = {"BEGIN", "COMMIT", GRANT_SCHEMA} | required
     seen = {}
     errors = []
     for statement in statements:
@@ -51,12 +56,29 @@ def validate(sql: str) -> list[str]:
         errors.append("Missing transaction boundaries")
     if [re.sub(r"\s+", " ", s).strip() for s in statements].count(GRANT_SCHEMA) != 1:
         errors.append("Missing or duplicate schema usage grant")
+    for required_statement in required:
+        if statements.count(required_statement) != 1:
+            errors.append(f"Missing or duplicate required grant: {required_statement}")
     return errors
 
 
 class TestDataApiGrants(unittest.TestCase):
     def test_reference_grants_are_safe(self):
         self.assertEqual(validate(SQL.read_text(encoding="utf-8")), [])
+
+    def test_preserve_column_update_boundary(self):
+        sql = SQL.read_text(encoding="utf-8")
+        self.assertTrue(validate(sql.replace(
+            "UPDATE (grade, graded_by, graded_at)", "UPDATE")))
+        self.assertTrue(validate(sql.replace(
+            "UPDATE (grade, graded_by, graded_at)",
+            "UPDATE (grade, graded_by, graded_at, student_id)")))
+
+    def test_queue_requires_explicit_server_access(self):
+        sql = SQL.read_text(encoding="utf-8")
+        grant = "GRANT SELECT, INSERT ON TABLE public.wirr_public_intake TO service_role;"
+        self.assertTrue(validate(sql.replace(grant, "")))
+        self.assertTrue(validate(sql.replace(grant, grant.replace("service_role", "anon"))))
 
     def test_reject_anon_grants(self):
         sql = SQL.read_text(encoding="utf-8").replace(
