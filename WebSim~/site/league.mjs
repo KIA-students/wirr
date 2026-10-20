@@ -109,9 +109,24 @@ export async function renderLeague(target) {
   if (!target) return;
   target.replaceChildren(el('p', 'Wczytywanie rankingu…'));
   try {
-    const response = await fetch('./competition/scoreboard.json', {cache:'no-store'});
-    if (!response.ok) throw new Error('HTTP ' + response.status);
-    render(validateLeague(await response.json()), target);
+    // Read the published site snapshot first; use the canonical main-branch source
+    // if the Pages build did not include the competition directory.
+    const urls = [
+      './competition/scoreboard.json',
+      'https://raw.githubusercontent.com/KIA-students/wirr/main/competition/scoreboard.json'
+    ];
+    let lastError;
+    for (const url of urls) {
+      try {
+        const response = await fetch(url, {cache:'no-store'});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        render(validateLeague(await response.json()), target);
+        return;
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
   } catch {
     target.replaceChildren(el('p', 'Ranking nie jest jeszcze opublikowany lub wystąpił błąd odczytu. Zobacz repozytorium kursu.'));
   }
