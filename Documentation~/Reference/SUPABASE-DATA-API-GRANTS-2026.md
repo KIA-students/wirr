@@ -27,4 +27,8 @@ Funkcja `/functions/v1/wirr-public-intake` nie podlega bezpośrednio zmianie prz
 5. Przetestuj role i JWT kont studenta oraz prowadzącego przez PostgREST, łącznie z upsert i próbami dostępu do cudzych wierszy. Nie testuj na danych produkcyjnych.
 6. Dopiero po tych kontrolach przenieś odpowiednie GRANT do migracji źródłowych. Nie nadawaj automatycznie `ALL` ani `PUBLIC`.
 
-Test statyczny: `python -m unittest discover -s tests/supabase -v`. Brak modyfikacji infrastruktury i danych produkcyjnych.
+Test statyczny: `python -m unittest discover -s tests/supabase -v`. Test kontroluje dokładną macierz przywilejów, transakcję, niedozwolone instrukcje i mutacje symulujące regresje. Nie wymaga połączenia z bazą. Brak modyfikacji infrastruktury i danych produkcyjnych.
+
+**Granice testu:** nie wykonuje on SQL ani nie dowodzi poprawności RLS, ekspozycji Data API, polityk widoków czy zachowania PostgREST. W szczególności przyznanie `authenticated` uprawnień do tabeli ocen jest bezpieczne tylko wtedy, gdy odrębne polityki RLS zabraniają studentom modyfikowania ocen. Przed przeniesieniem SQL do migracji wymagana jest izolowana próba odtworzenia bazy oraz test pozytywny i negatywny z kontami rzeczywistych ról.
+
+**Uwaga o migracjach:** przy odtwarzaniu obiektów `GRANT` należy umieścić *po* odpowiednim `CREATE TABLE`/`CREATE VIEW` w migracjach należących do właściciela schematu, zamiast uruchamiać ten plik na istniejącej produkcji. `service_role` jest świadomie pominięty: sposób dostępu funkcji Edge do bazy nie został jeszcze zweryfikowany.
