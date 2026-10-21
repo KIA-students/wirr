@@ -16,3 +16,7 @@ To repozytorium jest **produkcyjnym, studenckim** punktem dystrybucji WiRR. `Mat
 - Nie rozwijaj tutaj nowej implementacji Unity. Błędy, regresje i propozycje kodu zgłaszaj w `MatPomGit/wirr`, a wydanie publikuj po weryfikacji.
 - Zabronione: prywatne oceny, identyfikujące raporty, SSQ, rubryki prowadzącego, sekrety i niezatwierdzone zadania egzaminacyjne.
 - Wynik automatycznego joba bez artefaktu i dowodu testowego nie jest zatwierdzeniem produkcyjnym.
+
+## Prace i wyniki studentów
+
+Stosuj [STUDENT_WORKS.md](STUDENT_WORKS.md): katalog docelowy `student-work/`, tylko indeksy w publikowanej tabeli ocen; pełne imiona i nazwiska wyłącznie w prywatnym `MatPomGit/prz/students/`. Obowiązującym katalogiem jest `student-work/`.
