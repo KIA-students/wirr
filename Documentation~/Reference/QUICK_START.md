@@ -28,4 +28,4 @@ Sam zapis lokalny nie oznacza oddania. Potwierdzenie serwera oznacza przyjęcie 
 
 WiRR 2.0 pozostaje wersją redakcyjną do odbioru scen, pomiarów i pełnego przepływu raportów.
 
-**Repozytorium produkcyjne:** [KIA-students/wirr](https://github.com/KIA-students/wirr). Docelowy katalog po migracji to `students-works/`; aktualne zgłoszenia przechodzą jeszcze przez `student-work/`. Nie wysyłaj pracy do `MatPomGit/wirr`. W przypadku e-maila prowadzący wprowadza zweryfikowany raport do tej samej kolejki, bez danych korespondencyjnych.
+**Repozytorium produkcyjne:** [KIA-students/wirr](https://github.com/KIA-students/wirr). Docelowy katalog po migracji to `student-work/`; aktualne zgłoszenia przechodzą jeszcze przez `student-work/`. Nie wysyłaj pracy do `MatPomGit/wirr`. W przypadku e-maila prowadzący wprowadza zweryfikowany raport do tej samej kolejki, bez danych korespondencyjnych.

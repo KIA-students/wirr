@@ -19,4 +19,4 @@ To repozytorium jest **produkcyjnym, studenckim** punktem dystrybucji WiRR. `Mat
 
 ## Prace i wyniki studentów
 
-Stosuj [STUDENT_WORKS.md](STUDENT_WORKS.md): katalog docelowy `students-works/`, tylko indeksy w publikowanej tabeli ocen; pełne imiona i nazwiska wyłącznie w prywatnym `MatPomGit/prz/students/`. Obecny katalog `student-work/` pozostaje zgodnościowy aż do kontrolowanej migracji.
+Stosuj [STUDENT_WORKS.md](STUDENT_WORKS.md): katalog docelowy `student-work/`, tylko indeksy w publikowanej tabeli ocen; pełne imiona i nazwiska wyłącznie w prywatnym `MatPomGit/prz/students/`. Obowiązującym katalogiem jest `student-work/`.

@@ -49,4 +49,4 @@ Pakiet opcjonalnych HDRI/PBR jest instalowany osobno: `https://github.com/KIA-st
 
 ## Oddawanie prac
 
-Jedyny adres repozytorium dla studentów: [KIA-students/wirr](https://github.com/KIA-students/wirr). Prace i raporty mają docelowo trafiać do `students-works/` przez kolejkę i kontrolowany PR. **Stan przejściowy:** automatyczny eksporter zapisuje jeszcze do `student-work/`; nie zakładaj ukończonej migracji. Zgłoszenia e-mail są awaryjne i muszą zostać przeniesione do tego samego rejestru po walidacji. [Reguły](STUDENT_WORKS.md).
+Jedyny adres repozytorium dla studentów: [KIA-students/wirr](https://github.com/KIA-students/wirr). Prace i raporty mają trafiać do `student-work/` przez kolejkę i kontrolowany PR. **Stan przejściowy:** automatyczny eksporter zapisuje jeszcze do `student-work/`; nie zakładaj ukończonej migracji. Zgłoszenia e-mail są awaryjne i muszą zostać przeniesione do tego samego rejestru po walidacji. [Reguły](STUDENT_WORKS.md).
