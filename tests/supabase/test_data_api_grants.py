@@ -52,12 +52,16 @@ def validate(sql: str) -> list[str]:
         seen[name] = set(privileges)
     if seen != EXPECTED:
         errors.append(f"Privilege matrix differs: {seen!r}")
-    if statements[:1] != ["BEGIN"] or statements[-1:] != ["COMMIT"]:
-        errors.append("Missing transaction boundaries")
-    if [re.sub(r"\s+", " ", s).strip() for s in statements].count(GRANT_SCHEMA) != 1:
+    normalized_statements = [re.sub(r"\s+", " ", s).strip() for s in statements]
+    if (normalized_statements[:1] != ["BEGIN"] or
+            normalized_statements[-1:] != ["COMMIT"] or
+            normalized_statements.count("BEGIN") != 1 or
+            normalized_statements.count("COMMIT") != 1):
+        errors.append("Missing, duplicate or misplaced transaction boundaries")
+    if normalized_statements.count(GRANT_SCHEMA) != 1:
         errors.append("Missing or duplicate schema usage grant")
     for required_statement in required:
-        if statements.count(required_statement) != 1:
+        if normalized_statements.count(required_statement) != 1:
             errors.append(f"Missing or duplicate required grant: {required_statement}")
     return errors
 
@@ -99,6 +103,16 @@ class TestDataApiGrants(unittest.TestCase):
         )
         self.assertTrue(validate(sql))
         self.assertTrue(validate(sql + "\nDROP TABLE public.courses;"))
+
+    def test_reject_duplicate_or_early_transaction_boundaries(self):
+        sql = SQL.read_text(encoding="utf-8")
+        self.assertTrue(validate(sql.replace("BEGIN;", "BEGIN;\nBEGIN;", 1)))
+        self.assertTrue(validate(sql.replace(
+            "GRANT SELECT ON TABLE public.courses",
+            "COMMIT;\nGRANT SELECT ON TABLE public.courses", 1)))
+        self.assertTrue(validate(sql.replace(
+            "GRANT SELECT ON TABLE public.courses",
+            "COMMIT;\nBEGIN;\nGRANT SELECT ON TABLE public.courses", 1)))
 
     def test_reject_duplicate_permissions(self):
         sql = SQL.read_text(encoding="utf-8").replace(
