@@ -58,4 +58,4 @@ Właściciel migracji wspólnych powinien dodać jawny SELECT na `courses` i `en
 
 Panel wysyła upsert ocen wraz z kolumnami klucza `course_id`, `student_id`, `lab_no`. Ścieżka konfliktu może wymagać UPDATE także tych kolumn i kolidować z celowym ograniczeniem kolumnowym. Nie rozszerzać grantu dla obejścia błędu. Osobna poprawka powinna rozdzielić INSERT od PATCH aktualizującego wyłącznie trzy dozwolone kolumny, z obsługą konfliktu równoległych zapisów. Wymaga testu przez lokalny PostgREST.
 
-Weryfikacja offline: 7/7 testów statycznych. Nie jest to test odtworzenia schematu ani integracji PostgREST. Nie wykonano migracji, wdrożenia funkcji ani zapisów do produkcji.
+Weryfikacja offline: 8/8 testów statycznych (w tym regresja granic transakcji SQL). Nie jest to test odtworzenia schematu ani integracji PostgREST. Nie wykonano migracji, wdrożenia funkcji ani zapisów do produkcji.
