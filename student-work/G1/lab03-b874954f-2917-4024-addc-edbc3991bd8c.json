@@ -1,0 +1,534 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S0d90500d8cae4f30a864b5f51a8f4c91",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173333"
+    },
+    {
+      "key": "variant.v1",
+      "value": "4"
+    },
+    {
+      "key": "variant.v2",
+      "value": "1"
+    },
+    {
+      "key": "variant.v3",
+      "value": "3"
+    },
+    {
+      "key": "variant.v4",
+      "value": "5"
+    },
+    {
+      "key": "variant.v5",
+      "value": "2"
+    },
+    {
+      "key": "table.lab03_drift_conditions.a.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.b.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.c.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp40.drift_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp50.error_after_fix_mm",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity 6, WiRR2, SIM_AR (dane syntetyczne, nie pomiar sprzętowy)"
+    },
+    {
+      "key": "basic.observation",
+      "value": "Próba 20731cc732da4f578113db8d4fa78578; 2026-10-25T15:26:34.3211280Z; VALID; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=1; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; elapsed=12.69720458984375 s; errors=0 count; successes=1 count; tracking_losses=0 count; relocalization_time=BRAK s; przyczyna braku: Nie uruchomiono kontrpróby relokalizacji.; before_sample_count=3 count; before_mean_error=0.5134241655468941 cm; before_bias_norm=0.4999999888241291 cm; before_scatter_rms=0.20000001111620774 cm; before_sample_1_dx=0.7000000216066837 cm; before_sample_1_dy=-0.10000000474974513 cm; before_sample_1_dz=0.10000000474974513 cm; before_sample_1_elapsed=1.0011825561523438 s; before_sample_2_dx=0.4999999888241291 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.10000000474974513 cm; before_sample_2_elapsed=2.0018081665039062 s; before_sample_3_dx=0.29999997932463884 cm; before_sample_3_dy=0.10000000474974513 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.0061492919921875 s; after_sample_count=0 count; after_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; \nPróba 719376e47cb04cdb83206f9e07ed0b84; 2026-10-25T15:27:07.0732376Z; VALID; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=2; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; elapsed=5.532524108886719 s; errors=0 count; successes=1 count; tracking_losses=0 count; relocalization_time=BRAK s; przyczyna braku: Nie uruchomiono kontrpróby relokalizacji.; before_sample_count=3 count; before_mean_error=2.641223929822445 cm; before_bias_norm=2.500000037252903 cm; before_scatter_rms=1.4000000290905255 cm; before_sample_1_dx=3.9000000804662704 cm; before_sample_1_dy=-0.7000000216066837 cm; before_sample_1_dz=0.7000000216066837 cm; before_sample_1_elapsed=1.0041885375976562 s; before_sample_2_dx=2.500000037252903 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.7000000216066837 cm; before_sample_2_elapsed=2.007965087890625 s; before_sample_3_dx=1.0999999940395355 cm; before_sample_3_dy=0.7000000216066837 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.00860595703125 s; after_sample_count=0 count; after_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; \nPróba b45c74aa39974bb0b8c9f9776ff3b50f; 2026-10-25T15:27:39.2447899Z; FAILED; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=3; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; przyczyna: Próba przerwana przez użytkownika lub zmianę sceny.; elapsed=0.868743896484375 s; errors=0 count; successes=0 count; tracking_losses=0 count; relocalization_time=BRAK s; przyczyna braku: Nie uruchomiono kontrpróby relokalizacji.; before_sample_count=0 count; before_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; before_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_count=0 count; after_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; \nPróba 24edff07626549f9a19a0144c616a59f; 2026-10-25T15:27:41.1051090Z; VALID; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=4; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; elapsed=5.2041778564453125 s; errors=0 count; successes=1 count; tracking_losses=0 count; relocalization_time=BRAK s; przyczyna braku: Nie uruchomiono kontrpróby relokalizacji.; before_sample_count=3 count; before_mean_error=0.5134241655468941 cm; before_bias_norm=0.4999999888241291 cm; before_scatter_rms=0.20000001111620774 cm; before_sample_1_dx=0.7000000216066837 cm; before_sample_1_dy=-0.10000000474974513 cm; before_sample_1_dz=0.10000000474974513 cm; before_sample_1_elapsed=1.004791259765625 s; before_sample_2_dx=0.4999999888241291 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.10000000474974513 cm; before_sample_2_elapsed=2.004913330078125 s; before_sample_3_dx=0.29999997932463884 cm; before_sample_3_dy=0.10000000474974513 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.005828857421875 s; after_sample_count=0 count; after_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; \nPróba f213693622e94475bed8a16b0ccdc293; 2026-10-25T15:27:50.6602100Z; VALID; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=5; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; elapsed=5.4504547119140625 s; errors=0 count; successes=1 count; tracking_losses=0 count; relocalization_time=BRAK s; przyczyna braku: Nie uruchomiono kontrpróby relokalizacji.; before_sample_count=3 count; before_mean_error=2.641223929822445 cm; before_bias_norm=2.500000037252903 cm; before_scatter_rms=1.4000000290905255 cm; before_sample_1_dx=3.9000000804662704 cm; before_sample_1_dy=-0.7000000216066837 cm; before_sample_1_dz=0.7000000216066837 cm; before_sample_1_elapsed=1.0024261474609375 s; before_sample_2_dx=2.500000037252903 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.7000000216066837 cm; before_sample_2_elapsed=2.0048370361328125 s; before_sample_3_dx=1.0999999940395355 cm; before_sample_3_dy=0.7000000216066837 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.007080078125 s; after_sample_count=0 count; after_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; \nPróba a50228e290ca4d869ad07ef30bab1198; 2026-10-25T15:28:30.3713849Z; VALID; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=6; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; elapsed=4.1045074462890625 s; errors=0 count; successes=1 count; tracking_losses=0 count; relocalization_time=BRAK s; przyczyna braku: Nie uruchomiono kontrpróby relokalizacji.; before_sample_count=3 count; before_mean_error=0.5134241655468941 cm; before_bias_norm=0.4999999888241291 cm; before_scatter_rms=0.20000001111620774 cm; before_sample_1_dx=0.7000000216066837 cm; before_sample_1_dy=-0.10000000474974513 cm; before_sample_1_dz=0.10000000474974513 cm; before_sample_1_elapsed=1.0003662109375 s; before_sample_2_dx=0.4999999888241291 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.10000000474974513 cm; before_sample_2_elapsed=2.00201416015625 s; before_sample_3_dx=0.29999997932463884 cm; before_sample_3_dy=0.10000000474974513 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.00274658203125 s; after_sample_count=0 count; after_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; \nPróba 07663ca343424098bdad13e0e317e609; 2026-10-25T15:28:36.7710624Z; VALID; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=7; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; elapsed=4.6399993896484375 s; errors=0 count; successes=1 count; tracking_losses=0 count; relocalization_time=BRAK s; przyczyna braku: Nie uruchomiono kontrpróby relokalizacji.; before_sample_count=3 count; before_mean_error=2.641223929822445 cm; before_bias_norm=2.500000037252903 cm; before_scatter_rms=1.4000000290905255 cm; before_sample_1_dx=3.9000000804662704 cm; before_sample_1_dy=-0.7000000216066837 cm; before_sample_1_dz=0.7000000216066837 cm; before_sample_1_elapsed=1.0000762939453125 s; before_sample_2_dx=2.500000037252903 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.7000000216066837 cm; before_sample_2_elapsed=2.0044097900390625 s; before_sample_3_dx=1.0999999940395355 cm; before_sample_3_dy=0.7000000216066837 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.0201568603515625 s; after_sample_count=0 count; after_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; \nPróba 63661b7496b6445d9785f5a18ba833bd; 2026-10-25T15:29:07.2867904Z; VALID; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=True; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=8; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; elapsed=8.247238159179688 s; errors=0 count; successes=1 count; tracking_losses=1 count; relocalization_time=1.501983642578125 s; before_sample_count=3 count; before_mean_error=0.5134241655468941 cm; before_bias_norm=0.4999999888241291 cm; before_scatter_rms=0.20000001111620774 cm; before_sample_1_dx=0.7000000216066837 cm; before_sample_1_dy=-0.10000000474974513 cm; before_sample_1_dz=0.10000000474974513 cm; before_sample_1_elapsed=1.001708984375 s; before_sample_2_dx=0.4999999888241291 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.10000000474974513 cm; before_sample_2_elapsed=2.002899169921875 s; before_sample_3_dx=0.29999997932463884 cm; before_sample_3_dy=0.10000000474974513 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.0059356689453125 s; after_sample_count=3 count; after_mean_error=1.5043474733829498 cm; after_bias_norm=1.5000000596046448 cm; after_scatter_rms=0.20000005659093512 cm; after_sample_1_dx=1.7000000923871994 cm; after_sample_1_dy=-0.10000000474974513 cm; after_sample_1_dz=0.10000000474974513 cm; after_sample_1_elapsed=5.51055908203125 s; after_sample_2_dx=1.4999999664723873 cm; after_sample_2_dy=0 cm; after_sample_2_dz=-0.10000000474974513 cm; after_sample_2_elapsed=6.512115478515625 s; after_sample_3_dx=1.2999999336898327 cm; after_sample_3_dy=0.10000000474974513 cm; after_sample_3_dz=0 cm; after_sample_3_elapsed=7.5151214599609375 s; pose_during_tracking_loss=BRAK cm; przyczyna braku: Brak poprawnego odczytu podczas utraty śledzenia SIM_AR.; \nPróba 7f913f7b27c74fd5b97cba9ada2b8c3f; 2026-10-25T15:29:22.0816476Z; VALID; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=True; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=9; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; elapsed=8.362808227539062 s; errors=0 count; successes=1 count; tracking_losses=1 count; relocalization_time=1.50421142578125 s; before_sample_count=3 count; before_mean_error=2.641223929822445 cm; before_bias_norm=2.500000037252903 cm; before_scatter_rms=1.4000000290905255 cm; before_sample_1_dx=3.9000000804662704 cm; before_sample_1_dy=-0.7000000216066837 cm; before_sample_1_dz=0.7000000216066837 cm; before_sample_1_elapsed=1.0029144287109375 s; before_sample_2_dx=2.500000037252903 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.7000000216066837 cm; before_sample_2_elapsed=2.00750732421875 s; before_sample_3_dx=1.0999999940395355 cm; before_sample_3_dy=0.7000000216066837 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.0122833251953125 s; after_sample_count=3 count; after_mean_error=5.671399086713791 cm; after_bias_norm=5.590169504284859 cm; after_scatter_rms=1.3999999251482722 cm; after_sample_1_dx=6.89999982714653 cm; after_sample_1_dy=0.2999999560415745 cm; after_sample_1_dz=0.7000000216066837 cm; after_sample_1_elapsed=5.5174713134765625 s; after_sample_2_dx=5.499999970197678 cm; after_sample_2_dy=0.9999999776482582 cm; after_sample_2_dz=-0.7000000216066837 cm; after_sample_2_elapsed=6.520172119140625 s; after_sample_3_dx=4.100000113248825 cm; after_sample_3_dy=1.7000000923871994 cm; after_sample_3_dz=0 cm; after_sample_3_elapsed=7.52545166015625 s; pose_during_tracking_loss=BRAK cm; przyczyna braku: Brak poprawnego odczytu podczas utraty śledzenia SIM_AR.; \nPróba 4f5b4bd550c246f9a3399a16ee1c1caa; 2026-10-25T15:29:50.6978932Z; FAILED; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=True; anchor_fail_recovery=True; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=10; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; przyczyna: Nie odzyskano śledzenia w limicie obserwacji SIM_AR.; elapsed=12.25213623046875 s; errors=0 count; successes=0 count; tracking_losses=1 count; relocalization_time=BRAK s; przyczyna braku: Nie zarejestrowano odzyskania śledzenia.; before_sample_count=3 count; before_mean_error=2.641223929822445 cm; before_bias_norm=2.500000037252903 cm; before_scatter_rms=1.4000000290905255 cm; before_sample_1_dx=3.9000000804662704 cm; before_sample_1_dy=-0.7000000216066837 cm; before_sample_1_dz=0.7000000216066837 cm; before_sample_1_elapsed=1.00433349609375 s; before_sample_2_dx=2.500000037252903 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.7000000216066837 cm; before_sample_2_elapsed=2.0074462890625 s; before_sample_3_dx=1.0999999940395355 cm; before_sample_3_dy=0.7000000216066837 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.011566162109375 s; after_sample_count=0 count; after_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; pose_during_tracking_loss=BRAK cm; przyczyna braku: Brak poprawnego odczytu podczas utraty śledzenia SIM_AR.; \nPróba d6c54e7021974621b4eb1eb3a0e690ef; 2026-10-25T15:30:07.5546039Z; FAILED; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=True; anchor_fail_recovery=True; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=11; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; przyczyna: Nie odzyskano śledzenia w limicie obserwacji SIM_AR.; elapsed=11.86187744140625 s; errors=0 count; successes=0 count; tracking_losses=1 count; relocalization_time=BRAK s; przyczyna braku: Nie zarejestrowano odzyskania śledzenia.; before_sample_count=3 count; before_mean_error=2.641223929822445 cm; before_bias_norm=2.500000037252903 cm; before_scatter_rms=1.4000000290905255 cm; before_sample_1_dx=3.9000000804662704 cm; before_sample_1_dy=-0.7000000216066837 cm; before_sample_1_dz=0.7000000216066837 cm; before_sample_1_elapsed=1.00140380859375 s; before_sample_2_dx=2.500000037252903 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.7000000216066837 cm; before_sample_2_elapsed=2.002166748046875 s; before_sample_3_dx=1.0999999940395355 cm; before_sample_3_dy=0.7000000216066837 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.002349853515625 s; after_sample_count=0 count; after_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; pose_during_tracking_loss=BRAK cm; przyczyna braku: Brak poprawnego odczytu podczas utraty śledzenia SIM_AR.; \nPróba 574fb255d14642b7a3e69c6ebe63b465; 2026-10-25T15:30:22.7142556Z; FAILED; tryb: SIM_AR; uczestnictwo: SOLO; warunki: variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=True; anchor_fail_recovery=True; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=12; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none; przyczyna: Nie odzyskano śledzenia w limicie obserwacji SIM_AR.; elapsed=9.031158447265625 s; errors=0 count; successes=0 count; tracking_losses=1 count; relocalization_time=BRAK s; przyczyna braku: Nie zarejestrowano odzyskania śledzenia.; before_sample_count=3 count; before_mean_error=0.5134241655468941 cm; before_bias_norm=0.4999999888241291 cm; before_scatter_rms=0.20000001111620774 cm; before_sample_1_dx=0.7000000216066837 cm; before_sample_1_dy=-0.10000000474974513 cm; before_sample_1_dz=0.10000000474974513 cm; before_sample_1_elapsed=1.003143310546875 s; before_sample_2_dx=0.4999999888241291 cm; before_sample_2_dy=0 cm; before_sample_2_dz=-0.10000000474974513 cm; before_sample_2_elapsed=2.006561279296875 s; before_sample_3_dx=0.29999997932463884 cm; before_sample_3_dy=0.10000000474974513 cm; before_sample_3_dz=0 cm; before_sample_3_elapsed=3.007049560546875 s; after_sample_count=0 count; after_mean_error=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_bias_norm=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_scatter_rms=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_1_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_2_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dx=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dy=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_dz=BRAK cm; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; after_sample_3_elapsed=BRAK s; przyczyna braku: Brak wystarczających poprawnych odczytów w tej fazie.; pose_during_tracking_loss=BRAK cm; przyczyna braku: Brak poprawnego odczytu podczas utraty śledzenia SIM_AR.; \n"
+    },
+    {
+      "key": "basic.change",
+      "value": "Porównane konfiguracje (według zapisu prób): variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=1; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=2; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=3; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=4; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=5; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=6; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=False; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=7; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=True; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=8; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=True; anchor_fail_recovery=False; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=9; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=True; anchor_fail_recovery=True; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=10; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=1; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=True; anchor_fail_recovery=True; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=11; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none | variant=0; view=0; objects=10; shadows=True; physics=False; highlight=False; technique=0; template=0; watchdog_s=0.5; gap_s=1.5; training=False; resolution=1325x576; vsync=0; fps_limit=-1; seed=2718; environment=Editor; large_targets=False; demonstration=False; auto_distance_lod=False; lod_near_m=6; lod_far_m=10; camera_path=anchor-three-points/v1; input_technique=not_applicable; cycles_required=0; cycle_timeout_s=0; anchor_relocalize=True; anchor_fail_recovery=True; anchor_model=anchor-model/1; depth_tolerance_m=0; dim_light=False; label_fault=True; ray_claim_fault=True; depth_source=not_applicable; cad_materials=1; cad_source=procedural-ring/v1; stale_visualization=FREEZE; replay_clock=paused-source/1; mission_protocol=desktop-three-steps/1; trial_ordinal=12; studio_protocol=desktop-studio/1; guest_profile=0; audience=student rozpoczynający zadanie; purpose=samodzielne wykonanie trzech kroków; limit_hypothesis=większy dystans może utrudnić odczyt; reference_trial=none"
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Porównano dwa profile śledzenia SIM_AR przy tej samej referencji, trasie kamery i modelu (seed 2718). Profil A (wiele cech) dał średni błąd 0,51 cm (stałe przesunięcie 0,5 cm, rozrzut RMS 0,2 cm, odczyty 0,32–0,71 cm), profil B (mało cech) 2,64 cm (przesunięcie 2,5 cm, RMS 1,4 cm, odczyty 1,30–4,02 cm). Wynik był identyczny w trzech ważnych powtórzeniach każdego profilu, dlatego do prób 4.5–5.0 wybrano profil A. Mały rozrzut nie oznacza małego błędu: w obu profilach dominuje stałe przesunięcie względem referencji, a nie losowa zmienność. Po utracie śledzenia i ponownej lokalizacji (ok. 1,5 s) model nie wrócił w to samo miejsce – błąd wzrósł do 1,50 cm (A) i 5,67 cm (B) przy niezmienionym rozrzucie, czyli relokalizacja dodała stałe przesunięcie. W scenariuszu granicznym (3 próby) śledzenie nie zostało odzyskane w oknie obserwacji – to brak odczytu, a nie błąd 0 cm ani czas 0 s. Wyniki pochodzą z deterministycznej symulacji SIM_AR i nie dowodzą dokładności rzeczywistego telefonu z ARCore bez niezależnego pomiaru referencyjnego."
+    },
+    {
+      "key": "basic.limits",
+      "value": ""
+    }
+  ],
+  "labNumber": 3,
+  "createdAtUtc": "2026-10-25T15:14:44.7422553Z",
+  "submissionId": "3efdbc966e3a45e798762c7e01a53804",
+  "updatedAtUtc": "2026-10-25T16:19:24.0864004Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173333"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 48,
+    "elapsedSeconds": 3843.221,
+    "lastEventAtUtc": "2026-10-25T16:19:22.7664635Z",
+    "firstEventAtUtc": "2026-10-25T15:15:19.5456056Z",
+    "playModeSeconds": 1733.069,
+    "playModeSessions": 3
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:15:19.5456056Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=2",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:15:27.0079202Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:15:27.0172129Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:15:52.2294916Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:15:58.2736837Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:16:11.5530384Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:16:14.0190791Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:16:24.7741804Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:16:36.7153921Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:16:44.3760675Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "official_samples_imported",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:16:44.3847547Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:16:53.1971290Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:16:54.9241988Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:17:05.7821236Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:17:15.5864365Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:17:23.2497225Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:18:39.7992836Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:18:44.4715833Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:18:44.4812039Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:18:44.4891352Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:18:53.9171138Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=3;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:19:01.7759885Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:22:28.7748745Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:22:30.8938252Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:25:32.1299094Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:31:22.9269331Z",
+      "durationSeconds": 350.796
+    },
+    {
+      "result": "errors=5;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:31:55.6249129Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:32:04.3628930Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:32:19.9731788Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:33:28.2442416Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:33:31.8843109Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:33:31.8937815Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:33:31.9037269Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:33:38.4422591Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:33:42.7140184Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:36:49.2732344Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:37:36.8531050Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:46:45.6586922Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:47:50.8939606Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "local",
+      "eventName": "report_exported",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:47:52.7055981Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:53:24.0468677Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:53:40.0329652Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T15:53:44.4099345Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T16:11:43.5641450Z",
+      "durationSeconds": 1079.152
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T16:11:51.5865542Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T16:16:54.7084902Z",
+      "durationSeconds": 303.121
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T16:19:02.3362777Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-25T16:19:22.7664635Z",
+      "durationSeconds": 0
+    }
+  ]
+}
