@@ -1,0 +1,475 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S8685b301ddd44f41834b0d60ae57a3fc",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346799"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "table.lab03_drift_conditions.a.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.b.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.c.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp40.drift_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp50.error_after_fix_mm",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC (wariant analityczny PC: REPLAY/ANALIZA w edytorze Unity 6 z symulacją dotyku Input System oraz weryfikacją skryptów ARTracikng"
+    },
+    {
+      "key": "basic.observation",
+      "value": "[REPLAY/ANALIZA + NV]:\r\nARTrackingMonitor: Skrypt poprawnie loguje stan sesji w konsoli Unity (LAB03_TRACKING). W symulacji edytora stan przechodzi do SessionTracking (reason=None). Fizyczny czas inicjalizacji ARCore dla wariantu v1=5 oznaczono jako NV.\r\n"
+    },
+    {
+      "key": "basic.change",
+      "value": "\rv1=5: Skan jednokierunkowy vs wielokierunkowy wokół stanowiska"
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Poprawne skonfigurowanie komponentów AR Session i XR Origin oraz skryptu diagnostycznego ARTrackingMonitor umożliwia monitorowanie cyklusesji AR."
+    }
+  ],
+  "labNumber": 3,
+  "createdAtUtc": "2026-10-27T11:35:41.2187568Z",
+  "submissionId": "b3df65ccb1c84f98861f3da763694a1e",
+  "updatedAtUtc": "2026-10-27T12:33:48.5516243Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173400",
+    "173399"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 40,
+    "elapsedSeconds": 3506.572,
+    "lastEventAtUtc": "2026-10-27T12:33:48.4580524Z",
+    "firstEventAtUtc": "2026-10-27T11:35:21.8861642Z",
+    "playModeSeconds": 76.467,
+    "playModeSessions": 2
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:35:21.8861642Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:35:41.2323598Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:36:01.1427778Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:36:04.9026529Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:36:15.1923573Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:36:16.6327942Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:36:56.2788302Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:36:59.2406393Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:37:09.3780786Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:37:11.1256977Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:40:36.8253551Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:40:37.9435378Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:48:42.2893355Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:48:54.9071394Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:57:28.0737263Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:57:31.8641826Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:57:35.1907124Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:59:08.6638298Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:00:19.6686764Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:00:57.0449823Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:01:49.6509121Z",
+      "durationSeconds": 52.605
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:01:50.6812105Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:02:14.5435897Z",
+      "durationSeconds": 23.862
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:16:56.1004831Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:17:01.5397610Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:17:19.6256518Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:18:31.8493557Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=1;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:18:43.0456108Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:19:55.1030224Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:20:41.2585769Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:08.9429480Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:22.0309541Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:22.5756821Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:22.7038188Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:22.8150216Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:22.9277521Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:23.0429252Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:23.1284205Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "local",
+      "eventName": "report_exported",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:47.6763983Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "local",
+      "eventName": "report_exported",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:48.4580524Z",
+      "durationSeconds": 0
+    }
+  ]
+}
