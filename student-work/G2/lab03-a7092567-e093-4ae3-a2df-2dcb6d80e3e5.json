@@ -1,0 +1,500 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S27f2bb2e8f9e4d4f9aa98af0a0fa1f36",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346802"
+    },
+    {
+      "key": "variant.v1",
+      "value": "3"
+    },
+    {
+      "key": "variant.v2",
+      "value": "5"
+    },
+    {
+      "key": "variant.v3",
+      "value": "2"
+    },
+    {
+      "key": "variant.v4",
+      "value": "4"
+    },
+    {
+      "key": "variant.v5",
+      "value": "1"
+    },
+    {
+      "key": "table.lab03_drift_conditions.a.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.b.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.c.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp40.drift_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp50.error_after_fix_mm",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Symulacja Unity PC (wariant analityczny PC)."
+    },
+    {
+      "key": "basic.observation",
+      "value": "W trybie Play konsola Unity wypisywała logi ze skryptu diagnostycznego, w których stan sesji wynosił state=None\n, a przyczyna braku śledzenia reason=None."
+    },
+    {
+      "key": "basic.change",
+      "value": "Uruchomiono przygotowaną scenę AR w edytorze na komputerze, testując poprawność kompilacji i działanie skryptów bez dostępu do rzeczywistej kamery."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Edytor PC pozwala sprawdzić logikę aplikacji, jednak bez fizycznego telefonu z usługami ARCore\n podsystem nie inicjalizuje przestrzeni i nie wykrywa płaszczyzn środowiskowych."
+    },
+    {
+      "key": "basic.limits",
+      "value": "Brak kompatybilnego telefonu ARCore. Pomiary czasu do uzyskania śledzenia oraz czasu wykrycia \npierwszej płaszczyzny nie zostały wykonane ."
+    }
+  ],
+  "labNumber": 3,
+  "createdAtUtc": "2026-10-27T12:29:08.7770158Z",
+  "submissionId": "fbbf34622dcb45328b2da26f8a516ef5",
+  "updatedAtUtc": "2026-10-27T12:36:02.3350109Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173404",
+    "173398"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 43,
+    "elapsedSeconds": 3375.867,
+    "lastEventAtUtc": "2026-10-27T12:35:56.7166741Z",
+    "firstEventAtUtc": "2026-10-27T11:39:40.8493555Z",
+    "playModeSeconds": 134.016,
+    "playModeSessions": 2
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:39:40.8493555Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:39:48.2432105Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=2",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:39:49.3593290Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:39:49.3635605Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:40:12.9821882Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:40:16.1007133Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:40:37.8952098Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:40:39.6516394Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:41:57.6677330Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:42:47.0462649Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:42:50.9636047Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:43:23.2910891Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:43:39.5174386Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:43:46.2331194Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:43:46.2365465Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:43:46.2516544Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:44:06.0699453Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=2;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:44:16.8377436Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:44:30.0519699Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=1;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:44:39.2532978Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=1;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:45:29.9310765Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=1;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:45:30.5731701Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:47:43.2038329Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:47:48.4901942Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=1;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:55:01.5383971Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T11:55:58.8528963Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:10:08.5726376Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:10:09.7984742Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:19:33.4631615Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:20:58.8663786Z",
+      "durationSeconds": 85.403
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:21:32.6280871Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:22:21.2412557Z",
+      "durationSeconds": 48.613
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:27:43.0565585Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:27:44.4488453Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:28:49.8026659Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:28:56.6402323Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:28:57.9740333Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:29:08.7914438Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:29:45.9472352Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:15.4123092Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:17.3211582Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:33:48.8751027Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-27T12:35:56.7166741Z",
+      "durationSeconds": 0
+    }
+  ]
+}
