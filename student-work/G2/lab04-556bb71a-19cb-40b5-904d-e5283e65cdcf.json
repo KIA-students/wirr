@@ -1,0 +1,392 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S98d01cceaa1d4c6b843b9b4a962abac3",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "347399"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_v1.b.mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_v1.c.mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC (UNITY_EDITOR / XR Simulation), Unity 6.6, AR Foundation 6.7.0."
+    },
+    {
+      "key": "basic.observation",
+      "value": "Poprawnie skonfigurowano i uruchomiono scenę Lab04 z komponentami AR Session, XR Origin, AR Occlusion Manager oraz skryptem DepthDiagnostics. W konsoli Unity Editor prawidłowo generowane były komunikaty diagnostyczne dotyczące Depth API. Wykonano pięciosekundowy test obejmujący 50 próbek, uzyskując successRate = 0,00%. Skrypt poprawnie zidentyfikował brak dostępnych danych głębi w środowisku XR Simulation oraz odczytał aktualny tryb głębi jako Disabled."
+    },
+    {
+      "key": "basic.change",
+      "value": " Skonfigurowano AR Occlusion Manager, ustawiając Environment Depth Mode na Fastest, włączając Temporal Smoothing oraz wybierając Prefer Environment Occlusion. Przygotowano skrypt DepthDiagnostics umożliwiający automatyczne próbkowanie danych głębi i obliczanie successRate. Porównano ustawienia komponentu z wartościami odczytywanymi podczas działania aplikacji. Uwzględniono wariant v1 = 5, dotyczący porównania powierzchni matowej i refleksyjnej."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Konfiguracja komponentów AR Foundation oraz przygotowany mechanizm diagnostyczny działają prawidłowo w środowisku Unity Editor. Skrypt DepthDiagnostics poprawnie realizuje pomiar, rejestruje liczbę próbek i oblicza skuteczność pozyskiwania danych głębi. Przeprowadzone testy potwierdziły poprawność działania diagnostyki oraz pozwoliły zidentyfikować ograniczenia środowiska symulacyjnego przed uruchomieniem aplikacji na urządzeniu docelowym."
+    },
+    {
+      "key": "basic.limits",
+      "value": "Laboratorium przeprowadzono w trybie analitycznym PC (Unity Editor / XR Simulation), bez wykorzystania fizycznego urządzenia obsługującego Depth API. W środowisku testowym nie uzyskano klatek CPU zawierających dane głębi, dlatego nie było możliwe przeprowadzenie rzeczywistego porównania powierzchni matowej i refleksyjnej ani oceny jakości okluzji. Niedostępne pomiary oznaczono jako UNSUPPORTED."
+    }
+  ],
+  "labNumber": 4,
+  "createdAtUtc": "2026-10-27T12:45:30.4369643Z",
+  "submissionId": "d2b62c310baf4174ae1717588061096a",
+  "updatedAtUtc": "2026-10-27T13:12:33.5544852Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173999",
+    "173400"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 35,
+    "elapsedSeconds": 5751.555,
+    "lastEventAtUtc": "2026-10-27T13:12:24.7278781Z",
+    "firstEventAtUtc": "2026-10-27T11:36:33.1725811Z",
+    "playModeSeconds": 263.745,
+    "playModeSessions": 4
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T11:36:33.1725811Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:35:44.3346651Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:37:08.4369965Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=3;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:37:15.8358271Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:38:01.3117702Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:38:01.5161957Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:38:01.7058998Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:38:01.8977501Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:38:02.0844483Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:38:02.3083431Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:38:02.5237961Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:38:02.7380812Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=2;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:38:07.2778750Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=1;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:40:05.9328109Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=1;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:40:42.3614545Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:40:50.0430064Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:45:05.1926785Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:45:06.2130706Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:45:30.4465299Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:46:27.6317012Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:48:00.2494149Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:48:58.1725765Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:49:34.7027750Z",
+      "durationSeconds": 36.53
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:50:42.8383106Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:50:53.2197007Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:54:34.9628889Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:55:06.5329830Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T12:56:40.6194825Z",
+      "durationSeconds": 94.086
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T13:01:08.5041012Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T13:02:37.6261256Z",
+      "durationSeconds": 89.123
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T13:04:19.7800882Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T13:04:31.1374927Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T13:05:15.1434406Z",
+      "durationSeconds": 44.006
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T13:05:28.1773543Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-27T13:12:24.7278781Z",
+      "durationSeconds": 0
+    }
+  ]
+}
