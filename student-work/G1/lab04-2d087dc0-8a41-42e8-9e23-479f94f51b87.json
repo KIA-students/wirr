@@ -1,0 +1,300 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S59ba10af84ac4e88ae3727c555eaee57",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173364"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.mediana",
+      "value": "98"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.mediana",
+      "value": "75"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "false"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.successrate_1",
+      "value": "100"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.successrate_2",
+      "value": "95"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.successrate_3",
+      "value": "98"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.rozdzielczość",
+      "value": "160x120"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.successrate_1",
+      "value": "80"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.successrate_2",
+      "value": "65"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.successrate_3",
+      "value": "75"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.uwagi",
+      "value": "Obraz mapy głębi był dość zwarty."
+    },
+    {
+      "key": "table.lab04_depth_v1.b.rozdzielczość",
+      "value": "160x120"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.uwagi",
+      "value": "Występowało zauważalne migotanie mapy głębi na odbijających powierzchniach, okluzja błędnie maskowała wirtualny obiekt"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.successrate_1",
+      "value": "-"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.successrate_2",
+      "value": "-"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.successrate_3",
+      "value": "-"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.rozdzielczość",
+      "value": "-"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.uwagi",
+      "value": "-"
+    },
+    {
+      "key": "cp30.depth_available",
+      "value": "dostępna"
+    },
+    {
+      "key": "cp30.depth_mode",
+      "value": "Smoothed"
+    },
+    {
+      "key": "cp30.depth_resolution",
+      "value": "160x120"
+    },
+    {
+      "key": "cp30.answer",
+      "value": "Dane jednoznacznie wskazują, że jakość śledzenia zależy wprost proporcjonalnie od właściwości powierzchni,\npłaszczyzny refleksyjne drastycznie zaburzają poprawność tworzenia środowiskowej mapy głębi w porównaniu do powierzchni matowych."
+    }
+  ],
+  "labNumber": 4,
+  "createdAtUtc": "2026-11-02T11:27:46.1107845Z",
+  "submissionId": "6fd9518580844c5f932a39f30a3b2cc1",
+  "updatedAtUtc": "2026-11-02T18:05:00.4731307Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173364"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 14,
+    "elapsedSeconds": 23855.658,
+    "lastEventAtUtc": "2026-11-02T18:04:42.8274206Z",
+    "firstEventAtUtc": "2026-11-02T11:27:07.1689521Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:27:07.1689521Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:27:09.6581283Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:27:25.5812164Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:27:28.4149878Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:27:30.9500551Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:27:32.5118781Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:27:32.5152940Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:27:32.5303145Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:27:35.9430002Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:27:46.1144732Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_quitting",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T11:30:07.0321134Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T17:23:56.7787750Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T17:25:03.7204570Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T18:04:42.8274206Z",
+      "durationSeconds": 0
+    }
+  ]
+}
