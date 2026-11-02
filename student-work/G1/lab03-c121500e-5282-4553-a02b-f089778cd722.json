@@ -1,0 +1,470 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S59ba10af84ac4e88ae3727c555eaee57",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173364"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "table.lab03_drift_conditions.a.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.b.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.c.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp40.drift_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp50.error_after_fix_mm",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "false"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.tracking_1_s",
+      "value": "1.6"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.tracking_2_s",
+      "value": "1.9"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.tracking_3_s",
+      "value": "1.7"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.mediana_tracking_s",
+      "value": "1.7"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.płaszczyzna_1_s",
+      "value": "3.5"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.płaszczyzna_2_s",
+      "value": "3.8"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.płaszczyzna_3_s",
+      "value": "3.6"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.mediana_płaszczyzny_s",
+      "value": "3.6"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.nottrackingreason_uwagi",
+      "value": "Initializing"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.tracking_1_s",
+      "value": "1.2"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.tracking_2_s",
+      "value": "1.4"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.tracking_3_s",
+      "value": "1.3"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.mediana_tracking_s",
+      "value": "1.3"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.płaszczyzna_1_s",
+      "value": "2.1"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.płaszczyzna_2_s",
+      "value": "2.3"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.płaszczyzna_3_s",
+      "value": "2.2"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.mediana_płaszczyzny_s",
+      "value": "2.2"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.nottrackingreason_uwagi",
+      "value": "Initializing"
+    },
+    {
+      "key": "cp30.tracking_s",
+      "value": "1.6"
+    },
+    {
+      "key": "cp30.first_plane_s",
+      "value": "2.3"
+    },
+    {
+      "key": "cp30.not_tracking_reason",
+      "value": "Initializing"
+    },
+    {
+      "key": "cp30.answer",
+      "value": "Na podstawie zebranych danych można stwierdzić, że skanowanie stanowiska w kilku kierunkach (Warunek B) zauważalnie skraca późniejszy \nczas stabilizacji i przyspiesza wygenerowanie użytecznej płaszczyzny w porównaniu do powolnego skanowania wyłącznie z jednego kierunku (Warunek A).\nOgraniczeniem zastosowanej metody pomiarowej jest to, że test ma charakter aplikacyjny, czas mierzony jest ręcznie (co wprowadza błąd wynikający z\nczasu reakcji eksperymentatora), a wyniki są mocno uzależnione od tekstury blatu oraz aktualnego, lokalnego oświetlenia stanowiska pracy."
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.tracking_1_s",
+      "value": "1.4"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.tracking_2_s",
+      "value": "1.2"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.tracking_3_s",
+      "value": "1.6"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.mediana_tracking_s",
+      "value": "1.4"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.płaszczyzna_1_s",
+      "value": "2.2"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.płaszczyzna_2_s",
+      "value": "2.4"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.płaszczyzna_3_s",
+      "value": "2.3"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.mediana_płaszczyzny_s",
+      "value": "2.3"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.nottrackingreason_uwagi",
+      "value": "Initializing"
+    }
+  ],
+  "labNumber": 3,
+  "createdAtUtc": "2026-11-02T11:07:59.7235950Z",
+  "submissionId": "e60a47c829644150b7782013390ff106",
+  "updatedAtUtc": "2026-11-02T11:22:04.3389342Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173364"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 24,
+    "elapsedSeconds": 1030.344,
+    "lastEventAtUtc": "2026-11-02T11:22:01.2267617Z",
+    "firstEventAtUtc": "2026-11-02T11:04:50.8830376Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:04:50.8830376Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:26.5595986Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=2",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:28.8306848Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:28.8348413Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:32.0192572Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:42.9220244Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "official_samples_imported",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:42.9261054Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:44.9886201Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:44.9947439Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:45.0116814Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:47.7254503Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:47.7295194Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:47.7495026Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:05:56.6382078Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:06:00.3645574Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:06:04.4993881Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:06:46.5088617Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:06:53.9069538Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:07:01.3946843Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:07:26.9804190Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:07:30.6247449Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:07:59.7419315Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "incomplete",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:20:29.4584070Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T11:22:01.2267617Z",
+      "durationSeconds": 0
+    }
+  ]
+}
