@@ -1,0 +1,645 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S25a7b43dd9e34bb4bdc8a2660063d395",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173358"
+    },
+    {
+      "key": "variant.v1",
+      "value": "4"
+    },
+    {
+      "key": "variant.v2",
+      "value": "1"
+    },
+    {
+      "key": "variant.v3",
+      "value": "3"
+    },
+    {
+      "key": "variant.v4",
+      "value": "5"
+    },
+    {
+      "key": "variant.v5",
+      "value": "2"
+    },
+    {
+      "key": "table.lab03_drift_conditions.a.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.b.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.c.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp40.drift_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp50.error_after_fix_mm",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "false"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.tracking_1_s",
+      "value": "2.8"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.tracking_2_s",
+      "value": "2.6"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.tracking_3_s",
+      "value": "2.9"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.mediana_tracking_s",
+      "value": "2.8"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.płaszczyzna_1_s",
+      "value": "4.1"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.płaszczyzna_2_s",
+      "value": "3.8"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.płaszczyzna_3_s",
+      "value": "4.0"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.mediana_płaszczyzny_s",
+      "value": "4.0"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.tracking_1_s",
+      "value": "2.7"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.tracking_2_s",
+      "value": "3.9"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.tracking_3_s",
+      "value": "3.8"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.mediana_tracking_s",
+      "value": "3.8"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.płaszczyzna_1_s",
+      "value": "6.7"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.płaszczyzna_2_s",
+      "value": "6.3"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.płaszczyzna_3_s",
+      "value": "6.5"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.mediana_płaszczyzny_s",
+      "value": "6.5"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.tracking_1_s",
+      "value": "3.1"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.tracking_2_s",
+      "value": "3.0"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.tracking_3_s",
+      "value": "3.2"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.mediana_tracking_s",
+      "value": "3.1"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.płaszczyzna_1_s",
+      "value": "4.9"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.płaszczyzna_2_s",
+      "value": "5"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.płaszczyzna_3_s",
+      "value": "4.8"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.mediana_płaszczyzny_s",
+      "value": "4.9"
+    },
+    {
+      "key": "cp30.tracking_s",
+      "value": "2.8"
+    },
+    {
+      "key": "cp30.first_plane_s",
+      "value": "4.0"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.nottrackingreason_uwagi",
+      "value": "Initialising"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.nottrackingreason_uwagi",
+      "value": "Initialising"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.nottrackingreason_uwagi",
+      "value": "Initialising"
+    },
+    {
+      "key": "cp30.not_tracking_reason",
+      "value": "Initialising"
+    },
+    {
+      "key": "cp30.answer",
+      "value": "Płaszczyzna była wykrywana szybciej przy kącie około 35° niż przy 70°. Średni czas uzyskania śledzenia wynosił około 2,8 s, a wykrycia pierwszej płaszczyzny około 4,0 s. Najczęstszą przyczyną braku śledzenia był stan Initializing. Wyniki mogły być zależne od oświetlenia, tekstury powierzchni oraz sposobu poruszania telefonem."
+    }
+  ],
+  "labNumber": 3,
+  "createdAtUtc": "2026-10-19T16:33:10.7692728Z",
+  "submissionId": "1266451b3a684a61820260d414ea2441",
+  "updatedAtUtc": "2026-11-02T17:27:52.2113652Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173358"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 49,
+    "elapsedSeconds": 1146964.374,
+    "lastEventAtUtc": "2026-11-02T17:25:19.8798311Z",
+    "firstEventAtUtc": "2026-10-20T10:49:15.5062123Z",
+    "playModeSeconds": 964.581,
+    "playModeSessions": 1
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:49:15.5062123Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:51:13.3240444Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:51:39.5848578Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:53:41.7693080Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:53:48.0847986Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=4",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:53:50.6911892Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:53:50.6998106Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:55:28.6215587Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:55:33.8549030Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:55:34.6700581Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:55:35.4261301Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:55:51.0856129Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:55:52.1244707Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:55:52.3842807Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=4",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:56:01.9661523Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:56:01.9748136Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:56:42.0010936Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:57:05.7868951Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:57:23.7476882Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:57:23.7577259Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:57:23.7692581Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:57:49.5571569Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=4",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:57:52.7334878Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:57:52.7420465Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:58:03.0146419Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:58:33.2296730Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=4",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:58:35.6360248Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T10:58:35.6441266Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:05:55.3686784Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=4",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:05:57.1870435Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:05:57.1958263Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:06:21.2904740Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:06:45.7294983Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:06:59.8916183Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:07:14.0002955Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:07:25.8849591Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:07:34.7948752Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:07:44.1659767Z",
+      "durationSeconds": 964.581
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:08:33.2237833Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:08:34.1629106Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:08:39.2207247Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=4",
+      "eventName": "dependency_install_started",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:09:35.3798169Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:09:44.3550054Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:09:44.3644512Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:09:44.3724902Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:09:48.3822439Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=3;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:10:30.8158106Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=3;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 3,
+      "timestampUtc": "2026-10-20T11:11:19.0489866Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 3,
+      "timestampUtc": "2026-11-02T17:25:19.8798311Z",
+      "durationSeconds": 0
+    }
+  ]
+}
