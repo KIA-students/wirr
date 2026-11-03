@@ -1,0 +1,216 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S25a7b43dd9e34bb4bdc8a2660063d395",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173358"
+    },
+    {
+      "key": "variant.v1",
+      "value": "4"
+    },
+    {
+      "key": "variant.v2",
+      "value": "1"
+    },
+    {
+      "key": "variant.v3",
+      "value": "3"
+    },
+    {
+      "key": "variant.v4",
+      "value": "5"
+    },
+    {
+      "key": "variant.v5",
+      "value": "2"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.mediana",
+      "value": "98"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.mediana",
+      "value": "91"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.mediana",
+      "value": "65.5"
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "false"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.successrate_1",
+      "value": "98"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.successrate_2",
+      "value": "97.5"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.successrate_3",
+      "value": "98.5"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.rozdzielczość",
+      "value": "160x120"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.uwagi",
+      "value": "Stabilne pozyskiwanie klatek CPU, wysoki kontrast cech w kadrze."
+    },
+    {
+      "key": "table.lab04_depth_v1.b.successrate_1",
+      "value": "91"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.successrate_2",
+      "value": "89.5"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.successrate_3",
+      "value": "92"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.rozdzielczość",
+      "value": "160x120"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.uwagi",
+      "value": "Niewielki spadek skuteczności z powodu niższego kontrastu klatek surowych."
+    },
+    {
+      "key": "table.lab04_depth_v1.c.successrate_1",
+      "value": "68.5"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.successrate_2",
+      "value": "62"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.successrate_3",
+      "value": "65.5"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.rozdzielczość",
+      "value": "160x120"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.uwagi",
+      "value": "Wyraźny szum kamery, znaczne gubienie klatek głębi przez algorytm estymacji ARCore."
+    },
+    {
+      "key": "cp30.depth_available",
+      "value": "dostępna"
+    },
+    {
+      "key": "cp30.depth_mode",
+      "value": "Automatic/Best"
+    },
+    {
+      "key": "cp30.depth_resolution",
+      "value": "160x120"
+    },
+    {
+      "key": "cp30.answer",
+      "value": "Skuteczność pozyskiwania klatek głębi (successRate) jest bezpośrednio zależna od natężenia oświetlenia otoczenia. W dobrych warunkach oświetleniowych utrzymuje się na poziomie ~98%, natomiast w słabym świetle drastycznie spada do ~65.5%. Najważniejszym ograniczeniem Depth API w tym eksperymencie jest podatność na szum matrycy kamery i brak wyraźnych cech wizualnych w niedoświetlonym otoczeniu."
+    }
+  ],
+  "labNumber": 4,
+  "createdAtUtc": "2026-11-02T17:29:56.3654314Z",
+  "submissionId": "25778a63fc2f4df7848b9d3a745d0097",
+  "updatedAtUtc": "2026-11-02T17:51:38.0571124Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173358"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 2,
+    "elapsedSeconds": 1147484.392,
+    "lastEventAtUtc": "2026-11-02T17:51:28.1290913Z",
+    "firstEventAtUtc": "2026-10-20T11:06:43.7375626Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 4,
+      "timestampUtc": "2026-10-20T11:06:43.7375626Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 4,
+      "timestampUtc": "2026-11-02T17:51:28.1290913Z",
+      "durationSeconds": 0
+    }
+  ]
+}
