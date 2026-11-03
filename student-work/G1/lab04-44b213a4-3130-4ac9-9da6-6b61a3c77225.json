@@ -1,0 +1,201 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Sa31a6570902b412f8bf1305e94ebf0e2",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173371"
+    },
+    {
+      "key": "variant.v1",
+      "value": "2"
+    },
+    {
+      "key": "variant.v2",
+      "value": "4"
+    },
+    {
+      "key": "variant.v3",
+      "value": "1"
+    },
+    {
+      "key": "variant.v4",
+      "value": "3"
+    },
+    {
+      "key": "variant.v5",
+      "value": "5"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.mediana",
+      "value": "10"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.mediana",
+      "value": "100"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.0_50_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_00_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_1.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_2.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_3.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_4.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "table.lab04_depth_raycast.1_50_m_5.e_d_m",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "false"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.successrate_1",
+      "value": "25"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.successrate_2",
+      "value": "10"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.successrate_3",
+      "value": "0"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.rozdzielczość",
+      "value": "160x120"
+    },
+    {
+      "key": "table.lab04_depth_v1.a.uwagi",
+      "value": "Brak ruchu powoduje szybki spadek generowania nowych ramek CPU depth."
+    },
+    {
+      "key": "table.lab04_depth_v1.b.successrate_1",
+      "value": "100.0"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.successrate_2",
+      "value": "98"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.successrate_3",
+      "value": "100"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.rozdzielczość",
+      "value": "160x120"
+    },
+    {
+      "key": "table.lab04_depth_v1.b.uwagi",
+      "value": "Wymuszenie paralaksy zapewnia stabilne dostarczanie klatek w oknie 5s."
+    },
+    {
+      "key": "table.lab04_depth_v1.c.successrate_1",
+      "value": "brak"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.successrate_2",
+      "value": "brak"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.successrate_3",
+      "value": "brak"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.rozdzielczość",
+      "value": "brak"
+    },
+    {
+      "key": "table.lab04_depth_v1.c.uwagi",
+      "value": "brak"
+    },
+    {
+      "key": "cp30.depth_available",
+      "value": "dostępna"
+    },
+    {
+      "key": "cp30.depth_mode",
+      "value": "Medium"
+    },
+    {
+      "key": "cp30.depth_resolution",
+      "value": "160x120"
+    },
+    {
+      "key": "cp30.answer",
+      "value": "ARCore Depth API w silnym stopniu zależy od ruchu kamery w celu generowania nowej geometrii z paralaksy. Gdy telefon był nieruchomy, odsetek pozyskanych klatek z głębią spadał gwałtownie (mediana 10%). Wymuszenie powolnego ruchu bocznego utrzymało successRate blisko 100%. Rozdzielczość mapy głębi jest niska (160x120) w porównaniu do obrazu RGB. Głównym ograniczeniem jest pomiar uśredniony w oknie 5s, przez co chwilowe spadki mogą być wygładzone."
+    }
+  ],
+  "labNumber": 4,
+  "createdAtUtc": "2026-11-02T17:41:58.6769712Z",
+  "submissionId": "c44c087f48604887899746d5ed9b0548",
+  "updatedAtUtc": "2026-11-02T17:54:31.4786596Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173371"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 0,
+    "elapsedSeconds": 0,
+    "lastEventAtUtc": "",
+    "firstEventAtUtc": "",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": []
+}
