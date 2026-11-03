@@ -1,0 +1,265 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S25a7b43dd9e34bb4bdc8a2660063d395",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173358"
+    },
+    {
+      "key": "variant.v1",
+      "value": "4"
+    },
+    {
+      "key": "variant.v2",
+      "value": "1"
+    },
+    {
+      "key": "variant.v3",
+      "value": "3"
+    },
+    {
+      "key": "variant.v4",
+      "value": "5"
+    },
+    {
+      "key": "variant.v5",
+      "value": "2"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.mediana_s",
+      "value": "4.5"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.mediana_s",
+      "value": "2.95"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.mediana_s",
+      "value": "2.15"
+    },
+    {
+      "key": "table.lab02_cp35_conditions.a.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_cp35_conditions.b.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_cp35_conditions.c.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_cp40_conditions.a.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_cp40_conditions.b.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_quest_experiment.a.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "table.lab02_quest_experiment.b.mediana_s",
+      "value": ""
+    },
+    {
+      "key": "cp30.errors",
+      "value": "3"
+    },
+    {
+      "key": "cp35.false_activations",
+      "value": ""
+    },
+    {
+      "key": "cp40.corrections",
+      "value": ""
+    },
+    {
+      "key": "cp45.scenario_median_s",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "false"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC (XR Interaction Simulator)."
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.próba_1_s",
+      "value": "4.85"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.próba_2_s",
+      "value": "4.50"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.próba_3_s",
+      "value": "4.20"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.próba_4_s",
+      "value": "4.65"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.próba_5_s",
+      "value": "4.10"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.a.błędy",
+      "value": "2"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.próba_1_s",
+      "value": "3.10"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.próba_2_s",
+      "value": "2.85"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.próba_3_s",
+      "value": "2.95"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.próba_4_s",
+      "value": "3.40"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.próba_5_s",
+      "value": "2.90"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.b.błędy",
+      "value": "0"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.próba_1_s",
+      "value": "2.20"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.próba_2_s",
+      "value": "2.15"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.próba_3_s",
+      "value": "2.50"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.próba_4_s",
+      "value": "2.05"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.próba_5_s",
+      "value": "2.10"
+    },
+    {
+      "key": "table.lab02_cp30_conditions.c.błędy",
+      "value": "1"
+    },
+    {
+      "key": "cp30.task_median_s",
+      "value": "2.95"
+    },
+    {
+      "key": "cp30.answer",
+      "value": "Zwiększenie strefy przechwytywania z małej do bazowej znacząco skraca medianę czasu osadzenia modułu (z 4.50 s do 2.95 s) oraz eliminuje błędy precyzji osadzenia. Zwiększenie strefy do rozmiaru dużego dodatkowo skraca czas wykonania zadania (do 2.15 s), jednak niesie ryzyko pojawienia się sporadycznych błędów (1 błąd) wynikających z przypadkowego wciągnięcia obiektu do gniazda przy zbyt wczesnym puszczeniu go przez użytkownika. Optymalnym rozwiązaniem pod kątem czasu i bezbłędności jest rozmiar bazowy."
+    }
+  ],
+  "labNumber": 2,
+  "createdAtUtc": "2026-10-19T16:32:44.3934752Z",
+  "submissionId": "3baf926921814bd39fdfe7dd9a35865a",
+  "updatedAtUtc": "2026-11-02T17:59:08.9813731Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173358",
+    ""
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 10,
+    "elapsedSeconds": 1212654.244,
+    "lastEventAtUtc": "2026-11-02T17:58:59.4915665Z",
+    "firstEventAtUtc": "2026-10-19T17:08:05.2473111Z",
+    "playModeSeconds": 18.011,
+    "playModeSessions": 1
+  },
+  "activityTimeline": [
+    {
+      "result": "incomplete",
+      "eventName": "report_checked",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-19T17:08:05.2473111Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-20T10:40:32.0966637Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-20T10:40:50.0975604Z",
+      "durationSeconds": 18.011
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_quitting",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-20T10:41:09.5012536Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-20T10:48:09.3585844Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 2,
+      "timestampUtc": "2026-10-20T10:48:43.1720033Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_quitting",
+      "labNumber": 2,
+      "timestampUtc": "2026-11-01T16:46:53.5813800Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 2,
+      "timestampUtc": "2026-11-02T17:13:55.5551836Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 2,
+      "timestampUtc": "2026-11-02T17:14:43.3159450Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 2,
+      "timestampUtc": "2026-11-02T17:58:59.4915665Z",
+      "durationSeconds": 0
+    }
+  ]
+}
