@@ -1,0 +1,301 @@
+{
+  "group": "G1",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S5c40990c950c4001bf2a9616cbc3124e",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173368"
+    },
+    {
+      "key": "variant.v1",
+      "value": "4"
+    },
+    {
+      "key": "variant.v2",
+      "value": "1"
+    },
+    {
+      "key": "variant.v3",
+      "value": "3"
+    },
+    {
+      "key": "variant.v4",
+      "value": "5"
+    },
+    {
+      "key": "variant.v5",
+      "value": "2"
+    },
+    {
+      "key": "table.lab03_drift_conditions.a.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.b.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_drift_conditions.c.mediana_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_registration.3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.baseline_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.błąd_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_1.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_2.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_med_mm",
+      "value": ""
+    },
+    {
+      "key": "table.lab03_fault.naprawa_3.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp40.drift_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_median_mm",
+      "value": ""
+    },
+    {
+      "key": "cp45.e_max_mm",
+      "value": ""
+    },
+    {
+      "key": "cp50.error_after_fix_mm",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "false"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.tracking_1_s",
+      "value": "5,2"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.tracking_2_s",
+      "value": "4,8"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.tracking_3_s",
+      "value": "5,5"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.mediana_tracking_s",
+      "value": "5,2"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.płaszczyzna_1_s",
+      "value": "8,7"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.płaszczyzna_2_s",
+      "value": "8,1"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.płaszczyzna_3_s",
+      "value": "9,2"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.mediana_płaszczyzny_s",
+      "value": "8,7\t"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.a.nottrackingreason_uwagi",
+      "value": "InsufficientFeatures"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.tracking_1_s",
+      "value": "3,7"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.tracking_2_s",
+      "value": "4,1"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.tracking_3_s",
+      "value": "3,9"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.mediana_tracking_s",
+      "value": "3,9"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.płaszczyzna_1_s",
+      "value": "5,8"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.płaszczyzna_2_s",
+      "value": "6,3"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.płaszczyzna_3_s",
+      "value": "6,0"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.mediana_płaszczyzny_s",
+      "value": "6,0"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.b.nottrackingreason_uwagi",
+      "value": "Initializing"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.tracking_1_s",
+      "value": "4,3"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.tracking_2_s",
+      "value": "4,0"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.tracking_3_s",
+      "value": "4,5"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.mediana_tracking_s",
+      "value": "4,3"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.płaszczyzna_1_s",
+      "value": "7,0"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.płaszczyzna_2_s",
+      "value": "6,5"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.płaszczyzna_3_s",
+      "value": "7,3"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.mediana_płaszczyzny_s",
+      "value": "7,0"
+    },
+    {
+      "key": "table.lab03_tracking_conditions.c.nottrackingreason_uwagi",
+      "value": "Initializing"
+    },
+    {
+      "key": "cp30.tracking_s",
+      "value": "3,9"
+    },
+    {
+      "key": "cp30.first_plane_s",
+      "value": "6,0"
+    },
+    {
+      "key": "cp30.not_tracking_reason",
+      "value": "Initializing"
+    },
+    {
+      "key": "cp30.answer",
+      "value": "W otrzymanych danych zaobserwowano wpływ kąta obserwacji na czas uzyskania stabilnego śledzenia oraz wykrycia pierwszej użytecznej płaszczyzny.\nDla pierwszym zestawie odczytów mediana czasu uzyskania stanu SessionTracking wyniosła 5,2 s, a czas wykrycia pierwszej płaszczyzny 8,7 s. Przy drugim zoestawie wartości te zmniejszyły się odpowiednio do 3,9 s oraz 6,0 s.\nW analizowanym przykładzie odczyt bardziej pionowo zapewniał szybszą inicjalizację śledzenia i wykrywanie płaszczyzny. Może to wynikać z korzystniejszych warunków obserwacji powierzchni przez kamerę."
+    }
+  ],
+  "labNumber": 3,
+  "createdAtUtc": "2026-11-05T08:39:02.6332389Z",
+  "submissionId": "cd99d91cf8b746de8854582339f022ef",
+  "updatedAtUtc": "2026-11-05T13:40:29.9119601Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173368"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 0,
+    "elapsedSeconds": 0,
+    "lastEventAtUtc": "",
+    "firstEventAtUtc": "",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": []
+}
