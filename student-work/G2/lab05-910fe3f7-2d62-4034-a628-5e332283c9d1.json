@@ -1,0 +1,265 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S711068d718b54e8eba9def84bdaee75a",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346718"
+    },
+    {
+      "key": "variant.v1",
+      "value": "4"
+    },
+    {
+      "key": "variant.v2",
+      "value": "1"
+    },
+    {
+      "key": "variant.v3",
+      "value": "3"
+    },
+    {
+      "key": "variant.v4",
+      "value": "5"
+    },
+    {
+      "key": "variant.v5",
+      "value": "2"
+    },
+    {
+      "key": "table.lab05_benchmark.a1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.a2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.a3.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b3.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c3.fps",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity Editor PC "
+    },
+    {
+      "key": "basic.observation",
+      "value": "Dla pomiaru bazowego audyt wykazal: 912 wierzcholkow, 620 trojkatow, 1 submesh, 1 slot materialu, 912 krawedzi brzegowych, 0 krawedzi non-manifold, 0 trojkatow zdegenerowanych, q05 = 0.034, qMedian = 0.130 oraz wymiary worldSize = (0.03, 0.02, 0.00) m. Po sztucznej zmianie wspolczynnika skali w importerze na wartosc 10 (Warunek B) wymiary worldSize wzrosly 10-krotnie do (0.30, 0.20, 0.00) m, podczas gdy liczba wierzcholkow (912), trojkatow (620) oraz wskaźniki jakosci topologii (q05=0.034, qMedian=0.130) pozostaly bez zadnych zmian."
+    },
+    {
+      "key": "basic.change",
+      "value": "Przeprowadzono eksperyment v1 dla wariantu 4 (jednostki/skala):\n- Warunek A (Baseline): Poprawna konwersja jednostek (Scale Factor = 1), gdzie worldSize wynosi (0.03, 0.02, 0.00) m.\n- Warunek B: Kontrolowany bledny wspolczynnik skali w Model Importer (Scale Factor = 10), gdzie worldSize wynosi (0.30, 0.20, 0.00) m."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Modyfikacja parametru Scale Factor w importerze Model Importer zmienia wylacznie przeskalowanie geometryczne w swiecie (worldSize), nie wplywajac na sama strukture siatki — liczba wierzcholkow (912), trojkatow (620), krawedzi brzegowych (912) oraz jakosc topologii (q05=0.034, qMedian=0.130) pozostaja identyczne."
+    },
+    {
+      "key": "basic.limits",
+      "value": "Pomiar wykonano w edytorze Unity Editor na PC, bez uzycia fizycznych gogli XR."
+    }
+  ],
+  "labNumber": 5,
+  "createdAtUtc": "2026-11-10T11:33:34.0861498Z",
+  "submissionId": "c39bf21c496146bea42f80538b7bfce6",
+  "updatedAtUtc": "2026-11-10T12:11:32.7004456Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173382",
+    "173336"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 22,
+    "elapsedSeconds": 2627.124,
+    "lastEventAtUtc": "2026-11-10T12:09:06.3470013Z",
+    "firstEventAtUtc": "2026-11-10T11:25:19.2232975Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:25:19.2232975Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:25:27.8601935Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:27:13.1750439Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:27:25.0328786Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:27:28.2926532Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:27:37.6178899Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:27:39.2810803Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:27:50.2588335Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:27:50.2588335Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:27:50.2682202Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:27:56.4225417Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:33:09.2289813Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:33:34.0974709Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:53:09.0094770Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:53:52.6185258Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:54:08.7422350Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:56:26.0953028Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:56:32.5231849Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:56:39.9607998Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:58:22.6474612Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T12:06:50.1063008Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T12:09:06.3470013Z",
+      "durationSeconds": 0
+    }
+  ]
+}
