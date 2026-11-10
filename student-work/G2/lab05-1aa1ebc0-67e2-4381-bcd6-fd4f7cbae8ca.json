@@ -1,0 +1,247 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S27f2bb2e8f9e4d4f9aa98af0a0fa1f36",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346802"
+    },
+    {
+      "key": "variant.v1",
+      "value": "3"
+    },
+    {
+      "key": "variant.v2",
+      "value": "5"
+    },
+    {
+      "key": "variant.v3",
+      "value": "2"
+    },
+    {
+      "key": "variant.v4",
+      "value": "4"
+    },
+    {
+      "key": "variant.v5",
+      "value": "1"
+    },
+    {
+      "key": "table.lab05_benchmark.a1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.a2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.a3.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b3.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c3.fps",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "PC"
+    },
+    {
+      "key": "basic.observation",
+      "value": "Sposób przygotowania siatki drastycznie zmienił końcową strukturę modelu po \nimporcie do Unity. Wersja A zachowała wszystkie osobne elementy,\n a Wersja B zgrupowała je w foldery według materiałów. \nWersja C wczytała się jako jedna zbita bryła, całkowicie uniemożliwiając wybranie pojedynczej części."
+    },
+    {
+      "key": "basic.change",
+      "value": "Zgodnie z wariantem trzecim, porównano wpływ metody eksportu \nna zachowanie hierarchii modelu. Wersja A posłużyła jako baza pomiarowa z \npełnym podziałem na detale. Wersje B i C to warianty zoptymalizowane poprzez łączenie elementów po materiałach\n oraz całkowite scalenie geometrii."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Pełna hierarchia z osobnymi częściami jest konieczna tylko wtedy, gdy \naplikacja wymaga fizycznej interakcji z detalami. Dla obiektów statycznych (tła) lepsze \njest całkowite scalenie, co drastycznie odciąża procesor. \nGrupowanie elementów po materiale to optymalny kompromis między wydajnością silnika a użytecznością modelu."
+    }
+  ],
+  "labNumber": 5,
+  "createdAtUtc": "2026-11-10T11:24:01.3657930Z",
+  "submissionId": "acadfe9a250240738eecf25a66e9222b",
+  "updatedAtUtc": "2026-11-10T12:29:38.3882008Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173404",
+    "173398"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 20,
+    "elapsedSeconds": 4026.905,
+    "lastEventAtUtc": "2026-11-10T12:29:31.2537505Z",
+    "firstEventAtUtc": "2026-11-10T11:22:24.3483052Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:22:24.3483052Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:22:43.1841831Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:22:46.1159735Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:22:49.6567664Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=0",
+      "eventName": "dependency_install_started",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:22:57.7677918Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:23:02.6161223Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:23:03.8086537Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:23:15.1931809Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:23:15.1971937Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:23:15.2078079Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:23:30.2124500Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:23:47.4767668Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:24:01.3685912Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:30:58.8070497Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:40:52.3917482Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:41:19.3424388Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:44:22.4166442Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:54:11.2458945Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T12:26:02.7455669Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T12:29:31.2537505Z",
+      "durationSeconds": 0
+    }
+  ]
+}
