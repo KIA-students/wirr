@@ -1,0 +1,261 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S98d01cceaa1d4c6b843b9b4a962abac3",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173999"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "cp40.latency_ms",
+      "value": ""
+    },
+    {
+      "key": "cp40.jitter_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.stale_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.recovery_ms",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity 6.6, Ubuntu 22.04, ROS2 Humble oraz Gazebo Fortress."
+    },
+    {
+      "key": "basic.observation",
+      "value": "Podczas testów Websim uzyskano status LIVE, RRBot w unity prawidłowo reagował na polecenia, Ruch A B i C oraz powrót. W gazebo wartości przegubów podczas ruchu robota sie zmienialy i zmiany byly odwzorowane w Unity. \nUruchomiono ROS-TCP i skomunikowano sie z UNITY."
+    },
+    {
+      "key": "basic.change",
+      "value": "Porównanie wykazało obecność dodatkowego węzła komuniakcyjnego, przy zachowaniu podstawowych symulacji w tym publikacji danych o stanie przegubów. Gazebo odpowiadało za symulacje ruchu"
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "W architekturze blizniaka cyfrowego istotne jest rozdzielenie symulacji fizycznej, publikacji stanów przegubów oraz komunikacji z aplikacją do wizualizacji. Gazebo i ros2_control realizują symulację oraz sterowanie, natomiast ROS-TCP_EndPoint umożliwia \nwymianę informacji z Unity. "
+    }
+  ],
+  "labNumber": 6,
+  "createdAtUtc": "2026-11-10T11:38:09.7619282Z",
+  "submissionId": "4d5393c718d04166ad7a9e04aef1963a",
+  "updatedAtUtc": "2026-11-10T12:25:31.7899504Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173999"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 25,
+    "elapsedSeconds": 2335.239,
+    "lastEventAtUtc": "2026-11-10T12:17:25.5036142Z",
+    "firstEventAtUtc": "2026-11-10T11:38:30.2648860Z",
+    "playModeSeconds": 129.415,
+    "playModeSessions": 1
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:38:30.2648860Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=1",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:38:33.8045281Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:38:33.8097035Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:38:39.0805464Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:38:50.4103695Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:38:51.7177277Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:39:21.2887425Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:39:42.3147255Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:39:54.6934936Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:39:58.8877400Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:40:17.3838210Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:40:17.3858568Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:40:17.3954834Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:40:42.5885529Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:40:44.8079783Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:44:01.6481577Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:44:14.9926442Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:44:20.3623387Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:50:12.3141134Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:55:45.1152980Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:10:50.7601462Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:11:46.9445841Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:11:57.5856953Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:14:07.0023972Z",
+      "durationSeconds": 129.415
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:17:25.5036142Z",
+      "durationSeconds": 0
+    }
+  ]
+}
