@@ -1,0 +1,227 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Scc3e9b81a6f6403883f624c4a7bd8397",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346794"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "cp40.latency_ms",
+      "value": ""
+    },
+    {
+      "key": "cp40.jitter_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.stale_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.recovery_ms",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "PC"
+    },
+    {
+      "key": "basic.observation",
+      "value": "W konfiguracji referencyjnej Gazebo odpowiada za symulację robota RRBot. \nROS2 udostępnia tematy joint_states, /tf,/ tf_static oraz /clock. Po uruchomieniu ROS-TCP-Endpoint oczekiwane jest dodatkowy węzeł.\t\t "
+    },
+    {
+      "key": "basic.change",
+      "value": "Porównano graf ROS2 przed i po uruchiomieniu endpointu. Zmianą było uruchomienie dodatkowego węzła odpowiadającego za połączenie ROS2 z Unity.\n"
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "ROS-TCP-Endpoint pełni funkcję pośrednika między Unity a ROS2. Nie odpowiada za symulację robota ani generowania jej stanu. "
+    }
+  ],
+  "labNumber": 6,
+  "createdAtUtc": "2026-11-10T11:23:49.9411618Z",
+  "submissionId": "d9eb461551694865ae513f9675f77799",
+  "updatedAtUtc": "2026-11-10T12:11:32.7359519Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173403",
+    "173391"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 20,
+    "elapsedSeconds": 2716.86,
+    "lastEventAtUtc": "2026-11-10T12:11:31.7071547Z",
+    "firstEventAtUtc": "2026-11-10T11:26:14.8470875Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:26:14.8470875Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=1",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:26:23.1835237Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:26:23.1850283Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:26:31.0718153Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:26:59.7651449Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:49.3501682Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:49.4058071Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:51.0632014Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:29:10.2078863Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:29:15.5770225Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:29:15.5785307Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:29:15.5891486Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:29:17.4903109Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:29:22.5981590Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:29:23.6469977Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:38:07.8644679Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:38:07.8938111Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:38:09.3125422Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:56:15.8618998Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:11:31.7071547Z",
+      "durationSeconds": 0
+    }
+  ]
+}
