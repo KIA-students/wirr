@@ -1,0 +1,267 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S98d01cceaa1d4c6b843b9b4a962abac3",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173999"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "table.lab05_benchmark.a1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.a2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.a3.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b3.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c3.fps",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC, Blender 5.2.3 LTS."
+    },
+    {
+      "key": "basic.observation",
+      "value": "Model kątownika został przekonwertowany z formatu STEP do OBJ i zaimportowany do Unity. Przeprowadzono audyt topologii siatki."
+    },
+    {
+      "key": "basic.change",
+      "value": "W programie blender przygotowano dwa warianty modelu z modyfikatorem Bevel (0,02m, 3 segmenty, kąt 30 stopni). Wariant A wyeksportowano z opcją Apply Modifiers, natomiast B z włączoną. Oba modele zaimportowano do Unity"
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Zastosowanie opcji APply Modifiers podczas eksportu z Blendera uwzglednia dzialanie modyfikatora. Powoduje to zwiekszenie szczegolowosci krawędzi prowadzi do wzrostu liczby wierzchlołków i trójkątów."
+    }
+  ],
+  "labNumber": 5,
+  "createdAtUtc": "2026-11-10T11:06:13.5037695Z",
+  "submissionId": "c4a635e2641241b09d0c21f03b20a944",
+  "updatedAtUtc": "2026-11-10T11:35:21.1155596Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173999"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 23,
+    "elapsedSeconds": 1209526.705,
+    "lastEventAtUtc": "2026-11-10T11:35:18.7841184Z",
+    "firstEventAtUtc": "2026-10-27T11:36:32.0790556Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 5,
+      "timestampUtc": "2026-10-27T11:36:32.0790556Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:36:56.7331880Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:37:06.9769129Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:37:28.7175509Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:38:11.2871421Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:38:11.4337795Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:38:11.5820080Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:40:32.3601019Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:40:35.9677026Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:40:36.5853405Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:40:36.7611334Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=0",
+      "eventName": "dependency_install_started",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:40:41.3995417Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:40:50.8327839Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:41:11.9297419Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:41:11.9322555Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:41:11.9418071Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:41:29.3951030Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:42:33.5586253Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:53:30.6445743Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:55:09.4729113Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:06:13.5173866Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:26:35.6663931Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:35:18.7841184Z",
+      "durationSeconds": 0
+    }
+  ]
+}
