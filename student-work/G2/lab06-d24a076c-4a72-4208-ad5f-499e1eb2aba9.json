@@ -1,0 +1,114 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S8685b301ddd44f41834b0d60ae57a3fc",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173400"
+    },
+    {
+      "key": "variant.v1",
+      "value": "1"
+    },
+    {
+      "key": "variant.v2",
+      "value": "3"
+    },
+    {
+      "key": "variant.v3",
+      "value": "5"
+    },
+    {
+      "key": "variant.v4",
+      "value": "2"
+    },
+    {
+      "key": "variant.v5",
+      "value": "4"
+    },
+    {
+      "key": "cp40.latency_ms",
+      "value": ""
+    },
+    {
+      "key": "cp40.jitter_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.stale_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.recovery_ms",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Analiza dokumentacji ROS 2 Humble, Gazebo Fortress oraz modelu RRBot. Środowisko Unity 6.6 na Windows. \nWyniki eksperymentalne oszacowano na podstawie konfiguracji referencyjnej, bez uruchamiania symulacji."
+    },
+    {
+      "key": "basic.observation",
+      "value": "RRBot posiada dwa przeguby obrotowe joint1 i joint2. Ich stan jest publikowany przez joint_state_broadcaster na temacie /joint_states. \nKonfiguracja kontrolera przewiduje częstotliwość aktualizacji 1000 Hz. Dla przykładowej symulacji oszacowano średnią częstotliwość publikacji 930 Hz i okres około 1,075 ms, \nprzy zakresie 0,8–2,4 ms. Są to wartości modelowe, nie pomiary rzeczywiste."
+    },
+    {
+      "key": "basic.change",
+      "value": "Przeanalizowano przepływ danych Gazebo → ros2_control → ROS 2 → ROS-TCP-Endpoint → Unity. Rozpatrzono eksperyment v1 = 1, \ndotyczący częstotliwości publikacji /joint_states i zmienności okresu między wiadomościami.\r\n"
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Częstotliwość aktualizacji kontrolera nie musi odpowiadać rzeczywistej częstotliwości odbioru danych. Obciążenie symulacji, komunikacja i nieregularność publikacji mogą wpływać \nna aktualność informacji przekazywanych do Unity. Monitorowanie /joint_states pozwala ocenić jakość źródła danych dla bliźniaka cyfrowego.\r\n"
+    }
+  ],
+  "labNumber": 6,
+  "createdAtUtc": "2026-11-10T11:37:41.0828004Z",
+  "submissionId": "ab53af8c7b484f0bb1440a3600802ba3",
+  "updatedAtUtc": "2026-11-10T11:48:20.7145261Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173400"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 4,
+    "elapsedSeconds": 433.601,
+    "lastEventAtUtc": "2026-11-10T11:37:58.2435522Z",
+    "firstEventAtUtc": "2026-11-10T11:30:44.6429129Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:30:44.6429129Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:37:41.0873308Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:37:49.7795425Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:37:58.2435522Z",
+      "durationSeconds": 0
+    }
+  ]
+}
