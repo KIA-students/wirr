@@ -1,0 +1,175 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S711068d718b54e8eba9def84bdaee75a",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346718"
+    },
+    {
+      "key": "variant.v1",
+      "value": "4"
+    },
+    {
+      "key": "variant.v2",
+      "value": "1"
+    },
+    {
+      "key": "variant.v3",
+      "value": "3"
+    },
+    {
+      "key": "variant.v4",
+      "value": "5"
+    },
+    {
+      "key": "variant.v5",
+      "value": "2"
+    },
+    {
+      "key": "cp40.latency_ms",
+      "value": ""
+    },
+    {
+      "key": "cp40.jitter_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.stale_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.recovery_ms",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC Windows. Wybrano topologię WEBSIM, łącząc się z backendem dostarczonym przez kontener Docker."
+    },
+    {
+      "key": "basic.observation",
+      "value": "Wykonano próby ruchu RRBota (Ruch A, Ruch B, Ruch C) bezpośrednio z panelu Unity, potwierdzając, \nże model płynnie reaguje na komendy, a częstotliwość wiadomości JointState w Unity po połączeniu utrzymuje się w okolicy nominalnych 30 Hz. \nPodczas testu v1 (wstrzymanie źródła) zaobserwowano, że zamrożenie pracy kontenera Docker całkowicie zatrzymuje dopływ nowych próbek do tematów /clock i /joint_states. Bliźniak w Unity zostaje wstrzymany (brak płynnego ruchu i nowych odczytów). \nPo odblokowaniu kontenera (docker unpause) publikacja danych zostaje natychmiastowo wznowiona, a model płynnie wraca do aktualizacji położeń ze źródła."
+    },
+    {
+      "key": "basic.change",
+      "value": "Eksperyment 1 (v1 = 4): Zasymulowano sprzętowe zatrzymanie Gazebo poprzez użycie poleceń 'docker pause' i 'docker unpause' na aktywnym kontenerze backendu WebSim. \nPorównano zachowanie tematów /clock i /joint_states podczas swobodnego działania środowiska oraz podczas sztucznie wymuszonego wstrzymania procesów symulacji."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Zarówno zegar symulacji, jak i strumień stanów zgięcia przegubów są ściśle powiązane z działaniem samego silnika fizyki (w tym przypadku backendu).\nPrzerwa w działaniu symulatora wstrzymuje publikację danych na zewnątrz, uniemożliwiając bliźniakowi cyfrowemu (w Unity) odbiór nowych parametrów w czasie rzeczywistym.\nBliźniak zależy bezpośrednio od stabilności toru transmisyjnego i aktywnego zegara nadawcy."
+    },
+    {
+      "key": "basic.limits",
+      "value": "Z powodu pracy na systemie Windows stanowisko nie posiadało natywnej instalacji ROS 2 Humble ani interfejsu graficznego Gazebo Sim. Wykorzystano architekturę WEBSIM (backend w Dockerze i protokół rosbridge/WebSocket zamiast TCP) oraz zasymulowano pauzę Gazebo za pomocą poleceń docker. \nNie mierzono fizycznego \"pinga\" ROS-TCP, gdyż warstwą transportową jest w tym trybie WebSocket."
+    }
+  ],
+  "labNumber": 6,
+  "createdAtUtc": "2026-11-10T12:11:17.2459728Z",
+  "submissionId": "ec318a34319141feb917dca74398cbc6",
+  "updatedAtUtc": "2026-11-10T12:35:43.9540038Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173382",
+    "173336"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 12,
+    "elapsedSeconds": 378.241,
+    "lastEventAtUtc": "2026-11-10T12:19:51.8087298Z",
+    "firstEventAtUtc": "2026-11-10T12:13:33.5681678Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:13:33.5681678Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:18.2801108Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:25.0026527Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=1",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:26.4882071Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:26.4882071Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:41.4129436Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:41.4647711Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:42.8815434Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:47.6825530Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:51.7966736Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:51.7996857Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:19:51.8087298Z",
+      "durationSeconds": 0
+    }
+  ]
+}
