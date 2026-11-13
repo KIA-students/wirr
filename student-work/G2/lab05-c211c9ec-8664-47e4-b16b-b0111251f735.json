@@ -1,0 +1,239 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Sf1f1e05332a34babbff4c582ce80748a",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173384"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "table.lab05_benchmark.a1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.a2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.a3.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b3.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c3.fps",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC"
+    },
+    {
+      "key": "basic.observation",
+      "value": "Plik referencyjny (step) został prawidłowo poddany tessellacji i zaimportowany do unity. po korekcie parametru scale factor na 0.001 model uzyskał poprawne wymiary rzeczywiste. Skrypt poprawnie odczytał bazowaąsiatkę (912 wierzchołków, 620 trójkątów).  "
+    },
+    {
+      "key": "basic.change",
+      "value": "Przeprowadzono test z apply modifiers w programie blender wyeksportowano dwa warianty z włączoną opcją aplikowania modyfikatorów przy zapisie oraz bazowy model step "
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Model przygotowany do renderowania w czsdie rzeczywistym traci parametryczną ciągłość obecną w formacie step. Niezbędna jest ręczna kontrola importu jednostek  pliki cad są zwykle w milimetrach a unity operuje na metrach. Zastosowanie opcji apply modifiers decyduje czy silnik otrzymuje finalną siatkę z gęstrzą geometrią."
+    }
+  ],
+  "labNumber": 5,
+  "createdAtUtc": "2026-11-10T10:52:03.6051647Z",
+  "submissionId": "73c42a4b020949f7bc22b96f1399bbe4",
+  "updatedAtUtc": "2026-11-10T11:13:24.1041777Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173384"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 19,
+    "elapsedSeconds": 2588.487,
+    "lastEventAtUtc": "2026-11-10T11:13:19.8634537Z",
+    "firstEventAtUtc": "2026-11-10T10:30:11.3764058Z",
+    "playModeSeconds": 309.014,
+    "playModeSessions": 1
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:30:11.3764058Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:30:14.5684260Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=0",
+      "eventName": "dependency_install_started",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:30:24.7453007Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:30:31.9391904Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:30:31.9426079Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:30:31.9602106Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:30:35.8185887Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:30:40.7792627Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:30:47.4077684Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:30:53.1612080Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:31:07.1655138Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:49:16.6899843Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:49:17.5964495Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:51:28.8544492Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:51:29.7889733Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:52:03.6180708Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:55:00.5169261Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:00:09.5300754Z",
+      "durationSeconds": 309.014
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:13:19.8634537Z",
+      "durationSeconds": 0
+    }
+  ]
+}
