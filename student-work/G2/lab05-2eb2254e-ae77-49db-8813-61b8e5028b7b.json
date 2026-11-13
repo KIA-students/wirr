@@ -1,0 +1,183 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S8685b301ddd44f41834b0d60ae57a3fc",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173400"
+    },
+    {
+      "key": "variant.v1",
+      "value": "1"
+    },
+    {
+      "key": "variant.v2",
+      "value": "3"
+    },
+    {
+      "key": "variant.v3",
+      "value": "5"
+    },
+    {
+      "key": "variant.v4",
+      "value": "2"
+    },
+    {
+      "key": "variant.v5",
+      "value": "4"
+    },
+    {
+      "key": "table.lab05_benchmark.a1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.a2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.a3.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.b3.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c1.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c2.fps",
+      "value": ""
+    },
+    {
+      "key": "table.lab05_benchmark.c3.fps",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity 6.6 (6000.6.5f1), komputer PC, scena Lab05_CADOptimization. Model referencyjny MakerBeam, konwersja STEP do OBJ przez Convert3D oraz eksport FBX przez Unity FBX Exporter.\n"
+    },
+    {
+      "key": "basic.observation",
+      "value": "Zaimportowano model OBJ i wykonano audyt: 704 wierzchołki, 684 trójkąty, 1 submesh, 704 krawędzie brzegowe, 0 non-manifold i 0 trójkątów zdegenerowanych. q05 = 0,033, qMedian = 0,130. Po przeskalowaniu uzyskano wymiary około 30 × 20 × 1,5 mm. Audyt FBX dał identyczne wyniki.\r\n\r\nRozmiary plików: OBJ – 64 239 B, FBX – 29 120 B, STL – 34 284 B."
+    },
+    {
+      "key": "basic.change",
+      "value": "Wykonano wariant v1 = 1, porównując formaty OBJ, FBX i STL. Zastosowano konwersję STEP → OBJ → FBX oraz OBJ → STL. \nPorównano rozmiary plików, geometrię i możliwości zachowywania informacji. Skorygowano skalę OBJ współczynnikiem 0,001."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "FBX zajmował najmniej miejsca, zachowując wszystkie badane parametry topologii OBJ. STL jest prostszym formatem, który nie przechowuje standardowo materiałów ani UV. \nWyniki pokazują, że rozmiar pliku zależy od formatu i sposobu eksportu, a konwersja CAD do siatki może powodować utratę informacji projektowych.\r\n"
+    }
+  ],
+  "labNumber": 5,
+  "createdAtUtc": "2026-11-10T10:53:29.7186751Z",
+  "submissionId": "64d37b8417e141d7aa65c2b65e816fdd",
+  "updatedAtUtc": "2026-11-10T11:30:09.6923594Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173400"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 11,
+    "elapsedSeconds": 3521.442,
+    "lastEventAtUtc": "2026-11-10T11:30:08.1318906Z",
+    "firstEventAtUtc": "2026-11-10T10:31:26.6901523Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:31:26.6901523Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T10:53:29.7297361Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:10:18.2224058Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:12:52.9905406Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:17:31.0112919Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "local",
+      "eventName": "report_exported",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:17:45.4603719Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "local",
+      "eventName": "report_exported",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:18:06.4330841Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "local",
+      "eventName": "report_exported",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:19:17.3589567Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:20:32.7073105Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:25:28.0169894Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 5,
+      "timestampUtc": "2026-11-10T11:30:08.1318906Z",
+      "durationSeconds": 0
+    }
+  ]
+}
