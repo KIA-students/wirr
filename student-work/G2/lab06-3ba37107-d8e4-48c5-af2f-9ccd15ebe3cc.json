@@ -1,0 +1,241 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S27f2bb2e8f9e4d4f9aa98af0a0fa1f36",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346802"
+    },
+    {
+      "key": "variant.v1",
+      "value": "3"
+    },
+    {
+      "key": "variant.v2",
+      "value": "5"
+    },
+    {
+      "key": "variant.v3",
+      "value": "2"
+    },
+    {
+      "key": "variant.v4",
+      "value": "4"
+    },
+    {
+      "key": "variant.v5",
+      "value": "1"
+    },
+    {
+      "key": "cp40.latency_ms",
+      "value": ""
+    },
+    {
+      "key": "cp40.jitter_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.stale_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.recovery_ms",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC"
+    },
+    {
+      "key": "basic.observation",
+      "value": "Bliźniak cyfrowy w Unity poprawnie reagował na sygnały z WebSima. Po wymuszonym zamknięciu generatora, \nmodel w Unity natychmiast się zatrzymał i prawidłowo zasygnalizował utratę danych (zmieniając stan na STALE)."
+    },
+    {
+      "key": "basic.change",
+      "value": "W ramach wariantu v1=3 porównano zachowanie modelu podczas aktywnego połączenia oraz po symulowanej \nawarii mostu komunikacyjnego. Ze względu na braki sprzętowe zamiast ROS 2 wykorzystano generator WebSim."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Awaria połączenia sieciowego odcina jedynie podgląd w Unity, ale prawdziwy robot i serwer pracują dalej \nniezależnie. Dlatego niezbędną funkcją bliźniaka cyfrowego jest szybkie wykrywanie i \nzgłaszanie braku aktualnych danych z maszyny."
+    }
+  ],
+  "labNumber": 6,
+  "createdAtUtc": "2026-11-10T12:32:02.5399625Z",
+  "submissionId": "4a6b12ea261c46a29dfc3aeb4f1539c3",
+  "updatedAtUtc": "2026-11-10T13:11:34.0006657Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173404",
+    "173398"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 22,
+    "elapsedSeconds": 2340.575,
+    "lastEventAtUtc": "2026-11-10T13:11:32.2941417Z",
+    "firstEventAtUtc": "2026-11-10T12:32:31.7186793Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:32:31.7186793Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:32:51.8995313Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:32:59.1737729Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:33:07.1548821Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:33:28.5824378Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:34:48.5185200Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:35:05.1171884Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:35:06.0735753Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:35:15.4012144Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:35:15.4037199Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:35:15.4444351Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:35:18.4032659Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:35:40.0168371Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:38:09.2269505Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:38:12.6485947Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:50:22.3280752Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T12:50:24.1182577Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T13:05:27.2040581Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T13:05:36.7224742Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T13:05:57.7598245Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T13:08:26.4593961Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T13:11:32.2941417Z",
+      "durationSeconds": 0
+    }
+  ]
+}
