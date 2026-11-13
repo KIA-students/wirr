@@ -1,0 +1,184 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Sf1f1e05332a34babbff4c582ce80748a",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173384"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "cp40.latency_ms",
+      "value": ""
+    },
+    {
+      "key": "cp40.jitter_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.stale_ms",
+      "value": ""
+    },
+    {
+      "key": "cp45.recovery_ms",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC, wariant z websim."
+    },
+    {
+      "key": "basic.observation",
+      "value": "W warstwie źródłowej publikowane są aktualne stany przegubów na temacie /joint_states. Po aktywacji warstwy transportowej, do systemu dołącza węzeł udostępniający te dane na zewnątrz. Z racji wyboru WebSim fizyczne gazebo zostało zastąpione backeendem WebSim a rolę endpointa przejął most rosbridge. "
+    },
+    {
+      "key": "basic.change",
+      "value": "Porównano architekturę systemu przed nawiązaniem poączenia sieciowego z Unity oraz po jego uruchomieniu. Zidentyfikowano i rozdzielono elementy odpowiedzialne za generowanie stanu od elementów odpowiadających za komunikację."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Bliźniak cyfrowy w Unity nie bierze udziału w obliczaniu fizyki robota - odtwarza jeynie stan udostępniany przez ROS2. Warstwa źródłowa i warstwa transportowa są od siebie niezależne, czyli awaria unity nie wpływa na pracę robota."
+    }
+  ],
+  "labNumber": 6,
+  "createdAtUtc": "2026-11-10T11:28:16.9323794Z",
+  "submissionId": "3cf74e0903bf4b6eb1de3dc829fa935d",
+  "updatedAtUtc": "2026-11-10T11:44:06.0288250Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173384"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 14,
+    "elapsedSeconds": 970.723,
+    "lastEventAtUtc": "2026-11-10T11:44:04.2045485Z",
+    "firstEventAtUtc": "2026-11-10T11:27:53.4817610Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:27:53.4817610Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "missing_upm=1",
+      "eventName": "environment_auto_repair_requested",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:01.3312119Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:01.3317208Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:16.9011970Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:16.9469945Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:18.1349415Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:31.1849759Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:36.4246523Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:36.4274939Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:36.4389781Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:42.7022993Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:45.3901282Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:28:52.8969968Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 6,
+      "timestampUtc": "2026-11-10T11:44:04.2045485Z",
+      "durationSeconds": 0
+    }
+  ]
+}
