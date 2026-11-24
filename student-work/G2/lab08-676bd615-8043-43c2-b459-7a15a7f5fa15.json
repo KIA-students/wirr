@@ -1,0 +1,120 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S8685b301ddd44f41834b0d60ae57a3fc",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346799"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity 6000.6.5f1 na komputerze z Windows. Scena Lab08_Demonstrator, tryb UNITY_EDITOR, obsługa myszą. Wynik odczytano z panelu demonstratora i zapisano w pliku WiRR-Lab08-results.json."
+    },
+    {
+      "key": "basic.observation",
+      "value": "Wykonano jedną próbę w wariancie A. Po wskazaniu trzech różnych elementów stanowiska program wyświetlił komunikat o sukcesie. \nCzas ukończenia inspekcji wyniósł 5,37 s, a licznik zarejestrował jedną udaną próbę."
+    },
+    {
+      "key": "basic.change",
+      "value": "Przygotowano osobną scenę inspekcji z trzema punktami kontrolnymi. Zadaniem operatora było sprawdzenie wszystkich punktów stanowiska bez pominięcia któregoś z nich. \nWynik porównano z kryterium ukończenia zadania: po wskazaniu 3 z 3 punktów system powinien potwierdzić sukces i zapisać czas próby."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Kryterium ukończenia inspekcji zostało spełnione. Operator otrzymał potwierdzenie sprawdzenia wszystkich trzech punktów, a czas próby został zachowany w pliku wynikowym."
+    }
+  ],
+  "labNumber": 8,
+  "createdAtUtc": "2026-11-24T12:30:29.5131642Z",
+  "submissionId": "957f650c408347d1959f120f46bfdde1",
+  "updatedAtUtc": "2026-11-24T12:42:14.4546877Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173400",
+    "173399"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 7,
+    "elapsedSeconds": 1530.146,
+    "lastEventAtUtc": "2026-11-24T12:42:12.9577522Z",
+    "firstEventAtUtc": "2026-11-24T12:16:42.8113524Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:16:42.8113524Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:30:29.5131642Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:31:34.8923439Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:38:01.8823255Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:40:46.2021168Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:42:00.2571192Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:42:12.9577522Z",
+      "durationSeconds": 0
+    }
+  ]
+}
