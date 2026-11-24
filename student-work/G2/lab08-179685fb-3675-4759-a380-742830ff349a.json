@@ -1,0 +1,194 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Se185b7a66e0845688286ccd5ae4a61ec",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346718"
+    },
+    {
+      "key": "variant.v1",
+      "value": "4"
+    },
+    {
+      "key": "variant.v2",
+      "value": "1"
+    },
+    {
+      "key": "variant.v3",
+      "value": "3"
+    },
+    {
+      "key": "variant.v4",
+      "value": "5"
+    },
+    {
+      "key": "variant.v5",
+      "value": "2"
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity Editor PC (tryb UNITY_EDITOR, Game View, wejście myszy i UI) na scenie Lab08_Demonstrator.unity. Wariant A: inspektor stanowiska technicznego."
+    },
+    {
+      "key": "basic.observation",
+      "value": "Zdefiniowano problem użytkownika (kontrola trzech odrębnych elementów stanowiska technicznego) oraz mierzalne kryterium akceptacji (rejestracja 3 różnych punktów i czasu trwania próby).\n W trybie Play dla Wariantu A wykonano próbę inspekcji, wskazując kolejno trzy punkty kontrolne – próba zakończyła się sukcesem w czasie 15,54 s, a wynik zapisał się automatycznie do pliku WiRR-Lab08-results.json."
+    },
+    {
+      "key": "basic.change",
+      "value": "Przygotowano scenę demonstratora bazowego Lab08_Demonstrator.unity z wygenerowanym obiektem WiRR_Lab08_Inspection oraz dopasowano położenie i obrót kamery tak, aby wszystkie trzy elementy inspekcji były w pełni widoczne przed rozpoczęciem próby."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Kryteria dla punktu kontrolnego 3.0 zostały spełnione: demonstrator poprawnie rejestruje kontrolę trzech odrębnych elementów stanowiska, mierzy czas wykonania (15,54 s) i eksportuje ustrukturyzowany wynik JSON na platformie PC."
+    },
+    {
+      "key": "basic.limits",
+      "value": ""
+    }
+  ],
+  "labNumber": 8,
+  "createdAtUtc": "2026-11-24T11:47:36.0248513Z",
+  "submissionId": "ff0b854abd824c5da6e4c1c904864669",
+  "updatedAtUtc": "2026-11-24T12:59:26.0335415Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173336",
+    "173382"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 17,
+    "elapsedSeconds": 4313.432,
+    "lastEventAtUtc": "2026-11-24T12:59:22.0436749Z",
+    "firstEventAtUtc": "2026-11-24T11:47:28.6112848Z",
+    "playModeSeconds": 0,
+    "playModeSessions": 0
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:47:28.6112848Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:47:36.0278791Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:47:38.9252930Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:47:40.4030574Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:47:42.4057770Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:47:42.4057770Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:47:42.4632940Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:47:46.1010295Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:48:22.2383036Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:58:10.3064891Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:08:14.1502947Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:12:21.0145977Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:14:05.2584904Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:15:55.4706185Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:24:29.5696862Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:26:40.8681231Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:59:22.0436749Z",
+      "durationSeconds": 0
+    }
+  ]
+}
