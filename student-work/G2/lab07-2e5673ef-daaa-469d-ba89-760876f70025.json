@@ -1,0 +1,407 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Se185b7a66e0845688286ccd5ae4a61ec",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346718"
+    },
+    {
+      "key": "variant.v1",
+      "value": "4"
+    },
+    {
+      "key": "variant.v2",
+      "value": "1"
+    },
+    {
+      "key": "variant.v3",
+      "value": "3"
+    },
+    {
+      "key": "variant.v4",
+      "value": "5"
+    },
+    {
+      "key": "variant.v5",
+      "value": "2"
+    },
+    {
+      "key": "table.lab07_performance.bezczynność.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_performance.nominalny.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_performance.obciążeniowy.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_01.r",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_02.r",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_03.r",
+      "value": ""
+    },
+    {
+      "key": "cp30.smoke_pass",
+      "value": ""
+    },
+    {
+      "key": "cp30.nv",
+      "value": ""
+    },
+    {
+      "key": "cp40.success_rate",
+      "value": ""
+    },
+    {
+      "key": "cp40.false_activations",
+      "value": ""
+    },
+    {
+      "key": "cp40.assistance",
+      "value": ""
+    },
+    {
+      "key": "cp50.max_risk",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "table.lab07_smoke.sm_02.dowód",
+      "value": ""
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity Editor PC na scenie walidacyjnej Lab07_Acceptance.unity."
+    },
+    {
+      "key": "basic.observation",
+      "value": "W teście dymnym scena uruchomiła się bez błędów krytycznych w konsoli, zweryfikowano obecność jednej aktywnej kamery oraz poprawną reakcję na wejście użytkownika.\n W Eksperymencie 1 (wariant v1=4) przeprowadzono 3 powtórzenia wymuszonego przełączania poziomów szczegółowości (LOD 0 -> LOD 1 -> LOD 2 -> LOD 0) obiektu testowego z komponentem LOD Group.\n W każdej z 3 prób zmiana wyświetlanej geometrii następowała płynnie w zadanych progach ekranowych bez znikania obiektu, błędów renderowania ani wyjątków w Console."
+    },
+    {
+      "key": "basic.change",
+      "value": "Porównano stan nominalny (poziom LOD 0 z bliska) ze stanami po wymuszeniu kolejnych stopni uproszczenia siatki (LOD 1 oraz LOD 2) dla obiektu testowego w 3 powtórzeniach.\n"
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Scena walidacyjna działa stabilnie, a mechanizm przełączania poziomów LOD (v1=4) funkcjonuje powtarzalnie.\n"
+    },
+    {
+      "key": "basic.limits",
+      "value": ""
+    }
+  ],
+  "labNumber": 7,
+  "createdAtUtc": "2026-11-24T11:23:21.2786051Z",
+  "submissionId": "4cfd43492ec64fad82b52c08e321155d",
+  "updatedAtUtc": "2026-11-24T12:58:18.3823698Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173336",
+    "173382"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 40,
+    "elapsedSeconds": 4747.809,
+    "lastEventAtUtc": "2026-11-24T12:42:25.3776258Z",
+    "firstEventAtUtc": "2026-11-24T11:23:17.5687351Z",
+    "playModeSeconds": 82.632,
+    "playModeSessions": 11
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:23:17.5687351Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:23:21.2917123Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:24:53.9482678Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:24:55.7638192Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:25:03.2565753Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:25:03.2590891Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:25:03.2626150Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:25:08.6181186Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:25:21.9353286Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=3.0;state=completed",
+      "eventName": "task_step_changed",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:25:28.7596356Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=3.0;state=reopened",
+      "eventName": "task_step_changed",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:25:30.2211276Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:36:07.3810470Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:37:28.1915364Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:41:48.2011352Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:41:57.1311536Z",
+      "durationSeconds": 8.932
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:41:58.6069811Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:42:01.9618164Z",
+      "durationSeconds": 3.354
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:42:02.7194592Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:42:05.1930101Z",
+      "durationSeconds": 2.474
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:42:18.0738214Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:42:18.6489857Z",
+      "durationSeconds": 0.576
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:42:24.1239806Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:42:37.5334564Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:42:39.0295620Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:42:58.0153163Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:43:02.0508776Z",
+      "durationSeconds": 4.035
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:43:02.5706336Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:43:09.1454677Z",
+      "durationSeconds": 6.574
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:43:15.2843846Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:43:41.8954857Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:45:49.9082999Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:46:39.7049238Z",
+      "durationSeconds": 49.797
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:42:11.3308571Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:42:15.5620844Z",
+      "durationSeconds": 4.232
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:42:18.1169247Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:42:19.5535493Z",
+      "durationSeconds": 1.436
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:42:21.8192792Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:42:22.4498042Z",
+      "durationSeconds": 0.63
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:42:24.7856819Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:42:25.3776258Z",
+      "durationSeconds": 0.592
+    }
+  ]
+}
