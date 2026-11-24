@@ -1,0 +1,407 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Scc3e9b81a6f6403883f624c4a7bd8397",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346794"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC"
+    },
+    {
+      "key": "basic.observation",
+      "value": "Zaobserwowano, że po zwiększeniu rozmiaru pasków czas potrzebny na kliknięcie trzech punktów kontrolnych uległ skróceniu.\nElementy były łatwiejsze do zauważenia i trafienia kursorem. Użytkownik mógł szybciej wykonać cała procedurę."
+    },
+    {
+      "key": "basic.change",
+      "value": "Porónano dwa warianty sceny - A z paskami o pierwonym rozmiarze oraz B z powiększonymi paskami. W obu wariantach należało wskazać trzy różna punkty kontrolne.\nSprawdzano czas wykonania zadania oraz poprawność wskazania wszystkich elementów."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Zwiększenie rozmiaru pasków pozytywnie wpłynęło na szybkość obsługi interfejsu. Większe elementy są łątwiejsze do kliknięcia \nograniczając trudności podczas wykonywania zadania. Można stwierdzić, że odpowiednie rozmiary elementów interfejsu poprawiają jego czytelność i wygodę użytkownika."
+    }
+  ],
+  "labNumber": 8,
+  "createdAtUtc": "2026-11-24T12:13:10.0537974Z",
+  "submissionId": "06946b715fe84b38a10ea4b389436297",
+  "updatedAtUtc": "2026-11-24T13:13:39.5100221Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173403",
+    "173391"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 48,
+    "elapsedSeconds": 3580.034,
+    "lastEventAtUtc": "2026-11-24T13:13:36.1438983Z",
+    "firstEventAtUtc": "2026-11-24T12:13:56.1100095Z",
+    "playModeSeconds": 1028.131,
+    "playModeSessions": 10
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:13:56.1100095Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:14:08.3604755Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:14:22.4899746Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:14:55.6164776Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:15:01.4504743Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:15:06.5791864Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:25:23.5650603Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:25:32.3743269Z",
+      "durationSeconds": 8.808
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:28:49.1804878Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:29:39.1083555Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:33:07.8893170Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:33:36.1259146Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:37:20.6978329Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:38:33.0057380Z",
+      "durationSeconds": 72.308
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:38:38.4008222Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:39:09.7719429Z",
+      "durationSeconds": 31.37
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:39:10.9131642Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:39:55.8912470Z",
+      "durationSeconds": 44.977
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:39:58.6502895Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:46:15.1742013Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:47:25.1032489Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:47:26.8593519Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:50:07.1719072Z",
+      "durationSeconds": 160.313
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:50:08.3455744Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:50:10.7208794Z",
+      "durationSeconds": 2.375
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:50:15.6985250Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:50:34.3772541Z",
+      "durationSeconds": 18.678
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:50:37.4988195Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:51:40.5928469Z",
+      "durationSeconds": 63.095
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:52:38.4809751Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:00:50.4431054Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:03:04.6880245Z",
+      "durationSeconds": 626.207
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:03:33.3049791Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:05:24.0366902Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:06:01.6324152Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:06:11.4077381Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=3.0;state=completed",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:06:35.9932555Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=3.0;state=completed",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:06:36.2927620Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=3.5;state=completed",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:06:37.3767659Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=3.5;state=completed",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:06:37.6340028Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=3.5;state=reopened",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:06:38.8877473Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=3.5;state=reopened",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:06:39.4103103Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=3.5;state=completed",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:07:01.5225774Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=3.5;state=completed",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:07:04.8719735Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=4.0;state=completed",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:07:07.1181645Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=4.0;state=completed",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:07:07.9305116Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "checkpoint=4.0;state=completed",
+      "eventName": "task_step_changed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:07:08.2889710Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T13:13:36.1438983Z",
+      "durationSeconds": 0
+    }
+  ]
+}
