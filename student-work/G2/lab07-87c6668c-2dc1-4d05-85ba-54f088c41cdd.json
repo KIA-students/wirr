@@ -1,0 +1,465 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S98d01cceaa1d4c6b843b9b4a962abac3",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173999"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "table.lab07_performance.bezczynność.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_performance.nominalny.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_performance.obciążeniowy.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_01.r",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_02.r",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_03.r",
+      "value": ""
+    },
+    {
+      "key": "cp30.smoke_pass",
+      "value": ""
+    },
+    {
+      "key": "cp30.nv",
+      "value": ""
+    },
+    {
+      "key": "cp40.success_rate",
+      "value": ""
+    },
+    {
+      "key": "cp40.false_activations",
+      "value": ""
+    },
+    {
+      "key": "cp40.assistance",
+      "value": ""
+    },
+    {
+      "key": "cp50.max_risk",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity 6.6 (6000.6.4f1), Windows, Ubuntu 22.04 LTS w WSL 2, ROS 2 Humble, Gazebo Fortress 6.18.0 oraz ROS-TCP-Endpoint. \nTesty przeprowadzono na komputerze PC z wykorzystaniem symulatora XR i modelu RRBot."
+    },
+    {
+      "key": "basic.observation",
+      "value": "Scena walidacyjna uruchomiła się bez błędów krytycznych. Sprawdzono działanie kamery oraz możliwość chwytania i przenoszenia obiektów. Nawiązano połączenie pomiędzy Gazebo i Unity przez ROS-TCP-Endpoint. \nWykonano trzy próby pozycjonowania robota RRBot. We wszystkich próbach po ustabilizowaniu robota uzyskano zgodność odczytów położenia przegubów oraz status LIVE."
+    },
+    {
+      "key": "basic.change",
+      "value": "Zgodnie z wariantem v1 = 5 porównano położenia przegubów joint1 i joint2 w Gazebo oraz Unity dla trzech konfiguracji:\n\nPróba 1: 0,5 rad i 0,3 rad – zgodność.\n\nPróba 2: -0,5 rad i 0,8 rad – zgodność.\n\nPróba 3: 1,0 rad i -0,5 rad – zgodność.\n\nZaimplementowano skrypt RRBotJointSubscriber odbierający dane z tematu /joint_states. Dodatkowo w środowisku WebSim sprawdzono utratę i automatyczne odzyskanie połączenia."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Przeprowadzone testy potwierdziły poprawność komunikacji pomiędzy Gazebo, ROS 2 i Unity. We wszystkich trzech konfiguracjach wartości położenia przegubów po ustabilizowaniu były zgodne. \nSystem poprawnie odbiera i przetwarza dane robota, umożliwiając odwzorowanie jego ruchu w środowisku Unity."
+    },
+    {
+      "key": "basic.limits",
+      "value": "Testy wykonano w środowisku symulacyjnym na komputerze PC, bez fizycznego robota i gogli XR. Gazebo uruchomiono w trybie headless. \nWystąpiły pojedyncze komunikaty o utracie wiadomości. Nie wykonywano pomiarów wydajności ani opóźnień komunikacji."
+    }
+  ],
+  "labNumber": 7,
+  "createdAtUtc": "2026-11-24T11:54:52.7931087Z",
+  "submissionId": "ac638e13f42b4b5b944d78bc66ccac86",
+  "updatedAtUtc": "2026-11-24T11:58:05.7921157Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173999"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 49,
+    "elapsedSeconds": 5029.388,
+    "lastEventAtUtc": "2026-11-24T11:58:04.9381107Z",
+    "firstEventAtUtc": "2026-11-24T10:34:15.5504621Z",
+    "playModeSeconds": 88.389,
+    "playModeSessions": 3
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:34:15.5504621Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:34:24.4708071Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:34:51.5055958Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:34:54.0622279Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:34:56.8485665Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:03.7357158Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:05.9274400Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:09.3326512Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:14.8807683Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:16.1859649Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:20.6477479Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:47.1055033Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:50.5875667Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:50.9590191Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:53.8501927Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:35:58.6496566Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:36:00.1977912Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:36:03.4821321Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:36:04.9737226Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:36:05.9552673Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:36:08.5220716Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:36:18.6469325Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:36:32.4915261Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:36:32.4925244Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:36:32.4988967Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:37:10.5697849Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:37:13.8463633Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:39:23.1686874Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:39:27.6735222Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:39:30.2414091Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:39:35.6245099Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:40:11.5086770Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:41:10.0584595Z",
+      "durationSeconds": 58.551
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:41:26.4651888Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:41:33.7138700Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:41:39.5064873Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:41:59.7546389Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:42:00.4040061Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:42:00.4093665Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:42:00.4189643Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:42:00.9525662Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:47:10.3229912Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:47:23.7021934Z",
+      "durationSeconds": 13.379
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:47:29.8639970Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:47:46.3226174Z",
+      "durationSeconds": 16.459
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:48:42.6541088Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:57:49.8078958Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "local",
+      "eventName": "report_exported",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:58:00.0174324Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "local",
+      "eventName": "report_exported",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:58:04.9381107Z",
+      "durationSeconds": 0
+    }
+  ]
+}
