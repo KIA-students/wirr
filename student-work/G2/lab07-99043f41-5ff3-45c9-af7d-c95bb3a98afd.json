@@ -1,0 +1,304 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Sf1f1e05332a34babbff4c582ce80748a",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173384"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "table.lab07_performance.bezczynność.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_performance.nominalny.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_performance.obciążeniowy.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_01.r",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_02.r",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_03.r",
+      "value": ""
+    },
+    {
+      "key": "cp30.smoke_pass",
+      "value": ""
+    },
+    {
+      "key": "cp30.nv",
+      "value": ""
+    },
+    {
+      "key": "cp40.success_rate",
+      "value": ""
+    },
+    {
+      "key": "cp40.false_activations",
+      "value": ""
+    },
+    {
+      "key": "cp40.assistance",
+      "value": ""
+    },
+    {
+      "key": "cp50.max_risk",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC (bez fizycznego sprzętu AR)"
+    },
+    {
+      "key": "basic.observation",
+      "value": "Kryteria akceptacji:\n1. Uruchomienie (blokujące): brak błędów krytycznych w konsoli\n2. Wydajność (nieblokujące): stabilny czas klatki\n3. Stabilność (nieblokujące): brak niekontrolowanego wzrostu zużycia pamięci\n4. Użyteczność (nieblokujące): wykonanie zadania z maks 2 błędami aktywacji\n5. Awaria (blokujące): jednoznaczna sygnalizacja braku danych \n6. Funkcjonalność (blokujące): posiadanie sprawnych projektów oraz adekwatnego oprogramowania potrzebnych do odpalenia projektu \nTest \"dymny\" scena w trybie play bez czerwonych błędów w Console."
+    },
+    {
+      "key": "basic.change",
+      "value": "Skonfigurowano minimalną scenę walidacyjną. Porównano stan faktyczny projektu z wymaganiami  kontraktów Lab 1-6 oraz kryteriami akceptacji."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Test \"dymny\" oraz bazowa konfiguracja XR origin zakończyła się statusem PASS co potwierdza gotowośćsamej sceny walidacyjnej do dalszych testów. \nJednak brak weryfikacji dla integracji Gazebo/ROS 2 -> Unity oraz funkcji z Lab 3-5 dotyczy kryteriów blokujących (funkcjonalność). "
+    },
+    {
+      "key": "basic.limits",
+      "value": "Testy przeprowadzano wyłącznie na PC bez gogli AR oraz telefonu. "
+    }
+  ],
+  "labNumber": 7,
+  "createdAtUtc": "2026-11-24T11:10:11.1599946Z",
+  "submissionId": "47c330e55fcc4917b656cbb3c98ded63",
+  "updatedAtUtc": "2026-11-24T11:51:21.3786040Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173384"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 26,
+    "elapsedSeconds": 3646.333,
+    "lastEventAtUtc": "2026-11-24T11:51:18.7334062Z",
+    "firstEventAtUtc": "2026-11-24T10:50:32.4008017Z",
+    "playModeSeconds": 981.624,
+    "playModeSessions": 1
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:50:32.4008017Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:51:21.3529301Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:52:17.0664707Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:53:42.3228599Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:53:42.9768762Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:53:44.1262799Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:53:48.1813657Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:53:53.3838505Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:53:53.5854673Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:53:53.5926626Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:53:57.3293756Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:54:02.7258963Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "enabled",
+      "eventName": "metrics_probe_toggled",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:54:07.6110709Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=1;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T10:54:27.5569341Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=1",
+      "eventName": "configuration_validated",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:09:29.9272300Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:10:11.1696611Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:13:57.6375076Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:30:19.2604360Z",
+      "durationSeconds": 981.624
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:35:19.3819438Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:35:24.1272103Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:35:26.0468269Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:35:26.2219984Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:35:26.3983133Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:35:26.5708891Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:35:56.9959765Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:51:18.7334062Z",
+      "durationSeconds": 0
+    }
+  ]
+}
