@@ -1,0 +1,190 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "S27f2bb2e8f9e4d4f9aa98af0a0fa1f36",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346802"
+    },
+    {
+      "key": "variant.v1",
+      "value": "3"
+    },
+    {
+      "key": "variant.v2",
+      "value": "5"
+    },
+    {
+      "key": "variant.v3",
+      "value": "2"
+    },
+    {
+      "key": "variant.v4",
+      "value": "4"
+    },
+    {
+      "key": "variant.v5",
+      "value": "1"
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC"
+    },
+    {
+      "key": "basic.observation",
+      "value": "Scena uruchomiła się bez błędów. \nPo rozpoczęciu próby w Wariancie A kliknięto trzy różne kostki (Punkt1, Punkt2, Punkt3), licznik doszedł do 3/3, pojawił się napis SUKCES, a wynik z czasem zapisał się w pliku JSON."
+    },
+    {
+      "key": "basic.change",
+      "value": "Zrobiono osobną scenę do Lab 08 bez ruszania Lab 07 oraz zapisano problem użytkownika i kryteria akceptacji. \nPorównania wersji A i B nie robiono na etapie 3.0 (NV)."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Demonstrator działa poprawnie na PC: sprawdza trzy różne punkty, pokazuje SUKCES i zapisuje wynik. \nDo wyższych ocen brakuje testu negatywnego, prób A/B i poprawki."
+    }
+  ],
+  "labNumber": 8,
+  "createdAtUtc": "2026-11-24T12:19:54.5715673Z",
+  "submissionId": "1a2fa535c44b4c4dbff0539fb785fc0e",
+  "updatedAtUtc": "2026-11-24T12:58:33.1375780Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173404",
+    "173398"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 17,
+    "elapsedSeconds": 2291.691,
+    "lastEventAtUtc": "2026-11-24T12:58:27.8355432Z",
+    "firstEventAtUtc": "2026-11-24T12:20:16.1450386Z",
+    "playModeSeconds": 85.6,
+    "playModeSessions": 1
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:20:16.1450386Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:21:46.4283235Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:21:49.0268917Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=0",
+      "eventName": "dependency_install_started",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:21:54.1615755Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:21:57.3723729Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:21:57.3743837Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:21:57.3808245Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:22:04.4475590Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:22:12.7609834Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:34:23.7388145Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:34:48.9457097Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:35:14.7191978Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:35:39.1564060Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:38:10.7745528Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:39:36.3759822Z",
+      "durationSeconds": 85.6
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:49:41.9281537Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:58:27.8355432Z",
+      "durationSeconds": 0
+    }
+  ]
+}
