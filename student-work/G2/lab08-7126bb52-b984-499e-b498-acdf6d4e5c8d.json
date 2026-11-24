@@ -1,0 +1,168 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Sf1f1e05332a34babbff4c582ce80748a",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "173384"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC "
+    },
+    {
+      "key": "basic.observation",
+      "value": "Pracownik techniczny musi sprawdzić 3 elementy stanowiska bez pominięcia żadnego z nich, a system ma odnotowaćukończenie kontroli i jej czas.\nSystem rejestruje sprawdzenie 3 odrębnych elementów, nie zlicza podwójnie tego samego punktu, pozwala przerwać próbę i zapisuje jej wynik oraz czas.\nPo uruchomieniu wykonały się 3 próby i 2 zostały zakończone FAIL a 1 PASS  "
+    },
+    {
+      "key": "basic.change",
+      "value": "Utworzono nową scenę demonstracyjnąbez modyfikowania starej sceny."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Demonstrator spełnia założenia pozwala na kontrolę 3 odrębnych elementów stanowiska i rejestruje wynik. "
+    }
+  ],
+  "labNumber": 8,
+  "createdAtUtc": "2026-11-24T11:57:58.3736760Z",
+  "submissionId": "cf2e2f27c4af409da312511c84efa262",
+  "updatedAtUtc": "2026-11-24T12:08:02.1760286Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173384"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 14,
+    "elapsedSeconds": 800.344,
+    "lastEventAtUtc": "2026-11-24T12:07:58.5089618Z",
+    "firstEventAtUtc": "2026-11-24T11:54:38.1653847Z",
+    "playModeSeconds": 1209.4,
+    "playModeSessions": 1
+  },
+  "activityTimeline": [
+    {
+      "result": "ok",
+      "eventName": "lab_selected",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:54:38.1653847Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:54:43.9559533Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=0",
+      "eventName": "dependency_install_started",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:55:12.4546269Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=0",
+      "eventName": "dependency_install_started",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:55:14.2067713Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=0",
+      "eventName": "dependency_install_started",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:55:14.3739593Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=0",
+      "eventName": "dependency_install_started",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:55:14.5510721Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:56:06.3960668Z",
+      "durationSeconds": 1209.4
+    },
+    {
+      "result": "packages=0",
+      "eventName": "dependency_install_started",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:56:37.7490342Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_quitting",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:56:52.9049905Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:57:58.3880003Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "unity_editor_context_loaded",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:57:59.7669865Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:58:24.0505230Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T11:59:24.3843927Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 8,
+      "timestampUtc": "2026-11-24T12:07:58.5089618Z",
+      "durationSeconds": 0
+    }
+  ]
+}
