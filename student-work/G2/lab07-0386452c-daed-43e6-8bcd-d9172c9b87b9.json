@@ -1,0 +1,315 @@
+{
+  "group": "G2",
+  "course": "Wirtualna i rozszerzona rzeczywistość",
+  "teamId": "Scc3e9b81a6f6403883f624c4a7bd8397",
+  "answers": [
+    {
+      "key": "variant.sum",
+      "value": "346794"
+    },
+    {
+      "key": "variant.v1",
+      "value": "5"
+    },
+    {
+      "key": "variant.v2",
+      "value": "2"
+    },
+    {
+      "key": "variant.v3",
+      "value": "4"
+    },
+    {
+      "key": "variant.v4",
+      "value": "1"
+    },
+    {
+      "key": "variant.v5",
+      "value": "3"
+    },
+    {
+      "key": "table.lab07_performance.bezczynność.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_performance.nominalny.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_performance.obciążeniowy.ms_kl_mediana",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_01.r",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_02.r",
+      "value": ""
+    },
+    {
+      "key": "table.lab07_risk.r_03.r",
+      "value": ""
+    },
+    {
+      "key": "cp30.smoke_pass",
+      "value": ""
+    },
+    {
+      "key": "cp30.nv",
+      "value": ""
+    },
+    {
+      "key": "cp40.success_rate",
+      "value": ""
+    },
+    {
+      "key": "cp40.false_activations",
+      "value": ""
+    },
+    {
+      "key": "cp40.assistance",
+      "value": ""
+    },
+    {
+      "key": "cp50.max_risk",
+      "value": ""
+    },
+    {
+      "key": "basic.mode",
+      "value": "true"
+    },
+    {
+      "key": "basic.source",
+      "value": "Unity PC"
+    },
+    {
+      "key": "basic.observation",
+      "value": "Nie zaobserwowano żadnych zmian w między LOD0, LOD1, LOD2. Wpływ na to może mieć mała skomplikowalność modelu.\t"
+    },
+    {
+      "key": "basic.change",
+      "value": "Zmieniano odległość kamery od modelu wymuszając kolejne poziomy LOD. Porównano wygląd geometrii oraz \nzachowanie otworu na poszczególnych poziomach szczegołówości."
+    },
+    {
+      "key": "basic.conclusion",
+      "value": "Mechanizm LOD działa poprawnie i pozwala na przełączanie poziomów szczegółowości modelu.\nZe względu na prostą budowę obiektu uproszczenie geometrii nie powoduje zauważalnych zmian w jego wyglądzie."
+    }
+  ],
+  "labNumber": 7,
+  "createdAtUtc": "2026-11-24T11:19:00.5631575Z",
+  "submissionId": "c098777d28544f9ebabf88727d1a991e",
+  "updatedAtUtc": "2026-11-24T12:13:01.9233803Z",
+  "schemaVersion": "wirr-report/1.0",
+  "studentIndices": [
+    "173403",
+    "173391"
+  ],
+  "submittedAtUtc": "",
+  "activitySummary": {
+    "eventCount": 28,
+    "elapsedSeconds": 2938.904,
+    "lastEventAtUtc": "2026-11-24T12:12:47.1343034Z",
+    "firstEventAtUtc": "2026-11-24T11:23:48.2299053Z",
+    "playModeSeconds": 160.729,
+    "playModeSessions": 2
+  },
+  "activityTimeline": [
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:23:48.2299053Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:23:59.6462746Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:24:05.9709802Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:24:28.2042639Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:27:47.9247792Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "course_toolkit_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:27:53.7242348Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "manual",
+      "eventName": "environment_preflight_refreshed",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:27:56.6776239Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "packages=1",
+      "eventName": "dependency_install_started",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:27:59.9672503Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:28:03.0818775Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "course_sample_imported",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:28:03.0853921Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:28:03.0918205Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:28:11.0010564Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "errors=0;warnings=0",
+      "eventName": "configuration_validated",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:28:19.5649016Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:28:52.2387400Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:51:47.5306911Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:52:51.6824440Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "base_scene_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:52:58.5279570Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "success",
+      "eventName": "workspace_prepared",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:53:06.5956655Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T11:57:29.1300283Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:00:39.2100577Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:02:15.5920573Z",
+      "durationSeconds": 96.383
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_entered",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:03:14.1058311Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "play_mode_exited",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:04:18.4531265Z",
+      "durationSeconds": 64.346
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:05:23.2316891Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:06:30.0643933Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:11:43.3972409Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ok",
+      "eventName": "report_opened",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:12:34.7503456Z",
+      "durationSeconds": 0
+    },
+    {
+      "result": "ready",
+      "eventName": "report_checked",
+      "labNumber": 7,
+      "timestampUtc": "2026-11-24T12:12:47.1343034Z",
+      "durationSeconds": 0
+    }
+  ]
+}
